@@ -1,0 +1,64 @@
+package steampunked.core.tabs;
+
+import java.util.List;
+
+import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import steampunked.blocks.ModBlocks;
+import steampunked.items.ModItems;
+import cpw.mods.fml.common.registry.LanguageRegistry;
+
+public class ModCreativeTab extends CreativeTabs {
+
+	public static ModCreativeTab INSTANCE = new ModCreativeTab();
+	ItemStack displayItem;
+	List list;
+
+	public ModCreativeTab() {
+		super("steampunked");
+
+		LanguageRegistry.instance().addStringLocalization(
+				"itemGroup.steampunked", "Steampunk'd");
+	}
+
+	@Override
+	public ItemStack getIconItemStack() {
+		if (displayItem == null)
+			return new ItemStack(ModItems.goggles);
+
+		return displayItem;
+	}
+
+	@Override
+	public void displayAllReleventItems(List list) {
+		this.list = list;
+
+		addItem(ModItems.bucket);
+		addBlock(ModBlocks.Injector);
+		addBlock(ModBlocks.steamFurnace);
+		addBlock(ModBlocks.steamBoiler);
+		addBlock(ModBlocks.tinkerBench);
+		addItem(ModItems.goggles);
+		addItem(ModItems.jetpack);
+		addItem(ModItems.boots);
+		addItem(ModItems.spanner);
+		addItem(ModItems.drill);
+		addItem(ModItems.drillDiamond);
+		addItem(ModItems.saberWood);
+		addItem(ModItems.saberStone);
+		addItem(ModItems.saberIron);
+		addItem(ModItems.saberGold);
+		addItem(ModItems.saberDiamond);
+
+	}
+
+	private void addItem(Item item) {
+		item.getSubItems(item.itemID, this, list);
+	}
+
+	private void addBlock(Block block) {
+		block.getSubBlocks(block.blockID, this, list);
+	}
+}
