@@ -16,6 +16,7 @@ tmp/
 *.bin
 *.cache
 *.project
+
 local.properties
 .classpath
 .settings/
