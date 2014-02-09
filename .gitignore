@@ -32,6 +32,9 @@ local.properties
 /reobf/*
 /runtime/*
 /temp/*
+/.gradle/*
+/gradle/*
+gradlew
 
 /src/minecraft/*
 /src/minecraft_server/*
