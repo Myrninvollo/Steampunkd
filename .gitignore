@@ -11,10 +11,37 @@ tmp/
 *.bak
 *.swp
 *~.nib
+*.jar
+*.txt
+*.bin
+*.cache
+*.project
 local.properties
 .classpath
 .settings/
 .loadpath
+/bin/*
+/conf/*
+/docs/*
+/eclipse/*
+/forge/*
+/jars/*
+/lib/*
+/logs/*
+/modsrc/*
+/reobf/*
+/runtime/*
+/temp/*
+
+/src/minecraft/*
+/src/minecraft_server/*
+/src/common/*
+!/src/common/dries007/
+!/src/common/mcmod.info
+!/src/common/SP.png
+
+*.bat
+*.sh
 
 # External tool builders
 .externalToolBuilders/

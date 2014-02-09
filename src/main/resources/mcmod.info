@@ -1,0 +1,18 @@
+ [{
+    "modid": "Steampunked",
+    "name": "Steampunk'd",
+    "description": "Minecraft Steampunk Mod, Roll on the Steam Revolution",
+    "version": "0.0.1",
+    "mcversion": "1.7.2",
+    "url": "http://www.github.com/sr2610/steampunked",
+    "updateUrl": "",
+      "credits" : "",
+   "authorList": [  "SR2610"  ],
+    "logoFile": "",
+    "screenshots": [ ],
+    "parent": "",
+    "requiredMods": [ "Forge"],
+"dependencies": ["mod_MinecraftForge"],
+    "dependants": [],
+    "useDependencyInformation": "true"
+  }]
