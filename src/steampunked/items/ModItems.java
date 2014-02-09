@@ -5,10 +5,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import steampunked.blocks.ModBlocks;
-import steampunked.items.parts.ItemArm;
-import steampunked.items.parts.ItemBody;
-import steampunked.items.parts.ItemHead;
-import steampunked.items.parts.ItemLeg;
 import steampunked.lib.LibIds;
 import steampunked.lib.LibNames;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -25,13 +21,9 @@ public final class ModItems {
 	public static Item namePlate;
 	public static Item spawner;
 
-	public static Item ItemBody;
-	public static Item ItemHead;
-	public static Item ItemLeg;
-	public static Item ItemArm;
-
 	public static Item AutomatonUpgrade;
 	public static Item punchcard;
+	public static Item chasis;
 
 	public static Item saberWood;
 	public static Item saberStone;
@@ -68,6 +60,7 @@ public final class ModItems {
 				.setUnlocalizedName(LibNames.UPGRADE);
 		punchcard = new ItemPunchcard(LibIds.idPunchcard)
 				.setUnlocalizedName(LibNames.PUNCHCARD);
+		chasis = new ItemChasis(LibIds.idChasis).setUnlocalizedName(LibNames.CHASIS);
 
 		saberWood = new ItemSaber(LibIds.idsaberWood, EnumToolMaterial.WOOD)
 				.setTexture("wood").setUnlocalizedName(LibNames.SABERWOOD);
@@ -81,20 +74,8 @@ public final class ModItems {
 				EnumToolMaterial.EMERALD).setTexture("diamond")
 				.setUnlocalizedName(LibNames.SABERDIAMOND);
 
-		initAutomatonParts();
-
 		registerItems();
 		nameItems();
-	}
-
-	private static void initAutomatonParts() {
-		ItemHead = new ItemHead(LibIds.idHead)
-				.setUnlocalizedName(LibNames.HEAD);
-		ItemBody = new ItemBody(LibIds.idBody)
-				.setUnlocalizedName(LibNames.BODY);
-		ItemArm = new ItemArm(LibIds.idArm).setUnlocalizedName(LibNames.ARM);
-		ItemLeg = new ItemLeg(LibIds.idLeg).setUnlocalizedName(LibNames.LEG);
-
 	}
 
 	private static void registerItems() {
@@ -108,12 +89,9 @@ public final class ModItems {
 		GameRegistry.registerItem(spawner, LibNames.SPAWNER);
 		GameRegistry.registerItem(namePlate, LibNames.NAMEPLATE);
 
-		GameRegistry.registerItem(ItemHead, LibNames.HEAD);
-		GameRegistry.registerItem(ItemBody, LibNames.BODY);
-		GameRegistry.registerItem(ItemArm, LibNames.ARM);
-		GameRegistry.registerItem(ItemLeg, LibNames.LEG);
 		GameRegistry.registerItem(AutomatonUpgrade, LibNames.UPGRADE);
 		GameRegistry.registerItem(punchcard, LibNames.PUNCHCARD);
+		GameRegistry.registerItem(chasis, LibNames.CHASIS);
 
 		GameRegistry.registerItem(saberWood, LibNames.SABERWOOD);
 		GameRegistry.registerItem(saberStone, LibNames.SABERSTONE);
@@ -134,10 +112,7 @@ public final class ModItems {
 		LanguageRegistry.addName(namePlate, LibNames.NAMEPLATE);
 		LanguageRegistry.addName(spawner, LibNames.SPAWNER);
 
-		LanguageRegistry.addName(ItemHead, LibNames.HEAD);
-		LanguageRegistry.addName(ItemBody, LibNames.BODY);
-		LanguageRegistry.addName(ItemArm, LibNames.ARM);
-		LanguageRegistry.addName(ItemLeg, LibNames.LEG);
+		LanguageRegistry.addName(chasis, LibNames.CHASIS);
 
 		LanguageRegistry.addName(AutomatonUpgrade, LibNames.UPGRADE);
 		LanguageRegistry.addName(punchcard, LibNames.PUNCHCARD);

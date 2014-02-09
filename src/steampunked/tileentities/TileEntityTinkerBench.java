@@ -1,15 +1,17 @@
 package steampunked.tileentities;
 
-import steampunked.blocks.ModBlocks;
-import steampunked.inventory.container.ContainerTinkerBench;
-import steampunked.lib.LibOptions;
+import com.google.common.io.ByteArrayDataInput;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet132TileEntityData;
+import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -17,10 +19,15 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
+import steampunked.blocks.ModBlocks;
+import steampunked.inventory.container.ContainerTinkerBench;
+import steampunked.items.ItemChasis;
+import steampunked.items.ModItems;
+import steampunked.lib.LibOptions;
 
 public class TileEntityTinkerBench extends TileEntityMachine implements IInventory, IFluidHandler {
 
-	private ItemStack[] benchItemStacks = new ItemStack[14];
+	private ItemStack[] benchItemStacks = new ItemStack[9];
 	
 	static private final int NETDATAID_TANK_FLUID = 1;
 	static private final int NETDATAID_TANK_AMOUNT = 2;
@@ -278,6 +285,8 @@ public class TileEntityTinkerBench extends TileEntityMachine implements IInvento
 		par1NBTTagCompound.setTag("Items", nbttaglist);
 
 	}
-
-
+	
+	
 }
+
+

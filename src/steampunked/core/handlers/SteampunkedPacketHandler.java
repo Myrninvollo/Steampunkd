@@ -8,6 +8,7 @@ import steampunked.Mod_Steampunked;
 import steampunked.tileentities.TileEntityInjector;
 import steampunked.tileentities.TileEntityMachine;
 import steampunked.tileentities.TileEntitySteamFurnace;
+import steampunked.tileentities.TileEntityTinkerBench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetworkManager;
@@ -68,6 +69,31 @@ public class SteampunkedPacketHandler implements IPacketHandler
 	    PacketDispatcher.sendPacketToServer(MakeInjectorModePacket(sender));
 	  }
 
+	  static private Packet250CustomPayload MakeTinkerModePacket(TileEntityTinkerBench sender)
+	  {
+	    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+	    DataOutputStream data = new DataOutputStream(bytes);
+	    try
+	    {
+	      //Position
+	      data.writeInt(sender.xCoord);
+	      data.writeInt(sender.yCoord);
+	      data.writeInt(sender.zCoord);
+	     // data.writeInt(sender.getStackInSlot(0).itemID);
+	    //  data.writeInt(sender.getStackInSlot(8).itemID);
+	    } catch(IOException e)
+	    {
+	      e.printStackTrace();
+	    }
+	    return MakePacket(bytes);
+	  }
+
+	  
+	  static public void SendTinkerModeToServer(TileEntityTinkerBench sender)
+	  {
+	    PacketDispatcher.sendPacketToServer(MakeTinkerModePacket(sender));
+	  }
+	  
 	  public static void SendInjectorModeToClients(TileEntityInjector sender)
 	  {
 	    SendTileEntityPacketToPlayers(MakeInjectorModePacket(sender), sender);
@@ -144,4 +170,6 @@ public class SteampunkedPacketHandler implements IPacketHandler
 	    }
 	    return MakePacket(bytes);
 	  }
+	  
+	  
 	}

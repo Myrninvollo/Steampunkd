@@ -7,6 +7,8 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.tileentity.TileEntityFurnace;
 import steampunked.inventory.slots.tinkerbench.SlotUpgrade;
 import steampunked.tileentities.TileEntitySteamFurnace;
 import cpw.mods.fml.relauncher.Side;
@@ -83,59 +85,39 @@ public class ContainerSteamFurnace extends Container {
 		return this.furnace.isUseableByPlayer(par1EntityPlayer);
 	}
 
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
-    {
-        ItemStack itemstack = null;
-        Slot slot = (Slot)this.inventorySlots.get(par2);
+	
+		 public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+		    {
+		        ItemStack itemstack = null;
+		        Slot slot = (Slot)this.inventorySlots.get(par2);
 
-        if (slot != null && slot.getHasStack())
-        {
-            ItemStack itemstack1 = slot.getStack();
-            itemstack = itemstack1.copy();
+		        if (slot != null && slot.getHasStack())
+		        {
+		            ItemStack itemstack1 = slot.getStack();
+		            itemstack = itemstack1.copy();
 
-            if (par2 == 0)
-            {
-                if (!this.mergeItemStack(itemstack1, 1, 37, true))
-                {
-                    return null;
-                }
-            }
-            else
-            {
-                if (((Slot)this.inventorySlots.get(0)).getHasStack() || !((Slot)this.inventorySlots.get(0)).isItemValid(itemstack1))
-                {
-                    return null;
-                }
+		            if (par2 < 1)
+		            {
+		                if (!this.mergeItemStack(itemstack1,1, this.inventorySlots.size(), true))
+		                {
+		                    return null;
+		                }
+		            }
+		            else if (!this.mergeItemStack(itemstack1, 0,1, false))
+		            {
+		                return null;
+		            }
 
-                if (itemstack1.hasTagCompound() && itemstack1.stackSize == 1)
-                {
-                    ((Slot)this.inventorySlots.get(0)).putStack(itemstack1.copy());
-                    itemstack1.stackSize = 0;
-                }
-                else if (itemstack1.stackSize >= 1)
-                {
-                    ((Slot)this.inventorySlots.get(0)).putStack(new ItemStack(itemstack1.itemID, 1, itemstack1.getItemDamage()));
-                    --itemstack1.stackSize;
-                }
-            }
+		            if (itemstack1.stackSize == 0)
+		            {
+		                slot.putStack((ItemStack)null);
+		            }
+		            else
+		            {
+		                slot.onSlotChanged();
+		            }
+		        }
 
-            if (itemstack1.stackSize == 0)
-            {
-                slot.putStack((ItemStack)null);
-            }
-            else
-            {
-                slot.onSlotChanged();
-            }
-
-            if (itemstack1.stackSize == itemstack.stackSize)
-            {
-                return null;
-            }
-
-            slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
-        }
-
-        return itemstack;
-    }
+		        return itemstack;
+		    }    
 }

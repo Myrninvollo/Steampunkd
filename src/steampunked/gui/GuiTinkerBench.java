@@ -1,18 +1,28 @@
 package steampunked.gui;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
+import steampunked.Mod_Steampunked;
 import steampunked.entity.automatons.EntityAutomoton;
 import steampunked.inventory.container.ContainerTinkerBench;
+import steampunked.items.ItemChasis;
 import steampunked.items.ModItems;
 import steampunked.lib.Reference;
 import steampunked.tileentities.TileEntityTinkerBench;
@@ -24,16 +34,14 @@ public class GuiTinkerBench extends GuiMachine {
 
 	private static int rotate = 0;
 
-	private static int rotateY = 0;
-
 	private TileEntityTinkerBench injectorInventory;
 
 	private static final int TANK_HEIGHT = 60;
 	private static final int TANK_X = 193;
-	private static final int TANK_Y = 35;
+	private static final int TANK_Y = 35 - 16;
 
 	private static final int TANK_OVERLAY_X = 216;
-	private static final int TANK_OVERLAY_Y = 35;
+	private static final int TANK_OVERLAY_Y = 35 - 16;
 
 	private IInventory player_inventory;
 	public EntityAutomoton ae;
@@ -65,34 +73,21 @@ public class GuiTinkerBench extends GuiMachine {
 		DisplayTank(window_x, window_y, TANK_X, TANK_Y, TANK_HEIGHT,
 				TANK_OVERLAY_X, TANK_OVERLAY_Y, injectorInventory.GetTank(0));
 		ae = new EntityAutomoton(this.mc.theWorld);
-		testItems();
-		
+		check();
 		drawEntity(guiLeft + 51 + 55, guiTop + 75, 30,
 				(float) (guiLeft + 51 + 60) - this.xSize,
 				(float) (guiTop + 75 - 50) - this.ySize, ae);
 
 	}
 
-	private void testItems() {
-		if (this.injectorInventory.getStackInSlot(0)!=null){
-			ae.head = "Iron";
+	private void check() {
+		if (injectorInventory.getStackInSlot(0) != null
+				&& injectorInventory.getStackInSlot(0).getItem() instanceof ItemChasis) {
+
+			ae.setInvisible(false);
+		} else {
+			ae.setInvisible(true);
 		}
-		if (this.injectorInventory.getStackInSlot(1)!=null && this.injectorInventory.getStackInSlot(1).getItemDamage() == 0){
-			ae.rArm = "Iron";
-		}
-		if (this.injectorInventory.getStackInSlot(1)!=null&&this.injectorInventory.getStackInSlot(1)!=null && this.injectorInventory.getStackInSlot(1).getItemDamage() == 1 ){
-			ae.rFlame = true;
-		}
-		if (this.injectorInventory.getStackInSlot(2)!=null){
-			ae.body = "Iron";
-		}if (this.injectorInventory.getStackInSlot(3)!=null){
-			ae.lArm = "Iron";
-		}if (this.injectorInventory.getStackInSlot(4)!=null){
-			ae.rLeg = "Iron";
-		}if (this.injectorInventory.getStackInSlot(5)!=null){
-			ae.lLeg = "Iron";
-		}
-		
 	}
 
 	@Override
@@ -102,6 +97,8 @@ public class GuiTinkerBench extends GuiMachine {
 		if (isPointInRegion(TANK_X, TANK_Y, 16, TANK_HEIGHT, mouse_x, mouse_y)) {
 			DisplayTankTooltip(mouse_x, mouse_y, injectorInventory.GetTank(0));
 		}
+		
+		
 
 	}
 
@@ -113,6 +110,9 @@ public class GuiTinkerBench extends GuiMachine {
 	@Override
 	public void initGui() {
 		super.initGui();
+		buttonList.clear();
+		buttonList.add(new GuiButton(1, width / 2 + 40, height / 2 - 35, 40,
+				20, "Craft"));
 		int window_x = (width - xSize) / 2;
 		int window_y = (height - ySize) / 2;
 
@@ -120,8 +120,44 @@ public class GuiTinkerBench extends GuiMachine {
 
 	protected void mouseClickMove(int par1, int par2, int par3, long par4) {
 		rotate = -par1;
-		rotateY = par2;
-super.mouseClickMove(par1, par2, par3, par4);
+
+		super.mouseClickMove(par1, par2, par3, par4);
+	}
+
+	public void actionPerformed(GuiButton button) {
+		if (button.id == 1) {
+			if (injectorInventory.getStackInSlot(0) != null
+					&& injectorInventory.getStackInSlot(0).getItem() instanceof ItemChasis) {
+				injectorInventory.setInventorySlotContents(0, null);
+				ItemStack stack = new ItemStack(ModItems.spawner, 1, 0);
+				injectorInventory.setInventorySlotContents(8, stack);
+				updateServer(stack);
+				injectorInventory.onInventoryChanged();
+			}
+		}
+	}
+
+	void updateServer(ItemStack stack) {
+		ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
+		DataOutputStream outputStream = new DataOutputStream(bos);
+		try {
+			outputStream.writeByte(2);
+			outputStream
+					.writeInt(injectorInventory.worldObj.provider.dimensionId);
+			outputStream.writeInt(injectorInventory.xCoord);
+			outputStream.writeInt(injectorInventory.yCoord);
+			outputStream.writeInt(injectorInventory.zCoord);
+			outputStream.writeShort(stack.itemID);
+			outputStream.writeShort(stack.getItemDamage());
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		Packet250CustomPayload packet = new Packet250CustomPayload();
+		packet.channel = Mod_Steampunked.STEAMPUNKED;
+		packet.data = bos.toByteArray();
+		packet.length = bos.size();
+		PacketDispatcher.sendPacketToServer(packet);
 	}
 
 	public static void drawEntity(int par0, int par1, int par2, float par3,
@@ -142,7 +178,6 @@ super.mouseClickMove(par1, par2, par3, par4);
 		GL11.glRotatef(-((float) Math.atan((double) (par4 / 40.0F))) * 20.0F,
 				1.0F, 0.0F, 0.0F);
 		par5EntityLivingBase.renderYawOffset = par5EntityLivingBase.rotationYaw = par5EntityLivingBase.prevRotationYaw = par5EntityLivingBase.prevRotationYawHead = par5EntityLivingBase.rotationYawHead = rotate;
-		par5EntityLivingBase.prevRotationPitch = par5EntityLivingBase.rotationPitch = rotateY;
 		GL11.glTranslatef(0.0F, par5EntityLivingBase.yOffset - 0.75F, 0.0F);
 		GL11.glScalef(2.0F, 2.0F, 2.0F);
 		RenderManager.instance.renderEntityWithPosYaw(par5EntityLivingBase,
@@ -163,8 +198,6 @@ super.mouseClickMove(par1, par2, par3, par4);
 	public void updateScreen() {
 		super.updateScreen();
 		rotate++;
-		rotateY++;
-		
 
 	}
 

@@ -6,10 +6,7 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import steampunked.inventory.slots.tinkerbench.SlotArm;
-import steampunked.inventory.slots.tinkerbench.SlotBody;
-import steampunked.inventory.slots.tinkerbench.SlotHead;
-import steampunked.inventory.slots.tinkerbench.SlotLeg;
+import steampunked.inventory.slots.tinkerbench.SlotChasis;
 import steampunked.inventory.slots.tinkerbench.SlotOutput;
 import steampunked.inventory.slots.tinkerbench.SlotUpgrade;
 import steampunked.tileentities.TileEntityTinkerBench;
@@ -22,27 +19,23 @@ public class ContainerTinkerBench extends Container {
 	private int lastCraftProgress;
 
 	public ContainerTinkerBench(TileEntityTinkerBench cs, IInventory player_inv) {
+		int i;
+		int j;
 		this.tinkerTable = cs;
 
-		this.addSlotToContainer(new SlotHead(cs, 0, 31, 28));
-		this.addSlotToContainer(new SlotArm(cs, 1, 8, 51));
-		this.addSlotToContainer(new SlotBody(cs, 2, 31, 51));
-		this.addSlotToContainer(new SlotArm(cs, 3, 54, 51));
-		this.addSlotToContainer(new SlotLeg(cs, 4, 20, 74));
-		this.addSlotToContainer(new SlotLeg(cs, 5, 42, 74));
+		this.addSlotToContainer(new SlotChasis(cs, 0, 16, 24));
+		this.addSlotToContainer(new Slot(cs, 1, 16, 49));
 
-		this.addSlotToContainer(new SlotUpgrade(cs, 6, 148, 40));
-		this.addSlotToContainer(new SlotUpgrade(cs, 7, 166, 40));
-		this.addSlotToContainer(new SlotUpgrade(cs, 8, 148, 58));
-		this.addSlotToContainer(new SlotUpgrade(cs, 9, 166, 58));
-		this.addSlotToContainer(new SlotUpgrade(cs, 10, 148, 76));
-		this.addSlotToContainer(new SlotUpgrade(cs, 11, 166, 76));
+		for (i = 0; i < 2; ++i) {
+			for (j = 0; j < 3; ++j) {
+				this.addSlotToContainer(new SlotUpgrade(cs, 3 + (j * i),
+						16 + j * 18, 78 + i * 18));
+			}
+		}
+		this.addSlotToContainer(new SlotOutput(cs, 8, 178, 103));
 
-		this.addSlotToContainer(new SlotOutput(cs, 12, 178, 103));
-
-		int i;
 		for (i = 0; i < 3; ++i) {
-			for (int j = 0; j < 9; ++j) {
+			for (j = 0; j < 9; ++j) {
 				this.addSlotToContainer(new Slot(player_inv, j + i * 9 + 9,
 						28 + j * 18, 135 + i * 18));
 			}
@@ -96,7 +89,29 @@ public class ContainerTinkerBench extends Container {
 	}
 
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
+		ItemStack itemstack = null;
+		Slot slot = (Slot) this.inventorySlots.get(par2);
 
-	        return null;
+		if (slot != null && slot.getHasStack()) {
+			ItemStack itemstack1 = slot.getStack();
+			itemstack = itemstack1.copy();
+
+			if (par2 < 8) {
+				if (!this.mergeItemStack(itemstack1, 8,
+						this.inventorySlots.size(), true)) {
+					return null;
+				}
+			} else if (!this.mergeItemStack(itemstack1, 0, 8, false)) {
+				return null;
+			}
+
+			if (itemstack1.stackSize == 0) {
+				slot.putStack((ItemStack) null);
+			} else {
+				slot.onSlotChanged();
+			}
+		}
+
+		return itemstack;
 	}
 }

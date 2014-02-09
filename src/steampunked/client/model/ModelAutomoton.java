@@ -161,14 +161,8 @@ public class ModelAutomoton extends ModelBase {
 		Neck.render(f5);
 
 		rightFlameBottom.render(f5);
-		//rightFlameCan.render(f5);
 		rightFlameTop.render(f5);
 		rightFlameShaft.render(f5);
-		/*
-		 * leftFlameTop.render(f5); leftFlameCan.render(f5);
-		 * leftFlameShaft.render(f5); leftFlameBottom.render(f5);
-		 */
-
 		GL11.glPopMatrix();
 
 	}
@@ -217,63 +211,13 @@ public class ModelAutomoton extends ModelBase {
 	}
 
 	public void hideParts(EntityAutomoton entity) {
-		rightarm.isHidden = true;
-
-	if (entity.rArm != null && entity.rArm == "Iron") {
-			rightarm.isHidden = false;
-		} else
-			rightarm.isHidden = true;
-
-		if (entity.lArm != null) {
-			leftarm.isHidden = false;
-		} else
-			leftarm.isHidden = true;
-
-		if (entity.head != null && entity.head == "Iron") {
-			head.isHidden = false;
-			Neck.isHidden = false;
-		} else {
-			head.isHidden = true;
-			Neck.isHidden = true;
-		}
-		if (entity.body != null && entity.body == "Iron") {
-			body.isHidden = false;
-			ShaftRight.isHidden = false;
-			ShaftLeft.isHidden = false;
-		} else {
-			body.isHidden = true;
-			ShaftRight.isHidden = true;
-			ShaftLeft.isHidden = true;
-		}
-
-		if (entity.rLeg != null && entity.rLeg == "Iron") {
-			rightleg.isHidden = false;
-			rightThigh.isHidden = false;
-
-		} else {
-			rightleg.isHidden = true;
-			rightThigh.isHidden = true;
-
-		}
-
-		if (entity.lLeg != null && entity.lLeg == "Iron") {
-			leftleg.isHidden = false;
-			leftThigh.isHidden = false;
-
-		} else {
-			leftleg.isHidden = true;
-			leftThigh.isHidden = true;
-		}
-
 		if (entity.rFlame == true) {
 			rightFlameBottom.isHidden = false;
-			//rightFlameCan.isHidden = false;
 			rightFlameTop.isHidden = false;
 			rightFlameShaft.isHidden = false;
 
 		} else {
 			rightFlameBottom.isHidden = true;
-			//rightFlameCan.isHidden = true;
 			rightFlameTop.isHidden = true;
 			rightFlameShaft.isHidden = true;
 		}

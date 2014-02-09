@@ -28,6 +28,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import steampunked.entity.ai.AttackFilter;
 import steampunked.entity.ai.EntityAICollectItem;
 import steampunked.entity.ai.EntityAIHurt;
 import steampunked.entity.ai.EntityAIMoveHome;

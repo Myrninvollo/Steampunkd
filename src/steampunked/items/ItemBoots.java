@@ -114,7 +114,7 @@ public class ItemBoots extends ItemArmor implements ISteamUser,ISpecialArmor {
 	@Override
 	public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) {
 		if (armor.getItemDamage() < armor.getMaxDamage() -1)
-			return 5;
+			return 3;
 		else
 			return 0;
 	}

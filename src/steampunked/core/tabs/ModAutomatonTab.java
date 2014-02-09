@@ -34,13 +34,10 @@ public class ModAutomatonTab extends CreativeTabs {
 	@Override
 	public void displayAllReleventItems(List list) {
 		this.list = list;
-
+addBlock(ModBlocks.tinkerBench);
+addItem(ModItems.chasis);
 		addItem(ModItems.spawner);
 		addItem(ModItems.namePlate);
-		addItem(ModItems.ItemHead);
-		addItem(ModItems.ItemBody);
-		addItem(ModItems.ItemArm);
-		addItem(ModItems.ItemLeg);
 		addItem(ModItems.AutomatonUpgrade);
 		addItem(ModItems.punchcard);
 

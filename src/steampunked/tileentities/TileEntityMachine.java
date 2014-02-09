@@ -126,7 +126,7 @@ public abstract class TileEntityMachine extends TileEntity implements IInventory
 
 
 	  @Override
-	  public final Packet getDescriptionPacket()
+	  public Packet getDescriptionPacket()
 	  {
 	    NBTTagCompound nbt = new NBTTagCompound();
 	    writeToNBT(nbt);    
@@ -289,7 +289,7 @@ public abstract class TileEntityMachine extends TileEntity implements IInventory
 	}
 
 	@Override
-	  public final void onDataPacket(INetworkManager net, Packet132TileEntityData pkt)
+	  public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt)
 	  {
 	    super.onDataPacket(net, pkt);
 	    readFromNBT(pkt.data);
@@ -299,4 +299,6 @@ public abstract class TileEntityMachine extends TileEntity implements IInventory
 	  {
 	    redstone_signal = worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord);
 	  }
+	  
+	  
 	}

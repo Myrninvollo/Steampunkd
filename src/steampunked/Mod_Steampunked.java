@@ -26,7 +26,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = Reference.ModID, name = "Steampunkd", version = "0.0.1")
-@NetworkMod(clientSideRequired = true, serverSideRequired = false, clientPacketHandlerSpec = @SidedPacketHandler(channels = { Mod_Steampunked.STEAMPUNKED }, packetHandler = ClientPacketHandler.class), serverPacketHandlerSpec = @SidedPacketHandler(channels = { "Steampunked" }, packetHandler = ServerPacketHandler.class))
+@NetworkMod(clientSideRequired = true, serverSideRequired = false, clientPacketHandlerSpec = @SidedPacketHandler(channels = { Mod_Steampunked.STEAMPUNKED }, packetHandler = ClientPacketHandler.class), serverPacketHandlerSpec = @SidedPacketHandler(channels = { Mod_Steampunked.STEAMPUNKED }, packetHandler = ServerPacketHandler.class))
 public class Mod_Steampunked {
 
 	@SidedProxy(serverSide = "steampunked.proxies.CommonProxy", clientSide = "steampunked.proxies.ClientProxy")
@@ -51,10 +51,12 @@ public class Mod_Steampunked {
 		ModBlocks.initBlocks();
 		ModItems.initItems();
 		EntityRegistry.registerModEntity(EntityAutomoton.class, "Automoton", 1,
-                this, 80, 3, true);
-		EntityRegistry.registerModEntity(EntityTankAutomoton.class, "AutomotonTank", 2,
-                this, 80, 3, true);
-        LanguageRegistry.instance().addStringLocalization("entity.steampunked.Automoton.name", "en_US","Steam Automoton");
+				this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityTankAutomoton.class,
+				"AutomotonTank", 2, this, 80, 3, true);
+		LanguageRegistry.instance()
+				.addStringLocalization("entity.steampunked.Automoton.name",
+						"en_US", "Steam Automoton");
 		MinecraftForge.EVENT_BUS.register(new SteampunkedEventHandler());
 		NetworkRegistry.instance().registerGuiHandler(this, guiHandler);
 

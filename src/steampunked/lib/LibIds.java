@@ -12,10 +12,7 @@ public final class LibIds {
 	public static int idDiamondDrill = 25006;
 	public static int idNameplate = 25007;
 	public static int idSpawner = 25008;
-	public static int idHead = 25009;
-	public static int idBody = 25010;
-	public static int idArm = 25011;
-	public static int idLeg = 25012;
+	public static int idChasis = 25009;
 	public static int idUpgrade = 25013;
 	public static int idPunchcard = 25014;
 	public static int idsaberWood = 25015;

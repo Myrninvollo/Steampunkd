@@ -24,5 +24,6 @@ public final class LibNames {
 	public static String SABERIRON = "Iron Saber";
 	public static String SABERGOLD = "Golden Saber";
 	public static String SABERDIAMOND = "Diamond Saber";
+	public static String CHASIS = "Automaton Chasis";
 
 }
