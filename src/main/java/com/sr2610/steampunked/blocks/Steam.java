@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 
 public class Steam extends Fluid {
 	public Steam() {
@@ -15,5 +16,7 @@ public class Steam extends Fluid {
 		setGaseous(true);
 		setTemperature(390);
 		setUnlocalizedName("steam");
+		FluidRegistry.registerFluid(this);
+
 }
 }

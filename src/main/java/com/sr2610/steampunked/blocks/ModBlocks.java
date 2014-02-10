@@ -74,7 +74,7 @@ public final class ModBlocks {
 		GameRegistry.registerTileEntity(TileEntityTinkerBench.class,
 				"tileEntityTinkerBench");
 
-		FluidRegistry.registerFluid(steam);
+		System.out.println(FluidRegistry.getRegisteredFluids());
 
 	}
 
