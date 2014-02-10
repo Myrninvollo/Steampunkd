@@ -9,7 +9,6 @@ import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
 import com.sr2610.steampunked.entity.automatons.EntityTankAutomoton;
 import com.sr2610.steampunked.gui.GuiHandler;
 import com.sr2610.steampunked.items.ModItems;
-import com.sr2610.steampunked.lib.Reference;
 import com.sr2610.steampunked.network.PacketPipeline;
 import com.sr2610.steampunked.proxies.CommonProxy;
 
@@ -23,8 +22,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 
-@Mod(modid =Mod_Steampunked.name , name = "Steampunkd", version = Mod_Steampunked.version)
-public class Mod_Steampunked {
+@Mod(modid = Steampunked.name, name = "Steampunkd", version = Steampunked.version)
+public class Steampunked {
 
 	public static final String version = "0.0.1";
 	public static final String name = "Steampunked";
@@ -33,7 +32,7 @@ public class Mod_Steampunked {
 	public static CommonProxy proxy;
 
 	@Instance
-	public static Mod_Steampunked instance = new Mod_Steampunked();
+	public static Steampunked instance = new Steampunked();
 
 	private GuiHandler guiHandler = new GuiHandler();
 

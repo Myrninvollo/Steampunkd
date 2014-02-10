@@ -12,7 +12,7 @@ import java.util.EnumMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.sr2610.steampunked.Mod_Steampunked;
+import com.sr2610.steampunked.Steampunked;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -122,7 +122,7 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
     // Method to call from FMLInitializationEvent
     public void initalise ()
     {
-        this.channels = NetworkRegistry.INSTANCE.newChannel(Mod_Steampunked.STEAMPUNKED, this);
+        this.channels = NetworkRegistry.INSTANCE.newChannel(Steampunked.STEAMPUNKED, this);
         registerPackets();
     }
 

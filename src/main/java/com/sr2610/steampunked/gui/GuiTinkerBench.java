@@ -16,7 +16,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import com.sr2610.steampunked.Mod_Steampunked;
+import com.sr2610.steampunked.Steampunked;
 import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
 import com.sr2610.steampunked.inventory.container.ContainerTinkerBench;
 import com.sr2610.steampunked.items.ItemChasis;
@@ -133,7 +133,7 @@ public class GuiTinkerBench extends GuiMachine {
 	}
 
 	void updateServer(ItemStack stack) {
-		Mod_Steampunked.packetPipeline.sendToServer(new PacketTinkerTable(
+		Steampunked.packetPipeline.sendToServer(new PacketTinkerTable(
 				injectorInventory.xCoord, injectorInventory.yCoord,
 				injectorInventory.zCoord, stack));
 

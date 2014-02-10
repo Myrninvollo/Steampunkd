@@ -14,7 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.sr2610.steampunked.Mod_Steampunked;
+import com.sr2610.steampunked.Steampunked;
 import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.lib.Reference;
 import com.sr2610.steampunked.tileentities.TileEntityInjector;
@@ -43,7 +43,7 @@ public class BlockInjector extends BlockContainer {
 		}
 
 		else
-			player.openGui(Mod_Steampunked.instance, 0, world, x, y, z);
+			player.openGui(Steampunked.instance, 0, world, x, y, z);
 		return true;
 
 	}

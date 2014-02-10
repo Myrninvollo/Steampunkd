@@ -13,7 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.sr2610.steampunked.Mod_Steampunked;
+import com.sr2610.steampunked.Steampunked;
 import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.tileentities.TileEntitySteamBoiler;
 
@@ -37,7 +37,7 @@ public class BlockSteamBoiler extends BlockContainer {
 		}
 
 		else
-			player.openGui(Mod_Steampunked.instance, 2, world, x, y, z);
+			player.openGui(Steampunked.instance, 2, world, x, y, z);
 		return true;
 
 	}

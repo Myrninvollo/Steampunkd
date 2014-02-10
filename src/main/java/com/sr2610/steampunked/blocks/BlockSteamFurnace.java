@@ -17,7 +17,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.sr2610.steampunked.Mod_Steampunked;
+import com.sr2610.steampunked.Steampunked;
 import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.lib.Reference;
 import com.sr2610.steampunked.tileentities.TileEntitySteamFurnace;
@@ -53,7 +53,7 @@ public class BlockSteamFurnace extends BlockContainer {
 		}
 
 		else
-			player.openGui(Mod_Steampunked.instance, 1, world, x, y, z);
+			player.openGui(Steampunked.instance, 1, world, x, y, z);
 		return true;
 
 	}
