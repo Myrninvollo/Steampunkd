@@ -31,8 +31,10 @@ public class BlockSteamFurnace extends BlockContainer {
 	private IIcon furnaceIconTop;
 	@SideOnly(Side.CLIENT)
 	private IIcon furnaceIconFront;
+	@SideOnly(Side.CLIENT)
+	private IIcon furnaceIconBottom;
 
-	protected BlockSteamFurnace(Material par2Material) {
+	protected BlockSteamFurnace(Boolean isOn, Material par2Material) {
 		super(par2Material);
 		setCreativeTab(ModCreativeTab.INSTANCE);
 
@@ -107,90 +109,87 @@ public class BlockSteamFurnace extends BlockContainer {
 
 	public void onBlockAdded(World world, int x, int y, int z) {
 		super.onBlockAdded(world, x, y, z);
-        this.func_149930_e(world, x, y, z);
+		this.func_149930_e(world, x, y, z);
 
 	}
 
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int par1, int par2) {
-		if (par2 == 0 && par1 == 3)
+	public IIcon getIcon(int side, int meta) {
+		if (meta == 0 && side == 3)
 			return furnaceIconFront;
-		return par1 == 1 ? this.furnaceIconTop
-				: (par1 == 0 ? this.furnaceIconTop
-						: (par1 != par2 ? this.blockIcon
-								: this.furnaceIconFront));
+		else if (side == 1)
+			return this.furnaceIconTop;
+		else if (side == 0)
+			return this.furnaceIconBottom;
+		else if (side == meta)
+			return furnaceIconFront;
+		else
+			return this.blockIcon;
+
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.blockIcon = par1IconRegister.registerIcon(Reference.ModID
-				+ ":furnace_side");
+				+ ":furnace");
 		this.furnaceIconFront = par1IconRegister.registerIcon(Reference.ModID
-				+ ":furnace_front");
+				+ ":furnacefront_on");
+
 		this.furnaceIconTop = par1IconRegister.registerIcon(Reference.ModID
 				+ ":furnace_top");
+		this.furnaceIconBottom = par1IconRegister.registerIcon(Reference.ModID
+				+ ":furnace_bottom");
 	}
 
-	
-	  private void func_149930_e(World world, int x, int y, int z)
-	    {
-	        if (!world.isRemote)
-	        {
-	            Block block = world.getBlock(x, y, z - 1);
-	            Block block1 = world.getBlock(x, y, z + 1);
-	            Block block2 = world.getBlock(x - 1, y, z);
-	            Block block3 = world.getBlock(x + 1, y, z);
-	            byte b0 = 3;
+	private void func_149930_e(World world, int x, int y, int z) {
+		if (!world.isRemote) {
+			Block block = world.getBlock(x, y, z - 1);
+			Block block1 = world.getBlock(x, y, z + 1);
+			Block block2 = world.getBlock(x - 1, y, z);
+			Block block3 = world.getBlock(x + 1, y, z);
+			byte b0 = 3;
 
-	            if (block.func_149730_j() && !block1.func_149730_j())
-	            {
-	                b0 = 3;
-	            }
+			if (block.func_149730_j() && !block1.func_149730_j()) {
+				b0 = 3;
+			}
 
-	            if (block1.func_149730_j() && !block.func_149730_j())
-	            {
-	                b0 = 2;
-	            }
+			if (block1.func_149730_j() && !block.func_149730_j()) {
+				b0 = 2;
+			}
 
-	            if (block2.func_149730_j() && !block3.func_149730_j())
-	            {
-	                b0 = 5;
-	            }
+			if (block2.func_149730_j() && !block3.func_149730_j()) {
+				b0 = 5;
+			}
 
-	            if (block3.func_149730_j() && !block2.func_149730_j())
-	            {
-	                b0 = 4;
-	            }
+			if (block3.func_149730_j() && !block2.func_149730_j()) {
+				b0 = 4;
+			}
 
-	            world.setBlockMetadataWithNotify(x, y, z, b0, 2);
-	        }
-	    }
-	  
-	  public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack itemstack)
-	    {
-	        int l = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+			world.setBlockMetadataWithNotify(x, y, z, b0, 2);
+		}
+	}
 
-	        if (l == 0)
-	        {
-	        	world.setBlockMetadataWithNotify(x, y, z, 2, 2);
-	        }
+	public void onBlockPlacedBy(World world, int x, int y, int z,
+			EntityLivingBase entity, ItemStack itemstack) {
+		int l = MathHelper
+				.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
-	        if (l == 1)
-	        {
-	        	world.setBlockMetadataWithNotify(x, y, z, 5, 2);
-	        }
+		if (l == 0) {
+			world.setBlockMetadataWithNotify(x, y, z, 2, 2);
+		}
 
-	        if (l == 2)
-	        {
-	        	world.setBlockMetadataWithNotify(x, y, z, 3, 2);
-	        }
+		if (l == 1) {
+			world.setBlockMetadataWithNotify(x, y, z, 5, 2);
+		}
 
-	        if (l == 3)
-	        {
-	        	world.setBlockMetadataWithNotify(x, y, z, 4, 2);
-	        }
+		if (l == 2) {
+			world.setBlockMetadataWithNotify(x, y, z, 3, 2);
+		}
 
-	     
-	    }
+		if (l == 3) {
+			world.setBlockMetadataWithNotify(x, y, z, 4, 2);
+		}
+
+	}
 
 }

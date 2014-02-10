@@ -240,8 +240,6 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 		super.markDirty();
 	}
 
-	
-
 	@Override
 	public int getInventoryStackLimit() {
 		return 64;
@@ -254,7 +252,6 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 						(double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64.0D;
 	}
 
-	
 	static private final int[] INSERT_SLOTS = { 0 };
 	static private final int[] EXTRACT_SLOTS = { 1 };
 
