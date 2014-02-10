@@ -22,6 +22,7 @@ public final class ModBlocks {
 	public static Fluid steam;
 	public static Block BlockFluidSteam;
 	public static Block steamFurnace;
+	public static Block steamFurnaceActive;
 	public static Block steamBoiler;
 	public static Block tinkerBench;
 	public static Material materialSteam;
@@ -36,9 +37,14 @@ public final class ModBlocks {
 				.setBlockName(LibNames.INJECTOR);
 
 		BlockFluidSteam = new BlockSteamFluid().setBlockName(LibNames.STEAM);
+		
 		steamFurnace = new BlockSteamFurnace(false, Material.iron).setHardness(5.0F)
 				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
 				.setBlockName(LibNames.FURNACE);
+		
+		steamFurnaceActive = new BlockSteamFurnace(true, Material.iron).setHardness(5.0F)
+				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
+				.setBlockName(LibNames.FURNACE+"burning");
 
 		steamBoiler = new BlockSteamBoiler(Material.iron).setHardness(5.0F)
 				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
@@ -56,6 +62,7 @@ public final class ModBlocks {
 		GameRegistry.registerBlock(BlockFluidSteam,
 				"Steampunked.BlockFluidSteam");
 		GameRegistry.registerBlock(steamFurnace, LibNames.FURNACE);
+		GameRegistry.registerBlock(steamFurnaceActive, LibNames.FURNACE+"burning");
 		GameRegistry.registerBlock(steamBoiler, LibNames.BOILER);
 		GameRegistry.registerBlock(tinkerBench, LibNames.BENCH);
 		GameRegistry.registerTileEntity(TileEntityInjector.class,

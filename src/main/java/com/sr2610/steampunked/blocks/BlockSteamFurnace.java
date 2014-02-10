@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -18,7 +18,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.sr2610.steampunked.Steampunked;
-import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.lib.Reference;
 import com.sr2610.steampunked.tileentities.TileEntitySteamFurnace;
 
@@ -26,6 +25,10 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSteamFurnace extends BlockContainer {
+
+	private final Random furnaceRand = new Random();
+	private final boolean isActive;
+	private static boolean keepFurnaceInventory = false;
 
 	@SideOnly(Side.CLIENT)
 	private IIcon furnaceIconTop;
@@ -36,8 +39,7 @@ public class BlockSteamFurnace extends BlockContainer {
 
 	protected BlockSteamFurnace(Boolean isOn, Material par2Material) {
 		super(par2Material);
-		setCreativeTab(ModCreativeTab.INSTANCE);
-
+		isActive = isOn;
 	}
 
 	@Override
@@ -61,50 +63,58 @@ public class BlockSteamFurnace extends BlockContainer {
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block i, int j) {
+	public void breakBlock(World world, int x, int y, int z, Block block, int i) {
+		if (keepFurnaceInventory == false) {
+			TileEntitySteamFurnace tileentityfurnace = (TileEntitySteamFurnace) world
+					.getTileEntity(x, y, z);
 
-		dropItems(world, x, y, z);
+			if (tileentityfurnace != null) {
+				for (int i1 = 0; i1 < tileentityfurnace.getSizeInventory(); ++i1) {
+					ItemStack itemstack = tileentityfurnace.getStackInSlot(i1);
 
-		super.breakBlock(world, x, y, z, i, j);
-	}
+					if (itemstack != null) {
+						float f = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+						float f1 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+						float f2 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
 
-	private void dropItems(World world, int x, int y, int z) {
-		Random rand = new Random();
+						while (itemstack.stackSize > 0) {
+							int j1 = this.furnaceRand.nextInt(21) + 10;
 
-		TileEntity tile_entity = world.getTileEntity(x, y, z);
+							if (j1 > itemstack.stackSize) {
+								j1 = itemstack.stackSize;
+							}
 
-		if (!(tile_entity instanceof IInventory)) {
-			return;
-		}
+							itemstack.stackSize -= j1;
+							EntityItem entityitem = new EntityItem(world,
+									(double) ((float) x + f),
+									(double) ((float) y + f1),
+									(double) ((float) z + f2), new ItemStack(
+											itemstack.getItem(), j1,
+											itemstack.getItemDamage()));
 
-		IInventory inventory = (IInventory) tile_entity;
+							if (itemstack.hasTagCompound()) {
+								entityitem.getEntityItem().setTagCompound(
+										(NBTTagCompound) itemstack
+												.getTagCompound().copy());
+							}
 
-		for (int i = 0; i < inventory.getSizeInventory(); i++) {
-			ItemStack item = inventory.getStackInSlot(i);
-
-			if (item != null && item.stackSize > 0) {
-				float rx = rand.nextFloat() * 0.6F + 0.1F;
-				float ry = rand.nextFloat() * 0.6F + 0.1F;
-				float rz = rand.nextFloat() * 0.6F + 0.1F;
-
-				EntityItem entity_item = new EntityItem(world, x + rx, y + ry,
-						z + rz, new ItemStack(item.getItem(), item.stackSize,
-								item.getItemDamage()));
-
-				if (item.hasTagCompound()) {
-					entity_item.writeToNBT((NBTTagCompound) item
-							.getTagCompound().copy());
+							float f3 = 0.05F;
+							entityitem.motionX = (double) ((float) this.furnaceRand
+									.nextGaussian() * f3);
+							entityitem.motionY = (double) ((float) this.furnaceRand
+									.nextGaussian() * f3 + 0.2F);
+							entityitem.motionZ = (double) ((float) this.furnaceRand
+									.nextGaussian() * f3);
+							world.spawnEntityInWorld(entityitem);
+						}
+					}
 				}
 
-				float factor = 0.5F;
-
-				entity_item.motionX = rand.nextGaussian() * factor;
-				entity_item.motionY = rand.nextGaussian() * factor + 0.2F;
-				entity_item.motionZ = rand.nextGaussian() * factor;
-				world.spawnEntityInWorld(entity_item);
-				item.stackSize = 0;
+				world.func_147453_f(x, y, z, block);
 			}
 		}
+
+		super.breakBlock(world, x, y, z, block, i);
 	}
 
 	public void onBlockAdded(World world, int x, int y, int z) {
@@ -132,8 +142,10 @@ public class BlockSteamFurnace extends BlockContainer {
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.blockIcon = par1IconRegister.registerIcon(Reference.ModID
 				+ ":furnace");
-		this.furnaceIconFront = par1IconRegister.registerIcon(Reference.ModID
-				+ ":furnacefront_on");
+		this.furnaceIconFront = par1IconRegister
+				.registerIcon(this.isActive ? Reference.ModID
+						+ ":furnaceFront_on" : Reference.ModID
+						+ ":furnaceFront_off");
 
 		this.furnaceIconTop = par1IconRegister.registerIcon(Reference.ModID
 				+ ":furnace_top");
@@ -190,6 +202,43 @@ public class BlockSteamFurnace extends BlockContainer {
 			world.setBlockMetadataWithNotify(x, y, z, 4, 2);
 		}
 
+	}
+
+	public static void updateFurnaceBlockState(boolean p_149931_0_,
+			World p_149931_1_, int p_149931_2_, int p_149931_3_, int p_149931_4_) {
+		int l = p_149931_1_.getBlockMetadata(p_149931_2_, p_149931_3_,
+				p_149931_4_);
+		TileEntity tileentity = p_149931_1_.getTileEntity(p_149931_2_,
+				p_149931_3_, p_149931_4_);
+		keepFurnaceInventory = true;
+
+		if (p_149931_0_) {
+			p_149931_1_.setBlock(p_149931_2_, p_149931_3_, p_149931_4_,
+					ModBlocks.steamFurnaceActive);
+		} else {
+			p_149931_1_.setBlock(p_149931_2_, p_149931_3_, p_149931_4_,
+					ModBlocks.steamFurnace);
+		}
+
+		keepFurnaceInventory = false;
+		p_149931_1_.setBlockMetadataWithNotify(p_149931_2_, p_149931_3_,
+				p_149931_4_, l, 2);
+
+		if (tileentity != null) {
+			tileentity.validate();
+			p_149931_1_.setTileEntity(p_149931_2_, p_149931_3_, p_149931_4_,
+					tileentity);
+		}
+	}
+
+	public Item getItemDropped(int p_149650_1_, Random p_149650_2_,
+			int p_149650_3_) {
+		return Item.getItemFromBlock(ModBlocks.steamFurnace);
+	}
+
+	@SideOnly(Side.CLIENT)
+	public Item getItem(World world, int x, int y, int z) {
+		return Item.getItemFromBlock(ModBlocks.steamFurnace);
 	}
 
 }

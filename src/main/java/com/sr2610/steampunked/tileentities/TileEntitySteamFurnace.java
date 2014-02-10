@@ -13,6 +13,7 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
+import com.sr2610.steampunked.blocks.BlockSteamFurnace;
 import com.sr2610.steampunked.blocks.ModBlocks;
 import com.sr2610.steampunked.inventory.container.ContainerSteamFurnace;
 import com.sr2610.steampunked.lib.LibOptions;
@@ -51,6 +52,7 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 
 	/** The number of ticks that the current item has been cooking for */
 	public int furnaceCookTime;
+	private boolean isSmelting;
 
 	/**
 	 * Returns the number of slots in the inventory.
@@ -178,25 +180,36 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 
 	@Override
 	public void update() {
+		boolean flag = true;
 		boolean flag1 = false;
 		if (!this.worldObj.isRemote) {
-
 			if (this.canSmelt() && tank.getFluidAmount() > 10) {
 				++this.furnaceCookTime;
+				this.isSmelting = true;
 				tank.drain(10, true);
 
 				if (this.furnaceCookTime == LibOptions.furnaceCookTime / 10) {
 					this.furnaceCookTime = 0;
+					this.isSmelting = false;
 					this.smeltItem();
 					flag1 = true;
+
 				}
 			} else {
 				this.furnaceCookTime = 0;
+				this.isSmelting = false;
+
+			}
+
+			if (flag == (isSmelting)) {
+				flag1 = true;
 			}
 
 			if (flag1) {
 				this.markDirty();
 			}
+			BlockSteamFurnace.updateFurnaceBlockState(isSmelting,
+					this.worldObj, this.xCoord, this.yCoord, this.zCoord);
 		}
 	}
 
