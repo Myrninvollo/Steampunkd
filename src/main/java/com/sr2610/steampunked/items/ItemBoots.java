@@ -13,7 +13,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.common.ISpecialArmor;
 
-import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.items.interfaces.ISteamUser;
 import com.sr2610.steampunked.lib.LibOptions;
 import com.sr2610.steampunked.lib.Reference;
@@ -21,19 +20,19 @@ import com.sr2610.steampunked.lib.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemBoots extends ItemArmor implements ISteamUser,ISpecialArmor {
+public class ItemBoots extends ItemArmor implements ISteamUser, ISpecialArmor {
 
 	static final int ARMOR_BOOTS = 3;
 
 	public ItemBoots() {
 		super(ItemArmor.ArmorMaterial.IRON, 2, ARMOR_BOOTS);
 		this.setMaxDamage(LibOptions.bootsCapacity + 1);
-		setCreativeTab(ModCreativeTab.INSTANCE);
 
 	}
 
 	@Override
-	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot, String type) {
+	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
+			String type) {
 
 		return Reference.ModID + ":textures/models/springbootsmodel.png";
 	}
@@ -94,12 +93,12 @@ public class ItemBoots extends ItemArmor implements ISteamUser,ISpecialArmor {
 	public int getItemEnchantability() {
 		return 0;
 	}
-	
+
 	@Override
 	public ArmorProperties getProperties(EntityLivingBase player,
 			ItemStack armor, DamageSource source, double damage, int slot) {
 		double protection;
-		if (armor.getItemDamage() < armor.getMaxDamage() -1)
+		if (armor.getItemDamage() < armor.getMaxDamage() - 1)
 			protection = 0.2;
 		else
 			protection = 0;
@@ -112,7 +111,7 @@ public class ItemBoots extends ItemArmor implements ISteamUser,ISpecialArmor {
 
 	@Override
 	public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) {
-		if (armor.getItemDamage() < armor.getMaxDamage() -1)
+		if (armor.getItemDamage() < armor.getMaxDamage() - 1)
 			return 3;
 		else
 			return 0;

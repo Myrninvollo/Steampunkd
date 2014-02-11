@@ -29,7 +29,6 @@ public class ItemSaber extends Item {
 		this.toolMaterial = par2EnumToolMaterial;
 		this.maxStackSize = 1;
 		this.setMaxDamage(par2EnumToolMaterial.getMaxUses());
-		this.setCreativeTab(CreativeTabs.tabCombat);
 		this.weaponDamage = 6.0F + par2EnumToolMaterial.getDamageVsEntity();
 	}
 
@@ -42,14 +41,12 @@ public class ItemSaber extends Item {
 	 * (Quality+1)*2 if correct blocktype, 1.5F if sword
 	 */
 	public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block) {
-		
-			Material material = par2Block.getMaterial();
-			return material != Material.plants && material != Material.vine
-					&& material != Material.coral
-					&& material != Material.leaves
-					&& material != Material.cake ? 1.0F : 1.5F;
-		}
-	
+
+		Material material = par2Block.getMaterial();
+		return material != Material.plants && material != Material.vine
+				&& material != Material.coral && material != Material.leaves
+				&& material != Material.cake ? 1.0F : 1.5F;
+	}
 
 	/**
 	 * Current implementations of this method in child classes do not use the
@@ -65,11 +62,9 @@ public class ItemSaber extends Item {
 	public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World,
 			int par3, int par4, int par5, int par6,
 			EntityLivingBase par7EntityLivingBase) {
-			par1ItemStack.damageItem(2, par7EntityLivingBase);
-			return true;
-		}
-
-	
+		par1ItemStack.damageItem(2, par7EntityLivingBase);
+		return true;
+	}
 
 	@SideOnly(Side.CLIENT)
 	/**
@@ -105,8 +100,6 @@ public class ItemSaber extends Item {
 		return par1ItemStack;
 	}
 
-	
-
 	/**
 	 * Return the enchantability factor of the item, most of the time is based
 	 * on material.
@@ -127,7 +120,7 @@ public class ItemSaber extends Item {
 	 */
 	public boolean getIsRepairable(ItemStack par1ItemStack,
 			ItemStack par2ItemStack) {
-		//TODO Make Sabers Repairable 
+		// TODO Make Sabers Repairable
 		return false;
 	}
 

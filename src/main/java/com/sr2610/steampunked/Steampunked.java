@@ -4,6 +4,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.sr2610.steampunked.blocks.ModBlocks;
 import com.sr2610.steampunked.core.handlers.ConfigHandler;
+import com.sr2610.steampunked.core.handlers.CraftingHandler;
 import com.sr2610.steampunked.core.handlers.SteampunkedEventHandler;
 import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
 import com.sr2610.steampunked.entity.automatons.EntityTankAutomoton;
@@ -59,6 +60,7 @@ public class Steampunked {
 	@EventHandler
 	public void load(FMLInitializationEvent e) {
 		packetPipeline.initalise();
+		CraftingHandler.init();
 
 	}
 

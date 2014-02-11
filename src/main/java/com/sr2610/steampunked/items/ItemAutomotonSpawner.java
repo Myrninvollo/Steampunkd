@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.IFluidHandler;
 
-import com.sr2610.steampunked.core.tabs.ModAutomatonTab;
 import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
 import com.sr2610.steampunked.entity.automatons.EntityTankAutomoton;
 import com.sr2610.steampunked.lib.Reference;
@@ -22,7 +21,6 @@ public class ItemAutomotonSpawner extends Item {
 
 	public ItemAutomotonSpawner() {
 		super();
-		setCreativeTab(ModAutomatonTab.INSTANCE);
 		setMaxStackSize(1);
 		setHasSubtypes(true);
 	}
@@ -37,7 +35,7 @@ public class ItemAutomotonSpawner extends Item {
 				entity.homeX = par4;
 				entity.homeY = par5;
 				entity.homeZ = par6;
-				entity.side=par7;
+				entity.side = par7;
 				entity.setLocationAndAngles((double) ((float) par4 + par8),
 						(double) ((float) par5 + par9) + 0.5,
 						(double) ((float) par6 + par10), par9, par10);
@@ -45,33 +43,34 @@ public class ItemAutomotonSpawner extends Item {
 				par3World.spawnEntityInWorld(entity);
 				if (!par2EntityPlayer.capabilities.isCreativeMode) {
 					--par1ItemStack.stackSize;
-	
-				return true;
+
+					return true;
 				}
 			}
 
 			case 1: {
-				if(par3World.getTileEntity(par4, par5, par6)!=null && par3World.getTileEntity(par4, par5, par6)instanceof IFluidHandler ){
-				EntityTankAutomoton entity = new EntityTankAutomoton(par3World);
-				entity.homeX = par4;
-				entity.homeY = par5;
-				entity.homeZ = par6;
-				entity.side=par7;
-				entity.setLocationAndAngles((double) ((float) par4 + par8),
-						(double) ((float) par5 + par9),
-						(double) ((float) par6 + par10), par9, par10);
-				entity.setOwner(par2EntityPlayer.getDisplayName());
-				par3World.spawnEntityInWorld(entity);
-				if (!par2EntityPlayer.capabilities.isCreativeMode) {
-					--par1ItemStack.stackSize;
-				}
+				if (par3World.getTileEntity(par4, par5, par6) != null
+						&& par3World.getTileEntity(par4, par5, par6) instanceof IFluidHandler) {
+					EntityTankAutomoton entity = new EntityTankAutomoton(
+							par3World);
+					entity.homeX = par4;
+					entity.homeY = par5;
+					entity.homeZ = par6;
+					entity.side = par7;
+					entity.setLocationAndAngles((double) ((float) par4 + par8),
+							(double) ((float) par5 + par9),
+							(double) ((float) par6 + par10), par9, par10);
+					entity.setOwner(par2EntityPlayer.getDisplayName());
+					par3World.spawnEntityInWorld(entity);
+					if (!par2EntityPlayer.capabilities.isCreativeMode) {
+						--par1ItemStack.stackSize;
+					}
 
-				return true;
-				}
-				else{
-					if(!par3World.isRemote){
-					//	par2EntityPlayer.addChatMessage(EnumChatFormatting.ITALIC+"You must place this on a block with a tank");
-			            return false;
+					return true;
+				} else {
+					if (!par3World.isRemote) {
+						// par2EntityPlayer.addChatMessage(EnumChatFormatting.ITALIC+"You must place this on a block with a tank");
+						return false;
 					}
 				}
 			}
@@ -80,15 +79,14 @@ public class ItemAutomotonSpawner extends Item {
 		return false;
 	}
 
-	 @SideOnly(Side.CLIENT)
-     public void getSubItems(int par1, CreativeTabs par2CreativeTabs,
-                     List par3List) {
-             for (int x = 0; x < 2; x++) {
-                     par3List.add(new ItemStack(this, 1, x));
-             }
-     }
+	@SideOnly(Side.CLIENT)
+	public void getSubItems(int par1, CreativeTabs par2CreativeTabs,
+			List par3List) {
+		for (int x = 0; x < 2; x++) {
+			par3List.add(new ItemStack(this, 1, x));
+		}
+	}
 
-	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister registry) {

@@ -21,7 +21,6 @@ public class BlockSteamBoiler extends BlockContainer {
 
 	protected BlockSteamBoiler(Material par2Material) {
 		super(par2Material);
-		setCreativeTab(ModCreativeTab.INSTANCE);
 	}
 
 	

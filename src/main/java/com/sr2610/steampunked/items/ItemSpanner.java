@@ -40,7 +40,6 @@ public class ItemSpanner extends ItemTool {
 		shiftRotations.add(BlockChest.class);
 		shiftRotations.add(BlockInjector.class);
 		shiftRotations.add(BlockSteamFurnace.class);
-		setCreativeTab(ModCreativeTab.INSTANCE);
 
 	}
 
@@ -72,11 +71,10 @@ public class ItemSpanner extends ItemTool {
 		return false;
 	}
 
-
-	 public boolean doesSneakBypassUse(World world, int x, int y, int z, EntityPlayer player)
-	    {
-	        return true;
-	    }
+	public boolean doesSneakBypassUse(World world, int x, int y, int z,
+			EntityPlayer player) {
+		return true;
+	}
 
 	@Override
 	@SideOnly(Side.CLIENT)

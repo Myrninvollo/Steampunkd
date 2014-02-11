@@ -1,11 +1,12 @@
 package com.sr2610.steampunked.items;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.sr2610.steampunked.lib.LibNames;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public final class ModItems {
 	public static Item jetpack;
@@ -28,49 +29,48 @@ public final class ModItems {
 	public static Item saberGold;
 	public static Item saberDiamond;
 
+	public static Item copperIngot;
+
 	public static void initItems() {
 		System.out.println("[Steampunk'd] Initializing Items...");
-		jetpack = new ItemJetpack().setUnlocalizedName(LibNames.JETPACK).setTextureName("steampunked:jetpack");
-		drill = new ItemDrill()
-				.setUnlocalizedName(LibNames.DRILL);
-		drillDiamond = new ItemDiamondDrill()
-				.setUnlocalizedName(LibNames.DRILL + "_diamond");
-		bucket = new ItemSteamBucket()
-				.setUnlocalizedName(LibNames.BUCKET);
-		
-		spanner = new ItemSpanner()
-				.setUnlocalizedName(LibNames.SPANNER);
+		jetpack = new ItemJetpack().setUnlocalizedName(LibNames.JETPACK)
+				.setTextureName("steampunked:jetpack");
+		drill = new ItemDrill().setUnlocalizedName(LibNames.DRILL);
+		drillDiamond = new ItemDiamondDrill().setUnlocalizedName(LibNames.DRILL
+				+ "_diamond");
+		bucket = new ItemSteamBucket().setUnlocalizedName(LibNames.BUCKET);
+
+		spanner = new ItemSpanner().setUnlocalizedName(LibNames.SPANNER);
 
 		goggles = new ItemGoggles().setUnlocalizedName(LibNames.GOGGLES);
 
 		boots = new ItemBoots().setUnlocalizedName(LibNames.BOOTS);
 
-		namePlate = new ItemNamePlate()
-				.setUnlocalizedName(LibNames.NAMEPLATE);
+		namePlate = new ItemNamePlate().setUnlocalizedName(LibNames.NAMEPLATE);
 
 		spawner = new ItemAutomotonSpawner()
 				.setUnlocalizedName(LibNames.SPAWNER);
 
 		AutomatonUpgrade = new ItemAutomatonUpgrade()
 				.setUnlocalizedName(LibNames.UPGRADE);
-		punchcard = new ItemPunchcard()
-				.setUnlocalizedName(LibNames.PUNCHCARD);
+		punchcard = new ItemPunchcard().setUnlocalizedName(LibNames.PUNCHCARD);
 		chasis = new ItemChasis().setUnlocalizedName(LibNames.CHASIS);
 
-		saberWood = new ItemSaber(Item.ToolMaterial.WOOD)
-				.setTexture("wood").setUnlocalizedName(LibNames.SABERWOOD);
-		saberStone = new ItemSaber(Item.ToolMaterial.STONE)
-				.setTexture("stone").setUnlocalizedName(LibNames.SABERSTONE);
-		saberIron = new ItemSaber(Item.ToolMaterial.IRON)
-				.setTexture("iron").setUnlocalizedName(LibNames.SABERIRON);
-		saberGold = new ItemSaber(Item.ToolMaterial.GOLD)
-				.setTexture("gold").setUnlocalizedName(LibNames.SABERGOLD);
-		saberDiamond = new ItemSaber(
-				Item.ToolMaterial.EMERALD).setTexture("diamond")
-				.setUnlocalizedName(LibNames.SABERDIAMOND);
+		saberWood = new ItemSaber(Item.ToolMaterial.WOOD).setTexture("wood")
+				.setUnlocalizedName(LibNames.SABERWOOD);
+		saberStone = new ItemSaber(Item.ToolMaterial.STONE).setTexture("stone")
+				.setUnlocalizedName(LibNames.SABERSTONE);
+		saberIron = new ItemSaber(Item.ToolMaterial.IRON).setTexture("iron")
+				.setUnlocalizedName(LibNames.SABERIRON);
+		saberGold = new ItemSaber(Item.ToolMaterial.GOLD).setTexture("gold")
+				.setUnlocalizedName(LibNames.SABERGOLD);
+		saberDiamond = new ItemSaber(Item.ToolMaterial.EMERALD).setTexture(
+				"diamond").setUnlocalizedName(LibNames.SABERDIAMOND);
+
+		copperIngot = new ItemMod("ingotCopper")
+				.setUnlocalizedName(LibNames.COPPERINGOT);
 
 		registerItems();
-		nameItems();
 	}
 
 	private static void registerItems() {
@@ -94,29 +94,12 @@ public final class ModItems {
 		GameRegistry.registerItem(saberGold, LibNames.SABERGOLD);
 		GameRegistry.registerItem(saberDiamond, LibNames.SABERDIAMOND);
 
+		GameRegistry.registerItem(copperIngot, LibNames.COPPERINGOT);
+		oreRegistration();
+
 	}
 
-	public static void nameItems() {
-		LanguageRegistry.addName(jetpack, LibNames.JETPACK);
-		LanguageRegistry.addName(drill, LibNames.DRILL);
-		LanguageRegistry.addName(drillDiamond, LibNames.DRILL);
-		LanguageRegistry.addName(bucket, LibNames.BUCKET);
-		LanguageRegistry.addName(spanner, LibNames.SPANNER);
-		LanguageRegistry.addName(goggles, LibNames.GOGGLES);
-		LanguageRegistry.addName(boots, LibNames.BOOTS);
-		LanguageRegistry.addName(namePlate, LibNames.NAMEPLATE);
-		LanguageRegistry.addName(spawner, LibNames.SPAWNER);
-
-		LanguageRegistry.addName(chasis, LibNames.CHASIS);
-
-		LanguageRegistry.addName(AutomatonUpgrade, LibNames.UPGRADE);
-		LanguageRegistry.addName(punchcard, LibNames.PUNCHCARD);
-
-		LanguageRegistry.addName(saberWood, LibNames.SABERWOOD);
-		LanguageRegistry.addName(saberStone, LibNames.SABERSTONE);
-		LanguageRegistry.addName(saberIron, LibNames.SABERIRON);
-		LanguageRegistry.addName(saberGold, LibNames.SABERGOLD);
-		LanguageRegistry.addName(saberDiamond, LibNames.SABERDIAMOND);
-
+	public static void oreRegistration() {
+		OreDictionary.registerOre("ingotCopper", new ItemStack(copperIngot));
 	}
 }

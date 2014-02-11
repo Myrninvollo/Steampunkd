@@ -23,8 +23,6 @@ public class BlockInjector extends BlockContainer {
 
 	public BlockInjector(Material par2) {
 		super(par2);
-		setCreativeTab(ModCreativeTab.INSTANCE);
-
 	}
 
 	public void registerIcons(IIconRegister par1IconRegister) {

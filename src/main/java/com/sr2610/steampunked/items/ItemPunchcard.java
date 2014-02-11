@@ -9,9 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.EnumChatFormatting;
 
-import com.sr2610.steampunked.core.tabs.ModAutomatonTab;
 import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
 import com.sr2610.steampunked.lib.Reference;
 
@@ -22,7 +20,6 @@ public class ItemPunchcard extends Item {
 
 	public ItemPunchcard() {
 		super();
-		setCreativeTab(ModAutomatonTab.INSTANCE);
 		setMaxStackSize(1);
 		setHasSubtypes(true);
 	}
@@ -81,7 +78,9 @@ public class ItemPunchcard extends Item {
 				}
 			} else {
 				if (!par2EntityPlayer.worldObj.isRemote)
-					par2EntityPlayer.addChatComponentMessage(new ChatComponentTranslation("steampunked.automatons.oneProgram"));
+					par2EntityPlayer
+							.addChatComponentMessage(new ChatComponentTranslation(
+									"steampunked.automatons.oneProgram"));
 				return false;
 			}
 
@@ -89,7 +88,9 @@ public class ItemPunchcard extends Item {
 
 		else {
 			if (!par2EntityPlayer.worldObj.isRemote)
-				par2EntityPlayer.addChatComponentMessage(new ChatComponentTranslation("steampunked.automatons.onlyAutomaton"));
+				par2EntityPlayer
+						.addChatComponentMessage(new ChatComponentTranslation(
+								"steampunked.automatons.onlyAutomaton"));
 			return false;
 		}
 		return false;

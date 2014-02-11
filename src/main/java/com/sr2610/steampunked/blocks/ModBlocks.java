@@ -4,8 +4,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialLiquid;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.sr2610.steampunked.lib.LibNames;
 import com.sr2610.steampunked.tileentities.TileEntityInjector;
@@ -25,6 +27,8 @@ public final class ModBlocks {
 	public static Block steamFurnaceActive;
 	public static Block steamBoiler;
 	public static Block tinkerBench;
+
+	public static Block oreCopper;
 	public static Material materialSteam;
 
 	public static void initBlocks() {
@@ -37,14 +41,16 @@ public final class ModBlocks {
 				.setBlockName(LibNames.INJECTOR);
 
 		BlockFluidSteam = new BlockSteamFluid().setBlockName(LibNames.STEAM);
-		
-		steamFurnace = new BlockSteamFurnace(false, Material.iron).setHardness(5.0F)
-				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
+
+		steamFurnace = new BlockSteamFurnace(false, Material.iron)
+				.setHardness(5.0F).setResistance(10.0F)
+				.setStepSound(Block.soundTypeMetal)
 				.setBlockName(LibNames.FURNACE);
-		
-		steamFurnaceActive = new BlockSteamFurnace(true, Material.iron).setHardness(5.0F)
-				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
-				.setBlockName(LibNames.FURNACE+"burning");
+
+		steamFurnaceActive = new BlockSteamFurnace(true, Material.iron)
+				.setHardness(5.0F).setResistance(10.0F)
+				.setStepSound(Block.soundTypeMetal)
+				.setBlockName(LibNames.FURNACE + "burning");
 
 		steamBoiler = new BlockSteamBoiler(Material.iron).setHardness(5.0F)
 				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
@@ -54,6 +60,11 @@ public final class ModBlocks {
 				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
 				.setBlockName(LibNames.BENCH);
 
+		oreCopper = new BlockMod(Material.ground, "oreCopper")
+				.setHardness(3.0F).setResistance(5.0F)
+				.setStepSound(Block.soundTypePiston)
+				.setBlockName(LibNames.ORECOPPER);
+
 		registerBlocks();
 	}
 
@@ -62,9 +73,11 @@ public final class ModBlocks {
 		GameRegistry.registerBlock(BlockFluidSteam,
 				"Steampunked.BlockFluidSteam");
 		GameRegistry.registerBlock(steamFurnace, LibNames.FURNACE);
-		GameRegistry.registerBlock(steamFurnaceActive, LibNames.FURNACE+"burning");
+		GameRegistry.registerBlock(steamFurnaceActive, LibNames.FURNACE
+				+ "burning");
 		GameRegistry.registerBlock(steamBoiler, LibNames.BOILER);
 		GameRegistry.registerBlock(tinkerBench, LibNames.BENCH);
+		GameRegistry.registerBlock(oreCopper, LibNames.ORECOPPER);
 		GameRegistry.registerTileEntity(TileEntityInjector.class,
 				"tileEntityInjector");
 		GameRegistry.registerTileEntity(TileEntitySteamFurnace.class,
@@ -73,9 +86,12 @@ public final class ModBlocks {
 				"tileEntitySteamBoiler");
 		GameRegistry.registerTileEntity(TileEntityTinkerBench.class,
 				"tileEntityTinkerBench");
+		oreRegistration();
 
-		System.out.println(FluidRegistry.getRegisteredFluids());
+	}
 
+	public static void oreRegistration() {
+		OreDictionary.registerOre("oreCopper", new ItemStack(oreCopper));
 	}
 
 }

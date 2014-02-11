@@ -15,7 +15,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Sets;
-import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.items.interfaces.ISteamUser;
 import com.sr2610.steampunked.lib.LibOptions;
 import com.sr2610.steampunked.lib.Reference;
@@ -25,14 +24,20 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemDrill extends ItemPickaxe implements ISteamUser {
 
-    private static final Set field_150915_c = Sets.newHashSet(new Block[] {Blocks.cobblestone, Blocks.double_stone_slab, Blocks.stone_slab, Blocks.stone, Blocks.sandstone, Blocks.mossy_cobblestone, Blocks.iron_ore, Blocks.iron_block, Blocks.coal_ore, Blocks.gold_block, Blocks.gold_ore, Blocks.diamond_ore, Blocks.diamond_block, Blocks.ice, Blocks.netherrack, Blocks.lapis_ore, Blocks.lapis_block, Blocks.redstone_ore, Blocks.lit_redstone_ore, Blocks.rail, Blocks.detector_rail, Blocks.golden_rail, Blocks.activator_rail});
-
+	private static final Set blocks = Sets.newHashSet(new Block[] {
+			Blocks.cobblestone, Blocks.double_stone_slab, Blocks.stone_slab,
+			Blocks.stone, Blocks.sandstone, Blocks.mossy_cobblestone,
+			Blocks.iron_ore, Blocks.iron_block, Blocks.coal_ore,
+			Blocks.gold_block, Blocks.gold_ore, Blocks.diamond_ore,
+			Blocks.diamond_block, Blocks.ice, Blocks.netherrack,
+			Blocks.lapis_ore, Blocks.lapis_block, Blocks.redstone_ore,
+			Blocks.lit_redstone_ore, Blocks.rail, Blocks.detector_rail,
+			Blocks.golden_rail, Blocks.activator_rail });
 
 	public ItemDrill() {
 		super(Item.ToolMaterial.IRON);
 		setMaxStackSize(1);
 		setMaxDamage(LibOptions.drillCapacity);
-		setCreativeTab(ModCreativeTab.INSTANCE);
 
 	}
 
@@ -53,7 +58,8 @@ public class ItemDrill extends ItemPickaxe implements ISteamUser {
 	}
 
 	@Override
-    public boolean onBlockDestroyed(ItemStack itemstack, World world, Block block, int par3, int par4, int par5, EntityLivingBase entity){
+	public boolean onBlockDestroyed(ItemStack itemstack, World world,
+			Block block, int par3, int par4, int par5, EntityLivingBase entity) {
 
 		if (getCurrentSteam(itemstack) > 0) {
 			return super.onBlockDestroyed(itemstack, world, block, par3, par4,

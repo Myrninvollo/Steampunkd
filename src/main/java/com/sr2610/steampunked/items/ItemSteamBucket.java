@@ -3,7 +3,6 @@ package com.sr2610.steampunked.items;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -15,7 +14,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
 import com.sr2610.steampunked.blocks.ModBlocks;
-import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.relauncher.Side;
@@ -26,7 +24,6 @@ public class ItemSteamBucket extends Item implements IFluidContainerItem {
 	public ItemSteamBucket() {
 		super();
 		this.maxStackSize = 1;
-		setCreativeTab(ModCreativeTab.INSTANCE);
 
 	}
 

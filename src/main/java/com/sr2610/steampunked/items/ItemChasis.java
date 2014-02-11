@@ -16,11 +16,10 @@ public class ItemChasis extends Item {
 
 	public ItemChasis() {
 		super();
-		setCreativeTab(ModAutomatonTab.INSTANCE);
 		setMaxStackSize(1);
 		setHasSubtypes(true);
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs,
 			List par3List) {

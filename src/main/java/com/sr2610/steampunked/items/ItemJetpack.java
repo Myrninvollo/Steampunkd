@@ -3,7 +3,6 @@ package com.sr2610.steampunked.items;
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,13 +10,11 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
 
 import org.lwjgl.input.Keyboard;
 
-import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.items.interfaces.ISteamUser;
 import com.sr2610.steampunked.lib.LibOptions;
 import com.sr2610.steampunked.lib.Reference;
@@ -33,7 +30,6 @@ public class ItemJetpack extends ItemArmor implements ISteamUser, ISpecialArmor 
 	public ItemJetpack() {
 		super(ItemArmor.ArmorMaterial.IRON, 2, ARMOR_CHEST);
 		this.setMaxDamage(LibOptions.jetpackCapacity + 1);
-		setCreativeTab(ModCreativeTab.INSTANCE);
 	}
 
 	@Override

@@ -21,11 +21,10 @@ public class BlockTinkerBench extends BlockContainer {
 
 	protected BlockTinkerBench(Material par2Material) {
 		super(par2Material);
-		setCreativeTab(ModCreativeTab.INSTANCE);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world,int var2) {
+	public TileEntity createNewTileEntity(World world, int var2) {
 		return new TileEntityTinkerBench();
 	}
 
