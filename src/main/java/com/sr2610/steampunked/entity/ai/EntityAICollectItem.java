@@ -17,9 +17,12 @@ public class EntityAICollectItem extends EntityAIBase {
 	private PathNavigate pathFinder;
 
 	private EntityItem targetItem = null;
+	
+	private double range;
 
-	public EntityAICollectItem(EntityAutomaton auto) {
+	public EntityAICollectItem(EntityAutomaton auto, double range) {
 		this.auto = auto;
+		this.range = range;
 		this.pathFinder = auto.getNavigator();
 		setMutexBits(3);
 	}
@@ -41,7 +44,7 @@ public class EntityAICollectItem extends EntityAIBase {
 								.getAABB(auto.posX - 1, auto.posY - 1,
 										auto.posZ - 1, auto.posX + 1,
 										auto.posY + 1, auto.posZ + 1)
-								.expand(10.0, 10.0, 10.0));
+								.expand(range, range, range));
 				EntityItem closest = null;
 				double closestDistance = Double.MAX_VALUE;
 				for (EntityItem item : items) {
@@ -61,7 +64,6 @@ public class EntityAICollectItem extends EntityAIBase {
 				}
 			}
 		}
-		// }
 		return false;
 	}
 

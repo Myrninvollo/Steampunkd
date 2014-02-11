@@ -58,6 +58,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 	public String lLeg;
 	public boolean rFlame;
 	public boolean lFlame;
+	public double range;
 
 	private static final IEntitySelector attackEntitySelector = new AttackFilter();
 
@@ -73,7 +74,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		targetTasks.addTask(5, new EntityAiNearestTarget(this,
 				EntityLiving.class, 0, false, true, attackEntitySelector));
 
-		this.tasks.addTask(6, new EntityAICollectItem(this));
+		this.tasks.addTask(6, new EntityAICollectItem(this, range));
 
 		this.tasks.addTask(7, new EntityAIMoveHome(this));
 		this.setCurrentItemOrArmor(0, this.getStackInSlot(0));
