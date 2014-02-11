@@ -21,6 +21,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.VillagerRegistry;
 
 @Mod(modid = Steampunked.name, name = "Steampunkd", version = Steampunked.version)
 public class Steampunked {
@@ -51,14 +52,13 @@ public class Steampunked {
 				this, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityTankAutomoton.class,
 				"AutomotonTank", 2, this, 80, 3, true);
-
+		MinecraftForge.EVENT_BUS.register(new SteampunkedEventHandler());
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, guiHandler);
 	}
 
 	@EventHandler
 	public void load(FMLInitializationEvent e) {
 		packetPipeline.initalise();
-		MinecraftForge.EVENT_BUS.register(new SteampunkedEventHandler());
 
 	}
 

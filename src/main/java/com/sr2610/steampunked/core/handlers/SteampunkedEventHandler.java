@@ -17,16 +17,20 @@ public class SteampunkedEventHandler {
 			return;
 		else {
 			EntityPlayer eventPlayer = (EntityPlayer) event.entityLiving;
-			if (eventPlayer.inventory.armorInventory[3] != null) {
-				ItemStack boots = eventPlayer.inventory.armorInventory[3];
+			if (eventPlayer.inventory.armorInventory[0] != null) {
+				ItemStack boots = eventPlayer.inventory.armorInventory[0];
 				if ((boots.getItem() == ModItems.boots)
 						&& (boots.getMaxDamage() - boots.getItemDamage() >= 1)) {
-					if (event.distance > 10F)
-						eventPlayer.worldObj.playSoundAtEntity(event.entity,
-								"tile.piston.out", 0.5F, 1.0F);
 					int d = (int) (event.distance / 2);
-					boots.setItemDamage(boots.getItemDamage() + d);
-					event.isCanceled();
+					if (boots.getMaxDamage() - boots.getItemDamage() > d) {
+
+						if (event.distance > 10F)
+							eventPlayer.worldObj
+									.playSoundAtEntity(event.entity,
+											"tile.piston.out", 0.5F, 1.0F);
+						boots.setItemDamage(boots.getItemDamage() + d);
+						event.distance = 0;
+					}
 				}
 			}
 		}
