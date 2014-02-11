@@ -21,23 +21,24 @@ public class BlockSteamFluid extends BlockFluidFinite {
 		super(ModBlocks.steam, ModBlocks.materialSteam);
 		this.quantaPerBlock = 6;
 		this.setTickRate(5);
-		setCreativeTab(CreativeTabs.tabBlock);
 	}
 
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-			return stillIcon;
+		return stillIcon;
 
 	}
 
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		this.stillIcon = par1IconRegister.registerIcon("steampunked:steam_still");
-		this.flowingIcon = par1IconRegister.registerIcon("steampunked:steam_still");
+		this.stillIcon = par1IconRegister
+				.registerIcon("steampunked:steam_still");
+		this.flowingIcon = par1IconRegister
+				.registerIcon("steampunked:steam_still");
 
 	}
-	
+
 	@Override
-	public Fluid getFluid(){
+	public Fluid getFluid() {
 		return ModBlocks.steam;
 	}
 

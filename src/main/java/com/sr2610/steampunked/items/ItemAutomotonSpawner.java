@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.IFluidHandler;
 
+import com.sr2610.steampunked.core.tabs.ModAutomatonTab;
 import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
 import com.sr2610.steampunked.entity.automatons.EntityTankAutomoton;
 import com.sr2610.steampunked.lib.Reference;
@@ -23,6 +24,7 @@ public class ItemAutomotonSpawner extends Item {
 		super();
 		setMaxStackSize(1);
 		setHasSubtypes(true);
+		setCreativeTab(ModAutomatonTab.INSTANCE);
 	}
 
 	public boolean onItemUse(ItemStack par1ItemStack,

@@ -16,22 +16,21 @@ public class ModAutomatonTab extends CreativeTabs {
 
 	public static ModAutomatonTab INSTANCE = new ModAutomatonTab();
 	List list;
+	ItemStack displayItem;
 
 	public ModAutomatonTab() {
 		super("automatons");
 	}
 
-
 	@Override
 	public void displayAllReleventItems(List list) {
 		this.list = list;
-addBlock(ModBlocks.tinkerBench);
-addItem(ModItems.chasis);
+		addBlock(ModBlocks.tinkerBench);
+		addItem(ModItems.chasis);
 		addItem(ModItems.spawner);
 		addItem(ModItems.namePlate);
 		addItem(ModItems.AutomatonUpgrade);
 		addItem(ModItems.punchcard);
-
 
 	}
 
@@ -42,7 +41,6 @@ addItem(ModItems.chasis);
 	private void addBlock(Block block) {
 		block.getSubBlocks((Item.getItemFromBlock(block)), this, list);
 	}
-	ItemStack displayItem;
 
 	@Override
 	public Item getTabIconItem() {

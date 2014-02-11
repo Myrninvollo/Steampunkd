@@ -55,12 +55,13 @@ public class Steampunked {
 				"AutomotonTank", 2, this, 80, 3, true);
 		MinecraftForge.EVENT_BUS.register(new SteampunkedEventHandler());
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, guiHandler);
+		CraftingHandler.init();
+
 	}
 
 	@EventHandler
 	public void load(FMLInitializationEvent e) {
 		packetPipeline.initalise();
-		CraftingHandler.init();
 
 	}
 
