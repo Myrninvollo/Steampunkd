@@ -14,9 +14,12 @@ public class BlockMod extends Block {
 
 	public String textureName;
 
-	protected BlockMod(Material material, String name) {
+	protected BlockMod(Material material, String name, int harvestLevel,
+			String harvestTool) {
 		super(material);
 		textureName = name;
+		this.setHarvestLevel(harvestTool, harvestLevel);
+
 	}
 
 	private IIcon blockIcon;
@@ -35,4 +38,5 @@ public class BlockMod extends Block {
 				+ textureName);
 
 	}
+
 }

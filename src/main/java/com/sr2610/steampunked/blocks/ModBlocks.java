@@ -5,6 +5,7 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialLiquid;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
@@ -60,7 +61,7 @@ public final class ModBlocks {
 				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
 				.setBlockName(LibNames.BENCH);
 
-		oreCopper = new BlockMod(Material.ground, "oreCopper")
+		oreCopper = new BlockMod(Material.rock, "oreCopper",1,"pickaxe")
 				.setHardness(3.0F).setResistance(5.0F)
 				.setStepSound(Block.soundTypePiston)
 				.setBlockName(LibNames.ORECOPPER);
@@ -87,11 +88,11 @@ public final class ModBlocks {
 		GameRegistry.registerTileEntity(TileEntityTinkerBench.class,
 				"tileEntityTinkerBench");
 		oreRegistration();
-
 	}
 
 	public static void oreRegistration() {
 		OreDictionary.registerOre("oreCopper", new ItemStack(oreCopper));
 	}
-
+	
+	
 }
