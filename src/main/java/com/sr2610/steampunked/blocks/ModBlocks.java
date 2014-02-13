@@ -11,6 +11,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.sr2610.steampunked.lib.LibNames;
+import com.sr2610.steampunked.lib.Reference;
 import com.sr2610.steampunked.tileentities.TileEntityInjector;
 import com.sr2610.steampunked.tileentities.TileEntitySteamBoiler;
 import com.sr2610.steampunked.tileentities.TileEntitySteamFurnace;

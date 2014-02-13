@@ -5,6 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.sr2610.steampunked.lib.LibNames;
+import com.sr2610.steampunked.lib.Reference;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -74,27 +75,27 @@ public final class ModItems {
 	}
 
 	private static void registerItems() {
-		GameRegistry.registerItem(boots, LibNames.BOOTS);
-		GameRegistry.registerItem(jetpack, LibNames.JETPACK);
-		GameRegistry.registerItem(drill, LibNames.DRILL);
-		GameRegistry.registerItem(drillDiamond, LibNames.DRILL + "_diamond");
-		GameRegistry.registerItem(bucket, LibNames.BUCKET);
-		GameRegistry.registerItem(spanner, LibNames.SPANNER);
-		GameRegistry.registerItem(goggles, LibNames.GOGGLES);
-		GameRegistry.registerItem(spawner, LibNames.SPAWNER);
-		GameRegistry.registerItem(namePlate, LibNames.NAMEPLATE);
+		GameRegistry.registerItem(boots, LibNames.BOOTS,Reference.ModID);
+		GameRegistry.registerItem(jetpack, LibNames.JETPACK,Reference.ModID);
+		GameRegistry.registerItem(drill, LibNames.DRILL,Reference.ModID);
+		GameRegistry.registerItem(drillDiamond, LibNames.DRILL + "_diamond",Reference.ModID);
+		GameRegistry.registerItem(bucket, LibNames.BUCKET,Reference.ModID);
+		GameRegistry.registerItem(spanner, LibNames.SPANNER,Reference.ModID);
+		GameRegistry.registerItem(goggles, LibNames.GOGGLES,Reference.ModID);
+		GameRegistry.registerItem(spawner, LibNames.SPAWNER,Reference.ModID);
+		GameRegistry.registerItem(namePlate, LibNames.NAMEPLATE,Reference.ModID);
 
-		GameRegistry.registerItem(AutomatonUpgrade, LibNames.UPGRADE);
-		GameRegistry.registerItem(punchcard, LibNames.PUNCHCARD);
-		GameRegistry.registerItem(chasis, LibNames.CHASIS);
+		GameRegistry.registerItem(AutomatonUpgrade, LibNames.UPGRADE,Reference.ModID);
+		GameRegistry.registerItem(punchcard, LibNames.PUNCHCARD,Reference.ModID);
+		GameRegistry.registerItem(chasis, LibNames.CHASIS,Reference.ModID);
 
-		GameRegistry.registerItem(saberWood, LibNames.SABERWOOD);
-		GameRegistry.registerItem(saberStone, LibNames.SABERSTONE);
-		GameRegistry.registerItem(saberIron, LibNames.SABERIRON);
-		GameRegistry.registerItem(saberGold, LibNames.SABERGOLD);
-		GameRegistry.registerItem(saberDiamond, LibNames.SABERDIAMOND);
+		GameRegistry.registerItem(saberWood, LibNames.SABERWOOD,Reference.ModID);
+		GameRegistry.registerItem(saberStone, LibNames.SABERSTONE,Reference.ModID);
+		GameRegistry.registerItem(saberIron, LibNames.SABERIRON,Reference.ModID);
+		GameRegistry.registerItem(saberGold, LibNames.SABERGOLD,Reference.ModID);
+		GameRegistry.registerItem(saberDiamond, LibNames.SABERDIAMOND,Reference.ModID);
 
-		GameRegistry.registerItem(copperIngot, LibNames.COPPERINGOT);
+		GameRegistry.registerItem(copperIngot, LibNames.COPPERINGOT,Reference.ModID);
 		oreRegistration();
 
 	}
