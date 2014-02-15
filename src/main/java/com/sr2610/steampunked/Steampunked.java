@@ -6,6 +6,7 @@ import com.sr2610.steampunked.blocks.ModBlocks;
 import com.sr2610.steampunked.core.handlers.ConfigHandler;
 import com.sr2610.steampunked.core.handlers.CraftingHandler;
 import com.sr2610.steampunked.core.handlers.SteampunkedEventHandler;
+import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
 import com.sr2610.steampunked.entity.automatons.EntityTankAutomoton;
 import com.sr2610.steampunked.gui.GuiHandler;
@@ -55,8 +56,6 @@ public class Steampunked {
 				"AutomotonTank", 2, this, 80, 3, true);
 		MinecraftForge.EVENT_BUS.register(new SteampunkedEventHandler());
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, guiHandler);
-		CraftingHandler.init();
-
 	}
 
 	@EventHandler

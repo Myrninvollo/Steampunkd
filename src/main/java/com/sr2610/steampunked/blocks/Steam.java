@@ -17,6 +17,7 @@ public class Steam extends Fluid {
 		setTemperature(390);
 		setUnlocalizedName("steam");
 		FluidRegistry.registerFluid(this);
+		this.setBlock(ModBlocks.BlockFluidSteam);
 
 }
 }

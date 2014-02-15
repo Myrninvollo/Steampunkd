@@ -1,9 +1,7 @@
 package com.sr2610.steampunked.blocks;
 
-import javax.swing.Icon;
-
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.BlockFluidFinite;
 import net.minecraftforge.fluids.Fluid;
@@ -12,34 +10,26 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSteamFluid extends BlockFluidFinite {
 
-	@SideOnly(Side.CLIENT)
-	public static IIcon stillIcon;
-	@SideOnly(Side.CLIENT)
-	public IIcon flowingIcon;
-
-	public BlockSteamFluid() {
-		super(ModBlocks.steam, ModBlocks.materialSteam);
+	public BlockSteamFluid(Fluid fluid, Material material) {
+		super(fluid, material);
 		this.quantaPerBlock = 6;
 		this.setTickRate(5);
 	}
 
 	@SideOnly(Side.CLIENT)
+	protected static IIcon[] theIcon;
+
+	@Override
 	public IIcon getIcon(int side, int meta) {
-		return stillIcon;
-
-	}
-
-	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		this.stillIcon = par1IconRegister
-				.registerIcon("steampunked:steam_still");
-		this.flowingIcon = par1IconRegister
-				.registerIcon("steampunked:steam_still");
-
+		return side != 0 && side != 1 ? this.theIcon[1] : this.theIcon[0];
 	}
 
 	@Override
-	public Fluid getFluid() {
-		return ModBlocks.steam;
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister iconRegister) {
+		this.theIcon = new IIcon[] {
+				iconRegister.registerIcon("steampunked:" + "steam" + "_still"),
+				iconRegister.registerIcon("steampunked:" + "steam" + "_still") };
 	}
 
 }

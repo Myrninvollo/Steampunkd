@@ -42,7 +42,7 @@ public final class ModBlocks {
 				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
 				.setBlockName(LibNames.INJECTOR);
 
-		BlockFluidSteam = new BlockSteamFluid().setBlockName(LibNames.STEAM);
+		BlockFluidSteam = new BlockSteamFluid(steam, materialSteam).setBlockName(LibNames.STEAM);
 
 		steamFurnace = new BlockSteamFurnace(false, Material.iron)
 				.setHardness(5.0F).setResistance(10.0F)

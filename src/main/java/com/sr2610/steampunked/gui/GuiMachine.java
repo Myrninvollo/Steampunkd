@@ -109,22 +109,16 @@ public abstract class GuiMachine extends GuiContainer {
 		}
 		int start = 0;
 
-		IIcon liquid_icon = null;
+		IIcon liquidIcon = null;
 		Fluid fluid = liquid.getFluid();
-		if (fluid != null && fluid.getStillIcon() != null) {
-			liquid_icon = fluid.getStillIcon();
-		}
-		if (liquid_icon == null) {
-			liquid_icon = ((TextureMap) Minecraft.getMinecraft()
-					.getTextureManager()
-					.getTexture(TextureMap.locationBlocksTexture))
-					.getAtlasSprite("missingno");
+		if (fluid != null && fluid.getBlock().getIcon(1, 1) != null) {
+			liquidIcon = fluid.getBlock().getIcon(1, 1);
 		}
 		mc.renderEngine.bindTexture(BLOCK_TEXTURE);
 
 		int h = liquid.amount * tank_height / tank.getCapacity();
 
-		if (liquid_icon != null) {
+		if (liquidIcon != null) {
 			while (true) {
 				int i;
 
@@ -138,7 +132,7 @@ public abstract class GuiMachine extends GuiContainer {
 
 				if (i > 0) {
 					drawTexturedModelRectFromIconPartial(window_x + x, window_y
-							+ y + tank_height - i - start, liquid_icon, 16, i,
+							+ y + tank_height - i - start, liquidIcon, 16, i,
 							0, 16 - i);
 				}
 				start += 16;
