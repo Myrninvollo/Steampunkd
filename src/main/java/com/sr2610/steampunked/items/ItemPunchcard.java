@@ -25,7 +25,7 @@ public class ItemPunchcard extends Item {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(int par1, CreativeTabs par2CreativeTabs,
+	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs,
 			List par3List) {
 		for (int x = 0; x < 3; x++) {
 			par3List.add(new ItemStack(this, 1, x));
@@ -45,7 +45,7 @@ public class ItemPunchcard extends Item {
 			break;
 
 		case 2:
-			list.add("Undefined");
+			list.add("Blank");
 			break;
 		}
 	}

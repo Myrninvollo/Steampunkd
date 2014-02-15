@@ -20,13 +20,16 @@ public final class LibNames {
 	public static final String SABERDIAMOND = "saberDiamond";
 	public static final String CHASIS = "chasis";
 	
+	public static final String COPPERINGOT = "ingotCopper";
+	
 	
     public static final String INJECTOR= "injector";
 	public static final String BOILER = "boiler";
 	public static final String FURNACE = "furnaceSteam";
 	public static final String STEAM = "steam";
 	public static final String BENCH = "bench";
-	public static final String COPPERINGOT = "ingotCopper";
+	
 	public static final String ORECOPPER = "oreCopper";
+	public static final String MAKER = "punchcardmaker";
 
 }

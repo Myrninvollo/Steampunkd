@@ -9,12 +9,9 @@ import com.sr2610.steampunked.inventory.container.ContainerInjector;
 import com.sr2610.steampunked.lib.Reference;
 import com.sr2610.steampunked.tileentities.TileEntityInjector;
 
-
 public class GuiInjector extends GuiMachine {
 	private static final ResourceLocation GUI_TEXTURE = new ResourceLocation(
 			Reference.ModID, "textures/gui/injector.png");
-
-	private TileEntityInjector injectorInventory;
 
 	private static final int TANK_HEIGHT = 60;
 	private static final int TANK_X = 153;
@@ -24,6 +21,7 @@ public class GuiInjector extends GuiMachine {
 	private static final int TANK_OVERLAY_Y = 9;
 
 	private IInventory player_inventory;
+	private TileEntityInjector injectorInventory;
 
 	public GuiInjector(TileEntityInjector cs, IInventory player_inv) {
 		super(new ContainerInjector(cs, player_inv));

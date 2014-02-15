@@ -5,10 +5,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.sr2610.steampunked.inventory.container.ContainerInjector;
+import com.sr2610.steampunked.inventory.container.ContainerPunchcardmaker;
 import com.sr2610.steampunked.inventory.container.ContainerSteamBoiler;
 import com.sr2610.steampunked.inventory.container.ContainerSteamFurnace;
 import com.sr2610.steampunked.inventory.container.ContainerTinkerBench;
 import com.sr2610.steampunked.tileentities.TileEntityInjector;
+import com.sr2610.steampunked.tileentities.TileEntityPunchardMaker;
 import com.sr2610.steampunked.tileentities.TileEntitySteamBoiler;
 import com.sr2610.steampunked.tileentities.TileEntitySteamFurnace;
 import com.sr2610.steampunked.tileentities.TileEntityTinkerBench;
@@ -36,6 +38,10 @@ public class GuiHandler implements IGuiHandler {
 		case 4:
 			return new ContainerTinkerBench(
 					(TileEntityTinkerBench) tile_entity, player.inventory);
+			
+		case 5:
+			return new ContainerPunchcardmaker(
+					(TileEntityPunchardMaker) tile_entity, player.inventory);
 		}
 		return null;
 	}
@@ -59,6 +65,9 @@ public class GuiHandler implements IGuiHandler {
 
 		case 4:
 			return new GuiTinkerBench((TileEntityTinkerBench) tile_entity,
+					player.inventory);
+		case 5:
+			return new GuiPunchardMaker((TileEntityPunchardMaker) tile_entity,
 					player.inventory);
 		}
 		return null;

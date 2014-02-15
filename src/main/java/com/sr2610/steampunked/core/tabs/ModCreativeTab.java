@@ -39,6 +39,7 @@ public class ModCreativeTab extends CreativeTabs {
 		addBlock(ModBlocks.steamFurnace);
 		addBlock(ModBlocks.steamBoiler);
 		addBlock(ModBlocks.tinkerBench);
+		addBlock(ModBlocks.punchcardMaker);
 		addItem(ModItems.goggles);
 		addItem(ModItems.jetpack);
 		addItem(ModItems.boots);

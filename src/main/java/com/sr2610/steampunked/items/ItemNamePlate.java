@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 
 import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
 import com.sr2610.steampunked.lib.Reference;
@@ -28,8 +29,7 @@ public class ItemNamePlate extends Item {
 			EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase) {
 		if (par3EntityLivingBase instanceof EntityAutomaton) {
 			if (!par1ItemStack.hasDisplayName()) {
-				// if (!par2EntityPlayer.worldObj.isRemote)
-				// par2EntityPlayer.addChatComponentMessage(EnumChatFormatting.ITALIC+"You must name the Nameplate in an Anvil First");
+			//TODO Add warning Messages
 				return false;
 			} else if (par3EntityLivingBase instanceof EntityAutomaton) {
 				EntityAutomaton entityAutomoton = (EntityAutomaton) par3EntityLivingBase;
@@ -45,8 +45,7 @@ public class ItemNamePlate extends Item {
 		}
 
 		else {
-			// if (!par2EntityPlayer.worldObj.isRemote)
-			// par2EntityPlayer.addChatMessage(EnumChatFormatting.ITALIC+"You can only use this on an Automoton");
+			//TODO Add warning Messages
 			return false;
 		}
 	}

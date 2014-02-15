@@ -13,6 +13,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.sr2610.steampunked.lib.LibNames;
 import com.sr2610.steampunked.lib.Reference;
 import com.sr2610.steampunked.tileentities.TileEntityInjector;
+import com.sr2610.steampunked.tileentities.TileEntityPunchardMaker;
 import com.sr2610.steampunked.tileentities.TileEntitySteamBoiler;
 import com.sr2610.steampunked.tileentities.TileEntitySteamFurnace;
 import com.sr2610.steampunked.tileentities.TileEntityTinkerBench;
@@ -29,6 +30,7 @@ public final class ModBlocks {
 	public static Block steamFurnaceActive;
 	public static Block steamBoiler;
 	public static Block tinkerBench;
+	public static Block punchcardMaker;
 
 	public static Block oreCopper;
 	public static Material materialSteam;
@@ -61,6 +63,10 @@ public final class ModBlocks {
 		tinkerBench = new BlockTinkerBench(Material.iron).setHardness(5.0F)
 				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
 				.setBlockName(LibNames.BENCH);
+		
+		punchcardMaker = new BlockPunchcardMaker(Material.iron).setHardness(5.0F)
+				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
+				.setBlockName(LibNames.MAKER);
 
 		oreCopper = new BlockMod(Material.rock, "oreCopper",1,"pickaxe")
 				.setHardness(3.0F).setResistance(5.0F)
@@ -80,6 +86,7 @@ public final class ModBlocks {
 		GameRegistry.registerBlock(steamBoiler, LibNames.BOILER);
 		GameRegistry.registerBlock(tinkerBench, LibNames.BENCH);
 		GameRegistry.registerBlock(oreCopper, LibNames.ORECOPPER);
+		GameRegistry.registerBlock(punchcardMaker, LibNames.MAKER);
 		GameRegistry.registerTileEntity(TileEntityInjector.class,
 				"tileEntityInjector");
 		GameRegistry.registerTileEntity(TileEntitySteamFurnace.class,
@@ -88,6 +95,8 @@ public final class ModBlocks {
 				"tileEntitySteamBoiler");
 		GameRegistry.registerTileEntity(TileEntityTinkerBench.class,
 				"tileEntityTinkerBench");
+		GameRegistry.registerTileEntity(TileEntityPunchardMaker.class,
+				"tileEntityPunchcardMaker");
 		oreRegistration();
 	}
 
