@@ -86,7 +86,8 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30000001192092896D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
+				.setBaseValue(0.30000001192092896D);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
 				.setBaseValue(20.0D);
 	}
@@ -172,12 +173,6 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		par1NBTTagCompound.setBoolean("Attack", this.getAttackMobs());
 		par1NBTTagCompound.setBoolean("has", this.hasProgram);
 		par1NBTTagCompound.setInteger("Side", this.side);
-		par1NBTTagCompound.setString("Head", this.head);
-		par1NBTTagCompound.setString("LeftArm", this.lArm);
-		par1NBTTagCompound.setString("RightArm", this.rArm);
-		par1NBTTagCompound.setString("Body", this.body);
-		par1NBTTagCompound.setString("LeftLeg", this.lLeg);
-		par1NBTTagCompound.setString("RightLeg", this.rLeg);
 		par1NBTTagCompound.setBoolean("rFlame", this.rFlame);
 		par1NBTTagCompound.setBoolean("lFlame", this.lFlame);
 		par1NBTTagCompound
@@ -206,12 +201,6 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		attackMobs = (par1NBTTagCompound.getBoolean("Attack"));
 		hasProgram = (par1NBTTagCompound.getBoolean("has"));
 		side = (par1NBTTagCompound.getInteger("Side"));
-		head = (par1NBTTagCompound.getString("Head"));
-		rArm = (par1NBTTagCompound.getString("RightArm"));
-		lArm = (par1NBTTagCompound.getString("LeftArm"));
-		body = (par1NBTTagCompound.getString("Body"));
-		lLeg = (par1NBTTagCompound.getString("LeftLeg"));
-		rLeg = (par1NBTTagCompound.getString("RightLeg"));
 		rFlame = (par1NBTTagCompound.getBoolean("RightFlame"));
 		lFlame = (par1NBTTagCompound.getBoolean("LeftFlame"));
 
@@ -220,7 +209,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items", 10);
 		this.autoItemStacks = new ItemStack[this.getSizeInventory()];
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-            NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			byte b0 = nbttagcompound1.getByte("Slot");
 
 			if (b0 >= 0 && b0 < this.autoItemStacks.length) {
@@ -248,7 +237,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 							this.decrStackSize(i, 1), side);
 
 					if (itemstack1 == null || itemstack1.stackSize == 0) {
-						
+
 						iinventory.markDirty();
 						return true;
 					}
@@ -325,7 +314,6 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 				}
 			}
 
-			
 		}
 
 		return par1ItemStack;
@@ -399,8 +387,6 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		}
 	}
 
-	
-
 	@Override
 	public int getInventoryStackLimit() {
 		return 64;
@@ -443,8 +429,8 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 				Block l = par0World.getBlock(i, j, k);
 
 				if (l instanceof BlockChest) {
-					iinventory = ((BlockChest) l).func_149951_m(par0World,
-							i, j, k);
+					iinventory = ((BlockChest) l).func_149951_m(par0World, i,
+							j, k);
 				}
 			}
 		}
@@ -509,10 +495,10 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 
 	@Override
 	public void openInventory() {
-		
+
 	}
 
 	@Override
-	public void closeInventory() {		
+	public void closeInventory() {
 	}
 }
