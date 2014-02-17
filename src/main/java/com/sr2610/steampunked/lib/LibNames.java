@@ -34,6 +34,9 @@ public final class LibNames {
 	public static final String ORECOPPER = "oreCopper";
 	public static final String MAKER = "punchcardmaker";
 	public static final String ORETIN = "oreTin";
+	public static final String COREBASIC = "coreBasic";
+	public static final String COREMEDIUM = "coreMedium";
+	public static final String COREADVANCED = "coreAdvanced";
 
 
 }

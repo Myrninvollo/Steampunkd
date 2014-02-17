@@ -32,6 +32,12 @@ public final class ModItems {
 
 	public static Item copperIngot;
 	public static Item tinIngot;
+	
+	
+	public static Item basicCore;
+	public static Item mediumCore;
+	public static Item advancedCore;
+
 
 	public static void initItems() {
 		System.out.println("[Steampunk'd] Initializing Items...");
@@ -72,6 +78,11 @@ public final class ModItems {
 		copperIngot = new ItemMod("ingotCopper")
 				.setUnlocalizedName(LibNames.COPPERINGOT);
 		tinIngot = new ItemMod("ingotTin").setUnlocalizedName(LibNames.TININGOT);
+		
+		basicCore = new ItemMod("coreBasic").setUnlocalizedName(LibNames.COREBASIC).setMaxStackSize(1);
+		mediumCore = new ItemMod("coreMedium").setUnlocalizedName(LibNames.COREMEDIUM).setMaxStackSize(1);
+		advancedCore = new ItemMod("coreAdvanced").setUnlocalizedName(LibNames.COREADVANCED).setMaxStackSize(1);
+
 
 		registerItems();
 	}
@@ -99,6 +110,11 @@ public final class ModItems {
 
 		GameRegistry.registerItem(copperIngot, LibNames.COPPERINGOT,Reference.ModID);
 		GameRegistry.registerItem(tinIngot, LibNames.TININGOT,Reference.ModID);
+		
+		GameRegistry.registerItem(basicCore, LibNames.COREBASIC,Reference.ModID);
+		GameRegistry.registerItem(mediumCore, LibNames.COREMEDIUM,Reference.ModID);
+		GameRegistry.registerItem(advancedCore, LibNames.COREADVANCED,Reference.ModID);
+
 
 		oreRegistration();
 
