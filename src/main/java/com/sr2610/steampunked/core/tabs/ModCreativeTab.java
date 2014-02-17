@@ -52,7 +52,9 @@ public class ModCreativeTab extends CreativeTabs {
 		addItem(ModItems.saberGold);
 		addItem(ModItems.saberDiamond);
 		addBlock(ModBlocks.oreCopper);
+		addBlock(ModBlocks.oreTin);
 		addItem(ModItems.copperIngot);
+		addItem(ModItems.tinIngot);
 
 
 	}

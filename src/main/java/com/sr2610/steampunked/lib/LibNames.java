@@ -21,6 +21,8 @@ public final class LibNames {
 	public static final String CHASIS = "chasis";
 	
 	public static final String COPPERINGOT = "ingotCopper";
+	public static final String TININGOT = "ingotTin";
+
 	
 	
     public static final String INJECTOR= "injector";
@@ -31,5 +33,7 @@ public final class LibNames {
 	
 	public static final String ORECOPPER = "oreCopper";
 	public static final String MAKER = "punchcardmaker";
+	public static final String ORETIN = "oreTin";
+
 
 }

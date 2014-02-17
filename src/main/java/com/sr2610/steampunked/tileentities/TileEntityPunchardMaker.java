@@ -6,9 +6,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityPunchardMaker extends TileEntity implements IInventory {
-	
-	private ItemStack[] benchItemStacks = new ItemStack[3];
 
+	private ItemStack[] benchItemStacks = new ItemStack[3];
 
 	public int getSizeInventory() {
 		return this.benchItemStacks.length;

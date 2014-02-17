@@ -1,4 +1,4 @@
-package com.sr2610.steampunked.gui;
+package com.sr2610.steampunked.network;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -7,22 +7,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.sr2610.steampunked.network.AbstractPacket;
 import com.sr2610.steampunked.tileentities.TileEntityPunchardMaker;
-import com.sr2610.steampunked.tileentities.TileEntityTinkerBench;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
 
-public class PacketMaker extends AbstractPacket {
+public class PacketPunchcardMaker extends AbstractPacket {
 
 	int x, y, z;
 	ItemStack contents;
 
-	public PacketMaker() {
+	public PacketPunchcardMaker() {
 
 	}
 
-	public PacketMaker(int x, int y, int z, ItemStack contents) {
+	public PacketPunchcardMaker(int x, int y, int z, ItemStack contents) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -56,7 +54,7 @@ public class PacketMaker extends AbstractPacket {
 		World world = player.worldObj;
 		TileEntity te = world.getTileEntity(x, y, z);
 
-		if (te instanceof TileEntityTinkerBench) {
+		if (te instanceof TileEntityPunchardMaker) {
 			((TileEntityPunchardMaker) te).setInventorySlotContents(2, contents);
 			((TileEntityPunchardMaker) te).setInventorySlotContents(0, null);
 

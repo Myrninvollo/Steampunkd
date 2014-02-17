@@ -1,5 +1,8 @@
 package com.sr2610.steampunked.tileentities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,7 +36,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntitySteamBoiler extends TileEntityMachine implements
-IFluidHandler, ISidedInventory {
+		IFluidHandler, ISidedInventory {
 
 	static private final int NETDATAID_INPUT_TANK_FLUID = 1;
 	static private final int NETDATAID_INPUT_TANK_AMOUNT = 2;
@@ -45,12 +48,13 @@ IFluidHandler, ISidedInventory {
 	static public final int TANK_OUTPUT = 1;
 	public int furnaceBurnTime;
 
+	protected List<ForgeDirection> surroundingTanks = new ArrayList<ForgeDirection>();
+
 	private static final int[] slots_top = new int[] { 0 };
 	private static final int[] slots_bottom = new int[] { 0 };
 	private static final int[] slots_sides = new int[] { 0 };
 	private FluidTank[] tanks;
 	private FluidTankInfo[] tank_info;
-	
 
 	public TileEntitySteamBoiler() {
 		super();
@@ -67,7 +71,7 @@ IFluidHandler, ISidedInventory {
 
 	public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
 		super.readFromNBT(par1NBTTagCompound);
-		NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items",10);
+		NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items", 10);
 		this.boilerItemStacks = new ItemStack[this.getSizeInventory()];
 
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
@@ -259,8 +263,6 @@ IFluidHandler, ISidedInventory {
 						(double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64.0D;
 	}
 
-	
-
 	protected boolean isFluidFuel(FluidStack fuel) {
 		return fuel.getFluid() == FluidRegistry.WATER;
 	}
@@ -335,47 +337,51 @@ IFluidHandler, ISidedInventory {
 		return 2;
 	}
 
-	public static int getItemBurnTime(ItemStack itemstack)
-    {
-        if (itemstack == null)
-        {
-            return 0;
-        }
-        else
-        {
-            Item item = itemstack.getItem();
+	public static int getItemBurnTime(ItemStack itemstack) {
+		if (itemstack == null) {
+			return 0;
+		} else {
+			Item item = itemstack.getItem();
 
-            if (item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.air)
-            {
-                Block block = Block.getBlockFromItem(item);
+			if (item instanceof ItemBlock
+					&& Block.getBlockFromItem(item) != Blocks.air) {
+				Block block = Block.getBlockFromItem(item);
 
-                if (block == Blocks.wooden_slab)
-                {
-                    return 150;
-                }
+				if (block == Blocks.wooden_slab) {
+					return 150;
+				}
 
-                if (block.getMaterial() == Material.wood)
-                {
-                    return 300;
-                }
+				if (block.getMaterial() == Material.wood) {
+					return 300;
+				}
 
-                if (block == Blocks.coal_block)
-                {
-                    return 16000;
-                }
-            }
+				if (block == Blocks.coal_block) {
+					return 16000;
+				}
+			}
 
-            if (item instanceof ItemTool && ((ItemTool)item).getToolMaterialName().equals("WOOD")) return 200;
-            if (item instanceof ItemSword && ((ItemSword)item).getToolMaterialName().equals("WOOD")) return 200;
-            if (item instanceof ItemHoe && ((ItemHoe)item).getToolMaterialName().equals("WOOD")) return 200;
-            if (item == Items.stick) return 100;
-            if (item == Items.coal) return 1600;
-            if (item == Items.lava_bucket) return 20000;
-            if (item == Item.getItemFromBlock(Blocks.sapling)) return 100;
-            if (item == Items.blaze_rod) return 2400;
-            return GameRegistry.getFuelValue(itemstack);
-        }
-    }
+			if (item instanceof ItemTool
+					&& ((ItemTool) item).getToolMaterialName().equals("WOOD"))
+				return 200;
+			if (item instanceof ItemSword
+					&& ((ItemSword) item).getToolMaterialName().equals("WOOD"))
+				return 200;
+			if (item instanceof ItemHoe
+					&& ((ItemHoe) item).getToolMaterialName().equals("WOOD"))
+				return 200;
+			if (item == Items.stick)
+				return 100;
+			if (item == Items.coal)
+				return 1600;
+			if (item == Items.lava_bucket)
+				return 20000;
+			if (item == Item.getItemFromBlock(Blocks.sapling))
+				return 100;
+			if (item == Items.blaze_rod)
+				return 2400;
+			return GameRegistry.getFuelValue(itemstack);
+		}
+	}
 
 	public static boolean isItemFuel(ItemStack par0ItemStack) {
 		return getItemBurnTime(par0ItemStack) > 0;
@@ -386,18 +392,19 @@ IFluidHandler, ISidedInventory {
 		boolean flag = this.furnaceBurnTime > 0;
 		boolean flag1 = false;
 
-		
 		if (this.furnaceBurnTime > 0) {
 			--this.furnaceBurnTime;
 		}
 
 		if (!this.worldObj.isRemote) {
-			if (tanks[0].getFluidAmount() != LibOptions.boilerCapacity){
-				if (worldObj.getBlock(xCoord, yCoord-1, zCoord)==FluidRegistry.WATER.getBlock()){
-					tanks[0].fill(new FluidStack(FluidRegistry.WATER,21), true);
+			if (tanks[0].getFluidAmount() != LibOptions.boilerCapacity) {
+				if (worldObj.getBlock(xCoord, yCoord - 1, zCoord) == FluidRegistry.WATER
+						.getBlock()) {
+					tanks[0].fill(new FluidStack(FluidRegistry.WATER, 21), true);
 				}
 			}
-			if (tanks[0].getFluidAmount() > 0 && tanks[1].getFluidAmount()!=LibOptions.boilerCapacity) {
+			if (tanks[0].getFluidAmount() > 0
+					&& tanks[1].getFluidAmount() != LibOptions.boilerCapacity) {
 				if (this.furnaceBurnTime == 0) {
 					this.currentItemBurnTime = this.furnaceBurnTime = getItemBurnTime(this.boilerItemStacks[0]) / 32;
 

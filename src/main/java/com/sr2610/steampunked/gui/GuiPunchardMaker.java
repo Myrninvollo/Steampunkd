@@ -10,11 +10,10 @@ import org.lwjgl.opengl.GL11;
 
 import com.sr2610.steampunked.Steampunked;
 import com.sr2610.steampunked.inventory.container.ContainerPunchcardmaker;
-import com.sr2610.steampunked.items.ItemChasis;
 import com.sr2610.steampunked.items.ItemPunchcard;
 import com.sr2610.steampunked.items.ModItems;
 import com.sr2610.steampunked.lib.Reference;
-import com.sr2610.steampunked.network.PacketTinkerTable;
+import com.sr2610.steampunked.network.PacketPunchcardMaker;
 import com.sr2610.steampunked.tileentities.TileEntityPunchardMaker;
 
 public class GuiPunchardMaker extends GuiMachine {
@@ -47,11 +46,12 @@ public class GuiPunchardMaker extends GuiMachine {
 				20, "Stamp"));
 
 	}
-	
+
 	public void actionPerformed(GuiButton button) {
 		if (button.id == 1) {
 			if (inventory.getStackInSlot(0) != null
-					&& inventory.getStackInSlot(0).getItem() instanceof ItemPunchcard &&  inventory.getStackInSlot(0).getItemDamage() == 2) {
+					&& inventory.getStackInSlot(0).getItem() instanceof ItemPunchcard
+					&& inventory.getStackInSlot(0).getItemDamage() == 2) {
 				ItemStack stack = new ItemStack(ModItems.punchcard, 1, 0);
 				inventory.setInventorySlotContents(2, stack);
 				updateServer(stack);
@@ -61,12 +61,10 @@ public class GuiPunchardMaker extends GuiMachine {
 	}
 
 	void updateServer(ItemStack stack) {
-		Steampunked.packetPipeline.sendToServer(new PacketMaker(
-				inventory.xCoord, inventory.yCoord,
-				inventory.zCoord, stack));
+		Steampunked.packetPipeline.sendToServer(new PacketPunchcardMaker(
+				inventory.xCoord, inventory.yCoord, inventory.zCoord, stack));
 
 	}
-
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouse_x, int mouse_y) {

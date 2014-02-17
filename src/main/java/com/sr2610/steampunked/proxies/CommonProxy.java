@@ -1,6 +1,7 @@
 package com.sr2610.steampunked.proxies;
 
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.world.World;
 
 public class CommonProxy {
 	public ModelBiped getArmorModel(int id){
@@ -13,6 +14,11 @@ public class CommonProxy {
 	
 	  public void registerRenderInformation() {}
 
-		}
+		
 
+public long getTicks(World worldObj) {
+	return worldObj.getTotalWorldTime();
+}
+
+}
 

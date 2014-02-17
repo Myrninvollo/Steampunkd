@@ -31,6 +31,7 @@ public final class ModItems {
 	public static Item saberDiamond;
 
 	public static Item copperIngot;
+	public static Item tinIngot;
 
 	public static void initItems() {
 		System.out.println("[Steampunk'd] Initializing Items...");
@@ -70,6 +71,7 @@ public final class ModItems {
 
 		copperIngot = new ItemMod("ingotCopper")
 				.setUnlocalizedName(LibNames.COPPERINGOT);
+		tinIngot = new ItemMod("ingotTin").setUnlocalizedName(LibNames.TININGOT);
 
 		registerItems();
 	}
@@ -96,11 +98,15 @@ public final class ModItems {
 		GameRegistry.registerItem(saberDiamond, LibNames.SABERDIAMOND,Reference.ModID);
 
 		GameRegistry.registerItem(copperIngot, LibNames.COPPERINGOT,Reference.ModID);
+		GameRegistry.registerItem(tinIngot, LibNames.TININGOT,Reference.ModID);
+
 		oreRegistration();
 
 	}
 
 	public static void oreRegistration() {
 		OreDictionary.registerOre("ingotCopper", new ItemStack(copperIngot));
+		OreDictionary.registerOre("ingotTin", new ItemStack(tinIngot));
+
 	}
 }

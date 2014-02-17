@@ -1,5 +1,6 @@
 package com.sr2610.steampunked.client.model;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -198,6 +199,7 @@ public class ModelAutomoton extends ModelBase {
 			this.leftarm.rotateAngleY = 0.0F;
 
 		} else {
+
 			this.rightarm.rotateAngleX = MathHelper.cos(par2 * 0.6662F
 					+ (float) Math.PI)
 					* 2.0F * par3 * 0.5F;
@@ -206,7 +208,6 @@ public class ModelAutomoton extends ModelBase {
 			this.rightarm.rotateAngleZ = 0.0F;
 			this.leftarm.rotateAngleZ = 0.0F;
 		}
-
 	}
 
 	public void hideParts(EntityAutomaton entity) {

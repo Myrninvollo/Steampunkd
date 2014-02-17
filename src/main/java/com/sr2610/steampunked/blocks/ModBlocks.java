@@ -5,13 +5,10 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialLiquid;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.sr2610.steampunked.lib.LibNames;
-import com.sr2610.steampunked.lib.Reference;
 import com.sr2610.steampunked.tileentities.TileEntityInjector;
 import com.sr2610.steampunked.tileentities.TileEntityPunchardMaker;
 import com.sr2610.steampunked.tileentities.TileEntitySteamBoiler;
@@ -19,7 +16,6 @@ import com.sr2610.steampunked.tileentities.TileEntitySteamFurnace;
 import com.sr2610.steampunked.tileentities.TileEntityTinkerBench;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public final class ModBlocks {
 
@@ -33,6 +29,7 @@ public final class ModBlocks {
 	public static Block punchcardMaker;
 
 	public static Block oreCopper;
+	public static Block oreTin;
 	public static Material materialSteam;
 
 	public static void initBlocks() {
@@ -44,7 +41,8 @@ public final class ModBlocks {
 				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
 				.setBlockName(LibNames.INJECTOR);
 
-		BlockFluidSteam = new BlockSteamFluid(steam, materialSteam).setBlockName(LibNames.STEAM);
+		BlockFluidSteam = new BlockSteamFluid(steam, materialSteam)
+				.setBlockName(LibNames.STEAM);
 
 		steamFurnace = new BlockSteamFurnace(false, Material.iron)
 				.setHardness(5.0F).setResistance(10.0F)
@@ -63,15 +61,21 @@ public final class ModBlocks {
 		tinkerBench = new BlockTinkerBench(Material.iron).setHardness(5.0F)
 				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
 				.setBlockName(LibNames.BENCH);
-		
-		punchcardMaker = new BlockPunchcardMaker(Material.iron).setHardness(5.0F)
-				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
+
+		punchcardMaker = new BlockPunchcardMaker(Material.iron)
+				.setHardness(5.0F).setResistance(10.0F)
+				.setStepSound(Block.soundTypeMetal)
 				.setBlockName(LibNames.MAKER);
 
-		oreCopper = new BlockMod(Material.rock, "oreCopper",1,"pickaxe")
+		oreCopper = new BlockMod(Material.rock, "oreCopper", 1, "pickaxe")
 				.setHardness(3.0F).setResistance(5.0F)
 				.setStepSound(Block.soundTypePiston)
 				.setBlockName(LibNames.ORECOPPER);
+		
+		oreTin = new BlockMod(Material.rock, "oreTin", 1, "pickaxe")
+				.setHardness(3.0F).setResistance(5.0F)
+				.setStepSound(Block.soundTypePiston)
+				.setBlockName(LibNames.ORETIN);
 
 		registerBlocks();
 	}
@@ -86,6 +90,7 @@ public final class ModBlocks {
 		GameRegistry.registerBlock(steamBoiler, LibNames.BOILER);
 		GameRegistry.registerBlock(tinkerBench, LibNames.BENCH);
 		GameRegistry.registerBlock(oreCopper, LibNames.ORECOPPER);
+		GameRegistry.registerBlock(oreTin, LibNames.ORETIN);
 		GameRegistry.registerBlock(punchcardMaker, LibNames.MAKER);
 		GameRegistry.registerTileEntity(TileEntityInjector.class,
 				"tileEntityInjector");
@@ -102,7 +107,8 @@ public final class ModBlocks {
 
 	public static void oreRegistration() {
 		OreDictionary.registerOre("oreCopper", new ItemStack(oreCopper));
+		OreDictionary.registerOre("oreTin", new ItemStack(oreTin));
+
 	}
-	
-	
+
 }
