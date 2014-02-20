@@ -53,7 +53,6 @@ public class ItemSpanner extends Item {
 			return false;
 
 		if (player.isSneaking() != isShiftRotation(block.getClass())) {
-
 			return false;
 		}
 

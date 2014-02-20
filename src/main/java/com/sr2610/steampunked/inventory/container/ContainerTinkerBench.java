@@ -8,6 +8,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 import com.sr2610.steampunked.inventory.slots.tinkerbench.SlotChasis;
+import com.sr2610.steampunked.inventory.slots.tinkerbench.SlotCore;
 import com.sr2610.steampunked.inventory.slots.tinkerbench.SlotOutput;
 import com.sr2610.steampunked.inventory.slots.tinkerbench.SlotUpgrade;
 import com.sr2610.steampunked.tileentities.TileEntityTinkerBench;
@@ -26,14 +27,16 @@ public class ContainerTinkerBench extends Container {
 		this.tinkerTable = cs;
 
 		this.addSlotToContainer(new SlotChasis(cs, 0, 16, 24));
-		this.addSlotToContainer(new Slot(cs, 1, 16, 49));
+		this.addSlotToContainer(new SlotCore(cs, 1, 16, 49));
 
-		for (i = 0; i < 2; ++i) {
-			for (j = 0; j < 3; ++j) {
-				this.addSlotToContainer(new SlotUpgrade(cs, 3 + (j * i),
-						16 + j * 18, 78 + i * 18));
-			}
-		}
+		this.addSlotToContainer(new SlotUpgrade(cs, 2, 16, 78));
+		this.addSlotToContainer(new SlotUpgrade(cs, 3, 34, 78));
+		this.addSlotToContainer(new SlotUpgrade(cs, 4, 52, 78));
+		this.addSlotToContainer(new SlotUpgrade(cs, 5, 16, 96));
+		this.addSlotToContainer(new SlotUpgrade(cs, 6, 34, 96));
+
+		this.addSlotToContainer(new SlotUpgrade(cs, 7, 52, 96));
+
 		this.addSlotToContainer(new SlotOutput(cs, 8, 178, 103));
 
 		for (i = 0; i < 3; ++i) {

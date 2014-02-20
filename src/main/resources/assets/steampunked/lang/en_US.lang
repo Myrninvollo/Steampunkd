@@ -25,5 +25,7 @@ tile.furnaceSteam.name=Steam Heated Furnace
 tile.bench.name=Automaton Tinkering Bench
 tile.oreCopper.name=Copper Ore
 entity.steampunked.Automaton.name=Steam Automaton
+
+
 itemGroup.automatons=Steampunk'd Automatons
 itemGroup.steampunked=Steampunk'd

@@ -78,10 +78,9 @@ public final class ModItems {
 		copperIngot = new ItemMod("ingotCopper")
 				.setUnlocalizedName(LibNames.COPPERINGOT);
 		tinIngot = new ItemMod("ingotTin").setUnlocalizedName(LibNames.TININGOT);
-		
-		basicCore = new ItemMod("coreBasic").setUnlocalizedName(LibNames.COREBASIC).setMaxStackSize(1);
-		mediumCore = new ItemMod("coreMedium").setUnlocalizedName(LibNames.COREMEDIUM).setMaxStackSize(1);
-		advancedCore = new ItemMod("coreAdvanced").setUnlocalizedName(LibNames.COREADVANCED).setMaxStackSize(1);
+		basicCore = new ItemCore("coreBasic").setUnlocalizedName(LibNames.COREBASIC).setMaxStackSize(1);
+		mediumCore = new ItemCore("coreMedium").setUnlocalizedName(LibNames.COREMEDIUM).setMaxStackSize(1);
+		advancedCore = new ItemCore("coreAdvanced").setUnlocalizedName(LibNames.COREADVANCED).setMaxStackSize(1);
 
 
 		registerItems();
