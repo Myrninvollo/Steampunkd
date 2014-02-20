@@ -37,6 +37,7 @@ public final class LibNames {
 	public static final String COREBASIC = "coreBasic";
 	public static final String COREMEDIUM = "coreMedium";
 	public static final String COREADVANCED = "coreAdvanced";
+	public static final String TEMPLATE = "template";
 
 
 }

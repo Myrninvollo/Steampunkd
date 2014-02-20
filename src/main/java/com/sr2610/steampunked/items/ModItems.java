@@ -22,6 +22,7 @@ public final class ModItems {
 
 	public static Item AutomatonUpgrade;
 	public static Item punchcard;
+	public static Item template;
 	public static Item chasis;
 
 	public static Item saberWood;
@@ -77,6 +78,8 @@ public final class ModItems {
 
 		copperIngot = new ItemMod("ingotCopper")
 				.setUnlocalizedName(LibNames.COPPERINGOT);
+		
+		template = new ItemMod("template").setUnlocalizedName(LibNames.TEMPLATE);
 		tinIngot = new ItemMod("ingotTin").setUnlocalizedName(LibNames.TININGOT);
 		basicCore = new ItemCore("coreBasic").setUnlocalizedName(LibNames.COREBASIC).setMaxStackSize(1);
 		mediumCore = new ItemCore("coreMedium").setUnlocalizedName(LibNames.COREMEDIUM).setMaxStackSize(1);
@@ -109,6 +112,8 @@ public final class ModItems {
 
 		GameRegistry.registerItem(copperIngot, LibNames.COPPERINGOT,Reference.ModID);
 		GameRegistry.registerItem(tinIngot, LibNames.TININGOT,Reference.ModID);
+		
+		GameRegistry.registerItem(template, LibNames.TEMPLATE,Reference.ModID);
 		
 		GameRegistry.registerItem(basicCore, LibNames.COREBASIC,Reference.ModID);
 		GameRegistry.registerItem(mediumCore, LibNames.COREMEDIUM,Reference.ModID);

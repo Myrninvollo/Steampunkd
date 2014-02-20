@@ -50,12 +50,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 	private boolean hasProgram;
 	private int healTimer;
 
-	public String head;
-	public String rArm;
-	public String lArm;
-	public String body;
-	public String rLeg;
-	public String lLeg;
+
 	public boolean rFlame;
 	public boolean lFlame;
 	public double range;

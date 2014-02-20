@@ -4,13 +4,13 @@ item.drill.name=Mining Drill
 item.drill_diamond.name=Mining Drill
 item.bucketSteam.name=Bucket of Steam
 item.spanner.name=Spanner
-item.punchcard.name=Punchcard
 item.nameplate.name=Automaton Nameplate
 item.upgrade.name=Automaton Upgrade
 item.flightGoggles.name=Flight Goggles
 item.bootsPiston.name=Piston Boots
 item.chasis.name=Automaton Chassis
 item.ingotCopper.name=Copper Ingot
+item.ingotTin.name=Tin Ingot
 
 item.saberWooden.name=Wooden Sabre
 item.saberIron.name=Iron Sabre
@@ -18,12 +18,26 @@ item.saberStone.name=Stone Sabre
 item.saberGold.name=Gold Sabre
 item.saberDiamond.name=Diamond Sabre
 
+item.coreBasic.name=Basic Automaton Core
+item.coreMedium.name=Simple Automaton Core
+item.coreAdvanced.name=Advanced Automaton Core
+
+item.punchcard.0.name=Blank Punchcard
+item.punchcard.1.name=Punchcard - Gather
+item.punchcard.2.name=Punchcard - Attack
+item.punchcard.11.name=Punchcard - Gather Template
+item.punchcard.12.name=Punchcard - Attack template
+
+
+
 fluid.steam=Steam
 tile.injector.name=Steam Injector
 tile.boiler.name=Steam Boiler
 tile.furnaceSteam.name=Steam Heated Furnace
 tile.bench.name=Automaton Tinkering Bench
+tile.punchcardmaker.name=Punchcard Maker
 tile.oreCopper.name=Copper Ore
+tile.oreTin.name=Tin Ore
 entity.steampunked.Automaton.name=Steam Automaton
 
 

@@ -49,10 +49,16 @@ public class GuiPunchardMaker extends GuiMachine {
 
 	public void actionPerformed(GuiButton button) {
 		if (button.id == 1) {
-			if (inventory.getStackInSlot(0) != null
-					&& inventory.getStackInSlot(0).getItem() instanceof ItemPunchcard
-					&& inventory.getStackInSlot(0).getItemDamage() == 2) {
-				ItemStack stack = new ItemStack(ModItems.punchcard, 1, 0);
+			ItemStack is = inventory.getStackInSlot(0);
+			ItemStack is2 = inventory.getStackInSlot(1);
+			ItemStack is3 = inventory.getStackInSlot(2);
+
+			if (is != null && is.getItem() instanceof ItemPunchcard
+					&& is.getItemDamage() == 0 && is3 == null && is2 != null
+					&& is2.getItem() instanceof ItemPunchcard
+					&& is2.getItemDamage() >= 11) {
+				ItemStack stack = new ItemStack(ModItems.punchcard, 1,
+						is2.getItemDamage() - 10);
 				inventory.setInventorySlotContents(2, stack);
 				updateServer(stack);
 				inventory.markDirty();

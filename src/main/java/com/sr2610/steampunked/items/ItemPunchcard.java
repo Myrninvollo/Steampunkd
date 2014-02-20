@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.MathHelper;
 
 import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
 import com.sr2610.steampunked.lib.Reference;
@@ -30,32 +31,19 @@ public class ItemPunchcard extends Item {
 		for (int x = 0; x < 3; x++) {
 			par3List.add(new ItemStack(this, 1, x));
 		}
-	}
-
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack itemstack,
-			EntityPlayer par2EntityPlayer, List list, boolean par4) {
-
-		switch (itemstack.getItemDamage()) {
-		case 0:
-			list.add("Gather Program");
-			break;
-		case 1:
-			list.add("Attack Program");
-			break;
-
-		case 2:
-			list.add("Blank");
-			break;
+		for (int x = 11; x < 13; x++) {
+			par3List.add(new ItemStack(this, 1, x));
 		}
 	}
+
+	
 
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister registry) {
 		itemIcon = registry.registerIcon(Reference.ModID + ":punchcard");
 	}
 
-	public boolean itemInteractionForEntity(ItemStack par1ItemStack,
+	/*public boolean itemInteractionForEntity(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase) {
 
 		if (par3EntityLivingBase instanceof EntityAutomaton) {
@@ -94,6 +82,12 @@ public class ItemPunchcard extends Item {
 			return false;
 		}
 		return false;
+	}*/
+	
+	public String getUnlocalizedName(ItemStack par1ItemStack)
+	{
+	         int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 20);
+	         return super.getUnlocalizedName() + "." + i;
 	}
 
 }
