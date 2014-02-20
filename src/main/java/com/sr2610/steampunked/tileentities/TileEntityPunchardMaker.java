@@ -3,11 +3,13 @@ package com.sr2610.steampunked.tileentities;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityPunchardMaker extends TileEntity implements IInventory {
 
-	private ItemStack[] benchItemStacks = new ItemStack[3];
+	private ItemStack[] benchItemStacks = new ItemStack[4];
 
 	public int getSizeInventory() {
 		return this.benchItemStacks.length;
@@ -66,7 +68,7 @@ public class TileEntityPunchardMaker extends TileEntity implements IInventory {
 
 	@Override
 	public int getInventoryStackLimit() {
-		return 1;
+		return 64;
 	}
 
 	@Override
@@ -94,6 +96,40 @@ public class TileEntityPunchardMaker extends TileEntity implements IInventory {
 	@Override
 	public boolean isItemValidForSlot(int var1, ItemStack var2) {
 		return true;
+	}
+	
+	public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
+		super.readFromNBT(par1NBTTagCompound);
+		NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items", 10);
+		this.benchItemStacks = new ItemStack[this.getSizeInventory()];
+
+		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
+			NBTTagCompound nbttagcompound1 = (nbttaglist.getCompoundTagAt(i));
+			byte b0 = nbttagcompound1.getByte("Slot");
+
+			if (b0 >= 0 && b0 < this.benchItemStacks.length) {
+				this.benchItemStacks[b0] = ItemStack
+						.loadItemStackFromNBT(nbttagcompound1);
+			}
+		}
+
+
+	}
+
+	public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
+		super.writeToNBT(par1NBTTagCompound);
+		NBTTagList nbttaglist = new NBTTagList();
+		for (int i = 0; i < this.benchItemStacks.length; ++i) {
+			if (this.benchItemStacks[i] != null) {
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setByte("Slot", (byte) i);
+				this.benchItemStacks[i].writeToNBT(nbttagcompound1);
+				nbttaglist.appendTag(nbttagcompound1);
+			}
+		}
+
+		par1NBTTagCompound.setTag("Items", nbttaglist);
+
 	}
 
 }

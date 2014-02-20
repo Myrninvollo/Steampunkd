@@ -34,6 +34,8 @@ public class ContainerPunchcardmaker extends Container {
 		this.addSlotToContainer(new Slot(injector, 0, 80, 16));
 		this.addSlotToContainer(new Slot(injector, 1, 80, 35));
 		this.addSlotToContainer(new Slot(injector, 2, 80, 54));
+		this.addSlotToContainer(new Slot(injector, 3, 33, 29));
+
 
 		for (i = 0; i < 3; ++i) {
 			for (j = 0; j < 9; ++j) {

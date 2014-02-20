@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -122,13 +123,19 @@ public class GuiTinkerBench extends GuiMachine {
 			if (injectorInventory.getStackInSlot(0) != null
 					&& injectorInventory.getStackInSlot(0).getItem() instanceof ItemChasis) {
 				ItemStack stack = new ItemStack(ModItems.spawner, 1, 0);
-				for (int i = 2; i < 6; ++i) {
+			/*	for (int i = 2; i < 6; ++i) {
 					if (injectorInventory.getStackInSlot(i) != null
 							&& injectorInventory.getStackInSlot(i).getItem() instanceof IUpgrade
 							&& injectorInventory.getStackInSlot(i)
-									.getItemDamage() == 0)
-						stack.stackTagCompound.setDouble("Range", 10.0);
-				}
+									.getItemDamage() == 0){
+					NBTTagCompound nbt = stack.stackTagCompound;
+				
+					nbt.setDouble("Range", 10.0);
+					
+					stack.setTagCompound(nbt);
+					}
+					
+				}*/
 				injectorInventory.setInventorySlotContents(8, stack);
 				updateServer(stack);
 				injectorInventory.markDirty();

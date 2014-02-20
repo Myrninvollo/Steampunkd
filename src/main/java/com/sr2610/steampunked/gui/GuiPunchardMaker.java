@@ -2,6 +2,7 @@ package com.sr2610.steampunked.gui;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -52,6 +53,8 @@ public class GuiPunchardMaker extends GuiMachine {
 			ItemStack is = inventory.getStackInSlot(0);
 			ItemStack is2 = inventory.getStackInSlot(1);
 			ItemStack is3 = inventory.getStackInSlot(2);
+			ItemStack is4 = inventory.getStackInSlot(3);
+			if(is4!=null && is4.getItem()==Items.dye && is4.getItemDamage()==0){
 
 			if (is != null && is.getItem() instanceof ItemPunchcard
 					&& is.getItemDamage() == 0 && is3 == null && is2 != null
@@ -62,7 +65,7 @@ public class GuiPunchardMaker extends GuiMachine {
 				inventory.setInventorySlotContents(2, stack);
 				updateServer(stack);
 				inventory.markDirty();
-			}
+			}}
 		}
 	}
 

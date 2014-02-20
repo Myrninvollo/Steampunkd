@@ -47,10 +47,10 @@ public class ItemAutomotonSpawner extends Item {
 						(double) ((float) par5 + par9) + 0.5,
 						(double) ((float) par6 + par10), par9, par10);
 				entity.setOwner(par2EntityPlayer.getDisplayName());
-				if (par1ItemStack.stackTagCompound.hasKey("Range")) {
+				/*if (par1ItemStack.stackTagCompound.hasKey("Range")) {
 					entity.range = par1ItemStack.stackTagCompound
 							.getDouble("Range");
-				} else
+				} else*/
 					entity.range = 5.0;
 				par3World.spawnEntityInWorld(entity);
 				if (!par2EntityPlayer.capabilities.isCreativeMode) {
