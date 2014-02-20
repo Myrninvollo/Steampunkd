@@ -1,4 +1,4 @@
-![]{https://github.com/SR2610/Steampunkd/blob/master/src/main/resources/assets/steampunked/logofile.png?raw=true)
+![](https://github.com/SR2610/Steampunkd/blob/master/src/main/resources/assets/steampunked/logofile.png?raw=true)
 Welcome to the Steampunk'd repository.  
 
 Steampunk'd is a [Minecraft](https://minecraft.net/) mod based upon the Steampunk Era and Industrial Revolution Technology.  
