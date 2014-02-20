@@ -23,7 +23,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
@@ -49,7 +48,6 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 	private boolean pickup;
 	private boolean hasProgram;
 	private int healTimer;
-
 
 	public boolean rFlame;
 	public boolean lFlame;
@@ -495,5 +493,18 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 
 	@Override
 	public void closeInventory() {
+	}
+
+	public void setProgram(int programID) {
+		switch (programID) {
+		case 1:
+			this.setPickup(true);
+			break;
+		case 2:
+			this.setAttackMobs(true);
+			break;
+		}
+		setProgram(true);
+
 	}
 }

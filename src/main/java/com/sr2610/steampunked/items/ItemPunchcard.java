@@ -36,30 +36,25 @@ public class ItemPunchcard extends Item {
 		}
 	}
 
-	
-
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister registry) {
 		itemIcon = registry.registerIcon(Reference.ModID + ":punchcard");
 	}
 
-	/*public boolean itemInteractionForEntity(ItemStack par1ItemStack,
+	public boolean itemInteractionForEntity(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase) {
 
 		if (par3EntityLivingBase instanceof EntityAutomaton) {
 			EntityAutomaton entityAutomoton = (EntityAutomaton) par3EntityLivingBase;
 			if (entityAutomoton.getProgram() != true) {
 				switch (par1ItemStack.getItemDamage()) {
-				case 0: {
-					entityAutomoton.setPickup(true);
-					entityAutomoton.setProgram(true);
+				case 1: {
+					entityAutomoton.setProgram(par1ItemStack.getItemDamage());
 					--par1ItemStack.stackSize;
 					return true;
 				}
-				case 1: {
-					entityAutomoton.setAttackMobs(true);
-					entityAutomoton.setProgram(true);
-
+				case 2: {
+					entityAutomoton.setProgram(par1ItemStack.getItemDamage());
 					--par1ItemStack.stackSize;
 					return true;
 				}
@@ -68,7 +63,7 @@ public class ItemPunchcard extends Item {
 				if (!par2EntityPlayer.worldObj.isRemote)
 					par2EntityPlayer
 							.addChatComponentMessage(new ChatComponentTranslation(
-									"steampunked.automatons.oneProgram"));
+									"You can only have one program per Automaton"));
 				return false;
 			}
 
@@ -78,16 +73,15 @@ public class ItemPunchcard extends Item {
 			if (!par2EntityPlayer.worldObj.isRemote)
 				par2EntityPlayer
 						.addChatComponentMessage(new ChatComponentTranslation(
-								"steampunked.automatons.onlyAutomaton"));
+								"This can only be used on an Automaton"));
 			return false;
 		}
 		return false;
-	}*/
-	
-	public String getUnlocalizedName(ItemStack par1ItemStack)
-	{
-	         int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 20);
-	         return super.getUnlocalizedName() + "." + i;
+	}
+
+	public String getUnlocalizedName(ItemStack par1ItemStack) {
+		int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 20);
+		return super.getUnlocalizedName() + "." + i;
 	}
 
 }
