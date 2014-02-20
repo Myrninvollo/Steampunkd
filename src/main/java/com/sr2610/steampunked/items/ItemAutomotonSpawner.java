@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagDouble;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
@@ -47,11 +48,14 @@ public class ItemAutomotonSpawner extends Item {
 						(double) ((float) par5 + par9) + 0.5,
 						(double) ((float) par6 + par10), par9, par10);
 				entity.setOwner(par2EntityPlayer.getDisplayName());
-				/*if (par1ItemStack.stackTagCompound.hasKey("Range")) {
-					entity.range = par1ItemStack.stackTagCompound
-							.getDouble("Range");
-				} else*/
-					entity.range = 5.0;
+				
+
+				NBTTagCompound nbttagcompound = par1ItemStack.getTagCompound();
+				NBTTagDouble nbttagdouble= (NBTTagDouble)nbttagcompound.getTag("Range");
+				if(nbttagdouble != null)
+				{entity.range = nbttagdouble.func_150286_g();}
+				else
+					entity.range = 5;
 				par3World.spawnEntityInWorld(entity);
 				if (!par2EntityPlayer.capabilities.isCreativeMode) {
 					--par1ItemStack.stackSize;
