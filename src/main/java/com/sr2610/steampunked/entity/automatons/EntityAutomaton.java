@@ -19,8 +19,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.*;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.AxisAlignedBB;
@@ -59,6 +58,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		super(par1World);
 		setSize(0.6F, 1F);
 		attackMobs = false;
+		range = 5.0;
 		tasks.addTask(1, new EntityAISwimming(this));
 		tasks.addTask(2, new EntityAIAttackOnCollide(this, 1.0D, true));
 		tasks.addTask(3, new EntityAILookIdle(this));
@@ -166,6 +166,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		par1NBTTagCompound.setBoolean("Attack", this.getAttackMobs());
 		par1NBTTagCompound.setBoolean("has", this.hasProgram);
 		par1NBTTagCompound.setInteger("Side", this.side);
+		par1NBTTagCompound.setDouble("Range", this.range);
 		par1NBTTagCompound.setBoolean("rFlame", this.rFlame);
 		par1NBTTagCompound.setBoolean("lFlame", this.lFlame);
 		par1NBTTagCompound
@@ -194,6 +195,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		attackMobs = (par1NBTTagCompound.getBoolean("Attack"));
 		hasProgram = (par1NBTTagCompound.getBoolean("has"));
 		side = (par1NBTTagCompound.getInteger("Side"));
+		range = (par1NBTTagCompound.getDouble("Range")); 
 		rFlame = (par1NBTTagCompound.getBoolean("RightFlame"));
 		lFlame = (par1NBTTagCompound.getBoolean("LeftFlame"));
 
@@ -507,4 +509,5 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		setProgram(true);
 
 	}
+
 }

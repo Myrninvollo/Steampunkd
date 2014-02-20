@@ -1,8 +1,5 @@
 package com.sr2610.steampunked.gui;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
@@ -10,7 +7,6 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -21,6 +17,7 @@ import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
 import com.sr2610.steampunked.inventory.container.ContainerTinkerBench;
 import com.sr2610.steampunked.items.ItemChasis;
 import com.sr2610.steampunked.items.ModItems;
+import com.sr2610.steampunked.items.interfaces.IUpgrade;
 import com.sr2610.steampunked.lib.Reference;
 import com.sr2610.steampunked.network.PacketTinkerTable;
 import com.sr2610.steampunked.tileentities.TileEntityTinkerBench;
@@ -125,6 +122,13 @@ public class GuiTinkerBench extends GuiMachine {
 			if (injectorInventory.getStackInSlot(0) != null
 					&& injectorInventory.getStackInSlot(0).getItem() instanceof ItemChasis) {
 				ItemStack stack = new ItemStack(ModItems.spawner, 1, 0);
+				for (int i = 2; i < 6; ++i) {
+					if (injectorInventory.getStackInSlot(i) != null
+							&& injectorInventory.getStackInSlot(i).getItem() instanceof IUpgrade
+							&& injectorInventory.getStackInSlot(i)
+									.getItemDamage() == 0)
+						stack.stackTagCompound.setDouble("Range", 10.0);
+				}
 				injectorInventory.setInventorySlotContents(8, stack);
 				updateServer(stack);
 				injectorInventory.markDirty();

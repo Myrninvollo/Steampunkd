@@ -4,11 +4,8 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.sr2610.steampunked.blocks.ModBlocks;
 import com.sr2610.steampunked.core.handlers.ConfigHandler;
-import com.sr2610.steampunked.core.handlers.CraftingHandler;
 import com.sr2610.steampunked.core.handlers.SteampunkedEventHandler;
-import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
-import com.sr2610.steampunked.entity.automatons.EntityTankAutomoton;
 import com.sr2610.steampunked.gui.GuiHandler;
 import com.sr2610.steampunked.items.ModItems;
 import com.sr2610.steampunked.network.PacketPipeline;
@@ -23,7 +20,6 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.VillagerRegistry;
 
 @Mod(modid = Steampunked.name, name = "Steampunkd", version = Steampunked.version)
 public class Steampunked {
@@ -52,8 +48,6 @@ public class Steampunked {
 		ModItems.initItems();
 		EntityRegistry.registerModEntity(EntityAutomaton.class, "Automoton", 1,
 				this, 80, 3, true);
-		EntityRegistry.registerModEntity(EntityTankAutomoton.class,
-				"AutomotonTank", 2, this, 80, 3, true);
 		MinecraftForge.EVENT_BUS.register(new SteampunkedEventHandler());
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, guiHandler);
 	}
