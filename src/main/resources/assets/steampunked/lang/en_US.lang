@@ -30,7 +30,10 @@ item.punchcard.12.name=Punchcard - Attack Template
 item.upgrade.0.name=Cybernetic Eye
 item.upgrade.1.name=Hydraulic Booster
 item.upgrade.2.name=Reinforced Armor
-steampunked.upgrade.name=Automaton Upgrade
+steampunked.upgrade.0.name=Automaton Upgrade - Range
+steampunked.upgrade.1.name=Automaton Upgrade - Speed
+steampunked.upgrade.2.name=Automaton Upgrade - Health
+
 
 
 fluid.steam=Steam
