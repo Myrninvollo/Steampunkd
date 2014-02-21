@@ -5,7 +5,6 @@ item.drill_diamond.name=Mining Drill
 item.bucketSteam.name=Bucket of Steam
 item.spanner.name=Spanner
 item.nameplate.name=Automaton Nameplate
-item.upgrade.name=Automaton Upgrade
 item.flightGoggles.name=Flight Goggles
 item.bootsPiston.name=Piston Boots
 item.chasis.name=Automaton Chassis
@@ -28,6 +27,10 @@ item.punchcard.2.name=Punchcard - Attack
 item.punchcard.11.name=Punchcard - Gather Template
 item.punchcard.12.name=Punchcard - Attack Template
 
+item.upgrade.0.name=Cybernetic Eye
+item.upgrade.1.name=Hydraulic Booster
+item.upgrade.2.name=Reinforced Armor
+steampunked.upgrade.name=Automaton Upgrade
 
 
 fluid.steam=Steam
@@ -43,3 +46,7 @@ entity.steampunked.Automaton.name=Steam Automaton
 
 itemGroup.automatons=Steampunk'd Automatons
 itemGroup.steampunked=Steampunk'd
+
+steampunked.oneProgram.name=You can only have one program per Automaton
+steampunked.onlyAutomaton.name=You can only use this on an Automaton
+steampunked.nameFirst.name=You must name this in an anvil first

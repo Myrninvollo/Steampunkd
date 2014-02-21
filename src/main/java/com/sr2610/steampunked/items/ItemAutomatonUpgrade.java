@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 
 import com.sr2610.steampunked.items.interfaces.IUpgrade;
 import com.sr2610.steampunked.lib.Reference;
@@ -25,7 +26,7 @@ public class ItemAutomatonUpgrade extends Item implements IUpgrade {
 	}
 
 	public static final String[] upgradeItemNames = new String[] { "range",
-			"speed", "undefined" };
+			"speed", "health", "undefined" };
 	@SideOnly(Side.CLIENT)
 	private IIcon[] upgradeIcons;
 
@@ -34,24 +35,6 @@ public class ItemAutomatonUpgrade extends Item implements IUpgrade {
 			List par3List) {
 		for (int x = 0; x < 3; x++) {
 			par3List.add(new ItemStack(this, 1, x));
-		}
-	}
-
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack itemstack,
-			EntityPlayer par2EntityPlayer, List list, boolean par4) {
-
-		switch (itemstack.getItemDamage()) {
-		case 0:
-			list.add("Range Upgrade");
-			return;
-		case 1:
-			list.add("Speed Upgrade");
-			return;
-
-		case 2:
-			list.add("Undefined");
-			return;
 		}
 	}
 
@@ -70,15 +53,14 @@ public class ItemAutomatonUpgrade extends Item implements IUpgrade {
 		}
 	}
 
-	/*
-	 * public boolean itemInteractionForEntity(ItemStack par1ItemStack,
-	 * EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase) {
-	 * if (par3EntityLivingBase instanceof EntityAutomoton){
-	 * 
-	 * EntityAutomoton entity = new
-	 * EntityAutomoton(par3EntityLivingBase.worldObj);
-	 * 
-	 * } return true; }
-	 */
+	public String getUnlocalizedName(ItemStack par1ItemStack) {
+		int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 20);
+		return super.getUnlocalizedName() + "." + i;
+	}
 
+	
+	public void addInformation(ItemStack par1ItemStack,
+			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+		par3List.add(StatCollector.translateToLocal("steampunked.upgrade.name"));
+	}
 }

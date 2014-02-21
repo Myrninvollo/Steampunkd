@@ -10,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 
 import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
 import com.sr2610.steampunked.lib.Reference;
@@ -63,7 +64,7 @@ public class ItemPunchcard extends Item {
 				if (!par2EntityPlayer.worldObj.isRemote)
 					par2EntityPlayer
 							.addChatComponentMessage(new ChatComponentTranslation(
-									"You can only have one program per Automaton"));
+								(StatCollector.translateToLocal("steampunked.oneProgram.name"))));
 				return false;
 			}
 
@@ -72,8 +73,8 @@ public class ItemPunchcard extends Item {
 		else {
 			if (!par2EntityPlayer.worldObj.isRemote)
 				par2EntityPlayer
-						.addChatComponentMessage(new ChatComponentTranslation(
-								"This can only be used on an Automaton"));
+						.addChatComponentMessage(new ChatComponentTranslation(StatCollector.translateToLocal("steampunked.onlyAutomaton.name")
+								));
 			return false;
 		}
 		return false;

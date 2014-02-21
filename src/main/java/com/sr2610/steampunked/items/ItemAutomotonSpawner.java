@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -56,6 +57,11 @@ public class ItemAutomotonSpawner extends Item {
 				{entity.range = nbttagdouble.func_150286_g();}
 				else
 					entity.range = 5;
+				NBTTagDouble nbttagdoubleHealth= (NBTTagDouble)nbttagcompound.getTag("MaxHealth");
+				if(nbttagdoubleHealth != null)
+				{entity.maxHealth = nbttagdoubleHealth.func_150286_g();}
+				else
+					entity.maxHealth = 20;
 				par3World.spawnEntityInWorld(entity);
 				if (!par2EntityPlayer.capabilities.isCreativeMode) {
 					--par1ItemStack.stackSize;

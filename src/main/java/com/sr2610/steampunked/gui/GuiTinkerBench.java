@@ -127,23 +127,33 @@ public class GuiTinkerBench extends GuiMachine {
 				ItemStack stack = new ItemStack(ModItems.spawner, 1, 0);
 				for (int i = 2; i < 6; ++i) {
 					if (injectorInventory.getStackInSlot(i) != null
-							&& injectorInventory.getStackInSlot(i).getItem() instanceof IUpgrade
-							&& injectorInventory.getStackInSlot(i)
-									.getItemDamage() == 0){
-						if(!stack.hasTagCompound())
-						{
+							&& injectorInventory.getStackInSlot(i).getItem() instanceof IUpgrade) {
+						if (!stack.hasTagCompound()) {
 							stack.setTagCompound(new NBTTagCompound());
 						}
 
 						NBTTagCompound nbttagcompound = stack.getTagCompound();
-						NBTTagDouble nbttagdouble= (NBTTagDouble)nbttagcompound.getTag("Range");
+						if (injectorInventory.getStackInSlot(i).getItemDamage() == 0) {
+							NBTTagDouble nbttagdouble = (NBTTagDouble) nbttagcompound
+									.getTag("Range");
 
-						if(nbttagdouble == null)
-						{
-							stack.setTagInfo("Range", new NBTTagDouble(10.0));
+							if (nbttagdouble == null) {
+								stack.setTagInfo("Range",
+										new NBTTagDouble(10.0));
+							}
+						}
+
+						if (injectorInventory.getStackInSlot(i).getItemDamage() == 2) {
+							NBTTagDouble nbttagdoubleHealth = (NBTTagDouble) nbttagcompound
+									.getTag("MaxHealth");
+
+							if (nbttagdoubleHealth == null) {
+								stack.setTagInfo("MaxHealth",
+										new NBTTagDouble(40.0));
+							}
 						}
 					}
-					
+
 				}
 				injectorInventory.setInventorySlotContents(8, stack);
 				updateServer(stack);

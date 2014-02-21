@@ -5,7 +5,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 
 import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
 import com.sr2610.steampunked.lib.Reference;
@@ -29,8 +31,10 @@ public class ItemNamePlate extends Item {
 			EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase) {
 		if (par3EntityLivingBase instanceof EntityAutomaton) {
 			if (!par1ItemStack.hasDisplayName()) {
-			//TODO Add warning Messages
-				return false;
+				if (!par2EntityPlayer.worldObj.isRemote)
+					par2EntityPlayer
+							.addChatComponentMessage(new ChatComponentTranslation(StatCollector.translateToLocal("steampunked.nameFirst.name")
+									));				return false;
 			} else if (par3EntityLivingBase instanceof EntityAutomaton) {
 				EntityAutomaton entityAutomoton = (EntityAutomaton) par3EntityLivingBase;
 				entityAutomoton
@@ -45,7 +49,10 @@ public class ItemNamePlate extends Item {
 		}
 
 		else {
-			//TODO Add warning Messages
+			if (!par2EntityPlayer.worldObj.isRemote)
+				par2EntityPlayer
+						.addChatComponentMessage(new ChatComponentTranslation(StatCollector.translateToLocal("steampunked.onlyAutomaton.name")
+								));
 			return false;
 		}
 	}

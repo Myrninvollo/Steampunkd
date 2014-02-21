@@ -19,7 +19,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.*;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.AxisAlignedBB;
@@ -51,6 +52,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 	public boolean rFlame;
 	public boolean lFlame;
 	public double range;
+	public double maxHealth;
 
 	private static final IEntitySelector attackEntitySelector = new AttackFilter();
 
@@ -58,7 +60,6 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		super(par1World);
 		setSize(0.6F, 1F);
 		attackMobs = false;
-		range = 5.0;
 		tasks.addTask(1, new EntityAISwimming(this));
 		tasks.addTask(2, new EntityAIAttackOnCollide(this, 1.0D, true));
 		tasks.addTask(3, new EntityAILookIdle(this));
@@ -81,8 +82,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
 				.setBaseValue(0.30000001192092896D);
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
-				.setBaseValue(20.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0);
 	}
 
 	public boolean isAIEnabled() {
@@ -100,6 +100,11 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
+		
+		if(this.maxHealth>20){
+    		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(maxHealth);
+
+		}
 
 		if (this.attackTimer > 0) {
 			--this.attackTimer;
@@ -110,7 +115,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		}
 		if (this.worldObj != null && !this.worldObj.isRemote) {
 			--this.transferCooldown;
-
+			healTimer--;
 			if (!this.isCoolingDown()) {
 				this.setTransferCooldown(0);
 				this.updateAuto();
@@ -167,6 +172,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		par1NBTTagCompound.setBoolean("has", this.hasProgram);
 		par1NBTTagCompound.setInteger("Side", this.side);
 		par1NBTTagCompound.setDouble("Range", this.range);
+		par1NBTTagCompound.setDouble("MaxHealth", this.maxHealth);
 		par1NBTTagCompound.setBoolean("rFlame", this.rFlame);
 		par1NBTTagCompound.setBoolean("lFlame", this.lFlame);
 		par1NBTTagCompound
@@ -195,7 +201,8 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		attackMobs = (par1NBTTagCompound.getBoolean("Attack"));
 		hasProgram = (par1NBTTagCompound.getBoolean("has"));
 		side = (par1NBTTagCompound.getInteger("Side"));
-		range = (par1NBTTagCompound.getDouble("Range")); 
+		range = (par1NBTTagCompound.getDouble("Range"));
+		maxHealth = (par1NBTTagCompound.getDouble("MaxHealth"));
 		rFlame = (par1NBTTagCompound.getBoolean("RightFlame"));
 		lFlame = (par1NBTTagCompound.getBoolean("LeftFlame"));
 
@@ -508,6 +515,10 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		}
 		setProgram(true);
 
+	}
+
+	public void setMaxHealth(float f) {
+		maxHealth = f;
 	}
 
 }
