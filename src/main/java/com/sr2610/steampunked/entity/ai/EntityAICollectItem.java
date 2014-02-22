@@ -24,7 +24,6 @@ public class EntityAICollectItem extends EntityAIBase {
 	public EntityAICollectItem(EntityAutomaton auto) {
 		this.auto = auto;
 		this.pathFinder = auto.getNavigator();
-		System.out.print(range);
 		setMutexBits(3);
 	}
 

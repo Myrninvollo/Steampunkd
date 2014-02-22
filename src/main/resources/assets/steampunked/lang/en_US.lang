@@ -28,7 +28,7 @@ item.punchcard.11.name=Punchcard - Gather Template
 item.punchcard.12.name=Punchcard - Attack Template
 
 item.upgrade.0.name=Cybernetic Eye
-item.upgrade.1.name=Hydraulic Booster
+item.upgrade.1.name=Steam Piston
 item.upgrade.2.name=Reinforced Armor
 steampunked.upgrade.0.name=Automaton Upgrade - Range
 steampunked.upgrade.1.name=Automaton Upgrade - Speed
