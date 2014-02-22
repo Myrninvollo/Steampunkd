@@ -68,7 +68,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		targetTasks.addTask(5, new EntityAiNearestTarget(this,
 				EntityLiving.class, 0, false, true, attackEntitySelector));
 
-		this.tasks.addTask(6, new EntityAICollectItem(this, range));
+		this.tasks.addTask(6, new EntityAICollectItem(this));
 
 		this.tasks.addTask(7, new EntityAIMoveHome(this));
 		this.setCurrentItemOrArmor(0, this.getStackInSlot(0));
@@ -82,7 +82,8 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
 				.setBaseValue(0.30000001192092896D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth)
+				.setBaseValue(20.0);
 	}
 
 	public boolean isAIEnabled() {
@@ -100,11 +101,13 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		
-		if(this.maxHealth>20){
-    		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(maxHealth);
+
+		if (this.maxHealth > 20) {
+			this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
+					.setBaseValue(maxHealth);
 
 		}
+
 
 		if (this.attackTimer > 0) {
 			--this.attackTimer;
@@ -234,12 +237,12 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		else {
 			for (int i = 0; i < this.getSizeInventory(); ++i) {
 				if (this.getStackInSlot(i) != null) {
+
 					ItemStack itemstack = this.getStackInSlot(i).copy();
 					ItemStack itemstack1 = insertStack(iinventory,
 							this.decrStackSize(i, 1), side);
 
 					if (itemstack1 == null || itemstack1.stackSize == 0) {
-
 						iinventory.markDirty();
 						return true;
 					}
@@ -250,6 +253,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 
 			return false;
 		}
+		
 	}
 
 	private IInventory getOutputInventory() {
@@ -291,7 +295,6 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 
 		if (canInsertItemToInventory(par0IInventory, par1ItemStack, par2, par3)) {
 			boolean flag = false;
-
 			if (itemstack1 == null) {
 				int max = Math.min(par1ItemStack.getMaxStackSize(),
 						par0IInventory.getInventoryStackLimit());
@@ -520,5 +523,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 	public void setMaxHealth(float f) {
 		maxHealth = f;
 	}
+
+	
 
 }

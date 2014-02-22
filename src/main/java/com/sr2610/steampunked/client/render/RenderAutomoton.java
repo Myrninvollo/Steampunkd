@@ -5,6 +5,8 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -45,52 +47,85 @@ public class RenderAutomoton extends RenderLiving {
 		return this.getAutomotonTextures((EntityAutomaton) entity);
 	}
 	
-	 protected void renderItems(EntityAutomaton par1Auto, float par2)
+	   protected void renderEquippedItems(EntityAutomaton par1EntityWitch, float par2)
 	    {
-	        float f1 = 1.0F;
-	        GL11.glColor3f(f1, f1, f1);
-	        super.renderEquippedItems(par1Auto, par2);
-	        ItemStack itemstack = par1Auto.getHeldItem();
+	        GL11.glColor3f(1.0F, 1.0F, 1.0F);
+	        super.renderEquippedItems(par1EntityWitch, par2);
+	        ItemStack itemstack = par1EntityWitch.getHeldItem();
 
 	        if (itemstack != null)
 	        {
 	            GL11.glPushMatrix();
-	            float f2;
-                f2 = 0.5F;
+	            float f1;
 
 
 	            GL11.glTranslatef(-0.0625F, 0.53125F, 0.21875F);
-
-	           
+	            if (itemstack.getItem() instanceof ItemBlock && RenderBlocks.renderItemIn3d(Block.getBlockFromItem(itemstack.getItem()).getRenderType()))
+	            {
+	                f1 = 0.5F;
 	                GL11.glTranslatef(0.12F, 0.4F, -0.4F);
-	                f2 *= 0.75F;
+	                f1 *= 0.75F;
 	                GL11.glRotatef(20.0F, 1.0F, 0.0F, 0.0F);
 	                GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
-	                GL11.glScalef(f2/2, -f2/2, f2/2);
-	           
-	   
-	           
-	            
-	            this.model.rightarm.postRender(0.0625F);
-	            this.model.leftarm.postRender(0.0625F);
+	                GL11.glScalef(f1/2, -f1/2, f1/2);
+	            }
+	            else if (itemstack.getItem() == Items.bow)
+	            {
+	                f1 = 0.625F;
+	                GL11.glTranslatef(0.12F, 0.4F, -0.4F);
+	                GL11.glRotatef(-20.0F, 0.0F, 1.0F, 0.0F);
+	                GL11.glScalef(f1/2, -f1/2, f1/2);
+	                GL11.glRotatef(-100.0F, 1.0F, 0.0F, 0.0F);
+	                GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
+	            }
+	            else if (itemstack.getItem().isFull3D())
+	            {
+	                f1 = 0.625F;
 
-	         
-	            this.renderManager.itemRenderer.renderItem(par1Auto, itemstack, 0);
+	                if (itemstack.getItem().shouldRotateAroundWhenRendering())
+	                {
+	                    GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
+		                GL11.glTranslatef(0.12F, 0.4F, -0.4F);
+	                }
+
+	                this.func_82410_b();
+	                GL11.glScalef(f1/2, -f1/2, f1/2);
+	                GL11.glRotatef(-100.0F, 1.0F, 0.0F, 0.0F);
+	                GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
+	            }
+	            else
+	            {
+	                f1 = 0.375F;
+	                GL11.glTranslatef(0.12F, 0.4F, -0.4F);
+	                GL11.glScalef(f1/2, f1/2, f1/2);
+	                GL11.glRotatef(60.0F, 0.0F, 0.0F, 1.0F);
+	                GL11.glRotatef(-90.0F, 1.0F, 0.0F, 0.0F);
+	                GL11.glRotatef(20.0F, 0.0F, 0.0F, 1.0F);
+	            }
+
+	            GL11.glRotatef(-15.0F, 1.0F, 0.0F, 0.0F);
+	            GL11.glRotatef(40.0F, 0.0F, 0.0F, 1.0F);
+	            this.renderManager.itemRenderer.renderItem(par1EntityWitch, itemstack, 0);
 
 	            if (itemstack.getItem().requiresMultipleRenderPasses())
 	            {
-	                this.renderManager.itemRenderer.renderItem(par1Auto, itemstack, 1);
+	                this.renderManager.itemRenderer.renderItem(par1EntityWitch, itemstack, 1);
 	            }
 
 	            GL11.glPopMatrix();
 	        }
+	    }
+	   
+	   protected void func_82410_b()
+	    {
+	        GL11.glTranslatef(0.0F, 0.1875F, 0.0F);
 	    }
 
 
 	 
 	    protected void renderEquippedItems(EntityLivingBase par1EntityLivingBase, float par2)
 	    {
-	        this.renderItems((EntityAutomaton)par1EntityLivingBase, par2);
+	        this.renderEquippedItems((EntityAutomaton)par1EntityLivingBase, par2);
 	    }
 	    
 	 

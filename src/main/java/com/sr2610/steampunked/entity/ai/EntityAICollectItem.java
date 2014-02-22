@@ -18,17 +18,20 @@ public class EntityAICollectItem extends EntityAIBase {
 
 	private EntityItem targetItem = null;
 	
-	private double range;
+	private double range = 5.0;
 
-	public EntityAICollectItem(EntityAutomaton auto, double range) {
+
+	public EntityAICollectItem(EntityAutomaton auto) {
 		this.auto = auto;
-		this.range = range;
 		this.pathFinder = auto.getNavigator();
+		System.out.print(range);
 		setMutexBits(3);
 	}
 
+	
 	@Override
 	public boolean shouldExecute() {
+		range=auto.range;
 		if (!pathFinder.noPath()) {
 			return false;
 		}
@@ -37,6 +40,7 @@ public class EntityAICollectItem extends EntityAIBase {
 
 		else if (auto.worldObj != null) {
 			if (auto.getStackInSlot(0) == null) {
+
 				List<EntityItem> items = auto.worldObj.getEntitiesWithinAABB(
 						EntityItem.class,
 						AxisAlignedBB
