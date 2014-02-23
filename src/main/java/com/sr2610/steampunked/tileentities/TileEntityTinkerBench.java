@@ -19,7 +19,7 @@ import com.sr2610.steampunked.inventory.container.ContainerTinkerBench;
 import com.sr2610.steampunked.lib.LibOptions;
 
 public class TileEntityTinkerBench extends TileEntityMachine implements
-IInventory, IFluidHandler {
+		IInventory, IFluidHandler {
 
 	private ItemStack[] benchItemStacks = new ItemStack[9];
 
@@ -108,8 +108,8 @@ IInventory, IFluidHandler {
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
 		return worldObj.getTileEntity(xCoord, yCoord, zCoord) != this ? false
-				: player.getDistanceSq(xCoord + 0.5D,
-						yCoord + 0.5D, zCoord + 0.5D) <= 64.0D;
+				: player.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D,
+						zCoord + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -259,8 +259,7 @@ IInventory, IFluidHandler {
 	@Override
 	public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
 		super.writeToNBT(par1NBTTagCompound);
-		par1NBTTagCompound
-		.setShort("CraftProgress", (short) craftProgress);
+		par1NBTTagCompound.setShort("CraftProgress", (short) craftProgress);
 		NBTTagList nbttaglist = new NBTTagList();
 
 		for (int i = 0; i < benchItemStacks.length; ++i) {

@@ -9,14 +9,12 @@ import net.minecraft.util.AxisAlignedBB;
 
 import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
 
-public class EntityAIHurt extends EntityAITarget
-{
+public class EntityAIHurt extends EntityAITarget {
 	boolean entityCallsForHelp;
 	private int field_142052_b;
 	private EntityAutomaton auto = null;
 
-	public EntityAIHurt(EntityCreature par1EntityCreature, boolean par2)
-	{
+	public EntityAIHurt(EntityCreature par1EntityCreature, boolean par2) {
 		super(par1EntityCreature, false);
 		entityCallsForHelp = par2;
 		setMutexBits(1);
@@ -27,12 +25,12 @@ public class EntityAIHurt extends EntityAITarget
 	 * Returns whether the EntityAIBase should begin execution.
 	 */
 	@Override
-	public boolean shouldExecute()
-	{
-		if(taskOwner instanceof EntityAutomaton){
-			if(auto.getAttackMobs() == true){
+	public boolean shouldExecute() {
+		if (taskOwner instanceof EntityAutomaton) {
+			if (auto.getAttackMobs() == true) {
 				int i = taskOwner.func_142015_aE();
-				return i != field_142052_b && isSuitableTarget(taskOwner.getAITarget(), false);
+				return i != field_142052_b
+						&& isSuitableTarget(taskOwner.getAITarget(), false);
 			}
 		}
 		return false;
@@ -43,23 +41,31 @@ public class EntityAIHurt extends EntityAITarget
 	 * Execute a one shot task or start executing a continuous task
 	 */
 	@Override
-	public void startExecuting()
-	{
+	public void startExecuting() {
 		taskOwner.setAttackTarget(taskOwner.getAITarget());
 		field_142052_b = taskOwner.func_142015_aE();
 
-		if (entityCallsForHelp)
-		{
+		if (entityCallsForHelp) {
 			double d0 = getTargetDistance();
-			List list = taskOwner.worldObj.getEntitiesWithinAABB(taskOwner.getClass(), AxisAlignedBB.getAABBPool().getAABB(taskOwner.posX, taskOwner.posY, taskOwner.posZ, taskOwner.posX + 1.0D, taskOwner.posY + 1.0D, taskOwner.posZ + 1.0D).expand(d0, 10.0D, d0));
+			List list = taskOwner.worldObj.getEntitiesWithinAABB(
+					taskOwner.getClass(),
+					AxisAlignedBB
+							.getAABBPool()
+							.getAABB(taskOwner.posX, taskOwner.posY,
+									taskOwner.posZ, taskOwner.posX + 1.0D,
+									taskOwner.posY + 1.0D,
+									taskOwner.posZ + 1.0D)
+							.expand(d0, 10.0D, d0));
 			Iterator iterator = list.iterator();
 
-			while (iterator.hasNext())
-			{
-				EntityCreature entitycreature = (EntityCreature)iterator.next();
+			while (iterator.hasNext()) {
+				EntityCreature entitycreature = (EntityCreature) iterator
+						.next();
 
-				if (taskOwner != entitycreature && entitycreature.getAttackTarget() == null && !entitycreature.isOnSameTeam(taskOwner.getAITarget()))
-				{
+				if (taskOwner != entitycreature
+						&& entitycreature.getAttackTarget() == null
+						&& !entitycreature
+								.isOnSameTeam(taskOwner.getAITarget())) {
 					entitycreature.setAttackTarget(taskOwner.getAITarget());
 				}
 			}

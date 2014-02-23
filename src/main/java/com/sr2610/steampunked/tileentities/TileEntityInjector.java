@@ -18,7 +18,7 @@ import com.sr2610.steampunked.items.interfaces.ISteamUser;
 import com.sr2610.steampunked.lib.LibOptions;
 
 public class TileEntityInjector extends TileEntityMachine implements
-ISidedInventory, IFluidHandler {
+		ISidedInventory, IFluidHandler {
 
 	static private final int NETDATAID_TANK_FLUID = 1;
 	static private final int NETDATAID_TANK_AMOUNT = 2;
@@ -157,8 +157,8 @@ ISidedInventory, IFluidHandler {
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
 		return worldObj.getTileEntity(xCoord, yCoord, zCoord) != this ? false
-				: player.getDistanceSq(xCoord + 0.5D,
-						yCoord + 0.5D, zCoord + 0.5D) <= 64.0D;
+				: player.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D,
+						zCoord + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -326,6 +326,5 @@ ISidedInventory, IFluidHandler {
 	public boolean hasCustomInventoryName() {
 		return false;
 	}
-
 
 }

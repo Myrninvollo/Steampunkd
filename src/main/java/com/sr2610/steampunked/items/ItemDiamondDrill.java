@@ -73,8 +73,8 @@ public class ItemDiamondDrill extends ItemPickaxe implements ISteamUser {
 
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		itemIcon = iconRegister.registerIcon(Reference.ModID
-				+ ":diamond_drill");
+		itemIcon = iconRegister
+				.registerIcon(Reference.ModID + ":diamond_drill");
 	}
 
 	@Override
@@ -126,8 +126,7 @@ public class ItemDiamondDrill extends ItemPickaxe implements ISteamUser {
 	public void addInformation(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
 		par3List.add(EnumChatFormatting.AQUA + "Steam : "
-				+ getCurrentSteam(par1ItemStack) + "/"
-				+ getMaxSteam());
+				+ getCurrentSteam(par1ItemStack) + "/" + getMaxSteam());
 		par3List.add(EnumChatFormatting.ITALIC + "Diamond Tipped");
 	}
 

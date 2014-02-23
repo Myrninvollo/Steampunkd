@@ -16,12 +16,11 @@ import net.minecraft.world.World;
 import com.sr2610.steampunked.Steampunked;
 import com.sr2610.steampunked.tileentities.TileEntityPunchardMaker;
 
-public class BlockPunchcardMaker extends BlockContainer{
+public class BlockPunchcardMaker extends BlockContainer {
 
 	protected BlockPunchcardMaker(Material material) {
 		super(material);
 	}
-
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int var2) {
@@ -96,4 +95,3 @@ public class BlockPunchcardMaker extends BlockContainer{
 	}
 
 }
-

@@ -45,53 +45,43 @@ public class ContainerSteamBoiler extends Container {
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
-	{
+	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
 		ItemStack itemstack = null;
-		Slot slot = (Slot)inventorySlots.get(par2);
+		Slot slot = (Slot) inventorySlots.get(par2);
 
-		if (slot != null && slot.getHasStack())
-		{
+		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			if (par2 == 0)
-			{
-				if (!mergeItemStack(itemstack1, 1, 37, true))
-				{
+			if (par2 == 0) {
+				if (!mergeItemStack(itemstack1, 1, 37, true)) {
 					return null;
 				}
-			}
-			else
-			{
-				if (((Slot)inventorySlots.get(0)).getHasStack() || !((Slot)inventorySlots.get(0)).isItemValid(itemstack1))
-				{
+			} else {
+				if (((Slot) inventorySlots.get(0)).getHasStack()
+						|| !((Slot) inventorySlots.get(0))
+								.isItemValid(itemstack1)) {
 					return null;
 				}
 
-				if (itemstack1.hasTagCompound() && itemstack1.stackSize == 1)
-				{
-					((Slot)inventorySlots.get(0)).putStack(itemstack1.copy());
+				if (itemstack1.hasTagCompound() && itemstack1.stackSize == 1) {
+					((Slot) inventorySlots.get(0)).putStack(itemstack1.copy());
 					itemstack1.stackSize = 0;
-				}
-				else if (itemstack1.stackSize >= 1)
-				{
-					((Slot)inventorySlots.get(0)).putStack(new ItemStack(itemstack1.getItem(), 1, itemstack1.getItemDamage()));
+				} else if (itemstack1.stackSize >= 1) {
+					((Slot) inventorySlots.get(0))
+							.putStack(new ItemStack(itemstack1.getItem(), 1,
+									itemstack1.getItemDamage()));
 					--itemstack1.stackSize;
 				}
 			}
 
-			if (itemstack1.stackSize == 0)
-			{
-				slot.putStack((ItemStack)null);
-			}
-			else
-			{
+			if (itemstack1.stackSize == 0) {
+				slot.putStack((ItemStack) null);
+			} else {
 				slot.onSlotChanged();
 			}
 
-			if (itemstack1.stackSize == itemstack.stackSize)
-			{
+			if (itemstack1.stackSize == itemstack.stackSize) {
 				return null;
 			}
 
@@ -119,13 +109,11 @@ public class ContainerSteamBoiler extends Container {
 	@Override
 	public void updateProgressBar(int i, int j) {
 		te_boiler.GetGUINetworkData(i, j);
-		if (i == 5)
-		{
+		if (i == 5) {
 			te_boiler.furnaceBurnTime = j;
 		}
 
-		if (i == 6)
-		{
+		if (i == 6) {
 			te_boiler.currentItemBurnTime = j;
 		}
 	}

@@ -23,9 +23,7 @@ public final class LibNames {
 	public static final String COPPERINGOT = "ingotCopper";
 	public static final String TININGOT = "ingotTin";
 
-
-
-	public static final String INJECTOR= "injector";
+	public static final String INJECTOR = "injector";
 	public static final String BOILER = "boiler";
 	public static final String FURNACE = "furnaceSteam";
 	public static final String STEAM = "steam";
@@ -38,6 +36,5 @@ public final class LibNames {
 	public static final String COREMEDIUM = "coreMedium";
 	public static final String COREADVANCED = "coreAdvanced";
 	public static final String TEMPLATE = "template";
-
 
 }

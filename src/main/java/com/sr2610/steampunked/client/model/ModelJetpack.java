@@ -4,8 +4,7 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelJetpack extends ModelBiped
-{
+public class ModelJetpack extends ModelBiped {
 	ModelRenderer leftshoulder;
 	ModelRenderer body;
 	ModelRenderer rightshoulder;
@@ -25,11 +24,9 @@ public class ModelJetpack extends ModelBiped
 	ModelRenderer backbody;
 	ModelRenderer strut;
 
-	public ModelJetpack()
-	{
+	public ModelJetpack() {
 		textureWidth = 128;
 		textureHeight = 64;
-
 
 		leftshoulder = new ModelRenderer(this, 16, 45);
 		leftshoulder.addBox(-1.5F, -2.5F, -2.5F, 5, 5, 5);
@@ -144,6 +141,7 @@ public class ModelJetpack extends ModelBiped
 		setRotation(strut, 0F, 0F, 0F);
 
 	}
+
 	private static void setRotation(ModelRenderer model, float x, float y,
 			float z) {
 		model.rotateAngleX = x;

@@ -26,6 +26,7 @@ public class EntityAiNearestTarget extends EntityAITarget {
 	 */
 	private final IEntitySelector targetEntitySelector;
 	private EntityLivingBase targetEntity;
+
 	public EntityAiNearestTarget(EntityCreature par1EntityCreature,
 			Class par2Class, int par3, boolean par4) {
 		this(par1EntityCreature, par2Class, par3, par4, false);
@@ -54,8 +55,8 @@ public class EntityAiNearestTarget extends EntityAITarget {
 			public boolean isEntityApplicable(Entity par1Entity) {
 				return !(par1Entity instanceof EntityLivingBase) ? false
 						: par6IEntitySelector != null
-						&& !par6IEntitySelector
-						.isEntityApplicable(par1Entity) ? false
+								&& !par6IEntitySelector
+										.isEntityApplicable(par1Entity) ? false
 								: EntityAiNearestTarget.this.isSuitableTarget(
 										(EntityLivingBase) par1Entity, false);
 			}
@@ -107,6 +108,7 @@ public class EntityAiNearestTarget extends EntityAITarget {
 
 	public static class Sorter implements Comparator {
 		private final Entity theEntity;
+
 		public Sorter(Entity par1Entity) {
 			theEntity = par1Entity;
 		}

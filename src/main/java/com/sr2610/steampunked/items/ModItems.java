@@ -34,11 +34,9 @@ public final class ModItems {
 	public static Item copperIngot;
 	public static Item tinIngot;
 
-
 	public static Item basicCore;
 	public static Item mediumCore;
 	public static Item advancedCore;
-
 
 	public static void initItems() {
 		System.out.println("[Steampunk'd] Initializing Items...");
@@ -58,10 +56,10 @@ public final class ModItems {
 		namePlate = new ItemNamePlate().setUnlocalizedName(LibNames.NAMEPLATE);
 
 		spawner = new ItemAutomotonSpawner()
-		.setUnlocalizedName(LibNames.SPAWNER);
+				.setUnlocalizedName(LibNames.SPAWNER);
 
 		AutomatonUpgrade = new ItemAutomatonUpgrade()
-		.setUnlocalizedName(LibNames.UPGRADE);
+				.setUnlocalizedName(LibNames.UPGRADE);
 		punchcard = new ItemPunchcard().setUnlocalizedName(LibNames.PUNCHCARD);
 		chasis = new ItemChasis().setUnlocalizedName(LibNames.CHASIS);
 
@@ -77,48 +75,64 @@ public final class ModItems {
 				"diamond").setUnlocalizedName(LibNames.SABERDIAMOND);
 
 		copperIngot = new ItemMod("ingotCopper")
-		.setUnlocalizedName(LibNames.COPPERINGOT);
+				.setUnlocalizedName(LibNames.COPPERINGOT);
 
-		template = new ItemMod("template").setUnlocalizedName(LibNames.TEMPLATE);
-		tinIngot = new ItemMod("ingotTin").setUnlocalizedName(LibNames.TININGOT);
-		basicCore = new ItemCore("coreBasic").setUnlocalizedName(LibNames.COREBASIC).setMaxStackSize(1);
-		mediumCore = new ItemCore("coreMedium").setUnlocalizedName(LibNames.COREMEDIUM).setMaxStackSize(1);
-		advancedCore = new ItemCore("coreAdvanced").setUnlocalizedName(LibNames.COREADVANCED).setMaxStackSize(1);
-
+		template = new ItemMod("template")
+				.setUnlocalizedName(LibNames.TEMPLATE);
+		tinIngot = new ItemMod("ingotTin")
+				.setUnlocalizedName(LibNames.TININGOT);
+		basicCore = new ItemCore("coreBasic").setUnlocalizedName(
+				LibNames.COREBASIC).setMaxStackSize(1);
+		mediumCore = new ItemCore("coreMedium").setUnlocalizedName(
+				LibNames.COREMEDIUM).setMaxStackSize(1);
+		advancedCore = new ItemCore("coreAdvanced").setUnlocalizedName(
+				LibNames.COREADVANCED).setMaxStackSize(1);
 
 		registerItems();
 	}
 
 	private static void registerItems() {
-		GameRegistry.registerItem(boots, LibNames.BOOTS,Reference.ModID);
-		GameRegistry.registerItem(jetpack, LibNames.JETPACK,Reference.ModID);
-		GameRegistry.registerItem(drill, LibNames.DRILL,Reference.ModID);
-		GameRegistry.registerItem(drillDiamond, LibNames.DRILL + "_diamond",Reference.ModID);
-		GameRegistry.registerItem(bucket, LibNames.BUCKET,Reference.ModID);
-		GameRegistry.registerItem(spanner, LibNames.SPANNER,Reference.ModID);
-		GameRegistry.registerItem(goggles, LibNames.GOGGLES,Reference.ModID);
-		GameRegistry.registerItem(spawner, LibNames.SPAWNER,Reference.ModID);
-		GameRegistry.registerItem(namePlate, LibNames.NAMEPLATE,Reference.ModID);
+		GameRegistry.registerItem(boots, LibNames.BOOTS, Reference.ModID);
+		GameRegistry.registerItem(jetpack, LibNames.JETPACK, Reference.ModID);
+		GameRegistry.registerItem(drill, LibNames.DRILL, Reference.ModID);
+		GameRegistry.registerItem(drillDiamond, LibNames.DRILL + "_diamond",
+				Reference.ModID);
+		GameRegistry.registerItem(bucket, LibNames.BUCKET, Reference.ModID);
+		GameRegistry.registerItem(spanner, LibNames.SPANNER, Reference.ModID);
+		GameRegistry.registerItem(goggles, LibNames.GOGGLES, Reference.ModID);
+		GameRegistry.registerItem(spawner, LibNames.SPAWNER, Reference.ModID);
+		GameRegistry.registerItem(namePlate, LibNames.NAMEPLATE,
+				Reference.ModID);
 
-		GameRegistry.registerItem(AutomatonUpgrade, LibNames.UPGRADE,Reference.ModID);
-		GameRegistry.registerItem(punchcard, LibNames.PUNCHCARD,Reference.ModID);
-		GameRegistry.registerItem(chasis, LibNames.CHASIS,Reference.ModID);
+		GameRegistry.registerItem(AutomatonUpgrade, LibNames.UPGRADE,
+				Reference.ModID);
+		GameRegistry.registerItem(punchcard, LibNames.PUNCHCARD,
+				Reference.ModID);
+		GameRegistry.registerItem(chasis, LibNames.CHASIS, Reference.ModID);
 
-		GameRegistry.registerItem(saberWood, LibNames.SABERWOOD,Reference.ModID);
-		GameRegistry.registerItem(saberStone, LibNames.SABERSTONE,Reference.ModID);
-		GameRegistry.registerItem(saberIron, LibNames.SABERIRON,Reference.ModID);
-		GameRegistry.registerItem(saberGold, LibNames.SABERGOLD,Reference.ModID);
-		GameRegistry.registerItem(saberDiamond, LibNames.SABERDIAMOND,Reference.ModID);
+		GameRegistry.registerItem(saberWood, LibNames.SABERWOOD,
+				Reference.ModID);
+		GameRegistry.registerItem(saberStone, LibNames.SABERSTONE,
+				Reference.ModID);
+		GameRegistry.registerItem(saberIron, LibNames.SABERIRON,
+				Reference.ModID);
+		GameRegistry.registerItem(saberGold, LibNames.SABERGOLD,
+				Reference.ModID);
+		GameRegistry.registerItem(saberDiamond, LibNames.SABERDIAMOND,
+				Reference.ModID);
 
-		GameRegistry.registerItem(copperIngot, LibNames.COPPERINGOT,Reference.ModID);
-		GameRegistry.registerItem(tinIngot, LibNames.TININGOT,Reference.ModID);
+		GameRegistry.registerItem(copperIngot, LibNames.COPPERINGOT,
+				Reference.ModID);
+		GameRegistry.registerItem(tinIngot, LibNames.TININGOT, Reference.ModID);
 
-		GameRegistry.registerItem(template, LibNames.TEMPLATE,Reference.ModID);
+		GameRegistry.registerItem(template, LibNames.TEMPLATE, Reference.ModID);
 
-		GameRegistry.registerItem(basicCore, LibNames.COREBASIC,Reference.ModID);
-		GameRegistry.registerItem(mediumCore, LibNames.COREMEDIUM,Reference.ModID);
-		GameRegistry.registerItem(advancedCore, LibNames.COREADVANCED,Reference.ModID);
-
+		GameRegistry.registerItem(basicCore, LibNames.COREBASIC,
+				Reference.ModID);
+		GameRegistry.registerItem(mediumCore, LibNames.COREMEDIUM,
+				Reference.ModID);
+		GameRegistry.registerItem(advancedCore, LibNames.COREADVANCED,
+				Reference.ModID);
 
 		oreRegistration();
 

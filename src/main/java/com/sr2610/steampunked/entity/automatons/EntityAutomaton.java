@@ -53,6 +53,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 	public boolean lFlame;
 	public double range;
 	public double maxHealth;
+	public double speed;
 
 	private static final IEntitySelector attackEntitySelector = new AttackFilter();
 
@@ -61,7 +62,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		setSize(0.6F, 1F);
 		attackMobs = false;
 		tasks.addTask(1, new EntityAISwimming(this));
-		tasks.addTask(2, new EntityAIAttackOnCollide(this, 1.0D, true));
+		tasks.addTask(2, new EntityAIAttackOnCollide(this,speed, true));
 		tasks.addTask(3, new EntityAILookIdle(this));
 		targetTasks.addTask(4, new EntityAIHurt(this, false));
 
@@ -82,10 +83,10 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-		.setBaseValue(0.30000001192092896D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(
+				0.25);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth)
-		.setBaseValue(20.0);
+				.setBaseValue(20.0);
 	}
 
 	@Override
@@ -108,12 +109,17 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		super.onLivingUpdate();
 
 		if (maxHealth > 20) {
-			getEntityAttribute(SharedMonsterAttributes.maxHealth)
-			.setBaseValue(maxHealth);
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(
+					maxHealth);
 
 		}
 
+		if (speed > 0.25) {
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(
+					speed);
 
+		}
+		
 		if (attackTimer > 0) {
 			--attackTimer;
 		}
@@ -166,8 +172,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
 		if (getHeldItem() != null) {
-			dropItem(getHeldItem().getItem(),
-					getHeldItem().stackSize);
+			dropItem(getHeldItem().getItem(), getHeldItem().stackSize);
 		}
 
 	}
@@ -186,8 +191,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		par1NBTTagCompound.setDouble("MaxHealth", maxHealth);
 		par1NBTTagCompound.setBoolean("rFlame", rFlame);
 		par1NBTTagCompound.setBoolean("lFlame", lFlame);
-		par1NBTTagCompound
-		.setInteger("TransferCooldown", transferCooldown);
+		par1NBTTagCompound.setInteger("TransferCooldown", transferCooldown);
 		NBTTagList nbttaglist = new NBTTagList();
 
 		for (int i = 0; i < autoItemStacks.length; ++i) {
@@ -218,8 +222,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		rFlame = par1NBTTagCompound.getBoolean("RightFlame");
 		lFlame = par1NBTTagCompound.getBoolean("LeftFlame");
 
-		transferCooldown = par1NBTTagCompound
-				.getInteger("TransferCooldown");
+		transferCooldown = par1NBTTagCompound.getInteger("TransferCooldown");
 		NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items", 10);
 		autoItemStacks = new ItemStack[getSizeInventory()];
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
@@ -241,7 +244,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 			return false;
 		}
 
-		if (!(getDistance(homeX, homeY, homeZ) < 2.0D))
+		if (!(getDistance(homeX, homeY, homeZ) < 2.5D))
 			return false;
 		else {
 			for (int i = 0; i < getSizeInventory(); ++i) {
@@ -266,8 +269,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 	}
 
 	private IInventory getOutputInventory() {
-		return getInventoryAtLocation(worldObj, homeX,
-				homeY, homeZ);
+		return getInventoryAtLocation(worldObj, homeX, homeY, homeZ);
 	}
 
 	public static ItemStack insertStack(IInventory par0IInventory,
@@ -308,7 +310,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 						par0IInventory.getInventoryStackLimit());
 				if (max >= par1ItemStack.stackSize) {
 					par0IInventory
-					.setInventorySlotContents(par2, par1ItemStack);
+							.setInventorySlotContents(par2, par1ItemStack);
 					par1ItemStack = null;
 				} else {
 					par0IInventory.setInventorySlotContents(par2,
@@ -334,17 +336,17 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 			ItemStack par1ItemStack, int par2, int par3) {
 		return !par0IInventory.isItemValidForSlot(par2, par1ItemStack) ? false
 				: !(par0IInventory instanceof ISidedInventory)
-				|| ((ISidedInventory) par0IInventory).canInsertItem(
-						par2, par1ItemStack, par3);
+						|| ((ISidedInventory) par0IInventory).canInsertItem(
+								par2, par1ItemStack, par3);
 	}
 
 	private static boolean areItemStacksEqualItem(ItemStack par0ItemStack,
 			ItemStack par1ItemStack) {
 		return par0ItemStack.getItem() != par1ItemStack.getItem() ? false
 				: par0ItemStack.getItemDamage() != par1ItemStack
-				.getItemDamage() ? false
+						.getItemDamage() ? false
 						: par0ItemStack.stackSize > par0ItemStack
-						.getMaxStackSize() ? false : ItemStack
+								.getMaxStackSize() ? false : ItemStack
 								.areItemStackTagsEqual(par0ItemStack,
 										par1ItemStack);
 	}
@@ -457,7 +459,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 					(Entity) null,
 					AxisAlignedBB.getAABBPool().getAABB(par1, par3, par5,
 							par1 + 1.0D, par3 + 1.0D, par5 + 1.0D),
-							IEntitySelector.selectInventories);
+					IEntitySelector.selectInventories);
 
 			if (list != null && list.size() > 0) {
 				iinventory = (IInventory) list.get(par0World.rand.nextInt(list
@@ -535,7 +537,5 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 	public void setMaxHealth(float f) {
 		maxHealth = f;
 	}
-
-
 
 }

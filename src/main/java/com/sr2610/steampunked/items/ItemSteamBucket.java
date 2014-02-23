@@ -30,8 +30,7 @@ public class ItemSteamBucket extends Item implements IFluidContainerItem {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister par1IconRegister) {
-		itemIcon = par1IconRegister
-				.registerIcon("steampunked:steam_bucket");
+		itemIcon = par1IconRegister.registerIcon("steampunked:steam_bucket");
 	}
 
 	@Override
@@ -58,8 +57,8 @@ public class ItemSteamBucket extends Item implements IFluidContainerItem {
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer) {
 		boolean flag = true;
-		MovingObjectPosition movingobjectposition = getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer,
-				flag);
+		MovingObjectPosition movingobjectposition = getMovingObjectPositionFromPlayer(
+				par2World, par3EntityPlayer, flag);
 
 		if (movingobjectposition == null) {
 			return par1ItemStack;

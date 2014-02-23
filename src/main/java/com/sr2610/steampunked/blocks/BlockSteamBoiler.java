@@ -22,9 +22,6 @@ public class BlockSteamBoiler extends BlockContainer {
 		super(par2Material);
 	}
 
-
-
-
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
 			EntityPlayer player, int i, float f, float g, float t) {
@@ -92,10 +89,9 @@ public class BlockSteamBoiler extends BlockContainer {
 		super.onBlockAdded(par1World, par2, par3, par4);
 	}
 
-
-
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
-		return new TileEntitySteamBoiler();	}
+		return new TileEntitySteamBoiler();
+	}
 
 }

@@ -45,23 +45,30 @@ public class ItemAutomotonSpawner extends Item {
 				entity.homeY = par5;
 				entity.homeZ = par6;
 				entity.side = par7;
-				entity.setLocationAndAngles(par4 + par8,
-						par5 + par9 + 0.5,
+				entity.setLocationAndAngles(par4 + par8, par5 + par9 + 0.5,
 						par6 + par10, par9, par10);
 				entity.setOwner(par2EntityPlayer.getDisplayName());
 
-
 				NBTTagCompound nbttagcompound = par1ItemStack.getTagCompound();
-				NBTTagDouble nbttagdouble= (NBTTagDouble)nbttagcompound.getTag("Range");
-				if(nbttagdouble != null)
-				{entity.range = nbttagdouble.func_150286_g();}
-				else
+				NBTTagDouble nbttagdouble = (NBTTagDouble) nbttagcompound
+						.getTag("Range");
+				if (nbttagdouble != null) {
+					entity.range = nbttagdouble.func_150286_g();
+				} else
 					entity.range = 5;
-				NBTTagDouble nbttagdoubleHealth= (NBTTagDouble)nbttagcompound.getTag("MaxHealth");
-				if(nbttagdoubleHealth != null)
-				{entity.maxHealth = nbttagdoubleHealth.func_150286_g();}
-				else
+				NBTTagDouble nbttagdoubleHealth = (NBTTagDouble) nbttagcompound
+						.getTag("MaxHealth");
+				if (nbttagdoubleHealth != null) {
+					entity.maxHealth = nbttagdoubleHealth.func_150286_g();
+				} else
 					entity.maxHealth = 20;
+				
+				NBTTagDouble nbttagdoubleSpeed = (NBTTagDouble) nbttagcompound
+						.getTag("Speed");
+				if (nbttagdoubleSpeed != null) {
+					entity.speed = nbttagdoubleSpeed.func_150286_g();
+				} else
+					entity.speed = 0.25;
 				par3World.spawnEntityInWorld(entity);
 				if (!par2EntityPlayer.capabilities.isCreativeMode) {
 					--par1ItemStack.stackSize;
@@ -113,7 +120,17 @@ public class ItemAutomotonSpawner extends Item {
 						+ par1ItemStack.stackTagCompound.getDouble("Range")
 						+ " Blocks");
 			else
+				
+				
 				par3List.add("Range: 5.0 Blocks");
+			
+			if (par1ItemStack.stackTagCompound.hasKey("Speed"))
+				par3List.add("Speed: Fast");
+					
+			else
+				
+
+				par3List.add("Speed: Slow");
 
 		}
 	}

@@ -11,7 +11,6 @@ public class EntityAIMoveHome extends EntityAIBase {
 
 	private PathNavigate pathFinder;
 
-
 	public EntityAIMoveHome(EntityAutomaton auto) {
 		this.auto = auto;
 		pathFinder = auto.getNavigator();
@@ -20,7 +19,9 @@ public class EntityAIMoveHome extends EntityAIBase {
 
 	@Override
 	public boolean shouldExecute() {
-		if (!pathFinder.noPath()) { return false; }
+		if (!pathFinder.noPath()) {
+			return false;
+		}
 		if (auto.worldObj != null) {
 			return true;
 
@@ -41,8 +42,8 @@ public class EntityAIMoveHome extends EntityAIBase {
 
 	@Override
 	public void startExecuting() {
-		if (auto.posX!=auto.homeX) {
-			pathFinder.tryMoveToXYZ(auto.homeX,auto.homeY, auto.homeZ,1.0);
+		if (auto.posX != auto.homeX) {
+			pathFinder.tryMoveToXYZ(auto.homeX, auto.homeY, auto.homeZ, auto.speed);
 		}
 	}
 

@@ -27,28 +27,26 @@ public class ContainerSteamFurnace extends Container {
 		int i;
 
 		for (i = 0; i < 3; ++i) {
-			addSlotToContainer(new SlotUpgrade(par2TileEntityFurnace,
-					i + 2, 8, 18 + i * 18));
+			addSlotToContainer(new SlotUpgrade(par2TileEntityFurnace, i + 2, 8,
+					18 + i * 18));
 		}
 
 		for (i = 0; i < 3; ++i) {
 			for (int j = 0; j < 9; ++j) {
-				addSlotToContainer(new Slot(par1InventoryPlayer, j + i * 9
-						+ 9, 8 + j * 18, 84 + i * 18));
+				addSlotToContainer(new Slot(par1InventoryPlayer, j + i * 9 + 9,
+						8 + j * 18, 84 + i * 18));
 			}
 		}
 
 		for (i = 0; i < 9; ++i) {
-			addSlotToContainer(new Slot(par1InventoryPlayer, i,
-					8 + i * 18, 142));
+			addSlotToContainer(new Slot(par1InventoryPlayer, i, 8 + i * 18, 142));
 		}
 	}
 
 	@Override
 	public void addCraftingToCrafters(ICrafting par1ICrafting) {
 		super.addCraftingToCrafters(par1ICrafting);
-		par1ICrafting.sendProgressBarUpdate(this, 0,
-				furnace.furnaceCookTime);
+		par1ICrafting.sendProgressBarUpdate(this, 0, furnace.furnaceCookTime);
 
 	}
 
@@ -62,7 +60,7 @@ public class ContainerSteamFurnace extends Container {
 			if (lastCookTime != furnace.furnaceCookTime) {
 				icrafting.sendProgressBarUpdate(this, 0,
 
-						furnace.furnaceCookTime);
+				furnace.furnaceCookTime);
 			}
 			for (i = 0; i < crafters.size(); i++) {
 				furnace.SendGUINetworkData(this, (ICrafting) crafters.get(i));
@@ -89,36 +87,26 @@ public class ContainerSteamFurnace extends Container {
 		return furnace.isUseableByPlayer(par1EntityPlayer);
 	}
 
-
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
-	{
+	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
 		ItemStack itemstack = null;
-		Slot slot = (Slot)inventorySlots.get(par2);
+		Slot slot = (Slot) inventorySlots.get(par2);
 
-		if (slot != null && slot.getHasStack())
-		{
+		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			if (par2 < 1)
-			{
-				if (!mergeItemStack(itemstack1,1, inventorySlots.size(), true))
-				{
+			if (par2 < 1) {
+				if (!mergeItemStack(itemstack1, 1, inventorySlots.size(), true)) {
 					return null;
 				}
-			}
-			else if (!mergeItemStack(itemstack1, 0,1, false))
-			{
+			} else if (!mergeItemStack(itemstack1, 0, 1, false)) {
 				return null;
 			}
 
-			if (itemstack1.stackSize == 0)
-			{
-				slot.putStack((ItemStack)null);
-			}
-			else
-			{
+			if (itemstack1.stackSize == 0) {
+				slot.putStack((ItemStack) null);
+			} else {
 				slot.onSlotChanged();
 			}
 		}

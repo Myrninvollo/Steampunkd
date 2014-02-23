@@ -25,6 +25,7 @@ public class ItemChasis extends Item {
 			par3List.add(new ItemStack(this, 1, x));
 		}
 	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack itemstack,

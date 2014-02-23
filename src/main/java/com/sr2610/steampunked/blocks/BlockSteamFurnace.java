@@ -86,16 +86,14 @@ public class BlockSteamFurnace extends BlockContainer {
 
 							itemstack.stackSize -= j1;
 							EntityItem entityitem = new EntityItem(world,
-									x + f,
-									y + f1,
-									z + f2, new ItemStack(
+									x + f, y + f1, z + f2, new ItemStack(
 											itemstack.getItem(), j1,
 											itemstack.getItemDamage()));
 
 							if (itemstack.hasTagCompound()) {
 								entityitem.getEntityItem().setTagCompound(
 										(NBTTagCompound) itemstack
-										.getTagCompound().copy());
+												.getTagCompound().copy());
 							}
 
 							float f3 = 0.05F;
@@ -143,12 +141,10 @@ public class BlockSteamFurnace extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		blockIcon = par1IconRegister.registerIcon(Reference.ModID
-				+ ":furnace");
+		blockIcon = par1IconRegister.registerIcon(Reference.ModID + ":furnace");
 		furnaceIconFront = par1IconRegister
-				.registerIcon(isActive ? Reference.ModID
-						+ ":furnaceFront_on" : Reference.ModID
-						+ ":furnaceFront_off");
+				.registerIcon(isActive ? Reference.ModID + ":furnaceFront_on"
+						: Reference.ModID + ":furnaceFront_off");
 
 		furnaceIconTop = par1IconRegister.registerIcon(Reference.ModID
 				+ ":furnace_top");

@@ -26,7 +26,7 @@ public class ItemAutomatonUpgrade extends Item implements IUpgrade {
 	}
 
 	public static final String[] upgradeItemNames = new String[] { "range",
-		"speed", "health", "undefined" };
+			"speed", "health", "undefined" };
 	@SideOnly(Side.CLIENT)
 	private IIcon[] upgradeIcons;
 
@@ -51,8 +51,8 @@ public class ItemAutomatonUpgrade extends Item implements IUpgrade {
 		upgradeIcons = new IIcon[upgradeItemNames.length];
 
 		for (int i = 0; i < upgradeItemNames.length; ++i) {
-			upgradeIcons[i] = par1IconRegister
-					.registerIcon(Reference.ModID + ":upgrade_" + +i);
+			upgradeIcons[i] = par1IconRegister.registerIcon(Reference.ModID
+					+ ":upgrade_" + +i);
 		}
 	}
 
@@ -62,11 +62,11 @@ public class ItemAutomatonUpgrade extends Item implements IUpgrade {
 		return super.getUnlocalizedName() + "." + i;
 	}
 
-
 	@Override
 	public void addInformation(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
 		int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 20);
-		par3List.add(StatCollector.translateToLocal("steampunked.upgrade."+i+".name"));
+		par3List.add(StatCollector.translateToLocal("steampunked.upgrade." + i
+				+ ".name"));
 	}
 }

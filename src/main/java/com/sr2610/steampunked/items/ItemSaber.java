@@ -139,8 +139,7 @@ public class ItemSaber extends Item {
 		Multimap multimap = super.getItemAttributeModifiers();
 		multimap.put(SharedMonsterAttributes.attackDamage
 				.getAttributeUnlocalizedName(), new AttributeModifier(
-						field_111210_e, "Weapon modifier", weaponDamage,
-						0));
+				field_111210_e, "Weapon modifier", weaponDamage, 0));
 		return multimap;
 	}
 

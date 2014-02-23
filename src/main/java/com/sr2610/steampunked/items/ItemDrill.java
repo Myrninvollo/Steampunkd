@@ -71,8 +71,7 @@ public class ItemDrill extends ItemPickaxe implements ISteamUser {
 
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		itemIcon = iconRegister.registerIcon(Reference.ModID
-				+ ":iron_drill");
+		itemIcon = iconRegister.registerIcon(Reference.ModID + ":iron_drill");
 	}
 
 	public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block) {
@@ -123,8 +122,7 @@ public class ItemDrill extends ItemPickaxe implements ISteamUser {
 	public void addInformation(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
 		par3List.add(EnumChatFormatting.AQUA + "Steam : "
-				+ getCurrentSteam(par1ItemStack) + "/"
-				+ getMaxSteam());
+				+ getCurrentSteam(par1ItemStack) + "/" + getMaxSteam());
 	}
 
 	@Override

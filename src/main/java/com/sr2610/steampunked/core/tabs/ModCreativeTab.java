@@ -54,7 +54,6 @@ public class ModCreativeTab extends CreativeTabs {
 		addItem(ModItems.copperIngot);
 		addItem(ModItems.tinIngot);
 
-
 	}
 
 	private void addItem(Item item) {

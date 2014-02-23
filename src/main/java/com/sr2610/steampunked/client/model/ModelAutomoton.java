@@ -205,8 +205,8 @@ public class ModelAutomoton extends ModelBase {
 			rightarm.rotateAngleX = MathHelper.cos(par2 * 0.6662F
 					+ (float) Math.PI)
 					* 2.0F * par3 * 0.5F;
-			leftarm.rotateAngleX = MathHelper.cos(par2 * 0.6662F) * 2.0F
-					* par3 * 0.5F;
+			leftarm.rotateAngleX = MathHelper.cos(par2 * 0.6662F) * 2.0F * par3
+					* 0.5F;
 			rightarm.rotateAngleZ = 0.0F;
 			leftarm.rotateAngleZ = 0.0F;
 		}

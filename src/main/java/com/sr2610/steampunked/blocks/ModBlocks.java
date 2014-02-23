@@ -42,17 +42,17 @@ public final class ModBlocks {
 				.setBlockName(LibNames.INJECTOR);
 
 		BlockFluidSteam = new BlockSteamFluid(steam, materialSteam)
-		.setBlockName(LibNames.STEAM);
+				.setBlockName(LibNames.STEAM);
 
 		steamFurnace = new BlockSteamFurnace(false, Material.iron)
-		.setHardness(5.0F).setResistance(10.0F)
-		.setStepSound(Block.soundTypeMetal)
-		.setBlockName(LibNames.FURNACE);
+				.setHardness(5.0F).setResistance(10.0F)
+				.setStepSound(Block.soundTypeMetal)
+				.setBlockName(LibNames.FURNACE);
 
 		steamFurnaceActive = new BlockSteamFurnace(true, Material.iron)
-		.setHardness(5.0F).setResistance(10.0F)
-		.setStepSound(Block.soundTypeMetal)
-		.setBlockName(LibNames.FURNACE + "burning");
+				.setHardness(5.0F).setResistance(10.0F)
+				.setStepSound(Block.soundTypeMetal)
+				.setBlockName(LibNames.FURNACE + "burning");
 
 		steamBoiler = new BlockSteamBoiler(Material.iron).setHardness(5.0F)
 				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
@@ -63,19 +63,19 @@ public final class ModBlocks {
 				.setBlockName(LibNames.BENCH);
 
 		punchcardMaker = new BlockPunchcardMaker(Material.iron)
-		.setHardness(5.0F).setResistance(10.0F)
-		.setStepSound(Block.soundTypeMetal)
-		.setBlockName(LibNames.MAKER);
+				.setHardness(5.0F).setResistance(10.0F)
+				.setStepSound(Block.soundTypeMetal)
+				.setBlockName(LibNames.MAKER);
 
 		oreCopper = new BlockMod(Material.rock, "oreCopper", 1, "pickaxe")
-		.setHardness(3.0F).setResistance(5.0F)
-		.setStepSound(Block.soundTypePiston)
-		.setBlockName(LibNames.ORECOPPER);
+				.setHardness(3.0F).setResistance(5.0F)
+				.setStepSound(Block.soundTypePiston)
+				.setBlockName(LibNames.ORECOPPER);
 
 		oreTin = new BlockMod(Material.rock, "oreTin", 1, "pickaxe")
-		.setHardness(3.0F).setResistance(5.0F)
-		.setStepSound(Block.soundTypePiston)
-		.setBlockName(LibNames.ORETIN);
+				.setHardness(3.0F).setResistance(5.0F)
+				.setStepSound(Block.soundTypePiston)
+				.setBlockName(LibNames.ORETIN);
 
 		registerBlocks();
 	}

@@ -70,8 +70,8 @@ public class GuiTinkerBench extends GuiMachine {
 		ae = new EntityAutomaton(mc.theWorld);
 		check();
 		drawEntity(guiLeft + 51 + 55, guiTop + 75, 30,
-				(float) (guiLeft + 51 + 60) - xSize,
-				(float) (guiTop + 75 - 50) - ySize, ae);
+				(float) (guiLeft + 51 + 60) - xSize, (float) (guiTop + 75 - 50)
+						- ySize, ae);
 
 	}
 
@@ -145,8 +145,17 @@ public class GuiTinkerBench extends GuiMachine {
 									.getTag("MaxHealth");
 
 							if (nbttagdoubleHealth == null) {
-								stack.setTagInfo("MaxHealth",
-										new NBTTagDouble(40.0));
+								stack.setTagInfo("MaxHealth", new NBTTagDouble(
+										40.0));
+							}
+						}
+						if (injectorInventory.getStackInSlot(i).getItemDamage() == 1) {
+							NBTTagDouble nbttagdoubleSpeed = (NBTTagDouble) nbttagcompound
+									.getTag("Speed");
+
+							if (nbttagdoubleSpeed == null) {
+								stack.setTagInfo("Speed", new NBTTagDouble(
+										0.5));
 							}
 						}
 					}
@@ -181,8 +190,8 @@ public class GuiTinkerBench extends GuiMachine {
 		GL11.glRotatef(135.0F, 0.0F, 1.0F, 0.0F);
 		RenderHelper.enableStandardItemLighting();
 		GL11.glRotatef(-135.0F, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(-((float) Math.atan(par4 / 40.0F)) * 20.0F,
-				1.0F, 0.0F, 0.0F);
+		GL11.glRotatef(-((float) Math.atan(par4 / 40.0F)) * 20.0F, 1.0F, 0.0F,
+				0.0F);
 		par5EntityLivingBase.renderYawOffset = par5EntityLivingBase.rotationYaw = par5EntityLivingBase.prevRotationYaw = par5EntityLivingBase.prevRotationYawHead = par5EntityLivingBase.rotationYawHead = rotate;
 		GL11.glTranslatef(0.0F, par5EntityLivingBase.yOffset - 0.75F, 0.0F);
 		GL11.glScalef(2.0F, 2.0F, 2.0F);

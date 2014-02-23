@@ -50,7 +50,8 @@ public class GuiSteamBoiler extends GuiMachine {
 				TANK_OVERLAY_X, TANK_OVERLAY_Y, BoilerInventory.GetTank(1));
 
 		int i1 = BoilerInventory.getBurnTimeRemainingScaled(12);
-		drawTexturedModalRect(guiLeft + 82, guiTop + 25 + 12 - i1, 176, 75+14 - i1, 14, i1 + 2);
+		drawTexturedModalRect(guiLeft + 82, guiTop + 25 + 12 - i1, 176,
+				75 + 14 - i1, 14, i1 + 2);
 	}
 
 	@Override

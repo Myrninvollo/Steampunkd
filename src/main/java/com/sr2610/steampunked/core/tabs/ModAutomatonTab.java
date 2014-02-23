@@ -34,7 +34,6 @@ public class ModAutomatonTab extends CreativeTabs {
 		addItem(ModItems.mediumCore);
 		addItem(ModItems.advancedCore);
 
-
 	}
 
 	private void addItem(Item item) {

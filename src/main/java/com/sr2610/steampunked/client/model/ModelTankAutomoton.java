@@ -180,11 +180,9 @@ public class ModelTankAutomoton extends ModelBase {
 			float f4, float f5, Entity entity) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
-		rightarm.rotateAngleX = MathHelper.cos(f * 0.6662F
-				+ (float) Math.PI)
+		rightarm.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI)
 				* 2.0F * f1 * 0.5F;
-		leftarm.rotateAngleX = MathHelper.cos(f * 0.6662F) * 2.0F * f1
-				* 0.5F;
+		leftarm.rotateAngleX = MathHelper.cos(f * 0.6662F) * 2.0F * f1 * 0.5F;
 		rightarm.rotateAngleZ = 0.0F;
 		leftarm.rotateAngleZ = 0.0F;
 		leftleg.rotateAngleX = -1.5F * getAngle(f, 13.0F) * f1;

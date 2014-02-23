@@ -22,7 +22,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntitySteamFurnace extends TileEntityMachine implements
-ISidedInventory, IFluidHandler {
+		ISidedInventory, IFluidHandler {
 
 	static private final int NETDATAID_TANK_FLUID = 1;
 	static private final int NETDATAID_TANK_AMOUNT = 2;
@@ -139,8 +139,8 @@ ISidedInventory, IFluidHandler {
 			if (!furnaceItemStacks[1].isItemEqual(itemstack))
 				return false;
 			int result = furnaceItemStacks[1].stackSize + itemstack.stackSize;
-			return result <= getInventoryStackLimit() && result <= itemstack
-					.getMaxStackSize();
+			return result <= getInventoryStackLimit()
+					&& result <= itemstack.getMaxStackSize();
 		}
 	}
 
@@ -207,8 +207,8 @@ ISidedInventory, IFluidHandler {
 			if (flag1) {
 				markDirty();
 			}
-			BlockSteamFurnace.updateFurnaceBlockState(isSmelting,
-					worldObj, xCoord, yCoord, zCoord);
+			BlockSteamFurnace.updateFurnaceBlockState(isSmelting, worldObj,
+					xCoord, yCoord, zCoord);
 		}
 	}
 
@@ -262,8 +262,8 @@ ISidedInventory, IFluidHandler {
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
 		return worldObj.getTileEntity(xCoord, yCoord, zCoord) != this ? false
-				: player.getDistanceSq(xCoord + 0.5D,
-						yCoord + 0.5D, zCoord + 0.5D) <= 64.0D;
+				: player.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D,
+						zCoord + 0.5D) <= 64.0D;
 	}
 
 	static private final int[] INSERT_SLOTS = { 0 };

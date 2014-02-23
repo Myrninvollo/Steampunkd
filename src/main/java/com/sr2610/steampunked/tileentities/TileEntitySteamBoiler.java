@@ -36,7 +36,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntitySteamBoiler extends TileEntityMachine implements
-IFluidHandler, ISidedInventory {
+		IFluidHandler, ISidedInventory {
 
 	static private final int NETDATAID_INPUT_TANK_FLUID = 1;
 	static private final int NETDATAID_INPUT_TANK_AMOUNT = 2;
@@ -264,8 +264,8 @@ IFluidHandler, ISidedInventory {
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
 		return worldObj.getTileEntity(xCoord, yCoord, zCoord) != this ? false
-				: player.getDistanceSq(xCoord + 0.5D,
-						yCoord + 0.5D, zCoord + 0.5D) <= 64.0D;
+				: player.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D,
+						zCoord + 0.5D) <= 64.0D;
 	}
 
 	@Override

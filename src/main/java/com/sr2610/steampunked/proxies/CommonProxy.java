@@ -4,7 +4,7 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.world.World;
 
 public class CommonProxy {
-	public ModelBiped getArmorModel(int id){
+	public ModelBiped getArmorModel(int id) {
 		return null;
 	}
 
@@ -12,13 +12,11 @@ public class CommonProxy {
 
 	}
 
-	public void registerRenderInformation() {}
-
-
+	public void registerRenderInformation() {
+	}
 
 	public long getTicks(World worldObj) {
 		return worldObj.getTotalWorldTime();
 	}
 
 }
-

@@ -50,10 +50,12 @@ public class GuiPunchardMaker extends GuiMachine {
 			ItemStack is2 = inventory.getStackInSlot(1);
 			ItemStack is3 = inventory.getStackInSlot(2);
 			ItemStack is4 = inventory.getStackInSlot(3);
-			if(is4!=null && is4.getItem()==Items.dye && is4.getItemDamage()==0){
+			if (is4 != null && is4.getItem() == Items.dye
+					&& is4.getItemDamage() == 0) {
 
 				if (is != null && is.getItem() instanceof ItemPunchcard
-						&& is.getItemDamage() == 0 && is3 == null && is2 != null
+						&& is.getItemDamage() == 0 && is3 == null
+						&& is2 != null
 						&& is2.getItem() instanceof ItemPunchcard
 						&& is2.getItemDamage() >= 11) {
 					ItemStack stack = new ItemStack(ModItems.punchcard, 1,
@@ -61,7 +63,8 @@ public class GuiPunchardMaker extends GuiMachine {
 					inventory.setInventorySlotContents(2, stack);
 					updateServer(stack);
 					inventory.markDirty();
-				}}
+				}
+			}
 		}
 	}
 

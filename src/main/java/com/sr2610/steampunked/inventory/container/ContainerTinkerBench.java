@@ -54,8 +54,7 @@ public class ContainerTinkerBench extends Container {
 	@Override
 	public void addCraftingToCrafters(ICrafting par1ICrafting) {
 		super.addCraftingToCrafters(par1ICrafting);
-		par1ICrafting.sendProgressBarUpdate(this, 0,
-				tinkerTable.craftProgress);
+		par1ICrafting.sendProgressBarUpdate(this, 0, tinkerTable.craftProgress);
 
 	}
 
@@ -69,7 +68,7 @@ public class ContainerTinkerBench extends Container {
 			if (lastCraftProgress != tinkerTable.craftProgress) {
 				icrafting.sendProgressBarUpdate(this, 0,
 
-						tinkerTable.craftProgress);
+				tinkerTable.craftProgress);
 			}
 			for (i = 0; i < crafters.size(); i++) {
 				tinkerTable.SendGUINetworkData(this,
@@ -107,8 +106,7 @@ public class ContainerTinkerBench extends Container {
 			itemstack = itemstack1.copy();
 
 			if (par2 < 8) {
-				if (!mergeItemStack(itemstack1, 8,
-						inventorySlots.size(), true)) {
+				if (!mergeItemStack(itemstack1, 8, inventorySlots.size(), true)) {
 					return null;
 				}
 			} else if (!mergeItemStack(itemstack1, 0, 8, false)) {

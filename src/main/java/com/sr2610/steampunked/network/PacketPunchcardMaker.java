@@ -55,12 +55,12 @@ public class PacketPunchcardMaker extends AbstractPacket {
 		TileEntity te = world.getTileEntity(x, y, z);
 
 		if (te instanceof TileEntityPunchardMaker) {
-			ItemStack is =  ((TileEntityPunchardMaker) te).getStackInSlot(3);
+			ItemStack is = ((TileEntityPunchardMaker) te).getStackInSlot(3);
 			is.stackSize--;
-			((TileEntityPunchardMaker) te).setInventorySlotContents(2, contents);
+			((TileEntityPunchardMaker) te)
+					.setInventorySlotContents(2, contents);
 			((TileEntityPunchardMaker) te).setInventorySlotContents(0, null);
-			((TileEntityPunchardMaker) te).setInventorySlotContents(3,is);
-
+			((TileEntityPunchardMaker) te).setInventorySlotContents(3, is);
 
 		}
 	}

@@ -10,7 +10,7 @@ import com.sr2610.steampunked.inventory.container.ContainerSteamFurnace;
 import com.sr2610.steampunked.lib.Reference;
 import com.sr2610.steampunked.tileentities.TileEntitySteamFurnace;
 
-public class GuiSteamFurnace extends GuiMachine{
+public class GuiSteamFurnace extends GuiMachine {
 
 	private static final ResourceLocation GUI_TEXTURE = new ResourceLocation(
 			Reference.ModID, "textures/gui/steamFurnace.png");
@@ -46,7 +46,8 @@ public class GuiSteamFurnace extends GuiMachine{
 		int window_y = (height - ySize) / 2;
 		drawTexturedModalRect(window_x, window_y, 0, 0, xSize, ySize);
 		DisplayTank(window_x, window_y, TANK_X, TANK_Y, TANK_HEIGHT,
-				TANK_OVERLAY_X, TANK_OVERLAY_Y, steamFurnaceInventory.GetTank(0));
+				TANK_OVERLAY_X, TANK_OVERLAY_Y,
+				steamFurnaceInventory.GetTank(0));
 		int i1 = steamFurnaceInventory.getCookProgressScaled(24);
 		drawTexturedModalRect(window_x + 79, window_y + 35, 176, 83, i1 + 1, 16);
 
@@ -57,7 +58,8 @@ public class GuiSteamFurnace extends GuiMachine{
 		super.drawScreen(mouse_x, mouse_y, par3);
 
 		if (func_146978_c(TANK_X, TANK_Y, 16, TANK_HEIGHT, mouse_x, mouse_y)) {
-			DisplayTankTooltip(mouse_x, mouse_y, steamFurnaceInventory.GetTank(0));
+			DisplayTankTooltip(mouse_x, mouse_y,
+					steamFurnaceInventory.GetTank(0));
 		}
 
 	}
@@ -72,6 +74,5 @@ public class GuiSteamFurnace extends GuiMachine{
 		super.initGui();
 
 	}
-
 
 }

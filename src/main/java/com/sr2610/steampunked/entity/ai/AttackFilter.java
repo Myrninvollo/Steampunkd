@@ -5,14 +5,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.IMob;
 
-public final class AttackFilter implements IEntitySelector
-{
+public final class AttackFilter implements IEntitySelector {
 	/**
 	 * Return whether the specified entity is applicable to this filter.
 	 */
 	@Override
-	public boolean isEntityApplicable(Entity par1Entity)
-	{
-		return par1Entity instanceof IMob && !(par1Entity instanceof EntityCreeper);
+	public boolean isEntityApplicable(Entity par1Entity) {
+		return par1Entity instanceof IMob
+				&& !(par1Entity instanceof EntityCreeper);
 	}
 }
