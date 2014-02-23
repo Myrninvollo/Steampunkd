@@ -22,11 +22,8 @@ public class GuiSteamBoiler extends GuiMachine {
 	private static final int TANK_OVERLAY_X = 176;
 	private static final int TANK_OVERLAY_Y = 9;
 
-	private IInventory player_inventory;
-
 	public GuiSteamBoiler(TileEntitySteamBoiler cs, IInventory player_inv) {
 		super(new ContainerSteamBoiler(cs, player_inv));
-		player_inventory = player_inv;
 		ySize = 166;
 		BoilerInventory = cs;
 	}
@@ -36,7 +33,7 @@ public class GuiSteamBoiler extends GuiMachine {
 		super.drawGuiContainerForegroundLayer(mouse_x, mouse_y);
 
 		fontRendererObj.drawString("Steam Boiler", 5, 6, 0x404040);
-		fontRendererObj.drawString("Inventory", 8, (ySize - 96) + 2, 0x404040);
+		fontRendererObj.drawString("Inventory", 8, ySize - 96 + 2, 0x404040);
 	}
 
 	@Override
@@ -51,9 +48,9 @@ public class GuiSteamBoiler extends GuiMachine {
 				TANK_OVERLAY_X, TANK_OVERLAY_Y, BoilerInventory.GetTank(0));
 		DisplayTank(window_x, window_y, TANK_X, TANK_Y, TANK_HEIGHT,
 				TANK_OVERLAY_X, TANK_OVERLAY_Y, BoilerInventory.GetTank(1));
-		
-		 int i1 = this.BoilerInventory.getBurnTimeRemainingScaled(12);
-         this.drawTexturedModalRect(guiLeft + 82, guiTop + 25 + 12 - i1, 176, 75+14 - i1, 14, i1 + 2);
+
+		int i1 = BoilerInventory.getBurnTimeRemainingScaled(12);
+		drawTexturedModalRect(guiLeft + 82, guiTop + 25 + 12 - i1, 176, 75+14 - i1, 14, i1 + 2);
 	}
 
 	@Override
@@ -78,8 +75,6 @@ public class GuiSteamBoiler extends GuiMachine {
 	@Override
 	public void initGui() {
 		super.initGui();
-		int window_x = (width - xSize) / 2;
-		int window_y = (height - ySize) / 2;
 
 	}
 

@@ -43,7 +43,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 	public int side;
 	private int transferCooldown = -1;
 	private ItemStack[] autoItemStacks = new ItemStack[1];
-	public ItemStack stack = this.getHeldItem();
+	public ItemStack stack = getHeldItem();
 	private boolean attackMobs;
 	private boolean pickup;
 	private boolean hasProgram;
@@ -68,72 +68,77 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		targetTasks.addTask(5, new EntityAiNearestTarget(this,
 				EntityLiving.class, 0, false, true, attackEntitySelector));
 
-		this.tasks.addTask(6, new EntityAICollectItem(this));
+		tasks.addTask(6, new EntityAICollectItem(this));
 
-		this.tasks.addTask(7, new EntityAIMoveHome(this));
-		this.setCurrentItemOrArmor(0, this.getStackInSlot(0));
+		tasks.addTask(7, new EntityAIMoveHome(this));
+		setCurrentItemOrArmor(0, getStackInSlot(0));
 
 	}
 
+	@Override
 	protected void dropEquipment(boolean par1, int par2) {
 	}
 
+	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-				.setBaseValue(0.30000001192092896D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed)
+		.setBaseValue(0.30000001192092896D);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth)
-				.setBaseValue(20.0);
+		.setBaseValue(20.0);
 	}
 
+	@Override
 	public boolean isAIEnabled() {
 		return true;
 	}
 
+	@Override
 	public boolean attackEntityAsMob(Entity par1Entity) {
-		this.attackTimer = 10;
-		this.worldObj.setEntityState(this, (byte) 4);
+		attackTimer = 10;
+		worldObj.setEntityState(this, (byte) 4);
 		boolean flag = par1Entity.attackEntityFrom(
-				DamageSource.causeMobDamage(this), (float) (2.5));
+				DamageSource.causeMobDamage(this), (float) 2.5);
 		return flag;
 
 	}
 
+	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
 
-		if (this.maxHealth > 20) {
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
-					.setBaseValue(maxHealth);
+		if (maxHealth > 20) {
+			getEntityAttribute(SharedMonsterAttributes.maxHealth)
+			.setBaseValue(maxHealth);
 
 		}
 
 
-		if (this.attackTimer > 0) {
-			--this.attackTimer;
+		if (attackTimer > 0) {
+			--attackTimer;
 		}
-		if (this.healTimer == 0) {
+		if (healTimer == 0) {
 			healTimer = 60;
-			this.heal(1.0F);
+			heal(1.0F);
 		}
-		if (this.worldObj != null && !this.worldObj.isRemote) {
-			--this.transferCooldown;
+		if (worldObj != null && !worldObj.isRemote) {
+			--transferCooldown;
 			healTimer--;
-			if (!this.isCoolingDown()) {
-				this.setTransferCooldown(0);
-				this.updateAuto();
+			if (!isCoolingDown()) {
+				setTransferCooldown(0);
+				updateAuto();
 			}
 		}
 	}
 
 	public boolean updateAuto() {
-		if (this.worldObj != null && !this.worldObj.isRemote) {
-			if (!this.isCoolingDown()) {
-				boolean flag = this.insertItemToInventory();
+		if (worldObj != null && !worldObj.isRemote) {
+			if (!isCoolingDown()) {
+				boolean flag = insertItemToInventory();
 
 				if (flag) {
-					this.setTransferCooldown(2);
-					this.markDirty();
+					setTransferCooldown(2);
+					markDirty();
 					return true;
 				}
 			}
@@ -144,9 +149,10 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		}
 	}
 
+	@Override
 	protected void collideWithEntity(Entity par1Entity) {
-		if (par1Entity instanceof IMob && this.getRNG().nextInt(20) == 0) {
-			this.setAttackTarget((EntityLivingBase) par1Entity);
+		if (par1Entity instanceof IMob && getRNG().nextInt(20) == 0) {
+			setAttackTarget((EntityLivingBase) par1Entity);
 		}
 
 		super.collideWithEntity(par1Entity);
@@ -157,36 +163,38 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		return null;
 	}
 
+	@Override
 	protected void dropFewItems(boolean par1, int par2) {
-		if (this.getHeldItem() != null) {
-			this.dropItem(this.getHeldItem().getItem(),
-					this.getHeldItem().stackSize);
+		if (getHeldItem() != null) {
+			dropItem(getHeldItem().getItem(),
+					getHeldItem().stackSize);
 		}
 
 	}
 
+	@Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
 		super.writeEntityToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setInteger("X", this.homeX);
-		par1NBTTagCompound.setInteger("Y", this.homeY);
-		par1NBTTagCompound.setInteger("Z", this.homeZ);
-		par1NBTTagCompound.setBoolean("Pickup", this.getPickup());
-		par1NBTTagCompound.setBoolean("Attack", this.getAttackMobs());
-		par1NBTTagCompound.setBoolean("has", this.hasProgram);
-		par1NBTTagCompound.setInteger("Side", this.side);
-		par1NBTTagCompound.setDouble("Range", this.range);
-		par1NBTTagCompound.setDouble("MaxHealth", this.maxHealth);
-		par1NBTTagCompound.setBoolean("rFlame", this.rFlame);
-		par1NBTTagCompound.setBoolean("lFlame", this.lFlame);
+		par1NBTTagCompound.setInteger("X", homeX);
+		par1NBTTagCompound.setInteger("Y", homeY);
+		par1NBTTagCompound.setInteger("Z", homeZ);
+		par1NBTTagCompound.setBoolean("Pickup", getPickup());
+		par1NBTTagCompound.setBoolean("Attack", getAttackMobs());
+		par1NBTTagCompound.setBoolean("has", hasProgram);
+		par1NBTTagCompound.setInteger("Side", side);
+		par1NBTTagCompound.setDouble("Range", range);
+		par1NBTTagCompound.setDouble("MaxHealth", maxHealth);
+		par1NBTTagCompound.setBoolean("rFlame", rFlame);
+		par1NBTTagCompound.setBoolean("lFlame", lFlame);
 		par1NBTTagCompound
-				.setInteger("TransferCooldown", this.transferCooldown);
+		.setInteger("TransferCooldown", transferCooldown);
 		NBTTagList nbttaglist = new NBTTagList();
 
-		for (int i = 0; i < this.autoItemStacks.length; ++i) {
-			if (this.autoItemStacks[i] != null) {
+		for (int i = 0; i < autoItemStacks.length; ++i) {
+			if (autoItemStacks[i] != null) {
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setByte("Slot", (byte) i);
-				this.autoItemStacks[i].writeToNBT(nbttagcompound1);
+				autoItemStacks[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
 		}
@@ -195,30 +203,31 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 
 	}
 
+	@Override
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
 		super.readEntityFromNBT(par1NBTTagCompound);
-		homeX = (par1NBTTagCompound.getInteger("X"));
-		homeY = (par1NBTTagCompound.getInteger("Y"));
-		homeZ = (par1NBTTagCompound.getInteger("Z"));
-		pickup = (par1NBTTagCompound.getBoolean("Pickup"));
-		attackMobs = (par1NBTTagCompound.getBoolean("Attack"));
-		hasProgram = (par1NBTTagCompound.getBoolean("has"));
-		side = (par1NBTTagCompound.getInteger("Side"));
-		range = (par1NBTTagCompound.getDouble("Range"));
-		maxHealth = (par1NBTTagCompound.getDouble("MaxHealth"));
-		rFlame = (par1NBTTagCompound.getBoolean("RightFlame"));
-		lFlame = (par1NBTTagCompound.getBoolean("LeftFlame"));
+		homeX = par1NBTTagCompound.getInteger("X");
+		homeY = par1NBTTagCompound.getInteger("Y");
+		homeZ = par1NBTTagCompound.getInteger("Z");
+		pickup = par1NBTTagCompound.getBoolean("Pickup");
+		attackMobs = par1NBTTagCompound.getBoolean("Attack");
+		hasProgram = par1NBTTagCompound.getBoolean("has");
+		side = par1NBTTagCompound.getInteger("Side");
+		range = par1NBTTagCompound.getDouble("Range");
+		maxHealth = par1NBTTagCompound.getDouble("MaxHealth");
+		rFlame = par1NBTTagCompound.getBoolean("RightFlame");
+		lFlame = par1NBTTagCompound.getBoolean("LeftFlame");
 
-		this.transferCooldown = par1NBTTagCompound
+		transferCooldown = par1NBTTagCompound
 				.getInteger("TransferCooldown");
 		NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items", 10);
-		this.autoItemStacks = new ItemStack[this.getSizeInventory()];
+		autoItemStacks = new ItemStack[getSizeInventory()];
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
 			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			byte b0 = nbttagcompound1.getByte("Slot");
 
-			if (b0 >= 0 && b0 < this.autoItemStacks.length) {
-				this.autoItemStacks[b0] = ItemStack
+			if (b0 >= 0 && b0 < autoItemStacks.length) {
+				autoItemStacks[b0] = ItemStack
 						.loadItemStackFromNBT(nbttagcompound1);
 			}
 		}
@@ -226,39 +235,39 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 	}
 
 	private boolean insertItemToInventory() {
-		IInventory iinventory = this.getOutputInventory();
+		IInventory iinventory = getOutputInventory();
 
 		if (iinventory == null) {
 			return false;
 		}
 
-		if (!(this.getDistance(homeX, homeY, homeZ) < 2.0D))
+		if (!(getDistance(homeX, homeY, homeZ) < 2.0D))
 			return false;
 		else {
-			for (int i = 0; i < this.getSizeInventory(); ++i) {
-				if (this.getStackInSlot(i) != null) {
+			for (int i = 0; i < getSizeInventory(); ++i) {
+				if (getStackInSlot(i) != null) {
 
-					ItemStack itemstack = this.getStackInSlot(i).copy();
+					ItemStack itemstack = getStackInSlot(i).copy();
 					ItemStack itemstack1 = insertStack(iinventory,
-							this.decrStackSize(i, 1), side);
+							decrStackSize(i, 1), side);
 
 					if (itemstack1 == null || itemstack1.stackSize == 0) {
 						iinventory.markDirty();
 						return true;
 					}
 
-					this.setInventorySlotContents(i, itemstack);
+					setInventorySlotContents(i, itemstack);
 				}
 			}
 
 			return false;
 		}
-		
+
 	}
 
 	private IInventory getOutputInventory() {
-		return getInventoryAtLocation(this.worldObj, (double) (this.homeX),
-				(double) (this.homeY), (double) (this.homeZ));
+		return getInventoryAtLocation(worldObj, homeX,
+				homeY, homeZ);
 	}
 
 	public static ItemStack insertStack(IInventory par0IInventory,
@@ -294,19 +303,17 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		ItemStack itemstack1 = par0IInventory.getStackInSlot(par2);
 
 		if (canInsertItemToInventory(par0IInventory, par1ItemStack, par2, par3)) {
-			boolean flag = false;
 			if (itemstack1 == null) {
 				int max = Math.min(par1ItemStack.getMaxStackSize(),
 						par0IInventory.getInventoryStackLimit());
 				if (max >= par1ItemStack.stackSize) {
 					par0IInventory
-							.setInventorySlotContents(par2, par1ItemStack);
+					.setInventorySlotContents(par2, par1ItemStack);
 					par1ItemStack = null;
 				} else {
 					par0IInventory.setInventorySlotContents(par2,
 							par1ItemStack.splitStack(max));
 				}
-				flag = true;
 			} else if (areItemStacksEqualItem(itemstack1, par1ItemStack)) {
 				int max = Math.min(par1ItemStack.getMaxStackSize(),
 						par0IInventory.getInventoryStackLimit());
@@ -315,7 +322,6 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 							- itemstack1.stackSize);
 					par1ItemStack.stackSize -= l;
 					itemstack1.stackSize += l;
-					flag = l > 0;
 				}
 			}
 
@@ -328,42 +334,45 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 			ItemStack par1ItemStack, int par2, int par3) {
 		return !par0IInventory.isItemValidForSlot(par2, par1ItemStack) ? false
 				: !(par0IInventory instanceof ISidedInventory)
-						|| ((ISidedInventory) par0IInventory).canInsertItem(
-								par2, par1ItemStack, par3);
+				|| ((ISidedInventory) par0IInventory).canInsertItem(
+						par2, par1ItemStack, par3);
 	}
 
 	private static boolean areItemStacksEqualItem(ItemStack par0ItemStack,
 			ItemStack par1ItemStack) {
 		return par0ItemStack.getItem() != par1ItemStack.getItem() ? false
-				: (par0ItemStack.getItemDamage() != par1ItemStack
-						.getItemDamage() ? false
-						: (par0ItemStack.stackSize > par0ItemStack
-								.getMaxStackSize() ? false : ItemStack
+				: par0ItemStack.getItemDamage() != par1ItemStack
+				.getItemDamage() ? false
+						: par0ItemStack.stackSize > par0ItemStack
+						.getMaxStackSize() ? false : ItemStack
 								.areItemStackTagsEqual(par0ItemStack,
-										par1ItemStack)));
+										par1ItemStack);
 	}
 
+	@Override
 	public int getSizeInventory() {
-		return this.autoItemStacks.length;
+		return autoItemStacks.length;
 	}
 
+	@Override
 	public ItemStack getStackInSlot(int par1) {
-		return this.autoItemStacks[par1];
+		return autoItemStacks[par1];
 	}
 
+	@Override
 	public ItemStack decrStackSize(int par1, int par2) {
-		if (this.autoItemStacks[par1] != null) {
+		if (autoItemStacks[par1] != null) {
 			ItemStack itemstack;
 
-			if (this.autoItemStacks[par1].stackSize <= par2) {
-				itemstack = this.autoItemStacks[par1];
-				this.autoItemStacks[par1] = null;
+			if (autoItemStacks[par1].stackSize <= par2) {
+				itemstack = autoItemStacks[par1];
+				autoItemStacks[par1] = null;
 				return itemstack;
 			} else {
-				itemstack = this.autoItemStacks[par1].splitStack(par2);
+				itemstack = autoItemStacks[par1].splitStack(par2);
 
-				if (this.autoItemStacks[par1].stackSize == 0) {
-					this.autoItemStacks[par1] = null;
+				if (autoItemStacks[par1].stackSize == 0) {
+					autoItemStacks[par1] = null;
 				}
 
 				return itemstack;
@@ -373,22 +382,24 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		}
 	}
 
+	@Override
 	public ItemStack getStackInSlotOnClosing(int par1) {
-		if (this.autoItemStacks[par1] != null) {
-			ItemStack itemstack = this.autoItemStacks[par1];
-			this.autoItemStacks[par1] = null;
+		if (autoItemStacks[par1] != null) {
+			ItemStack itemstack = autoItemStacks[par1];
+			autoItemStacks[par1] = null;
 			return itemstack;
 		} else {
 			return null;
 		}
 	}
 
+	@Override
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
-		this.autoItemStacks[par1] = par2ItemStack;
+		autoItemStacks[par1] = par2ItemStack;
 
 		if (par2ItemStack != null
-				&& par2ItemStack.stackSize > this.getInventoryStackLimit()) {
-			par2ItemStack.stackSize = this.getInventoryStackLimit();
+				&& par2ItemStack.stackSize > getInventoryStackLimit()) {
+			par2ItemStack.stackSize = getInventoryStackLimit();
 		}
 	}
 
@@ -399,7 +410,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 
 	@Override
 	public void markDirty() {
-		this.setCurrentItemOrArmor(0, this.getStackInSlot(0));
+		setCurrentItemOrArmor(0, getStackInSlot(0));
 
 	}
 
@@ -415,6 +426,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 	public void closeChest() {
 	}
 
+	@Override
 	public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack) {
 		return true;
 	}
@@ -445,7 +457,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 					(Entity) null,
 					AxisAlignedBB.getAABBPool().getAABB(par1, par3, par5,
 							par1 + 1.0D, par3 + 1.0D, par5 + 1.0D),
-					IEntitySelector.selectInventories);
+							IEntitySelector.selectInventories);
 
 			if (list != null && list.size() > 0) {
 				iinventory = (IInventory) list.get(par0World.rand.nextInt(list
@@ -457,11 +469,11 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 	}
 
 	public void setTransferCooldown(int par1) {
-		this.transferCooldown = par1;
+		transferCooldown = par1;
 	}
 
 	public boolean isCoolingDown() {
-		return this.transferCooldown > 0;
+		return transferCooldown > 0;
 	}
 
 	public boolean getPickup() {
@@ -481,7 +493,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 	}
 
 	public void setProgram(boolean has) {
-		this.hasProgram = has;
+		hasProgram = has;
 	}
 
 	public boolean getProgram() {
@@ -510,10 +522,10 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 	public void setProgram(int programID) {
 		switch (programID) {
 		case 1:
-			this.setPickup(true);
+			setPickup(true);
 			break;
 		case 2:
-			this.setAttackMobs(true);
+			setAttackMobs(true);
 			break;
 		}
 		setProgram(true);
@@ -524,6 +536,6 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		maxHealth = f;
 	}
 
-	
+
 
 }

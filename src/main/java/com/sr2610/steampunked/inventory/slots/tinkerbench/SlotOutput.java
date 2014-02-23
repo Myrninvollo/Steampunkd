@@ -10,11 +10,13 @@ public class SlotOutput extends Slot {
 		super(par1iInventory, par2, par3, par4);
 	}
 
+	@Override
 	public boolean isItemValid(ItemStack itemstack) {
 
 		return false;
 	}
 
+	@Override
 	public int getSlotStackLimit() {
 		return 1;
 	}

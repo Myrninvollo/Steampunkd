@@ -20,47 +20,49 @@ public class ContainerSteamFurnace extends Container {
 
 	public ContainerSteamFurnace(InventoryPlayer par1InventoryPlayer,
 			TileEntitySteamFurnace par2TileEntityFurnace) {
-		this.furnace = par2TileEntityFurnace;
-		this.addSlotToContainer(new Slot(par2TileEntityFurnace, 0, 56, 35));
-		this.addSlotToContainer(new SlotFurnace(par1InventoryPlayer.player,
+		furnace = par2TileEntityFurnace;
+		addSlotToContainer(new Slot(par2TileEntityFurnace, 0, 56, 35));
+		addSlotToContainer(new SlotFurnace(par1InventoryPlayer.player,
 				par2TileEntityFurnace, 1, 116, 35));
 		int i;
 
 		for (i = 0; i < 3; ++i) {
-			this.addSlotToContainer(new SlotUpgrade(par2TileEntityFurnace,
+			addSlotToContainer(new SlotUpgrade(par2TileEntityFurnace,
 					i + 2, 8, 18 + i * 18));
 		}
 
 		for (i = 0; i < 3; ++i) {
 			for (int j = 0; j < 9; ++j) {
-				this.addSlotToContainer(new Slot(par1InventoryPlayer, j + i * 9
+				addSlotToContainer(new Slot(par1InventoryPlayer, j + i * 9
 						+ 9, 8 + j * 18, 84 + i * 18));
 			}
 		}
 
 		for (i = 0; i < 9; ++i) {
-			this.addSlotToContainer(new Slot(par1InventoryPlayer, i,
+			addSlotToContainer(new Slot(par1InventoryPlayer, i,
 					8 + i * 18, 142));
 		}
 	}
 
+	@Override
 	public void addCraftingToCrafters(ICrafting par1ICrafting) {
 		super.addCraftingToCrafters(par1ICrafting);
 		par1ICrafting.sendProgressBarUpdate(this, 0,
-				this.furnace.furnaceCookTime);
+				furnace.furnaceCookTime);
 
 	}
 
+	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < this.crafters.size(); ++i) {
-			ICrafting icrafting = (ICrafting) this.crafters.get(i);
+		for (int i = 0; i < crafters.size(); ++i) {
+			ICrafting icrafting = (ICrafting) crafters.get(i);
 
-			if (this.lastCookTime != this.furnace.furnaceCookTime) {
+			if (lastCookTime != furnace.furnaceCookTime) {
 				icrafting.sendProgressBarUpdate(this, 0,
 
-				this.furnace.furnaceCookTime);
+						furnace.furnaceCookTime);
 			}
 			for (i = 0; i < crafters.size(); i++) {
 				furnace.SendGUINetworkData(this, (ICrafting) crafters.get(i));
@@ -68,56 +70,59 @@ public class ContainerSteamFurnace extends Container {
 
 		}
 
-		this.lastCookTime = this.furnace.furnaceCookTime;
+		lastCookTime = furnace.furnaceCookTime;
 
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int par1, int par2) {
 		furnace.GetGUINetworkData(par1, par2);
 		if (par1 == 0) {
-			this.furnace.furnaceCookTime = par2;
+			furnace.furnaceCookTime = par2;
 		}
 
 	}
 
+	@Override
 	public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
-		return this.furnace.isUseableByPlayer(par1EntityPlayer);
+		return furnace.isUseableByPlayer(par1EntityPlayer);
 	}
 
-	
-		 public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
-		    {
-		        ItemStack itemstack = null;
-		        Slot slot = (Slot)this.inventorySlots.get(par2);
 
-		        if (slot != null && slot.getHasStack())
-		        {
-		            ItemStack itemstack1 = slot.getStack();
-		            itemstack = itemstack1.copy();
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+	{
+		ItemStack itemstack = null;
+		Slot slot = (Slot)inventorySlots.get(par2);
 
-		            if (par2 < 1)
-		            {
-		                if (!this.mergeItemStack(itemstack1,1, this.inventorySlots.size(), true))
-		                {
-		                    return null;
-		                }
-		            }
-		            else if (!this.mergeItemStack(itemstack1, 0,1, false))
-		            {
-		                return null;
-		            }
+		if (slot != null && slot.getHasStack())
+		{
+			ItemStack itemstack1 = slot.getStack();
+			itemstack = itemstack1.copy();
 
-		            if (itemstack1.stackSize == 0)
-		            {
-		                slot.putStack((ItemStack)null);
-		            }
-		            else
-		            {
-		                slot.onSlotChanged();
-		            }
-		        }
+			if (par2 < 1)
+			{
+				if (!mergeItemStack(itemstack1,1, inventorySlots.size(), true))
+				{
+					return null;
+				}
+			}
+			else if (!mergeItemStack(itemstack1, 0,1, false))
+			{
+				return null;
+			}
 
-		        return itemstack;
-		    }    
+			if (itemstack1.stackSize == 0)
+			{
+				slot.putStack((ItemStack)null);
+			}
+			else
+			{
+				slot.onSlotChanged();
+			}
+		}
+
+		return itemstack;
+	}
 }

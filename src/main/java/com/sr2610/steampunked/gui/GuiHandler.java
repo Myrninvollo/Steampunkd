@@ -38,7 +38,7 @@ public class GuiHandler implements IGuiHandler {
 		case 4:
 			return new ContainerTinkerBench(
 					(TileEntityTinkerBench) tile_entity, player.inventory);
-			
+
 		case 5:
 			return new ContainerPunchcardmaker(
 					(TileEntityPunchardMaker) tile_entity, player.inventory);

@@ -140,6 +140,7 @@ public class ModelTankAutomoton extends ModelBase {
 
 	}
 
+	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3,
 			float f4, float f5) {
 		f5 = f5 / 2;
@@ -174,25 +175,26 @@ public class ModelTankAutomoton extends ModelBase {
 
 	}
 
+	@Override
 	public void setRotationAngles(float f, float f1, float f2, float f3,
 			float f4, float f5, Entity entity) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
-		this.rightarm.rotateAngleX = MathHelper.cos(f * 0.6662F
+		rightarm.rotateAngleX = MathHelper.cos(f * 0.6662F
 				+ (float) Math.PI)
 				* 2.0F * f1 * 0.5F;
-		this.leftarm.rotateAngleX = MathHelper.cos(f * 0.6662F) * 2.0F * f1
+		leftarm.rotateAngleX = MathHelper.cos(f * 0.6662F) * 2.0F * f1
 				* 0.5F;
-		this.rightarm.rotateAngleZ = 0.0F;
-		this.leftarm.rotateAngleZ = 0.0F;
-		this.leftleg.rotateAngleX = -1.5F * this.getAngle(f, 13.0F) * f1;
-		this.leftThigh.rotateAngleX = -1.5F * this.getAngle(f, 13.0F) * f1;
-		this.rightleg.rotateAngleX = 1.5F * this.getAngle(f, 13.0F) * f1;
-		this.rightThigh.rotateAngleX = 1.5F * this.getAngle(f, 13.0F) * f1;
-		this.leftleg.rotateAngleY = 0.0F;
-		this.leftThigh.rotateAngleY = 0.0F;
-		this.rightleg.rotateAngleY = 0.0F;
-		this.rightThigh.rotateAngleY = 0.0F;
+		rightarm.rotateAngleZ = 0.0F;
+		leftarm.rotateAngleZ = 0.0F;
+		leftleg.rotateAngleX = -1.5F * getAngle(f, 13.0F) * f1;
+		leftThigh.rotateAngleX = -1.5F * getAngle(f, 13.0F) * f1;
+		rightleg.rotateAngleX = 1.5F * getAngle(f, 13.0F) * f1;
+		rightThigh.rotateAngleX = 1.5F * getAngle(f, 13.0F) * f1;
+		leftleg.rotateAngleY = 0.0F;
+		leftThigh.rotateAngleY = 0.0F;
+		rightleg.rotateAngleY = 0.0F;
+		rightThigh.rotateAngleY = 0.0F;
 
 	}
 

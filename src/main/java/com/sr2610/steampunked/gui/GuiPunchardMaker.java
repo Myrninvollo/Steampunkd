@@ -1,7 +1,6 @@
 package com.sr2610.steampunked.gui;
 
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -19,15 +18,13 @@ import com.sr2610.steampunked.tileentities.TileEntityPunchardMaker;
 
 public class GuiPunchardMaker extends GuiMachine {
 
-	private IInventory player_inventory;
 	private TileEntityPunchardMaker inventory;
 
 	private static final ResourceLocation GUI_TEXTURE = new ResourceLocation(
 			Reference.ModID, "textures/gui/maker.png");
 
 	public GuiPunchardMaker(TileEntityPunchardMaker cs, IInventory player_inv) {
-		super(new ContainerPunchcardmaker(cs, (InventoryPlayer) player_inv));
-		player_inventory = player_inv;
+		super(new ContainerPunchcardmaker(cs, player_inv));
 		ySize = 166;
 		inventory = cs;
 	}
@@ -40,14 +37,13 @@ public class GuiPunchardMaker extends GuiMachine {
 	@Override
 	public void initGui() {
 		super.initGui();
-		int window_x = (width - xSize) / 2;
-		int window_y = (height - ySize) / 2;
 		buttonList.clear();
 		buttonList.add(new GuiButton(1, width / 2 + 40, height / 2 - 35, 40,
 				20, "Stamp"));
 
 	}
 
+	@Override
 	public void actionPerformed(GuiButton button) {
 		if (button.id == 1) {
 			ItemStack is = inventory.getStackInSlot(0);
@@ -56,16 +52,16 @@ public class GuiPunchardMaker extends GuiMachine {
 			ItemStack is4 = inventory.getStackInSlot(3);
 			if(is4!=null && is4.getItem()==Items.dye && is4.getItemDamage()==0){
 
-			if (is != null && is.getItem() instanceof ItemPunchcard
-					&& is.getItemDamage() == 0 && is3 == null && is2 != null
-					&& is2.getItem() instanceof ItemPunchcard
-					&& is2.getItemDamage() >= 11) {
-				ItemStack stack = new ItemStack(ModItems.punchcard, 1,
-						is2.getItemDamage() - 10);
-				inventory.setInventorySlotContents(2, stack);
-				updateServer(stack);
-				inventory.markDirty();
-			}}
+				if (is != null && is.getItem() instanceof ItemPunchcard
+						&& is.getItemDamage() == 0 && is3 == null && is2 != null
+						&& is2.getItem() instanceof ItemPunchcard
+						&& is2.getItemDamage() >= 11) {
+					ItemStack stack = new ItemStack(ModItems.punchcard, 1,
+							is2.getItemDamage() - 10);
+					inventory.setInventorySlotContents(2, stack);
+					updateServer(stack);
+					inventory.markDirty();
+				}}
 		}
 	}
 
@@ -80,7 +76,7 @@ public class GuiPunchardMaker extends GuiMachine {
 		super.drawGuiContainerForegroundLayer(mouse_x, mouse_y);
 
 		fontRendererObj.drawString("Punchcard Maker", 5, 6, 0x404040);
-		fontRendererObj.drawString("Inventory", 8, (ySize - 96) + 2, 0x404040);
+		fontRendererObj.drawString("Inventory", 8, ySize - 96 + 2, 0x404040);
 	}
 
 	@Override

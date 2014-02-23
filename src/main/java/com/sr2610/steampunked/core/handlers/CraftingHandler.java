@@ -10,7 +10,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public final class CraftingHandler {
 
 	public static void init() {
-initSmelting();
+		initSmelting();
 	}
 
 	public static void initSmelting() {

@@ -34,7 +34,7 @@ public class BlockMod extends Block {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		this.blockIcon = par1IconRegister.registerIcon(Reference.ModID + ":"
+		blockIcon = par1IconRegister.registerIcon(Reference.ModID + ":"
 				+ textureName);
 
 	}

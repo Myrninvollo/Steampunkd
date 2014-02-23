@@ -26,6 +26,7 @@ public class ItemPunchcard extends Item {
 		setHasSubtypes(true);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs,
 			List par3List) {
@@ -37,11 +38,13 @@ public class ItemPunchcard extends Item {
 		}
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister registry) {
 		itemIcon = registry.registerIcon(Reference.ModID + ":punchcard");
 	}
 
+	@Override
 	public boolean itemInteractionForEntity(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase) {
 
@@ -63,8 +66,8 @@ public class ItemPunchcard extends Item {
 			} else {
 				if (!par2EntityPlayer.worldObj.isRemote)
 					par2EntityPlayer
-							.addChatComponentMessage(new ChatComponentTranslation(
-								(StatCollector.translateToLocal("steampunked.oneProgram.name"))));
+					.addChatComponentMessage(new ChatComponentTranslation(
+							StatCollector.translateToLocal("steampunked.oneProgram.name")));
 				return false;
 			}
 
@@ -73,13 +76,14 @@ public class ItemPunchcard extends Item {
 		else {
 			if (!par2EntityPlayer.worldObj.isRemote)
 				par2EntityPlayer
-						.addChatComponentMessage(new ChatComponentTranslation(StatCollector.translateToLocal("steampunked.onlyAutomaton.name")
-								));
+				.addChatComponentMessage(new ChatComponentTranslation(StatCollector.translateToLocal("steampunked.onlyAutomaton.name")
+						));
 			return false;
 		}
 		return false;
 	}
 
+	@Override
 	public String getUnlocalizedName(ItemStack par1ItemStack) {
 		int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 20);
 		return super.getUnlocalizedName() + "." + i;

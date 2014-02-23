@@ -1,6 +1,5 @@
 package com.sr2610.steampunked.client.model;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -141,6 +140,7 @@ public class ModelAutomoton extends ModelBase {
 
 	}
 
+	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3,
 			float f4, float f5) {
 		f5 = f5 / 2;
@@ -167,18 +167,19 @@ public class ModelAutomoton extends ModelBase {
 
 	}
 
+	@Override
 	public void setRotationAngles(float f, float f1, float f2, float f3,
 			float f4, float f5, Entity entity) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
-		this.leftleg.rotateAngleX = -1.5F * this.getAngle(f, 13.0F) * f1;
-		this.leftThigh.rotateAngleX = -1.5F * this.getAngle(f, 13.0F) * f1;
-		this.rightleg.rotateAngleX = 1.5F * this.getAngle(f, 13.0F) * f1;
-		this.rightThigh.rotateAngleX = 1.5F * this.getAngle(f, 13.0F) * f1;
-		this.leftleg.rotateAngleY = 0.0F;
-		this.leftThigh.rotateAngleY = 0.0F;
-		this.rightleg.rotateAngleY = 0.0F;
-		this.rightThigh.rotateAngleY = 0.0F;
+		leftleg.rotateAngleX = -1.5F * getAngle(f, 13.0F) * f1;
+		leftThigh.rotateAngleX = -1.5F * getAngle(f, 13.0F) * f1;
+		rightleg.rotateAngleX = 1.5F * getAngle(f, 13.0F) * f1;
+		rightThigh.rotateAngleX = 1.5F * getAngle(f, 13.0F) * f1;
+		leftleg.rotateAngleY = 0.0F;
+		leftThigh.rotateAngleY = 0.0F;
+		rightleg.rotateAngleY = 0.0F;
+		rightThigh.rotateAngleY = 0.0F;
 
 	}
 
@@ -187,26 +188,27 @@ public class ModelAutomoton extends ModelBase {
 				/ (par2 * 0.25F);
 	}
 
+	@Override
 	public void setLivingAnimations(EntityLivingBase par1EntityLivingBase,
 			float par2, float par3, float par4) {
 		EntityAutomaton entity = (EntityAutomaton) par1EntityLivingBase;
 		hideParts(entity);
 
 		if (entity.getHeldItem() != null) {
-			this.rightarm.rotateAngleX = -0.6F;
-			this.rightarm.rotateAngleY = 0.0F;
-			this.leftarm.rotateAngleX = -0.6F;
-			this.leftarm.rotateAngleY = 0.0F;
+			rightarm.rotateAngleX = -0.6F;
+			rightarm.rotateAngleY = 0.0F;
+			leftarm.rotateAngleX = -0.6F;
+			leftarm.rotateAngleY = 0.0F;
 
 		} else {
 
-			this.rightarm.rotateAngleX = MathHelper.cos(par2 * 0.6662F
+			rightarm.rotateAngleX = MathHelper.cos(par2 * 0.6662F
 					+ (float) Math.PI)
 					* 2.0F * par3 * 0.5F;
-			this.leftarm.rotateAngleX = MathHelper.cos(par2 * 0.6662F) * 2.0F
+			leftarm.rotateAngleX = MathHelper.cos(par2 * 0.6662F) * 2.0F
 					* par3 * 0.5F;
-			this.rightarm.rotateAngleZ = 0.0F;
-			this.leftarm.rotateAngleZ = 0.0F;
+			rightarm.rotateAngleZ = 0.0F;
+			leftarm.rotateAngleZ = 0.0F;
 		}
 	}
 

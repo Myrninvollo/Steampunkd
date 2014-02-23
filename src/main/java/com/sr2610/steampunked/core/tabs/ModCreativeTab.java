@@ -10,8 +10,6 @@ import net.minecraft.item.ItemStack;
 import com.sr2610.steampunked.blocks.ModBlocks;
 import com.sr2610.steampunked.items.ModItems;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
-
 public class ModCreativeTab extends CreativeTabs {
 
 	public static ModCreativeTab INSTANCE = new ModCreativeTab();
@@ -64,7 +62,7 @@ public class ModCreativeTab extends CreativeTabs {
 	}
 
 	private void addBlock(Block block) {
-		block.getSubBlocks((Item.getItemFromBlock(block)), this, list);
+		block.getSubBlocks(Item.getItemFromBlock(block), this, list);
 	}
 
 	@Override

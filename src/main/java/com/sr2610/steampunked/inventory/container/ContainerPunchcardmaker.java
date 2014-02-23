@@ -6,19 +6,11 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import com.sr2610.steampunked.inventory.slots.SlotArmor;
 import com.sr2610.steampunked.tileentities.TileEntityPunchardMaker;
 
 public class ContainerPunchcardmaker extends Container {
 
 	private TileEntityPunchardMaker te_injector;
-	private int lastSteam;
-
-	private static final int SLOTS_TE = 0;
-	private static final int SLOTS_TE_SIZE = 5;
-	private static final int SLOTS_INVENTORY = 5;
-	private static final int SLOTS_HOTBAR = 5 + 3 * 9;
-
 	private static final int SLOT_INVENTORY_X = 8;
 	private static final int SLOT_INVENTORY_Y = 84;
 
@@ -31,10 +23,10 @@ public class ContainerPunchcardmaker extends Container {
 		te_injector.openInventory();
 		int i, j;
 
-		this.addSlotToContainer(new Slot(injector, 0, 80, 16));
-		this.addSlotToContainer(new Slot(injector, 1, 80, 35));
-		this.addSlotToContainer(new Slot(injector, 2, 80, 54));
-		this.addSlotToContainer(new Slot(injector, 3, 33, 29));
+		addSlotToContainer(new Slot(injector, 0, 80, 16));
+		addSlotToContainer(new Slot(injector, 1, 80, 35));
+		addSlotToContainer(new Slot(injector, 2, 80, 54));
+		addSlotToContainer(new Slot(injector, 3, 33, 29));
 
 
 		for (i = 0; i < 3; ++i) {
@@ -49,10 +41,12 @@ public class ContainerPunchcardmaker extends Container {
 		}
 	}
 
+	@Override
 	public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
 		return te_injector.isUseableByPlayer(par1EntityPlayer);
 	}
 
+	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
 		return null;
 	}

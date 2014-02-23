@@ -22,7 +22,7 @@ public class BlockPunchcardMaker extends BlockContainer{
 		super(material);
 	}
 
-	
+
 	@Override
 	public TileEntity createNewTileEntity(World world, int var2) {
 		return new TileEntityPunchardMaker();
@@ -90,6 +90,7 @@ public class BlockPunchcardMaker extends BlockContainer{
 		}
 	}
 
+	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
 		super.onBlockAdded(par1World, par2, par3, par4);
 	}

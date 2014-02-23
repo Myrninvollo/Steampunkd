@@ -24,16 +24,13 @@ public class RenderAutomoton extends RenderLiving {
 	private static final ResourceLocation textures = new ResourceLocation(
 			"steampunked:textures/models/Automoton.png");
 
-	private final ModelAutomoton model;
-
 	public RenderAutomoton() {
 		super(new ModelAutomoton(), 0.25F);
-		this.model = (ModelAutomoton) super	.mainModel;
 	}
 
 	public void doRenderAutomoton(EntityAutomaton par1EntityAutomoton,
 			double par2, double par4, double par6, float par8, float par9) {
-		
+
 		super.doRender(par1EntityAutomoton, par2, par4, par6, par8, par9);
 	}
 
@@ -44,90 +41,91 @@ public class RenderAutomoton extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		return this.getAutomotonTextures((EntityAutomaton) entity);
+		return getAutomotonTextures((EntityAutomaton) entity);
 	}
-	
-	   protected void renderEquippedItems(EntityAutomaton par1EntityWitch, float par2)
-	    {
-	        GL11.glColor3f(1.0F, 1.0F, 1.0F);
-	        super.renderEquippedItems(par1EntityWitch, par2);
-	        ItemStack itemstack = par1EntityWitch.getHeldItem();
 
-	        if (itemstack != null)
-	        {
-	            GL11.glPushMatrix();
-	            float f1;
+	protected void renderEquippedItems(EntityAutomaton par1EntityWitch, float par2)
+	{
+		GL11.glColor3f(1.0F, 1.0F, 1.0F);
+		super.renderEquippedItems(par1EntityWitch, par2);
+		ItemStack itemstack = par1EntityWitch.getHeldItem();
 
-
-	            GL11.glTranslatef(-0.0625F, 0.53125F, 0.21875F);
-	            if (itemstack.getItem() instanceof ItemBlock && RenderBlocks.renderItemIn3d(Block.getBlockFromItem(itemstack.getItem()).getRenderType()))
-	            {
-	                f1 = 0.5F;
-	                GL11.glTranslatef(0.12F, 0.4F, -0.4F);
-	                f1 *= 0.75F;
-	                GL11.glRotatef(20.0F, 1.0F, 0.0F, 0.0F);
-	                GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
-	                GL11.glScalef(f1/2, -f1/2, f1/2);
-	            }
-	            else if (itemstack.getItem() == Items.bow)
-	            {
-	                f1 = 0.625F;
-	                GL11.glTranslatef(0.12F, 0.4F, -0.4F);
-	                GL11.glRotatef(-20.0F, 0.0F, 1.0F, 0.0F);
-	                GL11.glScalef(f1/2, -f1/2, f1/2);
-	                GL11.glRotatef(-100.0F, 1.0F, 0.0F, 0.0F);
-	                GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
-	            }
-	            else if (itemstack.getItem().isFull3D())
-	            {
-	                f1 = 0.625F;
-
-	                if (itemstack.getItem().shouldRotateAroundWhenRendering())
-	                {
-	                    GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-		                GL11.glTranslatef(0.12F, 0.4F, -0.4F);
-	                }
-
-	                this.func_82410_b();
-	                GL11.glScalef(f1/2, -f1/2, f1/2);
-	                GL11.glRotatef(-100.0F, 1.0F, 0.0F, 0.0F);
-	                GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
-	            }
-	            else
-	            {
-	                f1 = 0.375F;
-	                GL11.glTranslatef(0.12F, 0.4F, -0.4F);
-	                GL11.glScalef(f1/2, f1/2, f1/2);
-	                GL11.glRotatef(60.0F, 0.0F, 0.0F, 1.0F);
-	                GL11.glRotatef(-90.0F, 1.0F, 0.0F, 0.0F);
-	                GL11.glRotatef(20.0F, 0.0F, 0.0F, 1.0F);
-	            }
-
-	            GL11.glRotatef(-15.0F, 1.0F, 0.0F, 0.0F);
-	            GL11.glRotatef(40.0F, 0.0F, 0.0F, 1.0F);
-	            this.renderManager.itemRenderer.renderItem(par1EntityWitch, itemstack, 0);
-
-	            if (itemstack.getItem().requiresMultipleRenderPasses())
-	            {
-	                this.renderManager.itemRenderer.renderItem(par1EntityWitch, itemstack, 1);
-	            }
-
-	            GL11.glPopMatrix();
-	        }
-	    }
-	   
-	   protected void func_82410_b()
-	    {
-	        GL11.glTranslatef(0.0F, 0.1875F, 0.0F);
-	    }
+		if (itemstack != null)
+		{
+			GL11.glPushMatrix();
+			float f1;
 
 
-	 
-	    protected void renderEquippedItems(EntityLivingBase par1EntityLivingBase, float par2)
-	    {
-	        this.renderEquippedItems((EntityAutomaton)par1EntityLivingBase, par2);
-	    }
-	    
-	 
-	 
+			GL11.glTranslatef(-0.0625F, 0.53125F, 0.21875F);
+			if (itemstack.getItem() instanceof ItemBlock && RenderBlocks.renderItemIn3d(Block.getBlockFromItem(itemstack.getItem()).getRenderType()))
+			{
+				f1 = 0.5F;
+				GL11.glTranslatef(0.12F, 0.4F, -0.4F);
+				f1 *= 0.75F;
+				GL11.glRotatef(20.0F, 1.0F, 0.0F, 0.0F);
+				GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
+				GL11.glScalef(f1/2, -f1/2, f1/2);
+			}
+			else if (itemstack.getItem() == Items.bow)
+			{
+				f1 = 0.625F;
+				GL11.glTranslatef(0.12F, 0.4F, -0.4F);
+				GL11.glRotatef(-20.0F, 0.0F, 1.0F, 0.0F);
+				GL11.glScalef(f1/2, -f1/2, f1/2);
+				GL11.glRotatef(-100.0F, 1.0F, 0.0F, 0.0F);
+				GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
+			}
+			else if (itemstack.getItem().isFull3D())
+			{
+				f1 = 0.625F;
+
+				if (itemstack.getItem().shouldRotateAroundWhenRendering())
+				{
+					GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
+					GL11.glTranslatef(0.12F, 0.4F, -0.4F);
+				}
+
+				func_82410_b();
+				GL11.glScalef(f1/2, -f1/2, f1/2);
+				GL11.glRotatef(-100.0F, 1.0F, 0.0F, 0.0F);
+				GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
+			}
+			else
+			{
+				f1 = 0.375F;
+				GL11.glTranslatef(0.12F, 0.4F, -0.4F);
+				GL11.glScalef(f1/2, f1/2, f1/2);
+				GL11.glRotatef(60.0F, 0.0F, 0.0F, 1.0F);
+				GL11.glRotatef(-90.0F, 1.0F, 0.0F, 0.0F);
+				GL11.glRotatef(20.0F, 0.0F, 0.0F, 1.0F);
+			}
+
+			GL11.glRotatef(-15.0F, 1.0F, 0.0F, 0.0F);
+			GL11.glRotatef(40.0F, 0.0F, 0.0F, 1.0F);
+			renderManager.itemRenderer.renderItem(par1EntityWitch, itemstack, 0);
+
+			if (itemstack.getItem().requiresMultipleRenderPasses())
+			{
+				renderManager.itemRenderer.renderItem(par1EntityWitch, itemstack, 1);
+			}
+
+			GL11.glPopMatrix();
+		}
+	}
+
+	protected void func_82410_b()
+	{
+		GL11.glTranslatef(0.0F, 0.1875F, 0.0F);
+	}
+
+
+
+	@Override
+	protected void renderEquippedItems(EntityLivingBase par1EntityLivingBase, float par2)
+	{
+		this.renderEquippedItems((EntityAutomaton)par1EntityLivingBase, par2);
+	}
+
+
+
 }

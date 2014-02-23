@@ -6,19 +6,19 @@ import net.minecraft.world.World;
 public class CommonProxy {
 	public ModelBiped getArmorModel(int id){
 		return null;
-		}
+	}
 
 	public void registerTickHandlers() {
 
 	}
-	
-	  public void registerRenderInformation() {}
 
-		
+	public void registerRenderInformation() {}
 
-public long getTicks(World worldObj) {
-	return worldObj.getTotalWorldTime();
-}
+
+
+	public long getTicks(World worldObj) {
+		return worldObj.getTotalWorldTime();
+	}
 
 }
 

@@ -11,58 +11,60 @@ import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
 
 public class EntityAIHurt extends EntityAITarget
 {
-    boolean entityCallsForHelp;
-    private int field_142052_b;
-    private EntityAutomaton auto = null;
+	boolean entityCallsForHelp;
+	private int field_142052_b;
+	private EntityAutomaton auto = null;
 
-    public EntityAIHurt(EntityCreature par1EntityCreature, boolean par2)
-    {
-        super(par1EntityCreature, false);
-        this.entityCallsForHelp = par2;
-        this.setMutexBits(1);
-        this.auto = (EntityAutomaton) this.taskOwner;
-    }
+	public EntityAIHurt(EntityCreature par1EntityCreature, boolean par2)
+	{
+		super(par1EntityCreature, false);
+		entityCallsForHelp = par2;
+		setMutexBits(1);
+		auto = (EntityAutomaton) taskOwner;
+	}
 
-    /**
-     * Returns whether the EntityAIBase should begin execution.
-     */
-    public boolean shouldExecute()
-    {
-    	if(this.taskOwner instanceof EntityAutomaton){
-    		if(auto.getAttackMobs() == true){
-    		 int i = this.taskOwner.func_142015_aE();
-            return i != this.field_142052_b && this.isSuitableTarget(this.taskOwner.getAITarget(), false);
-    	}
-    	}
+	/**
+	 * Returns whether the EntityAIBase should begin execution.
+	 */
+	@Override
+	public boolean shouldExecute()
+	{
+		if(taskOwner instanceof EntityAutomaton){
+			if(auto.getAttackMobs() == true){
+				int i = taskOwner.func_142015_aE();
+				return i != field_142052_b && isSuitableTarget(taskOwner.getAITarget(), false);
+			}
+		}
 		return false;
-       
-    }
 
-    /**
-     * Execute a one shot task or start executing a continuous task
-     */
-    public void startExecuting()
-    {
-        this.taskOwner.setAttackTarget(this.taskOwner.getAITarget());
-        this.field_142052_b = this.taskOwner.func_142015_aE();
+	}
 
-        if (this.entityCallsForHelp)
-        {
-            double d0 = this.getTargetDistance();
-            List list = this.taskOwner.worldObj.getEntitiesWithinAABB(this.taskOwner.getClass(), AxisAlignedBB.getAABBPool().getAABB(this.taskOwner.posX, this.taskOwner.posY, this.taskOwner.posZ, this.taskOwner.posX + 1.0D, this.taskOwner.posY + 1.0D, this.taskOwner.posZ + 1.0D).expand(d0, 10.0D, d0));
-            Iterator iterator = list.iterator();
+	/**
+	 * Execute a one shot task or start executing a continuous task
+	 */
+	@Override
+	public void startExecuting()
+	{
+		taskOwner.setAttackTarget(taskOwner.getAITarget());
+		field_142052_b = taskOwner.func_142015_aE();
 
-            while (iterator.hasNext())
-            {
-                EntityCreature entitycreature = (EntityCreature)iterator.next();
+		if (entityCallsForHelp)
+		{
+			double d0 = getTargetDistance();
+			List list = taskOwner.worldObj.getEntitiesWithinAABB(taskOwner.getClass(), AxisAlignedBB.getAABBPool().getAABB(taskOwner.posX, taskOwner.posY, taskOwner.posZ, taskOwner.posX + 1.0D, taskOwner.posY + 1.0D, taskOwner.posZ + 1.0D).expand(d0, 10.0D, d0));
+			Iterator iterator = list.iterator();
 
-                if (this.taskOwner != entitycreature && entitycreature.getAttackTarget() == null && !entitycreature.isOnSameTeam(this.taskOwner.getAITarget()))
-                {
-                    entitycreature.setAttackTarget(this.taskOwner.getAITarget());
-                }
-            }
-        }
+			while (iterator.hasNext())
+			{
+				EntityCreature entitycreature = (EntityCreature)iterator.next();
 
-        super.startExecuting();
-    }
+				if (taskOwner != entitycreature && entitycreature.getAttackTarget() == null && !entitycreature.isOnSameTeam(taskOwner.getAITarget()))
+				{
+					entitycreature.setAttackTarget(taskOwner.getAITarget());
+				}
+			}
+		}
+
+		super.startExecuting();
+	}
 }

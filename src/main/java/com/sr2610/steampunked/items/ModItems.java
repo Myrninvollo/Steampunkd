@@ -33,8 +33,8 @@ public final class ModItems {
 
 	public static Item copperIngot;
 	public static Item tinIngot;
-	
-	
+
+
 	public static Item basicCore;
 	public static Item mediumCore;
 	public static Item advancedCore;
@@ -58,10 +58,10 @@ public final class ModItems {
 		namePlate = new ItemNamePlate().setUnlocalizedName(LibNames.NAMEPLATE);
 
 		spawner = new ItemAutomotonSpawner()
-				.setUnlocalizedName(LibNames.SPAWNER);
+		.setUnlocalizedName(LibNames.SPAWNER);
 
 		AutomatonUpgrade = new ItemAutomatonUpgrade()
-				.setUnlocalizedName(LibNames.UPGRADE);
+		.setUnlocalizedName(LibNames.UPGRADE);
 		punchcard = new ItemPunchcard().setUnlocalizedName(LibNames.PUNCHCARD);
 		chasis = new ItemChasis().setUnlocalizedName(LibNames.CHASIS);
 
@@ -77,8 +77,8 @@ public final class ModItems {
 				"diamond").setUnlocalizedName(LibNames.SABERDIAMOND);
 
 		copperIngot = new ItemMod("ingotCopper")
-				.setUnlocalizedName(LibNames.COPPERINGOT);
-		
+		.setUnlocalizedName(LibNames.COPPERINGOT);
+
 		template = new ItemMod("template").setUnlocalizedName(LibNames.TEMPLATE);
 		tinIngot = new ItemMod("ingotTin").setUnlocalizedName(LibNames.TININGOT);
 		basicCore = new ItemCore("coreBasic").setUnlocalizedName(LibNames.COREBASIC).setMaxStackSize(1);
@@ -112,9 +112,9 @@ public final class ModItems {
 
 		GameRegistry.registerItem(copperIngot, LibNames.COPPERINGOT,Reference.ModID);
 		GameRegistry.registerItem(tinIngot, LibNames.TININGOT,Reference.ModID);
-		
+
 		GameRegistry.registerItem(template, LibNames.TEMPLATE,Reference.ModID);
-		
+
 		GameRegistry.registerItem(basicCore, LibNames.COREBASIC,Reference.ModID);
 		GameRegistry.registerItem(mediumCore, LibNames.COREMEDIUM,Reference.ModID);
 		GameRegistry.registerItem(advancedCore, LibNames.COREADVANCED,Reference.ModID);

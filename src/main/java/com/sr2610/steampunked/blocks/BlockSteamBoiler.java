@@ -14,7 +14,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.sr2610.steampunked.Steampunked;
-import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.tileentities.TileEntitySteamBoiler;
 
 public class BlockSteamBoiler extends BlockContainer {
@@ -23,8 +22,8 @@ public class BlockSteamBoiler extends BlockContainer {
 		super(par2Material);
 	}
 
-	
-	
+
+
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
@@ -88,11 +87,12 @@ public class BlockSteamBoiler extends BlockContainer {
 		}
 	}
 
+	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
 		super.onBlockAdded(par1World, par2, par3, par4);
 	}
 
-	
+
 
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {

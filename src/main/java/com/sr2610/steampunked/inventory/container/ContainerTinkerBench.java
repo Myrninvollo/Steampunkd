@@ -24,50 +24,52 @@ public class ContainerTinkerBench extends Container {
 	public ContainerTinkerBench(TileEntityTinkerBench cs, IInventory player_inv) {
 		int i;
 		int j;
-		this.tinkerTable = cs;
+		tinkerTable = cs;
 
-		this.addSlotToContainer(new SlotChasis(cs, 0, 16, 24));
-		this.addSlotToContainer(new SlotCore(cs, 1, 16, 49));
+		addSlotToContainer(new SlotChasis(cs, 0, 16, 24));
+		addSlotToContainer(new SlotCore(cs, 1, 16, 49));
 
-		this.addSlotToContainer(new SlotUpgrade(cs, 2, 16, 78));
-		this.addSlotToContainer(new SlotUpgrade(cs, 3, 34, 78));
-		this.addSlotToContainer(new SlotUpgrade(cs, 4, 52, 78));
-		this.addSlotToContainer(new SlotUpgrade(cs, 5, 16, 96));
-		this.addSlotToContainer(new SlotUpgrade(cs, 6, 34, 96));
+		addSlotToContainer(new SlotUpgrade(cs, 2, 16, 78));
+		addSlotToContainer(new SlotUpgrade(cs, 3, 34, 78));
+		addSlotToContainer(new SlotUpgrade(cs, 4, 52, 78));
+		addSlotToContainer(new SlotUpgrade(cs, 5, 16, 96));
+		addSlotToContainer(new SlotUpgrade(cs, 6, 34, 96));
 
-		this.addSlotToContainer(new SlotUpgrade(cs, 7, 52, 96));
+		addSlotToContainer(new SlotUpgrade(cs, 7, 52, 96));
 
-		this.addSlotToContainer(new SlotOutput(cs, 8, 178, 103));
+		addSlotToContainer(new SlotOutput(cs, 8, 178, 103));
 
 		for (i = 0; i < 3; ++i) {
 			for (j = 0; j < 9; ++j) {
-				this.addSlotToContainer(new Slot(player_inv, j + i * 9 + 9,
+				addSlotToContainer(new Slot(player_inv, j + i * 9 + 9,
 						28 + j * 18, 135 + i * 18));
 			}
 		}
 
 		for (i = 0; i < 9; ++i) {
-			this.addSlotToContainer(new Slot(player_inv, i, 28 + i * 18, 193));
+			addSlotToContainer(new Slot(player_inv, i, 28 + i * 18, 193));
 		}
 	}
 
+	@Override
 	public void addCraftingToCrafters(ICrafting par1ICrafting) {
 		super.addCraftingToCrafters(par1ICrafting);
 		par1ICrafting.sendProgressBarUpdate(this, 0,
-				this.tinkerTable.craftProgress);
+				tinkerTable.craftProgress);
 
 	}
 
+	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < this.crafters.size(); ++i) {
-			ICrafting icrafting = (ICrafting) this.crafters.get(i);
+		for (int i = 0; i < crafters.size(); ++i) {
+			ICrafting icrafting = (ICrafting) crafters.get(i);
 
-			if (this.lastCraftProgress != this.tinkerTable.craftProgress) {
+			if (lastCraftProgress != tinkerTable.craftProgress) {
 				icrafting.sendProgressBarUpdate(this, 0,
 
-				this.tinkerTable.craftProgress);
+						tinkerTable.craftProgress);
 			}
 			for (i = 0; i < crafters.size(); i++) {
 				tinkerTable.SendGUINetworkData(this,
@@ -76,37 +78,40 @@ public class ContainerTinkerBench extends Container {
 
 		}
 
-		this.lastCraftProgress = this.tinkerTable.craftProgress;
+		lastCraftProgress = tinkerTable.craftProgress;
 
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int par1, int par2) {
 		tinkerTable.GetGUINetworkData(par1, par2);
 		if (par1 == 0) {
-			this.tinkerTable.craftProgress = par2;
+			tinkerTable.craftProgress = par2;
 		}
 
 	}
 
+	@Override
 	public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
-		return this.tinkerTable.isUseableByPlayer(par1EntityPlayer);
+		return tinkerTable.isUseableByPlayer(par1EntityPlayer);
 	}
 
+	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
 		ItemStack itemstack = null;
-		Slot slot = (Slot) this.inventorySlots.get(par2);
+		Slot slot = (Slot) inventorySlots.get(par2);
 
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
 			if (par2 < 8) {
-				if (!this.mergeItemStack(itemstack1, 8,
-						this.inventorySlots.size(), true)) {
+				if (!mergeItemStack(itemstack1, 8,
+						inventorySlots.size(), true)) {
 					return null;
 				}
-			} else if (!this.mergeItemStack(itemstack1, 0, 8, false)) {
+			} else if (!mergeItemStack(itemstack1, 0, 8, false)) {
 				return null;
 			}
 

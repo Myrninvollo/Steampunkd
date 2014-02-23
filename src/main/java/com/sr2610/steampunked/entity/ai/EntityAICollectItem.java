@@ -17,17 +17,17 @@ public class EntityAICollectItem extends EntityAIBase {
 	private PathNavigate pathFinder;
 
 	private EntityItem targetItem = null;
-	
+
 	private double range = 5.0;
 
 
 	public EntityAICollectItem(EntityAutomaton auto) {
 		this.auto = auto;
-		this.pathFinder = auto.getNavigator();
+		pathFinder = auto.getNavigator();
 		setMutexBits(3);
 	}
 
-	
+
 	@Override
 	public boolean shouldExecute() {
 		range=auto.range;
@@ -43,10 +43,10 @@ public class EntityAICollectItem extends EntityAIBase {
 				List<EntityItem> items = auto.worldObj.getEntitiesWithinAABB(
 						EntityItem.class,
 						AxisAlignedBB
-								.getAABBPool()
-								.getAABB(auto.posX - 1, auto.posY - 1,
-										auto.posZ - 1, auto.posX + 1,
-										auto.posY + 1, auto.posZ + 1)
+						.getAABBPool()
+						.getAABB(auto.posX - 1, auto.posY - 1,
+								auto.posZ - 1, auto.posX + 1,
+								auto.posY + 1, auto.posZ + 1)
 								.expand(range, range, range));
 				EntityItem closest = null;
 				double closestDistance = Double.MAX_VALUE;
@@ -97,7 +97,6 @@ public class EntityAICollectItem extends EntityAIBase {
 			if (targetItem != null
 					&& auto.getDistanceToEntity(targetItem) < 1.0) {
 				ItemStack stack = targetItem.getEntityItem();
-				int preEatSize = stack.stackSize;
 				auto.setInventorySlotContents(0, stack);
 				auto.markDirty();
 				targetItem.setDead();

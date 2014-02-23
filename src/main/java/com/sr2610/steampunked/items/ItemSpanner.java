@@ -72,7 +72,7 @@ public class ItemSpanner extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister par1IconRegister) {
-		this.itemIcon = par1IconRegister.registerIcon("steampunked:spanner");
+		itemIcon = par1IconRegister.registerIcon("steampunked:spanner");
 	}
 
 }

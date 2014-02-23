@@ -23,13 +23,14 @@ public class ItemSteamBucket extends Item implements IFluidContainerItem {
 
 	public ItemSteamBucket() {
 		super();
-		this.maxStackSize = 1;
+		maxStackSize = 1;
 
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister par1IconRegister) {
-		this.itemIcon = par1IconRegister
+		itemIcon = par1IconRegister
 				.registerIcon("steampunked:steam_bucket");
 	}
 
@@ -53,12 +54,12 @@ public class ItemSteamBucket extends Item implements IFluidContainerItem {
 		return null;
 	}
 
+	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer) {
 		boolean flag = true;
-		MovingObjectPosition movingobjectposition = this
-				.getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer,
-						flag);
+		MovingObjectPosition movingobjectposition = getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer,
+				flag);
 
 		if (movingobjectposition == null) {
 			return par1ItemStack;
@@ -107,7 +108,7 @@ public class ItemSteamBucket extends Item implements IFluidContainerItem {
 
 					if (material == Material.water && l == 0) {
 						par2World.setBlockToAir(i, j, k);
-						return this.canPlace(par1ItemStack, par3EntityPlayer,
+						return canPlace(par1ItemStack, par3EntityPlayer,
 								Items.water_bucket);
 					}
 
@@ -117,7 +118,7 @@ public class ItemSteamBucket extends Item implements IFluidContainerItem {
 						return par1ItemStack;
 					}
 
-					if (this.tryPlaceContainedLiquid(par2World, i, j, k)
+					if (tryPlaceContainedLiquid(par2World, i, j, k)
 							&& !par3EntityPlayer.capabilities.isCreativeMode) {
 						return new ItemStack(Items.bucket);
 					}

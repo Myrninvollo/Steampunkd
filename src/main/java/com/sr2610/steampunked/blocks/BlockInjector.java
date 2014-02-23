@@ -15,7 +15,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.sr2610.steampunked.Steampunked;
-import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.lib.Reference;
 import com.sr2610.steampunked.tileentities.TileEntityInjector;
 
@@ -26,7 +25,7 @@ public class BlockInjector extends BlockContainer {
 	}
 
 	public void registerIcons(IIconRegister par1IconRegister) {
-		this.blockIcon = par1IconRegister.registerIcon(Reference.ModID
+		blockIcon = par1IconRegister.registerIcon(Reference.ModID
 				+ ":compressor");
 
 	}
@@ -93,6 +92,7 @@ public class BlockInjector extends BlockContainer {
 		}
 	}
 
+	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
 		super.onBlockAdded(par1World, par2, par3, par4);
 	}
@@ -100,7 +100,7 @@ public class BlockInjector extends BlockContainer {
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
 		return new TileEntityInjector();
-		
+
 	}
 
 }

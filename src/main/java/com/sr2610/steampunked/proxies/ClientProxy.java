@@ -11,6 +11,7 @@ public class ClientProxy extends CommonProxy {
 
 	}
 
+	@Override
 	public void registerRenderInformation() {
 		RenderingRegistry.registerEntityRenderingHandler(EntityAutomaton.class,
 				new RenderAutomoton());

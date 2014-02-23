@@ -10,8 +10,6 @@ import net.minecraft.item.ItemStack;
 import com.sr2610.steampunked.blocks.ModBlocks;
 import com.sr2610.steampunked.items.ModItems;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
-
 public class ModAutomatonTab extends CreativeTabs {
 
 	public static ModAutomatonTab INSTANCE = new ModAutomatonTab();
@@ -31,7 +29,7 @@ public class ModAutomatonTab extends CreativeTabs {
 		addItem(ModItems.namePlate);
 		addItem(ModItems.AutomatonUpgrade);
 		addItem(ModItems.punchcard);
-		
+
 		addItem(ModItems.basicCore);
 		addItem(ModItems.mediumCore);
 		addItem(ModItems.advancedCore);
@@ -44,7 +42,7 @@ public class ModAutomatonTab extends CreativeTabs {
 	}
 
 	private void addBlock(Block block) {
-		block.getSubBlocks((Item.getItemFromBlock(block)), this, list);
+		block.getSubBlocks(Item.getItemFromBlock(block), this, list);
 	}
 
 	@Override

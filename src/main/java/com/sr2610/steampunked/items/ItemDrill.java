@@ -71,7 +71,7 @@ public class ItemDrill extends ItemPickaxe implements ISteamUser {
 
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(Reference.ModID
+		itemIcon = iconRegister.registerIcon(Reference.ModID
 				+ ":iron_drill");
 	}
 
@@ -98,7 +98,7 @@ public class ItemDrill extends ItemPickaxe implements ISteamUser {
 
 	@Override
 	public int getCurrentSteam(ItemStack itemStack) {
-		return this.getMaxDamage() - this.getDamage(itemStack);
+		return this.getMaxDamage() - getDamage(itemStack);
 	}
 
 	@Override
@@ -110,25 +110,26 @@ public class ItemDrill extends ItemPickaxe implements ISteamUser {
 	public int charge(ItemStack target, int energyAvailable) {
 		if (energyAvailable > getDamage(target)) {
 			int remainder = energyAvailable - getDamage(target);
-			this.setDamage(target, 0);
+			setDamage(target, 0);
 			return remainder;
 		} else {
-			this.setDamage(target, getDamage(target) - energyAvailable);
+			setDamage(target, getDamage(target) - energyAvailable);
 			return 0;
 		}
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
 		par3List.add(EnumChatFormatting.AQUA + "Steam : "
-				+ this.getCurrentSteam(par1ItemStack) + "/"
-				+ this.getMaxSteam());
+				+ getCurrentSteam(par1ItemStack) + "/"
+				+ getMaxSteam());
 	}
 
 	@Override
 	public void addCharge(int charge, ItemStack stack) {
-		this.setDamage(stack, getCurrentSteam(stack) + charge);
+		setDamage(stack, getCurrentSteam(stack) + charge);
 	}
 
 }

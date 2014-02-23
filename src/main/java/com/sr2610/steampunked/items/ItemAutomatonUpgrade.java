@@ -26,10 +26,11 @@ public class ItemAutomatonUpgrade extends Item implements IUpgrade {
 	}
 
 	public static final String[] upgradeItemNames = new String[] { "range",
-			"speed", "health", "undefined" };
+		"speed", "health", "undefined" };
 	@SideOnly(Side.CLIENT)
 	private IIcon[] upgradeIcons;
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs,
 			List par3List) {
@@ -38,27 +39,31 @@ public class ItemAutomatonUpgrade extends Item implements IUpgrade {
 		}
 	}
 
+	@Override
 	public IIcon getIconFromDamage(int par1) {
 		int j = MathHelper.clamp_int(par1, 0, 3);
-		return this.upgradeIcons[j];
+		return upgradeIcons[j];
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister par1IconRegister) {
-		this.upgradeIcons = new IIcon[upgradeItemNames.length];
+		upgradeIcons = new IIcon[upgradeItemNames.length];
 
 		for (int i = 0; i < upgradeItemNames.length; ++i) {
-			this.upgradeIcons[i] = par1IconRegister
+			upgradeIcons[i] = par1IconRegister
 					.registerIcon(Reference.ModID + ":upgrade_" + +i);
 		}
 	}
 
+	@Override
 	public String getUnlocalizedName(ItemStack par1ItemStack) {
 		int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 20);
 		return super.getUnlocalizedName() + "." + i;
 	}
 
-	
+
+	@Override
 	public void addInformation(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
 		int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 20);

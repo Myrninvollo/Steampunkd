@@ -6,9 +6,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-
-import com.sr2610.steampunked.core.tabs.ModAutomatonTab;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -20,6 +17,7 @@ public class ItemChasis extends Item {
 		setHasSubtypes(true);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs,
 			List par3List) {
@@ -27,6 +25,7 @@ public class ItemChasis extends Item {
 			par3List.add(new ItemStack(this, 1, x));
 		}
 	}
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack itemstack,
 			EntityPlayer par2EntityPlayer, List list, boolean par4) {

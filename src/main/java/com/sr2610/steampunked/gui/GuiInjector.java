@@ -20,12 +20,10 @@ public class GuiInjector extends GuiMachine {
 	private static final int TANK_OVERLAY_X = 176;
 	private static final int TANK_OVERLAY_Y = 9;
 
-	private IInventory player_inventory;
 	private TileEntityInjector injectorInventory;
 
 	public GuiInjector(TileEntityInjector cs, IInventory player_inv) {
 		super(new ContainerInjector(cs, player_inv));
-		player_inventory = player_inv;
 		ySize = 166;
 		injectorInventory = cs;
 	}
@@ -35,7 +33,7 @@ public class GuiInjector extends GuiMachine {
 		super.drawGuiContainerForegroundLayer(mouse_x, mouse_y);
 
 		fontRendererObj.drawString("Steam Injector", 5, 6, 0x404040);
-		fontRendererObj.drawString("Inventory", 8, (ySize - 96) + 2, 0x404040);
+		fontRendererObj.drawString("Inventory", 8, ySize - 96 + 2, 0x404040);
 	}
 
 	@Override
@@ -68,8 +66,6 @@ public class GuiInjector extends GuiMachine {
 	@Override
 	public void initGui() {
 		super.initGui();
-		int window_x = (width - xSize) / 2;
-		int window_y = (height - ySize) / 2;
 
 	}
 

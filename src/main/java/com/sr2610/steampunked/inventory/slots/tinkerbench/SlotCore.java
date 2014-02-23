@@ -11,7 +11,8 @@ public class SlotCore extends Slot {
 	public SlotCore(IInventory par1iInventory, int par2, int par3, int par4) {
 		super(par1iInventory, par2, par3, par4);
 	}
-	
+
+	@Override
 	public boolean isItemValid(ItemStack itemstack) {
 
 		if (itemstack.getItem() instanceof ItemCore) {
@@ -19,6 +20,7 @@ public class SlotCore extends Slot {
 		return false;
 	}
 
+	@Override
 	public int getSlotStackLimit() {
 		return 1;
 	}

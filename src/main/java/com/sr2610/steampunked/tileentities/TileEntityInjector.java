@@ -18,15 +18,11 @@ import com.sr2610.steampunked.items.interfaces.ISteamUser;
 import com.sr2610.steampunked.lib.LibOptions;
 
 public class TileEntityInjector extends TileEntityMachine implements
-		ISidedInventory, IFluidHandler {
+ISidedInventory, IFluidHandler {
 
 	static private final int NETDATAID_TANK_FLUID = 1;
 	static private final int NETDATAID_TANK_AMOUNT = 2;
 
-	private static final int[] slots_top = new int[] { 0 };
-	private static final int[] slots_bottom = new int[] { 0 };
-	private static final int[] slots_sides = new int[] { 0 };
-	private ItemStack[] inventory;
 	private FluidTank tank;
 	private FluidTankInfo[] tank_info;
 
@@ -37,27 +33,28 @@ public class TileEntityInjector extends TileEntityMachine implements
 
 		tank_info = new FluidTankInfo[1];
 		tank_info[0] = new FluidTankInfo(tank);
-		inventory = new ItemStack[0];
 
 	}
 
 	private ItemStack[] chargerItemSlot = new ItemStack[1];
 
+	@Override
 	public boolean canInsertItem(int slot, ItemStack item, int side) {
-		return this.isItemValidForSlot(slot, item);
+		return isItemValidForSlot(slot, item);
 	}
 
 	/**
 	 * Returns true if automation can extract the given item in the given slot
 	 * from the given side. Args: Slot, item, side
 	 */
+	@Override
 	public boolean canExtractItem(int slot, ItemStack item, int side) {
 		return true;
 	}
 
 	@Override
 	public int getSizeInventory() {
-		return this.chargerItemSlot.length;
+		return chargerItemSlot.length;
 	}
 
 	/**
@@ -65,7 +62,7 @@ public class TileEntityInjector extends TileEntityMachine implements
 	 */
 	@Override
 	public ItemStack getStackInSlot(int par1) {
-		return this.chargerItemSlot[par1];
+		return chargerItemSlot[par1];
 	}
 
 	/**
@@ -74,18 +71,18 @@ public class TileEntityInjector extends TileEntityMachine implements
 	 */
 	@Override
 	public ItemStack decrStackSize(int par1, int par2) {
-		if (this.chargerItemSlot[par1] != null) {
+		if (chargerItemSlot[par1] != null) {
 			ItemStack itemstack;
 
-			if (this.chargerItemSlot[par1].stackSize <= par2) {
-				itemstack = this.chargerItemSlot[par1];
-				this.chargerItemSlot[par1] = null;
+			if (chargerItemSlot[par1].stackSize <= par2) {
+				itemstack = chargerItemSlot[par1];
+				chargerItemSlot[par1] = null;
 				return itemstack;
 			} else {
-				itemstack = this.chargerItemSlot[par1].splitStack(par2);
+				itemstack = chargerItemSlot[par1].splitStack(par2);
 
-				if (this.chargerItemSlot[par1].stackSize == 0) {
-					this.chargerItemSlot[par1] = null;
+				if (chargerItemSlot[par1].stackSize == 0) {
+					chargerItemSlot[par1] = null;
 				}
 
 				return itemstack;
@@ -102,9 +99,9 @@ public class TileEntityInjector extends TileEntityMachine implements
 	 */
 	@Override
 	public ItemStack getStackInSlotOnClosing(int par1) {
-		if (this.chargerItemSlot[par1] != null) {
-			ItemStack itemstack = this.chargerItemSlot[par1];
-			this.chargerItemSlot[par1] = null;
+		if (chargerItemSlot[par1] != null) {
+			ItemStack itemstack = chargerItemSlot[par1];
+			chargerItemSlot[par1] = null;
 			return itemstack;
 		} else {
 			return null;
@@ -117,11 +114,11 @@ public class TileEntityInjector extends TileEntityMachine implements
 	 */
 	@Override
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
-		this.chargerItemSlot[par1] = par2ItemStack;
+		chargerItemSlot[par1] = par2ItemStack;
 
 		if (par2ItemStack != null
-				&& par2ItemStack.stackSize > this.getInventoryStackLimit()) {
-			par2ItemStack.stackSize = this.getInventoryStackLimit();
+				&& par2ItemStack.stackSize > getInventoryStackLimit()) {
+			par2ItemStack.stackSize = getInventoryStackLimit();
 		}
 	}
 
@@ -160,8 +157,8 @@ public class TileEntityInjector extends TileEntityMachine implements
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
 		return worldObj.getTileEntity(xCoord, yCoord, zCoord) != this ? false
-				: player.getDistanceSq((double) xCoord + 0.5D,
-						(double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64.0D;
+				: player.getDistanceSq(xCoord + 0.5D,
+						yCoord + 0.5D, zCoord + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -213,6 +210,7 @@ public class TileEntityInjector extends TileEntityMachine implements
 		return 0;
 	}
 
+	@Override
 	protected boolean isFluidFuel(FluidStack fuel) {
 		String name = getFluidName(fuel);
 		if (name == null)
@@ -328,6 +326,6 @@ public class TileEntityInjector extends TileEntityMachine implements
 	public boolean hasCustomInventoryName() {
 		return false;
 	}
-	
+
 
 }

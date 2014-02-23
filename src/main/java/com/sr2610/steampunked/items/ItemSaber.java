@@ -3,7 +3,6 @@ package com.sr2610.steampunked.items;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -26,14 +25,14 @@ public class ItemSaber extends Item {
 
 	public ItemSaber(Item.ToolMaterial par2EnumToolMaterial) {
 		super();
-		this.toolMaterial = par2EnumToolMaterial;
-		this.maxStackSize = 1;
-		this.setMaxDamage(par2EnumToolMaterial.getMaxUses());
-		this.weaponDamage = 6.0F + par2EnumToolMaterial.getDamageVsEntity();
+		toolMaterial = par2EnumToolMaterial;
+		maxStackSize = 1;
+		setMaxDamage(par2EnumToolMaterial.getMaxUses());
+		weaponDamage = 6.0F + par2EnumToolMaterial.getDamageVsEntity();
 	}
 
 	public float getDamage() {
-		return this.toolMaterial.getDamageVsEntity();
+		return toolMaterial.getDamageVsEntity();
 	}
 
 	/**
@@ -52,6 +51,7 @@ public class ItemSaber extends Item {
 	 * Current implementations of this method in child classes do not use the
 	 * entry argument beside ev. They just raise the damage on the stack.
 	 */
+	@Override
 	public boolean hitEntity(ItemStack par1ItemStack,
 			EntityLivingBase par2EntityLivingBase,
 			EntityLivingBase par3EntityLivingBase) {
@@ -66,6 +66,7 @@ public class ItemSaber extends Item {
 		return true;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	/**
 	 * Returns True is the item is renderer in full 3D when hold.
@@ -78,6 +79,7 @@ public class ItemSaber extends Item {
 	 * returns the action that specifies what animation to play when the items
 	 * is being used
 	 */
+	@Override
 	public EnumAction getItemUseAction(ItemStack par1ItemStack) {
 		return EnumAction.block;
 	}
@@ -85,6 +87,7 @@ public class ItemSaber extends Item {
 	/**
 	 * How long it takes to use or consume an item
 	 */
+	@Override
 	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
 		return 72000;
 	}
@@ -93,10 +96,11 @@ public class ItemSaber extends Item {
 	 * Called whenever this item is equipped and the right mouse button is
 	 * pressed. Args: itemStack, world, entityPlayer
 	 */
+	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer) {
 		par3EntityPlayer.setItemInUse(par1ItemStack,
-				this.getMaxItemUseDuration(par1ItemStack));
+				getMaxItemUseDuration(par1ItemStack));
 		return par1ItemStack;
 	}
 
@@ -104,20 +108,22 @@ public class ItemSaber extends Item {
 	 * Return the enchantability factor of the item, most of the time is based
 	 * on material.
 	 */
+	@Override
 	public int getItemEnchantability() {
-		return this.toolMaterial.getEnchantability();
+		return toolMaterial.getEnchantability();
 	}
 
 	/**
 	 * Return the name for this tool's material.
 	 */
 	public String getToolMaterialName() {
-		return this.toolMaterial.toString();
+		return toolMaterial.toString();
 	}
 
 	/**
 	 * Return whether this item is repairable in an anvil.
 	 */
+	@Override
 	public boolean getIsRepairable(ItemStack par1ItemStack,
 			ItemStack par2ItemStack) {
 		// TODO Make Sabers Repairable
@@ -128,20 +134,22 @@ public class ItemSaber extends Item {
 	 * Gets a map of item attribute modifiers, used by ItemSword to increase hit
 	 * damage.
 	 */
+	@Override
 	public Multimap getItemAttributeModifiers() {
 		Multimap multimap = super.getItemAttributeModifiers();
 		multimap.put(SharedMonsterAttributes.attackDamage
 				.getAttributeUnlocalizedName(), new AttributeModifier(
-				field_111210_e, "Weapon modifier", (double) this.weaponDamage,
-				0));
+						field_111210_e, "Weapon modifier", weaponDamage,
+						0));
 		return multimap;
 	}
 
 	public Item setTexture(String string) {
-		this.texturename = string;
+		texturename = string;
 		return this;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister registry) {
 		itemIcon = registry.registerIcon(Reference.ModID + ":saber_"

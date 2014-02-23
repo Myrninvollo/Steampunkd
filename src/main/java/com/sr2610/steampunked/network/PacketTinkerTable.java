@@ -55,8 +55,8 @@ public class PacketTinkerTable extends AbstractPacket {
 		TileEntity te = world.getTileEntity(x, y, z);
 
 		if (te instanceof TileEntityTinkerBench) {
-			  for (int i = 0; i < 8; ++i)
-		      		((TileEntityTinkerBench) te).setInventorySlotContents(i, null);
+			for (int i = 0; i < 8; ++i)
+				((TileEntityTinkerBench) te).setInventorySlotContents(i, null);
 
 			((TileEntityTinkerBench) te).setInventorySlotContents(8, contents);
 

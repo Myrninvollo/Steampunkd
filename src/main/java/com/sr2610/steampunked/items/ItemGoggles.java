@@ -8,11 +8,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
 
 import com.sr2610.steampunked.lib.Reference;
 
-import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -34,7 +32,7 @@ public class ItemGoggles extends ItemArmor {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister registry) {
-		itemIcon = registry.registerIcon(Reference.ModID + ":goggles_item");
+		itemIcon = registry.registerIcon(Reference.ModID + ":goggles	");
 	}
 
 	@Override
@@ -47,10 +45,11 @@ public class ItemGoggles extends ItemArmor {
 		return armorType == ARMOR_HELMET;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
 		par3List.add("Useful for high altitude flying");
 	}
-	
+
 }

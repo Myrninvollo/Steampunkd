@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -33,6 +32,7 @@ public class ItemAutomotonSpawner extends Item {
 
 	}
 
+	@Override
 	public boolean onItemUse(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, World par3World, int par4, int par5,
 			int par6, int par7, float par8, float par9, float par10) {
@@ -45,11 +45,11 @@ public class ItemAutomotonSpawner extends Item {
 				entity.homeY = par5;
 				entity.homeZ = par6;
 				entity.side = par7;
-				entity.setLocationAndAngles((double) ((float) par4 + par8),
-						(double) ((float) par5 + par9) + 0.5,
-						(double) ((float) par6 + par10), par9, par10);
+				entity.setLocationAndAngles(par4 + par8,
+						par5 + par9 + 0.5,
+						par6 + par10, par9, par10);
 				entity.setOwner(par2EntityPlayer.getDisplayName());
-				
+
 
 				NBTTagCompound nbttagcompound = par1ItemStack.getTagCompound();
 				NBTTagDouble nbttagdouble= (NBTTagDouble)nbttagcompound.getTag("Range");
@@ -95,6 +95,7 @@ public class ItemAutomotonSpawner extends Item {
 		itemIcon = registry.registerIcon(Reference.ModID + ":automoton");
 	}
 
+	@Override
 	public void addInformation(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
 		if (par1ItemStack.stackTagCompound == null)

@@ -14,7 +14,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.sr2610.steampunked.Steampunked;
-import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.tileentities.TileEntityTinkerBench;
 
 public class BlockTinkerBench extends BlockContainer {
@@ -90,6 +89,7 @@ public class BlockTinkerBench extends BlockContainer {
 		}
 	}
 
+	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
 		super.onBlockAdded(par1World, par2, par3, par4);
 	}

@@ -24,11 +24,8 @@ public class GuiSteamFurnace extends GuiMachine{
 	private static final int TANK_OVERLAY_X = 176;
 	private static final int TANK_OVERLAY_Y = 9;
 
-	private IInventory player_inventory;
-
 	public GuiSteamFurnace(TileEntitySteamFurnace cs, IInventory player_inv) {
 		super(new ContainerSteamFurnace((InventoryPlayer) player_inv, cs));
-		player_inventory = player_inv;
 		ySize = 166;
 		steamFurnaceInventory = cs;
 	}
@@ -38,7 +35,7 @@ public class GuiSteamFurnace extends GuiMachine{
 		super.drawGuiContainerForegroundLayer(mouse_x, mouse_y);
 
 		fontRendererObj.drawString("Steam Heated Furnace", 5, 6, 0x404040);
-		fontRendererObj.drawString("Inventory", 8, (ySize - 96) + 2, 0x404040);
+		fontRendererObj.drawString("Inventory", 8, ySize - 96 + 2, 0x404040);
 	}
 
 	@Override
@@ -50,8 +47,8 @@ public class GuiSteamFurnace extends GuiMachine{
 		drawTexturedModalRect(window_x, window_y, 0, 0, xSize, ySize);
 		DisplayTank(window_x, window_y, TANK_X, TANK_Y, TANK_HEIGHT,
 				TANK_OVERLAY_X, TANK_OVERLAY_Y, steamFurnaceInventory.GetTank(0));
-		int i1 = this.steamFurnaceInventory.getCookProgressScaled(24);
-	       drawTexturedModalRect(window_x + 79, window_y + 35, 176, 83, i1 + 1, 16);
+		int i1 = steamFurnaceInventory.getCookProgressScaled(24);
+		drawTexturedModalRect(window_x + 79, window_y + 35, 176, 83, i1 + 1, 16);
 
 	}
 
@@ -73,8 +70,6 @@ public class GuiSteamFurnace extends GuiMachine{
 	@Override
 	public void initGui() {
 		super.initGui();
-		int window_x = (width - xSize) / 2;
-		int window_y = (height - ySize) / 2;
 
 	}
 

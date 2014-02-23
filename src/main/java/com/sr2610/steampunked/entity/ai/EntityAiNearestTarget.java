@@ -26,8 +26,6 @@ public class EntityAiNearestTarget extends EntityAITarget {
 	 */
 	private final IEntitySelector targetEntitySelector;
 	private EntityLivingBase targetEntity;
-	private static final String __OBFID = "CL_00001620";
-
 	public EntityAiNearestTarget(EntityCreature par1EntityCreature,
 			Class par2Class, int par3, boolean par4) {
 		this(par1EntityCreature, par2Class, par3, par4, false);
@@ -43,24 +41,23 @@ public class EntityAiNearestTarget extends EntityAITarget {
 			Class par2Class, int par3, boolean par4, boolean par5,
 			final IEntitySelector par6IEntitySelector) {
 		super(par1EntityCreature, par4, par5);
-		this.targetClass = par2Class;
-		this.targetChance = par3;
-		this.theNearestAttackableTargetSorter = new EntityAINearestAttackableTarget.Sorter(
+		targetClass = par2Class;
+		targetChance = par3;
+		theNearestAttackableTargetSorter = new EntityAINearestAttackableTarget.Sorter(
 				par1EntityCreature);
-		this.setMutexBits(1);
-		this.targetEntitySelector = new IEntitySelector() {
-			private static final String __OBFID = "CL_00001621";
-
+		setMutexBits(1);
+		targetEntitySelector = new IEntitySelector() {
 			/**
 			 * Return whether the specified entity is applicable to this filter.
 			 */
+			@Override
 			public boolean isEntityApplicable(Entity par1Entity) {
 				return !(par1Entity instanceof EntityLivingBase) ? false
-						: (par6IEntitySelector != null
-								&& !par6IEntitySelector
-										.isEntityApplicable(par1Entity) ? false
+						: par6IEntitySelector != null
+						&& !par6IEntitySelector
+						.isEntityApplicable(par1Entity) ? false
 								: EntityAiNearestTarget.this.isSuitableTarget(
-										(EntityLivingBase) par1Entity, false));
+										(EntityLivingBase) par1Entity, false);
 			}
 		};
 	}
@@ -68,8 +65,9 @@ public class EntityAiNearestTarget extends EntityAITarget {
 	/**
 	 * Returns whether the EntityAIBase should begin execution.
 	 */
+	@Override
 	public boolean shouldExecute() {
-		if (!(this.taskOwner instanceof EntityAutomaton)) {
+		if (!(taskOwner instanceof EntityAutomaton)) {
 			return false;
 		} else
 
@@ -77,21 +75,21 @@ public class EntityAiNearestTarget extends EntityAITarget {
 			EntityAutomaton EA = (EntityAutomaton) taskOwner;
 			if (!EA.getAttackMobs())
 				return false;
-			else if (this.targetChance > 0
-					&& this.taskOwner.getRNG().nextInt(this.targetChance) != 0) {
+			else if (targetChance > 0
+					&& taskOwner.getRNG().nextInt(targetChance) != 0) {
 				return false;
 			} else {
-				double d0 = this.getTargetDistance();
-				List list = this.taskOwner.worldObj.selectEntitiesWithinAABB(
-						this.targetClass,
-						this.taskOwner.boundingBox.expand(d0, 4.0D, d0),
-						this.targetEntitySelector);
-				Collections.sort(list, this.theNearestAttackableTargetSorter);
+				double d0 = getTargetDistance();
+				List list = taskOwner.worldObj.selectEntitiesWithinAABB(
+						targetClass,
+						taskOwner.boundingBox.expand(d0, 4.0D, d0),
+						targetEntitySelector);
+				Collections.sort(list, theNearestAttackableTargetSorter);
 
 				if (list.isEmpty()) {
 					return false;
 				} else {
-					this.targetEntity = (EntityLivingBase) list.get(0);
+					targetEntity = (EntityLivingBase) list.get(0);
 					return true;
 				}
 			}
@@ -101,25 +99,25 @@ public class EntityAiNearestTarget extends EntityAITarget {
 	/**
 	 * Execute a one shot task or start executing a continuous task
 	 */
+	@Override
 	public void startExecuting() {
-		this.taskOwner.setAttackTarget(this.targetEntity);
+		taskOwner.setAttackTarget(targetEntity);
 		super.startExecuting();
 	}
 
 	public static class Sorter implements Comparator {
 		private final Entity theEntity;
-		private static final String __OBFID = "CL_00001622";
-
 		public Sorter(Entity par1Entity) {
-			this.theEntity = par1Entity;
+			theEntity = par1Entity;
 		}
 
 		public int compare(Entity par1Entity, Entity par2Entity) {
-			double d0 = this.theEntity.getDistanceSqToEntity(par1Entity);
-			double d1 = this.theEntity.getDistanceSqToEntity(par2Entity);
-			return d0 < d1 ? -1 : (d0 > d1 ? 1 : 0);
+			double d0 = theEntity.getDistanceSqToEntity(par1Entity);
+			double d1 = theEntity.getDistanceSqToEntity(par2Entity);
+			return d0 < d1 ? -1 : d0 > d1 ? 1 : 0;
 		}
 
+		@Override
 		public int compare(Object par1Obj, Object par2Obj) {
 			return this.compare((Entity) par1Obj, (Entity) par2Obj);
 		}

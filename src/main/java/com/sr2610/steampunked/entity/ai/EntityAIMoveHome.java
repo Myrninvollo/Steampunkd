@@ -7,49 +7,48 @@ import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
 
 public class EntityAIMoveHome extends EntityAIBase {
 
-    private EntityAutomaton auto = null;
+	private EntityAutomaton auto = null;
 
-    private PathNavigate pathFinder;
+	private PathNavigate pathFinder;
 
 
-    public EntityAIMoveHome(EntityAutomaton auto) {
-            this.auto = auto;
-            this.pathFinder = auto.getNavigator();
-            setMutexBits(3);
-    }
+	public EntityAIMoveHome(EntityAutomaton auto) {
+		this.auto = auto;
+		pathFinder = auto.getNavigator();
+		setMutexBits(3);
+	}
 
-    @Override
-    public boolean shouldExecute() {
-            if (!pathFinder.noPath()) { return false; }
-            if (auto.worldObj != null) {
-            	return true;
-       
-            }
-            return false;
-    }
+	@Override
+	public boolean shouldExecute() {
+		if (!pathFinder.noPath()) { return false; }
+		if (auto.worldObj != null) {
+			return true;
 
-    @Override
-    public void resetTask() {
-            pathFinder.clearPathEntity();
-    }
+		}
+		return false;
+	}
 
-    @Override
-    public boolean continueExecuting() {
-            return auto.isEntityAlive() && !pathFinder.noPath();
-                            
-    }
+	@Override
+	public void resetTask() {
+		pathFinder.clearPathEntity();
+	}
 
-    @Override
-    public void startExecuting() {
-            if (auto.posX!=auto.homeX) {
-                    pathFinder.tryMoveToXYZ((double)auto.homeX,(double)auto.homeY, (double)auto.homeZ,1.0);
-            }
-    }
+	@Override
+	public boolean continueExecuting() {
+		return auto.isEntityAlive() && !pathFinder.noPath();
 
-    @Override
-    public void updateTask() {
-            super.updateTask();
-           
-                    }
-            }
-   
+	}
+
+	@Override
+	public void startExecuting() {
+		if (auto.posX!=auto.homeX) {
+			pathFinder.tryMoveToXYZ(auto.homeX,auto.homeY, auto.homeZ,1.0);
+		}
+	}
+
+	@Override
+	public void updateTask() {
+		super.updateTask();
+
+	}
+}

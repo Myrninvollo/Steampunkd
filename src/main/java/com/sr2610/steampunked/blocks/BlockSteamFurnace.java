@@ -73,12 +73,12 @@ public class BlockSteamFurnace extends BlockContainer {
 					ItemStack itemstack = tileentityfurnace.getStackInSlot(i1);
 
 					if (itemstack != null) {
-						float f = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
-						float f1 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
-						float f2 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+						float f = furnaceRand.nextFloat() * 0.8F + 0.1F;
+						float f1 = furnaceRand.nextFloat() * 0.8F + 0.1F;
+						float f2 = furnaceRand.nextFloat() * 0.8F + 0.1F;
 
 						while (itemstack.stackSize > 0) {
-							int j1 = this.furnaceRand.nextInt(21) + 10;
+							int j1 = furnaceRand.nextInt(21) + 10;
 
 							if (j1 > itemstack.stackSize) {
 								j1 = itemstack.stackSize;
@@ -86,25 +86,25 @@ public class BlockSteamFurnace extends BlockContainer {
 
 							itemstack.stackSize -= j1;
 							EntityItem entityitem = new EntityItem(world,
-									(double) ((float) x + f),
-									(double) ((float) y + f1),
-									(double) ((float) z + f2), new ItemStack(
+									x + f,
+									y + f1,
+									z + f2, new ItemStack(
 											itemstack.getItem(), j1,
 											itemstack.getItemDamage()));
 
 							if (itemstack.hasTagCompound()) {
 								entityitem.getEntityItem().setTagCompound(
 										(NBTTagCompound) itemstack
-												.getTagCompound().copy());
+										.getTagCompound().copy());
 							}
 
 							float f3 = 0.05F;
-							entityitem.motionX = (double) ((float) this.furnaceRand
-									.nextGaussian() * f3);
-							entityitem.motionY = (double) ((float) this.furnaceRand
-									.nextGaussian() * f3 + 0.2F);
-							entityitem.motionZ = (double) ((float) this.furnaceRand
-									.nextGaussian() * f3);
+							entityitem.motionX = (float) furnaceRand
+									.nextGaussian() * f3;
+							entityitem.motionY = (float) furnaceRand
+									.nextGaussian() * f3 + 0.2F;
+							entityitem.motionZ = (float) furnaceRand
+									.nextGaussian() * f3;
 							world.spawnEntityInWorld(entityitem);
 						}
 					}
@@ -117,39 +117,42 @@ public class BlockSteamFurnace extends BlockContainer {
 		super.breakBlock(world, x, y, z, block, i);
 	}
 
+	@Override
 	public void onBlockAdded(World world, int x, int y, int z) {
 		super.onBlockAdded(world, x, y, z);
-		this.func_149930_e(world, x, y, z);
+		func_149930_e(world, x, y, z);
 
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 		if (meta == 0 && side == 3)
 			return furnaceIconFront;
 		else if (side == 1)
-			return this.furnaceIconTop;
+			return furnaceIconTop;
 		else if (side == 0)
-			return this.furnaceIconBottom;
+			return furnaceIconBottom;
 		else if (side == meta)
 			return furnaceIconFront;
 		else
-			return this.blockIcon;
+			return blockIcon;
 
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		this.blockIcon = par1IconRegister.registerIcon(Reference.ModID
+		blockIcon = par1IconRegister.registerIcon(Reference.ModID
 				+ ":furnace");
-		this.furnaceIconFront = par1IconRegister
-				.registerIcon(this.isActive ? Reference.ModID
+		furnaceIconFront = par1IconRegister
+				.registerIcon(isActive ? Reference.ModID
 						+ ":furnaceFront_on" : Reference.ModID
 						+ ":furnaceFront_off");
 
-		this.furnaceIconTop = par1IconRegister.registerIcon(Reference.ModID
+		furnaceIconTop = par1IconRegister.registerIcon(Reference.ModID
 				+ ":furnace_top");
-		this.furnaceIconBottom = par1IconRegister.registerIcon(Reference.ModID
+		furnaceIconBottom = par1IconRegister.registerIcon(Reference.ModID
 				+ ":furnace_bottom");
 	}
 
@@ -181,10 +184,11 @@ public class BlockSteamFurnace extends BlockContainer {
 		}
 	}
 
+	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z,
 			EntityLivingBase entity, ItemStack itemstack) {
 		int l = MathHelper
-				.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+				.floor_double(entity.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
 		if (l == 0) {
 			world.setBlockMetadataWithNotify(x, y, z, 2, 2);
@@ -231,11 +235,13 @@ public class BlockSteamFurnace extends BlockContainer {
 		}
 	}
 
+	@Override
 	public Item getItemDropped(int p_149650_1_, Random p_149650_2_,
 			int p_149650_3_) {
 		return Item.getItemFromBlock(ModBlocks.steamFurnace);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z) {
 		return Item.getItemFromBlock(ModBlocks.steamFurnace);

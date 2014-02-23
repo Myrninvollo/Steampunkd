@@ -12,6 +12,7 @@ public class SlotUpgrade extends Slot {
 		super(par1iInventory, par2, par3, par4);
 	}
 
+	@Override
 	public boolean isItemValid(ItemStack itemstack) {
 
 		if (itemstack.getItem() instanceof IUpgrade) {
@@ -20,6 +21,7 @@ public class SlotUpgrade extends Slot {
 			return false;
 	}
 
+	@Override
 	public int getSlotStackLimit() {
 		return 1;
 	}

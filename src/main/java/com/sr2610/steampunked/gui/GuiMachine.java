@@ -3,9 +3,6 @@ package com.sr2610.steampunked.gui;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.Icon;
-
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -59,7 +56,7 @@ public abstract class GuiMachine extends GuiContainer {
 		tessellator.startDrawingQuads();
 		tessellator.addVertexWithUV(x, y + height, zLevel, min_u, max_v);
 		tessellator
-				.addVertexWithUV(x + width, y + height, zLevel, max_u, max_v);
+		.addVertexWithUV(x + width, y + height, zLevel, max_u, max_v);
 		tessellator.addVertexWithUV(x + width, y, zLevel, max_u, min_v);
 		tessellator.addVertexWithUV(x, y, zLevel, min_u, min_v);
 		tessellator.draw();

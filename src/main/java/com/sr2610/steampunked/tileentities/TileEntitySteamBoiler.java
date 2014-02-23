@@ -36,7 +36,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntitySteamBoiler extends TileEntityMachine implements
-		IFluidHandler, ISidedInventory {
+IFluidHandler, ISidedInventory {
 
 	static private final int NETDATAID_INPUT_TANK_FLUID = 1;
 	static private final int NETDATAID_INPUT_TANK_AMOUNT = 2;
@@ -50,9 +50,6 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 
 	protected List<ForgeDirection> surroundingTanks = new ArrayList<ForgeDirection>();
 
-	private static final int[] slots_top = new int[] { 0 };
-	private static final int[] slots_bottom = new int[] { 0 };
-	private static final int[] slots_sides = new int[] { 0 };
 	private FluidTank[] tanks;
 	private FluidTankInfo[] tank_info;
 
@@ -69,40 +66,42 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 
 	}
 
+	@Override
 	public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
 		super.readFromNBT(par1NBTTagCompound);
 		NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items", 10);
-		this.boilerItemStacks = new ItemStack[this.getSizeInventory()];
+		boilerItemStacks = new ItemStack[getSizeInventory()];
 
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
 			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			byte b0 = nbttagcompound1.getByte("Slot");
 
-			if (b0 >= 0 && b0 < this.boilerItemStacks.length) {
-				this.boilerItemStacks[b0] = ItemStack
+			if (b0 >= 0 && b0 < boilerItemStacks.length) {
+				boilerItemStacks[b0] = ItemStack
 						.loadItemStackFromNBT(nbttagcompound1);
 			}
 		}
 
-		this.furnaceBurnTime = par1NBTTagCompound.getShort("BurnTime");
+		furnaceBurnTime = par1NBTTagCompound.getShort("BurnTime");
 
-		this.currentItemBurnTime = getItemBurnTime(this.boilerItemStacks[0]);
+		currentItemBurnTime = getItemBurnTime(boilerItemStacks[0]);
 
 	}
 
 	/**
 	 * Writes a tile entity to NBT.
 	 */
+	@Override
 	public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
 		super.writeToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setShort("BurnTime", (short) this.furnaceBurnTime);
+		par1NBTTagCompound.setShort("BurnTime", (short) furnaceBurnTime);
 		NBTTagList nbttaglist = new NBTTagList();
 
-		for (int i = 0; i < this.boilerItemStacks.length; ++i) {
-			if (this.boilerItemStacks[i] != null) {
+		for (int i = 0; i < boilerItemStacks.length; ++i) {
+			if (boilerItemStacks[i] != null) {
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setByte("Slot", (byte) i);
-				this.boilerItemStacks[i].writeToNBT(nbttagcompound1);
+				boilerItemStacks[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
 		}
@@ -114,28 +113,30 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 	private ItemStack[] boilerItemStacks = new ItemStack[1];
 	public int currentItemBurnTime;
 
+	@Override
 	public int getSizeInventory() {
-		return this.boilerItemStacks.length;
+		return boilerItemStacks.length;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int par1) {
-		return this.boilerItemStacks[par1];
+		return boilerItemStacks[par1];
 	}
 
+	@Override
 	public ItemStack decrStackSize(int par1, int par2) {
-		if (this.boilerItemStacks[par1] != null) {
+		if (boilerItemStacks[par1] != null) {
 			ItemStack itemstack;
 
-			if (this.boilerItemStacks[par1].stackSize <= par2) {
-				itemstack = this.boilerItemStacks[par1];
-				this.boilerItemStacks[par1] = null;
+			if (boilerItemStacks[par1].stackSize <= par2) {
+				itemstack = boilerItemStacks[par1];
+				boilerItemStacks[par1] = null;
 				return itemstack;
 			} else {
-				itemstack = this.boilerItemStacks[par1].splitStack(par2);
+				itemstack = boilerItemStacks[par1].splitStack(par2);
 
-				if (this.boilerItemStacks[par1].stackSize == 0) {
-					this.boilerItemStacks[par1] = null;
+				if (boilerItemStacks[par1].stackSize == 0) {
+					boilerItemStacks[par1] = null;
 				}
 
 				return itemstack;
@@ -145,22 +146,24 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 		}
 	}
 
+	@Override
 	public ItemStack getStackInSlotOnClosing(int par1) {
-		if (this.boilerItemStacks[par1] != null) {
-			ItemStack itemstack = this.boilerItemStacks[par1];
-			this.boilerItemStacks[par1] = null;
+		if (boilerItemStacks[par1] != null) {
+			ItemStack itemstack = boilerItemStacks[par1];
+			boilerItemStacks[par1] = null;
 			return itemstack;
 		} else {
 			return null;
 		}
 	}
 
+	@Override
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
-		this.boilerItemStacks[par1] = par2ItemStack;
+		boilerItemStacks[par1] = par2ItemStack;
 
 		if (par2ItemStack != null
-				&& par2ItemStack.stackSize > this.getInventoryStackLimit()) {
-			par2ItemStack.stackSize = this.getInventoryStackLimit();
+				&& par2ItemStack.stackSize > getInventoryStackLimit()) {
+			par2ItemStack.stackSize = getInventoryStackLimit();
 		}
 	}
 
@@ -174,10 +177,12 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 
 	}
 
+	@Override
 	public boolean canInsertItem(int slot, ItemStack item, int side) {
-		return this.isItemValidForSlot(slot, item);
+		return isItemValidForSlot(slot, item);
 	}
 
+	@Override
 	public boolean canExtractItem(int slot, ItemStack item, int side) {
 		return true;
 	}
@@ -259,10 +264,11 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
 		return worldObj.getTileEntity(xCoord, yCoord, zCoord) != this ? false
-				: player.getDistanceSq((double) xCoord + 0.5D,
-						(double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64.0D;
+				: player.getDistanceSq(xCoord + 0.5D,
+						yCoord + 0.5D, zCoord + 0.5D) <= 64.0D;
 	}
 
+	@Override
 	protected boolean isFluidFuel(FluidStack fuel) {
 		return fuel.getFluid() == FluidRegistry.WATER;
 	}
@@ -387,16 +393,14 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 		return getItemBurnTime(par0ItemStack) > 0;
 	}
 
+	@Override
 	public void update() {
 
-		boolean flag = this.furnaceBurnTime > 0;
-		boolean flag1 = false;
-
-		if (this.furnaceBurnTime > 0) {
-			--this.furnaceBurnTime;
+		if (furnaceBurnTime > 0) {
+			--furnaceBurnTime;
 		}
 
-		if (!this.worldObj.isRemote) {
+		if (!worldObj.isRemote) {
 			if (tanks[0].getFluidAmount() != LibOptions.boilerCapacity) {
 				if (worldObj.getBlock(xCoord, yCoord - 1, zCoord) == FluidRegistry.WATER
 						.getBlock()) {
@@ -405,17 +409,15 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 			}
 			if (tanks[0].getFluidAmount() > 0
 					&& tanks[1].getFluidAmount() != LibOptions.boilerCapacity) {
-				if (this.furnaceBurnTime == 0) {
-					this.currentItemBurnTime = this.furnaceBurnTime = getItemBurnTime(this.boilerItemStacks[0]) / 32;
+				if (furnaceBurnTime == 0) {
+					currentItemBurnTime = furnaceBurnTime = getItemBurnTime(boilerItemStacks[0]) / 32;
 
-					if (this.furnaceBurnTime > 0) {
-						flag1 = true;
+					if (furnaceBurnTime > 0) {
+						if (boilerItemStacks[0] != null) {
+							--boilerItemStacks[0].stackSize;
 
-						if (this.boilerItemStacks[0] != null) {
-							--this.boilerItemStacks[0].stackSize;
-
-							if (this.boilerItemStacks[0].stackSize == 0) {
-								this.boilerItemStacks[0] = this.boilerItemStacks[0]
+							if (boilerItemStacks[0].stackSize == 0) {
+								boilerItemStacks[0] = boilerItemStacks[0]
 										.getItem().getContainerItem(
 												boilerItemStacks[0]);
 							}
@@ -423,7 +425,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 					}
 				}
 
-				if (this.furnaceBurnTime > 0 && tanks[0].getFluidAmount() > 2) {
+				if (furnaceBurnTime > 0 && tanks[0].getFluidAmount() > 2) {
 					tanks[0].drain(20, true);
 					tanks[1].fill(new FluidStack(ModBlocks.steam, 20), true);
 				}
@@ -433,11 +435,11 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 
 	@SideOnly(Side.CLIENT)
 	public int getBurnTimeRemainingScaled(int par1) {
-		if (this.currentItemBurnTime == 0) {
-			this.currentItemBurnTime = 200;
+		if (currentItemBurnTime == 0) {
+			currentItemBurnTime = 200;
 		}
 
-		return this.furnaceBurnTime * par1 / this.currentItemBurnTime;
+		return furnaceBurnTime * par1 / currentItemBurnTime;
 	}
 
 	static private final int[] INSERT_SLOTS = { 0 };

@@ -1,9 +1,10 @@
 package com.sr2610.steampunked.items;
 
-import com.sr2610.steampunked.lib.Reference;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
+
+import com.sr2610.steampunked.lib.Reference;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

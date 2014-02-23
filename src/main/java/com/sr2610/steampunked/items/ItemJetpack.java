@@ -29,7 +29,7 @@ public class ItemJetpack extends ItemArmor implements ISteamUser, ISpecialArmor 
 
 	public ItemJetpack() {
 		super(ItemArmor.ArmorMaterial.IRON, 2, ARMOR_CHEST);
-		this.setMaxDamage(LibOptions.jetpackCapacity + 1);
+		setMaxDamage(LibOptions.jetpackCapacity + 1);
 	}
 
 	@Override
@@ -37,6 +37,7 @@ public class ItemJetpack extends ItemArmor implements ISteamUser, ISpecialArmor 
 		return armorType == ARMOR_CHEST;
 	}
 
+	@Override
 	public int getItemEnchantability() {
 		return 0;
 	}
@@ -47,15 +48,16 @@ public class ItemJetpack extends ItemArmor implements ISteamUser, ISpecialArmor 
 		return Reference.ModID + ":textures/models/jetpack.png";
 	}
 
+	@Override
 	public void onArmorTick(World world, EntityPlayer player,
 			ItemStack itemStack) {
 		Minecraft mc = FMLClientHandler.instance().getClient();
-		if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && (player.posY <= 200)
-				&& this.getCurrentSteam(itemStack) > 0
+		if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && player.posY <= 200
+				&& getCurrentSteam(itemStack) > 0
 				&& mc.currentScreen == null) {
 			player.fallDistance = 0F;
 			player.motionY += 0.10;
-			this.setDamage(itemStack, (this.getDamage(itemStack) + 1));
+			setDamage(itemStack, getDamage(itemStack) + 1);
 
 		}
 
@@ -63,7 +65,7 @@ public class ItemJetpack extends ItemArmor implements ISteamUser, ISpecialArmor 
 
 	@Override
 	public int getCurrentSteam(ItemStack itemStack) {
-		return this.getMaxDamage() - this.getDamage(itemStack) - 1;
+		return this.getMaxDamage() - getDamage(itemStack) - 1;
 	}
 
 	@Override
@@ -75,26 +77,27 @@ public class ItemJetpack extends ItemArmor implements ISteamUser, ISpecialArmor 
 	public int charge(ItemStack target, int energyAvailable) {
 		if (energyAvailable > getDamage(target)) {
 			int remainder = energyAvailable - getDamage(target);
-			this.setDamage(target, 0);
+			setDamage(target, 0);
 			return remainder;
 		} else {
-			this.setDamage(target, getDamage(target) - energyAvailable);
+			setDamage(target, getDamage(target) - energyAvailable);
 			return 0;
 		}
 
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
 		par3List.add(EnumChatFormatting.AQUA + "Steam : "
-				+ this.getCurrentSteam(par1ItemStack) + "/"
-				+ this.getMaxSteam());
+				+ getCurrentSteam(par1ItemStack) + "/"
+				+ getMaxSteam());
 	}
 
 	@Override
 	public void addCharge(int charge, ItemStack stack) {
-		this.setDamage(stack, getCurrentSteam(stack) + charge);
+		setDamage(stack, getCurrentSteam(stack) + charge);
 	}
 
 	@Override

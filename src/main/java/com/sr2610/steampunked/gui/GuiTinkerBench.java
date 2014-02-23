@@ -9,7 +9,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagDouble;
-import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -41,12 +40,10 @@ public class GuiTinkerBench extends GuiMachine {
 	private static final int TANK_OVERLAY_X = 216;
 	private static final int TANK_OVERLAY_Y = 35 - 16;
 
-	private IInventory player_inventory;
 	public EntityAutomaton ae;
 
 	public GuiTinkerBench(TileEntityTinkerBench cs, IInventory player_inv) {
 		super(new ContainerTinkerBench(cs, player_inv));
-		player_inventory = player_inv;
 		ySize = 217;
 		xSize = 216;
 		injectorInventory = cs;
@@ -57,7 +54,7 @@ public class GuiTinkerBench extends GuiMachine {
 		super.drawGuiContainerForegroundLayer(mouse_x, mouse_y);
 
 		fontRendererObj.drawString("Automaton Tinkering Bench", 5, 6, 0x404040);
-		fontRendererObj.drawString("Inventory", 25, (ySize - 96) + 2, 0x404040);
+		fontRendererObj.drawString("Inventory", 25, ySize - 96 + 2, 0x404040);
 	}
 
 	@Override
@@ -70,11 +67,11 @@ public class GuiTinkerBench extends GuiMachine {
 
 		DisplayTank(window_x, window_y, TANK_X, TANK_Y, TANK_HEIGHT,
 				TANK_OVERLAY_X, TANK_OVERLAY_Y, injectorInventory.GetTank(0));
-		ae = new EntityAutomaton(this.mc.theWorld);
+		ae = new EntityAutomaton(mc.theWorld);
 		check();
 		drawEntity(guiLeft + 51 + 55, guiTop + 75, 30,
-				(float) (guiLeft + 51 + 60) - this.xSize,
-				(float) (guiTop + 75 - 50) - this.ySize, ae);
+				(float) (guiLeft + 51 + 60) - xSize,
+				(float) (guiTop + 75 - 50) - ySize, ae);
 
 	}
 
@@ -109,17 +106,17 @@ public class GuiTinkerBench extends GuiMachine {
 		buttonList.clear();
 		buttonList.add(new GuiButton(1, width / 2 + 40, height / 2 - 35, 40,
 				20, "Craft"));
-		int window_x = (width - xSize) / 2;
-		int window_y = (height - ySize) / 2;
 
 	}
 
+	@Override
 	protected void mouseClickMove(int par1, int par2, int par3, long par4) {
 		rotate = -par1;
 
 		super.mouseClickMove(par1, par2, par3, par4);
 	}
 
+	@Override
 	public void actionPerformed(GuiButton button) {
 		if (button.id == 1) {
 			if (injectorInventory.getStackInSlot(0) != null
@@ -173,8 +170,8 @@ public class GuiTinkerBench extends GuiMachine {
 			float par4, EntityLivingBase par5EntityLivingBase) {
 		GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 		GL11.glPushMatrix();
-		GL11.glTranslatef((float) par0, (float) par1, 50.0F);
-		GL11.glScalef((float) (-par2), (float) par2, (float) par2);
+		GL11.glTranslatef(par0, par1, 50.0F);
+		GL11.glScalef(-par2, par2, par2);
 		GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
 		float f2 = par5EntityLivingBase.renderYawOffset;
 		float f3 = par5EntityLivingBase.rotationYaw;
@@ -184,7 +181,7 @@ public class GuiTinkerBench extends GuiMachine {
 		GL11.glRotatef(135.0F, 0.0F, 1.0F, 0.0F);
 		RenderHelper.enableStandardItemLighting();
 		GL11.glRotatef(-135.0F, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(-((float) Math.atan((double) (par4 / 40.0F))) * 20.0F,
+		GL11.glRotatef(-((float) Math.atan(par4 / 40.0F)) * 20.0F,
 				1.0F, 0.0F, 0.0F);
 		par5EntityLivingBase.renderYawOffset = par5EntityLivingBase.rotationYaw = par5EntityLivingBase.prevRotationYaw = par5EntityLivingBase.prevRotationYawHead = par5EntityLivingBase.rotationYawHead = rotate;
 		GL11.glTranslatef(0.0F, par5EntityLivingBase.yOffset - 0.75F, 0.0F);
@@ -204,6 +201,7 @@ public class GuiTinkerBench extends GuiMachine {
 		OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
 	}
 
+	@Override
 	public void updateScreen() {
 		super.updateScreen();
 		rotate++;
