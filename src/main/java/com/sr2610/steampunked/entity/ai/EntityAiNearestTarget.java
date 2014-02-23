@@ -55,8 +55,8 @@ public class EntityAiNearestTarget extends EntityAITarget {
 			public boolean isEntityApplicable(Entity par1Entity) {
 				return !(par1Entity instanceof EntityLivingBase) ? false
 						: par6IEntitySelector != null
-								&& !par6IEntitySelector
-										.isEntityApplicable(par1Entity) ? false
+						&& !par6IEntitySelector
+						.isEntityApplicable(par1Entity) ? false
 								: EntityAiNearestTarget.this.isSuitableTarget(
 										(EntityLivingBase) par1Entity, false);
 			}

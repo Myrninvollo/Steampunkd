@@ -32,14 +32,14 @@ public class ItemNamePlate extends Item {
 			if (!par1ItemStack.hasDisplayName()) {
 				if (!par2EntityPlayer.worldObj.isRemote)
 					par2EntityPlayer
-							.addChatComponentMessage(new ChatComponentTranslation(
-									StatCollector
-											.translateToLocal("steampunked.nameFirst.name")));
+					.addChatComponentMessage(new ChatComponentTranslation(
+							StatCollector
+							.translateToLocal("steampunked.nameFirst.name")));
 				return false;
 			} else if (par3EntityLivingBase instanceof EntityAutomaton) {
 				EntityAutomaton entityAutomoton = (EntityAutomaton) par3EntityLivingBase;
 				entityAutomoton
-						.setCustomNameTag(par1ItemStack.getDisplayName());
+				.setCustomNameTag(par1ItemStack.getDisplayName());
 				entityAutomoton.func_110163_bv();
 				--par1ItemStack.stackSize;
 				return true;
@@ -52,9 +52,9 @@ public class ItemNamePlate extends Item {
 		else {
 			if (!par2EntityPlayer.worldObj.isRemote)
 				par2EntityPlayer
-						.addChatComponentMessage(new ChatComponentTranslation(
-								StatCollector
-										.translateToLocal("steampunked.onlyAutomaton.name")));
+				.addChatComponentMessage(new ChatComponentTranslation(
+						StatCollector
+						.translateToLocal("steampunked.onlyAutomaton.name")));
 			return false;
 		}
 	}

@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.sr2610.steampunked.blocks.BlockSteamFurnace;
+import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -27,6 +28,7 @@ public class ItemSpanner extends Item {
 		super();
 		setFull3D();
 		setMaxStackSize(1);
+		setCreativeTab(ModCreativeTab.INSTANCE);
 		shiftRotations.add(BlockChest.class);
 		shiftRotations.add(BlockFurnace.class);
 		shiftRotations.add(BlockSteamFurnace.class);

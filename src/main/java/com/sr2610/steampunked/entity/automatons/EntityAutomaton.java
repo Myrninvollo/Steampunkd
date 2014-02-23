@@ -86,7 +86,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(
 				0.25);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth)
-				.setBaseValue(20.0);
+		.setBaseValue(20.0);
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 					speed);
 
 		}
-		
+
 		if (attackTimer > 0) {
 			--attackTimer;
 		}
@@ -310,7 +310,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 						par0IInventory.getInventoryStackLimit());
 				if (max >= par1ItemStack.stackSize) {
 					par0IInventory
-							.setInventorySlotContents(par2, par1ItemStack);
+					.setInventorySlotContents(par2, par1ItemStack);
 					par1ItemStack = null;
 				} else {
 					par0IInventory.setInventorySlotContents(par2,
@@ -336,17 +336,17 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 			ItemStack par1ItemStack, int par2, int par3) {
 		return !par0IInventory.isItemValidForSlot(par2, par1ItemStack) ? false
 				: !(par0IInventory instanceof ISidedInventory)
-						|| ((ISidedInventory) par0IInventory).canInsertItem(
-								par2, par1ItemStack, par3);
+				|| ((ISidedInventory) par0IInventory).canInsertItem(
+						par2, par1ItemStack, par3);
 	}
 
 	private static boolean areItemStacksEqualItem(ItemStack par0ItemStack,
 			ItemStack par1ItemStack) {
 		return par0ItemStack.getItem() != par1ItemStack.getItem() ? false
 				: par0ItemStack.getItemDamage() != par1ItemStack
-						.getItemDamage() ? false
+				.getItemDamage() ? false
 						: par0ItemStack.stackSize > par0ItemStack
-								.getMaxStackSize() ? false : ItemStack
+						.getMaxStackSize() ? false : ItemStack
 								.areItemStackTagsEqual(par0ItemStack,
 										par1ItemStack);
 	}
@@ -459,7 +459,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 					(Entity) null,
 					AxisAlignedBB.getAABBPool().getAABB(par1, par3, par5,
 							par1 + 1.0D, par3 + 1.0D, par5 + 1.0D),
-					IEntitySelector.selectInventories);
+							IEntitySelector.selectInventories);
 
 			if (list != null && list.size() > 0) {
 				iinventory = (IInventory) list.get(par0World.rand.nextInt(list

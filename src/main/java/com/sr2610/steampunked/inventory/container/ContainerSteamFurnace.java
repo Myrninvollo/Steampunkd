@@ -60,7 +60,7 @@ public class ContainerSteamFurnace extends Container {
 			if (lastCookTime != furnace.furnaceCookTime) {
 				icrafting.sendProgressBarUpdate(this, 0,
 
-				furnace.furnaceCookTime);
+						furnace.furnaceCookTime);
 			}
 			for (i = 0; i < crafters.size(); i++) {
 				furnace.SendGUINetworkData(this, (ICrafting) crafters.get(i));

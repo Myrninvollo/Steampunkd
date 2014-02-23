@@ -19,7 +19,7 @@ import com.sr2610.steampunked.inventory.container.ContainerTinkerBench;
 import com.sr2610.steampunked.lib.LibOptions;
 
 public class TileEntityTinkerBench extends TileEntityMachine implements
-		IInventory, IFluidHandler {
+IInventory, IFluidHandler {
 
 	private ItemStack[] benchItemStacks = new ItemStack[9];
 

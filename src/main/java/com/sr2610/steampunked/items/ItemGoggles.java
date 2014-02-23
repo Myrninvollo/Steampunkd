@@ -32,7 +32,7 @@ public class ItemGoggles extends ItemArmor {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister registry) {
-		itemIcon = registry.registerIcon(Reference.ModID + ":goggles	");
+		itemIcon = registry.registerIcon(Reference.ModID + ":goggles");
 	}
 
 	@Override

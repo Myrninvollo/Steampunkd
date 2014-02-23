@@ -56,7 +56,7 @@ public abstract class GuiMachine extends GuiContainer {
 		tessellator.startDrawingQuads();
 		tessellator.addVertexWithUV(x, y + height, zLevel, min_u, max_v);
 		tessellator
-				.addVertexWithUV(x + width, y + height, zLevel, max_u, max_v);
+		.addVertexWithUV(x + width, y + height, zLevel, max_u, max_v);
 		tessellator.addVertexWithUV(x + width, y, zLevel, max_u, min_v);
 		tessellator.addVertexWithUV(x, y, zLevel, min_u, min_v);
 		tessellator.draw();

@@ -15,7 +15,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Sets;
-import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.items.interfaces.ISteamUser;
 import com.sr2610.steampunked.lib.LibOptions;
 import com.sr2610.steampunked.lib.Reference;
@@ -39,8 +38,6 @@ public class ItemDiamondDrill extends ItemPickaxe implements ISteamUser {
 		super(Item.ToolMaterial.EMERALD);
 		setMaxStackSize(1);
 		setMaxDamage(LibOptions.drillCapacity * 2);
-		setCreativeTab(ModCreativeTab.INSTANCE);
-
 	}
 
 	@Override

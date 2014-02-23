@@ -71,7 +71,7 @@ public class GuiTinkerBench extends GuiMachine {
 		check();
 		drawEntity(guiLeft + 51 + 55, guiTop + 75, 30,
 				(float) (guiLeft + 51 + 60) - xSize, (float) (guiTop + 75 - 50)
-						- ySize, ae);
+				- ySize, ae);
 
 	}
 

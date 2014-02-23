@@ -56,10 +56,10 @@ public final class ModItems {
 		namePlate = new ItemNamePlate().setUnlocalizedName(LibNames.NAMEPLATE);
 
 		spawner = new ItemAutomotonSpawner()
-				.setUnlocalizedName(LibNames.SPAWNER);
+		.setUnlocalizedName(LibNames.SPAWNER);
 
 		AutomatonUpgrade = new ItemAutomatonUpgrade()
-				.setUnlocalizedName(LibNames.UPGRADE);
+		.setUnlocalizedName(LibNames.UPGRADE);
 		punchcard = new ItemPunchcard().setUnlocalizedName(LibNames.PUNCHCARD);
 		chasis = new ItemChasis().setUnlocalizedName(LibNames.CHASIS);
 
@@ -75,12 +75,12 @@ public final class ModItems {
 				"diamond").setUnlocalizedName(LibNames.SABERDIAMOND);
 
 		copperIngot = new ItemMod("ingotCopper")
-				.setUnlocalizedName(LibNames.COPPERINGOT);
+		.setUnlocalizedName(LibNames.COPPERINGOT);
 
 		template = new ItemMod("template")
-				.setUnlocalizedName(LibNames.TEMPLATE);
+		.setUnlocalizedName(LibNames.TEMPLATE);
 		tinIngot = new ItemMod("ingotTin")
-				.setUnlocalizedName(LibNames.TININGOT);
+		.setUnlocalizedName(LibNames.TININGOT);
 		basicCore = new ItemCore("coreBasic").setUnlocalizedName(
 				LibNames.COREBASIC).setMaxStackSize(1);
 		mediumCore = new ItemCore("coreMedium").setUnlocalizedName(

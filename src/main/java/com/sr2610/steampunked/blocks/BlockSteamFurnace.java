@@ -93,7 +93,7 @@ public class BlockSteamFurnace extends BlockContainer {
 							if (itemstack.hasTagCompound()) {
 								entityitem.getEntityItem().setTagCompound(
 										(NBTTagCompound) itemstack
-												.getTagCompound().copy());
+										.getTagCompound().copy());
 							}
 
 							float f3 = 0.05F;

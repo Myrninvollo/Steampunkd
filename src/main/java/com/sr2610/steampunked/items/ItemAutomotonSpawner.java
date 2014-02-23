@@ -62,7 +62,7 @@ public class ItemAutomotonSpawner extends Item {
 					entity.maxHealth = nbttagdoubleHealth.func_150286_g();
 				} else
 					entity.maxHealth = 20;
-				
+
 				NBTTagDouble nbttagdoubleSpeed = (NBTTagDouble) nbttagcompound
 						.getTag("Speed");
 				if (nbttagdoubleSpeed != null) {
@@ -120,15 +120,15 @@ public class ItemAutomotonSpawner extends Item {
 						+ par1ItemStack.stackTagCompound.getDouble("Range")
 						+ " Blocks");
 			else
-				
-				
+
+
 				par3List.add("Range: 5.0 Blocks");
-			
+
 			if (par1ItemStack.stackTagCompound.hasKey("Speed"))
 				par3List.add("Speed: Fast");
-					
+
 			else
-				
+
 
 				par3List.add("Speed: Slow");
 

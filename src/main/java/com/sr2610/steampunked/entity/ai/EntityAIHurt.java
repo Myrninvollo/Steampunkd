@@ -50,11 +50,11 @@ public class EntityAIHurt extends EntityAITarget {
 			List list = taskOwner.worldObj.getEntitiesWithinAABB(
 					taskOwner.getClass(),
 					AxisAlignedBB
-							.getAABBPool()
-							.getAABB(taskOwner.posX, taskOwner.posY,
-									taskOwner.posZ, taskOwner.posX + 1.0D,
-									taskOwner.posY + 1.0D,
-									taskOwner.posZ + 1.0D)
+					.getAABBPool()
+					.getAABB(taskOwner.posX, taskOwner.posY,
+							taskOwner.posZ, taskOwner.posX + 1.0D,
+							taskOwner.posY + 1.0D,
+							taskOwner.posZ + 1.0D)
 							.expand(d0, 10.0D, d0));
 			Iterator iterator = list.iterator();
 
@@ -65,7 +65,7 @@ public class EntityAIHurt extends EntityAITarget {
 				if (taskOwner != entitycreature
 						&& entitycreature.getAttackTarget() == null
 						&& !entitycreature
-								.isOnSameTeam(taskOwner.getAITarget())) {
+						.isOnSameTeam(taskOwner.getAITarget())) {
 					entitycreature.setAttackTarget(taskOwner.getAITarget());
 				}
 			}

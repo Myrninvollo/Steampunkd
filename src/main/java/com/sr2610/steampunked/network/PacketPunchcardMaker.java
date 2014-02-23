@@ -58,7 +58,7 @@ public class PacketPunchcardMaker extends AbstractPacket {
 			ItemStack is = ((TileEntityPunchardMaker) te).getStackInSlot(3);
 			is.stackSize--;
 			((TileEntityPunchardMaker) te)
-					.setInventorySlotContents(2, contents);
+			.setInventorySlotContents(2, contents);
 			((TileEntityPunchardMaker) te).setInventorySlotContents(0, null);
 			((TileEntityPunchardMaker) te).setInventorySlotContents(3, is);
 

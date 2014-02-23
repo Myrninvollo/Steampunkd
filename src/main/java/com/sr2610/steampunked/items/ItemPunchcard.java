@@ -66,9 +66,9 @@ public class ItemPunchcard extends Item {
 			} else {
 				if (!par2EntityPlayer.worldObj.isRemote)
 					par2EntityPlayer
-							.addChatComponentMessage(new ChatComponentTranslation(
-									StatCollector
-											.translateToLocal("steampunked.oneProgram.name")));
+					.addChatComponentMessage(new ChatComponentTranslation(
+							StatCollector
+							.translateToLocal("steampunked.oneProgram.name")));
 				return false;
 			}
 
@@ -77,9 +77,9 @@ public class ItemPunchcard extends Item {
 		else {
 			if (!par2EntityPlayer.worldObj.isRemote)
 				par2EntityPlayer
-						.addChatComponentMessage(new ChatComponentTranslation(
-								StatCollector
-										.translateToLocal("steampunked.onlyAutomaton.name")));
+				.addChatComponentMessage(new ChatComponentTranslation(
+						StatCollector
+						.translateToLocal("steampunked.onlyAutomaton.name")));
 			return false;
 		}
 		return false;

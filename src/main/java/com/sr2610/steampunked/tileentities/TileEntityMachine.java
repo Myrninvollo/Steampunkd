@@ -12,7 +12,7 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
 public abstract class TileEntityMachine extends TileEntity implements
-		IInventory {
+IInventory {
 	protected abstract boolean isFluidFuel(FluidStack fuel);
 
 	/**

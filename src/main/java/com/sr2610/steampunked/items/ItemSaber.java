@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Multimap;
@@ -18,13 +19,13 @@ import com.sr2610.steampunked.lib.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemSaber extends Item {
+public class ItemSaber extends ItemSword {
 	private float weaponDamage;
 	private final Item.ToolMaterial toolMaterial;
 	private String texturename;
 
 	public ItemSaber(Item.ToolMaterial par2EnumToolMaterial) {
-		super();
+		super(par2EnumToolMaterial);
 		toolMaterial = par2EnumToolMaterial;
 		maxStackSize = 1;
 		setMaxDamage(par2EnumToolMaterial.getMaxUses());
@@ -116,19 +117,11 @@ public class ItemSaber extends Item {
 	/**
 	 * Return the name for this tool's material.
 	 */
+	@Override
 	public String getToolMaterialName() {
 		return toolMaterial.toString();
 	}
 
-	/**
-	 * Return whether this item is repairable in an anvil.
-	 */
-	@Override
-	public boolean getIsRepairable(ItemStack par1ItemStack,
-			ItemStack par2ItemStack) {
-		// TODO Make Sabers Repairable
-		return false;
-	}
 
 	/**
 	 * Gets a map of item attribute modifiers, used by ItemSword to increase hit
@@ -139,7 +132,7 @@ public class ItemSaber extends Item {
 		Multimap multimap = super.getItemAttributeModifiers();
 		multimap.put(SharedMonsterAttributes.attackDamage
 				.getAttributeUnlocalizedName(), new AttributeModifier(
-				field_111210_e, "Weapon modifier", weaponDamage, 0));
+						field_111210_e, "Weapon modifier", weaponDamage, 0));
 		return multimap;
 	}
 

@@ -60,7 +60,7 @@ public class ContainerSteamBoiler extends Container {
 			} else {
 				if (((Slot) inventorySlots.get(0)).getHasStack()
 						|| !((Slot) inventorySlots.get(0))
-								.isItemValid(itemstack1)) {
+						.isItemValid(itemstack1)) {
 					return null;
 				}
 
@@ -69,8 +69,8 @@ public class ContainerSteamBoiler extends Container {
 					itemstack1.stackSize = 0;
 				} else if (itemstack1.stackSize >= 1) {
 					((Slot) inventorySlots.get(0))
-							.putStack(new ItemStack(itemstack1.getItem(), 1,
-									itemstack1.getItemDamage()));
+					.putStack(new ItemStack(itemstack1.getItem(), 1,
+							itemstack1.getItemDamage()));
 					--itemstack1.stackSize;
 				}
 			}

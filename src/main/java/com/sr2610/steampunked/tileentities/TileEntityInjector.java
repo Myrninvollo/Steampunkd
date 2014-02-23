@@ -18,7 +18,7 @@ import com.sr2610.steampunked.items.interfaces.ISteamUser;
 import com.sr2610.steampunked.lib.LibOptions;
 
 public class TileEntityInjector extends TileEntityMachine implements
-		ISidedInventory, IFluidHandler {
+ISidedInventory, IFluidHandler {
 
 	static private final int NETDATAID_TANK_FLUID = 1;
 	static private final int NETDATAID_TANK_AMOUNT = 2;

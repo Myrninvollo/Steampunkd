@@ -95,7 +95,7 @@ public class RenderAutomoton extends RenderLiving {
 			GL11.glRotatef(-15.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glRotatef(40.0F, 0.0F, 0.0F, 1.0F);
 			renderManager.itemRenderer
-					.renderItem(par1EntityWitch, itemstack, 0);
+			.renderItem(par1EntityWitch, itemstack, 0);
 
 			if (itemstack.getItem().requiresMultipleRenderPasses()) {
 				renderManager.itemRenderer.renderItem(par1EntityWitch,

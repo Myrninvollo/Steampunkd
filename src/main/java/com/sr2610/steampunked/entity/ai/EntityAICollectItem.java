@@ -19,8 +19,8 @@ public class EntityAICollectItem extends EntityAIBase {
 	private EntityItem targetItem = null;
 
 	private double range = 5.0;
-	
-	private double speed = 2.5;
+
+	private double speed = 0.25;
 
 	public EntityAICollectItem(EntityAutomaton auto) {
 		this.auto = auto;
@@ -44,10 +44,10 @@ public class EntityAICollectItem extends EntityAIBase {
 				List<EntityItem> items = auto.worldObj.getEntitiesWithinAABB(
 						EntityItem.class,
 						AxisAlignedBB
-								.getAABBPool()
-								.getAABB(auto.posX - 1, auto.posY - 1,
-										auto.posZ - 1, auto.posX + 1,
-										auto.posY + 1, auto.posZ + 1)
+						.getAABBPool()
+						.getAABB(auto.posX - 1, auto.posY - 1,
+								auto.posZ - 1, auto.posX + 1,
+								auto.posY + 1, auto.posZ + 1)
 								.expand(range, range, range));
 				EntityItem closest = null;
 				double closestDistance = Double.MAX_VALUE;

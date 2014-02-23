@@ -20,13 +20,7 @@ public class ModCreativeTab extends CreativeTabs {
 		super("steampunked");
 	}
 
-	@Override
-	public ItemStack getIconItemStack() {
-		if (displayItem == null)
-			return new ItemStack(ModItems.goggles);
 
-		return displayItem;
-	}
 
 	@Override
 	public void displayAllReleventItems(List list) {

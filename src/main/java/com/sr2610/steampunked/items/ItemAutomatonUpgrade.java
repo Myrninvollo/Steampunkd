@@ -26,7 +26,7 @@ public class ItemAutomatonUpgrade extends Item implements IUpgrade {
 	}
 
 	public static final String[] upgradeItemNames = new String[] { "range",
-			"speed", "health", "undefined" };
+		"speed", "health", "undefined" };
 	@SideOnly(Side.CLIENT)
 	private IIcon[] upgradeIcons;
 

@@ -68,7 +68,7 @@ public class ContainerTinkerBench extends Container {
 			if (lastCraftProgress != tinkerTable.craftProgress) {
 				icrafting.sendProgressBarUpdate(this, 0,
 
-				tinkerTable.craftProgress);
+						tinkerTable.craftProgress);
 			}
 			for (i = 0; i < crafters.size(); i++) {
 				tinkerTable.SendGUINetworkData(this,

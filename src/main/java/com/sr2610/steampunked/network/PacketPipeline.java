@@ -30,7 +30,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @ChannelHandler.Sharable
 public class PacketPipeline extends
-		MessageToMessageCodec<FMLProxyPacket, AbstractPacket> {
+MessageToMessageCodec<FMLProxyPacket, AbstractPacket> {
 
 	private EnumMap<Side, FMLEmbeddedChannel> channels;
 	private LinkedList<Class<? extends AbstractPacket>> packets = new LinkedList<Class<? extends AbstractPacket>>();
@@ -110,7 +110,7 @@ public class PacketPipeline extends
 
 		case SERVER:
 			INetHandler netHandler = ctx.channel()
-					.attr(NetworkRegistry.NET_HANDLER).get();
+			.attr(NetworkRegistry.NET_HANDLER).get();
 			player = ((NetHandlerPlayServer) netHandler).playerEntity;
 			pkt.handleServerSide(player);
 			break;
@@ -147,20 +147,20 @@ public class PacketPipeline extends
 		Collections.sort(packets,
 				new Comparator<Class<? extends AbstractPacket>>() {
 
-					@Override
-					public int compare(Class<? extends AbstractPacket> clazz1,
-							Class<? extends AbstractPacket> clazz2) {
-						int com = String.CASE_INSENSITIVE_ORDER.compare(
-								clazz1.getCanonicalName(),
-								clazz2.getCanonicalName());
-						if (com == 0) {
-							com = clazz1.getCanonicalName().compareTo(
-									clazz2.getCanonicalName());
-						}
+			@Override
+			public int compare(Class<? extends AbstractPacket> clazz1,
+					Class<? extends AbstractPacket> clazz2) {
+				int com = String.CASE_INSENSITIVE_ORDER.compare(
+						clazz1.getCanonicalName(),
+						clazz2.getCanonicalName());
+				if (com == 0) {
+					com = clazz1.getCanonicalName().compareTo(
+							clazz2.getCanonicalName());
+				}
 
-						return com;
-					}
-				});
+				return com;
+			}
+		});
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -179,7 +179,7 @@ public class PacketPipeline extends
 	 */
 	public void sendToAll(AbstractPacket message) {
 		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET)
-				.set(FMLOutboundHandler.OutboundTarget.ALL);
+		.set(FMLOutboundHandler.OutboundTarget.ALL);
 		channels.get(Side.SERVER).writeAndFlush(message);
 	}
 
@@ -196,9 +196,9 @@ public class PacketPipeline extends
 	 */
 	public void sendTo(AbstractPacket message, EntityPlayerMP player) {
 		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET)
-				.set(FMLOutboundHandler.OutboundTarget.PLAYER);
+		.set(FMLOutboundHandler.OutboundTarget.PLAYER);
 		channels.get(Side.SERVER)
-				.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(player);
+		.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(player);
 		channels.get(Side.SERVER).writeAndFlush(message);
 	}
 
@@ -218,9 +218,9 @@ public class PacketPipeline extends
 	public void sendToAllAround(AbstractPacket message,
 			NetworkRegistry.TargetPoint point) {
 		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET)
-				.set(FMLOutboundHandler.OutboundTarget.ALLAROUNDPOINT);
+		.set(FMLOutboundHandler.OutboundTarget.ALLAROUNDPOINT);
 		channels.get(Side.SERVER)
-				.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(point);
+		.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(point);
 		channels.get(Side.SERVER).writeAndFlush(message);
 	}
 
@@ -237,10 +237,10 @@ public class PacketPipeline extends
 	 */
 	public void sendToDimension(AbstractPacket message, int dimensionId) {
 		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET)
-				.set(FMLOutboundHandler.OutboundTarget.DIMENSION);
+		.set(FMLOutboundHandler.OutboundTarget.DIMENSION);
 		channels.get(Side.SERVER)
-				.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS)
-				.set(dimensionId);
+		.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS)
+		.set(dimensionId);
 		channels.get(Side.SERVER).writeAndFlush(message);
 	}
 
@@ -255,7 +255,7 @@ public class PacketPipeline extends
 	 */
 	public void sendToServer(AbstractPacket message) {
 		channels.get(Side.CLIENT).attr(FMLOutboundHandler.FML_MESSAGETARGET)
-				.set(FMLOutboundHandler.OutboundTarget.TOSERVER);
+		.set(FMLOutboundHandler.OutboundTarget.TOSERVER);
 		channels.get(Side.CLIENT).writeAndFlush(message);
 	}
 }
