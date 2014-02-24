@@ -30,6 +30,7 @@ public final class ModItems {
 	public static Item saberIron;
 	public static Item saberGold;
 	public static Item saberDiamond;
+	public static Item clockworkBow;
 
 	public static Item copperIngot;
 	public static Item tinIngot;
@@ -73,6 +74,8 @@ public final class ModItems {
 				.setUnlocalizedName(LibNames.SABERGOLD);
 		saberDiamond = new ItemSaber(Item.ToolMaterial.EMERALD).setTexture(
 				"diamond").setUnlocalizedName(LibNames.SABERDIAMOND);
+		
+		clockworkBow = new ItemClockworkBow().setUnlocalizedName(LibNames.BOW);
 
 		copperIngot = new ItemMod("ingotCopper")
 		.setUnlocalizedName(LibNames.COPPERINGOT);
@@ -119,6 +122,9 @@ public final class ModItems {
 		GameRegistry.registerItem(saberGold, LibNames.SABERGOLD,
 				Reference.ModID);
 		GameRegistry.registerItem(saberDiamond, LibNames.SABERDIAMOND,
+				Reference.ModID);
+		
+		GameRegistry.registerItem(clockworkBow, LibNames.BOW,
 				Reference.ModID);
 
 		GameRegistry.registerItem(copperIngot, LibNames.COPPERINGOT,

@@ -43,9 +43,9 @@ public class Steampunked {
 	public void preLoad(FMLPreInitializationEvent event) {
 		ConfigHandler.loadConfig(event.getSuggestedConfigurationFile());
 		proxy.registerTickHandlers();
-		proxy.registerRenderInformation();
 		ModBlocks.initBlocks();
 		ModItems.initItems();
+		proxy.registerRenderInformation();
 		EntityRegistry.registerModEntity(EntityAutomaton.class, "Automoton", 1,
 				this, 80, 3, true);
 		MinecraftForge.EVENT_BUS.register(new SteampunkedEventHandler());

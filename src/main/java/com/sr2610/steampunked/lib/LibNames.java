@@ -36,5 +36,6 @@ public final class LibNames {
 	public static final String COREMEDIUM = "coreMedium";
 	public static final String COREADVANCED = "coreAdvanced";
 	public static final String TEMPLATE = "template";
+	public static final String BOW = "bowClockwork";
 
 }
