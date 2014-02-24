@@ -11,7 +11,6 @@ public class EntityAIMoveHome extends EntityAIBase {
 
 	private PathNavigate pathFinder;
 
-	private double speed = 0.25;
 
 
 	public EntityAIMoveHome(EntityAutomaton auto) {
@@ -22,7 +21,6 @@ public class EntityAIMoveHome extends EntityAIBase {
 
 	@Override
 	public boolean shouldExecute() {
-		speed = auto.speed;
 		if (!pathFinder.noPath()) {
 			return false;
 		}
@@ -47,7 +45,7 @@ public class EntityAIMoveHome extends EntityAIBase {
 	@Override
 	public void startExecuting() {
 		if (auto.posX != auto.homeX) {
-			pathFinder.tryMoveToXYZ(auto.homeX, auto.homeY, auto.homeZ, speed);
+			pathFinder.tryMoveToXYZ(auto.homeX, auto.homeY, auto.homeZ, 1.0D);
 		}
 	}
 

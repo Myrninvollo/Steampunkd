@@ -155,7 +155,7 @@ public class GuiTinkerBench extends GuiMachine {
 
 							if (nbttagdoubleSpeed == null) {
 								stack.setTagInfo("Speed", new NBTTagDouble(
-										0.5));
+										0.8));
 							}
 						}
 					}

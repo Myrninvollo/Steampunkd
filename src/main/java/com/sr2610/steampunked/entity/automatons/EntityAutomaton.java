@@ -1,6 +1,7 @@
 package com.sr2610.steampunked.entity.automatons;
 
 import java.util.List;
+import java.util.UUID;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
@@ -13,6 +14,8 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -54,15 +57,19 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 	public double range;
 	public double maxHealth;
 	public double speed;
+	private static final UUID speedBoostUUID = UUID
+			.fromString("49455A49-7EC5-45BA-B886-3B80B23A1718");
 
 	private static final IEntitySelector attackEntitySelector = new AttackFilter();
+	private static final AttributeModifier speedBoost = new AttributeModifier(
+			speedBoostUUID, "Speed Boost", 0.5D, 1);
 
 	public EntityAutomaton(World par1World) {
 		super(par1World);
 		setSize(0.6F, 1F);
 		attackMobs = false;
 		tasks.addTask(1, new EntityAISwimming(this));
-		tasks.addTask(2, new EntityAIAttackOnCollide(this,speed, true));
+		tasks.addTask(2, new EntityAIAttackOnCollide(this, speed, true));
 		tasks.addTask(3, new EntityAILookIdle(this));
 		targetTasks.addTask(4, new EntityAIHurt(this, false));
 
@@ -78,6 +85,8 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 
 	@Override
 	protected void dropEquipment(boolean par1, int par2) {
+
+		entityDropItem(getHeldItem(), 1);
 	}
 
 	@Override
@@ -114,10 +123,16 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 
 		}
 
-		if (speed > 0.25) {
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(
-					speed);
+		if (speed > 0.0) {
+			IAttributeInstance iattributeinstance = getEntityAttribute(SharedMonsterAttributes.movementSpeed);
+			iattributeinstance.removeModifier(speedBoost);
 
+			if (speed > 0.25) {
+
+				iattributeinstance.applyModifier(speedBoost);
+
+			} else
+				iattributeinstance.removeModifier(speedBoost);
 		}
 
 		if (attackTimer > 0) {
@@ -171,9 +186,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
-		if (getHeldItem() != null) {
-			dropItem(getHeldItem().getItem(), getHeldItem().stackSize);
-		}
+
 
 	}
 

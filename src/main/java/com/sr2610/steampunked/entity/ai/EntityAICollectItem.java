@@ -20,7 +20,6 @@ public class EntityAICollectItem extends EntityAIBase {
 
 	private double range = 5.0;
 
-	private double speed = 0.25;
 
 	public EntityAICollectItem(EntityAutomaton auto) {
 		this.auto = auto;
@@ -31,7 +30,6 @@ public class EntityAICollectItem extends EntityAIBase {
 	@Override
 	public boolean shouldExecute() {
 		range = auto.range;
-		speed = auto.speed;
 		if (!pathFinder.noPath()) {
 			return false;
 		}
@@ -87,7 +85,7 @@ public class EntityAICollectItem extends EntityAIBase {
 	public void startExecuting() {
 		if (targetItem != null) {
 			pathFinder.tryMoveToXYZ(targetItem.posX, targetItem.posY,
-					targetItem.posZ, speed);
+					targetItem.posZ, 1.0D);
 		}
 	}
 
