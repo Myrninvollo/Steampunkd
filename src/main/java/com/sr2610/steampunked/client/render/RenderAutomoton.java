@@ -1,6 +1,7 @@
 package com.sr2610.steampunked.client.render;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
@@ -8,6 +9,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -95,7 +98,7 @@ public class RenderAutomoton extends RenderLiving {
 			GL11.glRotatef(-15.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glRotatef(40.0F, 0.0F, 0.0F, 1.0F);
 			renderManager.itemRenderer
-			.renderItem(par1EntityWitch, itemstack, 0);
+					.renderItem(par1EntityWitch, itemstack, 0);
 
 			if (itemstack.getItem().requiresMultipleRenderPasses()) {
 				renderManager.itemRenderer.renderItem(par1EntityWitch,
@@ -116,4 +119,19 @@ public class RenderAutomoton extends RenderLiving {
 		this.renderEquippedItems((EntityAutomaton) par1EntityLivingBase, par2);
 	}
 
+	protected void rotateCorpse(EntityLivingBase par1EntityLivingBase,
+			float par2, float par3, float par4) {
+		GL11.glRotatef(180.0F - par3, 0.0F, 1.0F, 0.0F);
+
+	
+			String s = EnumChatFormatting
+					.getTextWithoutFormattingCodes(par1EntityLivingBase
+							.getCommandSenderName());
+			if (s == "SR2610") {
+				GL11.glTranslatef(0.0F, par1EntityLivingBase.height + 0.1F,
+						0.0F);
+			}
+		
+		super.rotateCorpse(par1EntityLivingBase, par2, par3, par4);
+	}
 }

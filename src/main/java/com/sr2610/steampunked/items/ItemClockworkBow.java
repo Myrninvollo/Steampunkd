@@ -151,23 +151,7 @@ public class ItemClockworkBow extends ItemBow {
 		if (event.isCanceled()) {
 			return event.result;
 		}
-		if (par3EntityPlayer.isSneaking()) {
-			if (par1ItemStack.stackTagCompound != null) {
-				int mode = par1ItemStack.stackTagCompound.getInteger("Mode");
 
-				switch (mode) {
-				case 0:
-					mode = 5;
-				case 1:
-					mode = 5;
-				case 2:
-					mode = 5;
-
-				}
-				par1ItemStack.stackTagCompound.setInteger("Mode", mode);
-
-			}
-		}
 		if (par3EntityPlayer.capabilities.isCreativeMode
 				|| par3EntityPlayer.inventory.hasItem(Items.arrow)) {
 			par3EntityPlayer.setItemInUse(par1ItemStack,
@@ -176,19 +160,6 @@ public class ItemClockworkBow extends ItemBow {
 		}
 
 		return par1ItemStack;
-	}
-
-	public void addInformation(ItemStack itemStack, EntityPlayer player,
-			List list, boolean par4) {
-		if (!itemStack.hasTagCompound()) {
-
-			itemStack.stackTagCompound = new NBTTagCompound();
-			itemStack.stackTagCompound.setInteger("Mode", 100);
-		} else {
-
-			int mode = itemStack.stackTagCompound.getInteger("Mode");
-			list.add("Mode: " + mode);
-		}
 	}
 
 	/**
