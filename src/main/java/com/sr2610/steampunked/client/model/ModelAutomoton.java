@@ -1,11 +1,9 @@
 package com.sr2610.steampunked.client.model;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
@@ -196,7 +194,7 @@ public class ModelAutomoton extends ModelBase {
 		EntityAutomaton entity = (EntityAutomaton) par1EntityLivingBase;
 		hideParts(entity);
 
-	
+
 
 		if (entity.getHeldItem() != null) {
 			rightarm.rotateAngleX = -0.6F;
@@ -205,7 +203,7 @@ public class ModelAutomoton extends ModelBase {
 			leftarm.rotateAngleY = 0.0F;
 
 		} else {
-			
+
 			rightarm.rotateAngleX = MathHelper.cos(par2 * 0.6662F
 					+ (float) Math.PI)
 					* 2.0F * par3 * 0.5F;
@@ -214,7 +212,7 @@ public class ModelAutomoton extends ModelBase {
 			rightarm.rotateAngleZ = 0.0F;
 			leftarm.rotateAngleZ = 0.0F;
 		}
-		
+
 	}
 
 	public void hideParts(EntityAutomaton entity) {

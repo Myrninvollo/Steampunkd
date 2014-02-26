@@ -3,8 +3,6 @@ package com.sr2610.steampunked.items;
 import java.util.List;
 import java.util.Set;
 
-import org.lwjgl.input.Keyboard;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -77,7 +75,7 @@ public class ItemDrill extends ItemPickaxe implements ISteamUser {
 		itemIcon = iconRegister.registerIcon(Reference.ModID + ":iron_drill");
 
 
-			
+
 	}
 
 	public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block) {

@@ -87,7 +87,7 @@ public class EntityAutomaton extends EntityTameable implements IInventory {
 	protected void dropEquipment(boolean par1, int par2) {
 		if (getHeldItem()!=null)
 
-		entityDropItem(getHeldItem(), 1);
+			entityDropItem(getHeldItem(), 1);
 	}
 
 	@Override
