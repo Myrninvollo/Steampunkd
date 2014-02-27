@@ -1,7 +1,6 @@
 package com.sr2610.steampunked.core.handlers;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Random;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -18,7 +17,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 public class SteampunkedEventHandler {
 
 	public boolean resetRender = false;
-	public static List<String> holograms = new ArrayList();
 	boolean avoidRecursion = false;
 
 	@SubscribeEvent
@@ -36,8 +34,8 @@ public class SteampunkedEventHandler {
 
 						if (event.distance > 10F)
 							eventPlayer.worldObj
-							.playSoundAtEntity(event.entity,
-									"tile.piston.out", 0.5F, 1.0F);
+									.playSoundAtEntity(event.entity,
+											"tile.piston.out", 0.5F, 1.0F);
 						boots.setItemDamage(boots.getItemDamage() + d);
 						event.distance = 0;
 					}
@@ -48,46 +46,40 @@ public class SteampunkedEventHandler {
 	}
 
 	@SubscribeEvent
-
-	public void entityColorRender(RenderLivingEvent.Pre event)
-	{
-		String s = EnumChatFormatting.getTextWithoutFormattingCodes(event.entity.getCommandSenderName());
+	public void entityColorRender(RenderLivingEvent.Pre event) {
+		String s = EnumChatFormatting
+				.getTextWithoutFormattingCodes(event.entity
+						.getCommandSenderName());
 		resetRender = true;
 
-		if (holograms.contains(s) && (!(event.entity instanceof EntityPlayer) || !((EntityPlayer)event.entity).isInvisible()))
-		{
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.45F);
-			GL11.glEnable(3042);
-			GL11.glBlendFunc(770, 771);
-			resetRender = true;
-		}
-		if (s.toLowerCase().equals("sr2610") && (!(event.entity instanceof EntityPlayer) || !((EntityPlayer)event.entity).isInvisible()))
-		{
-			GL11.glColor4f(0.8F, 0.8F, 1.0F, 0.55F);
+		if (s.toLowerCase().equals("sr2610")
+				&& (!(event.entity instanceof EntityPlayer) || !((EntityPlayer) event.entity)
+						.getHideCape())) {
+			GL11.glColor4f(0.8F, 0.8F, 1.0F, 0.65F);
 			GL11.glEnable(3042);
 			GL11.glBlendFunc(770, 771);
 			resetRender = true;
 		}
 
-		if (s.toLowerCase().equals("danh37") && !(event.entity instanceof EntityPlayer))
-		{
-			GL11.glColor4f(1F,0.392F, 0.392F, 1.0F);
+		if (s.toLowerCase().equals("danh37")
+				&& (!(event.entity instanceof EntityPlayer) || !((EntityPlayer) event.entity)
+						.getHideCape())) {
+			GL11.glColor4f(1F, 0.392F, 0.392F, 1.0F);
 			resetRender = true;
 		}
 
-		if (s.toLowerCase().equals("flarehayr") && !(event.entity instanceof EntityPlayer))
-		{
-			GL11.glColor4f(1F,0.7F, 0.392F, 1.0F);
+		if (s.toLowerCase().equals("flarehayr")
+				&& (!(event.entity instanceof EntityPlayer) || !((EntityPlayer) event.entity)
+						.getHideCape())) {
+			GL11.glColor4f(1F, 0.7F, 0.392F, 1.0F);
 			resetRender = true;
 		}
 
 	}
 
 	@SubscribeEvent
-	public void entityColorRender(RenderLivingEvent.Post event)
-	{
-		if (!avoidRecursion && resetRender)
-		{
+	public void entityColorRender(RenderLivingEvent.Post event) {
+		if (!avoidRecursion && resetRender) {
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glDisable(3042);
 		}
