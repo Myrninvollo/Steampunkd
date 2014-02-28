@@ -36,6 +36,7 @@ IInventory {
 					|| !(stack.getItem() instanceof IFluidContainerItem)) {
 				return;
 			}
+
 			IFluidContainerItem fluid_cont = (IFluidContainerItem) stack
 					.getItem();
 

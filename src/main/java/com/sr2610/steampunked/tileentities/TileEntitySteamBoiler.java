@@ -1,6 +1,9 @@
 package com.sr2610.steampunked.tileentities;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -18,6 +21,7 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -36,7 +40,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntitySteamBoiler extends TileEntityMachine implements
-IFluidHandler, ISidedInventory {
+		IFluidHandler, ISidedInventory {
 
 	static private final int NETDATAID_INPUT_TANK_FLUID = 1;
 	static private final int NETDATAID_INPUT_TANK_AMOUNT = 2;
@@ -47,8 +51,6 @@ IFluidHandler, ISidedInventory {
 	static public final int TANK_INPUT = 0;
 	static public final int TANK_OUTPUT = 1;
 	public int furnaceBurnTime;
-
-	protected List<ForgeDirection> surroundingTanks = new ArrayList<ForgeDirection>();
 
 	private FluidTank[] tanks;
 	private FluidTankInfo[] tank_info;
@@ -407,6 +409,8 @@ IFluidHandler, ISidedInventory {
 					tanks[0].fill(new FluidStack(FluidRegistry.WATER, 21), true);
 				}
 			}
+			autoOutputToSides(10, this);
+
 			if (tanks[0].getFluidAmount() > 0
 					&& tanks[1].getFluidAmount() != LibOptions.boilerCapacity) {
 				if (furnaceBurnTime == 0) {
@@ -458,6 +462,61 @@ IFluidHandler, ISidedInventory {
 	@Override
 	public boolean hasCustomInventoryName() {
 		return false;
+	}
+
+	protected List<ForgeDirection> surroundingTanks = new ArrayList<ForgeDirection>();
+
+	public void autoOutputToSides(int amountPerTick, TileEntity currentTile) {
+
+		if (worldObj == null)
+			return;
+		refreshSurroundingTanks(currentTile);
+
+		if (tanks[1].getFluidAmount() > 0 && surroundingTanks.size() > 0) {
+			FluidStack drainedFluid = tanks[1].drain(
+					Math.min(tanks[1].getFluidAmount(), amountPerTick), true);
+			if (drainedFluid != null) {
+				Collections.shuffle(surroundingTanks);
+				// for each surrounding tank
+				for (ForgeDirection side : surroundingTanks) {
+					TileEntity otherTank = getTileInDirection(this, side);
+					if (drainedFluid.amount > 0) {
+						drainedFluid = drainedFluid.copy();
+						if (otherTank instanceof IFluidHandler) {
+							drainedFluid.amount -= ((IFluidHandler) otherTank)
+									.fill(side.getOpposite(), drainedFluid,
+											true);
+						}
+					}
+				}
+				if (drainedFluid.amount > 0) {
+					tanks[1].fill(drainedFluid, true);
+				}
+			}
+		}
+
+	}
+
+	public TileEntity getTileInDirection(TileEntity tile,
+			ForgeDirection direction) {
+		int targetX = tile.xCoord + direction.offsetX;
+		int targetY = tile.yCoord + direction.offsetY;
+		int targetZ = tile.zCoord + direction.offsetZ;
+		return worldObj.getTileEntity(targetX, targetY, targetZ);
+	}
+
+	public void refreshSurroundingTanks(TileEntity currentTile) {
+		HashSet<ForgeDirection> checkSides = new HashSet<ForgeDirection>();
+
+		checkSides.addAll(Arrays.asList(ForgeDirection.VALID_DIRECTIONS));
+
+		surroundingTanks = new ArrayList<ForgeDirection>();
+		for (ForgeDirection side : checkSides) {
+			TileEntity tile = getTileInDirection(currentTile, side);
+			if (tile instanceof IFluidHandler) {
+				surroundingTanks.add(side);
+			}
+		}
 	}
 
 }

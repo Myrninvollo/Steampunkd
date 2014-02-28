@@ -253,6 +253,7 @@ ISidedInventory, IFluidHandler {
 					.setItemDamage(chargerItemSlot[0].getItemDamage() - 1);
 		}
 
+
 	}
 
 	public World getWorld() {
@@ -326,5 +327,9 @@ ISidedInventory, IFluidHandler {
 	public boolean hasCustomInventoryName() {
 		return false;
 	}
+
+
+
+
 
 }

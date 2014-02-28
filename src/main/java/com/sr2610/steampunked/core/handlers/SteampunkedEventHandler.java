@@ -1,7 +1,5 @@
 package com.sr2610.steampunked.core.handlers;
 
-import java.util.Random;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
@@ -34,8 +32,8 @@ public class SteampunkedEventHandler {
 
 						if (event.distance > 10F)
 							eventPlayer.worldObj
-									.playSoundAtEntity(event.entity,
-											"tile.piston.out", 0.5F, 1.0F);
+							.playSoundAtEntity(event.entity,
+									"tile.piston.out", 0.5F, 1.0F);
 						boots.setItemDamage(boots.getItemDamage() + d);
 						event.distance = 0;
 					}
