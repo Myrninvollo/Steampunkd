@@ -18,6 +18,7 @@ import com.sr2610.steampunked.Steampunked;
 import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
 import com.sr2610.steampunked.inventory.container.ContainerTinkerBench;
 import com.sr2610.steampunked.items.ItemChasis;
+import com.sr2610.steampunked.items.ItemCore;
 import com.sr2610.steampunked.items.ModItems;
 import com.sr2610.steampunked.items.interfaces.IUpgrade;
 import com.sr2610.steampunked.lib.Reference;
@@ -71,7 +72,7 @@ public class GuiTinkerBench extends GuiMachine {
 		check();
 		drawEntity(guiLeft + 51 + 55, guiTop + 75, 30,
 				(float) (guiLeft + 51 + 60) - xSize, (float) (guiTop + 75 - 50)
-				- ySize, ae);
+						- ySize, ae);
 
 	}
 
@@ -120,7 +121,9 @@ public class GuiTinkerBench extends GuiMachine {
 	public void actionPerformed(GuiButton button) {
 		if (button.id == 1) {
 			if (injectorInventory.getStackInSlot(0) != null
-					&& injectorInventory.getStackInSlot(0).getItem() instanceof ItemChasis) {
+					&& injectorInventory.getStackInSlot(0).getItem() instanceof ItemChasis
+					&& injectorInventory.getStackInSlot(1) != null
+					&& injectorInventory.getStackInSlot(1).getItem() instanceof ItemCore) {
 				ItemStack stack = new ItemStack(ModItems.spawner, 1, 0);
 				for (int i = 2; i < 6; ++i) {
 					if (injectorInventory.getStackInSlot(i) != null
@@ -154,8 +157,7 @@ public class GuiTinkerBench extends GuiMachine {
 									.getTag("Speed");
 
 							if (nbttagdoubleSpeed == null) {
-								stack.setTagInfo("Speed", new NBTTagDouble(
-										0.8));
+								stack.setTagInfo("Speed", new NBTTagDouble(0.8));
 							}
 						}
 					}
