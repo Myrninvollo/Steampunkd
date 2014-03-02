@@ -27,11 +27,6 @@ public class ContainerSteamFurnace extends Container {
 		int i;
 
 		for (i = 0; i < 3; ++i) {
-			addSlotToContainer(new SlotUpgrade(par2TileEntityFurnace, i + 2, 8,
-					18 + i * 18));
-		}
-
-		for (i = 0; i < 3; ++i) {
 			for (int j = 0; j < 9; ++j) {
 				addSlotToContainer(new Slot(par1InventoryPlayer, j + i * 9 + 9,
 						8 + j * 18, 84 + i * 18));
