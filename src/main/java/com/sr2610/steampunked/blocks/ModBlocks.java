@@ -10,6 +10,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.sr2610.steampunked.lib.LibNames;
 import com.sr2610.steampunked.tileentities.TileEntityInjector;
+import com.sr2610.steampunked.tileentities.TileEntityPipe;
 import com.sr2610.steampunked.tileentities.TileEntityPunchardMaker;
 import com.sr2610.steampunked.tileentities.TileEntitySteamBoiler;
 import com.sr2610.steampunked.tileentities.TileEntitySteamFurnace;
@@ -27,6 +28,7 @@ public final class ModBlocks {
 	public static Block steamBoiler;
 	public static Block tinkerBench;
 	public static Block punchcardMaker;
+	public static Block pipetest;
 
 	public static Block oreCopper;
 	public static Block oreTin;
@@ -76,6 +78,11 @@ public final class ModBlocks {
 		.setHardness(3.0F).setResistance(5.0F)
 		.setStepSound(Block.soundTypePiston)
 		.setBlockName(LibNames.ORETIN);
+		
+		pipetest=new BlockPipe(Material.iron)
+		.setHardness(5.0F).setResistance(10.0F)
+		.setStepSound(Block.soundTypeMetal)
+		.setBlockName("Pipe");
 
 		registerBlocks();
 	}
@@ -102,6 +109,10 @@ public final class ModBlocks {
 				"tileEntityTinkerBench");
 		GameRegistry.registerTileEntity(TileEntityPunchardMaker.class,
 				"tileEntityPunchcardMaker");
+		
+		GameRegistry.registerBlock(pipetest, "pipe");
+		GameRegistry.registerTileEntity(TileEntityPipe.class,
+				"tileEntityPipe");
 		oreRegistration();
 	}
 
