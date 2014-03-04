@@ -8,7 +8,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
 
-import com.sr2610.steampunked.inventory.slots.tinkerbench.SlotUpgrade;
 import com.sr2610.steampunked.tileentities.TileEntitySteamFurnace;
 
 import cpw.mods.fml.relauncher.Side;

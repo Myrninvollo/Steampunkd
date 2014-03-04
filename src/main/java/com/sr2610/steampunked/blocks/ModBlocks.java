@@ -78,7 +78,7 @@ public final class ModBlocks {
 		.setHardness(3.0F).setResistance(5.0F)
 		.setStepSound(Block.soundTypePiston)
 		.setBlockName(LibNames.ORETIN);
-		
+
 		pipetest=new BlockPipe(Material.iron)
 		.setHardness(5.0F).setResistance(10.0F)
 		.setStepSound(Block.soundTypeMetal)
@@ -109,7 +109,7 @@ public final class ModBlocks {
 				"tileEntityTinkerBench");
 		GameRegistry.registerTileEntity(TileEntityPunchardMaker.class,
 				"tileEntityPunchcardMaker");
-		
+
 		GameRegistry.registerBlock(pipetest, "pipe");
 		GameRegistry.registerTileEntity(TileEntityPipe.class,
 				"tileEntityPipe");

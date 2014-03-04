@@ -17,11 +17,11 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
-import com.sr2610.steampunked.blocks.ModBlocks;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -29,21 +29,21 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
+import com.sr2610.steampunked.blocks.ModBlocks;
+
 public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
-	
+
 	private FluidTank tank;
 	private FluidTankInfo[] tank_info;
-	
+
 	public TileEntityPipe() {
 		super();
 
-		int i;
+		tank = new FluidTank(200);
+		tank_info = new FluidTankInfo[1];
+		tank_info[0] = new FluidTankInfo(tank);		}
 
-			tank = new FluidTank(200);
-			tank_info = new FluidTankInfo[1];
-			tank_info[0] = new FluidTankInfo(tank);		}
 
-	
 
 	@Override
 	public int getSizeInventory() {
@@ -102,7 +102,7 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 		return false;
 	}
 
-	
+
 	@Override
 	protected void UpdateEntityClient() {
 	}
@@ -120,14 +120,14 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 	public int GetTankCount() {
 		return 1;
 	}
-	
+
 	@Override
 	public void update(){
-		this.autoOutputToSides(30, this);
+		autoOutputToSides(40, this);
 
 	}
-	
-	
+
+
 	protected List<ForgeDirection> surroundingTanks = new ArrayList<ForgeDirection>();
 
 	public void autoOutputToSides(int amountPerTick, TileEntity currentTile) {
@@ -230,16 +230,24 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 
 	@Override
 	public boolean canDrain(ForgeDirection from, Fluid fluid) {
-		return true;
+		return false;
 	}
 
 
 
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-		return this.tank_info;
+		return tank_info;
 	}
 
+
+
+	public boolean isPipeConnected(ForgeDirection direct) {
+		return true;
+	}
 	
+
+
+
 
 }
