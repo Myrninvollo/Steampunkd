@@ -92,7 +92,7 @@ public final class ModItems {
 				LibNames.COREMEDIUM).setMaxStackSize(1);
 		advancedCore = new ItemCore("coreAdvanced").setUnlocalizedName(
 				LibNames.COREADVANCED).setMaxStackSize(1);
-		
+
 		itemPipe=new ItemPipe().setCreativeTab(CreativeTabs.tabAllSearch);
 
 		registerItems();
@@ -143,7 +143,7 @@ public final class ModItems {
 				Reference.ModID);
 		GameRegistry.registerItem(advancedCore, LibNames.COREADVANCED,
 				Reference.ModID);
-		
+
 		GameRegistry.registerItem(itemPipe, LibNames.PIPE, Reference.ModID);
 
 		oreRegistration();

@@ -17,6 +17,7 @@ import java.util.List;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,7 +32,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.sr2610.steampunked.proxies.ClientProxy;
+import com.sr2610.steampunked.lib.Reference;
 import com.sr2610.steampunked.tileentities.TileEntityPipe;
 
 import cpw.mods.fml.relauncher.Side;
@@ -57,7 +58,7 @@ public class BlockPipe extends BlockContainer {
 	}
 
 
-	
+
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
 		return new TileEntityPipe();
@@ -98,7 +99,7 @@ public class BlockPipe extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess blockAccess, int x, int y,
 			int z, int side) {
-		return (renderMask & (1 << side)) != 0;
+		return (renderMask & 1 << side) != 0;
 	}
 
 	@Override
@@ -173,18 +174,16 @@ public class BlockPipe extends BlockContainer {
 
 		if (rayTraceResult != null && rayTraceResult.boundingBox != null) {
 			AxisAlignedBB box = rayTraceResult.boundingBox;
-			switch (rayTraceResult.hitPart) {
 
-			case Pipe: {
-				float scale = 0.05F;
-				box = box.expand(scale, scale, scale);
-				break;
-			}
-			}
+			float scale = 0.05F;
+			box = box.expand(scale, scale, scale);
+
+
 			return box.getOffsetBoundingBox(x, y, z);
 		}
-		return super.getSelectedBoundingBoxFromPool(world, x, y, z).expand(
-				-0.85F, -0.85F, -0.85F);
+		//return super.getSelectedBoundingBoxFromPool(world, x, y, z).expand(
+		//		-0.85F, -0.85F, -0.85F);
+		return super.getSelectedBoundingBoxFromPool(world, x, y, z).setBounds(0, 0, 0, 0, 0, 0);
 	}
 
 	static class RaytraceResult {
@@ -194,7 +193,7 @@ public class BlockPipe extends BlockContainer {
 			this.hitPart = hitPart;
 			this.movingObjectPosition = movingObjectPosition;
 			this.boundingBox = boundingBox;
-			this.sideHit = side;
+			sideHit = side;
 		}
 
 		public final Part hitPart;
@@ -206,7 +205,7 @@ public class BlockPipe extends BlockContainer {
 		public String toString() {
 			return String.format("RayTraceResult: %s, %s",
 					hitPart == null ? "null" : hitPart.name(),
-					boundingBox == null ? "null" : boundingBox.toString());
+							boundingBox == null ? "null" : boundingBox.toString());
 		}
 	}
 
@@ -221,13 +220,13 @@ public class BlockPipe extends BlockContainer {
 
 		double eyeHeight = world.isRemote ? player.getEyeHeight()
 				- player.getDefaultEyeHeight() : player.getEyeHeight();
-		Vec3 lookVec = player.getLookVec();
-		Vec3 origin = world.getWorldVec3Pool().getVecFromPool(player.posX,
-				player.posY + eyeHeight, player.posZ);
-		Vec3 direction = origin.addVector(lookVec.xCoord * reachDistance,
-				lookVec.yCoord * reachDistance, lookVec.zCoord * reachDistance);
+				Vec3 lookVec = player.getLookVec();
+				Vec3 origin = world.getWorldVec3Pool().getVecFromPool(player.posX,
+						player.posY + eyeHeight, player.posZ);
+				Vec3 direction = origin.addVector(lookVec.xCoord * reachDistance,
+						lookVec.yCoord * reachDistance, lookVec.zCoord * reachDistance);
 
-		return doRayTrace(world, x, y, z, origin, direction);
+				return doRayTrace(world, x, y, z, origin, direction);
 	}
 
 	private RaytraceResult doRayTrace(World world, int x, int y, int z,
@@ -329,7 +328,7 @@ public class BlockPipe extends BlockContainer {
 			mirrorY(targetArray);
 		}
 
-		for (int i = 0; i < (direction.ordinal() >> 1); i++) {
+		for (int i = 0; i < direction.ordinal() >> 1; i++) {
 			rotate(targetArray);
 		}
 	}
@@ -337,12 +336,12 @@ public class BlockPipe extends BlockContainer {
 	public static void mirrorY(float[][] targetArray) {
 		float temp = targetArray[1][0];
 		targetArray[1][0] = (targetArray[1][1] - 0.5F) * -1F + 0.5F; // 1 ->
-																		// 0.5F
-																		// ->
-																		// -0.5F
-																		// -> 0F
+		// 0.5F
+		// ->
+		// -0.5F
+		// -> 0F
 		targetArray[1][1] = (temp - 0.5F) * -1F + 0.5F; // 0 -> -0.5F -> 0.5F ->
-														// 1F
+		// 1F
 	}
 
 	public static void rotate(float[][] targetArray) {
@@ -361,7 +360,7 @@ public class BlockPipe extends BlockContainer {
 		super.onBlockActivated(world, x, y, z, player, side, xOffset, yOffset,
 				zOffset);
 
-		world.notifyBlocksOfNeighborChange(x, y, z, ModBlocks.pipetest);
+		world.notifyBlocksOfNeighborChange(x, y, z, ModBlocks.pipe);
 
 		ItemStack currentItem = player.getCurrentEquippedItem();
 
@@ -373,4 +372,9 @@ public class BlockPipe extends BlockContainer {
 
 	}
 
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
+		blockIcon = par1IconRegister.registerIcon(Reference.ModID + ":pipe");
+	}
 }

@@ -28,7 +28,7 @@ public final class ModBlocks {
 	public static Block steamBoiler;
 	public static Block tinkerBench;
 	public static Block punchcardMaker;
-	public static Block pipetest;
+	public static Block pipe;
 
 	public static Block oreCopper;
 	public static Block oreTin;
@@ -79,7 +79,7 @@ public final class ModBlocks {
 		.setStepSound(Block.soundTypePiston)
 		.setBlockName(LibNames.ORETIN);
 
-		pipetest=new BlockPipe(Material.iron)
+		pipe=new BlockPipe(Material.iron)
 		.setHardness(5.0F).setResistance(10.0F)
 		.setStepSound(Block.soundTypeMetal)
 		.setBlockName("Pipe");
@@ -110,7 +110,7 @@ public final class ModBlocks {
 		GameRegistry.registerTileEntity(TileEntityPunchardMaker.class,
 				"tileEntityPunchcardMaker");
 
-		GameRegistry.registerBlock(pipetest, "pipe");
+		GameRegistry.registerBlock(pipe, "pipe");
 		GameRegistry.registerTileEntity(TileEntityPipe.class,
 				"tileEntityPipe");
 		oreRegistration();

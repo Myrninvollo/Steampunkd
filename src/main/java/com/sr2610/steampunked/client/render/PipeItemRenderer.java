@@ -19,8 +19,6 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.IItemRenderer.ItemRenderType;
-import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
 import org.lwjgl.opengl.GL11;
 
@@ -34,7 +32,7 @@ public class PipeItemRenderer implements IItemRenderer {
 		// GL11.glBindTexture(GL11.GL_TEXTURE_2D, 10);
 		Tessellator tessellator = Tessellator.instance;
 
-		Block block = ModBlocks.pipetest;
+		Block block = ModBlocks.pipe;
 		IIcon icon = item.getItem().getIconFromDamage(0);
 
 		if (icon == null)
@@ -79,16 +77,16 @@ public class PipeItemRenderer implements IItemRenderer {
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
 		switch (type) {
-			case ENTITY:
-				return true;
-			case EQUIPPED:
-				return true;
-			case EQUIPPED_FIRST_PERSON:
-				return true;
-			case INVENTORY:
-				return true;
-			default:
-				return false;
+		case ENTITY:
+			return true;
+		case EQUIPPED:
+			return true;
+		case EQUIPPED_FIRST_PERSON:
+			return true;
+		case INVENTORY:
+			return true;
+		default:
+			return false;
 		}
 	}
 
@@ -100,19 +98,19 @@ public class PipeItemRenderer implements IItemRenderer {
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		switch (type) {
-			case ENTITY:
-				renderPipeItem((RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
-				break;
-			case EQUIPPED:
-				renderPipeItem((RenderBlocks) data[0], item, -0.4f, 0.50f, 0.35f);
-				break;
-			case EQUIPPED_FIRST_PERSON:
-				renderPipeItem((RenderBlocks) data[0], item, -0.4f, 0.50f, 0.35f);
-				break;
-			case INVENTORY:
-				renderPipeItem((RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
-				break;
-			default:
+		case ENTITY:
+			renderPipeItem((RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+			break;
+		case EQUIPPED:
+			renderPipeItem((RenderBlocks) data[0], item, -0.4f, 0.50f, 0.35f);
+			break;
+		case EQUIPPED_FIRST_PERSON:
+			renderPipeItem((RenderBlocks) data[0], item, -0.4f, 0.50f, 0.35f);
+			break;
+		case INVENTORY:
+			renderPipeItem((RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+			break;
+		default:
 		}
 	}
 }

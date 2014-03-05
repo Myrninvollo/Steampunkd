@@ -16,8 +16,8 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy {
-	
-	
+
+
 	public static int pipeRenderID = -1;
 
 
@@ -26,7 +26,7 @@ public class ClientProxy extends CommonProxy {
 	public void registerTickHandlers() {
 
 	}
-	
+
 	public final static PipeItemRenderer pipeItemRenderer = new PipeItemRenderer();
 
 
@@ -38,12 +38,12 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(ModItems.clockworkBow,
 				new BowRenderer());
 		PipeRendererTESR rp = new PipeRendererTESR();
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.pipetest),
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.pipe),
 				pipeItemRenderer);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPipe.class, rp);
-		
-	  
-		
+
+
+
 
 	}
 }

@@ -11,15 +11,10 @@
  */
 package com.sr2610.steampunked.client.render;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
@@ -32,21 +27,21 @@ public class PipeRendererTESR extends TileEntitySpecialRenderer {
 	private ModelPipe model;
 
 	public PipeRendererTESR() {
-		this.model = new ModelPipe();
+		model = new ModelPipe();
 	}
 
 	@Override
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z,
 			float scale) {
 		GL11.glPushMatrix();
-		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
+		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.3F, (float) z + 0.5F);
 
-		ResourceLocation textures = (new ResourceLocation(
-				Reference.ModID+":textures/blocks/models/pipe.png"));
+		ResourceLocation textures = new ResourceLocation(
+				Reference.ModID+":textures/blocks/models/pipe.png");
 		Minecraft.getMinecraft().renderEngine.bindTexture(textures);
 		GL11.glPushMatrix();
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
-		this.renderModelAt((TileEntityPipe) te, x, y, z, scale);
+		renderModelAt((TileEntityPipe) te, x, y, z, scale);
 
 		GL11.glPopMatrix();
 		GL11.glPopMatrix();
@@ -56,7 +51,7 @@ public class PipeRendererTESR extends TileEntitySpecialRenderer {
 			double d2, float scale) {
 		tileEntity.checkPipeConnections();
 		boolean[] adjecentConnections = tileEntity.pipeConnectionsBuffer;
-		float f= 0.0625F;
+		float f= 0.05F;
 
 		if (adjecentConnections[0] == true) {
 			model.renderPart("Top",f);
