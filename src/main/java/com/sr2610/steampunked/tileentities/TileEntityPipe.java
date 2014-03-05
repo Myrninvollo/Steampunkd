@@ -20,8 +20,7 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.world.World;
+import net.minecraft.util.IIcon;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -30,6 +29,9 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
 import com.sr2610.steampunked.blocks.ModBlocks;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 
@@ -41,9 +43,8 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 
 		tank = new FluidTank(200);
 		tank_info = new FluidTankInfo[1];
-		tank_info[0] = new FluidTankInfo(tank);		}
-
-
+		tank_info[0] = new FluidTankInfo(tank);
+	}
 
 	@Override
 	public int getSizeInventory() {
@@ -102,7 +103,6 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 		return false;
 	}
 
-
 	@Override
 	protected void UpdateEntityClient() {
 	}
@@ -122,11 +122,10 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 	}
 
 	@Override
-	public void update(){
+	public void update() {
 		autoOutputToSides(40, this);
 
 	}
-
 
 	protected List<ForgeDirection> surroundingTanks = new ArrayList<ForgeDirection>();
 
@@ -177,7 +176,8 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 		surroundingTanks = new ArrayList<ForgeDirection>();
 		for (ForgeDirection side : checkSides) {
 			TileEntity tile = getTileInDirection(currentTile, side);
-			if (tile instanceof IFluidHandler && !(tile instanceof TileEntitySteamBoiler) ) {
+			if (tile instanceof IFluidHandler
+					&& !(tile instanceof TileEntitySteamBoiler)) {
 				surroundingTanks.add(side);
 			}
 		}
@@ -233,21 +233,59 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 		return false;
 	}
 
-
-
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
 		return tank_info;
 	}
 
-
+	public boolean[] pipeConnectionsBuffer = new boolean[6];
 
 	public boolean isPipeConnected(ForgeDirection direct) {
-		return true;
+		TileEntity tile = getTileInDirection(this, direct);
+		if (tile != null && tile instanceof IFluidHandler)
+			return true;
+		return false;
 	}
-	
 
+	@SideOnly(Side.CLIENT)
+	public IIcon getPipeIcons() {
 
+		return null;
+	}
 
+	public void checkPipeConnections() {
+		if (isPipeConnected(ForgeDirection.WEST))
+			pipeConnectionsBuffer[5] = true;
+
+		else
+			pipeConnectionsBuffer[5] = false;
+
+		if (isPipeConnected(ForgeDirection.EAST))
+			pipeConnectionsBuffer[4] = true;
+
+		else
+			pipeConnectionsBuffer[4] = false;
+
+		if (isPipeConnected(ForgeDirection.DOWN))
+			pipeConnectionsBuffer[1] = true;
+		else
+			pipeConnectionsBuffer[1] = false;
+
+		if (isPipeConnected(ForgeDirection.UP))
+			pipeConnectionsBuffer[0] = true;
+		else
+			pipeConnectionsBuffer[0] = false;
+
+		if (isPipeConnected(ForgeDirection.NORTH))
+			pipeConnectionsBuffer[2] = true;
+		else
+			pipeConnectionsBuffer[2] = false;
+
+		if (isPipeConnected(ForgeDirection.SOUTH))
+			pipeConnectionsBuffer[3] = true;
+		else
+			pipeConnectionsBuffer[3] = false;
+
+	}
 
 }

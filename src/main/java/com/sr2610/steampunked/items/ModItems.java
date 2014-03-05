@@ -1,5 +1,6 @@
 package com.sr2610.steampunked.items;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -38,6 +39,7 @@ public final class ModItems {
 	public static Item basicCore;
 	public static Item mediumCore;
 	public static Item advancedCore;
+	public static Item itemPipe;
 
 	public static void initItems() {
 		System.out.println("[Steampunk'd] Initializing Items...");
@@ -90,6 +92,8 @@ public final class ModItems {
 				LibNames.COREMEDIUM).setMaxStackSize(1);
 		advancedCore = new ItemCore("coreAdvanced").setUnlocalizedName(
 				LibNames.COREADVANCED).setMaxStackSize(1);
+		
+		itemPipe=new ItemPipe().setCreativeTab(CreativeTabs.tabAllSearch);
 
 		registerItems();
 	}
@@ -139,6 +143,8 @@ public final class ModItems {
 				Reference.ModID);
 		GameRegistry.registerItem(advancedCore, LibNames.COREADVANCED,
 				Reference.ModID);
+		
+		GameRegistry.registerItem(itemPipe, LibNames.PIPE, Reference.ModID);
 
 		oreRegistration();
 
