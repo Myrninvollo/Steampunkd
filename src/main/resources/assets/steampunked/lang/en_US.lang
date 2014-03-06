@@ -58,3 +58,4 @@ itemGroup.steampunked=Steampunk'd
 steampunked.oneProgram.name=You can only have one program per Automaton
 steampunked.onlyAutomaton.name=You can only use this on an Automaton
 steampunked.nameFirst.name=You must name this in an anvil first
+steampunked.boundDone.name=Successfully Reprogrammed
