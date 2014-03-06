@@ -93,8 +93,6 @@ public final class ModItems {
 		advancedCore = new ItemCore("coreAdvanced").setUnlocalizedName(
 				LibNames.COREADVANCED).setMaxStackSize(1);
 
-		itemPipe=new ItemPipe().setCreativeTab(CreativeTabs.tabAllSearch);
-
 		registerItems();
 	}
 
