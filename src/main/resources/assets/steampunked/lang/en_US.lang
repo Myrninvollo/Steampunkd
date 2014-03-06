@@ -46,7 +46,7 @@ tile.punchcardmaker.name=Punchcard Maker
 tile.oreCopper.name=Copper Ore
 tile.oreTin.name=Tin Ore
 
-tile.pipe.name=Fluid Pipe
+tile.pipeFluid.name=Fluid Pipe
 entity.steampunked.Automaton.name=Steam Automaton
 
 

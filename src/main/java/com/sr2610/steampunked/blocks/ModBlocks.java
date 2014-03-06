@@ -82,7 +82,7 @@ public final class ModBlocks {
 		pipe=new BlockPipe(Material.iron)
 		.setHardness(5.0F).setResistance(10.0F)
 		.setStepSound(Block.soundTypeMetal)
-		.setBlockName("Pipe");
+		.setBlockName("pipeFluid");
 
 		registerBlocks();
 	}
