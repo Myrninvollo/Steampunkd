@@ -23,7 +23,6 @@ public final class ModItems {
 
 	public static Item AutomatonUpgrade;
 	public static Item punchcard;
-	public static Item template;
 	public static Item chasis;
 
 	public static Item saberWood;
@@ -39,7 +38,8 @@ public final class ModItems {
 	public static Item basicCore;
 	public static Item mediumCore;
 	public static Item advancedCore;
-	public static Item itemPipe;
+	
+	public static Item reprogrammer;
 
 	public static void initItems() {
 		System.out.println("[Steampunk'd] Initializing Items...");
@@ -82,8 +82,7 @@ public final class ModItems {
 		copperIngot = new ItemMod("ingotCopper")
 		.setUnlocalizedName(LibNames.COPPERINGOT);
 
-		template = new ItemMod("template")
-		.setUnlocalizedName(LibNames.TEMPLATE);
+		
 		tinIngot = new ItemMod("ingotTin")
 		.setUnlocalizedName(LibNames.TININGOT);
 		basicCore = new ItemCore("coreBasic").setUnlocalizedName(
@@ -92,6 +91,8 @@ public final class ModItems {
 				LibNames.COREMEDIUM).setMaxStackSize(1);
 		advancedCore = new ItemCore("coreAdvanced").setUnlocalizedName(
 				LibNames.COREADVANCED).setMaxStackSize(1);
+		
+		reprogrammer = new ItemReprogrammer().setUnlocalizedName(LibNames.REPROGRAMMER).setMaxStackSize(1);
 
 		registerItems();
 	}
@@ -133,7 +134,6 @@ public final class ModItems {
 				Reference.ModID);
 		GameRegistry.registerItem(tinIngot, LibNames.TININGOT, Reference.ModID);
 
-		GameRegistry.registerItem(template, LibNames.TEMPLATE, Reference.ModID);
 
 		GameRegistry.registerItem(basicCore, LibNames.COREBASIC,
 				Reference.ModID);
@@ -141,8 +141,10 @@ public final class ModItems {
 				Reference.ModID);
 		GameRegistry.registerItem(advancedCore, LibNames.COREADVANCED,
 				Reference.ModID);
+		
+		GameRegistry.registerItem(reprogrammer, LibNames.REPROGRAMMER,
+				Reference.ModID);
 
-		GameRegistry.registerItem(itemPipe, LibNames.PIPE, Reference.ModID);
 
 		oreRegistration();
 

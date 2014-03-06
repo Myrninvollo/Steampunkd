@@ -28,6 +28,8 @@ item.punchcard.2.name=Punchcard - Attack
 item.punchcard.11.name=Punchcard - Gather Template
 item.punchcard.12.name=Punchcard - Attack Template
 
+item.reprogrammer.name=Automaton Reprogrammer
+
 item.upgrade.0.name=Cybernetic Eye
 item.upgrade.1.name=Gearbox
 item.upgrade.2.name=Reinforced Armor
