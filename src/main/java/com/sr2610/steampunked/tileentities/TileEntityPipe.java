@@ -31,7 +31,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 
-	private FluidTank tank;
+	public FluidTank tank;
 	private FluidTankInfo[] tank_info;
 
 	public TileEntityPipe() {
