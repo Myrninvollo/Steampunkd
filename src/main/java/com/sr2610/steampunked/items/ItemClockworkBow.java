@@ -1,5 +1,7 @@
 package com.sr2610.steampunked.items;
 
+import java.util.List;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
@@ -186,7 +188,46 @@ public class ItemClockworkBow extends ItemBow {
 	@Override
 	public void onCreated(ItemStack itemStack, World world, EntityPlayer player) {
 		itemStack.stackTagCompound = new NBTTagCompound();
-		itemStack.stackTagCompound.setInteger("Mode", 0);
+		itemStack.stackTagCompound.setInteger("Mode", 1);
+	}
+
+	public void addInformation(ItemStack itemStack, EntityPlayer player,
+			List list, boolean par4) {
+		if (itemStack.stackTagCompound != null) {
+			int Mode = itemStack.stackTagCompound.getInteger("Mode");
+			switch(Mode){
+			case 1:list.add("Mode: Regular Firing");
+			break;
+			case 2:list.add("Mode: Triple Arrows");
+			break;
+			case 3:list.add("Mode: Rapid Fire");
+			break;
+			}
+			
+		}
+	}
+
+	@Override
+	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player,
+			World world, int x, int y, int z, int side, float hitX, float hitY,
+			float hitZ) {
+		if (player.isSneaking()) {
+			if (stack.stackTagCompound != null) {
+				int Mode = stack.stackTagCompound.getInteger("Mode");
+				if (Mode < 3)
+					Mode++;
+				else
+					Mode = 1;
+				stack.stackTagCompound = new NBTTagCompound();
+				stack.stackTagCompound.setInteger("Mode", Mode);
+			} else {
+				stack.stackTagCompound = new NBTTagCompound();
+				stack.stackTagCompound.setInteger("Mode",1);
+			}
+			return true;
+		}
+		return false;
 
 	}
+
 }
