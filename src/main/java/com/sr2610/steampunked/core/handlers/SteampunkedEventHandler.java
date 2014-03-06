@@ -53,7 +53,7 @@ public class SteampunkedEventHandler {
 		if (s.toLowerCase().equals("sr2610")
 				&& (!(event.entity instanceof EntityPlayer) || !((EntityPlayer) event.entity)
 						.getHideCape())) {
-			GL11.glColor4f(0.8F, 0.8F, 1.0F, 0.65F);
+			GL11.glColor4f(0.5F, 0.5F, 0.5F, 0.85F);
 			GL11.glEnable(3042);
 			GL11.glBlendFunc(770, 771);
 			resetRender = true;
