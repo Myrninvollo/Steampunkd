@@ -53,7 +53,6 @@ public class BlockPipe extends BlockContainer {
 
 	protected BlockPipe(Material material) {
 		super(material);
-		setCreativeTab(CreativeTabs.tabAllSearch);
 
 	}
 

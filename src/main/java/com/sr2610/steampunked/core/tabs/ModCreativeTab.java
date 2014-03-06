@@ -27,11 +27,12 @@ public class ModCreativeTab extends CreativeTabs {
 		this.list = list;
 
 		addItem(ModItems.bucket);
+		addBlock(ModBlocks.steamBoiler);
 		addBlock(ModBlocks.Injector);
 		addBlock(ModBlocks.steamFurnace);
-		addBlock(ModBlocks.steamBoiler);
 		addBlock(ModBlocks.tinkerBench);
 		addBlock(ModBlocks.punchcardMaker);
+		addBlock(ModBlocks.pipe);
 		addItem(ModItems.goggles);
 		addItem(ModItems.jetpack);
 		addItem(ModItems.boots);
@@ -48,6 +49,7 @@ public class ModCreativeTab extends CreativeTabs {
 		addBlock(ModBlocks.oreTin);
 		addItem(ModItems.copperIngot);
 		addItem(ModItems.tinIngot);
+		
 
 	}
 
@@ -62,7 +64,7 @@ public class ModCreativeTab extends CreativeTabs {
 	@Override
 	public Item getTabIconItem() {
 		if (displayItem == null)
-			return new ItemStack(ModItems.goggles).getItem();
+			return new ItemStack(ModItems.spanner).getItem();
 
 		return displayItem.getItem();
 	}
