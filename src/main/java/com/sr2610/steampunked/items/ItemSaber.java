@@ -122,7 +122,6 @@ public class ItemSaber extends ItemSword {
 		return toolMaterial.toString();
 	}
 
-
 	/**
 	 * Gets a map of item attribute modifiers, used by ItemSword to increase hit
 	 * damage.
@@ -132,7 +131,7 @@ public class ItemSaber extends ItemSword {
 		Multimap multimap = super.getItemAttributeModifiers();
 		multimap.put(SharedMonsterAttributes.attackDamage
 				.getAttributeUnlocalizedName(), new AttributeModifier(
-						field_111210_e, "Weapon modifier", weaponDamage, 0));
+				field_111210_e, "Weapon modifier", weaponDamage, 0));
 		return multimap;
 	}
 

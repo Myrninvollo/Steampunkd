@@ -194,8 +194,6 @@ public class ModelAutomoton extends ModelBase {
 		EntityAutomaton entity = (EntityAutomaton) par1EntityLivingBase;
 		hideParts(entity);
 
-
-
 		if (entity.getHeldItem() != null) {
 			rightarm.rotateAngleX = -0.6F;
 			rightarm.rotateAngleY = 0.0F;

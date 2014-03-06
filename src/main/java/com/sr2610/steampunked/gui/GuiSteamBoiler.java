@@ -59,12 +59,10 @@ public class GuiSteamBoiler extends GuiMachine {
 		super.drawScreen(mouse_x, mouse_y, par3);
 
 		if (func_146978_c(TANK_X - 18, TANK_Y, 16, TANK_HEIGHT, mouse_x,
-				mouse_y)) {
+				mouse_y))
 			DisplayTankTooltip(mouse_x, mouse_y, BoilerInventory.GetTank(0));
-		}
-		if (func_146978_c(TANK_X, TANK_Y, 16, TANK_HEIGHT, mouse_x, mouse_y)) {
+		if (func_146978_c(TANK_X, TANK_Y, 16, TANK_HEIGHT, mouse_x, mouse_y))
 			DisplayTankTooltip(mouse_x, mouse_y, BoilerInventory.GetTank(1));
-		}
 
 	}
 

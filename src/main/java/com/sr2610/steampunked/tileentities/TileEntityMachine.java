@@ -16,7 +16,7 @@ import net.minecraftforge.fluids.IFluidContainerItem;
 import net.minecraftforge.fluids.IFluidHandler;
 
 public abstract class TileEntityMachine extends TileEntity implements
-IInventory {
+		IInventory {
 	protected abstract boolean isFluidFuel(FluidStack fuel);
 
 	/**
@@ -37,9 +37,8 @@ IInventory {
 		public void Update() {
 			ItemStack stack = getStackInSlot(slot);
 			if (stack == null
-					|| !(stack.getItem() instanceof IFluidContainerItem)) {
+					|| !(stack.getItem() instanceof IFluidContainerItem))
 				return;
-			}
 
 			IFluidContainerItem fluid_cont = (IFluidContainerItem) stack
 					.getItem();
@@ -47,27 +46,23 @@ IInventory {
 			FluidTank tank = GetTank(tank_slot);
 			if (fill) {
 				FluidStack drained = tank.drain(25, false);
-				if (drained == null || drained.amount == 0) {
+				if (drained == null || drained.amount == 0)
 					return;
-				}
 				int filled = fluid_cont.fill(stack, drained, false);
-				if (filled == 0) {
+				if (filled == 0)
 					return;
-				}
 				drained = tank.drain(filled, true);
 				fluid_cont.fill(stack, drained, true);
 				UpdateTank(tank_slot);
 				UpdateInventoryItem(slot);
 			} else {
 				FluidStack drained = fluid_cont.drain(stack, 25, false);
-				if (drained == null || drained.amount == 0) {
+				if (drained == null || drained.amount == 0)
 					return;
-				}
 
 				int filled = tank.fill(drained, false);
-				if (filled == 0) {
+				if (filled == 0)
 					return;
-				}
 				drained = fluid_cont.drain(stack, filled, true);
 				tank.fill(drained, true);
 				UpdateTank(tank_slot);
@@ -108,16 +103,14 @@ IInventory {
 	}
 
 	protected final void UpdateTank(int slot) {
-		if (packet == null) {
+		if (packet == null)
 			return;
-		}
 		WriteTankToNBT(packet, slot);
 	}
 
 	protected final void UpdateInventoryItem(int slot) {
-		if (packet == null) {
+		if (packet == null)
 			return;
-		}
 		WriteInventoryItemToNBT(packet, slot);
 	}
 
@@ -134,9 +127,8 @@ IInventory {
 		if (is != null) {
 			tag.setBoolean("empty", false);
 			is.writeToNBT(tag);
-		} else {
+		} else
 			tag.setBoolean("empty", true);
-		}
 		compound.setTag("Item_" + String.valueOf(slot), tag);
 	}
 
@@ -160,9 +152,8 @@ IInventory {
 					+ String.valueOf(i));
 			if (tag != null) {
 				ItemStack stack = null;
-				if (!tag.getBoolean("empty")) {
+				if (!tag.getBoolean("empty"))
 					stack = ItemStack.loadItemStackFromNBT(tag);
-				}
 				setInventorySlotContents(i, stack);
 			}
 		}
@@ -172,47 +163,40 @@ IInventory {
 	public void writeToNBT(NBTTagCompound compound) {
 		int i;
 		super.writeToNBT(compound);
-		for (i = 0; i < GetTankCount(); i++) {
+		for (i = 0; i < GetTankCount(); i++)
 			WriteTankToNBT(compound, i);
-		}
-		for (i = 0; i < getSizeInventory(); i++) {
+		for (i = 0; i < getSizeInventory(); i++)
 			WriteInventoryItemToNBT(compound, i);
-		}
 	}
 
 	protected final void UpdateValue(String name, int value) {
-		if (packet == null) {
+		if (packet == null)
 			return;
-		}
 		packet.setInteger(name, value);
 	}
 
 	protected final void UpdateNBTTag(String name, NBTTagCompound compound) {
-		if (packet == null) {
+		if (packet == null)
 			return;
-		}
 		packet.setTag(name, compound);
 	}
 
 	@Override
 	public void updateEntity() {
-		if (!(initialized || isInvalid())) {
+		if (!(initialized || isInvalid()))
 			UpdateRedstone();
-		}
 
 		if (!worldObj.isRemote) {
 			update();
 			packet = new NBTTagCompound();
 			super.writeToNBT(packet);
-			for (ContainerSlot cs : conatiner_slots) {
+			for (ContainerSlot cs : conatiner_slots)
 				cs.Update();
-			}
 			UpdateEntityServer();
 
 			packet = null;
-		} else {
+		} else
 			UpdateEntityClient();
-		}
 		last_redstone_signal = redstone_signal;
 	}
 
@@ -226,7 +210,6 @@ IInventory {
 	}
 
 	protected List<ForgeDirection> surroundingTanks = new ArrayList<ForgeDirection>();
-
 
 	public TileEntity getTileInDirection(TileEntity tile,
 			ForgeDirection direction) {
@@ -245,9 +228,8 @@ IInventory {
 		for (ForgeDirection side : checkSides) {
 			TileEntity tile = getTileInDirection(currentTile, side);
 			if (tile instanceof IFluidHandler
-					&& !(tile instanceof TileEntitySteamBoiler)) {
+					&& !(tile instanceof TileEntitySteamBoiler))
 				surroundingTanks.add(side);
-			}
 		}
 	}
 

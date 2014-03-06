@@ -18,7 +18,6 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -56,8 +55,6 @@ public class BlockPipe extends BlockContainer {
 
 	}
 
-
-
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
 		return new TileEntityPipe();
@@ -87,11 +84,10 @@ public class BlockPipe extends BlockContainer {
 	}
 
 	public void setRenderSide(ForgeDirection side, boolean render) {
-		if (render) {
+		if (render)
 			renderMask |= 1 << side.ordinal();
-		} else {
+		else
 			renderMask &= ~(1 << side.ordinal());
-		}
 	}
 
 	@Override
@@ -177,12 +173,12 @@ public class BlockPipe extends BlockContainer {
 			float scale = 0.05F;
 			box = box.expand(scale, scale, scale);
 
-
 			return box.getOffsetBoundingBox(x, y, z);
 		}
-		//return super.getSelectedBoundingBoxFromPool(world, x, y, z).expand(
-		//		-0.85F, -0.85F, -0.85F);
-		return super.getSelectedBoundingBoxFromPool(world, x, y, z).setBounds(0, 0, 0, 0, 0, 0);
+		// return super.getSelectedBoundingBoxFromPool(world, x, y, z).expand(
+		// -0.85F, -0.85F, -0.85F);
+		return super.getSelectedBoundingBoxFromPool(world, x, y, z).setBounds(
+				0, 0, 0, 0, 0, 0);
 	}
 
 	static class RaytraceResult {
@@ -204,7 +200,7 @@ public class BlockPipe extends BlockContainer {
 		public String toString() {
 			return String.format("RayTraceResult: %s, %s",
 					hitPart == null ? "null" : hitPart.name(),
-							boundingBox == null ? "null" : boundingBox.toString());
+					boundingBox == null ? "null" : boundingBox.toString());
 		}
 	}
 
@@ -212,20 +208,19 @@ public class BlockPipe extends BlockContainer {
 			EntityPlayer player) {
 		double reachDistance = 5;
 
-		if (player instanceof EntityPlayerMP) {
+		if (player instanceof EntityPlayerMP)
 			reachDistance = ((EntityPlayerMP) player).theItemInWorldManager
 					.getBlockReachDistance();
-		}
 
 		double eyeHeight = world.isRemote ? player.getEyeHeight()
 				- player.getDefaultEyeHeight() : player.getEyeHeight();
-				Vec3 lookVec = player.getLookVec();
-				Vec3 origin = world.getWorldVec3Pool().getVecFromPool(player.posX,
-						player.posY + eyeHeight, player.posZ);
-				Vec3 direction = origin.addVector(lookVec.xCoord * reachDistance,
-						lookVec.yCoord * reachDistance, lookVec.zCoord * reachDistance);
+		Vec3 lookVec = player.getLookVec();
+		Vec3 origin = world.getWorldVec3Pool().getVecFromPool(player.posX,
+				player.posY + eyeHeight, player.posZ);
+		Vec3 direction = origin.addVector(lookVec.xCoord * reachDistance,
+				lookVec.yCoord * reachDistance, lookVec.zCoord * reachDistance);
 
-				return doRayTrace(world, x, y, z, origin, direction);
+		return doRayTrace(world, x, y, z, origin, direction);
 	}
 
 	private RaytraceResult doRayTrace(World world, int x, int y, int z,
@@ -233,20 +228,18 @@ public class BlockPipe extends BlockContainer {
 		TileEntity pipeTileEntity = world.getTileEntity(x, y, z);
 
 		TileEntityPipe tileG = null;
-		if (pipeTileEntity instanceof TileEntityPipe) {
+		if (pipeTileEntity instanceof TileEntityPipe)
 			tileG = (TileEntityPipe) pipeTileEntity;
-		}
 
-		if (tileG == null) {
+		if (tileG == null)
 			return null;
-		}
 
 		MovingObjectPosition[] hits = new MovingObjectPosition[25];
 		AxisAlignedBB[] boxes = new AxisAlignedBB[25];
 		ForgeDirection[] sideHit = new ForgeDirection[25];
 		Arrays.fill(sideHit, ForgeDirection.UNKNOWN);
 
-		for (ForgeDirection side : DIR_VALUES) {
+		for (ForgeDirection side : DIR_VALUES)
 			if (side == ForgeDirection.UNKNOWN || tileG.isPipeConnected(side)) {
 				AxisAlignedBB bb = getPipeBoundingBox(side);
 				setBlockBounds(bb);
@@ -255,16 +248,14 @@ public class BlockPipe extends BlockContainer {
 						origin, direction);
 				sideHit[side.ordinal()] = side;
 			}
-		}
 
 		double minLengthSquared = Double.POSITIVE_INFINITY;
 		int minIndex = -1;
 
 		for (int i = 0; i < hits.length; i++) {
 			MovingObjectPosition hit = hits[i];
-			if (hit == null) {
+			if (hit == null)
 				continue;
-			}
 
 			double lengthSquared = hit.hitVec.squareDistanceTo(origin);
 
@@ -278,14 +269,13 @@ public class BlockPipe extends BlockContainer {
 
 		setBlockBounds(0, 0, 0, 1, 1, 1);
 
-		if (minIndex == -1) {
+		if (minIndex == -1)
 			return null;
-		} else {
+		else {
 			Part hitPart = null;
 
-			if (minIndex < 7) {
+			if (minIndex < 7)
 				hitPart = Part.Pipe;
-			}
 
 			return new RaytraceResult(hitPart, hits[minIndex], boxes[minIndex],
 					sideHit[minIndex]);
@@ -301,10 +291,9 @@ public class BlockPipe extends BlockContainer {
 		float min = PIPE_MIN_POS;
 		float max = PIPE_MAX_POS;
 
-		if (side == ForgeDirection.UNKNOWN) {
+		if (side == ForgeDirection.UNKNOWN)
 			return AxisAlignedBB.getAABBPool().getAABB(min, min, min, max, max,
 					max);
-		}
 
 		float[][] bounds = new float[3][2];
 		// X START - END
@@ -323,13 +312,11 @@ public class BlockPipe extends BlockContainer {
 	}
 
 	public static void transform(float[][] targetArray, ForgeDirection direction) {
-		if ((direction.ordinal() & 0x1) == 1) {
+		if ((direction.ordinal() & 0x1) == 1)
 			mirrorY(targetArray);
-		}
 
-		for (int i = 0; i < direction.ordinal() >> 1; i++) {
+		for (int i = 0; i < direction.ordinal() >> 1; i++)
 			rotate(targetArray);
-		}
 	}
 
 	public static void mirrorY(float[][] targetArray) {
@@ -364,9 +351,8 @@ public class BlockPipe extends BlockContainer {
 		ItemStack currentItem = player.getCurrentEquippedItem();
 
 		if (currentItem == null) {
-		} else if (currentItem.getItem() == Items.sign) {
+		} else if (currentItem.getItem() == Items.sign)
 			return false;
-		}
 		return false;
 
 	}

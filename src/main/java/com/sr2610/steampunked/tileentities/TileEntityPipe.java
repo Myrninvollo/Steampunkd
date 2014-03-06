@@ -123,7 +123,6 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 
 	}
 
-
 	public void autoOutputToSides(int amountPerTick, TileEntity currentTile) {
 
 		if (worldObj == null)
@@ -140,29 +139,24 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 					TileEntity otherTank = getTileInDirection(this, side);
 					if (drainedFluid.amount > 0) {
 						drainedFluid = drainedFluid.copy();
-						if (otherTank instanceof IFluidHandler) {
+						if (otherTank instanceof IFluidHandler)
 							drainedFluid.amount -= ((IFluidHandler) otherTank)
 									.fill(side.getOpposite(), drainedFluid,
 											true);
-						}
 					}
 				}
-				if (drainedFluid.amount > 0) {
+				if (drainedFluid.amount > 0)
 					tank.fill(drainedFluid, true);
-				}
 			}
 		}
 
 	}
 
-
-
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource,
 			boolean doDrain) {
-		if (resource.isFluidEqual(tank.getFluid())) {
+		if (resource.isFluidEqual(tank.getFluid()))
 			return tank.drain(resource.amount, doDrain);
-		}
 		return null;
 	}
 

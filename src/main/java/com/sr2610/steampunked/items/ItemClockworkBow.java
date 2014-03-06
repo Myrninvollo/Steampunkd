@@ -24,7 +24,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemClockworkBow extends ItemBow {
 	public static final String[] bowPullIconNameArray = new String[] {
-		"bow_pull_0", "bow_pull_1", "bow_pull_2" };
+			"bow_pull_0", "bow_pull_1", "bow_pull_2" };
 	@SideOnly(Side.CLIENT)
 	private IIcon[] iconArray = new IIcon[4];
 
@@ -47,69 +47,60 @@ public class ItemClockworkBow extends ItemBow {
 		ArrowLooseEvent event = new ArrowLooseEvent(par3EntityPlayer,
 				par1ItemStack, j);
 		MinecraftForge.EVENT_BUS.post(event);
-		if (event.isCanceled()) {
+		if (event.isCanceled())
 			return;
-		}
 		j = event.charge;
 
 		boolean flag = par3EntityPlayer.capabilities.isCreativeMode
 				|| EnchantmentHelper.getEnchantmentLevel(
 						Enchantment.infinity.effectId, par1ItemStack) > 0;
 
-						if (flag || par3EntityPlayer.inventory.hasItem(Items.arrow)) {
-							float f = j / 20.0F;
-							f = (f * f + f * 2.0F) / 3.0F;
+		if (flag || par3EntityPlayer.inventory.hasItem(Items.arrow)) {
+			float f = j / 20.0F;
+			f = (f * f + f * 2.0F) / 3.0F;
 
-							if (f < 0.1D) {
-								return;
-							}
+			if (f < 0.1D)
+				return;
 
-							if (f > 0.7F) {
-								f = 1.1F;
-							}
+			if (f > 0.7F)
+				f = 1.1F;
 
-							EntityArrow entityarrow = new EntityArrow(par2World,
-									par3EntityPlayer, f * 2.0F);
-							entityarrow.setDamage(entityarrow.getDamage() + 1.0);
+			EntityArrow entityarrow = new EntityArrow(par2World,
+					par3EntityPlayer, f * 2.0F);
+			entityarrow.setDamage(entityarrow.getDamage() + 1.0);
 
-							if (f == 1.1F) {
-								entityarrow.setIsCritical(true);
-							}
+			if (f == 1.1F)
+				entityarrow.setIsCritical(true);
 
-							int k = EnchantmentHelper.getEnchantmentLevel(
-									Enchantment.power.effectId, par1ItemStack);
+			int k = EnchantmentHelper.getEnchantmentLevel(
+					Enchantment.power.effectId, par1ItemStack);
 
-							if (k > 0) {
-								entityarrow
-								.setDamage(entityarrow.getDamage() + k * 0.5D + 0.5D);
-							}
+			if (k > 0)
+				entityarrow
+						.setDamage(entityarrow.getDamage() + k * 0.5D + 0.5D);
 
-							int l = EnchantmentHelper.getEnchantmentLevel(
-									Enchantment.punch.effectId, par1ItemStack);
+			int l = EnchantmentHelper.getEnchantmentLevel(
+					Enchantment.punch.effectId, par1ItemStack);
 
-							if (l > 0) {
-								entityarrow.setKnockbackStrength(l);
-							}
+			if (l > 0)
+				entityarrow.setKnockbackStrength(l);
 
-							if (EnchantmentHelper.getEnchantmentLevel(
-									Enchantment.flame.effectId, par1ItemStack) > 0) {
-								entityarrow.setFire(100);
-							}
+			if (EnchantmentHelper.getEnchantmentLevel(
+					Enchantment.flame.effectId, par1ItemStack) > 0)
+				entityarrow.setFire(100);
 
-							par1ItemStack.damageItem(1, par3EntityPlayer);
-							par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F,
-									1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+			par1ItemStack.damageItem(1, par3EntityPlayer);
+			par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F,
+					1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
-							if (flag) {
-								entityarrow.canBePickedUp = 2;
-							} else {
-								par3EntityPlayer.inventory.consumeInventoryItem(Items.arrow);
-							}
+			if (flag)
+				entityarrow.canBePickedUp = 2;
+			else
+				par3EntityPlayer.inventory.consumeInventoryItem(Items.arrow);
 
-							if (!par2World.isRemote) {
-								par2World.spawnEntityInWorld(entityarrow);
-							}
-						}
+			if (!par2World.isRemote)
+				par2World.spawnEntityInWorld(entityarrow);
+		}
 	}
 
 	@Override
@@ -146,16 +137,13 @@ public class ItemClockworkBow extends ItemBow {
 		ArrowNockEvent event = new ArrowNockEvent(par3EntityPlayer,
 				par1ItemStack);
 		MinecraftForge.EVENT_BUS.post(event);
-		if (event.isCanceled()) {
+		if (event.isCanceled())
 			return event.result;
-		}
 
 		if (par3EntityPlayer.capabilities.isCreativeMode
-				|| par3EntityPlayer.inventory.hasItem(Items.arrow)) {
+				|| par3EntityPlayer.inventory.hasItem(Items.arrow))
 			par3EntityPlayer.setItemInUse(par1ItemStack,
 					getMaxItemUseDuration(par1ItemStack));
-
-		}
 
 		return par1ItemStack;
 	}
@@ -175,11 +163,9 @@ public class ItemClockworkBow extends ItemBow {
 
 		itemIcon = par1IconRegister.registerIcon(Reference.ModID
 				+ ":bow/bowClockwork" + "_0");
-		for (int N = 0; N < 4; N++) {
+		for (int N = 0; N < 4; N++)
 			iconArray[N] = par1IconRegister.registerIcon(Reference.ModID
 					+ ":bow/bowClockwork" + "_" + N);
-
-		}
 	}
 
 	@Override
@@ -188,13 +174,12 @@ public class ItemClockworkBow extends ItemBow {
 		if (player.getItemInUse() == null)
 			return itemIcon;
 		int time = stack.getMaxItemUseDuration() - useRemaining;
-		if (time >= 13) {
+		if (time >= 13)
 			return iconArray[3];
-		} else if (time > 8) {
+		else if (time > 8)
 			return iconArray[2];
-		} else if (time > 0) {
+		else if (time > 0)
 			return iconArray[1];
-		}
 		return iconArray[0];
 	}
 

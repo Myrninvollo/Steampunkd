@@ -20,7 +20,6 @@ public class EntityAICollectItem extends EntityAIBase {
 
 	private double range = 5.0;
 
-
 	public EntityAICollectItem(EntityAutomaton auto) {
 		this.auto = auto;
 		pathFinder = auto.getNavigator();
@@ -30,26 +29,25 @@ public class EntityAICollectItem extends EntityAIBase {
 	@Override
 	public boolean shouldExecute() {
 		range = auto.range;
-		if (!pathFinder.noPath()) {
+		if (!pathFinder.noPath())
 			return false;
-		}
 		if (auto.getPickup() != true)
 			return false;
 
-		else if (auto.worldObj != null) {
+		else if (auto.worldObj != null)
 			if (auto.getStackInSlot(0) == null) {
 
 				List<EntityItem> items = auto.worldObj.getEntitiesWithinAABB(
 						EntityItem.class,
 						AxisAlignedBB
-						.getAABBPool()
-						.getAABB(auto.posX - 1, auto.posY - 1,
-								auto.posZ - 1, auto.posX + 1,
-								auto.posY + 1, auto.posZ + 1)
+								.getAABBPool()
+								.getAABB(auto.posX - 1, auto.posY - 1,
+										auto.posZ - 1, auto.posX + 1,
+										auto.posY + 1, auto.posZ + 1)
 								.expand(range, range, range));
 				EntityItem closest = null;
 				double closestDistance = Double.MAX_VALUE;
-				for (EntityItem item : items) {
+				for (EntityItem item : items)
 					if (!item.isDead && item.onGround) {
 						double dist = item.getDistanceToEntity(auto); // Check
 
@@ -59,13 +57,11 @@ public class EntityAICollectItem extends EntityAIBase {
 							closestDistance = dist;
 						}
 					}
-				}
 				if (closest != null) {
 					targetItem = closest;
 					return true;
 				}
 			}
-		}
 		return false;
 	}
 
@@ -83,16 +79,15 @@ public class EntityAICollectItem extends EntityAIBase {
 
 	@Override
 	public void startExecuting() {
-		if (targetItem != null) {
+		if (targetItem != null)
 			pathFinder.tryMoveToXYZ(targetItem.posX, targetItem.posY,
 					targetItem.posZ, 1.0D);
-		}
 	}
 
 	@Override
 	public void updateTask() {
 		super.updateTask();
-		if (!auto.worldObj.isRemote) {
+		if (!auto.worldObj.isRemote)
 			if (targetItem != null
 					&& auto.getDistanceToEntity(targetItem) < 1.5) {
 				ItemStack stack = targetItem.getEntityItem();
@@ -101,6 +96,5 @@ public class EntityAICollectItem extends EntityAIBase {
 				targetItem.setDead();
 
 			}
-		}
 	}
 }

@@ -96,12 +96,11 @@ public class RenderAutomoton extends RenderLiving {
 			GL11.glRotatef(-15.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glRotatef(40.0F, 0.0F, 0.0F, 1.0F);
 			renderManager.itemRenderer
-			.renderItem(par1EntityWitch, itemstack, 0);
+					.renderItem(par1EntityWitch, itemstack, 0);
 
-			if (itemstack.getItem().requiresMultipleRenderPasses()) {
+			if (itemstack.getItem().requiresMultipleRenderPasses())
 				renderManager.itemRenderer.renderItem(par1EntityWitch,
 						itemstack, 1);
-			}
 
 			GL11.glPopMatrix();
 		}
@@ -122,14 +121,11 @@ public class RenderAutomoton extends RenderLiving {
 			float par2, float par3, float par4) {
 		GL11.glRotatef(180.0F - par3, 0.0F, 1.0F, 0.0F);
 
-
 		String s = EnumChatFormatting
 				.getTextWithoutFormattingCodes(par1EntityLivingBase
 						.getCommandSenderName());
-		if (s == "SR2610") {
-			GL11.glTranslatef(0.0F, par1EntityLivingBase.height + 0.1F,
-					0.0F);
-		}
+		if (s == "SR2610")
+			GL11.glTranslatef(0.0F, par1EntityLivingBase.height + 0.1F, 0.0F);
 
 		super.rotateCorpse(par1EntityLivingBase, par2, par3, par4);
 	}

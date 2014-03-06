@@ -72,27 +72,24 @@ public class GuiTinkerBench extends GuiMachine {
 		check();
 		drawEntity(guiLeft + 51 + 55, guiTop + 75, 30,
 				(float) (guiLeft + 51 + 60) - xSize, (float) (guiTop + 75 - 50)
-				- ySize, ae);
+						- ySize, ae);
 
 	}
 
 	private void check() {
 		if (injectorInventory.getStackInSlot(0) != null
-				&& injectorInventory.getStackInSlot(0).getItem() instanceof ItemChasis) {
-
+				&& injectorInventory.getStackInSlot(0).getItem() instanceof ItemChasis)
 			ae.setInvisible(false);
-		} else {
+		else
 			ae.setInvisible(true);
-		}
 	}
 
 	@Override
 	public void drawScreen(int mouse_x, int mouse_y, float par3) {
 		super.drawScreen(mouse_x, mouse_y, par3);
 
-		if (func_146978_c(TANK_X, TANK_Y, 16, TANK_HEIGHT, mouse_x, mouse_y)) {
+		if (func_146978_c(TANK_X, TANK_Y, 16, TANK_HEIGHT, mouse_x, mouse_y))
 			DisplayTankTooltip(mouse_x, mouse_y, injectorInventory.GetTank(0));
-		}
 
 	}
 
@@ -119,55 +116,48 @@ public class GuiTinkerBench extends GuiMachine {
 
 	@Override
 	public void actionPerformed(GuiButton button) {
-		if (button.id == 1) {
+		if (button.id == 1)
 			if (injectorInventory.getStackInSlot(0) != null
 					&& injectorInventory.getStackInSlot(0).getItem() instanceof ItemChasis
 					&& injectorInventory.getStackInSlot(1) != null
 					&& injectorInventory.getStackInSlot(1).getItem() instanceof ItemCore) {
 				ItemStack stack = new ItemStack(ModItems.spawner, 1, 0);
-				for (int i = 2; i < 6; ++i) {
+				for (int i = 2; i < 6; ++i)
 					if (injectorInventory.getStackInSlot(i) != null
 							&& injectorInventory.getStackInSlot(i).getItem() instanceof IUpgrade) {
-						if (!stack.hasTagCompound()) {
+						if (!stack.hasTagCompound())
 							stack.setTagCompound(new NBTTagCompound());
-						}
 
 						NBTTagCompound nbttagcompound = stack.getTagCompound();
 						if (injectorInventory.getStackInSlot(i).getItemDamage() == 0) {
 							NBTTagDouble nbttagdouble = (NBTTagDouble) nbttagcompound
 									.getTag("Range");
 
-							if (nbttagdouble == null) {
+							if (nbttagdouble == null)
 								stack.setTagInfo("Range",
 										new NBTTagDouble(10.0));
-							}
 						}
 
 						if (injectorInventory.getStackInSlot(i).getItemDamage() == 2) {
 							NBTTagDouble nbttagdoubleHealth = (NBTTagDouble) nbttagcompound
 									.getTag("MaxHealth");
 
-							if (nbttagdoubleHealth == null) {
+							if (nbttagdoubleHealth == null)
 								stack.setTagInfo("MaxHealth", new NBTTagDouble(
 										40.0));
-							}
 						}
 						if (injectorInventory.getStackInSlot(i).getItemDamage() == 1) {
 							NBTTagDouble nbttagdoubleSpeed = (NBTTagDouble) nbttagcompound
 									.getTag("Speed");
 
-							if (nbttagdoubleSpeed == null) {
+							if (nbttagdoubleSpeed == null)
 								stack.setTagInfo("Speed", new NBTTagDouble(0.8));
-							}
 						}
 					}
-
-				}
 				injectorInventory.setInventorySlotContents(8, stack);
 				updateServer(stack);
 				injectorInventory.markDirty();
 			}
-		}
 	}
 
 	void updateServer(ItemStack stack) {

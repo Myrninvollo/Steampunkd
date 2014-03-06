@@ -30,12 +30,10 @@ public class ItemPunchcard extends Item {
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs,
 			List par3List) {
-		for (int x = 0; x < 3; x++) {
+		for (int x = 0; x < 3; x++)
 			par3List.add(new ItemStack(this, 1, x));
-		}
-		for (int x = 11; x < 13; x++) {
+		for (int x = 11; x < 13; x++)
 			par3List.add(new ItemStack(this, 1, x));
-		}
 	}
 
 	@Override
@@ -50,7 +48,7 @@ public class ItemPunchcard extends Item {
 
 		if (par3EntityLivingBase instanceof EntityAutomaton) {
 			EntityAutomaton entityAutomoton = (EntityAutomaton) par3EntityLivingBase;
-			if (entityAutomoton.getProgram() != true) {
+			if (entityAutomoton.getProgram() != true)
 				switch (par1ItemStack.getItemDamage()) {
 				case 1: {
 					entityAutomoton.setProgram(par1ItemStack.getItemDamage());
@@ -63,12 +61,12 @@ public class ItemPunchcard extends Item {
 					return true;
 				}
 				}
-			} else {
+			else {
 				if (!par2EntityPlayer.worldObj.isRemote)
 					par2EntityPlayer
-					.addChatComponentMessage(new ChatComponentTranslation(
-							StatCollector
-							.translateToLocal("steampunked.oneProgram.name")));
+							.addChatComponentMessage(new ChatComponentTranslation(
+									StatCollector
+											.translateToLocal("steampunked.oneProgram.name")));
 				return false;
 			}
 
@@ -77,9 +75,9 @@ public class ItemPunchcard extends Item {
 		else {
 			if (!par2EntityPlayer.worldObj.isRemote)
 				par2EntityPlayer
-				.addChatComponentMessage(new ChatComponentTranslation(
-						StatCollector
-						.translateToLocal("steampunked.onlyAutomaton.name")));
+						.addChatComponentMessage(new ChatComponentTranslation(
+								StatCollector
+										.translateToLocal("steampunked.onlyAutomaton.name")));
 			return false;
 		}
 		return false;

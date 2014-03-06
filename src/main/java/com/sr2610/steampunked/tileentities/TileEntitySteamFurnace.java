@@ -22,7 +22,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntitySteamFurnace extends TileEntityMachine implements
-ISidedInventory, IFluidHandler {
+		ISidedInventory, IFluidHandler {
 
 	static private final int NETDATAID_TANK_FLUID = 1;
 	static private final int NETDATAID_TANK_AMOUNT = 2;
@@ -81,15 +81,13 @@ ISidedInventory, IFluidHandler {
 			} else {
 				itemstack = furnaceItemStacks[par1].splitStack(par2);
 
-				if (furnaceItemStacks[par1].stackSize == 0) {
+				if (furnaceItemStacks[par1].stackSize == 0)
 					furnaceItemStacks[par1] = null;
-				}
 
 				return itemstack;
 			}
-		} else {
+		} else
 			return null;
-		}
 	}
 
 	@Override
@@ -98,9 +96,8 @@ ISidedInventory, IFluidHandler {
 			ItemStack itemstack = furnaceItemStacks[par1];
 			furnaceItemStacks[par1] = null;
 			return itemstack;
-		} else {
+		} else
 			return null;
-		}
 	}
 
 	/**
@@ -112,9 +109,8 @@ ISidedInventory, IFluidHandler {
 		furnaceItemStacks[par1] = par2ItemStack;
 
 		if (par2ItemStack != null
-				&& par2ItemStack.stackSize > getInventoryStackLimit()) {
+				&& par2ItemStack.stackSize > getInventoryStackLimit())
 			par2ItemStack.stackSize = getInventoryStackLimit();
-		}
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -127,9 +123,9 @@ ISidedInventory, IFluidHandler {
 	 * destination stack isn't full, etc.
 	 */
 	private boolean canSmelt() {
-		if (furnaceItemStacks[0] == null) {
+		if (furnaceItemStacks[0] == null)
 			return false;
-		} else {
+		else {
 			ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(
 					furnaceItemStacks[0]);
 			if (itemstack == null)
@@ -153,17 +149,15 @@ ISidedInventory, IFluidHandler {
 			ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(
 					furnaceItemStacks[0]);
 
-			if (furnaceItemStacks[1] == null) {
+			if (furnaceItemStacks[1] == null)
 				furnaceItemStacks[1] = itemstack.copy();
-			} else if (furnaceItemStacks[1].isItemEqual(itemstack)) {
+			else if (furnaceItemStacks[1].isItemEqual(itemstack))
 				furnaceItemStacks[1].stackSize += itemstack.stackSize;
-			}
 
 			--furnaceItemStacks[0].stackSize;
 
-			if (furnaceItemStacks[0].stackSize <= 0) {
+			if (furnaceItemStacks[0].stackSize <= 0)
 				furnaceItemStacks[0] = null;
-			}
 		}
 	}
 
@@ -200,13 +194,11 @@ ISidedInventory, IFluidHandler {
 
 			}
 
-			if (flag == isSmelting) {
+			if (flag == isSmelting)
 				flag1 = true;
-			}
 
-			if (flag1) {
+			if (flag1)
 				markDirty();
-			}
 			BlockSteamFurnace.updateFurnaceBlockState(isSmelting, worldObj,
 					xCoord, yCoord, zCoord);
 		}
@@ -225,18 +217,16 @@ ISidedInventory, IFluidHandler {
 	public void GetGUINetworkData(int id, int value) {
 		switch (id) {
 		case NETDATAID_TANK_FLUID:
-			if (tank.getFluid() == null) {
+			if (tank.getFluid() == null)
 				tank.setFluid(new FluidStack(value, 0));
-			} else {
+			else
 				tank.getFluid().fluidID = value;
-			}
 			break;
 		case NETDATAID_TANK_AMOUNT:
-			if (tank.getFluid() == null) {
+			if (tank.getFluid() == null)
 				tank.setFluid(new FluidStack(0, value));
-			} else {
+			else
 				tank.getFluid().amount = value;
-			}
 			break;
 		}
 	}
@@ -282,9 +272,8 @@ ISidedInventory, IFluidHandler {
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource,
 			boolean doDrain) {
-		if (resource.isFluidEqual(tank.getFluid())) {
+		if (resource.isFluidEqual(tank.getFluid()))
 			return tank.drain(resource.amount, doDrain);
-		}
 		return null;
 	}
 
@@ -345,9 +334,8 @@ ISidedInventory, IFluidHandler {
 
 	@Override
 	public FluidTank GetTank(int slot) {
-		if (slot != 0) {
+		if (slot != 0)
 			return null;
-		}
 		return tank;
 	}
 

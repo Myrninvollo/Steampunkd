@@ -1,6 +1,5 @@
 package com.sr2610.steampunked.items;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -38,7 +37,7 @@ public final class ModItems {
 	public static Item basicCore;
 	public static Item mediumCore;
 	public static Item advancedCore;
-	
+
 	public static Item reprogrammer;
 
 	public static void initItems() {
@@ -59,10 +58,10 @@ public final class ModItems {
 		namePlate = new ItemNamePlate().setUnlocalizedName(LibNames.NAMEPLATE);
 
 		spawner = new ItemAutomotonSpawner()
-		.setUnlocalizedName(LibNames.SPAWNER);
+				.setUnlocalizedName(LibNames.SPAWNER);
 
 		AutomatonUpgrade = new ItemAutomatonUpgrade()
-		.setUnlocalizedName(LibNames.UPGRADE);
+				.setUnlocalizedName(LibNames.UPGRADE);
 		punchcard = new ItemPunchcard().setUnlocalizedName(LibNames.PUNCHCARD);
 		chasis = new ItemChasis().setUnlocalizedName(LibNames.CHASIS);
 
@@ -80,19 +79,19 @@ public final class ModItems {
 		clockworkBow = new ItemClockworkBow().setUnlocalizedName(LibNames.BOW);
 
 		copperIngot = new ItemMod("ingotCopper")
-		.setUnlocalizedName(LibNames.COPPERINGOT);
+				.setUnlocalizedName(LibNames.COPPERINGOT);
 
-		
 		tinIngot = new ItemMod("ingotTin")
-		.setUnlocalizedName(LibNames.TININGOT);
+				.setUnlocalizedName(LibNames.TININGOT);
 		basicCore = new ItemCore("coreBasic").setUnlocalizedName(
 				LibNames.COREBASIC).setMaxStackSize(1);
 		mediumCore = new ItemCore("coreMedium").setUnlocalizedName(
 				LibNames.COREMEDIUM).setMaxStackSize(1);
 		advancedCore = new ItemCore("coreAdvanced").setUnlocalizedName(
 				LibNames.COREADVANCED).setMaxStackSize(1);
-		
-		reprogrammer = new ItemReprogrammer().setUnlocalizedName(LibNames.REPROGRAMMER).setMaxStackSize(1);
+
+		reprogrammer = new ItemReprogrammer().setUnlocalizedName(
+				LibNames.REPROGRAMMER).setMaxStackSize(1);
 
 		registerItems();
 	}
@@ -127,13 +126,11 @@ public final class ModItems {
 		GameRegistry.registerItem(saberDiamond, LibNames.SABERDIAMOND,
 				Reference.ModID);
 
-		GameRegistry.registerItem(clockworkBow, LibNames.BOW,
-				Reference.ModID);
+		GameRegistry.registerItem(clockworkBow, LibNames.BOW, Reference.ModID);
 
 		GameRegistry.registerItem(copperIngot, LibNames.COPPERINGOT,
 				Reference.ModID);
 		GameRegistry.registerItem(tinIngot, LibNames.TININGOT, Reference.ModID);
-
 
 		GameRegistry.registerItem(basicCore, LibNames.COREBASIC,
 				Reference.ModID);
@@ -141,10 +138,9 @@ public final class ModItems {
 				Reference.ModID);
 		GameRegistry.registerItem(advancedCore, LibNames.COREADVANCED,
 				Reference.ModID);
-		
+
 		GameRegistry.registerItem(reprogrammer, LibNames.REPROGRAMMER,
 				Reference.ModID);
-
 
 		oreRegistration();
 

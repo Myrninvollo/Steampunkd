@@ -60,29 +60,25 @@ public class ItemSteamBucket extends Item implements IFluidContainerItem {
 		MovingObjectPosition movingobjectposition = getMovingObjectPositionFromPlayer(
 				par2World, par3EntityPlayer, flag);
 
-		if (movingobjectposition == null) {
+		if (movingobjectposition == null)
 			return par1ItemStack;
-		} else {
+		else {
 			FillBucketEvent event = new FillBucketEvent(par3EntityPlayer,
 					par1ItemStack, par2World, movingobjectposition);
-			if (MinecraftForge.EVENT_BUS.post(event)) {
+			if (MinecraftForge.EVENT_BUS.post(event))
 				return par1ItemStack;
-			}
 
 			if (event.getResult() == Event.Result.ALLOW) {
-				if (par3EntityPlayer.capabilities.isCreativeMode) {
+				if (par3EntityPlayer.capabilities.isCreativeMode)
 					return par1ItemStack;
-				}
 
-				if (--par1ItemStack.stackSize <= 0) {
+				if (--par1ItemStack.stackSize <= 0)
 					return event.result;
-				}
 
 				if (!par3EntityPlayer.inventory
-						.addItemStackToInventory(event.result)) {
+						.addItemStackToInventory(event.result))
 					par3EntityPlayer.dropPlayerItemWithRandomChoice(
 							event.result, false);
-				}
 
 				return par1ItemStack;
 			}
@@ -91,15 +87,13 @@ public class ItemSteamBucket extends Item implements IFluidContainerItem {
 				int j = movingobjectposition.blockY;
 				int k = movingobjectposition.blockZ;
 
-				if (!par2World.canMineBlock(par3EntityPlayer, i, j, k)) {
+				if (!par2World.canMineBlock(par3EntityPlayer, i, j, k))
 					return par1ItemStack;
-				}
 
 				if (flag) {
 					if (!par3EntityPlayer.canPlayerEdit(i, j, k,
-							movingobjectposition.sideHit, par1ItemStack)) {
+							movingobjectposition.sideHit, par1ItemStack))
 						return par1ItemStack;
-					}
 
 					Material material = par2World.getBlock(i, j, k)
 							.getMaterial();
@@ -113,14 +107,12 @@ public class ItemSteamBucket extends Item implements IFluidContainerItem {
 
 				} else {
 					if (!par3EntityPlayer.canPlayerEdit(i, j, k,
-							movingobjectposition.sideHit, par1ItemStack)) {
+							movingobjectposition.sideHit, par1ItemStack))
 						return par1ItemStack;
-					}
 
 					if (tryPlaceContainedLiquid(par2World, i, j, k)
-							&& !par3EntityPlayer.capabilities.isCreativeMode) {
+							&& !par3EntityPlayer.capabilities.isCreativeMode)
 						return new ItemStack(Items.bucket);
-					}
 				}
 			}
 
@@ -130,16 +122,15 @@ public class ItemSteamBucket extends Item implements IFluidContainerItem {
 
 	private ItemStack canPlace(ItemStack p_150910_1_, EntityPlayer p_150910_2_,
 			Item p_150910_3_) {
-		if (p_150910_2_.capabilities.isCreativeMode) {
+		if (p_150910_2_.capabilities.isCreativeMode)
 			return p_150910_1_;
-		} else if (--p_150910_1_.stackSize <= 0) {
+		else if (--p_150910_1_.stackSize <= 0)
 			return new ItemStack(p_150910_3_);
-		} else {
+		else {
 			if (!p_150910_2_.inventory.addItemStackToInventory(new ItemStack(
-					p_150910_3_))) {
+					p_150910_3_)))
 				p_150910_2_.dropPlayerItemWithRandomChoice(new ItemStack(
 						p_150910_3_, 1, 0), false);
-			}
 
 			return p_150910_1_;
 		}
@@ -155,13 +146,12 @@ public class ItemSteamBucket extends Item implements IFluidContainerItem {
 		Material material = par1World.getBlock(par2, par3, par4).getMaterial();
 		boolean flag = !material.isSolid();
 
-		if (!par1World.isAirBlock(par2, par3, par4) && !flag) {
+		if (!par1World.isAirBlock(par2, par3, par4) && !flag)
 			return false;
-		} else {
+		else {
 
-			if (!par1World.isRemote && flag && !material.isLiquid()) {
+			if (!par1World.isRemote && flag && !material.isLiquid())
 				par1World.func_147480_a(par2, par3, par4, true);
-			}
 
 			par1World.setBlock(par2, par3, par4, ModBlocks.BlockFluidSteam, 0,
 					3);

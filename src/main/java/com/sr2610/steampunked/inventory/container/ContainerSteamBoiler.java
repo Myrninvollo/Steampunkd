@@ -27,16 +27,13 @@ public class ContainerSteamBoiler extends Container {
 
 		addSlotToContainer(new Slot(te_boiler, 0, 81, 39));
 
-		for (i = 0; i < 3; ++i) {
-			for (j = 0; j < 9; ++j) {
+		for (i = 0; i < 3; ++i)
+			for (j = 0; j < 9; ++j)
 				addSlotToContainer(new Slot(player_inventory, j + i * 9 + 9,
 						SLOT_INVENTORY_X + j * 18, SLOT_INVENTORY_Y + i * 18));
-			}
-		}
-		for (i = 0; i < 9; ++i) {
+		for (i = 0; i < 9; ++i)
 			addSlotToContainer(new Slot(player_inventory, i, SLOT_HOTBAR_X + i
 					* 18, SLOT_HOTBAR_Y));
-		}
 	}
 
 	@Override
@@ -54,36 +51,32 @@ public class ContainerSteamBoiler extends Container {
 			itemstack = itemstack1.copy();
 
 			if (par2 == 0) {
-				if (!mergeItemStack(itemstack1, 1, 37, true)) {
+				if (!mergeItemStack(itemstack1, 1, 37, true))
 					return null;
-				}
 			} else {
 				if (((Slot) inventorySlots.get(0)).getHasStack()
 						|| !((Slot) inventorySlots.get(0))
-						.isItemValid(itemstack1)) {
+								.isItemValid(itemstack1))
 					return null;
-				}
 
 				if (itemstack1.hasTagCompound() && itemstack1.stackSize == 1) {
 					((Slot) inventorySlots.get(0)).putStack(itemstack1.copy());
 					itemstack1.stackSize = 0;
 				} else if (itemstack1.stackSize >= 1) {
 					((Slot) inventorySlots.get(0))
-					.putStack(new ItemStack(itemstack1.getItem(), 1,
-							itemstack1.getItemDamage()));
+							.putStack(new ItemStack(itemstack1.getItem(), 1,
+									itemstack1.getItemDamage()));
 					--itemstack1.stackSize;
 				}
 			}
 
-			if (itemstack1.stackSize == 0) {
+			if (itemstack1.stackSize == 0)
 				slot.putStack((ItemStack) null);
-			} else {
+			else
 				slot.onSlotChanged();
-			}
 
-			if (itemstack1.stackSize == itemstack.stackSize) {
+			if (itemstack1.stackSize == itemstack.stackSize)
 				return null;
-			}
 
 			slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
 		}
@@ -101,21 +94,18 @@ public class ContainerSteamBoiler extends Container {
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < crafters.size(); i++) {
+		for (int i = 0; i < crafters.size(); i++)
 			te_boiler.SendGUINetworkData(this, (ICrafting) crafters.get(i));
-		}
 	}
 
 	@Override
 	public void updateProgressBar(int i, int j) {
 		te_boiler.GetGUINetworkData(i, j);
-		if (i == 5) {
+		if (i == 5)
 			te_boiler.furnaceBurnTime = j;
-		}
 
-		if (i == 6) {
+		if (i == 6)
 			te_boiler.currentItemBurnTime = j;
-		}
 	}
 
 }

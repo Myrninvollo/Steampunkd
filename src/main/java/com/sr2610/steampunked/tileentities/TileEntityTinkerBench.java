@@ -19,7 +19,7 @@ import com.sr2610.steampunked.inventory.container.ContainerTinkerBench;
 import com.sr2610.steampunked.lib.LibOptions;
 
 public class TileEntityTinkerBench extends TileEntityMachine implements
-IInventory, IFluidHandler {
+		IInventory, IFluidHandler {
 
 	private ItemStack[] benchItemStacks = new ItemStack[9];
 
@@ -63,15 +63,13 @@ IInventory, IFluidHandler {
 			} else {
 				itemstack = benchItemStacks[par1].splitStack(par2);
 
-				if (benchItemStacks[par1].stackSize == 0) {
+				if (benchItemStacks[par1].stackSize == 0)
 					benchItemStacks[par1] = null;
-				}
 
 				return itemstack;
 			}
-		} else {
+		} else
 			return null;
-		}
 	}
 
 	@Override
@@ -80,9 +78,8 @@ IInventory, IFluidHandler {
 			ItemStack itemstack = benchItemStacks[par1];
 			benchItemStacks[par1] = null;
 			return itemstack;
-		} else {
+		} else
 			return null;
-		}
 	}
 
 	@Override
@@ -90,9 +87,8 @@ IInventory, IFluidHandler {
 		benchItemStacks[par1] = par2ItemStack;
 
 		if (par2ItemStack != null
-				&& par2ItemStack.stackSize > getInventoryStackLimit()) {
+				&& par2ItemStack.stackSize > getInventoryStackLimit())
 			par2ItemStack.stackSize = getInventoryStackLimit();
-		}
 	}
 
 	@Override
@@ -130,9 +126,8 @@ IInventory, IFluidHandler {
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource,
 			boolean doDrain) {
-		if (resource.isFluidEqual(tank.getFluid())) {
+		if (resource.isFluidEqual(tank.getFluid()))
 			return tank.drain(resource.amount, doDrain);
-		}
 		return null;
 	}
 
@@ -193,9 +188,8 @@ IInventory, IFluidHandler {
 
 	@Override
 	public FluidTank GetTank(int slot) {
-		if (slot != 0) {
+		if (slot != 0)
 			return null;
-		}
 		return tank;
 	}
 
@@ -212,18 +206,16 @@ IInventory, IFluidHandler {
 	public void GetGUINetworkData(int id, int value) {
 		switch (id) {
 		case NETDATAID_TANK_FLUID:
-			if (tank.getFluid() == null) {
+			if (tank.getFluid() == null)
 				tank.setFluid(new FluidStack(value, 0));
-			} else {
+			else
 				tank.getFluid().fluidID = value;
-			}
 			break;
 		case NETDATAID_TANK_AMOUNT:
-			if (tank.getFluid() == null) {
+			if (tank.getFluid() == null)
 				tank.setFluid(new FluidStack(0, value));
-			} else {
+			else
 				tank.getFluid().amount = value;
-			}
 			break;
 		}
 	}
@@ -246,10 +238,9 @@ IInventory, IFluidHandler {
 			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			byte b0 = nbttagcompound1.getByte("Slot");
 
-			if (b0 >= 0 && b0 < benchItemStacks.length) {
+			if (b0 >= 0 && b0 < benchItemStacks.length)
 				benchItemStacks[b0] = ItemStack
 						.loadItemStackFromNBT(nbttagcompound1);
-			}
 		}
 
 		craftProgress = par1NBTTagCompound.getShort("CraftProgress");
@@ -262,14 +253,13 @@ IInventory, IFluidHandler {
 		par1NBTTagCompound.setShort("CraftProgress", (short) craftProgress);
 		NBTTagList nbttaglist = new NBTTagList();
 
-		for (int i = 0; i < benchItemStacks.length; ++i) {
+		for (int i = 0; i < benchItemStacks.length; ++i)
 			if (benchItemStacks[i] != null) {
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setByte("Slot", (byte) i);
 				benchItemStacks[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
-		}
 
 		par1NBTTagCompound.setTag("Items", nbttaglist);
 

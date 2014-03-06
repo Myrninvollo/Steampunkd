@@ -52,9 +52,8 @@ public class GuiInjector extends GuiMachine {
 	public void drawScreen(int mouse_x, int mouse_y, float par3) {
 		super.drawScreen(mouse_x, mouse_y, par3);
 
-		if (func_146978_c(TANK_X, TANK_Y, 16, TANK_HEIGHT, mouse_x, mouse_y)) {
+		if (func_146978_c(TANK_X, TANK_Y, 16, TANK_HEIGHT, mouse_x, mouse_y))
 			DisplayTankTooltip(mouse_x, mouse_y, injectorInventory.GetTank(0));
-		}
 
 	}
 

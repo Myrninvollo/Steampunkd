@@ -18,7 +18,7 @@ import com.sr2610.steampunked.items.interfaces.ISteamUser;
 import com.sr2610.steampunked.lib.LibOptions;
 
 public class TileEntityInjector extends TileEntityMachine implements
-ISidedInventory, IFluidHandler {
+		ISidedInventory, IFluidHandler {
 
 	static private final int NETDATAID_TANK_FLUID = 1;
 	static private final int NETDATAID_TANK_AMOUNT = 2;
@@ -81,15 +81,13 @@ ISidedInventory, IFluidHandler {
 			} else {
 				itemstack = chargerItemSlot[par1].splitStack(par2);
 
-				if (chargerItemSlot[par1].stackSize == 0) {
+				if (chargerItemSlot[par1].stackSize == 0)
 					chargerItemSlot[par1] = null;
-				}
 
 				return itemstack;
 			}
-		} else {
+		} else
 			return null;
-		}
 	}
 
 	/**
@@ -103,9 +101,8 @@ ISidedInventory, IFluidHandler {
 			ItemStack itemstack = chargerItemSlot[par1];
 			chargerItemSlot[par1] = null;
 			return itemstack;
-		} else {
+		} else
 			return null;
-		}
 	}
 
 	/**
@@ -117,26 +114,23 @@ ISidedInventory, IFluidHandler {
 		chargerItemSlot[par1] = par2ItemStack;
 
 		if (par2ItemStack != null
-				&& par2ItemStack.stackSize > getInventoryStackLimit()) {
+				&& par2ItemStack.stackSize > getInventoryStackLimit())
 			par2ItemStack.stackSize = getInventoryStackLimit();
-		}
 	}
 
 	public void GetGUINetworkData(int id, int value) {
 		switch (id) {
 		case NETDATAID_TANK_FLUID:
-			if (tank.getFluid() == null) {
+			if (tank.getFluid() == null)
 				tank.setFluid(new FluidStack(value, 0));
-			} else {
+			else
 				tank.getFluid().fluidID = value;
-			}
 			break;
 		case NETDATAID_TANK_AMOUNT:
-			if (tank.getFluid() == null) {
+			if (tank.getFluid() == null)
 				tank.setFluid(new FluidStack(0, value));
-			} else {
+			else
 				tank.getFluid().amount = value;
-			}
 			break;
 		}
 	}
@@ -187,9 +181,8 @@ ISidedInventory, IFluidHandler {
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource,
 			boolean doDrain) {
-		if (resource.isFluidEqual(tank.getFluid())) {
+		if (resource.isFluidEqual(tank.getFluid()))
 			return tank.drain(resource.amount, doDrain);
-		}
 		return null;
 	}
 
@@ -253,7 +246,6 @@ ISidedInventory, IFluidHandler {
 					.setItemDamage(chargerItemSlot[0].getItemDamage() - 1);
 		}
 
-
 	}
 
 	public World getWorld() {
@@ -262,9 +254,8 @@ ISidedInventory, IFluidHandler {
 
 	@Override
 	public FluidTank GetTank(int slot) {
-		if (slot != 0) {
+		if (slot != 0)
 			return null;
-		}
 		return tank;
 	}
 
@@ -285,9 +276,8 @@ ISidedInventory, IFluidHandler {
 		if (chargerItemSlot[0].getItem() instanceof ISteamUser) {
 			ISteamUser r = (ISteamUser) chargerItemSlot[0].getItem();
 			return r.getCurrentSteam(chargerItemSlot[0]);
-		} else {
+		} else
 			return 0;
-		}
 
 	}
 
@@ -306,9 +296,9 @@ ISidedInventory, IFluidHandler {
 		if (chargerItemSlot[0] == null)
 			return false;
 		if (chargerItemSlot[0].getItem() instanceof ISteamUser
-				&& getItemChargeLevel() != getItemMaxCharge()) {
+				&& getItemChargeLevel() != getItemMaxCharge())
 			return true;
-		} else
+		else
 			return false;
 
 	}
@@ -327,9 +317,5 @@ ISidedInventory, IFluidHandler {
 	public boolean hasCustomInventoryName() {
 		return false;
 	}
-
-
-
-
 
 }

@@ -15,9 +15,8 @@ public class SlotCore extends Slot {
 	@Override
 	public boolean isItemValid(ItemStack itemstack) {
 
-		if (itemstack.getItem() instanceof ItemCore) {
+		if (itemstack.getItem() instanceof ItemCore)
 			return true;
-		}
 		return false;
 	}
 

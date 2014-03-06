@@ -15,9 +15,8 @@ public class SlotChasis extends Slot {
 	@Override
 	public boolean isItemValid(ItemStack itemstack) {
 
-		if (itemstack.getItem() instanceof ItemChasis) {
+		if (itemstack.getItem() instanceof ItemChasis)
 			return true;
-		}
 		return false;
 	}
 

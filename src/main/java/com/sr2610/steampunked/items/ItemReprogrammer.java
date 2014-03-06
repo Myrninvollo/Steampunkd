@@ -26,6 +26,7 @@ import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
 
 public class ItemReprogrammer extends Item {
 
+	@Override
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player,
 			World world, int x, int y, int z, int side, float hitX, float hitY,
 			float hitZ) {
@@ -40,9 +41,10 @@ public class ItemReprogrammer extends Item {
 					1.0F, 1.0F);
 
 		}
-		 return false;
+		return false;
 	}
 
+	@Override
 	public void onCreated(ItemStack itemStack, World world, EntityPlayer player) {
 		itemStack.stackTagCompound = new NBTTagCompound();
 		itemStack.stackTagCompound.setInteger("X", 0);
@@ -52,6 +54,7 @@ public class ItemReprogrammer extends Item {
 
 	}
 
+	@Override
 	public void addInformation(ItemStack itemStack, EntityPlayer player,
 			List list, boolean par4) {
 		if (itemStack.stackTagCompound != null) {
@@ -69,6 +72,7 @@ public class ItemReprogrammer extends Item {
 			list.add("Position not Defined");
 	}
 
+	@Override
 	public boolean itemInteractionForEntity(ItemStack itemStack,
 			EntityPlayer player, EntityLivingBase entityLiving) {
 

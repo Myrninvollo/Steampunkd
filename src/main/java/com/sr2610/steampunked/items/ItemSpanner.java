@@ -12,7 +12,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -41,10 +40,9 @@ public class ItemSpanner extends Item {
 	}
 
 	private boolean isShiftRotation(Class<? extends Block> cls) {
-		for (Class<? extends Block> shift : shiftRotations) {
+		for (Class<? extends Block> shift : shiftRotations)
 			if (shift.isAssignableFrom(cls))
 				return true;
-		}
 		return false;
 	}
 
@@ -74,14 +72,12 @@ public class ItemSpanner extends Item {
 									+ "mB"));
 			}
 
-		if (player.isSneaking() != isShiftRotation(block.getClass())) {
+		if (player.isSneaking() != isShiftRotation(block.getClass()))
 			return false;
-		}
 
 		if (block.rotateBlock(world, x, y, z,
-				ForgeDirection.getOrientation(side))) {
+				ForgeDirection.getOrientation(side)))
 			return !world.isRemote;
-		}
 		return false;
 	}
 

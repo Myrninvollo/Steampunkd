@@ -51,8 +51,7 @@ public class GuiPunchardMaker extends GuiMachine {
 			ItemStack is3 = inventory.getStackInSlot(2);
 			ItemStack is4 = inventory.getStackInSlot(3);
 			if (is4 != null && is4.getItem() == Items.dye
-					&& is4.getItemDamage() == 0) {
-
+					&& is4.getItemDamage() == 0)
 				if (is != null && is.getItem() instanceof ItemPunchcard
 						&& is.getItemDamage() == 0 && is3 == null
 						&& is2 != null
@@ -64,7 +63,6 @@ public class GuiPunchardMaker extends GuiMachine {
 					updateServer(stack);
 					inventory.markDirty();
 				}
-			}
 		}
 	}
 

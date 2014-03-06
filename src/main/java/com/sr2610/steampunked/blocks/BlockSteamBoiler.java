@@ -27,10 +27,8 @@ public class BlockSteamBoiler extends BlockContainer {
 			EntityPlayer player, int i, float f, float g, float t) {
 		TileEntity tile_entity = world.getTileEntity(x, y, z);
 
-		if (tile_entity == null || player.isSneaking()) {
+		if (tile_entity == null || player.isSneaking())
 			return false;
-		}
-
 		else
 			player.openGui(Steampunked.instance, 2, world, x, y, z);
 		return true;
@@ -50,9 +48,8 @@ public class BlockSteamBoiler extends BlockContainer {
 
 		TileEntity tile_entity = world.getTileEntity(x, y, z);
 
-		if (!(tile_entity instanceof IInventory)) {
+		if (!(tile_entity instanceof IInventory))
 			return;
-		}
 
 		IInventory inventory = (IInventory) tile_entity;
 
@@ -68,10 +65,9 @@ public class BlockSteamBoiler extends BlockContainer {
 						z + rz, new ItemStack(item.getItem(), item.stackSize,
 								item.getItemDamage()));
 
-				if (item.hasTagCompound()) {
+				if (item.hasTagCompound())
 					entity_item.writeToNBT((NBTTagCompound) item
 							.getTagCompound().copy());
-				}
 
 				float factor = 0.5F;
 

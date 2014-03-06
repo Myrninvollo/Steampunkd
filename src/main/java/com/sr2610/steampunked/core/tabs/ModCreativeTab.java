@@ -20,8 +20,6 @@ public class ModCreativeTab extends CreativeTabs {
 		super("steampunked");
 	}
 
-
-
 	@Override
 	public void displayAllReleventItems(List list) {
 		this.list = list;
@@ -49,7 +47,6 @@ public class ModCreativeTab extends CreativeTabs {
 		addBlock(ModBlocks.oreTin);
 		addItem(ModItems.copperIngot);
 		addItem(ModItems.tinIngot);
-		
 
 	}
 

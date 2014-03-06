@@ -30,7 +30,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @ChannelHandler.Sharable
 public class PacketPipeline extends
-MessageToMessageCodec<FMLProxyPacket, AbstractPacket> {
+		MessageToMessageCodec<FMLProxyPacket, AbstractPacket> {
 
 	private EnumMap<Side, FMLEmbeddedChannel> channels;
 	private LinkedList<Class<? extends AbstractPacket>> packets = new LinkedList<Class<? extends AbstractPacket>>();
@@ -48,20 +48,17 @@ MessageToMessageCodec<FMLProxyPacket, AbstractPacket> {
 	 *         this packet
 	 */
 	public boolean registerPacket(Class<? extends AbstractPacket> clazz) {
-		if (packets.size() > 256) {
+		if (packets.size() > 256)
 			// You should log here!!
 			return false;
-		}
 
-		if (packets.contains(clazz)) {
+		if (packets.contains(clazz))
 			// You should log here!!
 			return false;
-		}
 
-		if (isPostInitialised) {
+		if (isPostInitialised)
 			// You should log here!!
 			return false;
-		}
 
 		packets.add(clazz);
 		return true;
@@ -73,10 +70,9 @@ MessageToMessageCodec<FMLProxyPacket, AbstractPacket> {
 			List<Object> out) throws Exception {
 		ByteBuf buffer = Unpooled.buffer();
 		Class<? extends AbstractPacket> clazz = msg.getClass();
-		if (!packets.contains(msg.getClass())) {
+		if (!packets.contains(msg.getClass()))
 			throw new NullPointerException("No Packet Registered for: "
 					+ msg.getClass().getCanonicalName());
-		}
 
 		byte discriminator = (byte) packets.indexOf(clazz);
 		buffer.writeByte(discriminator);
@@ -93,10 +89,9 @@ MessageToMessageCodec<FMLProxyPacket, AbstractPacket> {
 		ByteBuf payload = msg.payload();
 		byte discriminator = payload.readByte();
 		Class<? extends AbstractPacket> clazz = packets.get(discriminator);
-		if (clazz == null) {
+		if (clazz == null)
 			throw new NullPointerException(
 					"No packet registered for discriminator: " + discriminator);
-		}
 
 		AbstractPacket pkt = clazz.newInstance();
 		pkt.decodeInto(ctx, payload.slice());
@@ -110,7 +105,7 @@ MessageToMessageCodec<FMLProxyPacket, AbstractPacket> {
 
 		case SERVER:
 			INetHandler netHandler = ctx.channel()
-			.attr(NetworkRegistry.NET_HANDLER).get();
+					.attr(NetworkRegistry.NET_HANDLER).get();
 			player = ((NetHandlerPlayServer) netHandler).playerEntity;
 			pkt.handleServerSide(player);
 			break;
@@ -139,28 +134,26 @@ MessageToMessageCodec<FMLProxyPacket, AbstractPacket> {
 	// Ensures that packet discriminators are common between server and client
 	// by using logical sorting
 	public void postInitialise() {
-		if (isPostInitialised) {
+		if (isPostInitialised)
 			return;
-		}
 
 		isPostInitialised = true;
 		Collections.sort(packets,
 				new Comparator<Class<? extends AbstractPacket>>() {
 
-			@Override
-			public int compare(Class<? extends AbstractPacket> clazz1,
-					Class<? extends AbstractPacket> clazz2) {
-				int com = String.CASE_INSENSITIVE_ORDER.compare(
-						clazz1.getCanonicalName(),
-						clazz2.getCanonicalName());
-				if (com == 0) {
-					com = clazz1.getCanonicalName().compareTo(
-							clazz2.getCanonicalName());
-				}
+					@Override
+					public int compare(Class<? extends AbstractPacket> clazz1,
+							Class<? extends AbstractPacket> clazz2) {
+						int com = String.CASE_INSENSITIVE_ORDER.compare(
+								clazz1.getCanonicalName(),
+								clazz2.getCanonicalName());
+						if (com == 0)
+							com = clazz1.getCanonicalName().compareTo(
+									clazz2.getCanonicalName());
 
-				return com;
-			}
-		});
+						return com;
+					}
+				});
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -179,7 +172,7 @@ MessageToMessageCodec<FMLProxyPacket, AbstractPacket> {
 	 */
 	public void sendToAll(AbstractPacket message) {
 		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET)
-		.set(FMLOutboundHandler.OutboundTarget.ALL);
+				.set(FMLOutboundHandler.OutboundTarget.ALL);
 		channels.get(Side.SERVER).writeAndFlush(message);
 	}
 
@@ -196,9 +189,9 @@ MessageToMessageCodec<FMLProxyPacket, AbstractPacket> {
 	 */
 	public void sendTo(AbstractPacket message, EntityPlayerMP player) {
 		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET)
-		.set(FMLOutboundHandler.OutboundTarget.PLAYER);
+				.set(FMLOutboundHandler.OutboundTarget.PLAYER);
 		channels.get(Side.SERVER)
-		.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(player);
+				.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(player);
 		channels.get(Side.SERVER).writeAndFlush(message);
 	}
 
@@ -218,9 +211,9 @@ MessageToMessageCodec<FMLProxyPacket, AbstractPacket> {
 	public void sendToAllAround(AbstractPacket message,
 			NetworkRegistry.TargetPoint point) {
 		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET)
-		.set(FMLOutboundHandler.OutboundTarget.ALLAROUNDPOINT);
+				.set(FMLOutboundHandler.OutboundTarget.ALLAROUNDPOINT);
 		channels.get(Side.SERVER)
-		.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(point);
+				.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(point);
 		channels.get(Side.SERVER).writeAndFlush(message);
 	}
 
@@ -237,10 +230,10 @@ MessageToMessageCodec<FMLProxyPacket, AbstractPacket> {
 	 */
 	public void sendToDimension(AbstractPacket message, int dimensionId) {
 		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET)
-		.set(FMLOutboundHandler.OutboundTarget.DIMENSION);
+				.set(FMLOutboundHandler.OutboundTarget.DIMENSION);
 		channels.get(Side.SERVER)
-		.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS)
-		.set(dimensionId);
+				.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS)
+				.set(dimensionId);
 		channels.get(Side.SERVER).writeAndFlush(message);
 	}
 
@@ -255,7 +248,7 @@ MessageToMessageCodec<FMLProxyPacket, AbstractPacket> {
 	 */
 	public void sendToServer(AbstractPacket message) {
 		channels.get(Side.CLIENT).attr(FMLOutboundHandler.FML_MESSAGETARGET)
-		.set(FMLOutboundHandler.OutboundTarget.TOSERVER);
+				.set(FMLOutboundHandler.OutboundTarget.TOSERVER);
 		channels.get(Side.CLIENT).writeAndFlush(message);
 	}
 }

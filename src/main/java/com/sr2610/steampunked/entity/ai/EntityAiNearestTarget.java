@@ -55,8 +55,8 @@ public class EntityAiNearestTarget extends EntityAITarget {
 			public boolean isEntityApplicable(Entity par1Entity) {
 				return !(par1Entity instanceof EntityLivingBase) ? false
 						: par6IEntitySelector != null
-						&& !par6IEntitySelector
-						.isEntityApplicable(par1Entity) ? false
+								&& !par6IEntitySelector
+										.isEntityApplicable(par1Entity) ? false
 								: EntityAiNearestTarget.this.isSuitableTarget(
 										(EntityLivingBase) par1Entity, false);
 			}
@@ -68,18 +68,18 @@ public class EntityAiNearestTarget extends EntityAITarget {
 	 */
 	@Override
 	public boolean shouldExecute() {
-		if (!(taskOwner instanceof EntityAutomaton)) {
+		if (!(taskOwner instanceof EntityAutomaton))
 			return false;
-		} else
+		else
 
 		{
 			EntityAutomaton EA = (EntityAutomaton) taskOwner;
 			if (!EA.getAttackMobs())
 				return false;
 			else if (targetChance > 0
-					&& taskOwner.getRNG().nextInt(targetChance) != 0) {
+					&& taskOwner.getRNG().nextInt(targetChance) != 0)
 				return false;
-			} else {
+			else {
 				double d0 = getTargetDistance();
 				List list = taskOwner.worldObj.selectEntitiesWithinAABB(
 						targetClass,
@@ -87,9 +87,9 @@ public class EntityAiNearestTarget extends EntityAITarget {
 						targetEntitySelector);
 				Collections.sort(list, theNearestAttackableTargetSorter);
 
-				if (list.isEmpty()) {
+				if (list.isEmpty())
 					return false;
-				} else {
+				else {
 					targetEntity = (EntityLivingBase) list.get(0);
 					return true;
 				}

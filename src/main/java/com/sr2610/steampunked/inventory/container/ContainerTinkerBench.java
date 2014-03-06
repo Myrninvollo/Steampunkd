@@ -39,16 +39,13 @@ public class ContainerTinkerBench extends Container {
 
 		addSlotToContainer(new SlotOutput(cs, 8, 178, 103));
 
-		for (i = 0; i < 3; ++i) {
-			for (j = 0; j < 9; ++j) {
+		for (i = 0; i < 3; ++i)
+			for (j = 0; j < 9; ++j)
 				addSlotToContainer(new Slot(player_inv, j + i * 9 + 9,
 						28 + j * 18, 135 + i * 18));
-			}
-		}
 
-		for (i = 0; i < 9; ++i) {
+		for (i = 0; i < 9; ++i)
 			addSlotToContainer(new Slot(player_inv, i, 28 + i * 18, 193));
-		}
 	}
 
 	@Override
@@ -65,15 +62,13 @@ public class ContainerTinkerBench extends Container {
 		for (int i = 0; i < crafters.size(); ++i) {
 			ICrafting icrafting = (ICrafting) crafters.get(i);
 
-			if (lastCraftProgress != tinkerTable.craftProgress) {
+			if (lastCraftProgress != tinkerTable.craftProgress)
 				icrafting.sendProgressBarUpdate(this, 0,
 
-						tinkerTable.craftProgress);
-			}
-			for (i = 0; i < crafters.size(); i++) {
+				tinkerTable.craftProgress);
+			for (i = 0; i < crafters.size(); i++)
 				tinkerTable.SendGUINetworkData(this,
 						(ICrafting) crafters.get(i));
-			}
 
 		}
 
@@ -85,9 +80,8 @@ public class ContainerTinkerBench extends Container {
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int par1, int par2) {
 		tinkerTable.GetGUINetworkData(par1, par2);
-		if (par1 == 0) {
+		if (par1 == 0)
 			tinkerTable.craftProgress = par2;
-		}
 
 	}
 
@@ -106,18 +100,15 @@ public class ContainerTinkerBench extends Container {
 			itemstack = itemstack1.copy();
 
 			if (par2 < 8) {
-				if (!mergeItemStack(itemstack1, 8, inventorySlots.size(), true)) {
+				if (!mergeItemStack(itemstack1, 8, inventorySlots.size(), true))
 					return null;
-				}
-			} else if (!mergeItemStack(itemstack1, 0, 8, false)) {
+			} else if (!mergeItemStack(itemstack1, 0, 8, false))
 				return null;
-			}
 
-			if (itemstack1.stackSize == 0) {
+			if (itemstack1.stackSize == 0)
 				slot.putStack((ItemStack) null);
-			} else {
+			else
 				slot.onSlotChanged();
-			}
 		}
 
 		return itemstack;

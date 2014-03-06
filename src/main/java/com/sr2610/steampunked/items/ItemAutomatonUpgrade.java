@@ -26,7 +26,7 @@ public class ItemAutomatonUpgrade extends Item implements IUpgrade {
 	}
 
 	public static final String[] upgradeItemNames = new String[] { "range",
-		"speed", "health", "undefined" };
+			"speed", "health", "undefined" };
 	@SideOnly(Side.CLIENT)
 	private IIcon[] upgradeIcons;
 
@@ -34,9 +34,8 @@ public class ItemAutomatonUpgrade extends Item implements IUpgrade {
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs,
 			List par3List) {
-		for (int x = 0; x < 3; x++) {
+		for (int x = 0; x < 3; x++)
 			par3List.add(new ItemStack(this, 1, x));
-		}
 	}
 
 	@Override
@@ -50,10 +49,9 @@ public class ItemAutomatonUpgrade extends Item implements IUpgrade {
 	public void registerIcons(IIconRegister par1IconRegister) {
 		upgradeIcons = new IIcon[upgradeItemNames.length];
 
-		for (int i = 0; i < upgradeItemNames.length; ++i) {
+		for (int i = 0; i < upgradeItemNames.length; ++i)
 			upgradeIcons[i] = par1IconRegister.registerIcon(Reference.ModID
 					+ ":upgrade_" + +i);
-		}
 	}
 
 	@Override

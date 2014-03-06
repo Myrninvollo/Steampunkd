@@ -36,8 +36,8 @@ public class PipeRendererTESR extends TileEntitySpecialRenderer {
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.3F, (float) z + 0.5F);
 
-		ResourceLocation textures = new ResourceLocation(
-				Reference.ModID+":textures/blocks/models/pipe.png");
+		ResourceLocation textures = new ResourceLocation(Reference.ModID
+				+ ":textures/blocks/models/pipe.png");
 		Minecraft.getMinecraft().renderEngine.bindTexture(textures);
 		GL11.glPushMatrix();
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
@@ -51,31 +51,25 @@ public class PipeRendererTESR extends TileEntitySpecialRenderer {
 			double d2, float scale) {
 		tileEntity.checkPipeConnections();
 		boolean[] adjecentConnections = tileEntity.pipeConnectionsBuffer;
-		float f= 0.05F;
+		float f = 0.05F;
 
-		if (adjecentConnections[0] == true) {
-			model.renderPart("Top",f);
-		}
+		if (adjecentConnections[0] == true)
+			model.renderPart("Top", f);
 
-		if (adjecentConnections[1] == true) {
+		if (adjecentConnections[1] == true)
 			model.renderPart("Bottom", f);
-		}
 
-		if (adjecentConnections[2] == true) {
+		if (adjecentConnections[2] == true)
 			model.renderPart("Front", f);
-		}
 
-		if (adjecentConnections[3] == true) {
+		if (adjecentConnections[3] == true)
 			model.renderPart("Back", f);
-		}
 
-		if (adjecentConnections[4] == true) {
+		if (adjecentConnections[4] == true)
 			model.renderPart("Right", f);
-		}
 
-		if (adjecentConnections[5] == true) {
+		if (adjecentConnections[5] == true)
 			model.renderPart("Left", f);
-		}
 
 		model.renderPart("Middle", f);
 

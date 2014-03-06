@@ -1,10 +1,6 @@
 package com.sr2610.steampunked.tileentities;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -78,10 +74,9 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			byte b0 = nbttagcompound1.getByte("Slot");
 
-			if (b0 >= 0 && b0 < boilerItemStacks.length) {
+			if (b0 >= 0 && b0 < boilerItemStacks.length)
 				boilerItemStacks[b0] = ItemStack
 						.loadItemStackFromNBT(nbttagcompound1);
-			}
 		}
 
 		furnaceBurnTime = par1NBTTagCompound.getShort("BurnTime");
@@ -99,14 +94,13 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 		par1NBTTagCompound.setShort("BurnTime", (short) furnaceBurnTime);
 		NBTTagList nbttaglist = new NBTTagList();
 
-		for (int i = 0; i < boilerItemStacks.length; ++i) {
+		for (int i = 0; i < boilerItemStacks.length; ++i)
 			if (boilerItemStacks[i] != null) {
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setByte("Slot", (byte) i);
 				boilerItemStacks[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
-		}
 
 		par1NBTTagCompound.setTag("Items", nbttaglist);
 
@@ -137,15 +131,13 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 			} else {
 				itemstack = boilerItemStacks[par1].splitStack(par2);
 
-				if (boilerItemStacks[par1].stackSize == 0) {
+				if (boilerItemStacks[par1].stackSize == 0)
 					boilerItemStacks[par1] = null;
-				}
 
 				return itemstack;
 			}
-		} else {
+		} else
 			return null;
-		}
 	}
 
 	@Override
@@ -154,9 +146,8 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 			ItemStack itemstack = boilerItemStacks[par1];
 			boilerItemStacks[par1] = null;
 			return itemstack;
-		} else {
+		} else
 			return null;
-		}
 	}
 
 	@Override
@@ -164,9 +155,8 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 		boilerItemStacks[par1] = par2ItemStack;
 
 		if (par2ItemStack != null
-				&& par2ItemStack.stackSize > getInventoryStackLimit()) {
+				&& par2ItemStack.stackSize > getInventoryStackLimit())
 			par2ItemStack.stackSize = getInventoryStackLimit();
-		}
 	}
 
 	@Override
@@ -190,19 +180,17 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 	}
 
 	private void SetTankFluid(FluidTank tank, int value) {
-		if (tank.getFluid() == null) {
+		if (tank.getFluid() == null)
 			tank.setFluid(new FluidStack(value, 0));
-		} else {
+		else
 			tank.getFluid().fluidID = value;
-		}
 	}
 
 	private void SetTankAmount(FluidTank tank, int value) {
-		if (tank.getFluid() == null) {
+		if (tank.getFluid() == null)
 			tank.setFluid(new FluidStack(0, value));
-		} else {
+		else
 			tank.getFluid().amount = value;
-		}
 	}
 
 	public void GetGUINetworkData(int id, int value) {
@@ -290,18 +278,17 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		if (isFluidFuel(resource)) {
+		if (isFluidFuel(resource))
 			return tanks[TANK_INPUT].fill(resource, doFill);
-		} else
+		else
 			return 0;
 	}
 
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource,
 			boolean doDrain) {
-		if (resource.isFluidEqual(tanks[TANK_OUTPUT].getFluid())) {
+		if (resource.isFluidEqual(tanks[TANK_OUTPUT].getFluid()))
 			return tanks[TANK_OUTPUT].drain(resource.amount, doDrain);
-		}
 		return null;
 	}
 
@@ -346,26 +333,23 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 	}
 
 	public static int getItemBurnTime(ItemStack itemstack) {
-		if (itemstack == null) {
+		if (itemstack == null)
 			return 0;
-		} else {
+		else {
 			Item item = itemstack.getItem();
 
 			if (item instanceof ItemBlock
 					&& Block.getBlockFromItem(item) != Blocks.air) {
 				Block block = Block.getBlockFromItem(item);
 
-				if (block == Blocks.wooden_slab) {
+				if (block == Blocks.wooden_slab)
 					return 150;
-				}
 
-				if (block.getMaterial() == Material.wood) {
+				if (block.getMaterial() == Material.wood)
 					return 300;
-				}
 
-				if (block == Blocks.coal_block) {
+				if (block == Blocks.coal_block)
 					return 16000;
-				}
 			}
 
 			if (item instanceof ItemTool
@@ -398,17 +382,14 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 	@Override
 	public void update() {
 
-		if (furnaceBurnTime > 0) {
+		if (furnaceBurnTime > 0)
 			--furnaceBurnTime;
-		}
 
 		if (!worldObj.isRemote) {
-			if (tanks[0].getFluidAmount() != LibOptions.boilerCapacity) {
+			if (tanks[0].getFluidAmount() != LibOptions.boilerCapacity)
 				if (worldObj.getBlock(xCoord, yCoord - 1, zCoord) == FluidRegistry.WATER
-						.getBlock()) {
+						.getBlock())
 					tanks[0].fill(new FluidStack(FluidRegistry.WATER, 21), true);
-				}
-			}
 			autoOutputToSides(10, this);
 
 			if (tanks[0].getFluidAmount() > 0
@@ -416,17 +397,15 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 				if (furnaceBurnTime == 0) {
 					currentItemBurnTime = furnaceBurnTime = getItemBurnTime(boilerItemStacks[0]) / 32;
 
-					if (furnaceBurnTime > 0) {
+					if (furnaceBurnTime > 0)
 						if (boilerItemStacks[0] != null) {
 							--boilerItemStacks[0].stackSize;
 
-							if (boilerItemStacks[0].stackSize == 0) {
+							if (boilerItemStacks[0].stackSize == 0)
 								boilerItemStacks[0] = boilerItemStacks[0]
 										.getItem().getContainerItem(
 												boilerItemStacks[0]);
-							}
 						}
-					}
 				}
 
 				if (furnaceBurnTime > 0 && tanks[0].getFluidAmount() > 2) {
@@ -439,9 +418,8 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 
 	@SideOnly(Side.CLIENT)
 	public int getBurnTimeRemainingScaled(int par1) {
-		if (currentItemBurnTime == 0) {
+		if (currentItemBurnTime == 0)
 			currentItemBurnTime = 200;
-		}
 
 		return furnaceBurnTime * par1 / currentItemBurnTime;
 	}
@@ -480,16 +458,14 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 					TileEntity otherTank = getTileInDirection(this, side);
 					if (drainedFluid.amount > 0) {
 						drainedFluid = drainedFluid.copy();
-						if (otherTank instanceof IFluidHandler) {
+						if (otherTank instanceof IFluidHandler)
 							drainedFluid.amount -= ((IFluidHandler) otherTank)
 									.fill(side.getOpposite(), drainedFluid,
 											true);
-						}
 					}
 				}
-				if (drainedFluid.amount > 0) {
+				if (drainedFluid.amount > 0)
 					tanks[1].fill(drainedFluid, true);
-				}
 			}
 		}
 

@@ -27,13 +27,18 @@ import com.sr2610.steampunked.blocks.ModBlocks;
 
 public class PipeItemRenderer implements IItemRenderer {
 
-	private void renderPipeItem(RenderBlocks render, ItemStack item, float translateX, float translateY, float translateZ) {
+	private void renderPipeItem(RenderBlocks render, ItemStack item,
+			float translateX, float translateY, float translateZ) {
 		Tessellator tessellator = Tessellator.instance;
 		Block block = ModBlocks.pipe;
 		IIcon icon = item.getItem().getIconFromDamage(0);
 		if (icon == null)
-			icon = ((TextureMap) Minecraft.getMinecraft().getTextureManager().getTexture(TextureMap.locationBlocksTexture)).getAtlasSprite("missingno");
-		block.setBlockBounds(BlockPipe.PIPE_MIN_POS, 0.0F, BlockPipe.PIPE_MIN_POS, BlockPipe.PIPE_MAX_POS, 1.0F, BlockPipe.PIPE_MAX_POS);
+			icon = ((TextureMap) Minecraft.getMinecraft().getTextureManager()
+					.getTexture(TextureMap.locationBlocksTexture))
+					.getAtlasSprite("missingno");
+		block.setBlockBounds(BlockPipe.PIPE_MIN_POS, 0.0F,
+				BlockPipe.PIPE_MIN_POS, BlockPipe.PIPE_MAX_POS, 1.0F,
+				BlockPipe.PIPE_MAX_POS);
 		block.setBlockBoundsForItemRender();
 		render.setRenderBoundsFromBlock(block);
 
@@ -83,7 +88,8 @@ public class PipeItemRenderer implements IItemRenderer {
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
+			ItemRendererHelper helper) {
 		return true;
 	}
 

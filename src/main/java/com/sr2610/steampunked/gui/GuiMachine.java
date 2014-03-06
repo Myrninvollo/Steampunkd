@@ -56,7 +56,7 @@ public abstract class GuiMachine extends GuiContainer {
 		tessellator.startDrawingQuads();
 		tessellator.addVertexWithUV(x, y + height, zLevel, min_u, max_v);
 		tessellator
-		.addVertexWithUV(x + width, y + height, zLevel, max_u, max_v);
+				.addVertexWithUV(x + width, y + height, zLevel, max_u, max_v);
 		tessellator.addVertexWithUV(x + width, y, zLevel, max_u, min_v);
 		tessellator.addVertexWithUV(x, y, zLevel, min_u, min_v);
 		tessellator.draw();
@@ -70,9 +70,8 @@ public abstract class GuiMachine extends GuiContainer {
 			list.add(stack.getFluid().getLocalizedName());
 			list.add(String.valueOf(stack.amount) + " / "
 					+ String.valueOf(tank.getCapacity()) + " mB");
-		} else {
+		} else
 			list.add("Empty");
-		}
 		drawHoveringText(list, x, y, fontRendererObj);
 	}
 
@@ -101,21 +100,19 @@ public abstract class GuiMachine extends GuiContainer {
 	protected void DisplayTank(int window_x, int window_y, int x, int y,
 			int tank_height, int overlay_x, int overlay_y, FluidTank tank) {
 		FluidStack liquid = tank.getFluid();
-		if (liquid == null) {
+		if (liquid == null)
 			return;
-		}
 		int start = 0;
 
 		IIcon liquidIcon = null;
 		Fluid fluid = liquid.getFluid();
-		if (fluid != null && fluid.getBlock().getIcon(1, 1) != null) {
+		if (fluid != null && fluid.getBlock().getIcon(1, 1) != null)
 			liquidIcon = fluid.getBlock().getIcon(1, 1);
-		}
 		mc.renderEngine.bindTexture(BLOCK_TEXTURE);
 
 		int h = liquid.amount * tank_height / tank.getCapacity();
 
-		if (liquidIcon != null) {
+		if (liquidIcon != null)
 			while (true) {
 				int i;
 
@@ -127,18 +124,15 @@ public abstract class GuiMachine extends GuiContainer {
 					h = 0;
 				}
 
-				if (i > 0) {
+				if (i > 0)
 					drawTexturedModelRectFromIconPartial(window_x + x, window_y
 							+ y + tank_height - i - start, liquidIcon, 16, i,
 							0, 16 - i);
-				}
 				start += 16;
 
-				if (i == 0 || h == 0) {
+				if (i == 0 || h == 0)
 					break;
-				}
 			}
-		}
 
 		mc.renderEngine.bindTexture(GetGUITexture());
 		drawTexturedModalRect(window_x + x, window_y + y, overlay_x, overlay_y,

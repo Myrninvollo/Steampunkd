@@ -25,16 +25,13 @@ public class ContainerSteamFurnace extends Container {
 				par2TileEntityFurnace, 1, 116, 35));
 		int i;
 
-		for (i = 0; i < 3; ++i) {
-			for (int j = 0; j < 9; ++j) {
+		for (i = 0; i < 3; ++i)
+			for (int j = 0; j < 9; ++j)
 				addSlotToContainer(new Slot(par1InventoryPlayer, j + i * 9 + 9,
 						8 + j * 18, 84 + i * 18));
-			}
-		}
 
-		for (i = 0; i < 9; ++i) {
+		for (i = 0; i < 9; ++i)
 			addSlotToContainer(new Slot(par1InventoryPlayer, i, 8 + i * 18, 142));
-		}
 	}
 
 	@Override
@@ -51,14 +48,12 @@ public class ContainerSteamFurnace extends Container {
 		for (int i = 0; i < crafters.size(); ++i) {
 			ICrafting icrafting = (ICrafting) crafters.get(i);
 
-			if (lastCookTime != furnace.furnaceCookTime) {
+			if (lastCookTime != furnace.furnaceCookTime)
 				icrafting.sendProgressBarUpdate(this, 0,
 
-						furnace.furnaceCookTime);
-			}
-			for (i = 0; i < crafters.size(); i++) {
+				furnace.furnaceCookTime);
+			for (i = 0; i < crafters.size(); i++)
 				furnace.SendGUINetworkData(this, (ICrafting) crafters.get(i));
-			}
 
 		}
 
@@ -70,9 +65,8 @@ public class ContainerSteamFurnace extends Container {
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int par1, int par2) {
 		furnace.GetGUINetworkData(par1, par2);
-		if (par1 == 0) {
+		if (par1 == 0)
 			furnace.furnaceCookTime = par2;
-		}
 
 	}
 
@@ -91,18 +85,15 @@ public class ContainerSteamFurnace extends Container {
 			itemstack = itemstack1.copy();
 
 			if (par2 < 1) {
-				if (!mergeItemStack(itemstack1, 1, inventorySlots.size(), true)) {
+				if (!mergeItemStack(itemstack1, 1, inventorySlots.size(), true))
 					return null;
-				}
-			} else if (!mergeItemStack(itemstack1, 0, 1, false)) {
+			} else if (!mergeItemStack(itemstack1, 0, 1, false))
 				return null;
-			}
 
-			if (itemstack1.stackSize == 0) {
+			if (itemstack1.stackSize == 0)
 				slot.putStack((ItemStack) null);
-			} else {
+			else
 				slot.onSlotChanged();
-			}
 		}
 
 		return itemstack;

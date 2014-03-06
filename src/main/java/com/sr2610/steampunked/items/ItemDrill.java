@@ -61,20 +61,17 @@ public class ItemDrill extends ItemPickaxe implements ISteamUser {
 	public boolean onBlockDestroyed(ItemStack itemstack, World world,
 			Block block, int par3, int par4, int par5, EntityLivingBase entity) {
 
-		if (getCurrentSteam(itemstack) > 0) {
+		if (getCurrentSteam(itemstack) > 0)
 			return super.onBlockDestroyed(itemstack, world, block, par3, par4,
 					par5, entity);
-		} else {
+		else
 			return true;
-		}
 	}
 
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
 
 		itemIcon = iconRegister.registerIcon(Reference.ModID + ":iron_drill");
-
-
 
 	}
 
@@ -84,13 +81,11 @@ public class ItemDrill extends ItemPickaxe implements ISteamUser {
 
 	@Override
 	public boolean canHarvestBlock(Block par1Block, ItemStack itemStack) {
-		if (itemStack.getItem() instanceof ISteamUser) {
-			if (((ISteamUser) itemStack.getItem()).getCurrentSteam(itemStack) > 0) {
+		if (itemStack.getItem() instanceof ISteamUser)
+			if (((ISteamUser) itemStack.getItem()).getCurrentSteam(itemStack) > 0)
 				return super.canHarvestBlock(par1Block, itemStack);
-			} else {
+			else
 				return false;
-			}
-		}
 		return super.canHarvestBlock(par1Block, itemStack);
 	}
 

@@ -33,7 +33,7 @@ public class ModAutomatonTab extends CreativeTabs {
 		addItem(ModItems.basicCore);
 		addItem(ModItems.mediumCore);
 		addItem(ModItems.advancedCore);
-		
+
 		addItem(ModItems.reprogrammer);
 
 	}

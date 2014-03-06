@@ -52,10 +52,8 @@ public class BlockSteamFurnace extends BlockContainer {
 			EntityPlayer player, int i, float f, float g, float t) {
 		TileEntity tile_entity = world.getTileEntity(x, y, z);
 
-		if (tile_entity == null || player.isSneaking()) {
+		if (tile_entity == null || player.isSneaking())
 			return false;
-		}
-
 		else
 			player.openGui(Steampunked.instance, 1, world, x, y, z);
 		return true;
@@ -80,9 +78,8 @@ public class BlockSteamFurnace extends BlockContainer {
 						while (itemstack.stackSize > 0) {
 							int j1 = furnaceRand.nextInt(21) + 10;
 
-							if (j1 > itemstack.stackSize) {
+							if (j1 > itemstack.stackSize)
 								j1 = itemstack.stackSize;
-							}
 
 							itemstack.stackSize -= j1;
 							EntityItem entityitem = new EntityItem(world,
@@ -90,11 +87,10 @@ public class BlockSteamFurnace extends BlockContainer {
 											itemstack.getItem(), j1,
 											itemstack.getItemDamage()));
 
-							if (itemstack.hasTagCompound()) {
+							if (itemstack.hasTagCompound())
 								entityitem.getEntityItem().setTagCompound(
 										(NBTTagCompound) itemstack
-										.getTagCompound().copy());
-							}
+												.getTagCompound().copy());
 
 							float f3 = 0.05F;
 							entityitem.motionX = (float) furnaceRand
@@ -160,21 +156,17 @@ public class BlockSteamFurnace extends BlockContainer {
 			Block block3 = world.getBlock(x + 1, y, z);
 			byte b0 = 3;
 
-			if (block.func_149730_j() && !block1.func_149730_j()) {
+			if (block.func_149730_j() && !block1.func_149730_j())
 				b0 = 3;
-			}
 
-			if (block1.func_149730_j() && !block.func_149730_j()) {
+			if (block1.func_149730_j() && !block.func_149730_j())
 				b0 = 2;
-			}
 
-			if (block2.func_149730_j() && !block3.func_149730_j()) {
+			if (block2.func_149730_j() && !block3.func_149730_j())
 				b0 = 5;
-			}
 
-			if (block3.func_149730_j() && !block2.func_149730_j()) {
+			if (block3.func_149730_j() && !block2.func_149730_j())
 				b0 = 4;
-			}
 
 			world.setBlockMetadataWithNotify(x, y, z, b0, 2);
 		}
@@ -186,21 +178,17 @@ public class BlockSteamFurnace extends BlockContainer {
 		int l = MathHelper
 				.floor_double(entity.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
-		if (l == 0) {
+		if (l == 0)
 			world.setBlockMetadataWithNotify(x, y, z, 2, 2);
-		}
 
-		if (l == 1) {
+		if (l == 1)
 			world.setBlockMetadataWithNotify(x, y, z, 5, 2);
-		}
 
-		if (l == 2) {
+		if (l == 2)
 			world.setBlockMetadataWithNotify(x, y, z, 3, 2);
-		}
 
-		if (l == 3) {
+		if (l == 3)
 			world.setBlockMetadataWithNotify(x, y, z, 4, 2);
-		}
 
 	}
 
@@ -212,13 +200,12 @@ public class BlockSteamFurnace extends BlockContainer {
 				p_149931_3_, p_149931_4_);
 		keepFurnaceInventory = true;
 
-		if (p_149931_0_) {
+		if (p_149931_0_)
 			p_149931_1_.setBlock(p_149931_2_, p_149931_3_, p_149931_4_,
 					ModBlocks.steamFurnaceActive);
-		} else {
+		else
 			p_149931_1_.setBlock(p_149931_2_, p_149931_3_, p_149931_4_,
 					ModBlocks.steamFurnace);
-		}
 
 		keepFurnaceInventory = false;
 		p_149931_1_.setBlockMetadataWithNotify(p_149931_2_, p_149931_3_,

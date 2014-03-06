@@ -36,7 +36,7 @@ public class ItemAutomotonSpawner extends Item {
 	public boolean onItemUse(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, World par3World, int par4, int par5,
 			int par6, int par7, float par8, float par9, float par10) {
-		if (!par3World.isRemote) {
+		if (!par3World.isRemote)
 			switch (par1ItemStack.getItemDamage()) {
 			case 0: {
 
@@ -52,48 +52,41 @@ public class ItemAutomotonSpawner extends Item {
 				NBTTagCompound nbttagcompound = par1ItemStack.getTagCompound();
 				NBTTagDouble nbttagdouble = (NBTTagDouble) nbttagcompound
 						.getTag("Range");
-				if (nbttagdouble != null) {
+				if (nbttagdouble != null)
 					entity.range = nbttagdouble.func_150286_g();
-				} else
+				else
 					entity.range = 5;
 				NBTTagDouble nbttagdoubleHealth = (NBTTagDouble) nbttagcompound
 						.getTag("MaxHealth");
-				if (nbttagdoubleHealth != null) {
+				if (nbttagdoubleHealth != null)
 					entity.maxHealth = nbttagdoubleHealth.func_150286_g();
-				} else
+				else
 					entity.maxHealth = 20;
 
 				NBTTagDouble nbttagdoubleSpeed = (NBTTagDouble) nbttagcompound
 						.getTag("Speed");
-				if (nbttagdoubleSpeed != null) {
+				if (nbttagdoubleSpeed != null)
 					entity.speed = nbttagdoubleSpeed.func_150286_g();
-				} else
+				else
 					entity.speed = 0.25;
 				par3World.spawnEntityInWorld(entity);
 				if (!par2EntityPlayer.capabilities.isCreativeMode) {
 					--par1ItemStack.stackSize;
 
 					return true;
-				}
-
-				else {
-					if (!par3World.isRemote) {
-						// par2EntityPlayer.addChatMessage(EnumChatFormatting.ITALIC+"You must place this on a block with a tank");
-						return false;
-					}
-				}
+				} else if (!par3World.isRemote)
+					// par2EntityPlayer.addChatMessage(EnumChatFormatting.ITALIC+"You must place this on a block with a tank");
+					return false;
 			}
 			}
-		}
 		return false;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs,
 			List par3List) {
-		for (int x = 0; x < 2; x++) {
+		for (int x = 0; x < 2; x++)
 			par3List.add(new ItemStack(this, 1, x));
-		}
 	}
 
 	@Override
@@ -121,14 +114,12 @@ public class ItemAutomotonSpawner extends Item {
 						+ " Blocks");
 			else
 
-
 				par3List.add("Range: 5.0 Blocks");
 
 			if (par1ItemStack.stackTagCompound.hasKey("Speed"))
 				par3List.add("Speed: Fast");
 
 			else
-
 
 				par3List.add("Speed: Slow");
 
