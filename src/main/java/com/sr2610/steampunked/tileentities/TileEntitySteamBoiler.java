@@ -40,7 +40,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntitySteamBoiler extends TileEntityMachine implements
-IFluidHandler, ISidedInventory {
+		IFluidHandler, ISidedInventory {
 
 	static private final int NETDATAID_INPUT_TANK_FLUID = 1;
 	static private final int NETDATAID_INPUT_TANK_AMOUNT = 2;
@@ -464,8 +464,6 @@ IFluidHandler, ISidedInventory {
 		return false;
 	}
 
-	protected List<ForgeDirection> surroundingTanks = new ArrayList<ForgeDirection>();
-
 	public void autoOutputToSides(int amountPerTick, TileEntity currentTile) {
 
 		if (worldObj == null)
@@ -495,28 +493,6 @@ IFluidHandler, ISidedInventory {
 			}
 		}
 
-	}
-
-	public TileEntity getTileInDirection(TileEntity tile,
-			ForgeDirection direction) {
-		int targetX = tile.xCoord + direction.offsetX;
-		int targetY = tile.yCoord + direction.offsetY;
-		int targetZ = tile.zCoord + direction.offsetZ;
-		return worldObj.getTileEntity(targetX, targetY, targetZ);
-	}
-
-	public void refreshSurroundingTanks(TileEntity currentTile) {
-		HashSet<ForgeDirection> checkSides = new HashSet<ForgeDirection>();
-
-		checkSides.addAll(Arrays.asList(ForgeDirection.VALID_DIRECTIONS));
-
-		surroundingTanks = new ArrayList<ForgeDirection>();
-		for (ForgeDirection side : checkSides) {
-			TileEntity tile = getTileInDirection(currentTile, side);
-			if (tile instanceof IFluidHandler) {
-				surroundingTanks.add(side);
-			}
-		}
 	}
 
 }

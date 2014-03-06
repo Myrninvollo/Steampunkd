@@ -28,16 +28,11 @@ import com.sr2610.steampunked.blocks.ModBlocks;
 public class PipeItemRenderer implements IItemRenderer {
 
 	private void renderPipeItem(RenderBlocks render, ItemStack item, float translateX, float translateY, float translateZ) {
-
-		// GL11.glBindTexture(GL11.GL_TEXTURE_2D, 10);
 		Tessellator tessellator = Tessellator.instance;
-
 		Block block = ModBlocks.pipe;
 		IIcon icon = item.getItem().getIconFromDamage(0);
-
 		if (icon == null)
 			icon = ((TextureMap) Minecraft.getMinecraft().getTextureManager().getTexture(TextureMap.locationBlocksTexture)).getAtlasSprite("missingno");
-
 		block.setBlockBounds(BlockPipe.PIPE_MIN_POS, 0.0F, BlockPipe.PIPE_MIN_POS, BlockPipe.PIPE_MAX_POS, 1.0F, BlockPipe.PIPE_MAX_POS);
 		block.setBlockBoundsForItemRender();
 		render.setRenderBoundsFromBlock(block);
@@ -71,9 +66,6 @@ public class PipeItemRenderer implements IItemRenderer {
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 	}
 
-	/**
-	 * IItemRenderer implementation *
-	 */
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
 		switch (type) {

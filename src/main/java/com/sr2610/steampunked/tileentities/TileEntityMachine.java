@@ -1,15 +1,19 @@
 package com.sr2610.steampunked.tileentities;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.IFluidContainerItem;
+import net.minecraftforge.fluids.IFluidHandler;
 
 public abstract class TileEntityMachine extends TileEntity implements
 IInventory {
@@ -219,6 +223,32 @@ IInventory {
 	public void UpdateRedstone() {
 		redstone_signal = worldObj.isBlockIndirectlyGettingPowered(xCoord,
 				yCoord, zCoord);
+	}
+
+	protected List<ForgeDirection> surroundingTanks = new ArrayList<ForgeDirection>();
+
+
+	public TileEntity getTileInDirection(TileEntity tile,
+			ForgeDirection direction) {
+		int targetX = tile.xCoord + direction.offsetX;
+		int targetY = tile.yCoord + direction.offsetY;
+		int targetZ = tile.zCoord + direction.offsetZ;
+		return worldObj.getTileEntity(targetX, targetY, targetZ);
+	}
+
+	public void refreshSurroundingTanks(TileEntity currentTile) {
+		HashSet<ForgeDirection> checkSides = new HashSet<ForgeDirection>();
+
+		checkSides.addAll(Arrays.asList(ForgeDirection.VALID_DIRECTIONS));
+
+		surroundingTanks = new ArrayList<ForgeDirection>();
+		for (ForgeDirection side : checkSides) {
+			TileEntity tile = getTileInDirection(currentTile, side);
+			if (tile instanceof IFluidHandler
+					&& !(tile instanceof TileEntitySteamBoiler)) {
+				surroundingTanks.add(side);
+			}
+		}
 	}
 
 }

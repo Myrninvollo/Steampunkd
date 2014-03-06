@@ -11,11 +11,7 @@
  */
 package com.sr2610.steampunked.tileentities;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -127,7 +123,6 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 
 	}
 
-	protected List<ForgeDirection> surroundingTanks = new ArrayList<ForgeDirection>();
 
 	public void autoOutputToSides(int amountPerTick, TileEntity currentTile) {
 
@@ -160,28 +155,7 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 
 	}
 
-	public TileEntity getTileInDirection(TileEntity tile,
-			ForgeDirection direction) {
-		int targetX = tile.xCoord + direction.offsetX;
-		int targetY = tile.yCoord + direction.offsetY;
-		int targetZ = tile.zCoord + direction.offsetZ;
-		return worldObj.getTileEntity(targetX, targetY, targetZ);
-	}
 
-	public void refreshSurroundingTanks(TileEntity currentTile) {
-		HashSet<ForgeDirection> checkSides = new HashSet<ForgeDirection>();
-
-		checkSides.addAll(Arrays.asList(ForgeDirection.VALID_DIRECTIONS));
-
-		surroundingTanks = new ArrayList<ForgeDirection>();
-		for (ForgeDirection side : checkSides) {
-			TileEntity tile = getTileInDirection(currentTile, side);
-			if (tile instanceof IFluidHandler
-					&& !(tile instanceof TileEntitySteamBoiler)) {
-				surroundingTanks.add(side);
-			}
-		}
-	}
 
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource,
