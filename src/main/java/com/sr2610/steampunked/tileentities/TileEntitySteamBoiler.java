@@ -46,7 +46,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 
 	static public final int TANK_INPUT = 0;
 	static public final int TANK_OUTPUT = 1;
-	public int furnaceBurnTime;
+	public int boilerBurnTime;
 
 	private FluidTank[] tanks;
 	private FluidTankInfo[] tank_info;
@@ -79,7 +79,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 						.loadItemStackFromNBT(nbttagcompound1);
 		}
 
-		furnaceBurnTime = par1NBTTagCompound.getShort("BurnTime");
+		boilerBurnTime = par1NBTTagCompound.getShort("BurnTime");
 
 		currentItemBurnTime = getItemBurnTime(boilerItemStacks[0]);
 
@@ -91,7 +91,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 	@Override
 	public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
 		super.writeToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setShort("BurnTime", (short) furnaceBurnTime);
+		par1NBTTagCompound.setShort("BurnTime", (short) boilerBurnTime);
 		NBTTagList nbttaglist = new NBTTagList();
 
 		for (int i = 0; i < boilerItemStacks.length; ++i)
@@ -212,7 +212,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 
 	public void SendGUINetworkData(ContainerSteamBoiler container,
 			ICrafting crafting) {
-		crafting.sendProgressBarUpdate(container, 5, furnaceBurnTime);
+		crafting.sendProgressBarUpdate(container, 5, boilerBurnTime);
 		crafting.sendProgressBarUpdate(container, 6, currentItemBurnTime);
 		crafting.sendProgressBarUpdate(
 				container,
@@ -382,8 +382,8 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 	@Override
 	public void update() {
 
-		if (furnaceBurnTime > 0)
-			--furnaceBurnTime;
+		if (boilerBurnTime > 0)
+			--boilerBurnTime;
 
 		if (!worldObj.isRemote) {
 			if (tanks[0].getFluidAmount() != LibOptions.boilerCapacity)
@@ -394,10 +394,10 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 
 			if (tanks[0].getFluidAmount() > 0
 					&& tanks[1].getFluidAmount() != LibOptions.boilerCapacity) {
-				if (furnaceBurnTime == 0) {
-					currentItemBurnTime = furnaceBurnTime = getItemBurnTime(boilerItemStacks[0]) / 32;
+				if (boilerBurnTime == 0) {
+					currentItemBurnTime = boilerBurnTime = getItemBurnTime(boilerItemStacks[0]) / 32;
 
-					if (furnaceBurnTime > 0)
+					if (boilerBurnTime > 0)
 						if (boilerItemStacks[0] != null) {
 							--boilerItemStacks[0].stackSize;
 
@@ -408,7 +408,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 						}
 				}
 
-				if (furnaceBurnTime > 0 && tanks[0].getFluidAmount() > 2) {
+				if (boilerBurnTime > 0 && tanks[0].getFluidAmount() > 2) {
 					tanks[0].drain(20, true);
 					tanks[1].fill(new FluidStack(ModBlocks.steam, 20), true);
 				}
@@ -421,7 +421,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 		if (currentItemBurnTime == 0)
 			currentItemBurnTime = 200;
 
-		return furnaceBurnTime * par1 / currentItemBurnTime;
+		return boilerBurnTime * par1 / currentItemBurnTime;
 	}
 
 	static private final int[] INSERT_SLOTS = { 0 };

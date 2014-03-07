@@ -37,8 +37,8 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 	public TileEntityPipe() {
 		super();
 
-		tank = new FluidTank(1000);
-		tank_info = new FluidTankInfo[1];
+		tank = new FluidTank(100);
+
 		tank_info[0] = new FluidTankInfo(tank);
 	}
 

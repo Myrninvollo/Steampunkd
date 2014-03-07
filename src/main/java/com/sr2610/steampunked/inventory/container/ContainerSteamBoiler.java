@@ -11,7 +11,7 @@ import com.sr2610.steampunked.tileentities.TileEntitySteamBoiler;
 
 public class ContainerSteamBoiler extends Container {
 
-	private TileEntitySteamBoiler te_boiler;
+	private TileEntitySteamBoiler boiler;
 
 	private static final int SLOT_INVENTORY_X = 8;
 	private static final int SLOT_INVENTORY_Y = 84;
@@ -19,13 +19,13 @@ public class ContainerSteamBoiler extends Container {
 	private static final int SLOT_HOTBAR_X = 8;
 	private static final int SLOT_HOTBAR_Y = 142;
 
-	public ContainerSteamBoiler(TileEntitySteamBoiler boiler,
+	public ContainerSteamBoiler(TileEntitySteamBoiler teBoiler,
 			IInventory player_inventory) {
-		te_boiler = boiler;
-		te_boiler.openInventory();
+		boiler = teBoiler;
+		boiler.openInventory();
 		int i, j;
 
-		addSlotToContainer(new Slot(te_boiler, 0, 81, 39));
+		addSlotToContainer(new Slot(boiler, 0, 81, 39));
 
 		for (i = 0; i < 3; ++i)
 			for (j = 0; j < 9; ++j)
@@ -38,56 +38,32 @@ public class ContainerSteamBoiler extends Container {
 
 	@Override
 	public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
-		return te_boiler.isUseableByPlayer(par1EntityPlayer);
+		return boiler.isUseableByPlayer(par1EntityPlayer);
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
-		ItemStack itemstack = null;
-		Slot slot = (Slot) inventorySlots.get(par2);
-
+	public ItemStack transferStackInSlot(EntityPlayer player, int slotId) {
+		Slot slot = (Slot)inventorySlots.get(slotId);
 		if (slot != null && slot.getHasStack()) {
-			ItemStack itemstack1 = slot.getStack();
-			itemstack = itemstack1.copy();
+			ItemStack itemToTransfer = slot.getStack();
+			ItemStack copy = itemToTransfer.copy();
+			if (slotId < boiler.getSizeInventory()) {
+				if (!mergeItemStack(itemToTransfer,  boiler.getSizeInventory(), inventorySlots.size(), true)) return null;
+			} else if (!mergeItemStack(itemToTransfer, 0,  boiler.getSizeInventory(), false)) return null;
 
-			if (par2 == 0) {
-				if (!mergeItemStack(itemstack1, 1, 37, true))
-					return null;
-			} else {
-				if (((Slot) inventorySlots.get(0)).getHasStack()
-						|| !((Slot) inventorySlots.get(0))
-								.isItemValid(itemstack1))
-					return null;
+			if (itemToTransfer.stackSize == 0) slot.putStack(null);
+			else slot.onSlotChanged();
 
-				if (itemstack1.hasTagCompound() && itemstack1.stackSize == 1) {
-					((Slot) inventorySlots.get(0)).putStack(itemstack1.copy());
-					itemstack1.stackSize = 0;
-				} else if (itemstack1.stackSize >= 1) {
-					((Slot) inventorySlots.get(0))
-							.putStack(new ItemStack(itemstack1.getItem(), 1,
-									itemstack1.getItemDamage()));
-					--itemstack1.stackSize;
-				}
-			}
-
-			if (itemstack1.stackSize == 0)
-				slot.putStack((ItemStack) null);
-			else
-				slot.onSlotChanged();
-
-			if (itemstack1.stackSize == itemstack.stackSize)
-				return null;
-
-			slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
+			if (itemToTransfer.stackSize != copy.stackSize) return copy;
 		}
-
-		return itemstack;
+		return null;
 	}
+
 
 	@Override
 	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
 		super.onContainerClosed(par1EntityPlayer);
-		te_boiler.closeInventory();
+		boiler.closeInventory();
 	}
 
 	@Override
@@ -95,17 +71,17 @@ public class ContainerSteamBoiler extends Container {
 		super.detectAndSendChanges();
 
 		for (int i = 0; i < crafters.size(); i++)
-			te_boiler.SendGUINetworkData(this, (ICrafting) crafters.get(i));
+			boiler.SendGUINetworkData(this, (ICrafting) crafters.get(i));
 	}
 
 	@Override
 	public void updateProgressBar(int i, int j) {
-		te_boiler.GetGUINetworkData(i, j);
+		boiler.GetGUINetworkData(i, j);
 		if (i == 5)
-			te_boiler.furnaceBurnTime = j;
+			boiler.boilerBurnTime = j;
 
 		if (i == 6)
-			te_boiler.currentItemBurnTime = j;
+			boiler.currentItemBurnTime = j;
 	}
 
 }

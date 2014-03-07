@@ -7,6 +7,8 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.tileentity.TileEntityFurnace;
 
 import com.sr2610.steampunked.tileentities.TileEntitySteamFurnace;
 
@@ -32,6 +34,8 @@ public class ContainerSteamFurnace extends Container {
 
 		for (i = 0; i < 9; ++i)
 			addSlotToContainer(new Slot(par1InventoryPlayer, i, 8 + i * 18, 142));
+		
+
 	}
 
 	@Override
@@ -51,7 +55,7 @@ public class ContainerSteamFurnace extends Container {
 			if (lastCookTime != furnace.furnaceCookTime)
 				icrafting.sendProgressBarUpdate(this, 0,
 
-				furnace.furnaceCookTime);
+						furnace.furnaceCookTime);
 			for (i = 0; i < crafters.size(); i++)
 				furnace.SendGUINetworkData(this, (ICrafting) crafters.get(i));
 
@@ -76,26 +80,23 @@ public class ContainerSteamFurnace extends Container {
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
-		ItemStack itemstack = null;
-		Slot slot = (Slot) inventorySlots.get(par2);
-
+	public ItemStack transferStackInSlot(EntityPlayer player, int slotId) {
+		Slot slot = (Slot)inventorySlots.get(slotId);
 		if (slot != null && slot.getHasStack()) {
-			ItemStack itemstack1 = slot.getStack();
-			itemstack = itemstack1.copy();
+			ItemStack itemToTransfer = slot.getStack();
+			ItemStack copy = itemToTransfer.copy();
+			if (slotId < furnace.getSizeInventory()) {
+				if (!mergeItemStack(itemToTransfer,  furnace.getSizeInventory(), inventorySlots.size(), true)) return null;
+			} else if (!mergeItemStack(itemToTransfer, 0,  furnace.getSizeInventory(), false)) return null;
 
-			if (par2 < 1) {
-				if (!mergeItemStack(itemstack1, 1, inventorySlots.size(), true))
-					return null;
-			} else if (!mergeItemStack(itemstack1, 0, 1, false))
-				return null;
+			if (itemToTransfer.stackSize == 0) slot.putStack(null);
+			else slot.onSlotChanged();
 
-			if (itemstack1.stackSize == 0)
-				slot.putStack((ItemStack) null);
-			else
-				slot.onSlotChanged();
+			if (itemToTransfer.stackSize != copy.stackSize) return copy;
 		}
-
-		return itemstack;
+		return null;
 	}
+
 }
+
+
