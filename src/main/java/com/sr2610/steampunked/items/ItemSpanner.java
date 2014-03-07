@@ -19,6 +19,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import com.sr2610.steampunked.blocks.BlockSteamFurnace;
 import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.tileentities.TileEntityPipe;
+import com.sr2610.steampunked.Utils;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -63,11 +64,7 @@ public class ItemSpanner extends Item {
 				if (!world.isRemote && pipe.tank.getFluid() != null)
 					player.addChatMessage(new ChatComponentTranslation(
 							"Fluid: "
-									+ FluidRegistry
-											.getFluidName(pipe.tank.getFluid())
-											.substring(0, 1).toUpperCase()
-									+ FluidRegistry.getFluidName(
-											pipe.tank.getFluid()).substring(1)
+									+ Utils.getFluidLocalisedName(pipe.tank.getFluid())
 									+ " Amount: " + pipe.tank.getFluidAmount()
 									+ "mB"));
 			}

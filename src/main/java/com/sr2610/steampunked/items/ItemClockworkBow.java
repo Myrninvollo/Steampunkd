@@ -191,19 +191,23 @@ public class ItemClockworkBow extends ItemBow {
 		itemStack.stackTagCompound.setInteger("Mode", 1);
 	}
 
+	@Override
 	public void addInformation(ItemStack itemStack, EntityPlayer player,
 			List list, boolean par4) {
 		if (itemStack.stackTagCompound != null) {
 			int Mode = itemStack.stackTagCompound.getInteger("Mode");
-			switch(Mode){
-			case 1:list.add("Mode: Regular Firing");
-			break;
-			case 2:list.add("Mode: Triple Arrows");
-			break;
-			case 3:list.add("Mode: Rapid Fire");
-			break;
+			switch (Mode) {
+			case 1:
+				list.add("Mode: Regular Firing");
+				break;
+			case 2:
+				list.add("Mode: Triple Arrows");
+				break;
+			case 3:
+				list.add("Mode: Rapid Fire");
+				break;
 			}
-			
+
 		}
 	}
 
@@ -222,7 +226,7 @@ public class ItemClockworkBow extends ItemBow {
 				stack.stackTagCompound.setInteger("Mode", Mode);
 			} else {
 				stack.stackTagCompound = new NBTTagCompound();
-				stack.stackTagCompound.setInteger("Mode",1);
+				stack.stackTagCompound.setInteger("Mode", 1);
 			}
 			return true;
 		}
