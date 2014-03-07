@@ -36,7 +36,7 @@ public class TileEntityInjector extends TileEntityMachine implements
 
 	}
 
-	private ItemStack[] chargerItemSlot = new ItemStack[1];
+	private ItemStack[] injectorItemSlot = new ItemStack[1];
 
 	@Override
 	public boolean canInsertItem(int slot, ItemStack item, int side) {
@@ -54,7 +54,7 @@ public class TileEntityInjector extends TileEntityMachine implements
 
 	@Override
 	public int getSizeInventory() {
-		return chargerItemSlot.length;
+		return injectorItemSlot.length;
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class TileEntityInjector extends TileEntityMachine implements
 	 */
 	@Override
 	public ItemStack getStackInSlot(int par1) {
-		return chargerItemSlot[par1];
+		return injectorItemSlot[par1];
 	}
 
 	/**
@@ -71,18 +71,18 @@ public class TileEntityInjector extends TileEntityMachine implements
 	 */
 	@Override
 	public ItemStack decrStackSize(int par1, int par2) {
-		if (chargerItemSlot[par1] != null) {
+		if (injectorItemSlot[par1] != null) {
 			ItemStack itemstack;
 
-			if (chargerItemSlot[par1].stackSize <= par2) {
-				itemstack = chargerItemSlot[par1];
-				chargerItemSlot[par1] = null;
+			if (injectorItemSlot[par1].stackSize <= par2) {
+				itemstack = injectorItemSlot[par1];
+				injectorItemSlot[par1] = null;
 				return itemstack;
 			} else {
-				itemstack = chargerItemSlot[par1].splitStack(par2);
+				itemstack = injectorItemSlot[par1].splitStack(par2);
 
-				if (chargerItemSlot[par1].stackSize == 0)
-					chargerItemSlot[par1] = null;
+				if (injectorItemSlot[par1].stackSize == 0)
+					injectorItemSlot[par1] = null;
 
 				return itemstack;
 			}
@@ -97,9 +97,9 @@ public class TileEntityInjector extends TileEntityMachine implements
 	 */
 	@Override
 	public ItemStack getStackInSlotOnClosing(int par1) {
-		if (chargerItemSlot[par1] != null) {
-			ItemStack itemstack = chargerItemSlot[par1];
-			chargerItemSlot[par1] = null;
+		if (injectorItemSlot[par1] != null) {
+			ItemStack itemstack = injectorItemSlot[par1];
+			injectorItemSlot[par1] = null;
 			return itemstack;
 		} else
 			return null;
@@ -111,7 +111,7 @@ public class TileEntityInjector extends TileEntityMachine implements
 	 */
 	@Override
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
-		chargerItemSlot[par1] = par2ItemStack;
+		injectorItemSlot[par1] = par2ItemStack;
 
 		if (par2ItemStack != null
 				&& par2ItemStack.stackSize > getInventoryStackLimit())
@@ -242,8 +242,8 @@ public class TileEntityInjector extends TileEntityMachine implements
 
 		if (canCharge() == true && tank.getFluidAmount() > 0) {
 			tank.drain(1, true);
-			chargerItemSlot[0]
-					.setItemDamage(chargerItemSlot[0].getItemDamage() - 1);
+			injectorItemSlot[0]
+					.setItemDamage(injectorItemSlot[0].getItemDamage() - 1);
 		}
 
 	}
@@ -271,31 +271,31 @@ public class TileEntityInjector extends TileEntityMachine implements
 	}
 
 	public int getItemChargeLevel() {
-		if (chargerItemSlot[0] == null)
+		if (injectorItemSlot[0] == null)
 			return 0;
-		if (chargerItemSlot[0].getItem() instanceof ISteamUser) {
-			ISteamUser r = (ISteamUser) chargerItemSlot[0].getItem();
-			return r.getCurrentSteam(chargerItemSlot[0]);
+		if (injectorItemSlot[0].getItem() instanceof ISteamUser) {
+			ISteamUser r = (ISteamUser) injectorItemSlot[0].getItem();
+			return r.getCurrentSteam(injectorItemSlot[0]);
 		} else
 			return 0;
 
 	}
 
 	public int getItemMaxCharge() {
-		if (chargerItemSlot[0] == null)
+		if (injectorItemSlot[0] == null)
 			return 0;
 
-		if (chargerItemSlot[0].getItem() instanceof ISteamUser) {
-			ISteamUser r = (ISteamUser) chargerItemSlot[0].getItem();
+		if (injectorItemSlot[0].getItem() instanceof ISteamUser) {
+			ISteamUser r = (ISteamUser) injectorItemSlot[0].getItem();
 			return r.getMaxSteam();
 		} else
 			return 0;
 	}
 
 	boolean canCharge() {
-		if (chargerItemSlot[0] == null)
+		if (injectorItemSlot[0] == null)
 			return false;
-		if (chargerItemSlot[0].getItem() instanceof ISteamUser
+		if (injectorItemSlot[0].getItem() instanceof ISteamUser
 				&& getItemChargeLevel() != getItemMaxCharge())
 			return true;
 		else

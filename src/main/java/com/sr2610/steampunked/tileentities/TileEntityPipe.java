@@ -38,7 +38,7 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 		super();
 
 		tank = new FluidTank(100);
-
+		tank_info = new FluidTankInfo[1];
 		tank_info[0] = new FluidTankInfo(tank);
 	}
 
@@ -109,7 +109,9 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 
 	@Override
 	public FluidTank GetTank(int slot) {
-		return null;
+		if (slot != 0)
+			return null;
+		return tank;
 	}
 
 	@Override
