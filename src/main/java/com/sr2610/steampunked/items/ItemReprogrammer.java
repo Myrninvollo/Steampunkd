@@ -22,9 +22,15 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import com.sr2610.steampunked.core.tabs.ModAutomatonTab;
 import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
 
 public class ItemReprogrammer extends Item {
+
+	public ItemReprogrammer() {
+		super();
+		setCreativeTab(ModAutomatonTab.INSTANCE);
+	}
 
 	@Override
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player,

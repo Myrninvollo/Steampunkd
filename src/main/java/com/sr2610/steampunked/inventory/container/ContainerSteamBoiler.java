@@ -43,22 +43,28 @@ public class ContainerSteamBoiler extends Container {
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotId) {
-		Slot slot = (Slot)inventorySlots.get(slotId);
+		Slot slot = (Slot) inventorySlots.get(slotId);
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemToTransfer = slot.getStack();
 			ItemStack copy = itemToTransfer.copy();
 			if (slotId < boiler.getSizeInventory()) {
-				if (!mergeItemStack(itemToTransfer,  boiler.getSizeInventory(), inventorySlots.size(), true)) return null;
-			} else if (!mergeItemStack(itemToTransfer, 0,  boiler.getSizeInventory(), false)) return null;
+				if (!mergeItemStack(itemToTransfer, boiler.getSizeInventory(),
+						inventorySlots.size(), true))
+					return null;
+			} else if (!mergeItemStack(itemToTransfer, 0,
+					boiler.getSizeInventory(), false))
+				return null;
 
-			if (itemToTransfer.stackSize == 0) slot.putStack(null);
-			else slot.onSlotChanged();
+			if (itemToTransfer.stackSize == 0)
+				slot.putStack(null);
+			else
+				slot.onSlotChanged();
 
-			if (itemToTransfer.stackSize != copy.stackSize) return copy;
+			if (itemToTransfer.stackSize != copy.stackSize)
+				return copy;
 		}
 		return null;
 	}
-
 
 	@Override
 	public void onContainerClosed(EntityPlayer par1EntityPlayer) {

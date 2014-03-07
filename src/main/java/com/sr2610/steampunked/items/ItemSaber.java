@@ -14,6 +14,7 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Multimap;
+import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.lib.Reference;
 
 import cpw.mods.fml.relauncher.Side;
@@ -30,6 +31,8 @@ public class ItemSaber extends ItemSword {
 		maxStackSize = 1;
 		setMaxDamage(par2EnumToolMaterial.getMaxUses());
 		weaponDamage = 6.0F + par2EnumToolMaterial.getDamageVsEntity();
+		setCreativeTab(ModCreativeTab.INSTANCE);
+
 	}
 
 	public float getDamage() {

@@ -15,6 +15,7 @@ import net.minecraftforge.common.ISpecialArmor;
 
 import org.lwjgl.input.Keyboard;
 
+import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.items.interfaces.ISteamUser;
 import com.sr2610.steampunked.lib.LibOptions;
 import com.sr2610.steampunked.lib.Reference;
@@ -30,6 +31,8 @@ public class ItemJetpack extends ItemArmor implements ISteamUser, ISpecialArmor 
 	public ItemJetpack() {
 		super(ItemArmor.ArmorMaterial.IRON, 2, ARMOR_CHEST);
 		setMaxDamage(LibOptions.jetpackCapacity + 1);
+		setCreativeTab(ModCreativeTab.INSTANCE);
+
 	}
 
 	@Override

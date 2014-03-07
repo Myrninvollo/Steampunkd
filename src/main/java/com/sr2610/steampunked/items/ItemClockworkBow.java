@@ -135,7 +135,6 @@ public class ItemClockworkBow extends ItemBow {
 		return par1ItemStack;
 	}
 
-
 	@Override
 	public int getItemEnchantability() {
 		return 1;

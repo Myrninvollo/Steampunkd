@@ -9,6 +9,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
+import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.lib.Reference;
 
 import cpw.mods.fml.relauncher.Side;
@@ -20,6 +21,7 @@ public class ItemGoggles extends ItemArmor {
 
 	public ItemGoggles() {
 		super(ItemArmor.ArmorMaterial.CLOTH, 2, ARMOR_HELMET);
+		setCreativeTab(ModCreativeTab.INSTANCE);
 
 	}
 

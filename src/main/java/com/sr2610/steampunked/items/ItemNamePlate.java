@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.StatCollector;
 
+import com.sr2610.steampunked.core.tabs.ModAutomatonTab;
 import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
 import com.sr2610.steampunked.lib.Reference;
 
@@ -17,6 +18,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemNamePlate extends Item {
 	public ItemNamePlate() {
 		super();
+		setCreativeTab(ModAutomatonTab.INSTANCE);
+
 	}
 
 	@SideOnly(Side.CLIENT)

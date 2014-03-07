@@ -2,6 +2,7 @@ package com.sr2610.steampunked.items;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -24,6 +25,7 @@ public class ItemSteamBucket extends Item implements IFluidContainerItem {
 	public ItemSteamBucket() {
 		super();
 		maxStackSize = 1;
+		setCreativeTab(CreativeTabs.tabMisc);
 
 	}
 

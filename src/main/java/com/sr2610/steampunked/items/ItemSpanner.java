@@ -14,12 +14,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.FluidRegistry;
 
+import com.sr2610.steampunked.Utils;
 import com.sr2610.steampunked.blocks.BlockSteamFurnace;
 import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.tileentities.TileEntityPipe;
-import com.sr2610.steampunked.Utils;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -37,6 +36,7 @@ public class ItemSpanner extends Item {
 		shiftRotations.add(BlockFurnace.class);
 		shiftRotations.add(BlockSteamFurnace.class);
 		shiftRotations.add(BlockSign.class);
+		setCreativeTab(ModCreativeTab.INSTANCE);
 
 	}
 
@@ -64,9 +64,9 @@ public class ItemSpanner extends Item {
 				if (!world.isRemote && pipe.tank.getFluid() != null)
 					player.addChatMessage(new ChatComponentTranslation(
 							"Fluid: "
-									+ Utils.getFluidLocalisedName(pipe.tank.getFluid())
-									+ " Amount: " + pipe.tank.getFluidAmount()
-									+ "mB"));
+									+ Utils.getFluidLocalisedName(pipe.tank
+											.getFluid()) + " Amount: "
+									+ pipe.tank.getFluidAmount() + "mB"));
 			}
 
 		if (player.isSneaking() != isShiftRotation(block.getClass()))

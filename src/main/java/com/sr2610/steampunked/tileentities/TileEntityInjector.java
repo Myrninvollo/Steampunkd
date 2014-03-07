@@ -242,8 +242,8 @@ public class TileEntityInjector extends TileEntityMachine implements
 
 		if (canCharge() == true && tank.getFluidAmount() > 0) {
 			tank.drain(1, true);
-			injectorItemSlot[0]
-					.setItemDamage(injectorItemSlot[0].getItemDamage() - 1);
+			injectorItemSlot[0].setItemDamage(injectorItemSlot[0]
+					.getItemDamage() - 1);
 		}
 
 	}

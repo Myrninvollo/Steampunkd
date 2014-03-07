@@ -6,6 +6,9 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import com.sr2610.steampunked.core.tabs.ModAutomatonTab;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -15,6 +18,8 @@ public class ItemChasis extends Item {
 		super();
 		setMaxStackSize(1);
 		setHasSubtypes(true);
+		setCreativeTab(ModAutomatonTab.INSTANCE);
+
 	}
 
 	@Override

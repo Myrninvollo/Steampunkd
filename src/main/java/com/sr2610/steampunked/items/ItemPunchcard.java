@@ -12,6 +12,7 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 
+import com.sr2610.steampunked.core.tabs.ModAutomatonTab;
 import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
 import com.sr2610.steampunked.lib.Reference;
 
@@ -24,6 +25,8 @@ public class ItemPunchcard extends Item {
 		super();
 		setMaxStackSize(1);
 		setHasSubtypes(true);
+		setCreativeTab(ModAutomatonTab.INSTANCE);
+
 	}
 
 	@Override

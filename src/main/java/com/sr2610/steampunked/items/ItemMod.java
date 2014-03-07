@@ -3,6 +3,7 @@ package com.sr2610.steampunked.items;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 
+import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.lib.Reference;
 
 import cpw.mods.fml.relauncher.Side;
@@ -14,6 +15,7 @@ public class ItemMod extends Item {
 	public ItemMod(String name) {
 		super();
 		texturename = name;
+		setCreativeTab(ModCreativeTab.INSTANCE);
 	}
 
 	@Override
