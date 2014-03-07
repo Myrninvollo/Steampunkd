@@ -18,6 +18,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.sr2610.steampunked.Steampunked;
+import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.lib.Reference;
 import com.sr2610.steampunked.tileentities.TileEntitySteamFurnace;
 
@@ -40,6 +41,8 @@ public class BlockSteamFurnace extends BlockContainer {
 	protected BlockSteamFurnace(Boolean isOn, Material par2Material) {
 		super(par2Material);
 		isActive = isOn;
+		setCreativeTab(ModCreativeTab.INSTANCE);
+
 	}
 
 	@Override

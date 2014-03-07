@@ -14,12 +14,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.sr2610.steampunked.Steampunked;
+import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.tileentities.TileEntityTinkerBench;
 
 public class BlockTinkerBench extends BlockContainer {
 
 	protected BlockTinkerBench(Material par2Material) {
 		super(par2Material);
+		setCreativeTab(ModCreativeTab.INSTANCE);
+
 	}
 
 	@Override

@@ -14,12 +14,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.sr2610.steampunked.Steampunked;
+import com.sr2610.steampunked.core.tabs.ModAutomatonTab;
 import com.sr2610.steampunked.tileentities.TileEntityPunchardMaker;
 
 public class BlockPunchcardMaker extends BlockContainer {
 
 	protected BlockPunchcardMaker(Material material) {
 		super(material);
+		setCreativeTab(ModAutomatonTab.INSTANCE);
+
 	}
 
 	@Override

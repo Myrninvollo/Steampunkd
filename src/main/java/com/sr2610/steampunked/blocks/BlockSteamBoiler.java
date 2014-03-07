@@ -14,12 +14,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.sr2610.steampunked.Steampunked;
+import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.tileentities.TileEntitySteamBoiler;
 
 public class BlockSteamBoiler extends BlockContainer {
 
 	protected BlockSteamBoiler(Material par2Material) {
 		super(par2Material);
+		setCreativeTab(ModCreativeTab.INSTANCE);
+
 	}
 
 	@Override

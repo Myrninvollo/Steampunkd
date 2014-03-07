@@ -5,6 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 
+import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.lib.Reference;
 
 import cpw.mods.fml.relauncher.Side;
@@ -19,6 +20,7 @@ public class BlockMod extends Block {
 		super(material);
 		textureName = name;
 		this.setHarvestLevel(harvestTool, harvestLevel);
+		setCreativeTab(ModCreativeTab.INSTANCE);
 
 	}
 
