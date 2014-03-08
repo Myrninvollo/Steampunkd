@@ -19,7 +19,7 @@ public class BlockMod extends Block {
 			String harvestTool) {
 		super(material);
 		textureName = name;
-		this.setHarvestLevel(harvestTool, harvestLevel);
+		setHarvestLevel(harvestTool, harvestLevel);
 		setCreativeTab(ModCreativeTab.INSTANCE);
 
 	}

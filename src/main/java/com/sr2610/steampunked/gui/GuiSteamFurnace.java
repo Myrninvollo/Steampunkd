@@ -1,11 +1,16 @@
 package com.sr2610.steampunked.gui;
 
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import com.sr2610.steampunked.gui.components.BaseComponent.TabColor;
+import com.sr2610.steampunked.gui.components.GuiComponentTab;
+import com.sr2610.steampunked.gui.components.GuiComponentTabs;
 import com.sr2610.steampunked.inventory.container.ContainerSteamFurnace;
 import com.sr2610.steampunked.lib.Reference;
 import com.sr2610.steampunked.tileentities.TileEntitySteamFurnace;
@@ -23,11 +28,21 @@ public class GuiSteamFurnace extends GuiMachine {
 
 	private static final int TANK_OVERLAY_X = 176;
 	private static final int TANK_OVERLAY_Y = 9;
+	
+	private GuiComponentTabs tabs;
+
+	private GuiComponentTab tabTool;
+	
 
 	public GuiSteamFurnace(TileEntitySteamFurnace cs, IInventory player_inv) {
 		super(new ContainerSteamFurnace((InventoryPlayer) player_inv, cs));
 		ySize = 166;
 		steamFurnaceInventory = cs;
+				tabs = new GuiComponentTabs(xSize - 3, 4);
+				tabTool = new GuiComponentTab(TabColor.green.getColor(), new ItemStack(Items.redstone), 100, 100);
+				tabs.addComponent(tabTool);
+				root.addComponent(tabs);
+
 	}
 
 	@Override
@@ -40,6 +55,7 @@ public class GuiSteamFurnace extends GuiMachine {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
+		super.drawGuiContainerBackgroundLayer(f, x, y);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.renderEngine.bindTexture(GUI_TEXTURE);
 		int window_x = (width - xSize) / 2;
@@ -50,6 +66,7 @@ public class GuiSteamFurnace extends GuiMachine {
 				steamFurnaceInventory.GetTank(0));
 		int i1 = steamFurnaceInventory.getCookProgressScaled(24);
 		drawTexturedModalRect(window_x + 79, window_y + 35, 176, 83, i1 + 1, 16);
+		
 
 	}
 

@@ -9,7 +9,7 @@
  * 
  * File Created @ [7 Mar 2014, 16:51:28 (GMT)]
  */
-package com.sr2610.steampunked;
+package com.sr2610.steampunked.utils;
 
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.FluidRegistry;

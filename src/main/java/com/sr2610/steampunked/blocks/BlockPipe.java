@@ -177,8 +177,7 @@ public class BlockPipe extends BlockContainer {
 
 			return box.getOffsetBoundingBox(x, y, z);
 		}
-		// return super.getSelectedBoundingBoxFromPool(world, x, y, z).expand(
-		// -0.85F, -0.85F, -0.85F);
+		
 		return super.getSelectedBoundingBoxFromPool(world, x, y, z).setBounds(
 				0, 0, 0, 0, 0, 0);
 	}

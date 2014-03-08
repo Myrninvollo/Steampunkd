@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.inventory.Container;
@@ -12,20 +13,38 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+
+import com.sr2610.steampunked.gui.components.BaseComponent;
+import com.sr2610.steampunked.gui.components.GuiComponentPanel;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public abstract class GuiMachine extends GuiContainer {
+	
 
 	protected abstract ResourceLocation GetGUITexture();
+	
+
 
 	private static final ResourceLocation BLOCK_TEXTURE = TextureMap.locationBlocksTexture;
 
 	public GuiMachine(Container container) {
 		super(container);
+		root = createRoot();
 	}
+	
+	protected BaseComponent root;
 
+
+	protected BaseComponent createRoot() {
+		return new GuiComponentPanel(0, 0, xSize, ySize);
+	}
+	
 	/**
 	 * Draw part of an icon
 	 * 
@@ -138,5 +157,71 @@ public abstract class GuiMachine extends GuiContainer {
 		drawTexturedModalRect(window_x + x, window_y + y, overlay_x, overlay_y,
 				16, tank_height);
 	}
+	
 
+	@Override
+	protected void mouseClicked(int x, int y, int button) {
+		super.mouseClicked(x, y, button);
+		root.mouseClicked(x - this.guiLeft, y - this.guiTop, button);
+	}
+
+	@Override
+	protected void mouseMovedOrUp(int x, int y, int button) {
+		super.mouseMovedOrUp(x, y, button);
+		root.mouseMovedOrUp(x - this.guiLeft, y - this.guiTop, button);
+	}
+
+	@Override
+	protected void mouseClickMove(int mouseX, int mouseY, int button, long time) {
+		super.mouseClickMove(mouseX, mouseY, button, time);
+		root.mouseClickMove(mouseX - this.guiLeft, mouseY - this.guiTop, button, time);
+	}
+
+	
+
+	public void preRender(float mouseX, float mouseY) {
+		root.mouseMovedOrUp((int)mouseX - this.guiLeft, (int)mouseY - this.guiTop, -1);
+	}
+
+	@Override
+	protected void keyTyped(char par1, int par2) {
+		super.keyTyped(par1, par2);
+		root.keyTyped(par1, par2);
+	}
+
+	public void postRender(int mouseX, int mouseY) {}
+
+	@Override
+	protected void drawGuiContainerBackgroundLayer(float f, int mouseX, int mouseY) {
+		this.preRender(mouseX, mouseY);
+		GL11.glPushMatrix();
+		GL11.glTranslated(this.guiLeft, this.guiTop, 0);
+		root.render(this.mc, 0, 0, mouseX - this.guiLeft, mouseY - this.guiTop);
+		GL11.glPopMatrix();
+	}
+
+	@Override
+	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+		this.postRender(mouseX, mouseY);
+
+	}
+
+	@Override
+	public void drawScreen(int par1, int par2, float par3) {
+		super.drawScreen(par1, par2, par3);
+		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+		RenderHelper.disableStandardItemLighting();
+		GL11.glDisable(GL11.GL_LIGHTING);
+		GL11.glDisable(GL11.GL_DEPTH_TEST);
+		GL11.glPushMatrix();
+
+		root.renderOverlay(this.mc, this.guiLeft, this.guiTop, par1 - this.guiLeft, par2 - this.guiTop);
+		GL11.glPopMatrix();
+		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+		GL11.glEnable(GL11.GL_LIGHTING);
+		GL11.glEnable(GL11.GL_DEPTH_TEST);
+		RenderHelper.enableStandardItemLighting();
+	}
+
+	
 }
