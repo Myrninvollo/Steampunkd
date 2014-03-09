@@ -53,7 +53,6 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 
 	public TileEntitySteamBoiler() {
 		super();
-
 		int i;
 		tanks = new FluidTank[2];
 		tank_info = new FluidTankInfo[2];
@@ -78,7 +77,6 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 				boilerItemStacks[b0] = ItemStack
 						.loadItemStackFromNBT(nbttagcompound1);
 		}
-
 		boilerBurnTime = par1NBTTagCompound.getShort("BurnTime");
 
 		currentItemBurnTime = getItemBurnTime(boilerItemStacks[0]);

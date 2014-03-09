@@ -18,6 +18,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 public abstract class TileEntityMachine extends TileEntity implements
 		IInventory {
 	protected abstract boolean isFluidFuel(FluidStack fuel);
+	public int redstoneMode;
 
 	/**
 	 * Links an item slot to a tank for filling/draining containers.
@@ -92,7 +93,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 
 	public TileEntityMachine() {
 		conatiner_slots = new ArrayList<ContainerSlot>();
-
+		redstoneMode=0;
 		initialized = false;
 	}
 
@@ -135,6 +136,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
+		redstoneMode=compound.getInteger("redstoneMode");
 
 		int i;
 		for (i = 0; i < GetTankCount(); i++) {
@@ -163,6 +165,8 @@ public abstract class TileEntityMachine extends TileEntity implements
 	public void writeToNBT(NBTTagCompound compound) {
 		int i;
 		super.writeToNBT(compound);
+		compound.setInteger("redstoneMode", redstoneMode);
+
 		for (i = 0; i < GetTankCount(); i++)
 			WriteTankToNBT(compound, i);
 		for (i = 0; i < getSizeInventory(); i++)

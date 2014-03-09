@@ -5,10 +5,15 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
 import com.sr2610.steampunked.Steampunked;
+import com.sr2610.steampunked.gui.components.BaseComponent.TabColor;
+import com.sr2610.steampunked.gui.components.GuiComponentLabel;
+import com.sr2610.steampunked.gui.components.GuiComponentTab;
+import com.sr2610.steampunked.gui.components.GuiComponentTabs;
 import com.sr2610.steampunked.inventory.container.ContainerPunchcardmaker;
 import com.sr2610.steampunked.items.ItemPunchcard;
 import com.sr2610.steampunked.items.ModItems;
@@ -26,7 +31,9 @@ public class GuiPunchardMaker extends GuiMachine {
 	public GuiPunchardMaker(TileEntityPunchardMaker cs, IInventory player_inv) {
 		super(new ContainerPunchcardmaker(cs, player_inv));
 		ySize = 166;
+		xSize = 176;
 		inventory = cs;
+
 	}
 
 	@Override
@@ -82,6 +89,7 @@ public class GuiPunchardMaker extends GuiMachine {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
+		super.drawGuiContainerBackgroundLayer(f, x, y);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.renderEngine.bindTexture(GUI_TEXTURE);
 		int window_x = (width - xSize) / 2;

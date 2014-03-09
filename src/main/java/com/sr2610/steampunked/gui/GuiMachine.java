@@ -25,11 +25,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public abstract class GuiMachine extends GuiContainer {
-	
 
 	protected abstract ResourceLocation GetGUITexture();
-	
 
+	protected BaseComponent root;
 
 	private static final ResourceLocation BLOCK_TEXTURE = TextureMap.locationBlocksTexture;
 
@@ -37,14 +36,7 @@ public abstract class GuiMachine extends GuiContainer {
 		super(container);
 		root = createRoot();
 	}
-	
-	protected BaseComponent root;
 
-
-	protected BaseComponent createRoot() {
-		return new GuiComponentPanel(0, 0, xSize, ySize);
-	}
-	
 	/**
 	 * Draw part of an icon
 	 * 
@@ -157,7 +149,10 @@ public abstract class GuiMachine extends GuiContainer {
 		drawTexturedModalRect(window_x + x, window_y + y, overlay_x, overlay_y,
 				16, tank_height);
 	}
-	
+
+	protected BaseComponent createRoot() {
+		return new GuiComponentPanel(0, 0, xSize, ySize);
+	}
 
 	@Override
 	protected void mouseClicked(int x, int y, int button) {
@@ -169,6 +164,7 @@ public abstract class GuiMachine extends GuiContainer {
 	protected void mouseMovedOrUp(int x, int y, int button) {
 		super.mouseMovedOrUp(x, y, button);
 		root.mouseMovedOrUp(x - this.guiLeft, y - this.guiTop, button);
+		
 	}
 
 	@Override
@@ -222,6 +218,5 @@ public abstract class GuiMachine extends GuiContainer {
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		RenderHelper.enableStandardItemLighting();
 	}
-
 	
 }

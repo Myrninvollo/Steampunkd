@@ -14,21 +14,24 @@ package com.sr2610.steampunked.gui.components;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sr2610.steampunked.lib.Reference;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;
 
 public abstract class BaseComponent extends Gui {
 
-	
+	public final static ResourceLocation TEXTURE_SHEET = new ResourceLocation(
+			Reference.ModID, "textures/gui/components.png");
+
+	protected void bindComponentsSheet() {
+		bindTextureToClient(TEXTURE_SHEET);
+	}
 
 	public enum TabColor {
-		blue(0x8784c8),
-		lightblue(0x84c7c8),
-		green(0x84c892),
-		yellow(0xc7c884),
-		red(0xc88a84),
-		purple(0xc884bf);
+		blue(0x8784c8), lightblue(0x84c7c8), green(0x84c892), yellow(0xc7c884), red(
+				0xFF0000), purple(0xc884bf);
 
 		private int color;
 
@@ -122,21 +125,26 @@ public abstract class BaseComponent extends Gui {
 	}
 
 	public BaseComponent childByName(String componentName) {
-		if (componentName == null) return null;
+		if (componentName == null)
+			return null;
 		for (BaseComponent component : components) {
-			if (componentName.equals(component.getName())) { return component; }
+			if (componentName.equals(component.getName())) {
+				return component;
+			}
 		}
 		return null;
 	}
 
 	public BaseComponent addListener(IComponentListener listener) {
-		if (listeners.contains(listener)) return this;
+		if (listeners.contains(listener))
+			return this;
 		listeners.add(listener);
 		return this;
 	}
 
 	public void removeListener(IComponentListener listener) {
-		if (!listeners.contains(listener)) return;
+		if (!listeners.contains(listener))
+			return;
 		listeners.remove(listener);
 	}
 
@@ -144,25 +152,25 @@ public abstract class BaseComponent extends Gui {
 		listeners.clear();
 	}
 
-	public void render(Minecraft minecraft, int offsetX, int offsetY, int mouseX, int mouseY) {
+	public void render(Minecraft minecraft, int offsetX, int offsetY,
+			int mouseX, int mouseY) {
 		if (renderChildren) {
 			for (BaseComponent component : components) {
 				if (component != null && component.isEnabled()) {
 					component.render(minecraft, offsetX + this.x, offsetY
-							+ this.y, mouseX
-							- this.x, mouseY - this.y);
+							+ this.y, mouseX - this.x, mouseY - this.y);
 				}
 			}
 		}
 	}
 
-	public void renderOverlay(Minecraft minecraft, int offsetX, int offsetY, int mouseX, int mouseY) {
+	public void renderOverlay(Minecraft minecraft, int offsetX, int offsetY,
+			int mouseX, int mouseY) {
 		if (renderChildren) {
 			for (BaseComponent component : components) {
 				if (component != null && component.isEnabled()) {
-					component.renderOverlay(minecraft, offsetX + this.x, offsetY
-							+ this.y, mouseX
-							- this.x, mouseY - this.y);
+					component.renderOverlay(minecraft, offsetX + this.x,
+							offsetY + this.y, mouseX - this.x, mouseY - this.y);
 				}
 			}
 		}
@@ -192,7 +200,8 @@ public abstract class BaseComponent extends Gui {
 		}
 	}
 
-	public void mouseClickMove(int mouseX, int mouseY, int button, /* love you */long time) {
+	public void mouseClickMove(int mouseX, int mouseY, int button, /* love you */
+			long time) {
 		invokeListenersMouseDrag(mouseX, mouseY, button, time);
 		if (renderChildren) {
 			for (BaseComponent component : components) {
@@ -215,10 +224,7 @@ public abstract class BaseComponent extends Gui {
 			for (BaseComponent component : components) {
 				if (component != null && component.isEnabled()
 						&& component.isMouseOver(mouseX, mouseY)) {
-					// Changed from mouseX - x, mouseY - y.
-					// This could break some logic but I feel that is how it's
-					// meant to be
-					// Let me know if I've messed up - NC
+					
 					component.mouseMovedOrUp(mouseX - component.x, mouseY
 							- component.y, button);
 				}
@@ -226,15 +232,9 @@ public abstract class BaseComponent extends Gui {
 		}
 	}
 
-	/*
-	 * The math on these methods is different because it takes the adjusted
-	 * values from the handlers and passes it to listeners. No subtraction
-	 * should be done here
-	 */
+
 	private void invokeListenersMouseDown(int offsetX, int offsetY, int button) {
-		// If a handler was called from something that was a) not another
-		// component Or b) some external mod. The offsets might be derpy. So we
-		// still check them. Even though 99% of the time they will be valid.
+
 		if (isMouseOver(offsetX + x, offsetY + y)) {
 			for (IComponentListener listener : listeners) {
 				listener.componentMouseDown(this, offsetX, offsetY, button);
@@ -242,10 +242,12 @@ public abstract class BaseComponent extends Gui {
 		}
 	}
 
-	private void invokeListenersMouseDrag(int offsetX, int offsetY, int button, long time) {
+	private void invokeListenersMouseDrag(int offsetX, int offsetY, int button,
+			long time) {
 		if (isMouseOver(offsetX + x, offsetY + y)) {
 			for (IComponentListener listener : listeners) {
-				listener.componentMouseDrag(this, offsetX, offsetY, button, time);
+				listener.componentMouseDrag(this, offsetX, offsetY, button,
+						time);
 			}
 		}
 	}
@@ -271,4 +273,13 @@ public abstract class BaseComponent extends Gui {
 			}
 		}
 	}
+
+	public void bindTextureToClient(ResourceLocation texture) {
+		if (texture != null) {
+			if (Minecraft.getMinecraft() != null) {
+				Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+			}
+		}
+	}
+
 }

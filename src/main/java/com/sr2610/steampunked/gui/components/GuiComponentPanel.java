@@ -11,18 +11,14 @@
  */
 package com.sr2610.steampunked.gui.components;
 
-import java.lang.ref.WeakReference;
-import java.util.List;
 import java.util.Map;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 
 import org.lwjgl.opengl.GL11;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Maps;
 
 public class GuiComponentPanel extends GuiComponentBox {
@@ -48,11 +44,10 @@ public class GuiComponentPanel extends GuiComponentBox {
 
 	private final Map<Integer, ISlotBackgroundRenderer> slotRenderers = Maps.newHashMap();
 
-//	private WeakReference<Container> container;
+	
 
 	public GuiComponentPanel(int x, int y, int width, int height) {
 		super(x, y, width, height, 0, 5, 0xFFFFFF);
-	//	this.container = new WeakReference<Container>(container);
 	}
 
 	public void setSlotRenderer(int slotId, ISlotBackgroundRenderer renderer) {
@@ -64,11 +59,7 @@ public class GuiComponentPanel extends GuiComponentBox {
 	public void render(Minecraft minecraft, int x, int y, int mouseX, int mouseY) {
 		super.render(minecraft, x, y, mouseX, mouseY);
 		GL11.glColor4f(1, 1, 1, 1);
-	/*	if (container != null && container.get() != null) {
-			for (Slot slot : (List<Slot>)container.get().inventorySlots) {
-				Objects.firstNonNull(slotRenderers.get(slot.slotNumber), normalSlot).render(this, slot);
-			}
-		}*/
+		bindComponentsSheet();
+		}
 	}
 
-}

@@ -127,6 +127,7 @@ public class PacketPipeline extends
 
 		registerPacket(PacketTinkerTable.class);
 		registerPacket(PacketPunchcardMaker.class);
+		registerPacket(PacketMachineRedstone.class);
 
 	}
 
