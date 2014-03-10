@@ -14,11 +14,11 @@ package com.sr2610.steampunked.gui.components;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sr2610.steampunked.lib.Reference;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;
+
+import com.sr2610.steampunked.lib.Reference;
 
 public abstract class BaseComponent extends Gui {
 
@@ -36,7 +36,7 @@ public abstract class BaseComponent extends Gui {
 		private int color;
 
 		TabColor(int col) {
-			this.color = col;
+			color = col;
 		}
 
 		public int getColor() {
@@ -112,8 +112,8 @@ public abstract class BaseComponent extends Gui {
 	 * @return true if the X and Y are inside this components area
 	 */
 	protected boolean isMouseOver(int mouseX, int mouseY) {
-		return (hasMouse = mouseX >= x && mouseX < x + getWidth()
-				&& mouseY >= y && mouseY < y + getHeight());
+		return hasMouse = mouseX >= x && mouseX < x + getWidth() && mouseY >= y
+				&& mouseY < y + getHeight();
 	}
 
 	private List<IComponentListener> listeners = new ArrayList<IComponentListener>();
@@ -127,11 +127,9 @@ public abstract class BaseComponent extends Gui {
 	public BaseComponent childByName(String componentName) {
 		if (componentName == null)
 			return null;
-		for (BaseComponent component : components) {
-			if (componentName.equals(component.getName())) {
+		for (BaseComponent component : components)
+			if (componentName.equals(component.getName()))
 				return component;
-			}
-		}
 		return null;
 	}
 
@@ -154,132 +152,100 @@ public abstract class BaseComponent extends Gui {
 
 	public void render(Minecraft minecraft, int offsetX, int offsetY,
 			int mouseX, int mouseY) {
-		if (renderChildren) {
-			for (BaseComponent component : components) {
-				if (component != null && component.isEnabled()) {
-					component.render(minecraft, offsetX + this.x, offsetY
-							+ this.y, mouseX - this.x, mouseY - this.y);
-				}
-			}
-		}
+		if (renderChildren)
+			for (BaseComponent component : components)
+				if (component != null && component.isEnabled())
+					component.render(minecraft, offsetX + x, offsetY + y,
+							mouseX - x, mouseY - y);
 	}
 
 	public void renderOverlay(Minecraft minecraft, int offsetX, int offsetY,
 			int mouseX, int mouseY) {
-		if (renderChildren) {
-			for (BaseComponent component : components) {
-				if (component != null && component.isEnabled()) {
-					component.renderOverlay(minecraft, offsetX + this.x,
-							offsetY + this.y, mouseX - this.x, mouseY - this.y);
-				}
-			}
-		}
+		if (renderChildren)
+			for (BaseComponent component : components)
+				if (component != null && component.isEnabled())
+					component.renderOverlay(minecraft, offsetX + x,
+							offsetY + y, mouseX - x, mouseY - y);
 	}
 
 	public void keyTyped(char par1, int par2) {
 		invokeListenersKeyTyped(par1, par2);
-		if (renderChildren) {
-			for (BaseComponent component : components) {
-				if (component != null && component.isEnabled()) {
+		if (renderChildren)
+			for (BaseComponent component : components)
+				if (component != null && component.isEnabled())
 					component.keyTyped(par1, par2);
-				}
-			}
-		}
 	}
 
 	public void mouseClicked(int mouseX, int mouseY, int button) {
 		invokeListenersMouseDown(mouseX, mouseY, button);
-		if (renderChildren) {
-			for (BaseComponent component : components) {
+		if (renderChildren)
+			for (BaseComponent component : components)
 				if (component != null && component.isEnabled()
-						&& component.isMouseOver(mouseX, mouseY)) {
+						&& component.isMouseOver(mouseX, mouseY))
 					component.mouseClicked(mouseX - component.x, mouseY
 							- component.y, button);
-				}
-			}
-		}
 	}
 
 	public void mouseClickMove(int mouseX, int mouseY, int button, /* love you */
 			long time) {
 		invokeListenersMouseDrag(mouseX, mouseY, button, time);
-		if (renderChildren) {
-			for (BaseComponent component : components) {
+		if (renderChildren)
+			for (BaseComponent component : components)
 				if (component != null && component.isEnabled()
-						&& component.isMouseOver(mouseX, mouseY)) {
+						&& component.isMouseOver(mouseX, mouseY))
 					component.mouseClickMove(mouseX - component.x, mouseY
 							- component.y, button, time);
-				}
-			}
-		}
 	}
 
 	public void mouseMovedOrUp(int mouseX, int mouseY, int button) {
-		if (button >= 0) {
+		if (button >= 0)
 			invokeListenersMouseUp(mouseX, mouseY, button);
-		} else {
+		else
 			invokeListenersMouseMove(mouseX, mouseY);
-		}
-		if (renderChildren) {
-			for (BaseComponent component : components) {
+		if (renderChildren)
+			for (BaseComponent component : components)
 				if (component != null && component.isEnabled()
-						&& component.isMouseOver(mouseX, mouseY)) {
-					
+						&& component.isMouseOver(mouseX, mouseY))
 					component.mouseMovedOrUp(mouseX - component.x, mouseY
 							- component.y, button);
-				}
-			}
-		}
 	}
-
 
 	private void invokeListenersMouseDown(int offsetX, int offsetY, int button) {
 
-		if (isMouseOver(offsetX + x, offsetY + y)) {
-			for (IComponentListener listener : listeners) {
+		if (isMouseOver(offsetX + x, offsetY + y))
+			for (IComponentListener listener : listeners)
 				listener.componentMouseDown(this, offsetX, offsetY, button);
-			}
-		}
 	}
 
 	private void invokeListenersMouseDrag(int offsetX, int offsetY, int button,
 			long time) {
-		if (isMouseOver(offsetX + x, offsetY + y)) {
-			for (IComponentListener listener : listeners) {
+		if (isMouseOver(offsetX + x, offsetY + y))
+			for (IComponentListener listener : listeners)
 				listener.componentMouseDrag(this, offsetX, offsetY, button,
 						time);
-			}
-		}
 	}
 
 	private void invokeListenersMouseMove(int offsetX, int offsetY) {
-		if (isMouseOver(offsetX + x, offsetY + y)) {
-			for (IComponentListener listener : listeners) {
+		if (isMouseOver(offsetX + x, offsetY + y))
+			for (IComponentListener listener : listeners)
 				listener.componentMouseMove(this, offsetX, offsetY);
-			}
-		}
 	}
 
 	private void invokeListenersKeyTyped(char par1, int par2) {
-		for (IComponentListener listener : listeners) {
+		for (IComponentListener listener : listeners)
 			listener.componentKeyTyped(this, par1, par2);
-		}
 	}
 
 	private void invokeListenersMouseUp(int offsetX, int offsetY, int button) {
-		if (isMouseOver(offsetX + x, offsetY + y)) {
-			for (IComponentListener listener : listeners) {
+		if (isMouseOver(offsetX + x, offsetY + y))
+			for (IComponentListener listener : listeners)
 				listener.componentMouseUp(this, offsetX, offsetY, button);
-			}
-		}
 	}
 
 	public void bindTextureToClient(ResourceLocation texture) {
-		if (texture != null) {
-			if (Minecraft.getMinecraft() != null) {
+		if (texture != null)
+			if (Minecraft.getMinecraft() != null)
 				Minecraft.getMinecraft().renderEngine.bindTexture(texture);
-			}
-		}
 	}
 
 }

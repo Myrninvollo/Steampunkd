@@ -11,7 +11,6 @@
  */
 package com.sr2610.steampunked.gui.components;
 
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
@@ -26,18 +25,20 @@ public class GuiComponentIconButton extends GuiComponentButton {
 		this.icon = icon;
 	}
 
-	public GuiComponentIconButton(int x, int y, int color, IIcon icon, ResourceLocation texture) {
+	public GuiComponentIconButton(int x, int y, int color, IIcon icon,
+			ResourceLocation texture) {
 		this(x, y, color, icon);
 		this.texture = texture;
 	}
 
 	@Override
-	public void renderContents(Minecraft minecraft, int offsetX, int offsetY, int mouseX, int mouseY, boolean pressed) {
-		if (texture != null) minecraft.renderEngine.bindTexture(texture);
+	public void renderContents(Minecraft minecraft, int offsetX, int offsetY,
+			int mouseX, int mouseY, boolean pressed) {
+		if (texture != null)
+			minecraft.renderEngine.bindTexture(texture);
 
-		int offset = (buttonEnabled && pressed)? 3 : 2;
-
-		drawTexturedModelRectFromIcon(offsetX + x, offsetY + y , icon, icon.getIconWidth(), icon.getIconHeight());
+		drawTexturedModelRectFromIcon(offsetX + x, offsetY + y, icon,
+				icon.getIconWidth(), icon.getIconHeight());
 	}
 
 }

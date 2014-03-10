@@ -157,26 +157,24 @@ public abstract class GuiMachine extends GuiContainer {
 	@Override
 	protected void mouseClicked(int x, int y, int button) {
 		super.mouseClicked(x, y, button);
-		root.mouseClicked(x - this.guiLeft, y - this.guiTop, button);
+		root.mouseClicked(x - guiLeft, y - guiTop, button);
 	}
 
 	@Override
 	protected void mouseMovedOrUp(int x, int y, int button) {
 		super.mouseMovedOrUp(x, y, button);
-		root.mouseMovedOrUp(x - this.guiLeft, y - this.guiTop, button);
-		
+		root.mouseMovedOrUp(x - guiLeft, y - guiTop, button);
+
 	}
 
 	@Override
 	protected void mouseClickMove(int mouseX, int mouseY, int button, long time) {
 		super.mouseClickMove(mouseX, mouseY, button, time);
-		root.mouseClickMove(mouseX - this.guiLeft, mouseY - this.guiTop, button, time);
+		root.mouseClickMove(mouseX - guiLeft, mouseY - guiTop, button, time);
 	}
 
-	
-
 	public void preRender(float mouseX, float mouseY) {
-		root.mouseMovedOrUp((int)mouseX - this.guiLeft, (int)mouseY - this.guiTop, -1);
+		root.mouseMovedOrUp((int) mouseX - guiLeft, (int) mouseY - guiTop, -1);
 	}
 
 	@Override
@@ -185,20 +183,22 @@ public abstract class GuiMachine extends GuiContainer {
 		root.keyTyped(par1, par2);
 	}
 
-	public void postRender(int mouseX, int mouseY) {}
+	public void postRender(int mouseX, int mouseY) {
+	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float f, int mouseX, int mouseY) {
-		this.preRender(mouseX, mouseY);
+	protected void drawGuiContainerBackgroundLayer(float f, int mouseX,
+			int mouseY) {
+		preRender(mouseX, mouseY);
 		GL11.glPushMatrix();
-		GL11.glTranslated(this.guiLeft, this.guiTop, 0);
-		root.render(this.mc, 0, 0, mouseX - this.guiLeft, mouseY - this.guiTop);
+		GL11.glTranslated(guiLeft, guiTop, 0);
+		root.render(mc, 0, 0, mouseX - guiLeft, mouseY - guiTop);
 		GL11.glPopMatrix();
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		this.postRender(mouseX, mouseY);
+		postRender(mouseX, mouseY);
 
 	}
 
@@ -211,12 +211,12 @@ public abstract class GuiMachine extends GuiContainer {
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		GL11.glPushMatrix();
 
-		root.renderOverlay(this.mc, this.guiLeft, this.guiTop, par1 - this.guiLeft, par2 - this.guiTop);
+		root.renderOverlay(mc, guiLeft, guiTop, par1 - guiLeft, par2 - guiTop);
 		GL11.glPopMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		RenderHelper.enableStandardItemLighting();
 	}
-	
+
 }

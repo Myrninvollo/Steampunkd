@@ -1,8 +1,5 @@
 package com.sr2610.steampunked.gui;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -11,10 +8,10 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
+import com.sr2610.steampunked.gui.components.BaseComponent.TabColor;
 import com.sr2610.steampunked.gui.components.GuiComponentLabel;
 import com.sr2610.steampunked.gui.components.GuiComponentTab;
 import com.sr2610.steampunked.gui.components.GuiComponentTabs;
-import com.sr2610.steampunked.gui.components.BaseComponent.TabColor;
 import com.sr2610.steampunked.inventory.container.ContainerSteamBoiler;
 import com.sr2610.steampunked.lib.Reference;
 import com.sr2610.steampunked.tileentities.TileEntitySteamBoiler;
@@ -31,22 +28,26 @@ public class GuiSteamBoiler extends GuiMachine {
 
 	private static final int TANK_OVERLAY_X = 176;
 	private static final int TANK_OVERLAY_Y = 9;
-	
+
 	private GuiComponentTabs tabs;
 
 	private GuiComponentTab tabRedstone;
 	private GuiComponentLabel labelRedstoneControl;
 	private GuiComponentLabel labelInfo;
 
-
 	public GuiSteamBoiler(TileEntitySteamBoiler cs, IInventory player_inv) {
 		super(new ContainerSteamBoiler(cs, player_inv));
 		ySize = 166;
 		BoilerInventory = cs;
 		tabs = new GuiComponentTabs(xSize - 3, 4);
-		tabRedstone = new GuiComponentTab(TabColor.red.getColor(), new ItemStack(Items.redstone), 100, 100);
-		labelRedstoneControl = new GuiComponentLabel(20, 8, StatCollector.translateToLocal("steampunked.gui.redstoneControl.name"));
-		labelInfo = new GuiComponentLabel(40, 4, getInfo());
+		tabRedstone = new GuiComponentTab(TabColor.red.getColor(),
+				new ItemStack(Items.redstone), 100, 100);
+		labelRedstoneControl = new GuiComponentLabel(
+				20,
+				8,
+				StatCollector
+						.translateToLocal("steampunked.gui.redstoneControl.name"), true);
+		labelInfo = new GuiComponentLabel(40, 4, getInfo(),true);
 		tabRedstone.addComponent(labelRedstoneControl);
 		tabRedstone.addComponent(labelInfo);
 		tabs.addComponent(tabRedstone);
@@ -54,13 +55,19 @@ public class GuiSteamBoiler extends GuiMachine {
 	}
 
 	private String getInfo() {
-		switch(BoilerInventory.redstoneMode){
-		case 0:return("Machine Disabled");
-		case 1: return("Enabled");
-		case 2: return("Requires Redstone Signal to Operate");
-		default:return("Unexpected, Place and Replace");
+		switch (BoilerInventory.getRedstoneMode()) {
+		case 0:
+			return "Machine Disabled";
+		case 1:
+			return "Enabled";
+		case 2:
+			return "Requires Redstone Signal to Operate";
+		default:
+			return "Unexpected, Place and Replace";
 		}
 	}
+	
+	
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouse_x, int mouse_y) {
@@ -100,8 +107,6 @@ public class GuiSteamBoiler extends GuiMachine {
 			DisplayTankTooltip(mouse_x, mouse_y, BoilerInventory.GetTank(1));
 
 	}
-	
-
 
 	@Override
 	protected ResourceLocation GetGUITexture() {
@@ -113,7 +118,5 @@ public class GuiSteamBoiler extends GuiMachine {
 		super.initGui();
 
 	}
-	
-	
 
 }

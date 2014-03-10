@@ -16,7 +16,6 @@ import net.minecraft.client.renderer.RenderHelper;
 
 import org.lwjgl.opengl.GL11;
 
-
 public class GuiComponentBox extends BaseComponent {
 
 	protected int width;
@@ -32,11 +31,12 @@ public class GuiComponentBox extends BaseComponent {
 	}
 
 	public BaseComponent setOverlayMode(boolean isOverlay) {
-		this.overlay_mode = isOverlay;
+		overlay_mode = isOverlay;
 		return this;
 	}
 
-	public GuiComponentBox(int x, int y, int width, int height, int u, int v, int color) {
+	public GuiComponentBox(int x, int y, int width, int height, int u, int v,
+			int color) {
 		super(x, y);
 		this.width = width;
 		this.height = height;
@@ -74,17 +74,20 @@ public class GuiComponentBox extends BaseComponent {
 
 	// 3x3 pixels starting at 5,0
 	public void renderTopRightCorner(int offsetX, int offsetY) {
-		drawTexturedModalRect(offsetX + x + getWidth() - 3, offsetY + y, u + 5, v, 3, 3);
+		drawTexturedModalRect(offsetX + x + getWidth() - 3, offsetY + y, u + 5,
+				v, 3, 3);
 	}
 
 	// 3x3 pixels starting at 11,0
 	public void renderBottomLeftCorner(int offsetX, int offsetY) {
-		drawTexturedModalRect(offsetX + x, offsetY + y + getHeight() - 3, u + 11, v, 3, 3);
+		drawTexturedModalRect(offsetX + x, offsetY + y + getHeight() - 3,
+				u + 11, v, 3, 3);
 	}
 
 	// 4x4 pixels starting at 15,0
 	public void renderBottomRightCorner(int offsetX, int offsetY) {
-		drawTexturedModalRect(offsetX + x + getWidth() - 4, offsetY + y + getHeight() - 4, u + 15, v, 4, 4);
+		drawTexturedModalRect(offsetX + x + getWidth() - 4, offsetY + y
+				+ getHeight() - 4, u + 15, v, 4, 4);
 	}
 
 	// 1x3 pixels starting at 14,0
@@ -133,18 +136,23 @@ public class GuiComponentBox extends BaseComponent {
 	}
 
 	@Override
-	public void render(Minecraft minecraft, int offsetX, int offsetY, int mouseX, int mouseY) {
-		if (!overlay_mode) doRender(minecraft, offsetX, offsetY, mouseX, mouseY);
+	public void render(Minecraft minecraft, int offsetX, int offsetY,
+			int mouseX, int mouseY) {
+		if (!overlay_mode)
+			doRender(minecraft, offsetX, offsetY, mouseX, mouseY);
 		super.render(minecraft, offsetX, offsetY, mouseX, mouseY);
 	}
 
 	@Override
-	public void renderOverlay(Minecraft minecraft, int offsetX, int offsetY, int mouseX, int mouseY) {
-		if (overlay_mode) doRender(minecraft, offsetX, offsetY, mouseX, mouseY);
+	public void renderOverlay(Minecraft minecraft, int offsetX, int offsetY,
+			int mouseX, int mouseY) {
+		if (overlay_mode)
+			doRender(minecraft, offsetX, offsetY, mouseX, mouseY);
 		super.renderOverlay(minecraft, offsetX, offsetY, mouseX, mouseY);
 	}
 
-	protected void doRender(Minecraft minecraft, int offsetX, int offsetY, int mouseX, int mouseY) {
+	protected void doRender(Minecraft minecraft, int offsetX, int offsetY,
+			int mouseX, int mouseY) {
 		RenderHelper.disableStandardItemLighting();
 		bindComponentsSheet();
 		int c = getColor();

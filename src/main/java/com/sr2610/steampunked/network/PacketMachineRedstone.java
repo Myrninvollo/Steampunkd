@@ -60,8 +60,7 @@ public class PacketMachineRedstone extends AbstractPacket {
 		World world = player.worldObj;
 		TileEntity te = world.getTileEntity(x, y, z);
 
-		if (te instanceof TileEntityMachine) {
-			((TileEntityMachine) te).redstoneMode = mode;
-		}
+		if (te instanceof TileEntityMachine)
+			((TileEntityMachine) te).setRedstoneMode(mode);
 	}
 }

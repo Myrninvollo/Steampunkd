@@ -26,25 +26,27 @@ public class GuiComponentPanel extends GuiComponentBox {
 	public static final ISlotBackgroundRenderer normalSlot = new ISlotBackgroundRenderer() {
 		@Override
 		public void render(Gui gui, Slot slot) {
-			gui.drawTexturedModalRect(slot.xDisplayPosition - 1, slot.yDisplayPosition - 1, 0, 20, 18, 18);
+			gui.drawTexturedModalRect(slot.xDisplayPosition - 1,
+					slot.yDisplayPosition - 1, 0, 20, 18, 18);
 		}
 	};
 
 	public static final ISlotBackgroundRenderer bigSlot = new ISlotBackgroundRenderer() {
 		@Override
 		public void render(Gui gui, Slot slot) {
-			gui.drawTexturedModalRect(slot.xDisplayPosition - 5, slot.yDisplayPosition - 5, 29, 20, 26, 26);
+			gui.drawTexturedModalRect(slot.xDisplayPosition - 5,
+					slot.yDisplayPosition - 5, 29, 20, 26, 26);
 		}
 	};
 
 	public static final ISlotBackgroundRenderer noRenderSlot = new ISlotBackgroundRenderer() {
 		@Override
-		public void render(Gui gui, Slot slot) {}
+		public void render(Gui gui, Slot slot) {
+		}
 	};
 
-	private final Map<Integer, ISlotBackgroundRenderer> slotRenderers = Maps.newHashMap();
-
-	
+	private final Map<Integer, ISlotBackgroundRenderer> slotRenderers = Maps
+			.newHashMap();
 
 	public GuiComponentPanel(int x, int y, int width, int height) {
 		super(x, y, width, height, 0, 5, 0xFFFFFF);
@@ -60,6 +62,5 @@ public class GuiComponentPanel extends GuiComponentBox {
 		super.render(minecraft, x, y, mouseX, mouseY);
 		GL11.glColor4f(1, 1, 1, 1);
 		bindComponentsSheet();
-		}
 	}
-
+}

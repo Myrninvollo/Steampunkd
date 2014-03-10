@@ -11,7 +11,6 @@
  */
 package com.sr2610.steampunked.utils;
 
-
 import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -25,7 +24,8 @@ public class FakeIcon implements IIcon {
 	private final int width;
 	private final int height;
 
-	public FakeIcon(float minU, float maxU, float minV, float maxV, int width, int height) {
+	public FakeIcon(float minU, float maxU, float minV, float maxV, int width,
+			int height) {
 		this.minU = minU;
 		this.maxU = maxU;
 		this.minV = minV;
@@ -39,7 +39,8 @@ public class FakeIcon implements IIcon {
 		float minV = y / 256.0f;
 		float maxU = (x + width) / 256.0f;
 		float maxV = (y + height) / 256.0f;
-		return new FakeIcon(minU, maxU, minV, maxV, Math.abs(width), Math.abs(height));
+		return new FakeIcon(minU, maxU, minV, maxV, Math.abs(width),
+				Math.abs(height));
 	}
 
 	@Override
@@ -69,7 +70,7 @@ public class FakeIcon implements IIcon {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public float getInterpolatedU(double p) {
-		return minU + (maxU - minU) * (float)p / 16.0f;
+		return minU + (maxU - minU) * (float) p / 16.0f;
 	}
 
 	@Override
@@ -87,7 +88,7 @@ public class FakeIcon implements IIcon {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public float getInterpolatedV(double p) {
-		return minV + (maxV - minV) * (float)p / 16.0f;
+		return minV + (maxV - minV) * (float) p / 16.0f;
 	}
 
 	@Override

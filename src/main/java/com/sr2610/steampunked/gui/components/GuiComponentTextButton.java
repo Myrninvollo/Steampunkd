@@ -17,7 +17,8 @@ public class GuiComponentTextButton extends GuiComponentButton {
 
 	private String text;
 
-	public GuiComponentTextButton(int x, int y, int width, int height, int color, String text) {
+	public GuiComponentTextButton(int x, int y, int width, int height,
+			int color, String text) {
 		super(x, y, width, height, color);
 		this.text = text;
 	}
@@ -27,20 +28,22 @@ public class GuiComponentTextButton extends GuiComponentButton {
 	}
 
 	public GuiComponentTextButton setText(String buttonText) {
-		this.text = buttonText;
+		text = buttonText;
 		return this;
 	}
 
 	@Override
-	public void renderContents(Minecraft minecraft, int offsetX, int offsetY, int mouseX, int mouseY, boolean pressed) {
+	public void renderContents(Minecraft minecraft, int offsetX, int offsetY,
+			int mouseX, int mouseY, boolean pressed) {
 		int textWidth = minecraft.fontRenderer.getStringWidth(text);
-		int offX = ((width - textWidth) / 2) + 1;
+		int offX = (width - textWidth) / 2 + 1;
 		int offY = 3;
 		if (buttonEnabled && pressed) {
 			offY++;
 			offX++;
 		}
-		minecraft.fontRenderer.drawString(text, offsetX + x + offX, offsetY + y + offY, 4210752);
+		minecraft.fontRenderer.drawString(text, offsetX + x + offX, offsetY + y
+				+ offY, 4210752);
 	}
 
 }

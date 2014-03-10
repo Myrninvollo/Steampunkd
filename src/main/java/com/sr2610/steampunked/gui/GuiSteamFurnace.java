@@ -23,7 +23,6 @@ import com.sr2610.steampunked.gui.components.IComponentListener;
 import com.sr2610.steampunked.inventory.container.ContainerSteamFurnace;
 import com.sr2610.steampunked.lib.Reference;
 import com.sr2610.steampunked.network.PacketMachineRedstone;
-import com.sr2610.steampunked.network.PacketPunchcardMaker;
 import com.sr2610.steampunked.tileentities.TileEntitySteamFurnace;
 import com.sr2610.steampunked.utils.FakeIcon;
 
@@ -47,39 +46,46 @@ public class GuiSteamFurnace extends GuiMachine implements IComponentListener {
 	private GuiComponentTab tabRedstone;
 	private GuiComponentLabel labelRedstoneControl;
 	private GuiComponentLabel labelInfo;
+	private GuiComponentLabel labelInfoLow;
+	private GuiComponentLabel labelInfoHigh;
+
 	private GuiComponentIconButton buttonDisable;
 	private GuiComponentIconButton buttonLow;
 	private GuiComponentIconButton buttonHigh;
 
 	public GuiSteamFurnace(TileEntitySteamFurnace cs, IInventory player_inv) {
 		super(new ContainerSteamFurnace((InventoryPlayer) player_inv, cs));
-		mode = cs.redstoneMode;
+		mode = cs.getRedstoneMode();
 		ySize = 166;
 		steamFurnaceInventory = cs;
+
 		tabs = new GuiComponentTabs(xSize - 3, 4);
 		tabRedstone = new GuiComponentTab(TabColor.red.getColor(),
 				new ItemStack(Items.redstone), 100, 100);
-		labelRedstoneControl = new GuiComponentLabel(
-				20,
-				8,
+		labelRedstoneControl = new GuiComponentLabel(20, 8,
 				StatCollector
-						.translateToLocal("steampunked.gui.redstoneControl.name"));
-		labelInfo = new GuiComponentLabel(8, 64, getInfo());
-		tabRedstone.addComponent(labelInfo);
+						.translateToLocal("steampunked.gui.redstoneControl"),
+				true);
+		labelInfo = new GuiComponentLabel(8, 64,96,88, getInfo(0), false);
+		labelInfoLow = new GuiComponentLabel(8, 64,96,88, getInfo(1), false);
+		labelInfoHigh = new GuiComponentLabel(8, 64,96,88, getInfo(2), false);
 
+		tabRedstone.addComponent(labelInfo);
+		tabRedstone.addComponent(labelInfoLow);
+		tabRedstone.addComponent(labelInfoHigh);
 		tabRedstone.addComponent(labelRedstoneControl);
 		root.addComponent(buttonDisable = (GuiComponentIconButton) new GuiComponentIconButton(
-				8, 32, 0xFFFFFF, FakeIcon.createSheetIcon(0, 82, 16, 16),
+				10, 32, 0xFFFFFF, FakeIcon.createSheetIcon(0, 82, 16, 16),
 				BaseComponent.TEXTURE_SHEET).addListener(this).setName(
 				"btnDisable"));
 		tabRedstone.addComponent(buttonDisable);
 		root.addComponent(buttonLow = (GuiComponentIconButton) new GuiComponentIconButton(
-				30, 32, 0xFFFFFF, FakeIcon.createSheetIcon(16, 82, 16, 16),
+				40, 32, 0xFFFFFF, FakeIcon.createSheetIcon(16, 82, 16, 16),
 				BaseComponent.TEXTURE_SHEET).addListener(this)
 				.setName("btnLow"));
 		tabRedstone.addComponent(buttonLow);
 		root.addComponent(buttonHigh = (GuiComponentIconButton) new GuiComponentIconButton(
-				52, 32, 0xFFFFFF, FakeIcon.createSheetIcon(32, 82, 16, 16),
+				70, 32, 0xFFFFFF, FakeIcon.createSheetIcon(32, 82, 16, 16),
 				BaseComponent.TEXTURE_SHEET).addListener(this).setName(
 				"btnHigh"));
 		tabRedstone.addComponent(buttonHigh);
@@ -89,16 +95,19 @@ public class GuiSteamFurnace extends GuiMachine implements IComponentListener {
 
 	}
 
-	private String getInfo() {
-		switch (mode) {
+	private String getInfo(int infoNo) {
+		switch (infoNo) {
 		case 0:
-			return ("Ignores Redstone");
+			return StatCollector
+					.translateToLocal("steampunked.gui.ignoreRedstone");
 		case 1:
-			return ("Enabled");
+			return StatCollector
+					.translateToLocal("steampunked.gui.lowRedstone");
 		case 2:
-			return ("Requires Redstone Signal to Operate");
+			return StatCollector
+					.translateToLocal("steampunked.gui.highRedstone");
 		default:
-			return ("Unexpected, Place and Replace");
+			return "Unexpected, Place and Replace";
 		}
 	}
 
@@ -129,10 +138,28 @@ public class GuiSteamFurnace extends GuiMachine implements IComponentListener {
 	@Override
 	public void drawScreen(int mouse_x, int mouse_y, float par3) {
 		super.drawScreen(mouse_x, mouse_y, par3);
+		
+		List<String> list = new ArrayList<String>();
 
 		if (func_146978_c(TANK_X, TANK_Y, 16, TANK_HEIGHT, mouse_x, mouse_y))
 			DisplayTankTooltip(mouse_x, mouse_y,
 					steamFurnaceInventory.GetTank(0));
+		
+		if(buttonDisable.capturingMouse()){
+			list.add("Disable Machine");
+			drawHoveringText(list, mouse_x, mouse_y, fontRendererObj);
+		}
+		
+		if(buttonLow.capturingMouse()){
+			list.add("Enable Machine");
+			drawHoveringText(list, mouse_x, mouse_y, fontRendererObj);
+		}
+		
+		if(buttonHigh.capturingMouse()){
+			list.add("Require Redstone Signal");
+			drawHoveringText(list, mouse_x, mouse_y, fontRendererObj);
+		}
+		
 	}
 
 	@Override
@@ -160,17 +187,13 @@ public class GuiSteamFurnace extends GuiMachine implements IComponentListener {
 			Steampunked.packetPipeline.sendToServer(new PacketMachineRedstone(
 					steamFurnaceInventory.xCoord, steamFurnaceInventory.yCoord,
 					steamFurnaceInventory.zCoord, 0));
-			buttonDisable.setButtonEnabled(false);
 
-			mode = 0;
 		}
 		if (component.getName().equals("btnLow")) {
 
 			Steampunked.packetPipeline.sendToServer(new PacketMachineRedstone(
 					steamFurnaceInventory.xCoord, steamFurnaceInventory.yCoord,
 					steamFurnaceInventory.zCoord, 1));
-			buttonLow.setButtonEnabled(false);
-			mode = 1;
 
 		}
 		if (component.getName().equals("btnHigh")) {
@@ -178,8 +201,6 @@ public class GuiSteamFurnace extends GuiMachine implements IComponentListener {
 			Steampunked.packetPipeline.sendToServer(new PacketMachineRedstone(
 					steamFurnaceInventory.xCoord, steamFurnaceInventory.yCoord,
 					steamFurnaceInventory.zCoord, 2));
-			buttonHigh.setButtonEnabled(false);
-			mode = 2;
 
 		}
 	}
@@ -206,21 +227,31 @@ public class GuiSteamFurnace extends GuiMachine implements IComponentListener {
 	@Override
 	public void updateScreen() {
 		super.updateScreen();
-		switch (steamFurnaceInventory.redstoneMode) {
+		mode = steamFurnaceInventory.getRedstoneMode();
+		switch (steamFurnaceInventory.getRedstoneMode()) {
 		case 0:
 			buttonDisable.setButtonEnabled(false);
 			buttonLow.setButtonEnabled(true);
 			buttonHigh.setButtonEnabled(true);
+			labelInfo.setEnabled(true);
+			labelInfoLow.setEnabled(false);
+			labelInfoHigh.setEnabled(false);
 			break;
 		case 1:
 			buttonDisable.setButtonEnabled(true);
 			buttonLow.setButtonEnabled(false);
 			buttonHigh.setButtonEnabled(true);
+			labelInfo.setEnabled(false);
+			labelInfoLow.setEnabled(true);
+			labelInfoHigh.setEnabled(false);
 			break;
 		case 2:
 			buttonDisable.setButtonEnabled(true);
 			buttonLow.setButtonEnabled(true);
 			buttonHigh.setButtonEnabled(false);
+			labelInfo.setEnabled(false);
+			labelInfoLow.setEnabled(false);
+			labelInfoHigh.setEnabled(true);
 			break;
 		}
 	}

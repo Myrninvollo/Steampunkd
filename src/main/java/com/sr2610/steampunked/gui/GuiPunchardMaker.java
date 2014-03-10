@@ -5,15 +5,10 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
 import com.sr2610.steampunked.Steampunked;
-import com.sr2610.steampunked.gui.components.BaseComponent.TabColor;
-import com.sr2610.steampunked.gui.components.GuiComponentLabel;
-import com.sr2610.steampunked.gui.components.GuiComponentTab;
-import com.sr2610.steampunked.gui.components.GuiComponentTabs;
 import com.sr2610.steampunked.inventory.container.ContainerPunchcardmaker;
 import com.sr2610.steampunked.items.ItemPunchcard;
 import com.sr2610.steampunked.items.ModItems;

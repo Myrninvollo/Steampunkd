@@ -30,36 +30,39 @@ public class GuiComponentTab extends GuiComponentBox {
 	private double dWidth;
 	private double dHeight;
 
-	public GuiComponentTab(int color, ItemStack iconStack, int expandedWidth, int expandedHeight) {
+	public GuiComponentTab(int color, ItemStack iconStack, int expandedWidth,
+			int expandedHeight) {
 		super(0, 0, 24, 24, 0, 5, color);
 		this.expandedWidth = expandedWidth;
 		this.expandedHeight = expandedHeight;
 		this.iconStack = iconStack;
-		this.dWidth = 24.0;
-		this.dHeight = 24.0;
+		dWidth = 24.0;
+		dHeight = 24.0;
 	}
 
 	@Override
-	public void renderTopLeftCorner(int offsetX, int offsetY) {}
+	public void renderTopLeftCorner(int offsetX, int offsetY) {
+	}
 
 	@Override
-	public void renderBottomLeftCorner(int offsetX, int offsetY) {}
+	public void renderBottomLeftCorner(int offsetX, int offsetY) {
+	}
 
 	@Override
-	public void renderLeftEdge(int offsetX, int offsetY) {}
+	public void renderLeftEdge(int offsetX, int offsetY) {
+	}
 
 	@Override
-	public void render(Minecraft minecraft, int offsetX, int offsetY, int mouseX, int mouseY) {
-		double targetWidth = active? expandedWidth : 24;
-		double targetHeight = active? expandedHeight : 24;
-		if (width != targetWidth) {
+	public void render(Minecraft minecraft, int offsetX, int offsetY,
+			int mouseX, int mouseY) {
+		double targetWidth = active ? expandedWidth : 24;
+		double targetHeight = active ? expandedHeight : 24;
+		if (width != targetWidth)
 			dWidth += (targetWidth - dWidth) / 4;
-		}
-		if (height != targetHeight) {
+		if (height != targetHeight)
 			dHeight += (targetHeight - dHeight) / 4;
-		}
-		width = (int)Math.round(dWidth);
-		height = (int)Math.round(dHeight);
+		width = (int) Math.round(dWidth);
+		height = (int) Math.round(dHeight);
 		renderChildren = active && width == targetWidth
 				&& height == targetHeight;
 		super.render(minecraft, offsetX, offsetY, mouseX, mouseY);
@@ -68,8 +71,9 @@ public class GuiComponentTab extends GuiComponentBox {
 		RenderHelper.enableGUIStandardItemLighting();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		itemRenderer.zLevel = zLevel + 50; // <- critical! Must be >= 50
-		itemRenderer.renderItemIntoGUI(minecraft.fontRenderer, minecraft.getTextureManager(), iconStack,
-				offsetX + x + 3, offsetY + y + 3);
+		itemRenderer.renderItemIntoGUI(minecraft.fontRenderer,
+				minecraft.getTextureManager(), iconStack, offsetX + x + 3,
+				offsetY + y + 3);
 		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 		GL11.glDisable(GL11.GL_LIGHTING);
 	}
@@ -77,7 +81,8 @@ public class GuiComponentTab extends GuiComponentBox {
 	@Override
 	public void mouseClicked(int x, int y, int button) {
 		super.mouseClicked(x, y, button);
-		if (x > 24 || y > 24) return;
+		if (x > 24 || y > 24)
+			return;
 		container.onTabClicked(this);
 	}
 

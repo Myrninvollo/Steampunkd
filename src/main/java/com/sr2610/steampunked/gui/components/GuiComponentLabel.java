@@ -33,16 +33,18 @@ public class GuiComponentLabel  extends BaseComponent {
 
 	
 
-	public GuiComponentLabel(int x, int y, String text) {
-		this(x, y, getFontRenderer().getStringWidth(text), getFontRenderer().FONT_HEIGHT, text);
+	public GuiComponentLabel(int x, int y, String text, boolean b) {
+		this(x, y, getFontRenderer().getStringWidth(text), getFontRenderer().FONT_HEIGHT, text, b);
+		this.enabled=b;
 	}
 
 
 
-	public GuiComponentLabel(int x, int y, int width, int height, String text) {
+	public GuiComponentLabel(int x, int y, int width, int height, String text, boolean b) {
 		super(x, y);
 		this.text = text;
 		this.formattedText = new String[10];
+		this.enabled=b;
 		setMaxHeight(height);
 		setMaxWidth(width);
 	}

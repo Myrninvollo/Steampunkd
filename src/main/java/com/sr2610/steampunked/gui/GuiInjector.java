@@ -8,10 +8,10 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
+import com.sr2610.steampunked.gui.components.BaseComponent.TabColor;
 import com.sr2610.steampunked.gui.components.GuiComponentLabel;
 import com.sr2610.steampunked.gui.components.GuiComponentTab;
 import com.sr2610.steampunked.gui.components.GuiComponentTabs;
-import com.sr2610.steampunked.gui.components.BaseComponent.TabColor;
 import com.sr2610.steampunked.inventory.container.ContainerInjector;
 import com.sr2610.steampunked.lib.Reference;
 import com.sr2610.steampunked.tileentities.TileEntityInjector;
@@ -28,20 +28,24 @@ public class GuiInjector extends GuiMachine {
 	private static final int TANK_OVERLAY_Y = 9;
 
 	private TileEntityInjector injectorInventory;
-	
+
 	private GuiComponentTabs tabs;
 
 	private GuiComponentTab tabRedstone;
 	private GuiComponentLabel labelRedstoneControl;
-
 
 	public GuiInjector(TileEntityInjector cs, IInventory player_inv) {
 		super(new ContainerInjector(cs, player_inv));
 		ySize = 166;
 		injectorInventory = cs;
 		tabs = new GuiComponentTabs(xSize - 3, 4);
-		tabRedstone = new GuiComponentTab(TabColor.red.getColor(), new ItemStack(Items.redstone), 100, 100);
-		labelRedstoneControl = new GuiComponentLabel(20, 8, StatCollector.translateToLocal("steampunked.gui.redstoneControl.name"));
+		tabRedstone = new GuiComponentTab(TabColor.red.getColor(),
+				new ItemStack(Items.redstone), 100, 100);
+		labelRedstoneControl = new GuiComponentLabel(
+				20,
+				8,
+				StatCollector
+						.translateToLocal("steampunked.gui.redstoneControl.name"), true);
 		tabRedstone.addComponent(labelRedstoneControl);
 		tabs.addComponent(tabRedstone);
 		root.addComponent(tabs);

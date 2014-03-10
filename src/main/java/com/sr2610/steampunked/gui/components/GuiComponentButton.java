@@ -24,7 +24,7 @@ public abstract class GuiComponentButton extends GuiComponentBox {
 	}
 
 	public void setButtonEnabled(boolean enabled) {
-		this.buttonEnabled = enabled;
+		buttonEnabled = enabled;
 	}
 
 	public boolean isButtonEnabled() {
@@ -32,13 +32,15 @@ public abstract class GuiComponentButton extends GuiComponentBox {
 	}
 
 	@Override
-	public void render(Minecraft minecraft, int offsetX, int offsetY, int mouseX, int mouseY) {
+	public void render(Minecraft minecraft, int offsetX, int offsetY,
+			int mouseX, int mouseY) {
 		boolean pressed = isMouseOver(mouseX, mouseY) && Mouse.isButtonDown(0);
-		this.u = buttonEnabled? (pressed? 20 : 0) : 40;
+		u = buttonEnabled ? pressed ? 20 : 0 : 40;
 		super.render(minecraft, offsetX, offsetY, mouseX, mouseY);
 		renderContents(minecraft, offsetX, offsetY, mouseX, mouseY, pressed);
 	}
 
-	protected abstract void renderContents(Minecraft minecraft, int offsetX, int offsetY, int mouseX, int mouseY, boolean pressed);
+	protected abstract void renderContents(Minecraft minecraft, int offsetX,
+			int offsetY, int mouseX, int mouseY, boolean pressed);
 
 }

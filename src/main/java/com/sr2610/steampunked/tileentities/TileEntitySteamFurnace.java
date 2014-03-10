@@ -40,35 +40,25 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 
 	}
 
-	/**
-	 * The ItemStacks that hold the items currently being used in the furnace
-	 */
+	
 	private ItemStack[] furnaceItemStacks = new ItemStack[6];
 
-	/** The number of ticks that the current item has been cooking for */
 	public int furnaceCookTime;
 	private boolean isSmelting;
 
-	/**
-	 * Returns the number of slots in the inventory.
-	 */
+
 	@Override
 	public int getSizeInventory() {
 		return furnaceItemStacks.length;
 	}
 
-	/**
-	 * Returns the stack in slot i
-	 */
+
 	@Override
 	public ItemStack getStackInSlot(int par1) {
 		return furnaceItemStacks[par1];
 	}
 
-	/**
-	 * Removes from an inventory slot (first arg) up to a specified number
-	 * (second arg) of items and returns them in a new stack.
-	 */
+	
 	@Override
 	public ItemStack decrStackSize(int par1, int par2) {
 		if (furnaceItemStacks[par1] != null) {
@@ -100,10 +90,7 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 			return null;
 	}
 
-	/**
-	 * Sets the given item stack to the specified slot in the inventory (can be
-	 * crafting or armor sections).
-	 */
+	
 	@Override
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
 		furnaceItemStacks[par1] = par2ItemStack;
@@ -118,10 +105,7 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 		return furnaceCookTime * par1 / (LibOptions.furnaceCookTime / 10);
 	}
 
-	/**
-	 * Returns true if the furnace can smelt an item, i.e. has a source item,
-	 * destination stack isn't full, etc.
-	 */
+	
 	private boolean canSmelt() {
 		if (furnaceItemStacks[0] == null)
 			return false;
@@ -140,10 +124,7 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 		}
 	}
 
-	/**
-	 * Turn one item from the furnace source stack into the appropriate smelted
-	 * item in the furnace result stack
-	 */
+	
 	public void smeltItem() {
 		if (canSmelt()) {
 			ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(
@@ -228,6 +209,10 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 			else
 				tank.getFluid().amount = value;
 			break;
+			
+		case 3:
+			setRedstoneMode(value);
+			break;
 		}
 	}
 
@@ -237,6 +222,7 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 				tank.getFluid() != null ? tank.getFluid().fluidID : 0);
 		crafting.sendProgressBarUpdate(container, NETDATAID_TANK_AMOUNT,
 				tank.getFluid() != null ? tank.getFluid().amount : 0);
+		crafting.sendProgressBarUpdate(container, 3, getRedstoneMode());
 	}
 
 	@Override
