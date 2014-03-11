@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
@@ -217,6 +218,22 @@ public abstract class GuiMachine extends GuiContainer {
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		RenderHelper.enableStandardItemLighting();
+	}
+	
+	protected String getInfo(int infoNo) {
+		switch (infoNo) {
+		case 0:
+			return StatCollector
+					.translateToLocal("steampunked.gui.ignoreRedstone");
+		case 1:
+			return StatCollector
+					.translateToLocal("steampunked.gui.lowRedstone");
+		case 2:
+			return StatCollector
+					.translateToLocal("steampunked.gui.highRedstone");
+		default:
+			return "Unexpected, Place and Replace";
+		}
 	}
 
 }

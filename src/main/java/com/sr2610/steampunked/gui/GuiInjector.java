@@ -8,15 +8,21 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
+import com.sr2610.steampunked.Steampunked;
 import com.sr2610.steampunked.gui.components.BaseComponent.TabColor;
+import com.sr2610.steampunked.gui.components.BaseComponent;
+import com.sr2610.steampunked.gui.components.GuiComponentIconButton;
 import com.sr2610.steampunked.gui.components.GuiComponentLabel;
 import com.sr2610.steampunked.gui.components.GuiComponentTab;
 import com.sr2610.steampunked.gui.components.GuiComponentTabs;
+import com.sr2610.steampunked.gui.components.IComponentListener;
 import com.sr2610.steampunked.inventory.container.ContainerInjector;
 import com.sr2610.steampunked.lib.Reference;
+import com.sr2610.steampunked.network.PacketMachineRedstone;
 import com.sr2610.steampunked.tileentities.TileEntityInjector;
+import com.sr2610.steampunked.utils.FakeIcon;
 
-public class GuiInjector extends GuiMachine {
+public class GuiInjector extends GuiMachine implements IComponentListener{
 	private static final ResourceLocation GUI_TEXTURE = new ResourceLocation(
 			Reference.ModID, "textures/gui/injector.png");
 
@@ -33,6 +39,13 @@ public class GuiInjector extends GuiMachine {
 
 	private GuiComponentTab tabRedstone;
 	private GuiComponentLabel labelRedstoneControl;
+	private GuiComponentLabel labelInfo;
+	private GuiComponentLabel labelInfoLow;
+	private GuiComponentLabel labelInfoHigh;
+
+	private GuiComponentIconButton buttonDisable;
+	private GuiComponentIconButton buttonLow;
+	private GuiComponentIconButton buttonHigh;
 
 	public GuiInjector(TileEntityInjector cs, IInventory player_inv) {
 		super(new ContainerInjector(cs, player_inv));
@@ -41,12 +54,34 @@ public class GuiInjector extends GuiMachine {
 		tabs = new GuiComponentTabs(xSize - 3, 4);
 		tabRedstone = new GuiComponentTab(TabColor.red.getColor(),
 				new ItemStack(Items.redstone), 100, 100);
-		labelRedstoneControl = new GuiComponentLabel(
-				20,
-				8,
+		labelRedstoneControl = new GuiComponentLabel(20, 8,
 				StatCollector
-						.translateToLocal("steampunked.gui.redstoneControl.name"), true);
+						.translateToLocal("steampunked.gui.redstoneControl"),
+				true);
+		labelInfo = new GuiComponentLabel(8, 64,96,88, getInfo(0), false);
+		labelInfoLow = new GuiComponentLabel(8, 64,96,88, getInfo(1), false);
+		labelInfoHigh = new GuiComponentLabel(8, 64,96,88, getInfo(2), false);
+
+		tabRedstone.addComponent(labelInfo);
+		tabRedstone.addComponent(labelInfoLow);
+		tabRedstone.addComponent(labelInfoHigh);
 		tabRedstone.addComponent(labelRedstoneControl);
+		root.addComponent(buttonDisable = (GuiComponentIconButton) new GuiComponentIconButton(
+				10, 32, 0xFFFFFF, FakeIcon.createSheetIcon(0, 82, 16, 16),
+				BaseComponent.TEXTURE_SHEET).addListener(this).setName(
+				"btnDisable"));
+		tabRedstone.addComponent(buttonDisable);
+		root.addComponent(buttonLow = (GuiComponentIconButton) new GuiComponentIconButton(
+				40, 32, 0xFFFFFF, FakeIcon.createSheetIcon(16, 82, 16, 16),
+				BaseComponent.TEXTURE_SHEET).addListener(this)
+				.setName("btnLow"));
+		tabRedstone.addComponent(buttonLow);
+		root.addComponent(buttonHigh = (GuiComponentIconButton) new GuiComponentIconButton(
+				70, 32, 0xFFFFFF, FakeIcon.createSheetIcon(32, 82, 16, 16),
+				BaseComponent.TEXTURE_SHEET).addListener(this).setName(
+				"btnHigh"));
+		tabRedstone.addComponent(buttonHigh);
+
 		tabs.addComponent(tabRedstone);
 		root.addComponent(tabs);
 	}
@@ -90,6 +125,82 @@ public class GuiInjector extends GuiMachine {
 	public void initGui() {
 		super.initGui();
 
+	}
+
+	@Override
+	public void componentMouseDown(BaseComponent component, int offsetX,
+			int offsetY, int button) {
+		if (component.getName().equals("btnDisable")) {
+
+			Steampunked.packetPipeline.sendToServer(new PacketMachineRedstone(
+					injectorInventory.xCoord, injectorInventory.yCoord,
+					injectorInventory.zCoord, 0));
+
+		}
+		if (component.getName().equals("btnLow")) {
+
+			Steampunked.packetPipeline.sendToServer(new PacketMachineRedstone(
+					injectorInventory.xCoord, injectorInventory.yCoord,
+					injectorInventory.zCoord, 1));
+
+		}
+		if (component.getName().equals("btnHigh")) {
+
+			Steampunked.packetPipeline.sendToServer(new PacketMachineRedstone(
+					injectorInventory.xCoord, injectorInventory.yCoord,
+					injectorInventory.zCoord, 2));
+
+		}
+	}
+
+	@Override
+	public void componentMouseDrag(BaseComponent component, int offsetX,
+			int offsetY, int button, long time) {
+	}
+
+	@Override
+	public void componentMouseMove(BaseComponent component, int offsetX,
+			int offsetY) {
+	}
+
+	@Override
+	public void componentMouseUp(BaseComponent component, int offsetX,
+			int offsetY, int button) {
+	}
+
+	@Override
+	public void componentKeyTyped(BaseComponent component, char par1, int par2) {
+	}
+
+	@Override
+	public void updateScreen() {
+		super.updateScreen();
+		switch (injectorInventory.getRedstoneMode()) {
+		case 0:
+			buttonDisable.setButtonEnabled(false);
+			buttonLow.setButtonEnabled(true);
+			buttonHigh.setButtonEnabled(true);
+			labelInfo.setEnabled(true);
+			labelInfoLow.setEnabled(false);
+			labelInfoHigh.setEnabled(false);
+			break;
+		case 1:
+			buttonDisable.setButtonEnabled(true);
+			buttonLow.setButtonEnabled(false);
+			buttonHigh.setButtonEnabled(true);
+			labelInfo.setEnabled(false);
+			labelInfoLow.setEnabled(true);
+			labelInfoHigh.setEnabled(false);
+			break;
+		case 2:
+			buttonDisable.setButtonEnabled(true);
+			buttonLow.setButtonEnabled(true);
+			buttonHigh.setButtonEnabled(false);
+			labelInfo.setEnabled(false);
+			labelInfoLow.setEnabled(false);
+			labelInfoHigh.setEnabled(true);
+			break;
+		}
 	}
 
 }

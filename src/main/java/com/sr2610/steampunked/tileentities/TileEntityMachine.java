@@ -190,6 +190,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 
 	@Override
 	public void updateEntity() {
+
 		if (!(initialized || isInvalid()))
 			UpdateRedstone();
 

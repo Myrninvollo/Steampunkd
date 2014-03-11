@@ -95,21 +95,7 @@ public class GuiSteamFurnace extends GuiMachine implements IComponentListener {
 
 	}
 
-	private String getInfo(int infoNo) {
-		switch (infoNo) {
-		case 0:
-			return StatCollector
-					.translateToLocal("steampunked.gui.ignoreRedstone");
-		case 1:
-			return StatCollector
-					.translateToLocal("steampunked.gui.lowRedstone");
-		case 2:
-			return StatCollector
-					.translateToLocal("steampunked.gui.highRedstone");
-		default:
-			return "Unexpected, Place and Replace";
-		}
-	}
+	
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouse_x, int mouse_y) {
@@ -144,21 +130,6 @@ public class GuiSteamFurnace extends GuiMachine implements IComponentListener {
 		if (func_146978_c(TANK_X, TANK_Y, 16, TANK_HEIGHT, mouse_x, mouse_y))
 			DisplayTankTooltip(mouse_x, mouse_y,
 					steamFurnaceInventory.GetTank(0));
-		
-		if(buttonDisable.capturingMouse()){
-			list.add("Disable Machine");
-			drawHoveringText(list, mouse_x, mouse_y, fontRendererObj);
-		}
-		
-		if(buttonLow.capturingMouse()){
-			list.add("Enable Machine");
-			drawHoveringText(list, mouse_x, mouse_y, fontRendererObj);
-		}
-		
-		if(buttonHigh.capturingMouse()){
-			list.add("Require Redstone Signal");
-			drawHoveringText(list, mouse_x, mouse_y, fontRendererObj);
-		}
 		
 	}
 

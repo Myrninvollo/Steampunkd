@@ -132,6 +132,10 @@ public class TileEntityInjector extends TileEntityMachine implements
 			else
 				tank.getFluid().amount = value;
 			break;
+			
+		case 3:
+			setRedstoneMode(value);
+			break;
 		}
 	}
 
@@ -141,6 +145,8 @@ public class TileEntityInjector extends TileEntityMachine implements
 				tank.getFluid() != null ? tank.getFluid().fluidID : 0);
 		crafting.sendProgressBarUpdate(container, NETDATAID_TANK_AMOUNT,
 				tank.getFluid() != null ? tank.getFluid().amount : 0);
+		crafting.sendProgressBarUpdate(container, 3, getRedstoneMode());
+
 	}
 
 	@Override
@@ -239,11 +245,20 @@ public class TileEntityInjector extends TileEntityMachine implements
 
 	@Override
 	public void update() {
+		UpdateRedstone();
+
+		if (getRedstoneMode() == 0)
+			return;
+
+		else if (getRedstoneMode() == 2 && !redstone_signal)
+			return;
+		else {
 
 		if (canCharge() == true && tank.getFluidAmount() > 0) {
 			tank.drain(1, true);
 			injectorItemSlot[0].setItemDamage(injectorItemSlot[0]
 					.getItemDamage() - 1);
+		}
 		}
 
 	}

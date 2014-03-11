@@ -40,25 +40,21 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 
 	}
 
-	
 	private ItemStack[] furnaceItemStacks = new ItemStack[6];
 
 	public int furnaceCookTime;
 	private boolean isSmelting;
-
 
 	@Override
 	public int getSizeInventory() {
 		return furnaceItemStacks.length;
 	}
 
-
 	@Override
 	public ItemStack getStackInSlot(int par1) {
 		return furnaceItemStacks[par1];
 	}
 
-	
 	@Override
 	public ItemStack decrStackSize(int par1, int par2) {
 		if (furnaceItemStacks[par1] != null) {
@@ -90,7 +86,6 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 			return null;
 	}
 
-	
 	@Override
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
 		furnaceItemStacks[par1] = par2ItemStack;
@@ -105,7 +100,6 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 		return furnaceCookTime * par1 / (LibOptions.furnaceCookTime / 10);
 	}
 
-	
 	private boolean canSmelt() {
 		if (furnaceItemStacks[0] == null)
 			return false;
@@ -124,7 +118,6 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 		}
 	}
 
-	
 	public void smeltItem() {
 		if (canSmelt()) {
 			ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(
@@ -154,34 +147,44 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 
 	@Override
 	public void update() {
-		boolean flag = true;
-		boolean flag1 = false;
-		if (!worldObj.isRemote) {
-			if (canSmelt() && tank.getFluidAmount() > 10) {
-				++furnaceCookTime;
-				isSmelting = true;
-				tank.drain(10, true);
 
-				if (furnaceCookTime == LibOptions.furnaceCookTime / 10) {
+		UpdateRedstone();
+
+		if (getRedstoneMode() == 0)
+			return;
+
+		else if (getRedstoneMode() == 2 && !redstone_signal)
+			return;
+		else {
+			boolean flag = true;
+			boolean flag1 = false;
+			if (!worldObj.isRemote) {
+				if (canSmelt() && tank.getFluidAmount() > 10) {
+					++furnaceCookTime;
+					isSmelting = true;
+					tank.drain(10, true);
+
+					if (furnaceCookTime == LibOptions.furnaceCookTime / 10) {
+						furnaceCookTime = 0;
+						isSmelting = false;
+						smeltItem();
+						flag1 = true;
+
+					}
+				} else {
 					furnaceCookTime = 0;
 					isSmelting = false;
-					smeltItem();
-					flag1 = true;
 
 				}
-			} else {
-				furnaceCookTime = 0;
-				isSmelting = false;
 
+				if (flag == isSmelting)
+					flag1 = true;
+
+				if (flag1)
+					markDirty();
+				BlockSteamFurnace.updateFurnaceBlockState(isSmelting, worldObj,
+						xCoord, yCoord, zCoord);
 			}
-
-			if (flag == isSmelting)
-				flag1 = true;
-
-			if (flag1)
-				markDirty();
-			BlockSteamFurnace.updateFurnaceBlockState(isSmelting, worldObj,
-					xCoord, yCoord, zCoord);
 		}
 	}
 
@@ -209,7 +212,7 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 			else
 				tank.getFluid().amount = value;
 			break;
-			
+
 		case 3:
 			setRedstoneMode(value);
 			break;
