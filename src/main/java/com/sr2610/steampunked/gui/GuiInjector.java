@@ -9,8 +9,8 @@ import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
 import com.sr2610.steampunked.Steampunked;
-import com.sr2610.steampunked.gui.components.BaseComponent.TabColor;
 import com.sr2610.steampunked.gui.components.BaseComponent;
+import com.sr2610.steampunked.gui.components.BaseComponent.TabColor;
 import com.sr2610.steampunked.gui.components.GuiComponentIconButton;
 import com.sr2610.steampunked.gui.components.GuiComponentLabel;
 import com.sr2610.steampunked.gui.components.GuiComponentTab;
@@ -22,7 +22,7 @@ import com.sr2610.steampunked.network.PacketMachineRedstone;
 import com.sr2610.steampunked.tileentities.TileEntityInjector;
 import com.sr2610.steampunked.utils.FakeIcon;
 
-public class GuiInjector extends GuiMachine implements IComponentListener{
+public class GuiInjector extends GuiMachine implements IComponentListener {
 	private static final ResourceLocation GUI_TEXTURE = new ResourceLocation(
 			Reference.ModID, "textures/gui/injector.png");
 
@@ -58,9 +58,9 @@ public class GuiInjector extends GuiMachine implements IComponentListener{
 				StatCollector
 						.translateToLocal("steampunked.gui.redstoneControl"),
 				true);
-		labelInfo = new GuiComponentLabel(8, 64,96,88, getInfo(0), false);
-		labelInfoLow = new GuiComponentLabel(8, 64,96,88, getInfo(1), false);
-		labelInfoHigh = new GuiComponentLabel(8, 64,96,88, getInfo(2), false);
+		labelInfo = new GuiComponentLabel(8, 64, 96, 88, getInfo(0), false);
+		labelInfoLow = new GuiComponentLabel(8, 64, 96, 88, getInfo(1), false);
+		labelInfoHigh = new GuiComponentLabel(8, 64, 96, 88, getInfo(2), false);
 
 		tabRedstone.addComponent(labelInfo);
 		tabRedstone.addComponent(labelInfoLow);
@@ -130,27 +130,18 @@ public class GuiInjector extends GuiMachine implements IComponentListener{
 	@Override
 	public void componentMouseDown(BaseComponent component, int offsetX,
 			int offsetY, int button) {
-		if (component.getName().equals("btnDisable")) {
-
+		if (component.getName().equals("btnDisable"))
 			Steampunked.packetPipeline.sendToServer(new PacketMachineRedstone(
 					injectorInventory.xCoord, injectorInventory.yCoord,
 					injectorInventory.zCoord, 0));
-
-		}
-		if (component.getName().equals("btnLow")) {
-
+		if (component.getName().equals("btnLow"))
 			Steampunked.packetPipeline.sendToServer(new PacketMachineRedstone(
 					injectorInventory.xCoord, injectorInventory.yCoord,
 					injectorInventory.zCoord, 1));
-
-		}
-		if (component.getName().equals("btnHigh")) {
-
+		if (component.getName().equals("btnHigh"))
 			Steampunked.packetPipeline.sendToServer(new PacketMachineRedstone(
 					injectorInventory.xCoord, injectorInventory.yCoord,
 					injectorInventory.zCoord, 2));
-
-		}
 	}
 
 	@Override

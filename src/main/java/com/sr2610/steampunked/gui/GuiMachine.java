@@ -219,7 +219,7 @@ public abstract class GuiMachine extends GuiContainer {
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		RenderHelper.enableStandardItemLighting();
 	}
-	
+
 	protected String getInfo(int infoNo) {
 		switch (infoNo) {
 		case 0:

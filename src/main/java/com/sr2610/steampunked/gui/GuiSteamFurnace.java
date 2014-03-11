@@ -1,7 +1,6 @@
 package com.sr2610.steampunked.gui;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
@@ -66,9 +65,9 @@ public class GuiSteamFurnace extends GuiMachine implements IComponentListener {
 				StatCollector
 						.translateToLocal("steampunked.gui.redstoneControl"),
 				true);
-		labelInfo = new GuiComponentLabel(8, 64,96,88, getInfo(0), false);
-		labelInfoLow = new GuiComponentLabel(8, 64,96,88, getInfo(1), false);
-		labelInfoHigh = new GuiComponentLabel(8, 64,96,88, getInfo(2), false);
+		labelInfo = new GuiComponentLabel(8, 64, 96, 88, getInfo(0), false);
+		labelInfoLow = new GuiComponentLabel(8, 64, 96, 88, getInfo(1), false);
+		labelInfoHigh = new GuiComponentLabel(8, 64, 96, 88, getInfo(2), false);
 
 		tabRedstone.addComponent(labelInfo);
 		tabRedstone.addComponent(labelInfoLow);
@@ -94,8 +93,6 @@ public class GuiSteamFurnace extends GuiMachine implements IComponentListener {
 		root.addComponent(tabs);
 
 	}
-
-	
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouse_x, int mouse_y) {
@@ -124,13 +121,13 @@ public class GuiSteamFurnace extends GuiMachine implements IComponentListener {
 	@Override
 	public void drawScreen(int mouse_x, int mouse_y, float par3) {
 		super.drawScreen(mouse_x, mouse_y, par3);
-		
-		List<String> list = new ArrayList<String>();
+
+		new ArrayList<String>();
 
 		if (func_146978_c(TANK_X, TANK_Y, 16, TANK_HEIGHT, mouse_x, mouse_y))
 			DisplayTankTooltip(mouse_x, mouse_y,
 					steamFurnaceInventory.GetTank(0));
-		
+
 	}
 
 	@Override
@@ -153,27 +150,18 @@ public class GuiSteamFurnace extends GuiMachine implements IComponentListener {
 	@Override
 	public void componentMouseDown(BaseComponent component, int offsetX,
 			int offsetY, int button) {
-		if (component.getName().equals("btnDisable")) {
-
+		if (component.getName().equals("btnDisable"))
 			Steampunked.packetPipeline.sendToServer(new PacketMachineRedstone(
 					steamFurnaceInventory.xCoord, steamFurnaceInventory.yCoord,
 					steamFurnaceInventory.zCoord, 0));
-
-		}
-		if (component.getName().equals("btnLow")) {
-
+		if (component.getName().equals("btnLow"))
 			Steampunked.packetPipeline.sendToServer(new PacketMachineRedstone(
 					steamFurnaceInventory.xCoord, steamFurnaceInventory.yCoord,
 					steamFurnaceInventory.zCoord, 1));
-
-		}
-		if (component.getName().equals("btnHigh")) {
-
+		if (component.getName().equals("btnHigh"))
 			Steampunked.packetPipeline.sendToServer(new PacketMachineRedstone(
 					steamFurnaceInventory.xCoord, steamFurnaceInventory.yCoord,
 					steamFurnaceInventory.zCoord, 2));
-
-		}
 	}
 
 	@Override

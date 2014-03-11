@@ -9,8 +9,8 @@ import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
 import com.sr2610.steampunked.Steampunked;
-import com.sr2610.steampunked.gui.components.BaseComponent.TabColor;
 import com.sr2610.steampunked.gui.components.BaseComponent;
+import com.sr2610.steampunked.gui.components.BaseComponent.TabColor;
 import com.sr2610.steampunked.gui.components.GuiComponentIconButton;
 import com.sr2610.steampunked.gui.components.GuiComponentLabel;
 import com.sr2610.steampunked.gui.components.GuiComponentTab;
@@ -58,9 +58,9 @@ public class GuiSteamBoiler extends GuiMachine implements IComponentListener {
 				StatCollector
 						.translateToLocal("steampunked.gui.redstoneControl"),
 				true);
-		labelInfo = new GuiComponentLabel(8, 64,96,88, getInfo(0), false);
-		labelInfoLow = new GuiComponentLabel(8, 64,96,88, getInfo(1), false);
-		labelInfoHigh = new GuiComponentLabel(8, 64,96,88, getInfo(2), false);
+		labelInfo = new GuiComponentLabel(8, 64, 96, 88, getInfo(0), false);
+		labelInfoLow = new GuiComponentLabel(8, 64, 96, 88, getInfo(1), false);
+		labelInfoHigh = new GuiComponentLabel(8, 64, 96, 88, getInfo(2), false);
 
 		tabRedstone.addComponent(labelInfo);
 		tabRedstone.addComponent(labelInfoLow);
@@ -86,21 +86,6 @@ public class GuiSteamBoiler extends GuiMachine implements IComponentListener {
 		root.addComponent(tabs);
 
 	}
-
-	private String getInfo() {
-		switch (BoilerInventory.getRedstoneMode()) {
-		case 0:
-			return "Machine Disabled";
-		case 1:
-			return "Enabled";
-		case 2:
-			return "Requires Redstone Signal to Operate";
-		default:
-			return "Unexpected, Place and Replace";
-		}
-	}
-	
-	
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouse_x, int mouse_y) {
@@ -151,31 +136,22 @@ public class GuiSteamBoiler extends GuiMachine implements IComponentListener {
 		super.initGui();
 
 	}
-	
+
 	@Override
 	public void componentMouseDown(BaseComponent component, int offsetX,
 			int offsetY, int button) {
-		if (component.getName().equals("btnDisable")) {
-
+		if (component.getName().equals("btnDisable"))
 			Steampunked.packetPipeline.sendToServer(new PacketMachineRedstone(
 					BoilerInventory.xCoord, BoilerInventory.yCoord,
 					BoilerInventory.zCoord, 0));
-
-		}
-		if (component.getName().equals("btnLow")) {
-
+		if (component.getName().equals("btnLow"))
 			Steampunked.packetPipeline.sendToServer(new PacketMachineRedstone(
 					BoilerInventory.xCoord, BoilerInventory.yCoord,
 					BoilerInventory.zCoord, 1));
-
-		}
-		if (component.getName().equals("btnHigh")) {
-
+		if (component.getName().equals("btnHigh"))
 			Steampunked.packetPipeline.sendToServer(new PacketMachineRedstone(
 					BoilerInventory.xCoord, BoilerInventory.yCoord,
 					BoilerInventory.zCoord, 2));
-
-		}
 	}
 
 	@Override
@@ -227,6 +203,5 @@ public class GuiSteamBoiler extends GuiMachine implements IComponentListener {
 			break;
 		}
 	}
-
 
 }
