@@ -54,7 +54,10 @@ public final class ModItems {
 		drill = new ItemDrill().setUnlocalizedName(LibNames.DRILL);
 		drillDiamond = new ItemDiamondDrill().setUnlocalizedName(LibNames.DRILL
 				+ "_diamond");
-		bucket = new ItemBucket(ModBlocks.BlockFluidSteam).setUnlocalizedName(LibNames.BUCKET).setContainerItem(Items.bucket).setTextureName(Reference.ModID+":steam_bucket");
+		bucket = new ItemBucket(ModBlocks.BlockFluidSteam)
+				.setUnlocalizedName(LibNames.BUCKET)
+				.setContainerItem(Items.bucket)
+				.setTextureName(Reference.ModID + ":steam_bucket");
 
 		spanner = new ItemSpanner().setUnlocalizedName(LibNames.SPANNER);
 
@@ -148,8 +151,10 @@ public final class ModItems {
 
 		GameRegistry.registerItem(reprogrammer, LibNames.REPROGRAMMER,
 				Reference.ModID);
-		
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("steam", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(bucket), new ItemStack(Items.bucket));
+
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry
+				.getFluidStack("steam", FluidContainerRegistry.BUCKET_VOLUME),
+				new ItemStack(bucket), new ItemStack(Items.bucket));
 		BucketHandler.INSTANCE.buckets.put(ModBlocks.BlockFluidSteam, bucket);
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
 
