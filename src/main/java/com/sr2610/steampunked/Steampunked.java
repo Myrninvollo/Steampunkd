@@ -10,6 +10,7 @@ import com.sr2610.steampunked.gui.GuiHandler;
 import com.sr2610.steampunked.items.ModItems;
 import com.sr2610.steampunked.network.PacketPipeline;
 import com.sr2610.steampunked.proxies.CommonProxy;
+import com.sr2610.steampunked.world.OreGeneration;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -20,6 +21,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = Steampunked.name, name = "Steampunkd", version = Steampunked.version)
 public class Steampunked {
@@ -50,6 +52,8 @@ public class Steampunked {
 				this, 80, 3, true);
 		MinecraftForge.EVENT_BUS.register(new SteampunkedEventHandler());
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, guiHandler);
+		GameRegistry.registerWorldGenerator(new OreGeneration(), 1);
+
 	}
 
 	@EventHandler
