@@ -36,7 +36,7 @@ public final class ModBlocks {
 	public static Material materialSteam;
 
 	public static void initBlocks() {
-		Steampunked.logger.info("[Steampunk'd] Initialising  Blocks");
+		Steampunked.logger.info("Initialising  Blocks");
 		materialSteam = new MaterialLiquid(MapColor.ironColor);
 
 		steam = new Steam();

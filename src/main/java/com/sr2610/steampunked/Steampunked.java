@@ -71,6 +71,6 @@ public class Steampunked {
 	@EventHandler
 	public void postLoad(FMLPostInitializationEvent event) {
 		packetPipeline.postInitialise();
-		logger.info("[Steampunk'd] Initialised Sucsessfully");
+		logger.info("Initialised Sucsessfully");
 	}
 }

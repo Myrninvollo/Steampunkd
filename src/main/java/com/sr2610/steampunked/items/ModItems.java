@@ -49,7 +49,7 @@ public final class ModItems {
 	public static Item reprogrammer;
 
 	public static void initItems() {
-		Steampunked.logger.info("[Steampunk'd] Initialising  Items");
+		Steampunked.logger.info("Initialising  Items");
 		jetpack = new ItemJetpack().setUnlocalizedName(LibNames.JETPACK)
 				.setTextureName("steampunked:jetpack");
 		drill = new ItemDrill().setUnlocalizedName(LibNames.DRILL);
