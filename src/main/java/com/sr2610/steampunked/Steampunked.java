@@ -1,5 +1,8 @@
 package com.sr2610.steampunked;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import net.minecraftforge.common.MinecraftForge;
 
 import com.sr2610.steampunked.blocks.ModBlocks;
@@ -28,7 +31,10 @@ public class Steampunked {
 
 	public static final String version = "0.0.1";
 	public static final String name = "Steampunked";
+    public static final Logger logger = LogManager.getLogger("Steampunked");
 
+	
+	
 	@SidedProxy(serverSide = "com.sr2610.steampunked.proxies.CommonProxy", clientSide = "com.sr2610.steampunked.proxies.ClientProxy")
 	public static CommonProxy proxy;
 
@@ -65,7 +71,6 @@ public class Steampunked {
 	@EventHandler
 	public void postLoad(FMLPostInitializationEvent event) {
 		packetPipeline.postInitialise();
-		System.out.println("[Steampunk'd] Initialized Sucsessfully");
-
+		logger.info("[Steampunk'd] Initialised Sucsessfully");
 	}
 }

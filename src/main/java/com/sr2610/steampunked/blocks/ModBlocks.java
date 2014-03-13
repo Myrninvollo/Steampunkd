@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.sr2610.steampunked.Steampunked;
 import com.sr2610.steampunked.lib.LibNames;
 import com.sr2610.steampunked.tileentities.TileEntityInjector;
 import com.sr2610.steampunked.tileentities.TileEntityPipe;
@@ -35,7 +36,7 @@ public final class ModBlocks {
 	public static Material materialSteam;
 
 	public static void initBlocks() {
-		System.out.println("[Steampunk'd] Initializing Blocks...");
+		Steampunked.logger.info("[Steampunk'd] Initialising  Blocks");
 		materialSteam = new MaterialLiquid(MapColor.ironColor);
 
 		steam = new Steam();

@@ -9,6 +9,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.sr2610.steampunked.Steampunked;
 import com.sr2610.steampunked.blocks.ModBlocks;
 import com.sr2610.steampunked.items.handlers.BucketHandler;
 import com.sr2610.steampunked.lib.LibNames;
@@ -48,7 +49,7 @@ public final class ModItems {
 	public static Item reprogrammer;
 
 	public static void initItems() {
-		System.out.println("[Steampunk'd] Initializing Items...");
+		Steampunked.logger.info("[Steampunk'd] Initialising  Items");
 		jetpack = new ItemJetpack().setUnlocalizedName(LibNames.JETPACK)
 				.setTextureName("steampunked:jetpack");
 		drill = new ItemDrill().setUnlocalizedName(LibNames.DRILL);
