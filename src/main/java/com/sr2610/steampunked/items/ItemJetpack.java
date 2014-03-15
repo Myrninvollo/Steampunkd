@@ -59,7 +59,7 @@ public class ItemJetpack extends ItemArmor implements ISteamUser, ISpecialArmor 
 				&& getCurrentSteam(itemStack) > 0 && mc.currentScreen == null) {
 			player.fallDistance = 0F;
 			player.motionY += 0.10;
-			setDamage(itemStack, getDamage(itemStack) + 1);
+			setDamage(itemStack, getDamage(itemStack) + 2);
 
 		}
 
