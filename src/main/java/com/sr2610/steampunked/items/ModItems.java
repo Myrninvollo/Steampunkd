@@ -47,7 +47,7 @@ public final class ModItems {
 	public static Item advancedCore;
 
 	public static Item reprogrammer;
-	
+
 	public static Item mechBoots;
 
 	public static void initItems() {
@@ -105,7 +105,7 @@ public final class ModItems {
 
 		reprogrammer = new ItemReprogrammer().setUnlocalizedName(
 				LibNames.REPROGRAMMER).setMaxStackSize(1);
-		
+
 		mechBoots = new ItemMechBoots().setUnlocalizedName(LibNames.MECHBOOTS);
 
 		registerItems();
@@ -156,7 +156,7 @@ public final class ModItems {
 
 		GameRegistry.registerItem(reprogrammer, LibNames.REPROGRAMMER,
 				Reference.ModID);
-		
+
 		GameRegistry.registerItem(mechBoots, LibNames.MECHBOOTS,
 				Reference.ModID);
 
