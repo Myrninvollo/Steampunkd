@@ -46,7 +46,7 @@ public class ItemMechBoots extends ItemArmor implements ISteamUser,
 
 	public ItemMechBoots() {
 		super(ItemArmor.ArmorMaterial.DIAMOND, 2, ARMOR_BOOTS);
-		setMaxDamage(LibOptions.bootsCapacity + 1);
+		setMaxDamage(LibOptions.advBootsCapacity + 1);
 		setCreativeTab(ModCreativeTab.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(this);
 
