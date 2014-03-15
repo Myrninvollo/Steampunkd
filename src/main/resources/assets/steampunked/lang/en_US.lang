@@ -44,6 +44,7 @@ fluid.steam=Steam
 tile.injector.name=Steam Injector
 tile.boiler.name=Steam Boiler
 tile.furnaceSteam.name=Steam Heated Furnace
+tile.furnaceSteamburning.name=Steam Heated Furnace
 tile.bench.name=Automaton Tinkering Bench
 tile.punchcardmaker.name=Punchcard Maker
 tile.oreCopper.name=Copper Ore
