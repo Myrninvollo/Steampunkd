@@ -158,6 +158,7 @@ public class ItemMechBoots extends ItemArmor implements ISteamUser,
 
 	void tickPlayer(EntityPlayer player) {
 		ItemStack armor = player.getCurrentArmor(0);
+		if(((ISteamUser)armor.getItem()).getCurrentSteam(armor)>0){
 		if (player.worldObj.isRemote)
 			player.stepHeight = player.isSneaking() ? 0.5F : 1F;
 		if ((player.onGround || player.capabilities.isFlying)
@@ -165,7 +166,7 @@ public class ItemMechBoots extends ItemArmor implements ISteamUser,
 			player.moveFlying(0F, 1F, player.capabilities.isFlying ? 0.075F
 					: 0.15F);
 		player.jumpMovementFactor = player.isSprinting() ? 0.05F : 0.04F;
-		
+		}
 	}
 	
 
@@ -175,7 +176,7 @@ public class ItemMechBoots extends ItemArmor implements ISteamUser,
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
 			boolean hasArmor = player.getCurrentArmor(0) != null && player.getCurrentArmor(0).getItem()==this;
 
-			if(hasArmor)
+			if(hasArmor&&((ISteamUser)player.getCurrentArmor(0).getItem()).getCurrentSteam(player.getCurrentArmor(0))>0)
 				 player.motionY += 0.3;
 		}
 	}
@@ -188,10 +189,10 @@ public class ItemMechBoots extends ItemArmor implements ISteamUser,
 			boolean highStepListed = playersWith1Step.contains(player.getCommandSenderName());
 			boolean hasHighStep = player.getCurrentArmor(0) != null && player.getCurrentArmor(0).getItem()==this;
 
-			if( !highStepListed && hasHighStep)
+			if( !highStepListed && hasHighStep && ((ISteamUser)player.getCurrentArmor(0).getItem()).getCurrentSteam(player.getCurrentArmor(0))>0)
 				playersWith1Step.add(player.getCommandSenderName());
 
-			if(!hasHighStep && highStepListed) {
+			if(!hasHighStep && highStepListed&&!(((ISteamUser)player.getCurrentArmor(0).getItem()).getCurrentSteam(player.getCurrentArmor(0))>0)) {
 				playersWith1Step.remove(player.getCommandSenderName());
 				player.stepHeight = 0.5F;
 			}
