@@ -3,6 +3,7 @@ package com.sr2610.steampunked.items;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,7 +29,7 @@ public class ItemBoots extends ItemArmor implements ISteamUser, ISpecialArmor {
 	public ItemBoots() {
 		super(ItemArmor.ArmorMaterial.IRON, 2, ARMOR_BOOTS);
 		setMaxDamage(LibOptions.bootsCapacity + 1);
-		setCreativeTab(ModCreativeTab.INSTANCE);
+		setCreativeTab(CreativeTabs.tabCombat);
 
 	}
 

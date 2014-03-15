@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -47,7 +48,7 @@ public class ItemMechBoots extends ItemArmor implements ISteamUser,
 	public ItemMechBoots() {
 		super(ItemArmor.ArmorMaterial.DIAMOND, 2, ARMOR_BOOTS);
 		setMaxDamage(LibOptions.advBootsCapacity + 1);
-		setCreativeTab(ModCreativeTab.INSTANCE);
+		setCreativeTab(CreativeTabs.tabCombat);
 		MinecraftForge.EVENT_BUS.register(this);
 
 	}

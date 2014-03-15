@@ -10,7 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.ItemBow;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
@@ -24,7 +24,7 @@ import com.sr2610.steampunked.lib.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemClockworkBow extends ItemBow {
+public class ItemClockworkBow extends Item {
 	public static final String[] bowPullIconNameArray = new String[] {
 			"bow_pull_0", "bow_pull_1", "bow_pull_2" };
 	@SideOnly(Side.CLIENT)
@@ -40,7 +40,7 @@ public class ItemClockworkBow extends ItemBow {
 	@Override
 	public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer, int par4) {
-		int j = getMaxItemUseDuration(par1ItemStack) - par4;
+		int j = 72000 - par4;
 
 		ArrowLooseEvent event = new ArrowLooseEvent(par3EntityPlayer,
 				par1ItemStack, j);
