@@ -29,7 +29,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
-import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.items.interfaces.ISteamUser;
 import com.sr2610.steampunked.lib.LibOptions;
 import com.sr2610.steampunked.lib.Reference;

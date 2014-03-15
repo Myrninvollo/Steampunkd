@@ -14,7 +14,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.common.ISpecialArmor;
 
-import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.items.interfaces.ISteamUser;
 import com.sr2610.steampunked.lib.LibOptions;
 import com.sr2610.steampunked.lib.Reference;
