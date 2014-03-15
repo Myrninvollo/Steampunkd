@@ -69,7 +69,7 @@ public class ItemPunchcard extends Item {
 					par2EntityPlayer
 							.addChatComponentMessage(new ChatComponentTranslation(
 									StatCollector
-											.translateToLocal("steampunked.oneProgram.name")));
+											.translateToLocal("steampunked.oneProgram")));
 				return false;
 			}
 
@@ -80,7 +80,7 @@ public class ItemPunchcard extends Item {
 				par2EntityPlayer
 						.addChatComponentMessage(new ChatComponentTranslation(
 								StatCollector
-										.translateToLocal("steampunked.onlyAutomaton.name")));
+										.translateToLocal("steampunked.onlyAutomaton")));
 			return false;
 		}
 		return false;

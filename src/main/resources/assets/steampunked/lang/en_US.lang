@@ -7,6 +7,7 @@ item.spanner.name=Spanner
 item.nameplate.name=Automaton Nameplate
 item.flightGoggles.name=Flight Goggles
 item.bootsPiston.name=Piston Boots
+item.mechBoots.name=Mechanical Boots
 item.chasis.name=Automaton Chassis
 item.ingotCopper.name=Copper Ingot
 item.ingotTin.name=Tin Ingot
@@ -33,9 +34,9 @@ item.reprogrammer.name=Automaton Reprogrammer
 item.upgrade.0.name=Cybernetic Eye
 item.upgrade.1.name=Gearbox
 item.upgrade.2.name=Reinforced Armor
-steampunked.upgrade.0.name=Automaton Upgrade - Range
-steampunked.upgrade.1.name=Automaton Upgrade - Speed
-steampunked.upgrade.2.name=Automaton Upgrade - Health
+steampunked.upgrade.0.info=Automaton Upgrade - Range
+steampunked.upgrade.1.info=Automaton Upgrade - Speed
+steampunked.upgrade.2.info=Automaton Upgrade - Health
 
 
 
@@ -55,10 +56,10 @@ entity.steampunked.Automaton.name=Steam Automaton
 itemGroup.automatons=Steampunk'd Automatons
 itemGroup.steampunked=Steampunk'd
 
-steampunked.oneProgram.name=You can only have one program per Automaton
-steampunked.onlyAutomaton.name=You can only use this on an Automaton
-steampunked.nameFirst.name=You must name this in an anvil first
-steampunked.boundDone.name=Successfully Reprogrammed
+steampunked.oneProgram=You can only have one program per Automaton
+steampunked.onlyAutomaton=You can only use this on an Automaton
+steampunked.nameFirst=You must name this in an anvil first
+steampunked.boundDone=Successfully Reprogrammed
 
 steampunked.gui.redstoneControl=Redstone Control
 steampunked.gui.ignoreRedstone=Machine Disabled

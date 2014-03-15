@@ -65,6 +65,6 @@ public class ItemAutomatonUpgrade extends Item implements IUpgrade {
 			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
 		int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 20);
 		par3List.add(StatCollector.translateToLocal("steampunked.upgrade." + i
-				+ ".name"));
+				+ ".info"));
 	}
 }

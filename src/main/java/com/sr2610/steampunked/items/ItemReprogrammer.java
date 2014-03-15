@@ -97,7 +97,7 @@ public class ItemReprogrammer extends Item {
 				if (!player.worldObj.isRemote)
 					player.addChatComponentMessage(new ChatComponentTranslation(
 							StatCollector
-									.translateToLocal("steampunked.boundDone.name")));
+									.translateToLocal("steampunked.boundDone")));
 				player.worldObj.playSoundAtEntity(player,
 						"random.successful_hit", 1.0F, 1.0F);
 

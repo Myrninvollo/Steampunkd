@@ -37,7 +37,7 @@ public class ItemNamePlate extends Item {
 					par2EntityPlayer
 							.addChatComponentMessage(new ChatComponentTranslation(
 									StatCollector
-											.translateToLocal("steampunked.nameFirst.name")));
+											.translateToLocal("steampunked.nameFirst")));
 				return false;
 			} else if (par3EntityLivingBase instanceof EntityAutomaton) {
 				EntityAutomaton entityAutomoton = (EntityAutomaton) par3EntityLivingBase;
@@ -56,7 +56,7 @@ public class ItemNamePlate extends Item {
 				par2EntityPlayer
 						.addChatComponentMessage(new ChatComponentTranslation(
 								StatCollector
-										.translateToLocal("steampunked.onlyAutomaton.name")));
+										.translateToLocal("steampunked.onlyAutomaton")));
 			return false;
 		}
 	}
