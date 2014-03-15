@@ -34,6 +34,15 @@ public final class ConfigHandler {
 				Configuration.CATEGORY_GENERAL,
 				"Volume of Steam Taken for the Steam Furnace to Smelt 1 Item in mB (1000mb = 1 Buckets Worth)  !Warning, Anything Below 500 will mean that it can become an infinite steam generator!",
 				LibOptions.furnaceCookTime).getInt();
+		
+		config.get(
+				Configuration.CATEGORY_GENERAL,
+				"Mech Boots Capacity",
+				LibOptions.advBootsCapacity).getInt();
+		config.get(
+				Configuration.CATEGORY_GENERAL,
+				"Piston Boots Capacity",
+				LibOptions.bootsCapacity).getInt();
 
 		config.save();
 	}
