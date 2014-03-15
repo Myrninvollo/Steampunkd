@@ -38,5 +38,6 @@ public final class LibNames {
 	public static final String TEMPLATE = "template";
 	public static final String BOW = "bowClockwork";
 	public static final String REPROGRAMMER = "reprogrammer";
+	public static final String MECHBOOTS = "mechBoots";
 
 }
