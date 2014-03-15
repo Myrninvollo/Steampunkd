@@ -41,7 +41,9 @@ public class BlockSteamFurnace extends BlockContainer {
 	protected BlockSteamFurnace(Boolean isOn, Material par2Material) {
 		super(par2Material);
 		isActive = isOn;
-		setCreativeTab(ModCreativeTab.INSTANCE);
+
+		if (!isOn)
+			setCreativeTab(ModCreativeTab.INSTANCE);
 
 	}
 
