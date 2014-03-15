@@ -36,6 +36,7 @@ public class ModCreativeTab extends CreativeTabs {
 		addItem(ModItems.boots);
 		addItem(ModItems.mechBoots);
 		addItem(ModItems.spanner);
+		addItem(ModItems.hammer);
 		addItem(ModItems.drill);
 		addItem(ModItems.drillDiamond);
 		addItem(ModItems.saberWood);

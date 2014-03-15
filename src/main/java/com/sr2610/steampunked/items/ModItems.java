@@ -12,6 +12,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.sr2610.steampunked.Steampunked;
 import com.sr2610.steampunked.blocks.ModBlocks;
 import com.sr2610.steampunked.items.handlers.BucketHandler;
+import com.sr2610.steampunked.items.tools.ItemHammer;
 import com.sr2610.steampunked.lib.LibNames;
 import com.sr2610.steampunked.lib.Reference;
 
@@ -25,6 +26,7 @@ public final class ModItems {
 	public static Item spanner;
 	public static Item goggles;
 	public static Item boots;
+	public static Item mechBoots;
 	public static Item namePlate;
 	public static Item spawner;
 
@@ -47,8 +49,7 @@ public final class ModItems {
 	public static Item advancedCore;
 
 	public static Item reprogrammer;
-
-	public static Item mechBoots;
+	public static Item hammer;
 
 	public static void initItems() {
 		Steampunked.logger.info("Initialising  Items");
@@ -107,6 +108,8 @@ public final class ModItems {
 				LibNames.REPROGRAMMER).setMaxStackSize(1);
 
 		mechBoots = new ItemMechBoots().setUnlocalizedName(LibNames.MECHBOOTS);
+		
+		hammer = new ItemHammer().setUnlocalizedName(LibNames.HAMMER);
 
 		registerItems();
 	}
@@ -159,6 +162,8 @@ public final class ModItems {
 
 		GameRegistry.registerItem(mechBoots, LibNames.MECHBOOTS,
 				Reference.ModID);
+		
+		GameRegistry.registerItem(hammer, LibNames.HAMMER, Reference.ModID);
 
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry
 				.getFluidStack("steam", FluidContainerRegistry.BUCKET_VOLUME),
