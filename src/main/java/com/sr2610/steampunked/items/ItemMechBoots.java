@@ -163,8 +163,8 @@ public class ItemMechBoots extends ItemArmor implements ISteamUser,
 			player.stepHeight = player.isSneaking() ? 0.5F : 1F;
 		if ((player.onGround || player.capabilities.isFlying)
 				&& player.moveForward > 0F)
-			player.moveFlying(0F, 1F, player.capabilities.isFlying ? 0.075F
-					: 0.15F);
+			player.moveFlying(0F, 1F, player.capabilities.isFlying ? 0.04F
+					: 0.08F);
 		player.jumpMovementFactor = player.isSprinting() ? 0.05F : 0.04F;
 		}
 	}
@@ -189,10 +189,10 @@ public class ItemMechBoots extends ItemArmor implements ISteamUser,
 			boolean highStepListed = playersWith1Step.contains(player.getCommandSenderName());
 			boolean hasHighStep = player.getCurrentArmor(0) != null && player.getCurrentArmor(0).getItem()==this;
 
-			if( !highStepListed && hasHighStep && ((ISteamUser)player.getCurrentArmor(0).getItem()).getCurrentSteam(player.getCurrentArmor(0))>0)
+			if( !highStepListed && hasHighStep && ((ISteamUser)player.getCurrentArmor(0).getItem()).getCurrentSteam(player.getCurrentArmor(0))>0 && player.getCurrentArmor(0) != null)
 				playersWith1Step.add(player.getCommandSenderName());
 
-			if(!hasHighStep && highStepListed&&!(((ISteamUser)player.getCurrentArmor(0).getItem()).getCurrentSteam(player.getCurrentArmor(0))>0)) {
+			if(!hasHighStep && highStepListed) {
 				playersWith1Step.remove(player.getCommandSenderName());
 				player.stepHeight = 0.5F;
 			}
