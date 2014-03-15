@@ -44,6 +44,7 @@ public class ItemHammer extends ItemPickaxe {
 
 	public ItemHammer() {
 		super(Item.ToolMaterial.IRON);
+		this.setNoRepair();
 	}
 
 	@Override
