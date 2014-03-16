@@ -14,6 +14,7 @@ package com.sr2610.steampunked.items;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -29,6 +30,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
+import com.sr2610.steampunked.client.model.ModelMechBoots;
 import com.sr2610.steampunked.items.interfaces.ISteamUser;
 import com.sr2610.steampunked.lib.LibOptions;
 import com.sr2610.steampunked.lib.Reference;
@@ -39,7 +41,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemMechBoots extends ItemArmor implements ISteamUser,
-		ISpecialArmor {
+ISpecialArmor {
 
 	public static List<String> playersWith1Step = new ArrayList();
 	static final int ARMOR_BOOTS = 3;
@@ -56,7 +58,7 @@ public class ItemMechBoots extends ItemArmor implements ISteamUser,
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
 			String type) {
 
-		return Reference.ModID + ":textures/models/springbootsmodel.png";
+		return Reference.ModID + ":textures/models/mechboots.png";
 	}
 
 	@Override
@@ -177,7 +179,7 @@ public class ItemMechBoots extends ItemArmor implements ISteamUser,
 
 			if (hasArmor
 					&& ((ISteamUser) player.getCurrentArmor(0).getItem())
-							.getCurrentSteam(player.getCurrentArmor(0)) > 0)
+					.getCurrentSteam(player.getCurrentArmor(0)) > 0)
 				player.motionY += 0.3;
 		}
 	}
@@ -196,7 +198,7 @@ public class ItemMechBoots extends ItemArmor implements ISteamUser,
 			if (!highStepListed
 					&& hasHighStep
 					&& ((ISteamUser) player.getCurrentArmor(0).getItem())
-							.getCurrentSteam(player.getCurrentArmor(0)) > 0
+					.getCurrentSteam(player.getCurrentArmor(0)) > 0
 					&& player.getCurrentArmor(0) != null)
 				playersWith1Step.add(player.getCommandSenderName());
 
@@ -207,4 +209,44 @@ public class ItemMechBoots extends ItemArmor implements ISteamUser,
 		}
 	}
 
+	ModelBiped armorModel = new ModelBiped();
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public ModelBiped getArmorModel(EntityLivingBase entityLiving,
+			ItemStack itemStack, int armorSlot) {
+
+		if(itemStack != null){
+			if(itemStack.getItem() instanceof ItemMechBoots){
+				int type = ((ItemArmor)itemStack.getItem()).armorType;
+
+				                         if(type == ARMOR_BOOTS){
+				                                 armorModel = new ModelMechBoots();
+				                         }else{
+				                                 armorModel = new ModelMechBoots();
+				                         }
+				}
+			if(armorModel != null){
+				armorModel.bipedHead.showModel = armorSlot == 0;
+				armorModel.bipedHeadwear.showModel = armorSlot == 0;
+				armorModel.bipedBody.showModel = armorSlot == 1 || armorSlot == 2;
+				armorModel.bipedRightArm.showModel = armorSlot == 1;
+				armorModel.bipedLeftArm.showModel = armorSlot == 1;
+				armorModel.bipedRightLeg.showModel = armorSlot == 2 || armorSlot == 3;
+				armorModel.bipedLeftLeg.showModel = armorSlot == 2 || armorSlot == 3;
+
+				armorModel.isSneak = entityLiving.isSneaking();
+				armorModel.isRiding = entityLiving.isRiding();
+				armorModel.isChild = entityLiving.isChild();
+				armorModel.heldItemRight = entityLiving.getHeldItem()!= null ? 1 :0;
+				if(entityLiving instanceof EntityPlayer){
+					armorModel.aimedBow =((EntityPlayer)entityLiving).getItemInUseDuration() > 2;
+				}
+				return armorModel;
+			}
+		}
+
+		return null;
+	}
 }
+
