@@ -181,12 +181,7 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 
 	@Override
 	protected boolean isFluidFuel(FluidStack fuel) {
-		String name = getFluidName(fuel);
-		if (name == null)
-			return false;
-		return name.equals("steam")
-				|| fuel.getFluid() == ModBlocks.steam
-				|| fuel.getFluid().getLocalizedName().trim().toLowerCase() == "steam";
+		return true;
 	}
 
 	protected String getFluidName(FluidStack fluid) {

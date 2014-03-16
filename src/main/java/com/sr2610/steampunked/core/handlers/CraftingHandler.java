@@ -31,7 +31,6 @@ public final class CraftingHandler {
 
 	@SubscribeEvent
 	public void craftingStuff(ItemCraftedEvent event) {
-	//	if (event.hasResult()) {
 			for (int i = 0; i < event.craftMatrix.getSizeInventory(); i++) {
 				if (event.craftMatrix.getStackInSlot(i) != null) {
 					ItemStack j = event.craftMatrix.getStackInSlot(i);
@@ -44,7 +43,6 @@ public final class CraftingHandler {
 						event.craftMatrix.setInventorySlotContents(i, k);
 					}
 				}
-		//	}
 		}
 	}
 
