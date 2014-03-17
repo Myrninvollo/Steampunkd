@@ -4,6 +4,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 import com.sr2610.steampunked.blocks.ModBlocks;
+import com.sr2610.steampunked.client.render.BootsItemRenderer;
 import com.sr2610.steampunked.client.render.BowRenderer;
 import com.sr2610.steampunked.client.render.PipeItemRenderer;
 import com.sr2610.steampunked.client.render.PipeRendererTESR;
@@ -25,6 +26,7 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	public final static PipeItemRenderer pipeItemRenderer = new PipeItemRenderer();
+	public final static BootsItemRenderer bootsItemRenderer = new BootsItemRenderer();
 
 	@Override
 	public void registerRenderInformation() {
@@ -35,6 +37,10 @@ public class ClientProxy extends CommonProxy {
 		PipeRendererTESR rp = new PipeRendererTESR();
 		MinecraftForgeClient.registerItemRenderer(
 				Item.getItemFromBlock(ModBlocks.pipe), pipeItemRenderer);
+		
+		MinecraftForgeClient.registerItemRenderer(
+				ModItems.mechBoots, bootsItemRenderer);
+		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPipe.class, rp);
 
 	}
