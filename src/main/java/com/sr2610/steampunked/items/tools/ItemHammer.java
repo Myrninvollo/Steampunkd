@@ -81,10 +81,10 @@ public class ItemHammer extends ItemPickaxe {
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player,
 			Entity entity) {
 
-		if (entity instanceof EntityLiving) {
-			((EntityLiving) entity).addPotionEffect(new PotionEffect(
+		if (entity instanceof EntityLivingBase) {
+			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(
 					Potion.moveSlowdown.id, 75, 1));
-			((EntityLiving) entity).addPotionEffect(new PotionEffect(
+			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(
 					Potion.confusion.id, 50, 1));
 		}
 		return false;

@@ -7,10 +7,11 @@ item.spanner.name=Spanner
 item.nameplate.name=Automaton Nameplate
 item.flightGoggles.name=Flight Goggles
 item.bootsPiston.name=Piston Boots
-item.mechBoots.name=Mechanical Boots
+item.mechBoots.name=Mechanised Boots
 item.chasis.name=Automaton Chassis
 item.ingotCopper.name=Copper Ingot
 item.ingotTin.name=Tin Ingot
+item.hammer.name=Iron Hammer
 
 item.saberWooden.name=Wooden Sabre
 item.saberIron.name=Iron Sabre
