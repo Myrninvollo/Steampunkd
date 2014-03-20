@@ -11,6 +11,7 @@
  */
 package com.sr2610.steampunked.utils;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -21,5 +22,18 @@ public class Utils {
 		return StatCollector.translateToLocal("fluid."
 				+ FluidRegistry.getFluidName(stack));
 
+	}
+
+	public static ItemStack consumeItem(ItemStack stack) {
+		if (stack.stackSize == 1) {
+			if (stack.getItem().hasContainerItem())
+				return stack.getItem().getContainerItem(stack);
+			else
+				return null;
+		} else {
+			stack.splitStack(1);
+
+			return stack;
+		}
 	}
 }

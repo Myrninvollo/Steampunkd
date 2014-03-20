@@ -16,7 +16,6 @@ import java.util.Set;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -44,7 +43,7 @@ public class ItemHammer extends ItemPickaxe {
 
 	public ItemHammer() {
 		super(Item.ToolMaterial.IRON);
-		this.setNoRepair();
+		setNoRepair();
 	}
 
 	@Override
@@ -78,6 +77,7 @@ public class ItemHammer extends ItemPickaxe {
 		return super.canHarvestBlock(par1Block, itemStack);
 	}
 
+	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player,
 			Entity entity) {
 

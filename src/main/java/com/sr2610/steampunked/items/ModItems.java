@@ -108,7 +108,7 @@ public final class ModItems {
 				LibNames.REPROGRAMMER).setMaxStackSize(1);
 
 		mechBoots = new ItemMechBoots().setUnlocalizedName(LibNames.MECHBOOTS);
-		
+
 		hammer = new ItemHammer().setUnlocalizedName(LibNames.HAMMER);
 
 		registerItems();
@@ -162,7 +162,7 @@ public final class ModItems {
 
 		GameRegistry.registerItem(mechBoots, LibNames.MECHBOOTS,
 				Reference.ModID);
-		
+
 		GameRegistry.registerItem(hammer, LibNames.HAMMER, Reference.ModID);
 
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry

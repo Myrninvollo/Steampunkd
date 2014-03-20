@@ -56,7 +56,6 @@ public class BlockSteamFurnace extends BlockContainer {
 	public boolean onBlockActivated(World world, int x, int y, int z,
 			EntityPlayer player, int i, float f, float g, float t) {
 		TileEntity tile_entity = world.getTileEntity(x, y, z);
-
 		if (tile_entity == null || player.isSneaking())
 			return false;
 		else

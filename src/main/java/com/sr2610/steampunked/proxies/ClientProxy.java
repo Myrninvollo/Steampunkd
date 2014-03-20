@@ -37,10 +37,10 @@ public class ClientProxy extends CommonProxy {
 		PipeRendererTESR rp = new PipeRendererTESR();
 		MinecraftForgeClient.registerItemRenderer(
 				Item.getItemFromBlock(ModBlocks.pipe), pipeItemRenderer);
-		
-		MinecraftForgeClient.registerItemRenderer(
-				ModItems.mechBoots, bootsItemRenderer);
-		
+
+		MinecraftForgeClient.registerItemRenderer(ModItems.mechBoots,
+				bootsItemRenderer);
+
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPipe.class, rp);
 
 	}

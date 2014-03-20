@@ -11,26 +11,23 @@
  */
 package com.sr2610.steampunked.client.render;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 
+import org.lwjgl.opengl.GL11;
+
 import com.sr2610.steampunked.client.model.ModelMechBoots;
 import com.sr2610.steampunked.lib.Reference;
 
 public class BootsItemRenderer implements IItemRenderer {
-	
-	
+
 	protected ModelMechBoots model;
 
 	public BootsItemRenderer() {
 		model = new ModelMechBoots();
 	}
-
-	
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -56,17 +53,16 @@ public class BootsItemRenderer implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-      Float f = 0.15F;
-      
-      Minecraft.getMinecraft().renderEngine
-				.bindTexture(new ResourceLocation(Reference.ModID,
-						"/textures/models/mechboots.png"));
-      GL11.glPushMatrix();
-      GL11.glRotatef(180F, 1, 0, 0);
-      GL11.glRotatef(270F, 0, 1, 0);
-      GL11.glTranslatef(0, -4F, 0);
-     
-      model.bipedHead.showModel = false;
+		Float f = 0.15F;
+
+		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(
+				Reference.ModID, "/textures/models/mechboots.png"));
+		GL11.glPushMatrix();
+		GL11.glRotatef(180F, 1, 0, 0);
+		GL11.glRotatef(270F, 0, 1, 0);
+		GL11.glTranslatef(0, -4F, 0);
+
+		model.bipedHead.showModel = false;
 		model.bipedHeadwear.showModel = false;
 		model.bipedBody.showModel = false;
 		model.bipedRightArm.showModel = false;
@@ -74,27 +70,26 @@ public class BootsItemRenderer implements IItemRenderer {
 		switch (type) {
 
 		case ENTITY:
-			   model.render(null, f, f, f, f, f, f);
-			      GL11.glPopMatrix();
+			model.render(null, f, f, f, f, f, f);
+			GL11.glPopMatrix();
 			break;
 		case EQUIPPED:
-			 GL11.glTranslatef(1, 0, 0);
-			   model.render(null, f, f, f, f, f, f);
-			      GL11.glPopMatrix();
+			GL11.glTranslatef(1, 0, 0);
+			model.render(null, f, f, f, f, f, f);
+			GL11.glPopMatrix();
 			break;
 		case EQUIPPED_FIRST_PERSON:
-			   model.render(null, f, f, f, f, f, f);
-			      GL11.glPopMatrix();
+			model.render(null, f, f, f, f, f, f);
+			GL11.glPopMatrix();
 			break;
 		case INVENTORY:
-		      GL11.glTranslatef(0, 0.5F, 0);
-			   model.render(null, f, f, f, f, f, f);
-			      GL11.glPopMatrix();
+			GL11.glTranslatef(0, 0.5F, 0);
+			model.render(null, f, f, f, f, f, f);
+			GL11.glPopMatrix();
 			break;
 		default:
 			break;
 		}
-
 
 	}
 

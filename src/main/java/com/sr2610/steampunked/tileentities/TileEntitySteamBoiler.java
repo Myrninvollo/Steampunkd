@@ -460,8 +460,6 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 		if (worldObj == null)
 			return;
 		refreshSurroundingTanks(currentTile);
-		
-		
 
 		if (tanks[1].getFluidAmount() > 0 && surroundingTanks.size() > 0) {
 			FluidStack drainedFluid = tanks[1].drain(
@@ -484,8 +482,6 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 			}
 		}
 
-	
 	}
-	
-	
+
 }

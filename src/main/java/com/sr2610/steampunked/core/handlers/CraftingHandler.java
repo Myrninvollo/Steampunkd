@@ -31,19 +31,17 @@ public final class CraftingHandler {
 
 	@SubscribeEvent
 	public void craftingStuff(ItemCraftedEvent event) {
-			for (int i = 0; i < event.craftMatrix.getSizeInventory(); i++) {
-				if (event.craftMatrix.getStackInSlot(i) != null) {
-					ItemStack j = event.craftMatrix.getStackInSlot(i);
-					if (j.getItem() != null && j.getItem() == ModItems.hammer) {
-						ItemStack k = new ItemStack(ModItems.hammer, 2,
-								(j.getItemDamage() + 1));
-						if (k.getItemDamage() >= k.getMaxDamage()) {
-							k.stackSize--;
-						}
-						event.craftMatrix.setInventorySlotContents(i, k);
-					}
+		for (int i = 0; i < event.craftMatrix.getSizeInventory(); i++)
+			if (event.craftMatrix.getStackInSlot(i) != null) {
+				ItemStack j = event.craftMatrix.getStackInSlot(i);
+				if (j.getItem() != null && j.getItem() == ModItems.hammer) {
+					ItemStack k = new ItemStack(ModItems.hammer, 2,
+							j.getItemDamage() + 1);
+					if (k.getItemDamage() >= k.getMaxDamage())
+						k.stackSize--;
+					event.craftMatrix.setInventorySlotContents(i, k);
 				}
-		}
+			}
 	}
 
 }
