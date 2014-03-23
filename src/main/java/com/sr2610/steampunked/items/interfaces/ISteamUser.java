@@ -21,9 +21,9 @@ public interface ISteamUser {
 	public abstract int getCurrentSteam(ItemStack itemStack);
 
 	/**
-	 * Gets the maximum charge level of the item.
+	 * Gets the maximum steam of the item.
 	 * 
-	 * @return the maximum charge level of the item.
+	 * @return the maximum steam of the item.
 	 */
 	public abstract int getMaxSteam();
 
@@ -31,16 +31,16 @@ public interface ISteamUser {
 	 * Recharges the item represented by the ItemStack. Implementations should
 	 * first check that the ItemStack is of the correct item type, then apply
 	 * the charge (typically removing damage), and finally return the amount of
-	 * energy used.
+	 * steam used.
 	 * 
 	 * @param target
-	 *            The ItemStack to recharge
+	 *            The ItemStack to refuel
 	 * @param energyAvailable
 	 *            The amount of energy put into the item in this invocation.
-	 * @return The amount of energy consumed. If <code>energyAvailable</code>
-	 *         was greater than the amount of energy needed to completely charge
+	 * @return The amount of energy consumed. If <code>steamAvailable</code>
+	 *         was greater than the amount of steam needed to completely fill
 	 *         this item, then the value returned will be less than
-	 *         <code>energyAvailable</code>.
+	 *         <code>steamAvailable</code>.
 	 */
 	public int charge(ItemStack target, int energyAvailable);
 

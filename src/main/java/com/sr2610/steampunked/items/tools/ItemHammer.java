@@ -1,25 +1,13 @@
 /*******************************************************************************
- * * This class was created by <SR2610>. It's distributed as
- *  * part of the Steampunk'd Mod. Get the Source Code in github:
- *  * https://github.com/SR2610/steampunkd
- *  * 
- *  * Steampunk'd is Open Source and distributed under a
- *  * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
- *  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
+ * * This class was created by <SR2610>. It's distributed as * part of the
+ * Steampunk'd Mod. Get the Source Code in github: *
+ * https://github.com/SR2610/steampunkd * * Steampunk'd is Open Source and
+ * distributed under a * Creative Commons Attribution-NonCommercial-ShareAlike
+ * 3.0 License * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
  ******************************************************************************/
-/**
- * This class was created by <SR2610>. It's distributed as
- * part of the Steampunk'd Mod. Get the Source Code in github:
- * https://github.com/SR2610/steampunkd
- * 
- * Steampunk'd is Open Source and distributed under a
- * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
- * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- * 
- * File Created @ [15 Mar 2014, 18:26:37 (GMT)]
- */
 package com.sr2610.steampunked.items.tools;
 
+import java.util.List;
 import java.util.Set;
 
 import net.minecraft.block.Block;
@@ -33,12 +21,19 @@ import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Sets;
 import com.sr2610.steampunked.lib.Reference;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class ItemHammer extends ItemPickaxe {
+
+	@SideOnly(Side.CLIENT)
+	IIcon itemIcon2;
 
 	private static final Set blockSet = Sets.newHashSet(new Block[] {
 			Blocks.cobblestone, Blocks.double_stone_slab, Blocks.stone_slab,
@@ -73,6 +68,7 @@ public class ItemHammer extends ItemPickaxe {
 	public void registerIcons(IIconRegister iconRegister) {
 
 		itemIcon = iconRegister.registerIcon(Reference.ModID + ":hammer");
+		itemIcon2 = iconRegister.registerIcon(Reference.ModID + ":hammerAdv");
 
 	}
 
@@ -98,5 +94,41 @@ public class ItemHammer extends ItemPickaxe {
 		}
 		return false;
 	}
+
+	@Override
+	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
+			EntityPlayer par3EntityPlayer) {
+		if (par1ItemStack.hasDisplayName()
+				&& (par1ItemStack.getDisplayName().toLowerCase().contains("mjolnir")||par1ItemStack.getDisplayName().toLowerCase().contains("mjölnir"))) {
+			par2World.playSoundAtEntity(par3EntityPlayer,
+					"ambient.weather.thunder", 1, 1);
+		}
+		return par1ItemStack;
+
+	}
+
+	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player,
+			ItemStack usingItem, int useRemaining) {
+
+		if (stack.hasDisplayName()&& (stack.getDisplayName().toLowerCase().contains("mjolnir")||stack.getDisplayName().toLowerCase().contains("mjölnir")))
+			return itemIcon2;
+		else
+			return itemIcon;
+	}
+
+	@Override
+	public void addInformation(ItemStack par1ItemStack,
+			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+		if (par1ItemStack.hasDisplayName()&& (par1ItemStack.getDisplayName().toLowerCase().contains("mjolnir")||par1ItemStack.getDisplayName().toLowerCase().contains("mjölnir"))) {
+			par3List.add("Whosoever holds this hammer, if he be worthy,");
+			par3List.add("shall possess the power of Thor.");
+		}
+	}
+
+	/*
+	 * &&(
+	 * par1ItemStack.getDisplayName().toLowerCase()=="mjolnir"||par1ItemStack
+	 * .getDisplayName().toLowerCase()=="Mjölnir"))
+	 */
 
 }
