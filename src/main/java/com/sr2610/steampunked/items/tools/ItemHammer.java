@@ -115,6 +115,15 @@ public class ItemHammer extends ItemPickaxe {
 		else
 			return itemIcon;
 	}
+	
+	 @SideOnly(Side.CLIENT)
+	    public IIcon getIconIndex(ItemStack stack)
+	    {
+		 if (stack.hasDisplayName()&& (stack.getDisplayName().toLowerCase().contains("mjolnir")||stack.getDisplayName().toLowerCase().contains("mjölnir")))
+				return itemIcon2;
+			else
+				return itemIcon;
+	    }
 
 	@Override
 	public void addInformation(ItemStack par1ItemStack,
