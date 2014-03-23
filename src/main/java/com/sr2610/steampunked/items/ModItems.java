@@ -13,6 +13,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -181,7 +183,14 @@ public final class ModItems {
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
 
 		oreRegistration();
+		addLoot();
 
+	}
+
+	private static void addLoot() {
+		ItemStack stack = new ItemStack(ModItems.hammer);
+		stack.setStackDisplayName("Mjölnir");
+		ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(stack, 002,1,1));
 	}
 
 	public static void oreRegistration() {
