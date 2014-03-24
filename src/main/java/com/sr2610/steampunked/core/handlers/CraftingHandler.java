@@ -36,6 +36,8 @@ public final class CraftingHandler {
 
 		GameRegistry.addSmelting(ModBlocks.oreCopper, new ItemStack(
 				ModItems.copperIngot), 0.7F);
+		GameRegistry.addSmelting(ModBlocks.oreTin, new ItemStack(
+				ModItems.tinIngot), 0.7F);
 	}
 
 	@SubscribeEvent

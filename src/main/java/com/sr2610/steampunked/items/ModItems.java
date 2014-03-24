@@ -190,8 +190,7 @@ public final class ModItems {
 	private static void addLoot() {
 		ItemStack stack = new ItemStack(ModItems.hammer);
 		stack.setStackDisplayName("Mjölnir");
-		ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(stack, 002,1,1));
-	}
+		ChestGenHooks.getInfo(ChestGenHooks.PYRAMID_JUNGLE_CHEST).addItem(new WeightedRandomChestContent(stack,1,1,1));	}
 
 	public static void oreRegistration() {
 		OreDictionary.registerOre("ingotCopper", new ItemStack(copperIngot));

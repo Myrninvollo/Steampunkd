@@ -184,7 +184,7 @@ public abstract class BaseComponent extends Gui {
 							- component.y, button);
 	}
 
-	public void mouseClickMove(int mouseX, int mouseY, int button, /* love you */
+	public void mouseClickMove(int mouseX, int mouseY, int button, 
 			long time) {
 		invokeListenersMouseDrag(mouseX, mouseY, button, time);
 		if (renderChildren)
