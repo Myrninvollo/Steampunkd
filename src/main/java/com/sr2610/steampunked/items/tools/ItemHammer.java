@@ -99,36 +99,45 @@ public class ItemHammer extends ItemPickaxe {
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer) {
 		if (par1ItemStack.hasDisplayName()
-				&& (par1ItemStack.getDisplayName().toLowerCase().contains("mjolnir")||par1ItemStack.getDisplayName().toLowerCase().contains("mjölnir"))) {
+				&& (par1ItemStack.getDisplayName().toLowerCase()
+						.contains("mjolnir") || par1ItemStack.getDisplayName()
+						.toLowerCase().contains("mjölnir")))
 			par2World.playSoundAtEntity(par3EntityPlayer,
 					"ambient.weather.thunder", 1, 1);
-		}
 		return par1ItemStack;
 
 	}
 
+	@Override
 	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player,
 			ItemStack usingItem, int useRemaining) {
 
-		if (stack.hasDisplayName()&& (stack.getDisplayName().toLowerCase().contains("mjolnir")||stack.getDisplayName().toLowerCase().contains("mjölnir")))
+		if (stack.hasDisplayName()
+				&& (stack.getDisplayName().toLowerCase().contains("mjolnir") || stack
+						.getDisplayName().toLowerCase().contains("mjölnir")))
 			return itemIcon2;
 		else
 			return itemIcon;
 	}
-	
-	 @SideOnly(Side.CLIENT)
-	    public IIcon getIconIndex(ItemStack stack)
-	    {
-		 if (stack.hasDisplayName()&& (stack.getDisplayName().toLowerCase().contains("mjolnir")||stack.getDisplayName().toLowerCase().contains("mjölnir")))
-				return itemIcon2;
-			else
-				return itemIcon;
-	    }
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIconIndex(ItemStack stack) {
+		if (stack.hasDisplayName()
+				&& (stack.getDisplayName().toLowerCase().contains("mjolnir") || stack
+						.getDisplayName().toLowerCase().contains("mjölnir")))
+			return itemIcon2;
+		else
+			return itemIcon;
+	}
 
 	@Override
 	public void addInformation(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
-		if (par1ItemStack.hasDisplayName()&& (par1ItemStack.getDisplayName().toLowerCase().contains("mjolnir")||par1ItemStack.getDisplayName().toLowerCase().contains("mjölnir"))) {
+		if (par1ItemStack.hasDisplayName()
+				&& (par1ItemStack.getDisplayName().toLowerCase()
+						.contains("mjolnir") || par1ItemStack.getDisplayName()
+						.toLowerCase().contains("mjölnir"))) {
 			par3List.add("Whosoever holds this hammer, if he be worthy,");
 			par3List.add("shall possess the power of Thor.");
 		}

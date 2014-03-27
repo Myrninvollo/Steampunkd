@@ -1,11 +1,9 @@
 /*******************************************************************************
- * * This class was created by <SR2610>. It's distributed as
- *  * part of the Steampunk'd Mod. Get the Source Code in github:
- *  * https://github.com/SR2610/steampunkd
- *  * 
- *  * Steampunk'd is Open Source and distributed under a
- *  * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
- *  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
+ * * This class was created by <SR2610>. It's distributed as * part of the
+ * Steampunk'd Mod. Get the Source Code in github: *
+ * https://github.com/SR2610/steampunkd * * Steampunk'd is Open Source and
+ * distributed under a * Creative Commons Attribution-NonCommercial-ShareAlike
+ * 3.0 License * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
  ******************************************************************************/
 package com.sr2610.steampunked.blocks;
 
@@ -13,6 +11,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialLiquid;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.oredict.OreDictionary;
@@ -43,6 +42,9 @@ public final class ModBlocks {
 	public static Block oreCopper;
 	public static Block oreTin;
 	public static Material materialSteam;
+
+	public static Item pipeFluidsWood;
+	public static Item pipeFluidsCobblestone;
 
 	public static void initBlocks() {
 		Steampunked.logger.info("Initialising  Blocks");
@@ -98,6 +100,7 @@ public final class ModBlocks {
 
 	private static void registerBlocks() {
 		GameRegistry.registerBlock(Injector, LibNames.INJECTOR);
+
 		GameRegistry.registerBlock(BlockFluidSteam,
 				"Steampunked.BlockFluidSteam");
 		GameRegistry.registerBlock(steamFurnace, LibNames.FURNACE);
