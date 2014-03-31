@@ -22,10 +22,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -42,8 +44,6 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 
 	public FluidTank tank;
 	private FluidTankInfo[] tank_info;
-
-	
 
 	public TileEntityPipe() {
 		super();
@@ -132,7 +132,7 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 
 	@Override
 	public void update() {
-		autoOutputToSides(100, this);
+		autoOutputToSides(40, this);
 	}
 
 	public void autoOutputToSides(int amountPerTick, TileEntity currentTile) {
@@ -261,6 +261,5 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 			pipeConnectionsBuffer[3] = false;
 
 	}
-
 
 }

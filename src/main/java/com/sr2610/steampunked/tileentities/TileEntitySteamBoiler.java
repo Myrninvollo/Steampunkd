@@ -392,6 +392,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 	@Override
 	public void update() {
 		UpdateRedstone();
+		this.autoOutputToSides(40, this);
 
 		if (getRedstoneMode() == 0)
 			return;
@@ -409,7 +410,6 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 							.getBlock())
 						tanks[0].fill(new FluidStack(FluidRegistry.WATER, 21),
 								true);
-				autoOutputToSides(10, this);
 
 				if (tanks[0].getFluidAmount() > 0
 						&& tanks[1].getFluidAmount() != LibOptions.boilerCapacity) {
@@ -473,7 +473,6 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 					Math.min(tanks[1].getFluidAmount(), amountPerTick), true);
 			if (drainedFluid != null) {
 				Collections.shuffle(surroundingTanks);
-				// for each surrounding tank
 				for (ForgeDirection side : surroundingTanks) {
 					TileEntity otherTank = getTileInDirection(this, side);
 					if (drainedFluid.amount > 0) {
