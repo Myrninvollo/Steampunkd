@@ -11,12 +11,17 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialLiquid;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.sr2610.steampunked.Steampunked;
+import com.sr2610.steampunked.blocks.slate.BlockSlate;
+import com.sr2610.steampunked.blocks.slate.BlockSlateBrickSlab;
+import com.sr2610.steampunked.blocks.slate.BlockSlateSlab;
+import com.sr2610.steampunked.blocks.slate.BlockSlateStairs;
+import com.sr2610.steampunked.items.ItemSlateBrickSlab;
+import com.sr2610.steampunked.items.ItemSlateSlab;
 import com.sr2610.steampunked.lib.LibNames;
 import com.sr2610.steampunked.tileentities.TileEntityInjector;
 import com.sr2610.steampunked.tileentities.TileEntityPipe;
@@ -43,8 +48,16 @@ public final class ModBlocks {
 	public static Block oreTin;
 	public static Material materialSteam;
 
-	public static Item pipeFluidsWood;
-	public static Item pipeFluidsCobblestone;
+	/* Slate */
+
+	public static Block slate;
+	public static Block slateBrick;
+	public static Block slateSlab;
+	public static Block slateBrickSlab;
+	public static Block slateSlabDouble;
+	public static Block slateBrickSlabDouble;
+	public static Block slateStair;
+	public static Block slateBrickStair;
 
 	public static void initBlocks() {
 		Steampunked.logger.info("Initialising  Blocks");
@@ -83,19 +96,35 @@ public final class ModBlocks {
 
 		oreCopper = new BlockMod(Material.rock, "oreCopper", 1, "pickaxe")
 				.setHardness(3.0F).setResistance(5.0F)
-				.setStepSound(Block.soundTypePiston)
+				.setStepSound(Block.soundTypeStone)
 				.setBlockName(LibNames.ORECOPPER);
 
 		oreTin = new BlockMod(Material.rock, "oreTin", 1, "pickaxe")
 				.setHardness(3.0F).setResistance(5.0F)
-				.setStepSound(Block.soundTypePiston)
+				.setStepSound(Block.soundTypeStone)
 				.setBlockName(LibNames.ORETIN);
 
 		pipe = new BlockPipe(Material.piston).setHardness(5.0F)
 				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
 				.setBlockName("pipeFluid");
 
+		initSlate();
+
 		registerBlocks();
+	}
+
+	private static void initSlate() {
+		slate = new BlockSlate("slate");
+				
+		slateBrick = new BlockSlate("slateBrick");
+		
+		slateSlab = new BlockSlateSlab(false);
+		slateSlabDouble = new BlockSlateSlab(true);
+		slateBrickSlab = new BlockSlateBrickSlab(false);
+		slateBrickSlabDouble = new BlockSlateBrickSlab(true);
+		slateStair = new BlockSlateStairs(slate);
+		slateBrickStair  = new BlockSlateStairs(slateBrick);
+				
 	}
 
 	private static void registerBlocks() {
@@ -124,6 +153,15 @@ public final class ModBlocks {
 
 		GameRegistry.registerBlock(pipe, "pipe");
 		GameRegistry.registerTileEntity(TileEntityPipe.class, "tileEntityPipe");
+		
+		GameRegistry.registerBlock(slate, "slate");
+		GameRegistry.registerBlock(slateBrick, "slateBrick");
+		GameRegistry.registerBlock(slateSlab,ItemSlateSlab.class, "slateSlab");
+		GameRegistry.registerBlock(slateBrickSlab,ItemSlateBrickSlab.class, "slateBrickSlab");
+		GameRegistry.registerBlock(slateSlabDouble,ItemSlateSlab.class, "slateSlabFull");
+		GameRegistry.registerBlock(slateBrickSlabDouble,ItemSlateBrickSlab.class, "slateBrickSlabFull");
+		GameRegistry.registerBlock(slateStair, "slateStair");
+		GameRegistry.registerBlock(slateBrickStair, "slateBrickStair");
 		oreRegistration();
 	}
 
