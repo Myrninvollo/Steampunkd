@@ -18,7 +18,6 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import com.sr2610.steampunked.blocks.BlockPipe;
 import com.sr2610.steampunked.blocks.ModBlocks;
 
 public class PipeItemRenderer implements IItemRenderer {
@@ -32,9 +31,7 @@ public class PipeItemRenderer implements IItemRenderer {
 			icon = ((TextureMap) Minecraft.getMinecraft().getTextureManager()
 					.getTexture(TextureMap.locationBlocksTexture))
 					.getAtlasSprite("missingno");
-		block.setBlockBounds(BlockPipe.PIPE_MIN_POS, 0.0F,
-				BlockPipe.PIPE_MIN_POS, BlockPipe.PIPE_MAX_POS, 1.0F,
-				BlockPipe.PIPE_MAX_POS);
+		block.setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
 		block.setBlockBoundsForItemRender();
 		render.setRenderBoundsFromBlock(block);
 

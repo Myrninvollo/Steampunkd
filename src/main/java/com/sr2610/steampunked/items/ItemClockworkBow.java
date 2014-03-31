@@ -98,13 +98,59 @@ public class ItemClockworkBow extends ItemBow {
 			par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F,
 					1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
-			if (flag)
-				entityarrow.canBePickedUp = 2;
-			else
-				par3EntityPlayer.inventory.consumeInventoryItem(Items.arrow);
+			EntityArrow entityarrow1 = new EntityArrow(par2World,
+					par3EntityPlayer, f * 2.0F);
+			entityarrow1.setDamage(entityarrow1.getDamage() + 1.0);
 
-			if (!par2World.isRemote)
-				par2World.spawnEntityInWorld(entityarrow);
+			EntityArrow entityarrow2 = new EntityArrow(par2World,
+					par3EntityPlayer, f * 2.0F);
+			entityarrow2.setDamage(entityarrow2.getDamage() + 1.0);
+
+			if (flag) {
+				entityarrow.canBePickedUp = 2;
+				entityarrow1.canBePickedUp = 2;
+				entityarrow2.canBePickedUp = 2;
+			} else {
+				par3EntityPlayer.inventory.consumeInventoryItem(Items.arrow);
+				if (par1ItemStack.stackTagCompound != null) {
+					int mode = par1ItemStack.stackTagCompound
+							.getInteger("Mode");
+					if (mode == 2) {
+						par3EntityPlayer.inventory
+								.consumeInventoryItem(Items.arrow);
+						par3EntityPlayer.inventory
+								.consumeInventoryItem(Items.arrow);
+					}
+				}
+			}
+
+			if (par1ItemStack.stackTagCompound != null) {
+				int Mode = par1ItemStack.stackTagCompound.getInteger("Mode");
+				switch (Mode) {
+				case 1:
+					if (!par2World.isRemote)
+						par2World.spawnEntityInWorld(entityarrow);
+					break;
+				case 2:
+					entityarrow.setDamage(entityarrow.getDamage() - 1);
+
+					if (!par2World.isRemote) {
+						par2World.spawnEntityInWorld(entityarrow);
+						par2World.spawnEntityInWorld(entityarrow2);
+						par2World.spawnEntityInWorld(entityarrow2);
+					}
+					break;
+				case 3:
+					if (!par2World.isRemote)
+						par2World.spawnEntityInWorld(entityarrow);
+					break;
+				}
+
+			} else
+				par1ItemStack.stackTagCompound = new NBTTagCompound();
+			par1ItemStack.stackTagCompound.setInteger("Mode", 1);
+			par2World.spawnEntityInWorld(entityarrow);
+
 		}
 	}
 

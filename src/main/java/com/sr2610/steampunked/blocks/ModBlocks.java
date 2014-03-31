@@ -91,7 +91,7 @@ public final class ModBlocks {
 				.setStepSound(Block.soundTypePiston)
 				.setBlockName(LibNames.ORETIN);
 
-		pipe = new BlockPipe(Material.iron).setHardness(5.0F)
+		pipe = new BlockPipe(Material.piston).setHardness(5.0F)
 				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
 				.setBlockName("pipeFluid");
 

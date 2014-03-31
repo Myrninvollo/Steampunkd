@@ -70,7 +70,7 @@ public class BootsItemRenderer implements IItemRenderer {
 			GL11.glPopMatrix();
 			break;
 		case EQUIPPED:
-			GL11.glTranslatef(1, 0, 0);
+			GL11.glTranslatef(-1, 0, 0);
 			model.render(null, f, f, f, f, f, f);
 			GL11.glPopMatrix();
 			break;

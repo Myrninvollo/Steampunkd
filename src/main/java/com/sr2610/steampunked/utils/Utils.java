@@ -9,6 +9,7 @@ package com.sr2610.steampunked.utils;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -30,6 +31,27 @@ public class Utils {
 			stack.splitStack(1);
 
 			return stack;
+		}
+	}
+
+	public static int getIntDirFromDirection(ForgeDirection dir) {
+		switch (dir) {
+		case DOWN:
+			return 0;
+		case EAST:
+			return 5;
+		case NORTH:
+			return 2;
+		case SOUTH:
+			return 3;
+		case UNKNOWN:
+			return 0;
+		case UP:
+			return 1;
+		case WEST:
+			return 4;
+		default:
+			return 0;
 		}
 	}
 }
