@@ -52,10 +52,20 @@ public class ModCreativeTab extends CreativeTabs {
 		addItem(ModItems.saberGold);
 		addItem(ModItems.saberDiamond);
 		addItem(ModItems.clockworkBow);
+	
+		addBlock(ModBlocks.slateSlab);
+		addBlock(ModBlocks.slate);
+		addBlock(ModBlocks.slateStair);
+		addBlock(ModBlocks.slateBrickSlab);
+		addBlock(ModBlocks.slateBrick);
+		addBlock(ModBlocks.slateBrickStair);
 		addBlock(ModBlocks.oreCopper);
 		addBlock(ModBlocks.oreTin);
 		addItem(ModItems.copperIngot);
 		addItem(ModItems.tinIngot);
+	
+
+
 
 	}
 

@@ -5,7 +5,7 @@
  * distributed under a * Creative Commons Attribution-NonCommercial-ShareAlike
  * 3.0 License * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
  ******************************************************************************/
-package com.sr2610.steampunked.blocks;
+package com.sr2610.steampunked.blocks.pipes;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class BlockPipe extends BlockContainer {
 	private static Vector3fMax blockBounds = new Vector3fMax(0.25f, 0.25f,
 			0.25f, 0.75f, 0.75f, 0.75f);
 
-	protected BlockPipe(Material mat) {
+	public BlockPipe(Material mat) {
 		super(mat);
 		this.setCreativeTab(CreativeTabs.tabRedstone);
 

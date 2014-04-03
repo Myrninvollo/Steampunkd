@@ -10,6 +10,7 @@ package com.sr2610.steampunked.items;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
+import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
@@ -59,6 +60,8 @@ public final class ModItems {
 
 	public static Item reprogrammer;
 	public static Item hammer;
+	
+	public static Item slateSlab;
 
 	public static void initItems() {
 		Steampunked.logger.info("Initialising  Items");
@@ -119,6 +122,7 @@ public final class ModItems {
 		mechBoots = new ItemMechBoots().setUnlocalizedName(LibNames.MECHBOOTS);
 
 		hammer = new ItemHammer().setUnlocalizedName(LibNames.HAMMER);
+	
 
 		registerItems();
 	}

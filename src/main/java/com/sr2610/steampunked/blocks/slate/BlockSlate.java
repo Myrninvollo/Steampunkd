@@ -1,5 +1,5 @@
 /*******************************************************************************
- * * This class was created by <SR2610>. It's distributed as * part of the
+ * * This class was created by <SR2610>. It's distributed as a part of the
  * Steampunk'd Mod. Get the Source Code in github: *
  * https://github.com/SR2610/steampunkd * * Steampunk'd is Open Source and
  * distributed under a * Creative Commons Attribution-NonCommercial-ShareAlike
@@ -10,10 +10,10 @@ package com.sr2610.steampunked.blocks.slate;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.IIcon;
 
 import com.sr2610.steampunked.core.tabs.ModCreativeTab;
-import com.sr2610.steampunked.lib.LibNames;
 import com.sr2610.steampunked.lib.Reference;
 
 import cpw.mods.fml.relauncher.Side;
@@ -26,11 +26,11 @@ public class BlockSlate extends Block {
 		super(Material.rock);
 		textureName = name;
 		setHarvestLevel("pickaxe", 0);
-		setCreativeTab(ModCreativeTab.INSTANCE);
+		setCreativeTab(CreativeTabs.tabBlock);
 		setHardness(3.0F);
 		setResistance(5.0F);
 		setStepSound(Block.soundTypeStone);
-		setBlockName(LibNames.SLATE + "." + textureName);
+		setBlockName(name);
 
 	}
 

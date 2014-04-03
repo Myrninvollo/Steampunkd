@@ -11,12 +11,19 @@ package com.sr2610.steampunked.blocks.slate;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
+import net.minecraft.creativetab.CreativeTabs;
 
 import com.sr2610.steampunked.blocks.ModBlocks;
+import com.sr2610.steampunked.lib.LibNames;
 
 public class BlockSlateBrickStairs  extends BlockStairs{
 		
-		protected BlockSlateBrickStairs(Block block) {
-			super(ModBlocks.slate, 0);
+		public BlockSlateBrickStairs(Block block) {
+			super(block, 0);
+			this.setBlockName(LibNames.SLATE+".brickStairs");
+			this.setLightOpacity(0); 
+			setCreativeTab(CreativeTabs.tabBlock);
+
+
 		}
 }

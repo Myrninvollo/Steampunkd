@@ -8,6 +8,7 @@
 package com.sr2610.steampunked.blocks.slate;
 
 import com.sr2610.steampunked.blocks.ModBlocks;
+import com.sr2610.steampunked.lib.LibNames;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
@@ -18,6 +19,9 @@ public class BlockSlateStairs extends BlockStairs {
 	public BlockSlateStairs(Block block) {
 		super(block, 0);
 		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setBlockName(LibNames.SLATE+".stairs");
+		this.setLightOpacity(0); 
+
 	}
 
 }

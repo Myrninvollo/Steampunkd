@@ -33,10 +33,12 @@ public class BlockSlateSlab extends BlockSlab {
 		super(par2, Material.rock);
 		setHardness(0.8F);
 		setResistance(10F);
+	
 		if(!par2) {
 			setLightOpacity(0);
 			this.setCreativeTab(CreativeTabs.tabBlock);
 		}
+		
 	}
 
 	@Override
@@ -54,10 +56,9 @@ public class BlockSlateSlab extends BlockSlab {
 	}
 
 	@Override
-	public String func_150002_b(int var1) {
-		return null;
+	public String func_150002_b(int i) {
+		return "tile." + LibNames.SLATE+"Slab";
 	}
-
 	
 
 	

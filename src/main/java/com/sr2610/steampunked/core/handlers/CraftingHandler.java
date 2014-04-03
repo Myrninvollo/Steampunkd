@@ -7,6 +7,7 @@
  ******************************************************************************/
 package com.sr2610.steampunked.core.handlers;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -28,6 +29,17 @@ public final class CraftingHandler {
 						new ItemStack(ModItems.hammer, 1,
 								OreDictionary.WILDCARD_VALUE), new ItemStack(
 								Items.iron_ingot));
+		
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.slateBrick,4), "xx", "xx", 
+		        'x', new ItemStack(ModBlocks.slate));
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.slateSlab,6), "xxx",
+		        'x', new ItemStack(ModBlocks.slate));
+       GameRegistry.addRecipe(new ItemStack(ModBlocks.slateStair,4), "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.slate));
+       GameRegistry.addRecipe(new ItemStack(ModBlocks.slateBrickSlab,6), "xxx",
+		        'x', new ItemStack(ModBlocks.slateBrick));
+      GameRegistry.addRecipe(new ItemStack(ModBlocks.slateBrickStair,4), "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.slateBrick));
+
+
 	}
 
 	public static void initSmelting() {

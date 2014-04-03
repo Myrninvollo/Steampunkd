@@ -19,6 +19,7 @@ import com.sr2610.steampunked.client.render.RenderAutomoton;
 import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
 import com.sr2610.steampunked.items.ModItems;
 import com.sr2610.steampunked.tileentities.TileEntityPipe;
+import com.sr2610.steampunked.tileentities.TileEntityValvePipe;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -49,6 +50,8 @@ public class ClientProxy extends CommonProxy {
 				bootsItemRenderer);
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPipe.class, rp);
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityValvePipe.class, rp);
+
 
 	}
 }

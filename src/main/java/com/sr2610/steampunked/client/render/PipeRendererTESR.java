@@ -17,6 +17,7 @@ import org.lwjgl.opengl.GL11;
 import com.sr2610.steampunked.client.model.ModelPipe;
 import com.sr2610.steampunked.lib.Reference;
 import com.sr2610.steampunked.tileentities.TileEntityPipe;
+import com.sr2610.steampunked.tileentities.TileEntityValvePipe;
 
 public class PipeRendererTESR extends TileEntitySpecialRenderer {
 
@@ -37,38 +38,67 @@ public class PipeRendererTESR extends TileEntitySpecialRenderer {
 		Minecraft.getMinecraft().renderEngine.bindTexture(textures);
 		GL11.glPushMatrix();
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
-		renderModelAt((TileEntityPipe) te, x, y, z, scale);
+		renderModelAt(te, x, y, z, scale);
 
 		GL11.glPopMatrix();
 		GL11.glPopMatrix();
 	}
 
-	public void renderModelAt(TileEntityPipe tileEntity, double d, double d1,
+	public void renderModelAt(TileEntity tileEntity, double d, double d1,
 			double d2, float scale) {
-		tileEntity.checkPipeConnections();
-		boolean[] adjecentConnections = tileEntity.pipeConnectionsBuffer;
-		float f = 0.05F;
+		if (tileEntity instanceof TileEntityPipe) {
+			((TileEntityPipe) tileEntity).checkPipeConnections();
+			boolean[] adjecentConnections = ((TileEntityPipe) tileEntity).pipeConnectionsBuffer;
+			float f = 0.05F;
 
-		if (adjecentConnections[0] == true)
-			model.renderPart("Top", f);
+			if (adjecentConnections[0] == true)
+				model.renderPart("Top", f);
 
-		if (adjecentConnections[1] == true)
-			model.renderPart("Bottom", f);
+			if (adjecentConnections[1] == true)
+				model.renderPart("Bottom", f);
 
-		if (adjecentConnections[2] == true)
-			model.renderPart("Front", f);
+			if (adjecentConnections[2] == true)
+				model.renderPart("Front", f);
 
-		if (adjecentConnections[3] == true)
-			model.renderPart("Back", f);
+			if (adjecentConnections[3] == true)
+				model.renderPart("Back", f);
 
-		if (adjecentConnections[4] == true)
-			model.renderPart("Right", f);
+			if (adjecentConnections[4] == true)
+				model.renderPart("Right", f);
 
-		if (adjecentConnections[5] == true)
-			model.renderPart("Left", f);
+			if (adjecentConnections[5] == true)
+				model.renderPart("Left", f);
 
-		model.renderPart("Middle", f);
+			model.renderPart("Middle", f);
 
+		}
+
+		else if (tileEntity instanceof TileEntityValvePipe) {
+			((TileEntityValvePipe) tileEntity).checkPipeConnections();
+			boolean[] adjecentConnections = ((TileEntityValvePipe) tileEntity).pipeConnectionsBuffer;
+			float f = 0.05F;
+
+			if (adjecentConnections[0] == true)
+				model.renderPart("Top", f);
+
+			if (adjecentConnections[1] == true)
+				model.renderPart("Bottom", f);
+
+			if (adjecentConnections[2] == true)
+				model.renderPart("Front", f);
+
+			if (adjecentConnections[3] == true)
+				model.renderPart("Back", f);
+
+			if (adjecentConnections[4] == true)
+				model.renderPart("Right", f);
+
+			if (adjecentConnections[5] == true)
+				model.renderPart("Left", f);
+
+			model.renderPart("Middle", f);
+
+		}
 	}
 
 }

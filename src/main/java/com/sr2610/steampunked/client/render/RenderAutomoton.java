@@ -7,6 +7,8 @@
  ******************************************************************************/
 package com.sr2610.steampunked.client.render;
 
+import java.util.Calendar;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -34,6 +36,7 @@ public class RenderAutomoton extends RenderLiving {
 
 	public RenderAutomoton() {
 		super(new ModelAutomoton(), 0.25F);
+		 
 	}
 
 	public void doRenderAutomoton(EntityAutomaton par1EntityAutomoton,

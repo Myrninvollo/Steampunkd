@@ -242,8 +242,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 		surroundingTanks = new ArrayList<ForgeDirection>();
 		for (ForgeDirection side : checkSides) {
 			TileEntity tile = getTileInDirection(currentTile, side);
-			if (tile instanceof IFluidHandler
-					&& !(tile instanceof TileEntitySteamBoiler))
+			if (tile instanceof IFluidHandler)
 				surroundingTanks.add(side);
 		}
 	}

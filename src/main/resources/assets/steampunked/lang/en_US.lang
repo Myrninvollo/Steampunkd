@@ -1,3 +1,4 @@
+**ITEMS**
 item.automaton.name=Steam Automaton
 item.jetpack.name=Steam Powered Jetpack
 item.drill.name=Mining Drill
@@ -13,6 +14,7 @@ item.ingotCopper.name=Copper Ingot
 item.ingotTin.name=Tin Ingot
 item.hammer.name=Iron Hammer
 
+**SABERS**
 item.saberWooden.name=Wooden Sabre
 item.saberIron.name=Iron Sabre
 item.saberStone.name=Stone Sabre
@@ -20,10 +22,12 @@ item.saberGold.name=Gold Sabre
 item.saberDiamond.name=Diamond Sabre
 item.bowClockwork.name=Clockwork Bow
 
+**CORES**
 item.coreBasic.name=Basic Automaton Core
 item.coreMedium.name=Simple Automaton Core
 item.coreAdvanced.name=Advanced Automaton Core
 
+**PUNCHCARDS**
 item.punchcard.0.name=Blank Punchcard
 item.punchcard.1.name=Punchcard - Gather
 item.punchcard.2.name=Punchcard - Attack
@@ -50,6 +54,14 @@ tile.bench.name=Automaton Tinkering Bench
 tile.punchcardmaker.name=Punchcard Maker
 tile.oreCopper.name=Copper Ore
 tile.oreTin.name=Tin Ore
+
+**SLATE**
+tile.slate.name=Slate
+tile.slateBrick.name=Slate Bricks
+tile.slateSlab.name=Slate Slab
+tile.slateBrickSlab.name=Slate Brick Slab
+tile.slate.stairs.name=Slate Stairs
+tile.slate.brickStairs.name=Slate Brick Stairs
 
 tile.pipeFluid.name=Fluid Pipe
 entity.steampunked.Automaton.name=Steam Automaton
