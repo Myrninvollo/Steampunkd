@@ -29,7 +29,7 @@ public final class CraftingHandler {
 						new ItemStack(ModItems.hammer, 1,
 								OreDictionary.WILDCARD_VALUE), new ItemStack(
 								Items.iron_ingot));
-		
+				
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.slateBrick,4), "xx", "xx", 
 		        'x', new ItemStack(ModBlocks.slate));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.slateSlab,6), "xxx",

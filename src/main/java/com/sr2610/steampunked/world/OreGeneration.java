@@ -10,6 +10,7 @@ package com.sr2610.steampunked.world;
 import java.util.Random;
 
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
@@ -53,6 +54,17 @@ public class OreGeneration implements IWorldGenerator {
 			int blockZCoord = j + random.nextInt(16);
 			new WorldGenMinable(ModBlocks.oreTin, 6).generate(world, random,
 					blockXCoord, blockYCoord, blockZCoord);
+
+		}
+
+		for (int k = 0; k < 4; k++) {
+			int blockXCoord = i + random.nextInt(16);
+			int blockYCoord = random.nextInt(64);
+			int blockZCoord = j + random.nextInt(16);
+			if (world.getBiomeGenForCoords(blockXCoord, blockZCoord) == BiomeGenBase.extremeHills) {
+				new WorldGenMinable(ModBlocks.slate, 20).generate(world,
+						random, blockXCoord, blockYCoord, blockZCoord);
+			}
 
 		}
 
