@@ -30,7 +30,7 @@ public class ModCreativeTab extends CreativeTabs {
 	@Override
 	public void displayAllReleventItems(List list) {
 		this.list = list;
-
+		addItem(ModItems.handBook);
 		addItem(ModItems.bucket);
 		addBlock(ModBlocks.steamBoiler);
 		addBlock(ModBlocks.Injector);
@@ -52,7 +52,7 @@ public class ModCreativeTab extends CreativeTabs {
 		addItem(ModItems.saberGold);
 		addItem(ModItems.saberDiamond);
 		addItem(ModItems.clockworkBow);
-	
+
 		addBlock(ModBlocks.slateSlab);
 		addBlock(ModBlocks.slate);
 		addBlock(ModBlocks.slateStair);
@@ -63,9 +63,6 @@ public class ModCreativeTab extends CreativeTabs {
 		addBlock(ModBlocks.oreTin);
 		addItem(ModItems.copperIngot);
 		addItem(ModItems.tinIngot);
-	
-
-
 
 	}
 

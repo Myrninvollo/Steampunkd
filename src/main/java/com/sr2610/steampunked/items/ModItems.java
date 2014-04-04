@@ -76,7 +76,8 @@ public final class ModItems {
 	public static Item reprogrammer;
 	public static Item hammer;
 	
-	public static Item slateSlab;
+	
+	public static Item handBook;
 
 	public static void initItems() {
 		Steampunked.logger.info("Initialising  Items");
@@ -137,6 +138,8 @@ public final class ModItems {
 		mechBoots = new ItemMechBoots().setUnlocalizedName(LibNames.MECHBOOTS);
 
 		hammer = new ItemHammer().setUnlocalizedName(LibNames.HAMMER);
+		
+		handBook= new ItemHandbook();
 	
 
 		registerItems();
@@ -192,6 +195,8 @@ public final class ModItems {
 				Reference.ModID);
 
 		GameRegistry.registerItem(hammer, LibNames.HAMMER, Reference.ModID);
+		
+		GameRegistry.registerItem(handBook, LibNames.HANDBOOK, Reference.ModID);
 
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry
 				.getFluidStack("steam", FluidContainerRegistry.BUCKET_VOLUME),
