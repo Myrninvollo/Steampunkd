@@ -21,8 +21,23 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.sr2610.steampunked.Steampunked;
 import com.sr2610.steampunked.blocks.ModBlocks;
+import com.sr2610.steampunked.items.armour.ItemBoots;
+import com.sr2610.steampunked.items.armour.ItemGoggles;
+import com.sr2610.steampunked.items.armour.ItemJetpack;
+import com.sr2610.steampunked.items.armour.ItemMechBoots;
+import com.sr2610.steampunked.items.automotons.ItemAutomatonUpgrade;
+import com.sr2610.steampunked.items.automotons.ItemAutomotonSpawner;
+import com.sr2610.steampunked.items.automotons.ItemChasis;
+import com.sr2610.steampunked.items.automotons.ItemCore;
+import com.sr2610.steampunked.items.automotons.ItemNamePlate;
+import com.sr2610.steampunked.items.automotons.ItemPunchcard;
+import com.sr2610.steampunked.items.automotons.ItemReprogrammer;
 import com.sr2610.steampunked.items.handlers.BucketHandler;
+import com.sr2610.steampunked.items.tools.ItemDiamondDrill;
+import com.sr2610.steampunked.items.tools.ItemDrill;
 import com.sr2610.steampunked.items.tools.ItemHammer;
+import com.sr2610.steampunked.items.tools.ItemSaber;
+import com.sr2610.steampunked.items.tools.ItemSpanner;
 import com.sr2610.steampunked.lib.LibNames;
 import com.sr2610.steampunked.lib.Reference;
 

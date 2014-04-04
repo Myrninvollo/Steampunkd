@@ -11,7 +11,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import com.sr2610.steampunked.items.ItemChasis;
+import com.sr2610.steampunked.items.automotons.ItemChasis;
 
 public class SlotChasis extends Slot {
 

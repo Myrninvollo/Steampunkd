@@ -5,7 +5,7 @@
  * distributed under a * Creative Commons Attribution-NonCommercial-ShareAlike
  * 3.0 License * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
  ******************************************************************************/
-package com.sr2610.steampunked.items;
+package com.sr2610.steampunked.items.tools;
 
 import java.util.List;
 import java.util.Set;
@@ -30,7 +30,7 @@ import com.sr2610.steampunked.lib.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemDrill extends ItemPickaxe implements ISteamUser {
+public class ItemDiamondDrill extends ItemPickaxe implements ISteamUser {
 
 	private static final Set blocks = Sets.newHashSet(new Block[] {
 			Blocks.cobblestone, Blocks.double_stone_slab, Blocks.stone_slab,
@@ -42,10 +42,10 @@ public class ItemDrill extends ItemPickaxe implements ISteamUser {
 			Blocks.lit_redstone_ore, Blocks.rail, Blocks.detector_rail,
 			Blocks.golden_rail, Blocks.activator_rail });
 
-	public ItemDrill() {
-		super(Item.ToolMaterial.IRON);
+	public ItemDiamondDrill() {
+		super(Item.ToolMaterial.EMERALD);
 		setMaxStackSize(1);
-		setMaxDamage(LibOptions.drillCapacity);
+		setMaxDamage(LibOptions.drillCapacity * 2);
 		setCreativeTab(ModCreativeTab.INSTANCE);
 
 	}
@@ -79,13 +79,13 @@ public class ItemDrill extends ItemPickaxe implements ISteamUser {
 
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-
-		itemIcon = iconRegister.registerIcon(Reference.ModID + ":iron_drill");
-
+		itemIcon = iconRegister
+				.registerIcon(Reference.ModID + ":diamond_drill");
 	}
 
-	public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block) {
-		return 3.0F;
+	@Override
+	public float func_150893_a(ItemStack stack, Block block) {
+		return 4.0F;
 	}
 
 	@Override
@@ -131,6 +131,7 @@ public class ItemDrill extends ItemPickaxe implements ISteamUser {
 			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
 		par3List.add(EnumChatFormatting.AQUA + "Steam : "
 				+ getCurrentSteam(par1ItemStack) + "/" + getMaxSteam());
+		par3List.add(EnumChatFormatting.ITALIC + "Diamond Tipped");
 	}
 
 	@Override

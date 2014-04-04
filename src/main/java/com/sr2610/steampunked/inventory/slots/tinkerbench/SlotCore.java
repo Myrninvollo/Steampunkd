@@ -11,7 +11,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import com.sr2610.steampunked.items.ItemCore;
+import com.sr2610.steampunked.items.automotons.ItemCore;
 
 public class SlotCore extends Slot {
 

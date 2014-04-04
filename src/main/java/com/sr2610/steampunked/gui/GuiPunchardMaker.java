@@ -17,8 +17,8 @@ import org.lwjgl.opengl.GL11;
 
 import com.sr2610.steampunked.Steampunked;
 import com.sr2610.steampunked.inventory.container.ContainerPunchcardmaker;
-import com.sr2610.steampunked.items.ItemPunchcard;
 import com.sr2610.steampunked.items.ModItems;
+import com.sr2610.steampunked.items.automotons.ItemPunchcard;
 import com.sr2610.steampunked.lib.Reference;
 import com.sr2610.steampunked.network.PacketPunchcardMaker;
 import com.sr2610.steampunked.tileentities.TileEntityPunchardMaker;

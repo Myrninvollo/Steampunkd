@@ -5,12 +5,11 @@
  * distributed under a * Creative Commons Attribution-NonCommercial-ShareAlike
  * 3.0 License * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
  ******************************************************************************/
-package com.sr2610.steampunked.items;
+package com.sr2610.steampunked.items.armour;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,48 +17,59 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
 
+import org.lwjgl.input.Keyboard;
+
+import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.items.interfaces.ISteamUser;
 import com.sr2610.steampunked.lib.LibOptions;
 import com.sr2610.steampunked.lib.Reference;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemBoots extends ItemArmor implements ISteamUser, ISpecialArmor {
+public class ItemJetpack extends ItemArmor implements ISteamUser, ISpecialArmor {
 
-	static final int ARMOR_BOOTS = 3;
+	static final int ARMOR_CHEST = 1;
 
-	public ItemBoots() {
-		super(ItemArmor.ArmorMaterial.IRON, 2, ARMOR_BOOTS);
-		setMaxDamage(LibOptions.bootsCapacity + 1);
-		setCreativeTab(CreativeTabs.tabCombat);
+	public ItemJetpack() {
+		super(ItemArmor.ArmorMaterial.IRON, 2, ARMOR_CHEST);
+		setMaxDamage(LibOptions.jetpackCapacity + 1);
+		setCreativeTab(ModCreativeTab.INSTANCE);
 
+	}
+
+	@Override
+	public boolean isValidArmor(ItemStack stack, int armorType, Entity entity) {
+		return armorType == ARMOR_CHEST;
+	}
+
+	@Override
+	public int getItemEnchantability() {
+		return 0;
 	}
 
 	@Override
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
 			String type) {
-
-		return Reference.ModID + ":textures/models/springbootsmodel.png";
+		return Reference.ModID + ":textures/models/jetpack.png";
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister registry) {
-		itemIcon = registry.registerIcon(Reference.ModID + ":springboots");
-	}
+	public void onArmorTick(World world, EntityPlayer player,
+			ItemStack itemStack) {
+		Minecraft mc = FMLClientHandler.instance().getClient();
+		if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && player.posY <= 200
+				&& getCurrentSteam(itemStack) > 0 && mc.currentScreen == null) {
+			player.fallDistance = 0F;
+			player.motionY += 0.10;
+			setDamage(itemStack, getDamage(itemStack) + 2);
 
-	@Override
-	public IIcon getIcon(ItemStack stack, int pass) {
-		return itemIcon;
-	}
+		}
 
-	@Override
-	public boolean isValidArmor(ItemStack stack, int armorType, Entity entity) {
-		return armorType == ARMOR_BOOTS;
 	}
 
 	@Override
@@ -86,22 +96,16 @@ public class ItemBoots extends ItemArmor implements ISteamUser, ISpecialArmor {
 	}
 
 	@Override
-	public void addCharge(int charge, ItemStack stack) {
-		setDamage(stack, getCurrentSteam(stack) + charge);
-	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
-		par3List.add("Useful for high altitude falling");
 		par3List.add(EnumChatFormatting.AQUA + "Steam : "
 				+ getCurrentSteam(par1ItemStack) + "/" + getMaxSteam());
 	}
 
 	@Override
-	public int getItemEnchantability() {
-		return 0;
+	public void addCharge(int charge, ItemStack stack) {
+		setDamage(stack, getCurrentSteam(stack) + charge);
 	}
 
 	@Override
