@@ -7,11 +7,15 @@
  ******************************************************************************/
 package com.sr2610.steampunked.core.handlers;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
+import com.sr2610.steampunked.api.SteampunkedAPI;
 import com.sr2610.steampunked.blocks.ModBlocks;
 import com.sr2610.steampunked.items.ModItems;
 
@@ -20,25 +24,31 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public final class CraftingHandler {
+	public static IRecipe recipeSpanner;
 
 	public static void init() {
 		initSmelting();
 
-		GameRegistry
-				.addShapelessRecipe(new ItemStack(Items.apple, 1, 0),
-						new ItemStack(ModItems.hammer, 1,
-								OreDictionary.WILDCARD_VALUE), new ItemStack(
-								Items.iron_ingot));
-				
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.slateBrick,4), "xx", "xx", 
-		        'x', new ItemStack(ModBlocks.slate));
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.slateSlab,6), "xxx",
-		        'x', new ItemStack(ModBlocks.slate));
-       GameRegistry.addRecipe(new ItemStack(ModBlocks.slateStair,4), "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.slate));
-       GameRegistry.addRecipe(new ItemStack(ModBlocks.slateBrickSlab,6), "xxx",
-		        'x', new ItemStack(ModBlocks.slateBrick));
-      GameRegistry.addRecipe(new ItemStack(ModBlocks.slateBrickStair,4), "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.slateBrick));
+		/*GameRegistry
+		.addShapelessRecipe(new ItemStack(Items.apple, 1, 0),
+				new ItemStack(ModItems.hammer, 1,
+						OreDictionary.WILDCARD_VALUE), new ItemStack(
+						Items.iron_ingot));*/
+		GameRegistry.addRecipe(new ItemStack(ModItems.spanner), "x x",
+				" x "," x ", 'x', new ItemStack(Items.iron_ingot));
+		recipeSpanner = SteampunkedAPI.getLatestAddedRecipe();
+		
 
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.slateBrick, 4), "xx",
+				"xx", 'x', new ItemStack(ModBlocks.slate));
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.slateSlab, 6), "xxx",
+				'x', new ItemStack(ModBlocks.slate));
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.slateStair, 4), "x  ",
+				"xx ", "xxx", 'x', new ItemStack(ModBlocks.slate));
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.slateBrickSlab, 6),
+				"xxx", 'x', new ItemStack(ModBlocks.slateBrick));
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.slateBrickStair, 4),
+				"x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.slateBrick));
 
 	}
 
@@ -63,6 +73,17 @@ public final class CraftingHandler {
 					event.craftMatrix.setInventorySlotContents(i, k);
 				}
 			}
+	}
+
+	private static void addOreDictRecipe(ItemStack output, Object... recipe) {
+		CraftingManager.getInstance().getRecipeList()
+				.add(new ShapedOreRecipe(output, recipe));
+	}
+
+	private static void addShapelessOreDictRecipe(ItemStack output,
+			Object... recipe) {
+		CraftingManager.getInstance().getRecipeList()
+				.add(new ShapelessOreRecipe(output, recipe));
 	}
 
 }

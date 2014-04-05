@@ -18,6 +18,7 @@ import com.sr2610.steampunked.core.handlers.CraftingHandler;
 import com.sr2610.steampunked.core.handlers.SteampunkedEventHandler;
 import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
 import com.sr2610.steampunked.gui.GuiHandler;
+import com.sr2610.steampunked.handbook.HandbookData;
 import com.sr2610.steampunked.items.ModItems;
 import com.sr2610.steampunked.network.PacketPipeline;
 import com.sr2610.steampunked.proxies.CommonProxy;
@@ -68,6 +69,7 @@ public class Steampunked {
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, guiHandler);
 		GameRegistry.registerWorldGenerator(new OreGeneration(), 1);
 		CraftingHandler.init();
+		HandbookData.init();
 
 	}
 

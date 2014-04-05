@@ -11,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import com.sr2610.steampunked.gui.handbook.GuiHandbook;
 import com.sr2610.steampunked.inventory.container.ContainerInjector;
 import com.sr2610.steampunked.inventory.container.ContainerPunchcardmaker;
 import com.sr2610.steampunked.inventory.container.ContainerSteamBoiler;
@@ -76,6 +77,9 @@ public class GuiHandler implements IGuiHandler {
 		case 5:
 			return new GuiPunchardMaker((TileEntityPunchardMaker) tile_entity,
 					player.inventory);
+		
+		case 6:
+			return new GuiHandbook();
 		}
 		return null;
 	}
