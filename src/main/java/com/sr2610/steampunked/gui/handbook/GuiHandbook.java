@@ -25,7 +25,7 @@ import com.sr2610.steampunked.lib.Reference;
 
 public class GuiHandbook extends GuiScreen {
 
-	public static GuiHandbook currentOpenLexicon = new GuiHandbook();
+	public static GuiHandbook currentOpenHandbook = new GuiHandbook();
 
 	public static final ResourceLocation texture = new ResourceLocation(
 			Reference.ModID, "textures/gui/handbook/handbook.png");
@@ -36,7 +36,7 @@ public class GuiHandbook extends GuiScreen {
 	@Override
 	public void initGui() {
 		super.initGui();
-		currentOpenLexicon = this;
+		currentOpenHandbook = this;
 
 		left = width / 2 - guiWidth / 2;
 		top = height / 2 - guiHeight / 2;

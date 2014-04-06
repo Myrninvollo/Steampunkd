@@ -67,25 +67,24 @@ public class PageRecipe extends HandbookPage {
 
 			if (tooltipEntry) {
 				RenderHelper
-						.renderTooltipOrange(
+						.renderTooltip(
 								mx,
 								my + tooltipY,
 								Arrays.asList(EnumChatFormatting.GRAY
 										+ StatCollector
-												.translateToLocal("botaniamisc.clickToRecipe")));
+												.translateToLocal("steampunked.gui.handbook.clickToRecipe")));
 				tooltipY += 18;
 			}
 
 			if (tooltipContainerStack != null)
 				RenderHelper
-						.renderTooltipGreen(
+						.renderTooltip(
 								mx,
 								my + tooltipY,
 								Arrays.asList(
 										EnumChatFormatting.AQUA
 												+ StatCollector
-														.translateToLocal("botaniamisc.craftingContainer"),
-										tooltipContainerStack.getDisplayName()));
+														.translateToLocal("steampunked.gui.handbook.craftingContainer")));
 		}
 
 		tooltipStack = tooltipContainerStack = null;
@@ -153,8 +152,6 @@ public class PageRecipe extends HandbookPage {
 		TextureManager renderEngine = Minecraft.getMinecraft().renderEngine;
 		FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
 
-		// Translations required so the glint doesn't merge with the book
-		// texture
 		GL11.glTranslatef(0F, 0F, 200F);
 		if (!ForgeHooksClient.renderInventoryItem(new RenderBlocks(),
 				renderEngine, stack, render.renderWithColor, gui.getZLevel(),
@@ -176,7 +173,7 @@ public class PageRecipe extends HandbookPage {
 							.getPageOn())) {
 				tooltipEntry = true;
 
-				if (Mouse.isButtonDown(0) && GuiScreen.isShiftKeyDown()) {
+				if (Mouse.isButtonDown(0)) {
 					GuiHandbookEntry newGui = new GuiHandbookEntry(data.entry,
 							(GuiScreen) gui);
 					newGui.page = data.page;

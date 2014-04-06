@@ -48,6 +48,7 @@ public class ItemHammer extends ItemPickaxe {
 	public ItemHammer() {
 		super(Item.ToolMaterial.IRON);
 		setNoRepair();
+		this.setContainerItem(this);
 	}
 
 	@Override
@@ -143,10 +144,6 @@ public class ItemHammer extends ItemPickaxe {
 		}
 	}
 
-	/*
-	 * &&(
-	 * par1ItemStack.getDisplayName().toLowerCase()=="mjolnir"||par1ItemStack
-	 * .getDisplayName().toLowerCase()=="Mjölnir"))
-	 */
+
 
 }

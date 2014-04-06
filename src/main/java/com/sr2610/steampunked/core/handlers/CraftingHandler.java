@@ -25,18 +25,26 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public final class CraftingHandler {
 	public static IRecipe recipeSpanner;
+	public static IRecipe recipeHammer;
+
 
 	public static void init() {
 		initSmelting();
+		addShapelessOreDictRecipe(new ItemStack(ModItems.handBook), "treeSapling", Items.book);
+		recipeSpanner = SteampunkedAPI.getLatestAddedRecipe();
 
-		/*GameRegistry
+		GameRegistry
 		.addShapelessRecipe(new ItemStack(Items.apple, 1, 0),
 				new ItemStack(ModItems.hammer, 1,
 						OreDictionary.WILDCARD_VALUE), new ItemStack(
-						Items.iron_ingot));*/
-		GameRegistry.addRecipe(new ItemStack(ModItems.spanner), "x x",
-				" x "," x ", 'x', new ItemStack(Items.iron_ingot));
-		recipeSpanner = SteampunkedAPI.getLatestAddedRecipe();
+						Items.iron_ingot));
+		//GameRegistry.addRecipe(new ItemStack(ModItems.spanner), "x x",
+			//	" x "," x ", 'x', new ItemStack(Items.iron_ingot));
+		addOreDictRecipe(new ItemStack(ModItems.hammer),
+				"xxx", "xxx", " s ",
+				's', "stickWood",
+				'x', new ItemStack(Items.iron_ingot));
+		recipeHammer = SteampunkedAPI.getLatestAddedRecipe();
 		
 
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.slateBrick, 4), "xx",

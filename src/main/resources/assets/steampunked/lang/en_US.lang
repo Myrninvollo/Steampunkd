@@ -79,3 +79,19 @@ steampunked.gui.redstoneControl=Redstone Control
 steampunked.gui.ignoreRedstone=Machine Disabled
 steampunked.gui.lowRedstone=Machine Enabled
 steampunked.gui.highRedstone=Requires Redstone Signal to Operate
+
+**HANDBOOK**
+item.handbook.name=Engineer's Handbook
+steampunked.gui.handbook.header=Engineer's Handbook
+steampunked.gui.handbook.clickToRecipe=Click to see Recipe
+steampunked.gui.handbook.craftingContainer=This item is returned after crafting
+steampunked.gui.handbook.oredict=Ore Dictionary Recipe
+steampunked.gui.handbook.shapeless=Shapeless Recipe
+
+**SPANNER**
+steampunked.entry.spanner=Spanner
+steampunked.page.spanner0=The Spanner.  The tool used to rotate blocks and do nifty things with machines and Automotons.
+steampunked.page.spanner1=Crafting Recipe
+
+**HAMMER**
+steampunked.entry.hammer=Hammer

@@ -79,7 +79,7 @@ public class GuiHandler implements IGuiHandler {
 					player.inventory);
 		
 		case 6:
-			return new GuiHandbook();
+			return GuiHandbook.currentOpenHandbook;
 		}
 		return null;
 	}

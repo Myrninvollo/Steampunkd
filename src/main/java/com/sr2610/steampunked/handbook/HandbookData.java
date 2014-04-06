@@ -24,6 +24,7 @@ public final class HandbookData {
 	public static HandbookCatagory categoryArmor;
 
 	public static HandbookEntry spanner;
+ public static HandbookEntry hammer;
 
 	public static void init() {
 		SteampunkedAPI.addCategory(categoryBasics = new HandbookCatagory(
@@ -42,6 +43,10 @@ public final class HandbookData {
 		spanner = new SPHandbookEntry("spanner", categoryBasics);
 		spanner.setPriority().setHandbookPages(new PageText("0"),
 				new PageCraftingRecipe("1", CraftingHandler.recipeSpanner));
+		
+		hammer = new SPHandbookEntry("hammer", categoryBasics);
+		hammer.setHandbookPages(new PageText("0"),
+				new PageCraftingRecipe("1", CraftingHandler.recipeHammer));
 
 	}
 

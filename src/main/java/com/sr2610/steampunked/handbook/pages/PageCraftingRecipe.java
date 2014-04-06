@@ -92,7 +92,7 @@ public class PageCraftingRecipe extends PageRecipe {
 			if(mx >= iconX && my >= iconY && mx < iconX + 16 && my < iconY + 16)
 				RenderHelper.renderTooltip(mx, my, Arrays.asList(StatCollector.translateToLocal("steampunked.gui.handbook.shapeless")));
 
-			iconY += 20;
+			iconX =gui.getLeft()+95;
 		}
 
 		render.bindTexture(craftingOverlay);
