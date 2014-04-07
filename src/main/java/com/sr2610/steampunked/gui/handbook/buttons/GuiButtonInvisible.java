@@ -11,6 +11,7 @@ package com.sr2610.steampunked.gui.handbook.buttons;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.util.EnumChatFormatting;
 
 public class GuiButtonInvisible  extends GuiButton {
 

@@ -14,6 +14,8 @@ item.ingotCopper.name=Copper Ingot
 item.ingotTin.name=Tin Ingot
 item.hammer.name=Iron Hammer
 
+item.craftingItem.0.name=Canister
+
 **SABERS**
 item.saberWooden.name=Wooden Sabre
 item.saberIron.name=Iron Sabre
@@ -95,3 +97,9 @@ steampunked.page.spanner1=Crafting Recipe
 
 **HAMMER**
 steampunked.entry.hammer=Hammer
+
+
+**Mech Boots**
+steampunked.entry.mechBoots=Mechanised Boots
+steampunked.page.mechBoots0=The piston boot's older brother.  They allow you to move faster, step up full blocks and jump with greater potency.
+steampunked.page.mechBoots1="Harder, Better, Faster, Stronger"

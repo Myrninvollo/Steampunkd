@@ -21,10 +21,10 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.sr2610.steampunked.Steampunked;
 import com.sr2610.steampunked.blocks.ModBlocks;
-import com.sr2610.steampunked.items.armour.ItemBoots;
-import com.sr2610.steampunked.items.armour.ItemGoggles;
-import com.sr2610.steampunked.items.armour.ItemJetpack;
-import com.sr2610.steampunked.items.armour.ItemMechBoots;
+import com.sr2610.steampunked.items.armor.ItemBoots;
+import com.sr2610.steampunked.items.armor.ItemGoggles;
+import com.sr2610.steampunked.items.armor.ItemJetpack;
+import com.sr2610.steampunked.items.armor.ItemMechBoots;
 import com.sr2610.steampunked.items.automotons.ItemAutomatonUpgrade;
 import com.sr2610.steampunked.items.automotons.ItemAutomotonSpawner;
 import com.sr2610.steampunked.items.automotons.ItemChasis;
@@ -75,6 +75,8 @@ public final class ModItems {
 
 	public static Item reprogrammer;
 	public static Item hammer;
+	
+	public static Item craftingItems;
 	
 	
 	public static Item handBook;
@@ -140,6 +142,8 @@ public final class ModItems {
 		hammer = new ItemHammer().setUnlocalizedName(LibNames.HAMMER);
 		
 		handBook= new ItemHandbook();
+		
+		craftingItems = new ItemCrafting().setUnlocalizedName(LibNames.CRAFTING);
 	
 
 		registerItems();
@@ -197,6 +201,9 @@ public final class ModItems {
 		GameRegistry.registerItem(hammer, LibNames.HAMMER, Reference.ModID);
 		
 		GameRegistry.registerItem(handBook, LibNames.HANDBOOK, Reference.ModID);
+		
+		GameRegistry.registerItem(craftingItems, LibNames.CRAFTING, Reference.ModID);
+
 
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry
 				.getFluidStack("steam", FluidContainerRegistry.BUCKET_VOLUME),

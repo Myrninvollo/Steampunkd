@@ -57,7 +57,7 @@ public class GuiHandbookIndex extends GuiHandbook {
 
 		entriesToDisplay.clear();
 		entriesToDisplay.addAll(category.entries);
-		Collections.sort(entriesToDisplay);
+		//Collections.sort(entriesToDisplay);
 
 		updatePageButtons();
 		populateIndex();
@@ -79,7 +79,6 @@ public class GuiHandbookIndex extends GuiHandbook {
 		switch(par1GuiButton.id) {
 		case 12 :
 			mc.displayGuiScreen(new GuiHandbook());
-		
 			break;
 		case 13 :
 			page--;
