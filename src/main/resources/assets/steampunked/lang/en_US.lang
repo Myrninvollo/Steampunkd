@@ -93,13 +93,25 @@ steampunked.gui.handbook.shapeless=Shapeless Recipe
 **SPANNER**
 steampunked.entry.spanner=Spanner
 steampunked.page.spanner0=The Spanner.  The tool used to rotate blocks and do nifty things with machines and Automotons.
-steampunked.page.spanner1=Crafting Recipe
+steampunked.page.spanner1=Crafting the Spanner
 
 **HAMMER**
 steampunked.entry.hammer=Hammer
-
+steampunked.page.hammer0=The Hammer.  A useful tool for crafting items, but it can also double up as a weapon and a pickaxe, some say that it was even used by a Norse God.
+steampunked.page.hammer1=Crafting the Hammer
 
 **Mech Boots**
 steampunked.entry.mechBoots=Mechanised Boots
 steampunked.page.mechBoots0=The piston boot's older brother.  They allow you to move faster, step up full blocks and jump with greater potency.
 steampunked.page.mechBoots1="Harder, Better, Faster, Stronger"
+
+
+**SLATE**
+steampunked.entry.slate=Slate
+steampunked.page.slate0=Slate is a metamorphic rock, found exclusively underground in mountainous regions.  It can be converted into Slabs, Stairs, Bricks and more, being useful as a decorative block.
+steampunked.page.slate1=Crafting Slate Slabs
+steampunked.page.slate2=Crafting Slate Stairs
+steampunked.page.slate3=Crafting Slate Bricks
+steampunked.page.slate4=Crafting Slate Brick Slabs
+steampunked.page.slate5=Crafting Slate Brick Stairs
+
