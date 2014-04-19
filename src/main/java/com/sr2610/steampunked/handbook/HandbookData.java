@@ -23,11 +23,15 @@ public final class HandbookData {
 	public static HandbookCatagory categoryItems;
 	public static HandbookCatagory categoryArmor;
 
+	public static HandbookEntry steam;
 	public static HandbookEntry spanner;
 	public static HandbookEntry hammer;
 	public static HandbookEntry pistonBoots;
 	public static HandbookEntry mechBoots;
 	public static HandbookEntry slate;
+	public static HandbookEntry jetpack;
+
+	
 
 	public static void init() {
 		SteampunkedAPI.addCategory(categoryBasics = new HandbookCatagory(
@@ -42,9 +46,14 @@ public final class HandbookData {
 				.addCategory(categoryArmor = new HandbookCatagory("Armor"));
 		SteampunkedAPI.addCategory(categoryAutomotons = new HandbookCatagory(
 				"Automotons"));
+		
+
+		steam = new SPHandbookEntry("steam", categoryBasics);
+		steam.setPriority().setHandbookPages(new PageText("0"));
+		
 
 		spanner = new SPHandbookEntry("spanner", categoryBasics);
-		spanner.setPriority().setHandbookPages(new PageText("0"),
+		spanner.setHandbookPages(new PageText("0"),
 				new PageCraftingRecipe("1", CraftingHandler.recipeSpanner));
 
 		hammer = new SPHandbookEntry("hammer", categoryBasics);
@@ -58,6 +67,9 @@ public final class HandbookData {
 		mechBoots = new SPHandbookEntry("mechBoots", categoryArmor);
 		mechBoots.setHandbookPages(new PageText("0"), new PageCraftingRecipe(
 				"1", CraftingHandler.recipeMechBoots));
+		jetpack = new SPHandbookEntry("jetpack", categoryArmor);
+		jetpack.setHandbookPages(new PageText("0"), new PageCraftingRecipe(
+				"1", CraftingHandler.recipeJetpack));
 
 		slate = new SPHandbookEntry("slate", categoryBlocks);
 		slate.setHandbookPages(new PageText("0"), new PageCraftingRecipe(

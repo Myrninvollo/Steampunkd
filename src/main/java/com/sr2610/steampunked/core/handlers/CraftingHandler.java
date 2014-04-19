@@ -19,6 +19,7 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import com.sr2610.steampunked.api.SteampunkedAPI;
 import com.sr2610.steampunked.blocks.ModBlocks;
 import com.sr2610.steampunked.items.ModItems;
+import com.sr2610.steampunked.lib.LibOptions;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
@@ -29,6 +30,8 @@ public final class CraftingHandler {
 	public static IRecipe recipeHammer;
 	public static IRecipe recipePistonBoots;
 	public static IRecipe recipeMechBoots;
+	public static IRecipe recipeJetpack;
+
 	
 	public static IRecipe slateSlab;
 	public static IRecipe slateStairs;
@@ -64,6 +67,10 @@ public final class CraftingHandler {
 				new ItemStack(ModItems.boots,1,250), 'p', new ItemStack(
 						Blocks.piston),'c',new ItemStack(ModItems.craftingItems,1,0));
 		recipeMechBoots = SteampunkedAPI.getLatestAddedRecipe();
+		GameRegistry.addRecipe(new ItemStack(ModItems.jetpack, 1, LibOptions.jetpackCapacity), "cxc",
+				"xpx", 'x', new ItemStack(Items.iron_ingot), 'p', new ItemStack(
+						Items.iron_chestplate),'c',new ItemStack(ModItems.craftingItems,1,0));
+		recipeJetpack = SteampunkedAPI.getLatestAddedRecipe();
 		GameRegistry.addRecipe(new ItemStack(ModItems.mechBoots, 1, 1500), "xbx",
 				"cpc", 'x', new ItemStack(Items.iron_ingot), 'b',
 				new ItemStack(ModItems.boots,1,OreDictionary.WILDCARD_VALUE), 'p', new ItemStack(

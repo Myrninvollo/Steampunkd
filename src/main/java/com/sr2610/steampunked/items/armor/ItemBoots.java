@@ -94,7 +94,6 @@ public class ItemBoots extends ItemArmor implements ISteamUser, ISpecialArmor {
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
-		par3List.add("Useful for high altitude falling");
 		par3List.add(EnumChatFormatting.AQUA + "Steam : "
 				+ getCurrentSteam(par1ItemStack) + "/" + getMaxSteam());
 	}

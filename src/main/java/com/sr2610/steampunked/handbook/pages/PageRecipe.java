@@ -66,25 +66,20 @@ public class PageRecipe extends HandbookPage {
 			int tooltipY = 8 + tooltipData.size() * 11;
 
 			if (tooltipEntry) {
-				RenderHelper
-						.renderTooltip(
-								mx,
-								my + tooltipY,
-								Arrays.asList(EnumChatFormatting.GRAY
+				tooltipData.add(EnumChatFormatting.GRAY
 										+ StatCollector
-												.translateToLocal("steampunked.gui.handbook.clickToRecipe")));
+												.translateToLocal("steampunked.gui.handbook.clickToRecipe"));
 				tooltipY += 18;
 			}
 
 			if (tooltipContainerStack != null)
-				RenderHelper
-						.renderTooltip(
-								mx,
-								my + tooltipY,
-								Arrays.asList(
-										EnumChatFormatting.AQUA
+				tooltipData.add(EnumChatFormatting.AQUA
 												+ StatCollector
-														.translateToLocal("steampunked.gui.handbook.craftingContainer")));
+														.translateToLocal("steampunked.gui.handbook.craftingContainer"));
+			
+			
+			RenderHelper.renderTooltip(mx, my, tooltipData);
+
 		}
 
 		tooltipStack = tooltipContainerStack = null;

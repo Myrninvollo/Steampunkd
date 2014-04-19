@@ -1,4 +1,4 @@
-**ITEMS**
+**Items**
 item.automaton.name=Steam Automaton
 item.jetpack.name=Steam Powered Jetpack
 item.drill.name=Mining Drill
@@ -16,7 +16,7 @@ item.hammer.name=Iron Hammer
 
 item.craftingItem.0.name=Canister
 
-**SABERS**
+**Sabers**
 item.saberWooden.name=Wooden Sabre
 item.saberIron.name=Iron Sabre
 item.saberStone.name=Stone Sabre
@@ -24,12 +24,12 @@ item.saberGold.name=Gold Sabre
 item.saberDiamond.name=Diamond Sabre
 item.bowClockwork.name=Clockwork Bow
 
-**CORES**
+**Cores**
 item.coreBasic.name=Basic Automaton Core
 item.coreMedium.name=Simple Automaton Core
 item.coreAdvanced.name=Advanced Automaton Core
 
-**PUNCHCARDS**
+**Punchcards**
 item.punchcard.0.name=Blank Punchcard
 item.punchcard.1.name=Punchcard - Gather
 item.punchcard.2.name=Punchcard - Attack
@@ -57,7 +57,7 @@ tile.punchcardmaker.name=Punchcard Maker
 tile.oreCopper.name=Copper Ore
 tile.oreTin.name=Tin Ore
 
-**SLATE**
+**Slate**
 tile.slate.name=Slate
 tile.slateBrick.name=Slate Bricks
 tile.slateSlab.name=Slate Slab
@@ -82,7 +82,7 @@ steampunked.gui.ignoreRedstone=Machine Disabled
 steampunked.gui.lowRedstone=Machine Enabled
 steampunked.gui.highRedstone=Requires Redstone Signal to Operate
 
-**HANDBOOK**
+**Handbook**
 item.handbook.name=Engineer's Handbook
 steampunked.gui.handbook.header=Engineer's Handbook
 steampunked.gui.handbook.clickToRecipe=Click to see Recipe
@@ -90,15 +90,20 @@ steampunked.gui.handbook.craftingContainer=This item is returned after crafting
 steampunked.gui.handbook.oredict=Ore Dictionary Recipe
 steampunked.gui.handbook.shapeless=Shapeless Recipe
 
-**SPANNER**
+**Spanner**
 steampunked.entry.spanner=Spanner
 steampunked.page.spanner0=The Spanner.  The tool used to rotate blocks and do nifty things with machines and Automotons.
 steampunked.page.spanner1=Crafting the Spanner
 
-**HAMMER**
+**Hammer**
 steampunked.entry.hammer=Hammer
 steampunked.page.hammer0=The Hammer.  A useful tool for crafting items, but it can also double up as a weapon and a pickaxe, some say that it was even used by a Norse God.
 steampunked.page.hammer1=Crafting the Hammer
+
+**Piston Boots**
+steampunked.entry.pistonBoots=Piston Boots
+steampunked.page.pistonBoots0=These babies are something special.They use a patented design to break your fall, and can be refilled with steam.
+steampunked.page.pistonBoots1=Useful for High Altitude Falling
 
 **Mech Boots**
 steampunked.entry.mechBoots=Mechanised Boots
@@ -106,7 +111,7 @@ steampunked.page.mechBoots0=The piston boot's older brother.  They allow you to 
 steampunked.page.mechBoots1="Harder, Better, Faster, Stronger"
 
 
-**SLATE**
+**Slate**
 steampunked.entry.slate=Slate
 steampunked.page.slate0=Slate is a metamorphic rock, found exclusively underground in mountainous regions.  It can be converted into Slabs, Stairs, Bricks and more, being useful as a decorative block.
 steampunked.page.slate1=Crafting Slate Slabs
@@ -114,3 +119,11 @@ steampunked.page.slate2=Crafting Slate Stairs
 steampunked.page.slate3=Crafting Slate Bricks
 steampunked.page.slate4=Crafting Slate Brick Slabs
 steampunked.page.slate5=Crafting Slate Brick Stairs
+
+**Jetpack**
+steampunked.entry.jetpack=Jetpack
+steampunked.page.jetpack0=The Jetpack is a steam powered self propulsion device. When you wear this you are capable of flying upwards when jumping, however it only know up, and not how to hover.
+steampunked.page.jetpack1=Up, Up, and Away
+**Steam**
+steampunked.entry.steam=Steam
+steampunked.page.steam0=Steam is a gas formed by heating water to temperatures of over 100C.  This can be achieved by using a Steam Boiler, which requires a heat source and water to produce it.
