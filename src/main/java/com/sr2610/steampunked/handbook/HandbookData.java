@@ -73,12 +73,15 @@ public final class HandbookData {
 				CraftingHandler.recipeSabers, "sabers"));
 
 		slate = new SPHandbookEntry("slate", categoryBlocks);
-		slate.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",
-				CraftingHandler.slateSlab, "slate"), new PageCraftingRecipe("2",
-				CraftingHandler.slateStairs, "slate"), new PageCraftingRecipe("3",
-				CraftingHandler.slateBrick, "slate"), new PageCraftingRecipe("4",
-				CraftingHandler.slateBrickSlab, "slate"), new PageCraftingRecipe("4",
-				CraftingHandler.slateBrickStairs, "slate"));
+		slate.setHandbookPages(
+				new PageText("0"),
+				new PageCraftingRecipe("1", CraftingHandler.slateSlab, "slate"),
+				new PageCraftingRecipe("2", CraftingHandler.slateStairs,
+						"slate"),
+				new PageCraftingRecipe("3", CraftingHandler.slateBrick, "slate"),
+				new PageCraftingRecipe("4", CraftingHandler.slateBrickSlab,
+						"slate"), new PageCraftingRecipe("4",
+						CraftingHandler.slateBrickStairs, "slate"));
 
 	}
 

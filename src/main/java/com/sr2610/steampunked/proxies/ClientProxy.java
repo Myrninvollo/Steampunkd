@@ -50,8 +50,8 @@ public class ClientProxy extends CommonProxy {
 				bootsItemRenderer);
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPipe.class, rp);
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityValvePipe.class, rp);
-
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityValvePipe.class,
+				rp);
 
 	}
 }

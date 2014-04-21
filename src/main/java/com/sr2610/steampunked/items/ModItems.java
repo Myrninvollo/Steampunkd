@@ -10,7 +10,6 @@ package com.sr2610.steampunked.items;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
-import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
@@ -75,10 +74,9 @@ public final class ModItems {
 
 	public static Item reprogrammer;
 	public static Item hammer;
-	
+
 	public static Item craftingItems;
-	
-	
+
 	public static Item handBook;
 
 	public static void initItems() {
@@ -140,11 +138,11 @@ public final class ModItems {
 		mechBoots = new ItemMechBoots().setUnlocalizedName(LibNames.MECHBOOTS);
 
 		hammer = new ItemHammer().setUnlocalizedName(LibNames.HAMMER);
-		
-		handBook= new ItemHandbook();
-		
-		craftingItems = new ItemCrafting().setUnlocalizedName(LibNames.CRAFTING);
-	
+
+		handBook = new ItemHandbook();
+
+		craftingItems = new ItemCrafting()
+				.setUnlocalizedName(LibNames.CRAFTING);
 
 		registerItems();
 	}
@@ -199,11 +197,11 @@ public final class ModItems {
 				Reference.ModID);
 
 		GameRegistry.registerItem(hammer, LibNames.HAMMER, Reference.ModID);
-		
-		GameRegistry.registerItem(handBook, LibNames.HANDBOOK, Reference.ModID);
-		
-		GameRegistry.registerItem(craftingItems, LibNames.CRAFTING, Reference.ModID);
 
+		GameRegistry.registerItem(handBook, LibNames.HANDBOOK, Reference.ModID);
+
+		GameRegistry.registerItem(craftingItems, LibNames.CRAFTING,
+				Reference.ModID);
 
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry
 				.getFluidStack("steam", FluidContainerRegistry.BUCKET_VOLUME),
@@ -226,8 +224,8 @@ public final class ModItems {
 	public static void oreRegistration() {
 		OreDictionary.registerOre("ingotCopper", new ItemStack(copperIngot));
 		OreDictionary.registerOre("ingotTin", new ItemStack(tinIngot));
-		
-		//:( Vanilla Should do this
+
+		// :( Vanilla Should do this
 		OreDictionary.registerOre("ingotIron", Items.iron_ingot);
 		OreDictionary.registerOre("ingotGold", Items.gold_ingot);
 		OreDictionary.registerOre("gemDiamond", Items.diamond);

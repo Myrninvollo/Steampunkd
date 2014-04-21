@@ -7,12 +7,8 @@
  ******************************************************************************/
 package com.sr2610.steampunked.gui.handbook.buttons;
 
-import java.util.Arrays;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 

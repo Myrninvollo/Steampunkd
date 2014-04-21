@@ -1,11 +1,9 @@
 /*******************************************************************************
- * * This class was created by <SR2610>. It's distributed as
- *  * part of the Steampunk'd Mod. Get the Source Code in github:
- *  * https://github.com/SR2610/steampunkd
- *  * 
- *  * Steampunk'd is Open Source and distributed under a
- *  * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
- *  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
+ * * This class was created by <SR2610>. It's distributed as * part of the
+ * Steampunk'd Mod. Get the Source Code in github: *
+ * https://github.com/SR2610/steampunkd * * Steampunk'd is Open Source and
+ * distributed under a * Creative Commons Attribution-NonCommercial-ShareAlike
+ * 3.0 License * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
  ******************************************************************************/
 package com.sr2610.steampunked.utils;
 
@@ -27,7 +25,8 @@ public final class RenderHelper {
 		renderTooltip(x, y, tooltipData, color, color2);
 	}
 
-	public static void renderTooltipOrange(int x, int y, List<String> tooltipData) {
+	public static void renderTooltipOrange(int x, int y,
+			List<String> tooltipData) {
 		int color = 0x50a06600;
 		int color2 = 0xf01e1200;
 
@@ -41,10 +40,12 @@ public final class RenderHelper {
 		renderTooltip(x, y, tooltipData, color, color2);
 	}
 
-	public static void renderTooltip(int x, int y, List<String> tooltipData, int color, int color2) {
+	public static void renderTooltip(int x, int y, List<String> tooltipData,
+			int color, int color2) {
 		boolean lighting = GL11.glGetBoolean(GL11.GL_LIGHTING);
-		if(lighting)
-			net.minecraft.client.renderer.RenderHelper.disableStandardItemLighting();
+		if (lighting)
+			net.minecraft.client.renderer.RenderHelper
+					.disableStandardItemLighting();
 
 		if (!tooltipData.isEmpty()) {
 			int var5 = 0;
@@ -62,16 +63,25 @@ public final class RenderHelper {
 			if (tooltipData.size() > 1)
 				var9 += 2 + (tooltipData.size() - 1) * 10;
 			float z = 300F;
-			drawGradientRect(var6 - 3, var7 - 4, z, var6 + var5 + 3, var7 - 3, color2, color2);
-			drawGradientRect(var6 - 3, var7 + var9 + 3, z, var6 + var5 + 3, var7 + var9 + 4, color2, color2);
-			drawGradientRect(var6 - 3, var7 - 3, z, var6 + var5 + 3, var7 + var9 + 3, color2, color2);
-			drawGradientRect(var6 - 4, var7 - 3, z, var6 - 3, var7 + var9 + 3, color2, color2);
-			drawGradientRect(var6 + var5 + 3, var7 - 3, z, var6 + var5 + 4, var7 + var9 + 3, color2, color2);
+			drawGradientRect(var6 - 3, var7 - 4, z, var6 + var5 + 3, var7 - 3,
+					color2, color2);
+			drawGradientRect(var6 - 3, var7 + var9 + 3, z, var6 + var5 + 3,
+					var7 + var9 + 4, color2, color2);
+			drawGradientRect(var6 - 3, var7 - 3, z, var6 + var5 + 3, var7
+					+ var9 + 3, color2, color2);
+			drawGradientRect(var6 - 4, var7 - 3, z, var6 - 3, var7 + var9 + 3,
+					color2, color2);
+			drawGradientRect(var6 + var5 + 3, var7 - 3, z, var6 + var5 + 4,
+					var7 + var9 + 3, color2, color2);
 			int var12 = (color & 0xFFFFFF) >> 1 | color & -16777216;
-			drawGradientRect(var6 - 3, var7 - 3 + 1, z, var6 - 3 + 1, var7 + var9 + 3 - 1, color, var12);
-			drawGradientRect(var6 + var5 + 2, var7 - 3 + 1, z, var6 + var5 + 3, var7 + var9 + 3 - 1, color, var12);
-			drawGradientRect(var6 - 3, var7 - 3, z, var6 + var5 + 3, var7 - 3 + 1, color, color);
-			drawGradientRect(var6 - 3, var7 + var9 + 2, z, var6 + var5 + 3, var7 + var9 + 3, var12, var12);
+			drawGradientRect(var6 - 3, var7 - 3 + 1, z, var6 - 3 + 1, var7
+					+ var9 + 3 - 1, color, var12);
+			drawGradientRect(var6 + var5 + 2, var7 - 3 + 1, z, var6 + var5 + 3,
+					var7 + var9 + 3 - 1, color, var12);
+			drawGradientRect(var6 - 3, var7 - 3, z, var6 + var5 + 3,
+					var7 - 3 + 1, color, color);
+			drawGradientRect(var6 - 3, var7 + var9 + 2, z, var6 + var5 + 3,
+					var7 + var9 + 3, var12, var12);
 
 			GL11.glDisable(GL11.GL_DEPTH_TEST);
 			for (int var13 = 0; var13 < tooltipData.size(); ++var13) {
@@ -83,12 +93,14 @@ public final class RenderHelper {
 			}
 			GL11.glEnable(GL11.GL_DEPTH_TEST);
 		}
-		if(!lighting)
-			net.minecraft.client.renderer.RenderHelper.disableStandardItemLighting();
+		if (!lighting)
+			net.minecraft.client.renderer.RenderHelper
+					.disableStandardItemLighting();
 		GL11.glColor4f(1F, 1F, 1F, 1F);
 	}
 
-	public static void drawGradientRect(int par1, int par2, float z, int par3, int par4, int par5, int par6) {
+	public static void drawGradientRect(int par1, int par2, float z, int par3,
+			int par4, int par5, int par6) {
 		float var7 = (par5 >> 24 & 255) / 255F;
 		float var8 = (par5 >> 16 & 255) / 255F;
 		float var9 = (par5 >> 8 & 255) / 255F;
@@ -117,22 +129,29 @@ public final class RenderHelper {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}
 
-	public static void drawTexturedModalRect(int par1, int par2, float z, int par3, int par4, int par5, int par6) {
+	public static void drawTexturedModalRect(int par1, int par2, float z,
+			int par3, int par4, int par5, int par6) {
 		float f = 0.00390625F;
 		float f1 = 0.00390625F;
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV(par1 + 0, par2 + par6, z, (par3 + 0) * f, (par4 + par6) * f1);
-		tessellator.addVertexWithUV(par1 + par5, par2 + par6, z, (par3 + par5) * f, (par4 + par6) * f1);
-		tessellator.addVertexWithUV(par1 + par5, par2 + 0, z, (par3 + par5) * f, (par4 + 0) * f1);
-		tessellator.addVertexWithUV(par1 + 0, par2 + 0, z, (par3 + 0) * f, (par4 + 0) * f1);
+		tessellator.addVertexWithUV(par1 + 0, par2 + par6, z, (par3 + 0) * f,
+				(par4 + par6) * f1);
+		tessellator.addVertexWithUV(par1 + par5, par2 + par6, z, (par3 + par5)
+				* f, (par4 + par6) * f1);
+		tessellator.addVertexWithUV(par1 + par5, par2 + 0, z,
+				(par3 + par5) * f, (par4 + 0) * f1);
+		tessellator.addVertexWithUV(par1 + 0, par2 + 0, z, (par3 + 0) * f,
+				(par4 + 0) * f1);
 		tessellator.draw();
 	}
 
-	public static void renderStar(int color, float xScale, float yScale, float zScale, long seed) {
+	public static void renderStar(int color, float xScale, float yScale,
+			float zScale, long seed) {
 		Tessellator tessellator = Tessellator.instance;
 
-		int ticks = (int) (Minecraft.getMinecraft().theWorld.getTotalWorldTime() % 200);
+		int ticks = (int) (Minecraft.getMinecraft().theWorld
+				.getTotalWorldTime() % 200);
 		if (ticks >= 100)
 			ticks = 200 - ticks - 1;
 

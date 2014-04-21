@@ -61,10 +61,9 @@ public class OreGeneration implements IWorldGenerator {
 			int blockXCoord = i + random.nextInt(16);
 			int blockYCoord = random.nextInt(64);
 			int blockZCoord = j + random.nextInt(16);
-			if (world.getBiomeGenForCoords(blockXCoord, blockZCoord) == BiomeGenBase.extremeHills) {
+			if (world.getBiomeGenForCoords(blockXCoord, blockZCoord) == BiomeGenBase.extremeHills)
 				new WorldGenMinable(ModBlocks.slate, 20).generate(world,
 						random, blockXCoord, blockYCoord, blockZCoord);
-			}
 
 		}
 

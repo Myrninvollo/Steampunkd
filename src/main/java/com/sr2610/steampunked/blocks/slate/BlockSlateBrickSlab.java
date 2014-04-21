@@ -14,7 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
 import com.sr2610.steampunked.blocks.ModBlocks;
-import com.sr2610.steampunked.core.tabs.ModCreativeTab;
 import com.sr2610.steampunked.lib.LibNames;
 
 import cpw.mods.fml.relauncher.Side;
@@ -45,6 +44,6 @@ public class BlockSlateBrickSlab extends BlockSlab {
 
 	@Override
 	public String func_150002_b(int i) {
-		return "tile." + LibNames.SLATE+"BrickSlab";
+		return "tile." + LibNames.SLATE + "BrickSlab";
 	}
 }

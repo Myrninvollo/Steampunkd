@@ -77,7 +77,7 @@ public class GuiHandler implements IGuiHandler {
 		case 5:
 			return new GuiPunchardMaker((TileEntityPunchardMaker) tile_entity,
 					player.inventory);
-		
+
 		case 6:
 			return GuiHandbook.currentOpenHandbook;
 		}

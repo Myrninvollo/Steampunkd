@@ -7,7 +7,6 @@
  ******************************************************************************/
 package com.sr2610.steampunked.handbook.pages;
 
-import java.util.Arrays;
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
@@ -44,8 +43,6 @@ public class PageRecipe extends HandbookPage {
 		super(unlocalizedName);
 	}
 
-
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void renderScreen(IGuiHandbookEntry gui, int mx, int my) {
@@ -65,21 +62,19 @@ public class PageRecipe extends HandbookPage {
 					Minecraft.getMinecraft().thePlayer, false);
 			RenderHelper.renderTooltip(mx, my, tooltipData);
 
-			int tooltipY = 8 + tooltipData.size() * 11;
-
 			if (tooltipEntry) {
-				tooltipData.add(EnumChatFormatting.GRAY
-										+ StatCollector
-												.translateToLocal("steampunked.gui.handbook.clickToRecipe"));
-				tooltipY += 18;
+				tooltipData
+						.add(EnumChatFormatting.GRAY
+								+ StatCollector
+										.translateToLocal("steampunked.gui.handbook.clickToRecipe"));
 			}
 
 			if (tooltipContainerStack != null)
-				tooltipData.add(EnumChatFormatting.AQUA
-												+ StatCollector
-														.translateToLocal("steampunked.gui.handbook.craftingContainer"));
-			
-			
+				tooltipData
+						.add(EnumChatFormatting.AQUA
+								+ StatCollector
+										.translateToLocal("steampunked.gui.handbook.craftingContainer"));
+
 			RenderHelper.renderTooltip(mx, my, tooltipData);
 
 		}
@@ -127,13 +122,13 @@ public class PageRecipe extends HandbookPage {
 		if (stack.getItemDamage() == Short.MAX_VALUE)
 			stack.setItemDamage(0);
 
-		int xPos = gui.getLeft() + x * 25 - 1 ;
-		int yPos = gui.getTop() + y * 26 - (y * 2) + 4 - y
-				- (y == 3 ? 0 : 2)- (y == 1 ? 1 : 0)+10;
-		
-		if(x==2&&y==0){
-			xPos= gui.getLeft() + (x+2) * 25 +3;
-			yPos = gui.getTop() + (y+2) * 26-4 +10;
+		int xPos = gui.getLeft() + x * 25 - 1;
+		int yPos = gui.getTop() + y * 26 - y * 2 + 4 - y - (y == 3 ? 0 : 2)
+				- (y == 1 ? 1 : 0) + 10;
+
+		if (x == 2 && y == 0) {
+			xPos = gui.getLeft() + (x + 2) * 25 + 3;
+			yPos = gui.getTop() + (y + 2) * 26 - 4 + 10;
 		}
 		ItemStack stack1 = stack.copy();
 		if (stack1.getItemDamage() == -1)

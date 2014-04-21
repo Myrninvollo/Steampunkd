@@ -1,11 +1,9 @@
 /*******************************************************************************
- * * This class was created by <SR2610>. It's distributed as
- *  * part of the Steampunk'd Mod. Get the Source Code in github:
- *  * https://github.com/SR2610/steampunkd
- *  * 
- *  * Steampunk'd is Open Source and distributed under a
- *  * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
- *  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
+ * * This class was created by <SR2610>. It's distributed as * part of the
+ * Steampunk'd Mod. Get the Source Code in github: *
+ * https://github.com/SR2610/steampunkd * * Steampunk'd is Open Source and
+ * distributed under a * Creative Commons Attribution-NonCommercial-ShareAlike
+ * 3.0 License * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
  ******************************************************************************/
 package com.sr2610.steampunked.gui.handbook;
 
@@ -39,9 +37,12 @@ public class GuiHandbookEntry extends GuiHandbook implements IGuiHandbookEntry {
 	public void initGui() {
 		super.initGui();
 
-		buttonList.add(new GuiButtonBackWithShift(0, left + guiWidth / 2 - 8, top + guiHeight + 2));
-		buttonList.add(leftButton = new GuiButtonPage(1, left, top + guiHeight - 10, false));
-		buttonList.add(rightButton = new GuiButtonPage(2, left + guiWidth - 18, top + guiHeight - 10, true));
+		buttonList.add(new GuiButtonBackWithShift(0, left + guiWidth / 2 - 8,
+				top + guiHeight + 2));
+		buttonList.add(leftButton = new GuiButtonPage(1, left, top + guiHeight
+				- 10, false));
+		buttonList.add(rightButton = new GuiButtonPage(2, left + guiWidth - 18,
+				top + guiHeight - 10, true));
 
 		updatePageButtons();
 	}
@@ -73,14 +74,15 @@ public class GuiHandbookEntry extends GuiHandbook implements IGuiHandbookEntry {
 
 	@Override
 	protected void actionPerformed(GuiButton par1GuiButton) {
-		switch(par1GuiButton.id) {
-		case 0 :
-			mc.displayGuiScreen(GuiScreen.isShiftKeyDown() ? new GuiHandbook() : parent);
+		switch (par1GuiButton.id) {
+		case 0:
+			mc.displayGuiScreen(GuiScreen.isShiftKeyDown() ? new GuiHandbook()
+					: parent);
 			break;
-		case 1 :
+		case 1:
 			page--;
 			break;
-		case 2 :
+		case 2:
 			page++;
 			break;
 		}

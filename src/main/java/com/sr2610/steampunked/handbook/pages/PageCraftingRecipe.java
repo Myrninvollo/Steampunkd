@@ -1,11 +1,9 @@
 /*******************************************************************************
- * * This class was created by <SR2610>. It's distributed as
- *  * part of the Steampunk'd Mod. Get the Source Code in github:
- *  * https://github.com/SR2610/steampunkd
- *  * 
- *  * Steampunk'd is Open Source and distributed under a
- *  * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
- *  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
+ * * This class was created by <SR2610>. It's distributed as * part of the
+ * Steampunk'd Mod. Get the Source Code in github: *
+ * https://github.com/SR2610/steampunkd * * Steampunk'd is Open Source and
+ * distributed under a * Creative Commons Attribution-NonCommercial-ShareAlike
+ * 3.0 License * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
  ******************************************************************************/
 package com.sr2610.steampunked.handbook.pages;
 
@@ -50,39 +48,42 @@ public class PageCraftingRecipe extends PageRecipe {
 
 	boolean oreDictRecipe, shapelessRecipe;
 
-	public PageCraftingRecipe(String unlocalizedName, List<IRecipe> recipes,String pageTitle) {
+	public PageCraftingRecipe(String unlocalizedName, List<IRecipe> recipes,
+			String pageTitle) {
 		super(unlocalizedName);
 		this.recipes = recipes;
-		name=pageTitle;
+		name = pageTitle;
 	}
 
-	public PageCraftingRecipe(String unlocalizedName, IRecipe recipe,String pageTitle) {
-		this(unlocalizedName, Arrays.asList(recipe),pageTitle);
+	public PageCraftingRecipe(String unlocalizedName, IRecipe recipe,
+			String pageTitle) {
+		this(unlocalizedName, Arrays.asList(recipe), pageTitle);
 	}
 
 	@Override
 	public void onPageAdded(HandbookEntry entry, int index) {
-		for(IRecipe recipe : recipes)
+		for (IRecipe recipe : recipes)
 			HandbookRecipeMappings.map(recipe.getRecipeOutput(), entry, index);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void renderRecipe(IGuiHandbookEntry gui, int mx, int my) {
-		
-		FontRenderer fontRendererObj=((GuiScreen)gui).mc.fontRenderer;
-		
+
+		FontRenderer fontRendererObj = ((GuiScreen) gui).mc.fontRenderer;
+
 		boolean unicode = fontRendererObj.getUnicodeFlag();
 		fontRendererObj.setUnicodeFlag(true);
-		fontRendererObj.drawSplitString(StatCollector.translateToLocal("steampunked.entry."+name+".title"), gui.getLeft() + 15, gui.getTop() + 15, 90, 0);
+		fontRendererObj.drawSplitString(
+				StatCollector.translateToLocal("steampunked.entry." + name
+						+ ".title"), gui.getLeft() + 15, gui.getTop() + 15, 90,
+				0);
 		fontRendererObj.setUnicodeFlag(unicode);
 
-		
 		oreDictRecipe = shapelessRecipe = false;
 
 		IRecipe recipe = recipes.get(recipeAt);
 		renderCraftingRecipe(gui, recipe);
-
 
 		TextureManager render = Minecraft.getMinecraft().renderEngine;
 		render.bindTexture(craftingOverlay);
@@ -90,7 +91,8 @@ public class PageCraftingRecipe extends PageRecipe {
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glColor4f(1F, 1F, 1F, 1F);
-		((GuiScreen) gui).drawTexturedModalRect(gui.getLeft(), gui.getTop(), 0, 0, gui.getWidth(), gui.getHeight());
+		((GuiScreen) gui).drawTexturedModalRect(gui.getLeft(), gui.getTop(), 0,
+				0, gui.getWidth(), gui.getHeight());
 
 		int iconX = gui.getLeft() + 115;
 		int iconY = gui.getTop() + 12;
@@ -98,23 +100,33 @@ public class PageCraftingRecipe extends PageRecipe {
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-		if(shapelessRecipe) {
-			((GuiScreen) gui).drawTexturedModalRect(iconX, iconY, 240, 0, 16, 16);
+		if (shapelessRecipe) {
+			((GuiScreen) gui).drawTexturedModalRect(iconX, iconY, 240, 0, 16,
+					16);
 
-			if(mx >= iconX && my >= iconY && mx < iconX + 16 && my < iconY + 16)
-				RenderHelper.renderTooltip(mx, my, Arrays.asList(StatCollector.translateToLocal("steampunked.gui.handbook.shapeless")));
+			if (mx >= iconX && my >= iconY && mx < iconX + 16
+					&& my < iconY + 16)
+				RenderHelper
+						.renderTooltip(
+								mx,
+								my,
+								Arrays.asList(StatCollector
+										.translateToLocal("steampunked.gui.handbook.shapeless")));
 
-			iconX =gui.getLeft()+95;
+			iconX = gui.getLeft() + 95;
 		}
 
 		render.bindTexture(craftingOverlay);
 		GL11.glEnable(GL11.GL_BLEND);
 
-		if(oreDictRecipe) {
-			((GuiScreen) gui).drawTexturedModalRect(iconX, iconY, 240, 16, 16, 16);
+		if (oreDictRecipe) {
+			((GuiScreen) gui).drawTexturedModalRect(iconX, iconY, 240, 16, 16,
+					16);
 
-			if(mx >= iconX && my >= iconY && mx < iconX + 16 && my < iconY + 16)
-				RenderHelper.renderTooltip(mx, my, Arrays.asList(StatCollector.translateToLocal("steampunked.gui.handbook.oredict")));
+			if (mx >= iconX && my >= iconY && mx < iconX + 16
+					&& my < iconY + 16)
+				RenderHelper.renderTooltip(mx, my, Arrays.asList(StatCollector
+						.translateToLocal("steampunked.gui.handbook.oredict")));
 		}
 		GL11.glDisable(GL11.GL_BLEND);
 	}
@@ -122,10 +134,10 @@ public class PageCraftingRecipe extends PageRecipe {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void updateScreen() {
-		if(ticksElapsed % 20 == 0) {
+		if (ticksElapsed % 20 == 0) {
 			recipeAt++;
 
-			if(recipeAt == recipes.size())
+			if (recipeAt == recipes.size())
 				recipeAt = 0;
 		}
 		++ticksElapsed;
@@ -133,55 +145,72 @@ public class PageCraftingRecipe extends PageRecipe {
 
 	@SideOnly(Side.CLIENT)
 	public void renderCraftingRecipe(IGuiHandbookEntry gui, IRecipe recipe) {
-		if(recipe instanceof ShapedRecipes) {
-			ShapedRecipes shaped = (ShapedRecipes)recipe;
+		if (recipe instanceof ShapedRecipes) {
+			ShapedRecipes shaped = (ShapedRecipes) recipe;
 
-			for(int y = 0; y < shaped.recipeHeight; y++)
-				for(int x = 0; x < shaped.recipeWidth; x++)
-					renderItemAtGridPos(gui, 1 + x, 1 + y, shaped.recipeItems[y * shaped.recipeWidth + x], true);
-		} else if(recipe instanceof ShapedOreRecipe) {
+			for (int y = 0; y < shaped.recipeHeight; y++)
+				for (int x = 0; x < shaped.recipeWidth; x++)
+					renderItemAtGridPos(gui, 1 + x, 1 + y, shaped.recipeItems[y
+							* shaped.recipeWidth + x], true);
+		} else if (recipe instanceof ShapedOreRecipe) {
 			ShapedOreRecipe shaped = (ShapedOreRecipe) recipe;
-			int width = (Integer) ReflectionHelper.getPrivateValue(ShapedOreRecipe.class, shaped, 4);
-			int height = (Integer) ReflectionHelper.getPrivateValue(ShapedOreRecipe.class, shaped, 5);
+			int width = (Integer) ReflectionHelper.getPrivateValue(
+					ShapedOreRecipe.class, shaped, 4);
+			int height = (Integer) ReflectionHelper.getPrivateValue(
+					ShapedOreRecipe.class, shaped, 5);
 
-			for(int y = 0; y < height; y++)
-				for(int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++)
+				for (int x = 0; x < width; x++) {
 					Object input = shaped.getInput()[y * width + x];
-					if(input != null)
-						renderItemAtGridPos(gui, 1 + x, 1 + y, input instanceof ItemStack ? (ItemStack) input : ((ArrayList<ItemStack>) input).get(0), true);
+					if (input != null)
+						renderItemAtGridPos(
+								gui,
+								1 + x,
+								1 + y,
+								input instanceof ItemStack ? (ItemStack) input
+										: ((ArrayList<ItemStack>) input).get(0),
+								true);
 				}
 
 			oreDictRecipe = true;
-		} else if(recipe instanceof ShapelessRecipes) {
+		} else if (recipe instanceof ShapelessRecipes) {
 			ShapelessRecipes shapeless = (ShapelessRecipes) recipe;
 
-			drawGrid : {
-				for(int y = 0; y < 3; y++)
-					for(int x = 0; x < 3; x++) {
+			drawGrid: {
+				for (int y = 0; y < 3; y++)
+					for (int x = 0; x < 3; x++) {
 						int index = y * 3 + x;
 
-						if(index >= shapeless.recipeItems.size())
+						if (index >= shapeless.recipeItems.size())
 							break drawGrid;
 
-						renderItemAtGridPos(gui, 1 + x, 1 + y, (ItemStack) shapeless.recipeItems.get(index), true);
+						renderItemAtGridPos(gui, 1 + x, 1 + y,
+								(ItemStack) shapeless.recipeItems.get(index),
+								true);
 					}
 			}
 
 			shapelessRecipe = true;
-		} else if(recipe instanceof ShapelessOreRecipe) {
+		} else if (recipe instanceof ShapelessOreRecipe) {
 			ShapelessOreRecipe shapeless = (ShapelessOreRecipe) recipe;
 
-			drawGrid : {
-				for(int y = 0; y < 3; y++)
-					for(int x = 0; x < 3; x++) {
+			drawGrid: {
+				for (int y = 0; y < 3; y++)
+					for (int x = 0; x < 3; x++) {
 						int index = y * 3 + x;
 
-						if(index >= shapeless.getRecipeSize())
+						if (index >= shapeless.getRecipeSize())
 							break drawGrid;
 
 						Object input = shapeless.getInput().get(index);
-						if(input != null)
-							renderItemAtGridPos(gui, 1 + x, 1 + y, input instanceof ItemStack ? (ItemStack) input : ((ArrayList<ItemStack>) input).get(0), true);
+						if (input != null)
+							renderItemAtGridPos(
+									gui,
+									1 + x,
+									1 + y,
+									input instanceof ItemStack ? (ItemStack) input
+											: ((ArrayList<ItemStack>) input)
+													.get(0), true);
 					}
 			}
 

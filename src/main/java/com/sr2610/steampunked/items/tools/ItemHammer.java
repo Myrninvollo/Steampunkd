@@ -48,7 +48,7 @@ public class ItemHammer extends ItemPickaxe {
 	public ItemHammer() {
 		super(Item.ToolMaterial.IRON);
 		setNoRepair();
-		this.setContainerItem(this);
+		setContainerItem(this);
 	}
 
 	@Override
@@ -143,7 +143,5 @@ public class ItemHammer extends ItemPickaxe {
 			par3List.add("shall possess the power of Thor.");
 		}
 	}
-
-
 
 }

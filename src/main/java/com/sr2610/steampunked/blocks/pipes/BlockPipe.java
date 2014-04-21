@@ -34,7 +34,7 @@ public class BlockPipe extends BlockContainer {
 
 	public BlockPipe(Material mat) {
 		super(mat);
-		this.setCreativeTab(CreativeTabs.tabRedstone);
+		setCreativeTab(CreativeTabs.tabRedstone);
 
 	}
 
