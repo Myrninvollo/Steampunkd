@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.item.ItemStack;
@@ -45,16 +46,18 @@ public class PageCraftingRecipe extends PageRecipe {
 	List<IRecipe> recipes;
 	int ticksElapsed = 0;
 	int recipeAt = 0;
+	String name;
 
 	boolean oreDictRecipe, shapelessRecipe;
 
-	public PageCraftingRecipe(String unlocalizedName, List<IRecipe> recipes) {
+	public PageCraftingRecipe(String unlocalizedName, List<IRecipe> recipes,String pageTitle) {
 		super(unlocalizedName);
 		this.recipes = recipes;
+		name=pageTitle;
 	}
 
-	public PageCraftingRecipe(String unlocalizedName, IRecipe recipe) {
-		this(unlocalizedName, Arrays.asList(recipe));
+	public PageCraftingRecipe(String unlocalizedName, IRecipe recipe,String pageTitle) {
+		this(unlocalizedName, Arrays.asList(recipe),pageTitle);
 	}
 
 	@Override
@@ -66,6 +69,15 @@ public class PageCraftingRecipe extends PageRecipe {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void renderRecipe(IGuiHandbookEntry gui, int mx, int my) {
+		
+		FontRenderer fontRendererObj=((GuiScreen)gui).mc.fontRenderer;
+		
+		boolean unicode = fontRendererObj.getUnicodeFlag();
+		fontRendererObj.setUnicodeFlag(true);
+		fontRendererObj.drawSplitString(StatCollector.translateToLocal("steampunked.entry."+name+".title"), gui.getLeft() + 15, gui.getTop() + 15, 90, 0);
+		fontRendererObj.setUnicodeFlag(unicode);
+
+		
 		oreDictRecipe = shapelessRecipe = false;
 
 		IRecipe recipe = recipes.get(recipeAt);

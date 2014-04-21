@@ -92,27 +92,32 @@ steampunked.gui.handbook.shapeless=Shapeless Recipe
 
 **Spanner**
 steampunked.entry.spanner=Spanner
+steampunked.entry.spanner.title=Crating the Spanner
 steampunked.page.spanner0=The Spanner.  The tool used to rotate blocks and do nifty things with machines and Automotons.
-steampunked.page.spanner1=Crafting the Spanner
+steampunked.page.spanner1=Never put a spanner in the works.  Never.
 
 **Hammer**
 steampunked.entry.hammer=Hammer
+steampunked.entry.hammer.title=Crafting the Hammer
 steampunked.page.hammer0=The Hammer.  A useful tool for crafting items, but it can also double up as a weapon and a pickaxe, some say that it was even used by a Norse God.
-steampunked.page.hammer1=Crafting the Hammer
+steampunked.page.hammer1=It was so cruel to put the hammer within your reach knowing that you could never lift it.
 
 **Piston Boots**
 steampunked.entry.pistonBoots=Piston Boots
+steampunked.entry.pistonBoots.title=Crafting Piston Boots
 steampunked.page.pistonBoots0=These babies are something special.They use a patented design to break your fall, and can be refilled with steam.
 steampunked.page.pistonBoots1=Useful for High Altitude Falling
 
 **Mech Boots**
 steampunked.entry.mechBoots=Mechanised Boots
+steampunked.entry.mechBoots.title=Crafting Mechanised Boots
 steampunked.page.mechBoots0=The piston boot's older brother.  They allow you to move faster, step up full blocks and jump with greater potency.
 steampunked.page.mechBoots1="Harder, Better, Faster, Stronger"
 
 
 **Slate**
 steampunked.entry.slate=Slate
+steampunked.entry.slate.title=Crafting with Slate
 steampunked.page.slate0=Slate is a metamorphic rock, found exclusively underground in mountainous regions.  It can be converted into Slabs, Stairs, Bricks and more, being useful as a decorative block.
 steampunked.page.slate1=Crafting Slate Slabs
 steampunked.page.slate2=Crafting Slate Stairs
@@ -122,8 +127,16 @@ steampunked.page.slate5=Crafting Slate Brick Stairs
 
 **Jetpack**
 steampunked.entry.jetpack=Jetpack
-steampunked.page.jetpack0=The Jetpack is a steam powered self propulsion device. When you wear this you are capable of flying upwards when jumping, however it only know up, and not how to hover.
+steampunked.entry.jetpack.title=Crafting the Jetpack
+steampunked.page.jetpack0=The Jetpack is a steam powered self propulsion device. When you wear this you are capable of flying upwards when jumping, however it only know up, and not how to hover.  Sadly due to weather conditions, you are not able to operate the jetpack at heights greater than 200M in the air, if only there was something to improve your vision... 
 steampunked.page.jetpack1=Up, Up, and Away
+
+**Sabers**
+steampunked.entry.sabers=Sabers
+steampunked.entry.sabers.title=Crafting Sabers
+steampunked.page.sabers0=These are like swords except they pack a slightly larger punch.  
+steampunked.page.sabers1=
+
 **Steam**
 steampunked.entry.steam=Steam
 steampunked.page.steam0=Steam is a gas formed by heating water to temperatures of over 100C.  This can be achieved by using a Steam Boiler, which requires a heat source and water to produce it.

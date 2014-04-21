@@ -7,6 +7,8 @@
  ******************************************************************************/
 package com.sr2610.steampunked.core.handlers;
 
+import java.util.List;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -28,6 +30,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public final class CraftingHandler {
 	public static IRecipe recipeSpanner;
 	public static IRecipe recipeHammer;
+	public static List<IRecipe> recipeSabers;
 	public static IRecipe recipePistonBoots;
 	public static IRecipe recipeMechBoots;
 	public static IRecipe recipeJetpack;
@@ -39,42 +42,48 @@ public final class CraftingHandler {
 	public static IRecipe slateBrickSlab;
 	public static IRecipe slateBrickStairs;
 
+
 	public static void init() {
 		initSmelting();
 		// addShapelessOreDictRecipe(new ItemStack(ModItems.handBook),
 		// "ingotTin", Items.book);
 
-		GameRegistry
-				.addShapelessRecipe(new ItemStack(Items.apple, 1, 0),
+		addShapelessOreDictRecipe(new ItemStack(Items.apple, 1, 0),
 						new ItemStack(ModItems.hammer, 1,
-								OreDictionary.WILDCARD_VALUE), new ItemStack(
-								Items.iron_ingot));
-		GameRegistry.addRecipe(new ItemStack(ModItems.spanner), "x x", " x ",
-				" x ", 'x', new ItemStack(Items.iron_ingot));
+								OreDictionary.WILDCARD_VALUE), "ingotIron");
+		addOreDictRecipe(new ItemStack(ModItems.spanner), "x x", " x ",
+				" x ", 'x',"ingotIron");
 		recipeSpanner = SteampunkedAPI.getLatestAddedRecipe();
 
 		addOreDictRecipe(new ItemStack(ModItems.hammer), "xxx", "xxx", " s ",
-				's', "stickWood", 'x', new ItemStack(Items.iron_ingot));
+				's', "stickWood", 'x', "ingotIron");
 		recipeHammer = SteampunkedAPI.getLatestAddedRecipe();
 
-		GameRegistry.addRecipe(new ItemStack(ModItems.boots, 1, 250), "xbx",
-				"pcp", 'x', new ItemStack(Items.iron_ingot), 'b',
+		addOreDictRecipe(new ItemStack(ModItems.boots, 1, 250), "xbx",
+				"pcp", 'x', "ingotIron", 'b',
 				new ItemStack(Items.iron_boots), 'p', new ItemStack(
 						Blocks.piston),'c',new ItemStack(ModItems.craftingItems,1,0));
 		recipePistonBoots = SteampunkedAPI.getLatestAddedRecipe();
-		GameRegistry.addRecipe(new ItemStack(ModItems.mechBoots, 1, 1500), "xbx",
-				"cpc", 'x', new ItemStack(Items.iron_ingot), 'b',
+		addOreDictRecipe(new ItemStack(ModItems.mechBoots, 1, 1500), "xbx",
+				"cpc", 'x', "ingotIron", 'b',
 				new ItemStack(ModItems.boots,1,250), 'p', new ItemStack(
 						Blocks.piston),'c',new ItemStack(ModItems.craftingItems,1,0));
 		recipeMechBoots = SteampunkedAPI.getLatestAddedRecipe();
-		GameRegistry.addRecipe(new ItemStack(ModItems.jetpack, 1, LibOptions.jetpackCapacity), "cxc",
-				"xpx", 'x', new ItemStack(Items.iron_ingot), 'p', new ItemStack(
+		addOreDictRecipe(new ItemStack(ModItems.jetpack, 1, LibOptions.jetpackCapacity), "cxc",
+				"xpx", 'x', "ingotIron", 'p', new ItemStack(
 						Items.iron_chestplate),'c',new ItemStack(ModItems.craftingItems,1,0));
 		recipeJetpack = SteampunkedAPI.getLatestAddedRecipe();
-		GameRegistry.addRecipe(new ItemStack(ModItems.mechBoots, 1, 1500), "xbx",
-				"cpc", 'x', new ItemStack(Items.iron_ingot), 'b',
+		addOreDictRecipe(new ItemStack(ModItems.mechBoots, 1, 1500), "xbx",
+				"cpc", 'x', "ingotIron", 'b',
 				new ItemStack(ModItems.boots,1,OreDictionary.WILDCARD_VALUE), 'p', new ItemStack(
 						Blocks.piston),'c',new ItemStack(ModItems.craftingItems,1,0));
+		
+		addOreDictRecipe(new ItemStack(ModItems.saberWood,1),"  g","ig ","ss ",'s',"stickWood",'g',"plankWood",'i',"ingotIron");
+		addOreDictRecipe(new ItemStack(ModItems.saberStone,1),"  g","ig ","ss ",'s',"stickWood",'g',"cobblestone",'i',"ingotIron");
+		addOreDictRecipe(new ItemStack(ModItems.saberIron,1),"  g","ig ","ss ",'s',"stickWood",'g',"ingotIron",'i',"ingotIron");
+		addOreDictRecipe(new ItemStack(ModItems.saberGold,1),"  g","ig ","ss ",'s',"stickWood",'g',"ingotGold",'i',"ingotIron");
+		addOreDictRecipe(new ItemStack(ModItems.saberDiamond,1),"  g","ig ","ss ",'s',"stickWood",'g',"gemDiamond",'i',"ingotIron");
+		recipeSabers=SteampunkedAPI.getLatestAddedRecipes(5);
 
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.slateBrick, 4), "xx",
 				"xx", 'x', new ItemStack(ModBlocks.slate));
@@ -94,6 +103,8 @@ public final class CraftingHandler {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.slateBrickStair, 4),
 				"x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.slateBrick));
 		slateBrickStairs=SteampunkedAPI.getLatestAddedRecipe();
+		
+		
 
 
 	}

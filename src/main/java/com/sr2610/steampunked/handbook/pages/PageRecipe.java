@@ -44,6 +44,8 @@ public class PageRecipe extends HandbookPage {
 		super(unlocalizedName);
 	}
 
+
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void renderScreen(IGuiHandbookEntry gui, int mx, int my) {
@@ -55,7 +57,7 @@ public class PageRecipe extends HandbookPage {
 		int width = gui.getWidth() - 30;
 		int height = gui.getHeight();
 		int x = gui.getLeft() + 16;
-		int y = gui.getTop() + height - 40;
+		int y = gui.getTop() + height - 80;
 		PageText.renderText(x, y, width, height, getUnlocalizedName());
 
 		if (tooltipStack != null) {
@@ -127,11 +129,11 @@ public class PageRecipe extends HandbookPage {
 
 		int xPos = gui.getLeft() + x * 25 - 1 ;
 		int yPos = gui.getTop() + y * 26 - (y * 2) + 4 - y
-				- (y == 3 ? 0 : 2)- (y == 1 ? 1 : 0);
+				- (y == 3 ? 0 : 2)- (y == 1 ? 1 : 0)+10;
 		
 		if(x==2&&y==0){
 			xPos= gui.getLeft() + (x+2) * 25 +3;
-			yPos = gui.getTop() + (y+2) * 26-4 ;
+			yPos = gui.getTop() + (y+2) * 26-4 +10;
 		}
 		ItemStack stack1 = stack.copy();
 		if (stack1.getItemDamage() == -1)

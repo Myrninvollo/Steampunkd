@@ -37,9 +37,16 @@ public class ItemHandbook extends Item {
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer) {
-		par3EntityPlayer.openGui(Steampunked.instance, 6,
-				par2World, 0, 0, 0);
+		par3EntityPlayer.openGui(Steampunked.instance, 6, par2World, 0, 0, 0);
 		return par1ItemStack;
+	}
+
+	@Override
+	public boolean onItemUse(ItemStack par1ItemStack,
+			EntityPlayer par2EntityPlayer, World par3World, int par4, int par5,
+			int par6, int par7, float par8, float par9, float par10) {
+
+		return false;
 	}
 
 }
