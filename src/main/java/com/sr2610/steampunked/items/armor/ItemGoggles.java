@@ -55,6 +55,4 @@ public class ItemGoggles extends ItemArmor {
 	public boolean isValidArmor(ItemStack stack, int armorType, Entity entity) {
 		return armorType == ARMOR_HELMET;
 	}
-
-
 }

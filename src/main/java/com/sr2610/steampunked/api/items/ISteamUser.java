@@ -7,16 +7,16 @@
  * Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
  ******************************************************************************/
-package com.sr2610.steampunked.items.interfaces;
+package com.sr2610.steampunked.api.items;
 
 import net.minecraft.item.ItemStack;
 
 public interface ISteamUser {
 
 	/**
-	 * Gets the current charge level of the item.
+	 * Gets the current steam level of the item.
 	 * 
-	 * @return the current charge level of the item.
+	 * @return the current steam level of the item.
 	 */
 	public abstract int getCurrentSteam(ItemStack itemStack);
 
@@ -28,9 +28,9 @@ public interface ISteamUser {
 	public abstract int getMaxSteam();
 
 	/**
-	 * Recharges the item represented by the ItemStack. Implementations should
+	 * Resteams the item represented by the ItemStack. Implementations should
 	 * first check that the ItemStack is of the correct item type, then apply
-	 * the charge (typically removing damage), and finally return the amount of
+	 * the steam (typically removing damage), and finally return the amount of
 	 * steam used.
 	 * 
 	 * @param target
@@ -42,8 +42,8 @@ public interface ISteamUser {
 	 *         item, then the value returned will be less than
 	 *         <code>steamAvailable</code>.
 	 */
-	public int charge(ItemStack target, int energyAvailable);
+	public int fill(ItemStack target, int energyAvailable);
 
-	public void addCharge(int charge, ItemStack stack);
+	public void addSteam(int steam, ItemStack stack);
 
 }

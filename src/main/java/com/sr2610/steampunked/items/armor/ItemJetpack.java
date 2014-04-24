@@ -24,8 +24,8 @@ import net.minecraftforge.common.ISpecialArmor;
 
 import org.lwjgl.input.Keyboard;
 
+import com.sr2610.steampunked.api.items.ISteamUser;
 import com.sr2610.steampunked.core.tabs.ModCreativeTab;
-import com.sr2610.steampunked.items.interfaces.ISteamUser;
 import com.sr2610.steampunked.lib.LibOptions;
 import com.sr2610.steampunked.lib.Reference;
 
@@ -85,7 +85,7 @@ public class ItemJetpack extends ItemArmor implements ISteamUser, ISpecialArmor 
 	}
 
 	@Override
-	public int charge(ItemStack target, int energyAvailable) {
+	public int fill(ItemStack target, int energyAvailable) {
 		if (energyAvailable > getDamage(target)) {
 			int remainder = energyAvailable - getDamage(target);
 			setDamage(target, 0);
@@ -106,7 +106,7 @@ public class ItemJetpack extends ItemArmor implements ISteamUser, ISpecialArmor 
 	}
 
 	@Override
-	public void addCharge(int charge, ItemStack stack) {
+	public void addSteam(int charge, ItemStack stack) {
 		setDamage(stack, getCurrentSteam(stack) + charge);
 	}
 

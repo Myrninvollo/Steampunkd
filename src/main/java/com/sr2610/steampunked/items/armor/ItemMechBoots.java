@@ -28,8 +28,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
+import com.sr2610.steampunked.api.items.ISteamUser;
 import com.sr2610.steampunked.client.model.ModelMechBoots;
-import com.sr2610.steampunked.items.interfaces.ISteamUser;
 import com.sr2610.steampunked.lib.LibOptions;
 import com.sr2610.steampunked.lib.Reference;
 
@@ -86,7 +86,7 @@ public class ItemMechBoots extends ItemArmor implements ISteamUser,
 	}
 
 	@Override
-	public int charge(ItemStack target, int energyAvailable) {
+	public int fill(ItemStack target, int energyAvailable) {
 		if (energyAvailable > getDamage(target)) {
 			int remainder = energyAvailable - getDamage(target);
 			setDamage(target, 0);
@@ -99,7 +99,7 @@ public class ItemMechBoots extends ItemArmor implements ISteamUser,
 	}
 
 	@Override
-	public void addCharge(int charge, ItemStack stack) {
+	public void addSteam(int charge, ItemStack stack) {
 		setDamage(stack, getCurrentSteam(stack) + charge);
 	}
 

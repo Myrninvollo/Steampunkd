@@ -21,9 +21,9 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
+import com.sr2610.steampunked.api.items.ISteamUser;
 import com.sr2610.steampunked.blocks.ModBlocks;
 import com.sr2610.steampunked.inventory.container.ContainerInjector;
-import com.sr2610.steampunked.items.interfaces.ISteamUser;
 import com.sr2610.steampunked.lib.LibOptions;
 
 public class TileEntityInjector extends TileEntityMachine implements
