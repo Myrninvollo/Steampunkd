@@ -17,7 +17,7 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 import com.sr2610.steampunked.client.model.ModelMechBoots;
-import com.sr2610.steampunked.lib.Reference;
+import com.sr2610.steampunked.common.lib.Reference;
 
 public class BootsItemRenderer implements IItemRenderer {
 

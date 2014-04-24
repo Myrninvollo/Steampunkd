@@ -23,7 +23,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import com.sr2610.steampunked.client.model.ModelAutomoton;
-import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
+import com.sr2610.steampunked.common.entity.automatons.EntityAutomaton;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

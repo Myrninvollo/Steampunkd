@@ -20,7 +20,7 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import com.sr2610.steampunked.blocks.ModBlocks;
+import com.sr2610.steampunked.common.blocks.ModBlocks;
 
 public class PipeItemRenderer implements IItemRenderer {
 

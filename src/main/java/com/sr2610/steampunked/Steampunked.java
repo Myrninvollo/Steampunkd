@@ -14,17 +14,17 @@ import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.sr2610.steampunked.blocks.ModBlocks;
-import com.sr2610.steampunked.core.handlers.ConfigHandler;
-import com.sr2610.steampunked.core.handlers.CraftingHandler;
-import com.sr2610.steampunked.core.handlers.SteampunkedEventHandler;
-import com.sr2610.steampunked.entity.automatons.EntityAutomaton;
-import com.sr2610.steampunked.gui.GuiHandler;
-import com.sr2610.steampunked.handbook.HandbookData;
-import com.sr2610.steampunked.items.ModItems;
-import com.sr2610.steampunked.network.PacketPipeline;
-import com.sr2610.steampunked.proxies.CommonProxy;
-import com.sr2610.steampunked.world.OreGeneration;
+import com.sr2610.steampunked.client.gui.GuiHandler;
+import com.sr2610.steampunked.common.CommonProxy;
+import com.sr2610.steampunked.common.blocks.ModBlocks;
+import com.sr2610.steampunked.common.entity.automatons.EntityAutomaton;
+import com.sr2610.steampunked.common.handbook.HandbookData;
+import com.sr2610.steampunked.common.handlers.ConfigHandler;
+import com.sr2610.steampunked.common.handlers.CraftingHandler;
+import com.sr2610.steampunked.common.handlers.SteampunkedEventHandler;
+import com.sr2610.steampunked.common.items.ModItems;
+import com.sr2610.steampunked.common.network.PacketPipeline;
+import com.sr2610.steampunked.common.world.OreGeneration;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;

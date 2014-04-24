@@ -17,9 +17,9 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import com.sr2610.steampunked.client.model.ModelPipe;
-import com.sr2610.steampunked.lib.Reference;
-import com.sr2610.steampunked.tileentities.TileEntityPipe;
-import com.sr2610.steampunked.tileentities.TileEntityValvePipe;
+import com.sr2610.steampunked.common.lib.Reference;
+import com.sr2610.steampunked.common.tileentities.TileEntityPipe;
+import com.sr2610.steampunked.common.tileentities.TileEntityValvePipe;
 
 public class PipeRendererTESR extends TileEntitySpecialRenderer {
 
