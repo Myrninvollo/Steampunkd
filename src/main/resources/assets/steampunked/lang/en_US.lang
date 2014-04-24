@@ -131,11 +131,23 @@ steampunked.entry.jetpack.title=Crafting the Jetpack
 steampunked.page.jetpack0=The Jetpack is a steam powered self propulsion device. When you wear this you are capable of flying upwards when jumping, however it only know up, and not how to hover.  Sadly due to weather conditions, you are not able to operate the jetpack at heights greater than 200M in the air, if only there was something to improve your vision... 
 steampunked.page.jetpack1=Up, Up, and Away
 
+**Goggles**
+steampunked.entry.goggles=Flight Goggles
+steampunked.entry.goggles.title=Crafting the Flight Goggles
+steampunked.page.goggles0=It sucks that due to poor visibility, aviation regulations only allow you to fly your Jetpack to altitudes of 200M.That's where these babies come in.These approved goggles allow you to fly however high you wish to go.
+steampunked.page.goggles1=Useful for high altitude flying
+
 **Sabers**
 steampunked.entry.sabers=Sabers
 steampunked.entry.sabers.title=Crafting Sabers
 steampunked.page.sabers0=These are like swords except they pack a slightly larger punch.  
 steampunked.page.sabers1=
+
+**Pipes**
+steampunked.entry.pipes=Fluid Pipes
+steampunked.entry.pipes.title=Crafting Pipes
+steampunked.page.pipes0=These nifty blocks are capable of transferring fluids across distances. WIP-Currently not fully implemented
+steampunked.page.pipes1=
 
 **Steam**
 steampunked.entry.steam=Steam

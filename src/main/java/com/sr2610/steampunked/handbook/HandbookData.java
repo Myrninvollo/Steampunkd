@@ -32,7 +32,11 @@ public final class HandbookData {
 	public static HandbookEntry mechBoots;
 	public static HandbookEntry slate;
 	public static HandbookEntry jetpack;
+	public static HandbookEntry goggles;
 	public static HandbookEntry sabers;
+	public static HandbookEntry pipes;
+	
+	public static HandbookEntry injector;
 
 	public static void init() {
 		SteampunkedAPI.addCategory(categoryBasics = new HandbookCatagory(
@@ -58,6 +62,8 @@ public final class HandbookData {
 		hammer = new SPHandbookEntry("hammer", categoryBasics);
 		hammer.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",
 				CraftingHandler.recipeHammer, "hammer"));
+		
+	
 
 		pistonBoots = new SPHandbookEntry("pistonBoots", categoryArmor);
 		pistonBoots.setHandbookPages(new PageText("0"), new PageCraftingRecipe(
@@ -69,10 +75,17 @@ public final class HandbookData {
 		jetpack = new SPHandbookEntry("jetpack", categoryArmor);
 		jetpack.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",
 				CraftingHandler.recipeJetpack, "jepack"));
+		goggles = new SPHandbookEntry("goggles", categoryArmor);
+		goggles.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",
+				CraftingHandler.recipeGoggles, "goggles"));
 
 		sabers = new SPHandbookEntry("sabers", categoryItems);
 		sabers.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",
 				CraftingHandler.recipeSabers, "sabers"));
+		
+		pipes = new SPHandbookEntry("pipes", categoryMachines);
+		pipes.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",
+				CraftingHandler.recipePipe, "pipes"));
 
 		slate = new SPHandbookEntry("slate", categoryBlocks);
 		slate.setHandbookPages(
@@ -84,6 +97,14 @@ public final class HandbookData {
 				new PageCraftingRecipe("4", CraftingHandler.slateBrickSlab,
 						"slate"), new PageCraftingRecipe("4",
 						CraftingHandler.slateBrickStairs, "slate"));
+		
+		
+		
+		//MACHINES//
+		
+		//injector = new SPHandbookEntry("injector", categoryMachines); 
+		//injector.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",
+		//		CraftingHandler.recipeInjector, "injector"));
 
 	}
 

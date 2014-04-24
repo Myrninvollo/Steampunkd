@@ -36,22 +36,24 @@ public final class CraftingHandler {
 	public static IRecipe recipePistonBoots;
 	public static IRecipe recipeMechBoots;
 	public static IRecipe recipeJetpack;
+	public static IRecipe recipeInjector;
 
 	public static IRecipe slateSlab;
 	public static IRecipe slateStairs;
 	public static IRecipe slateBrick;
 	public static IRecipe slateBrickSlab;
 	public static IRecipe slateBrickStairs;
+	public static IRecipe recipeGoggles;
+	public static IRecipe recipePipe;
 
 	public static void init() {
 		initSmelting();
 		// addShapelessOreDictRecipe(new ItemStack(ModItems.handBook),
 		// "ingotTin", Items.book);
 
-		addShapelessOreDictRecipe(
-				new ItemStack(Items.apple, 1, 0),
-				new ItemStack(ModItems.hammer, 1, OreDictionary.WILDCARD_VALUE),
-				"ingotIron");
+		addOreDictRecipe(new ItemStack(ModBlocks.pipe), "ICI", "ICI", 'I',
+				"ingotIron",'C',new ItemStack(ModItems.craftingItems, 1, 0));
+		recipePipe = SteampunkedAPI.getLatestAddedRecipe();
 		addOreDictRecipe(new ItemStack(ModItems.spanner), "x x", " x ", " x ",
 				'x', "ingotIron");
 		recipeSpanner = SteampunkedAPI.getLatestAddedRecipe();
@@ -112,6 +114,10 @@ public final class CraftingHandler {
 				"x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.slateBrick));
 		slateBrickStairs = SteampunkedAPI.getLatestAddedRecipe();
 
+		addOreDictRecipe(new ItemStack(ModItems.goggles), "LGL", "L L", "PCP",
+				'G', "ingotGold", 'L', new ItemStack(Items.leather), 'P',
+				new ItemStack(Blocks.glass_pane), 'C', "ingotCopper");
+		recipeGoggles = SteampunkedAPI.getLatestAddedRecipe();
 	}
 
 	public static void initSmelting() {

@@ -56,11 +56,5 @@ public class ItemGoggles extends ItemArmor {
 		return armorType == ARMOR_HELMET;
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack par1ItemStack,
-			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
-		par3List.add("Useful for high altitude flying");
-	}
 
 }
