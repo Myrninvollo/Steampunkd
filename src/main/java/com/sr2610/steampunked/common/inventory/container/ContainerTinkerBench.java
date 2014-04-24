@@ -17,7 +17,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 import com.sr2610.steampunked.common.inventory.slots.tinkerbench.SlotChasis;
-import com.sr2610.steampunked.common.inventory.slots.tinkerbench.SlotCore;
 import com.sr2610.steampunked.common.inventory.slots.tinkerbench.SlotOutput;
 import com.sr2610.steampunked.common.inventory.slots.tinkerbench.SlotUpgrade;
 import com.sr2610.steampunked.common.tileentities.TileEntityTinkerBench;
@@ -36,7 +35,7 @@ public class ContainerTinkerBench extends Container {
 		tinkerTable = cs;
 
 		addSlotToContainer(new SlotChasis(cs, 0, 16, 24));
-		addSlotToContainer(new SlotCore(cs, 1, 16, 49));
+		addSlotToContainer(new Slot(cs, 1, 16, 49));
 
 		addSlotToContainer(new SlotUpgrade(cs, 2, 16, 78));
 		addSlotToContainer(new SlotUpgrade(cs, 3, 34, 78));

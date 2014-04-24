@@ -41,10 +41,10 @@ public class EntityAutomoton extends EntityTameable {
 
 		if (healthUpgrade)
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(
-					20.0D);
+					30.0D);
 		else
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(
-					8.0D);
+					15.0D);
 
 		if (speedUpgrade)
 			getEntityAttribute(SharedMonsterAttributes.movementSpeed)

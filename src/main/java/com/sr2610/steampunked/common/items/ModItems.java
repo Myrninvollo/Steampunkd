@@ -29,7 +29,6 @@ import com.sr2610.steampunked.common.items.armor.ItemMechBoots;
 import com.sr2610.steampunked.common.items.automotons.ItemAutomatonUpgrade;
 import com.sr2610.steampunked.common.items.automotons.ItemAutomotonSpawner;
 import com.sr2610.steampunked.common.items.automotons.ItemChasis;
-import com.sr2610.steampunked.common.items.automotons.ItemCore;
 import com.sr2610.steampunked.common.items.automotons.ItemNamePlate;
 import com.sr2610.steampunked.common.items.automotons.ItemPunchcard;
 import com.sr2610.steampunked.common.items.automotons.ItemReprogrammer;
@@ -70,9 +69,7 @@ public final class ModItems {
 	public static Item copperIngot;
 	public static Item tinIngot;
 
-	public static Item basicCore;
-	public static Item mediumCore;
-	public static Item advancedCore;
+	
 
 	public static Item reprogrammer;
 	public static Item hammer;
@@ -127,13 +124,7 @@ public final class ModItems {
 
 		tinIngot = new ItemMod("ingotTin")
 				.setUnlocalizedName(LibNames.TININGOT);
-		basicCore = new ItemCore("coreBasic").setUnlocalizedName(
-				LibNames.COREBASIC).setMaxStackSize(1);
-		mediumCore = new ItemCore("coreMedium").setUnlocalizedName(
-				LibNames.COREMEDIUM).setMaxStackSize(1);
-		advancedCore = new ItemCore("coreAdvanced").setUnlocalizedName(
-				LibNames.COREADVANCED).setMaxStackSize(1);
-
+	
 		reprogrammer = new ItemReprogrammer().setUnlocalizedName(
 				LibNames.REPROGRAMMER).setMaxStackSize(1);
 
@@ -184,13 +175,6 @@ public final class ModItems {
 		GameRegistry.registerItem(copperIngot, LibNames.COPPERINGOT,
 				Reference.ModID);
 		GameRegistry.registerItem(tinIngot, LibNames.TININGOT, Reference.ModID);
-
-		GameRegistry.registerItem(basicCore, LibNames.COREBASIC,
-				Reference.ModID);
-		GameRegistry.registerItem(mediumCore, LibNames.COREMEDIUM,
-				Reference.ModID);
-		GameRegistry.registerItem(advancedCore, LibNames.COREADVANCED,
-				Reference.ModID);
 
 		GameRegistry.registerItem(reprogrammer, LibNames.REPROGRAMMER,
 				Reference.ModID);

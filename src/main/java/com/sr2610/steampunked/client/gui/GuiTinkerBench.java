@@ -28,7 +28,6 @@ import com.sr2610.steampunked.common.entitys.EntityAutomoton;
 import com.sr2610.steampunked.common.inventory.container.ContainerTinkerBench;
 import com.sr2610.steampunked.common.items.ModItems;
 import com.sr2610.steampunked.common.items.automotons.ItemChasis;
-import com.sr2610.steampunked.common.items.automotons.ItemCore;
 import com.sr2610.steampunked.common.items.interfaces.IUpgrade;
 import com.sr2610.steampunked.common.lib.Reference;
 import com.sr2610.steampunked.common.network.PacketTinkerTable;
@@ -128,8 +127,7 @@ public class GuiTinkerBench extends GuiMachine {
 		if (button.id == 1)
 			if ((injectorInventory.getStackInSlot(0) != null)
 					&& (injectorInventory.getStackInSlot(0).getItem() instanceof ItemChasis)
-					&& (injectorInventory.getStackInSlot(1) != null)
-					&& (injectorInventory.getStackInSlot(1).getItem() instanceof ItemCore)) {
+					&& (injectorInventory.getStackInSlot(1) != null)) {
 				final ItemStack stack = new ItemStack(ModItems.spawner, 1, 0);
 				for (int i = 2; i < 6; ++i)
 					if ((injectorInventory.getStackInSlot(i) != null)
