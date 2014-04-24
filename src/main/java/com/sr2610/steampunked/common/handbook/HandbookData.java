@@ -83,9 +83,7 @@ public final class HandbookData {
 		sabers.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",
 				CraftingHandler.recipeSabers, "sabers"));
 		
-		pipes = new SPHandbookEntry("pipes", categoryMachines);
-		pipes.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",
-				CraftingHandler.recipePipe, "pipes"));
+		
 
 		slate = new SPHandbookEntry("slate", categoryBlocks);
 		slate.setHandbookPages(
@@ -101,6 +99,10 @@ public final class HandbookData {
 		
 		
 		//MACHINES//
+		
+		pipes = new SPHandbookEntry("pipes", categoryMachines);
+		pipes.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",
+				CraftingHandler.recipePipe, "pipes"));
 		
 		//injector = new SPHandbookEntry("injector", categoryMachines); 
 		//injector.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",

@@ -45,7 +45,7 @@ public class Steampunked {
 	public static final String name = "Steampunked";
 	public static final Logger logger = LogManager.getLogger("Steampunked");
 
-	@SidedProxy(serverSide = "com.sr2610.steampunked.proxies.CommonProxy", clientSide = "com.sr2610.steampunked.proxies.ClientProxy")
+	@SidedProxy(serverSide = "com.sr2610.steampunked.common.CommonProxy", clientSide = "com.sr2610.steampunked.client.ClientProxy")
 	public static CommonProxy proxy;
 
 	@Instance
