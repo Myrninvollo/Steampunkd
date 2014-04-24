@@ -217,7 +217,7 @@ public final class ModItems {
 	}
 
 	private static void addLoot() {
-		ItemStack stack = new ItemStack(ModItems.hammer);
+		final ItemStack stack = new ItemStack(ModItems.hammer);
 		stack.setStackDisplayName("Mjölnir");
 		ChestGenHooks.getInfo(ChestGenHooks.PYRAMID_JUNGLE_CHEST).addItem(
 				new WeightedRandomChestContent(stack, 1, 1, 1));

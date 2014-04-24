@@ -20,7 +20,7 @@ import com.sr2610.steampunked.common.tileentities.TileEntitySteamBoiler;
 
 public class ContainerSteamBoiler extends Container {
 
-	private TileEntitySteamBoiler boiler;
+	private final TileEntitySteamBoiler boiler;
 
 	private static final int SLOT_INVENTORY_X = 8;
 	private static final int SLOT_INVENTORY_Y = 84;
@@ -38,11 +38,12 @@ public class ContainerSteamBoiler extends Container {
 
 		for (i = 0; i < 3; ++i)
 			for (j = 0; j < 9; ++j)
-				addSlotToContainer(new Slot(player_inventory, j + i * 9 + 9,
-						SLOT_INVENTORY_X + j * 18, SLOT_INVENTORY_Y + i * 18));
+				addSlotToContainer(new Slot(player_inventory, j + (i * 9) + 9,
+						SLOT_INVENTORY_X + (j * 18), SLOT_INVENTORY_Y
+								+ (i * 18)));
 		for (i = 0; i < 9; ++i)
-			addSlotToContainer(new Slot(player_inventory, i, SLOT_HOTBAR_X + i
-					* 18, SLOT_HOTBAR_Y));
+			addSlotToContainer(new Slot(player_inventory, i, SLOT_HOTBAR_X
+					+ (i * 18), SLOT_HOTBAR_Y));
 	}
 
 	@Override
@@ -52,10 +53,10 @@ public class ContainerSteamBoiler extends Container {
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotId) {
-		Slot slot = (Slot) inventorySlots.get(slotId);
-		if (slot != null && slot.getHasStack()) {
-			ItemStack itemToTransfer = slot.getStack();
-			ItemStack copy = itemToTransfer.copy();
+		final Slot slot = (Slot) inventorySlots.get(slotId);
+		if ((slot != null) && slot.getHasStack()) {
+			final ItemStack itemToTransfer = slot.getStack();
+			final ItemStack copy = itemToTransfer.copy();
 			if (slotId < boiler.getSizeInventory()) {
 				if (!mergeItemStack(itemToTransfer, boiler.getSizeInventory(),
 						inventorySlots.size(), true))

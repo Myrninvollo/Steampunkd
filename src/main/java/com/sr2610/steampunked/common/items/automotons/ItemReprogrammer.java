@@ -16,12 +16,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.sr2610.steampunked.common.creativetabs.ModAutomatonTab;
-import com.sr2610.steampunked.common.entity.automatons.EntityAutomaton;
 
 public class ItemReprogrammer extends Item {
 
@@ -62,10 +59,10 @@ public class ItemReprogrammer extends Item {
 	public void addInformation(ItemStack itemStack, EntityPlayer player,
 			List list, boolean par4) {
 		if (itemStack.stackTagCompound != null) {
-			int X = itemStack.stackTagCompound.getInteger("X");
-			int Y = itemStack.stackTagCompound.getInteger("Y");
-			int Z = itemStack.stackTagCompound.getInteger("Z");
-			int Side = itemStack.stackTagCompound.getInteger("Side");
+			final int X = itemStack.stackTagCompound.getInteger("X");
+			final int Y = itemStack.stackTagCompound.getInteger("Y");
+			final int Z = itemStack.stackTagCompound.getInteger("Z");
+			final int Side = itemStack.stackTagCompound.getInteger("Side");
 
 			list.add("X: " + X);
 			list.add("Y: " + Y);
@@ -80,29 +77,26 @@ public class ItemReprogrammer extends Item {
 	public boolean itemInteractionForEntity(ItemStack itemStack,
 			EntityPlayer player, EntityLivingBase entityLiving) {
 
-		if (entityLiving instanceof EntityAutomaton) {
-			EntityAutomaton automaton = (EntityAutomaton) entityLiving;
-			if (itemStack.stackTagCompound != null) {
-				int X = itemStack.stackTagCompound.getInteger("X");
-				int Y = itemStack.stackTagCompound.getInteger("Y");
-				int Z = itemStack.stackTagCompound.getInteger("Z");
-				int Side = itemStack.stackTagCompound.getInteger("Side");
-
-				automaton.homeX = X;
-				automaton.homeY = Y;
-				automaton.homeZ = Z;
-				automaton.side = Side;
-				if (!player.worldObj.isRemote)
-					player.addChatComponentMessage(new ChatComponentTranslation(
-							StatCollector
-									.translateToLocal("steampunked.boundDone")));
-				player.worldObj.playSoundAtEntity(player,
-						"random.successful_hit", 1.0F, 1.0F);
-
-				return true;
-
-			}
-		}
+		/*
+		 * if (entityLiving instanceof EntityAutomaton) { EntityAutomaton
+		 * automaton = (EntityAutomaton) entityLiving; if
+		 * (itemStack.stackTagCompound != null) { int X =
+		 * itemStack.stackTagCompound.getInteger("X"); int Y =
+		 * itemStack.stackTagCompound.getInteger("Y"); int Z =
+		 * itemStack.stackTagCompound.getInteger("Z"); int Side =
+		 * itemStack.stackTagCompound.getInteger("Side");
+		 * 
+		 * automaton.homeX = X; automaton.homeY = Y; automaton.homeZ = Z;
+		 * automaton.side = Side; if (!player.worldObj.isRemote)
+		 * player.addChatComponentMessage(new ChatComponentTranslation(
+		 * StatCollector .translateToLocal("steampunked.boundDone")));
+		 * player.worldObj.playSoundAtEntity(player, "random.successful_hit",
+		 * 1.0F, 1.0F);
+		 * 
+		 * return true;
+		 * 
+		 * } }
+		 */
 		return false;
 	}
 }

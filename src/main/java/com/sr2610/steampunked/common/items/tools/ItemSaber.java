@@ -30,7 +30,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemSaber extends ItemSword {
-	private float weaponDamage;
+	private final float weaponDamage;
 	private final Item.ToolMaterial toolMaterial;
 	private String texturename;
 
@@ -54,10 +54,11 @@ public class ItemSaber extends ItemSword {
 	 */
 	public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block) {
 
-		Material material = par2Block.getMaterial();
-		return material != Material.plants && material != Material.vine
-				&& material != Material.coral && material != Material.leaves
-				&& material != Material.cake ? 1.0F : 1.5F;
+		final Material material = par2Block.getMaterial();
+		return (material != Material.plants) && (material != Material.vine)
+				&& (material != Material.coral)
+				&& (material != Material.leaves) && (material != Material.cake) ? 1.0F
+				: 1.5F;
 	}
 
 	/**
@@ -140,7 +141,7 @@ public class ItemSaber extends ItemSword {
 	 */
 	@Override
 	public Multimap getItemAttributeModifiers() {
-		Multimap multimap = super.getItemAttributeModifiers();
+		final Multimap multimap = super.getItemAttributeModifiers();
 		multimap.put(SharedMonsterAttributes.attackDamage
 				.getAttributeUnlocalizedName(), new AttributeModifier(
 				field_111210_e, "Weapon modifier", weaponDamage, 0));

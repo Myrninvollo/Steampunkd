@@ -23,7 +23,7 @@ import com.sr2610.steampunked.common.tileentities.TileEntityValvePipe;
 
 public class PipeRendererTESR extends TileEntitySpecialRenderer {
 
-	private ModelPipe model;
+	private final ModelPipe model;
 
 	public PipeRendererTESR() {
 		model = new ModelPipe();
@@ -35,7 +35,7 @@ public class PipeRendererTESR extends TileEntitySpecialRenderer {
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.3F, (float) z + 0.5F);
 
-		ResourceLocation textures = new ResourceLocation(Reference.ModID
+		final ResourceLocation textures = new ResourceLocation(Reference.ModID
 				+ ":textures/blocks/models/pipe.png");
 		Minecraft.getMinecraft().renderEngine.bindTexture(textures);
 		GL11.glPushMatrix();
@@ -50,8 +50,8 @@ public class PipeRendererTESR extends TileEntitySpecialRenderer {
 			double d2, float scale) {
 		if (tileEntity instanceof TileEntityPipe) {
 			((TileEntityPipe) tileEntity).checkPipeConnections();
-			boolean[] adjecentConnections = ((TileEntityPipe) tileEntity).pipeConnectionsBuffer;
-			float f = 0.05F;
+			final boolean[] adjecentConnections = ((TileEntityPipe) tileEntity).pipeConnectionsBuffer;
+			final float f = 0.05F;
 
 			if (adjecentConnections[0] == true)
 				model.renderPart("Top", f);
@@ -77,8 +77,8 @@ public class PipeRendererTESR extends TileEntitySpecialRenderer {
 
 		else if (tileEntity instanceof TileEntityValvePipe) {
 			((TileEntityValvePipe) tileEntity).checkPipeConnections();
-			boolean[] adjecentConnections = ((TileEntityValvePipe) tileEntity).pipeConnectionsBuffer;
-			float f = 0.05F;
+			final boolean[] adjecentConnections = ((TileEntityValvePipe) tileEntity).pipeConnectionsBuffer;
+			final float f = 0.05F;
 
 			if (adjecentConnections[0] == true)
 				model.renderPart("Top", f);

@@ -21,14 +21,15 @@ public class GuiButtonInvisible extends GuiButton {
 
 	@Override
 	public void drawButton(Minecraft par1Minecraft, int par2, int par3) {
-		field_146123_n = par2 >= xPosition && par3 >= yPosition
-				&& par2 < xPosition + width && par3 < yPosition + height;
-		int k = getHoverState(field_146123_n);
+		field_146123_n = (par2 >= xPosition) && (par3 >= yPosition)
+				&& (par2 < (xPosition + width))
+				&& (par3 < (yPosition + height));
+		final int k = getHoverState(field_146123_n);
 
-		boolean unicode = par1Minecraft.fontRenderer.getUnicodeFlag();
+		final boolean unicode = par1Minecraft.fontRenderer.getUnicodeFlag();
 		par1Minecraft.fontRenderer.setUnicodeFlag(true);
 		par1Minecraft.fontRenderer.drawString(displayString, xPosition
-				+ (k == 2 ? 5 : 0), yPosition + (height - 8) / 2, 0);
+				+ (k == 2 ? 5 : 0), yPosition + ((height - 8) / 2), 0);
 		par1Minecraft.fontRenderer.setUnicodeFlag(unicode);
 	}
 

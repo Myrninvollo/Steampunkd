@@ -19,7 +19,7 @@ import com.sr2610.steampunked.client.render.PipeRendererTESR;
 import com.sr2610.steampunked.client.render.RenderAutomoton;
 import com.sr2610.steampunked.common.CommonProxy;
 import com.sr2610.steampunked.common.blocks.ModBlocks;
-import com.sr2610.steampunked.common.entity.automatons.EntityAutomaton;
+import com.sr2610.steampunked.common.entitys.EntityAutomoton;
 import com.sr2610.steampunked.common.items.ModItems;
 import com.sr2610.steampunked.common.tileentities.TileEntityPipe;
 import com.sr2610.steampunked.common.tileentities.TileEntityValvePipe;
@@ -31,21 +31,16 @@ public class ClientProxy extends CommonProxy {
 
 	public static int pipeRenderID = -1;
 
-	@Override
-	public void registerTickHandlers() {
-
-	}
-
 	public final static PipeItemRenderer pipeItemRenderer = new PipeItemRenderer();
 	public final static BootsItemRenderer bootsItemRenderer = new BootsItemRenderer();
 
 	@Override
 	public void registerRenderInformation() {
-		RenderingRegistry.registerEntityRenderingHandler(EntityAutomaton.class,
+		RenderingRegistry.registerEntityRenderingHandler(EntityAutomoton.class,
 				new RenderAutomoton());
 		MinecraftForgeClient.registerItemRenderer(ModItems.clockworkBow,
 				new BowRenderer());
-		PipeRendererTESR rp = new PipeRendererTESR();
+		final PipeRendererTESR rp = new PipeRendererTESR();
 		MinecraftForgeClient.registerItemRenderer(
 				Item.getItemFromBlock(ModBlocks.pipe), pipeItemRenderer);
 

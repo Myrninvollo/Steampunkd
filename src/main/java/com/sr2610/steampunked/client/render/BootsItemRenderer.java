@@ -51,7 +51,7 @@ public class BootsItemRenderer implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		Float f = 0.15F;
+		final Float f = 0.15F;
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(
 				Reference.ModID, "/textures/models/mechboots.png"));

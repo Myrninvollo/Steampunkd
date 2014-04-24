@@ -1,9 +1,10 @@
 /*******************************************************************************
- * This class was created by <SR2610>. It's distributed as part of the Steampunk'd Mod. 
- * Get the Source Code in Github: https://github.com/SR2610/Steampunkd
+ * This class was created by <SR2610>. It's distributed as part of the
+ * Steampunk'd Mod. Get the Source Code in Github:
+ * https://github.com/SR2610/Steampunkd
  * 
- * Steampunk'd is Open Source and distributed under a
- * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
+ * Steampunk'd is Open Source and distributed under a Creative Commons
+ * Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
  ******************************************************************************/
 package com.sr2610.steampunked.common.items.tools;
@@ -46,7 +47,7 @@ public class ItemSpanner extends Item {
 	}
 
 	private boolean isShiftRotation(Class<? extends Block> cls) {
-		for (Class<? extends Block> shift : shiftRotations)
+		for (final Class<? extends Block> shift : shiftRotations)
 			if (shift.isAssignableFrom(cls))
 				return true;
 		return false;
@@ -56,7 +57,7 @@ public class ItemSpanner extends Item {
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player,
 			World world, int x, int y, int z, int side, float hitX, float hitY,
 			float hitZ) {
-		Block block = world.getBlock(x, y, z);
+		final Block block = world.getBlock(x, y, z);
 		player.swingItem();
 
 		if (block == null)

@@ -64,8 +64,8 @@ public class BlockSteamFurnace extends BlockContainer {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
 			EntityPlayer player, int i, float f, float g, float t) {
-		TileEntity tile_entity = world.getTileEntity(x, y, z);
-		if (tile_entity == null || player.isSneaking())
+		final TileEntity tile_entity = world.getTileEntity(x, y, z);
+		if ((tile_entity == null) || player.isSneaking())
 			return false;
 		else
 			player.openGui(Steampunked.instance, 1, world, x, y, z);
@@ -76,17 +76,18 @@ public class BlockSteamFurnace extends BlockContainer {
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int i) {
 		if (keepFurnaceInventory == false) {
-			TileEntitySteamFurnace tileentityfurnace = (TileEntitySteamFurnace) world
+			final TileEntitySteamFurnace tileentityfurnace = (TileEntitySteamFurnace) world
 					.getTileEntity(x, y, z);
 
 			if (tileentityfurnace != null) {
 				for (int i1 = 0; i1 < tileentityfurnace.getSizeInventory(); ++i1) {
-					ItemStack itemstack = tileentityfurnace.getStackInSlot(i1);
+					final ItemStack itemstack = tileentityfurnace
+							.getStackInSlot(i1);
 
 					if (itemstack != null) {
-						float f = furnaceRand.nextFloat() * 0.8F + 0.1F;
-						float f1 = furnaceRand.nextFloat() * 0.8F + 0.1F;
-						float f2 = furnaceRand.nextFloat() * 0.8F + 0.1F;
+						final float f = (furnaceRand.nextFloat() * 0.8F) + 0.1F;
+						final float f1 = (furnaceRand.nextFloat() * 0.8F) + 0.1F;
+						final float f2 = (furnaceRand.nextFloat() * 0.8F) + 0.1F;
 
 						while (itemstack.stackSize > 0) {
 							int j1 = furnaceRand.nextInt(21) + 10;
@@ -95,7 +96,7 @@ public class BlockSteamFurnace extends BlockContainer {
 								j1 = itemstack.stackSize;
 
 							itemstack.stackSize -= j1;
-							EntityItem entityitem = new EntityItem(world,
+							final EntityItem entityitem = new EntityItem(world,
 									x + f, y + f1, z + f2, new ItemStack(
 											itemstack.getItem(), j1,
 											itemstack.getItemDamage()));
@@ -105,11 +106,11 @@ public class BlockSteamFurnace extends BlockContainer {
 										(NBTTagCompound) itemstack
 												.getTagCompound().copy());
 
-							float f3 = 0.05F;
+							final float f3 = 0.05F;
 							entityitem.motionX = (float) furnaceRand
 									.nextGaussian() * f3;
-							entityitem.motionY = (float) furnaceRand
-									.nextGaussian() * f3 + 0.2F;
+							entityitem.motionY = ((float) furnaceRand
+									.nextGaussian() * f3) + 0.2F;
 							entityitem.motionZ = (float) furnaceRand
 									.nextGaussian() * f3;
 							world.spawnEntityInWorld(entityitem);
@@ -134,7 +135,7 @@ public class BlockSteamFurnace extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-		if (meta == 0 && side == 3)
+		if ((meta == 0) && (side == 3))
 			return furnaceIconFront;
 		else if (side == 1)
 			return furnaceIconTop;
@@ -163,10 +164,10 @@ public class BlockSteamFurnace extends BlockContainer {
 
 	private void func_149930_e(World world, int x, int y, int z) {
 		if (!world.isRemote) {
-			Block block = world.getBlock(x, y, z - 1);
-			Block block1 = world.getBlock(x, y, z + 1);
-			Block block2 = world.getBlock(x - 1, y, z);
-			Block block3 = world.getBlock(x + 1, y, z);
+			final Block block = world.getBlock(x, y, z - 1);
+			final Block block1 = world.getBlock(x, y, z + 1);
+			final Block block2 = world.getBlock(x - 1, y, z);
+			final Block block3 = world.getBlock(x + 1, y, z);
 			byte b0 = 3;
 
 			if (block.func_149730_j() && !block1.func_149730_j())
@@ -188,8 +189,8 @@ public class BlockSteamFurnace extends BlockContainer {
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z,
 			EntityLivingBase entity, ItemStack itemstack) {
-		int l = MathHelper
-				.floor_double(entity.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+		final int l = MathHelper
+				.floor_double(((entity.rotationYaw * 4.0F) / 360.0F) + 0.5D) & 3;
 
 		if (l == 0)
 			world.setBlockMetadataWithNotify(x, y, z, 2, 2);
@@ -207,9 +208,9 @@ public class BlockSteamFurnace extends BlockContainer {
 
 	public static void updateFurnaceBlockState(boolean p_149931_0_,
 			World p_149931_1_, int p_149931_2_, int p_149931_3_, int p_149931_4_) {
-		int l = p_149931_1_.getBlockMetadata(p_149931_2_, p_149931_3_,
+		final int l = p_149931_1_.getBlockMetadata(p_149931_2_, p_149931_3_,
 				p_149931_4_);
-		TileEntity tileentity = p_149931_1_.getTileEntity(p_149931_2_,
+		final TileEntity tileentity = p_149931_1_.getTileEntity(p_149931_2_,
 				p_149931_3_, p_149931_4_);
 		keepFurnaceInventory = true;
 

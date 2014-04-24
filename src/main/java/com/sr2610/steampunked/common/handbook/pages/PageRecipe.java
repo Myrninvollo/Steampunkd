@@ -53,23 +53,22 @@ public class PageRecipe extends HandbookPage {
 
 		renderRecipe(gui, mx, my);
 
-		int width = gui.getWidth() - 30;
-		int height = gui.getHeight();
-		int x = gui.getLeft() + 16;
-		int y = gui.getTop() + height - 80;
+		final int width = gui.getWidth() - 30;
+		final int height = gui.getHeight();
+		final int x = gui.getLeft() + 16;
+		final int y = (gui.getTop() + height) - 80;
 		PageText.renderText(x, y, width, height, getUnlocalizedName());
 
 		if (tooltipStack != null) {
-			List<String> tooltipData = tooltipStack.getTooltip(
+			final List<String> tooltipData = tooltipStack.getTooltip(
 					Minecraft.getMinecraft().thePlayer, false);
 			RenderHelper.renderTooltip(mx, my, tooltipData);
 
-			if (tooltipEntry) {
+			if (tooltipEntry)
 				tooltipData
 						.add(EnumChatFormatting.GRAY
 								+ StatCollector
 										.translateToLocal("steampunked.gui.handbook.clickToRecipe"));
-			}
 
 			if (tooltipContainerStack != null)
 				tooltipData
@@ -94,7 +93,7 @@ public class PageRecipe extends HandbookPage {
 	@SideOnly(Side.CLIENT)
 	public void renderItemAtAngle(IGuiHandbookEntry gui, int angle,
 			ItemStack stack) {
-		if (stack == null || stack.getItem() == null)
+		if ((stack == null) || (stack.getItem() == null))
 			return;
 		stack = stack.copy();
 
@@ -102,12 +101,13 @@ public class PageRecipe extends HandbookPage {
 			stack.setItemDamage(0);
 
 		angle -= 90;
-		int radius = 32;
-		double xPos = gui.getLeft() + Math.cos(angle * Math.PI / 180D) * radius
-				+ gui.getWidth() / 2 - 8;
-		double yPos = gui.getTop() + Math.sin(angle * Math.PI / 180D) * radius
-				+ 53;
-		ItemStack stack1 = stack.copy();
+		final int radius = 32;
+		final double xPos = (gui.getLeft()
+				+ (Math.cos((angle * Math.PI) / 180D) * radius) + (gui
+				.getWidth() / 2)) - 8;
+		final double yPos = gui.getTop()
+				+ (Math.sin((angle * Math.PI) / 180D) * radius) + 53;
+		final ItemStack stack1 = stack.copy();
 		if (stack1.getItemDamage() == -1)
 			stack1.setItemDamage(0);
 
@@ -117,22 +117,22 @@ public class PageRecipe extends HandbookPage {
 	@SideOnly(Side.CLIENT)
 	public void renderItemAtGridPos(IGuiHandbookEntry gui, int x, int y,
 			ItemStack stack, boolean accountForContainer) {
-		if (stack == null || stack.getItem() == null)
+		if ((stack == null) || (stack.getItem() == null))
 			return;
 		stack = stack.copy();
 
 		if (stack.getItemDamage() == Short.MAX_VALUE)
 			stack.setItemDamage(0);
 
-		int xPos = gui.getLeft() + x * 25 - 1;
-		int yPos = gui.getTop() + y * 26 - y * 2 + 4 - y - (y == 3 ? 0 : 2)
-				- (y == 1 ? 1 : 0) + 10;
+		int xPos = (gui.getLeft() + (x * 25)) - 1;
+		int yPos = ((((gui.getTop() + (y * 26)) - (y * 2)) + 4) - y
+				- (y == 3 ? 0 : 2) - (y == 1 ? 1 : 0)) + 10;
 
-		if (x == 2 && y == 0) {
-			xPos = gui.getLeft() + (x + 2) * 25 + 3;
-			yPos = gui.getTop() + (y + 2) * 26 - 4 + 10;
+		if ((x == 2) && (y == 0)) {
+			xPos = gui.getLeft() + ((x + 2) * 25) + 3;
+			yPos = ((gui.getTop() + ((y + 2) * 26)) - 4) + 10;
 		}
-		ItemStack stack1 = stack.copy();
+		final ItemStack stack1 = stack.copy();
 		if (stack1.getItemDamage() == -1)
 			stack1.setItemDamage(0);
 
@@ -142,9 +142,9 @@ public class PageRecipe extends HandbookPage {
 	@SideOnly(Side.CLIENT)
 	public void renderItem(IGuiHandbookEntry gui, int xPos, int yPos,
 			ItemStack stack, boolean accountForContainer) {
-		RenderItem render = new RenderItem();
-		TextureManager renderEngine = Minecraft.getMinecraft().renderEngine;
-		FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+		final RenderItem render = new RenderItem();
+		final TextureManager renderEngine = Minecraft.getMinecraft().renderEngine;
+		final FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
 
 		GL11.glTranslatef(0F, 0F, 200F);
 		if (!ForgeHooksClient.renderInventoryItem(new RenderBlocks(),
@@ -156,29 +156,31 @@ public class PageRecipe extends HandbookPage {
 				xPos, yPos);
 		GL11.glTranslatef(0F, 0F, -200F);
 
-		if (relativeMouseX >= xPos && relativeMouseY >= yPos
-				&& relativeMouseX <= xPos + 16 && relativeMouseY <= yPos + 16) {
+		if ((relativeMouseX >= xPos) && (relativeMouseY >= yPos)
+				&& (relativeMouseX <= (xPos + 16))
+				&& (relativeMouseY <= (yPos + 16))) {
 			tooltipStack = stack;
 
-			EntryData data = HandbookRecipeMappings
+			final EntryData data = HandbookRecipeMappings
 					.getDataForStack(tooltipStack);
-			if (data != null
-					&& (data.entry != gui.getEntry() || data.page != gui
-							.getPageOn())) {
+			if ((data != null)
+					&& ((data.entry != gui.getEntry()) || (data.page != gui
+							.getPageOn()))) {
 				tooltipEntry = true;
 
 				if (Mouse.isButtonDown(0)) {
-					GuiHandbookEntry newGui = new GuiHandbookEntry(data.entry,
-							(GuiScreen) gui);
+					final GuiHandbookEntry newGui = new GuiHandbookEntry(
+							data.entry, (GuiScreen) gui);
 					newGui.page = data.page;
 					Minecraft.getMinecraft().displayGuiScreen(newGui);
 				}
 			}
 
 			if (accountForContainer) {
-				ItemStack containerStack = stack.getItem().getContainerItem(
-						stack);
-				if (containerStack != null && containerStack.getItem() != null)
+				final ItemStack containerStack = stack.getItem()
+						.getContainerItem(stack);
+				if ((containerStack != null)
+						&& (containerStack.getItem() != null))
 					tooltipContainerStack = containerStack;
 			}
 		}

@@ -42,27 +42,27 @@ public class OreGeneration implements IWorldGenerator {
 
 	private void generateSurface(World world, Random random, int i, int j) {
 		for (int k = 0; k < 10; k++) {
-			int blockXCoord = i + random.nextInt(16);
-			int blockYCoord = random.nextInt(64);
-			int blockZCoord = j + random.nextInt(16);
+			final int blockXCoord = i + random.nextInt(16);
+			final int blockYCoord = random.nextInt(64);
+			final int blockZCoord = j + random.nextInt(16);
 			new WorldGenMinable(ModBlocks.oreCopper, 8).generate(world, random,
 					blockXCoord, blockYCoord, blockZCoord);
 
 		}
 
 		for (int k = 0; k < 6; k++) {
-			int blockXCoord = i + random.nextInt(16);
-			int blockYCoord = random.nextInt(64);
-			int blockZCoord = j + random.nextInt(16);
+			final int blockXCoord = i + random.nextInt(16);
+			final int blockYCoord = random.nextInt(64);
+			final int blockZCoord = j + random.nextInt(16);
 			new WorldGenMinable(ModBlocks.oreTin, 6).generate(world, random,
 					blockXCoord, blockYCoord, blockZCoord);
 
 		}
 
 		for (int k = 0; k < 4; k++) {
-			int blockXCoord = i + random.nextInt(16);
-			int blockYCoord = random.nextInt(64);
-			int blockZCoord = j + random.nextInt(16);
+			final int blockXCoord = i + random.nextInt(16);
+			final int blockYCoord = random.nextInt(64);
+			final int blockZCoord = j + random.nextInt(16);
 			if (world.getBiomeGenForCoords(blockXCoord, blockZCoord) == BiomeGenBase.extremeHills)
 				new WorldGenMinable(ModBlocks.slate, 20).generate(world,
 						random, blockXCoord, blockYCoord, blockZCoord);

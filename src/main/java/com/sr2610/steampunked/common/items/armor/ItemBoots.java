@@ -77,7 +77,7 @@ public class ItemBoots extends ItemArmor implements ISteamUser, ISpecialArmor {
 	@Override
 	public int fill(ItemStack target, int energyAvailable) {
 		if (energyAvailable > getDamage(target)) {
-			int remainder = energyAvailable - getDamage(target);
+			final int remainder = energyAvailable - getDamage(target);
 			setDamage(target, 0);
 			return remainder;
 		} else {
@@ -109,12 +109,12 @@ public class ItemBoots extends ItemArmor implements ISteamUser, ISpecialArmor {
 	public ArmorProperties getProperties(EntityLivingBase player,
 			ItemStack armor, DamageSource source, double damage, int slot) {
 		double protection;
-		if (armor.getItemDamage() < armor.getMaxDamage() - 1)
+		if (armor.getItemDamage() < (armor.getMaxDamage() - 1))
 			protection = 0.2;
 		else
 			protection = 0;
 
-		ArmorProperties prop = new ArmorProperties(Integer.MAX_VALUE,
+		final ArmorProperties prop = new ArmorProperties(Integer.MAX_VALUE,
 				protection, Integer.MAX_VALUE);
 		return prop;
 
@@ -122,7 +122,7 @@ public class ItemBoots extends ItemArmor implements ISteamUser, ISpecialArmor {
 
 	@Override
 	public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) {
-		if (armor.getItemDamage() < armor.getMaxDamage() - 1)
+		if (armor.getItemDamage() < (armor.getMaxDamage() - 1))
 			return 3;
 		else
 			return 0;

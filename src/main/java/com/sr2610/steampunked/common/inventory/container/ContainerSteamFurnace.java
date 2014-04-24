@@ -23,7 +23,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ContainerSteamFurnace extends Container {
-	private TileEntitySteamFurnace furnace;
+	private final TileEntitySteamFurnace furnace;
 	private int lastCookTime;
 
 	public ContainerSteamFurnace(InventoryPlayer par1InventoryPlayer,
@@ -36,11 +36,12 @@ public class ContainerSteamFurnace extends Container {
 
 		for (i = 0; i < 3; ++i)
 			for (int j = 0; j < 9; ++j)
-				addSlotToContainer(new Slot(par1InventoryPlayer, j + i * 9 + 9,
-						8 + j * 18, 84 + i * 18));
+				addSlotToContainer(new Slot(par1InventoryPlayer, j + (i * 9)
+						+ 9, 8 + (j * 18), 84 + (i * 18)));
 
 		for (i = 0; i < 9; ++i)
-			addSlotToContainer(new Slot(par1InventoryPlayer, i, 8 + i * 18, 142));
+			addSlotToContainer(new Slot(par1InventoryPlayer, i, 8 + (i * 18),
+					142));
 
 	}
 
@@ -56,7 +57,7 @@ public class ContainerSteamFurnace extends Container {
 		super.detectAndSendChanges();
 
 		for (int i = 0; i < crafters.size(); ++i) {
-			ICrafting icrafting = (ICrafting) crafters.get(i);
+			final ICrafting icrafting = (ICrafting) crafters.get(i);
 
 			if (lastCookTime != furnace.furnaceCookTime)
 				icrafting.sendProgressBarUpdate(this, 0,
@@ -87,10 +88,10 @@ public class ContainerSteamFurnace extends Container {
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotId) {
-		Slot slot = (Slot) inventorySlots.get(slotId);
-		if (slot != null && slot.getHasStack()) {
-			ItemStack itemToTransfer = slot.getStack();
-			ItemStack copy = itemToTransfer.copy();
+		final Slot slot = (Slot) inventorySlots.get(slotId);
+		if ((slot != null) && slot.getHasStack()) {
+			final ItemStack itemToTransfer = slot.getStack();
+			final ItemStack copy = itemToTransfer.copy();
 			if (slotId < furnace.getSizeInventory()) {
 				if (!mergeItemStack(itemToTransfer, furnace.getSizeInventory(),
 						inventorySlots.size(), true))

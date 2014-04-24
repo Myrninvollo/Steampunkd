@@ -20,7 +20,7 @@ import com.sr2610.steampunked.common.inventory.slots.SlotArmor;
 import com.sr2610.steampunked.common.tileentities.TileEntityInjector;
 
 public class ContainerInjector extends Container {
-	private TileEntityInjector te_injector;
+	private final TileEntityInjector te_injector;
 	private static final int SLOT_INVENTORY_X = 8;
 	private static final int SLOT_INVENTORY_Y = 84;
 
@@ -37,16 +37,17 @@ public class ContainerInjector extends Container {
 
 		for (i = 0; i < 4; ++i)
 			addSlotToContainer(new SlotArmor(null, player_inventory,
-					player_inventory.getSizeInventory() - 1 - i, 8 + i * 18,
+					player_inventory.getSizeInventory() - 1 - i, 8 + (i * 18),
 					49, i));
 
 		for (i = 0; i < 3; ++i)
 			for (j = 0; j < 9; ++j)
-				addSlotToContainer(new Slot(player_inventory, j + i * 9 + 9,
-						SLOT_INVENTORY_X + j * 18, SLOT_INVENTORY_Y + i * 18));
+				addSlotToContainer(new Slot(player_inventory, j + (i * 9) + 9,
+						SLOT_INVENTORY_X + (j * 18), SLOT_INVENTORY_Y
+								+ (i * 18)));
 		for (i = 0; i < 9; ++i)
-			addSlotToContainer(new Slot(player_inventory, i, SLOT_HOTBAR_X + i
-					* 18, SLOT_HOTBAR_Y));
+			addSlotToContainer(new Slot(player_inventory, i, SLOT_HOTBAR_X
+					+ (i * 18), SLOT_HOTBAR_Y));
 	}
 
 	@Override
@@ -76,10 +77,10 @@ public class ContainerInjector extends Container {
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
 		ItemStack itemstack = null;
-		Slot slot = (Slot) inventorySlots.get(par2);
+		final Slot slot = (Slot) inventorySlots.get(par2);
 
-		if (slot != null && slot.getHasStack()) {
-			ItemStack itemstack1 = slot.getStack();
+		if ((slot != null) && slot.getHasStack()) {
+			final ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
 			if (par2 == 0) {
@@ -91,7 +92,7 @@ public class ContainerInjector extends Container {
 								.isItemValid(itemstack1))
 					return null;
 
-				if (itemstack1.hasTagCompound() && itemstack1.stackSize == 1) {
+				if (itemstack1.hasTagCompound() && (itemstack1.stackSize == 1)) {
 					((Slot) inventorySlots.get(0)).putStack(itemstack1.copy());
 					itemstack1.stackSize = 0;
 				} else if (itemstack1.stackSize >= 1) {

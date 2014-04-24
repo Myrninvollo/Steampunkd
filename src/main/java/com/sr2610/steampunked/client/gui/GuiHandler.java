@@ -31,7 +31,7 @@ public class GuiHandler implements IGuiHandler {
 	@Override
 	public Object getServerGuiElement(int id, EntityPlayer player, World world,
 			int x, int y, int z) {
-		TileEntity tile_entity = world.getTileEntity(x, y, z);
+		final TileEntity tile_entity = world.getTileEntity(x, y, z);
 		switch (id) {
 		case 0:
 			return new ContainerInjector((TileEntityInjector) tile_entity,
@@ -59,7 +59,7 @@ public class GuiHandler implements IGuiHandler {
 	@Override
 	public Object getClientGuiElement(int id, EntityPlayer player, World world,
 			int x, int y, int z) {
-		TileEntity tile_entity = world.getTileEntity(x, y, z);
+		final TileEntity tile_entity = world.getTileEntity(x, y, z);
 		switch (id) {
 		case 0:
 			return new GuiInjector((TileEntityInjector) tile_entity,

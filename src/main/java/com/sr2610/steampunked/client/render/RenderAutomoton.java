@@ -17,13 +17,12 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
 import com.sr2610.steampunked.client.model.ModelAutomoton;
-import com.sr2610.steampunked.common.entity.automatons.EntityAutomaton;
+import com.sr2610.steampunked.common.entitys.EntityAutomoton;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -39,34 +38,34 @@ public class RenderAutomoton extends RenderLiving {
 
 	}
 
-	public void doRenderAutomoton(EntityAutomaton par1EntityAutomoton,
+	public void doRenderAutomoton(EntityAutomoton par1EntityAutomoton,
 			double par2, double par4, double par6, float par8, float par9) {
 
 		super.doRender(par1EntityAutomoton, par2, par4, par6, par8, par9);
 	}
 
 	protected ResourceLocation getAutomotonTextures(
-			EntityAutomaton par1EntityAutomoton) {
+			EntityAutomoton par1EntityAutomoton) {
 		return textures;
 	}
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		return getAutomotonTextures((EntityAutomaton) entity);
+		return getAutomotonTextures((EntityAutomoton) entity);
 	}
 
-	protected void renderEquippedItems(EntityAutomaton par1EntityWitch,
+	protected void renderEquippedItems(EntityAutomoton par1EntityWitch,
 			float par2) {
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
 		super.renderEquippedItems(par1EntityWitch, par2);
-		ItemStack itemstack = par1EntityWitch.getHeldItem();
+		final ItemStack itemstack = par1EntityWitch.getHeldItem();
 
 		if (itemstack != null) {
 			GL11.glPushMatrix();
 			float f1;
 
 			GL11.glTranslatef(-0.0625F, 0.53125F, 0.21875F);
-			if (itemstack.getItem() instanceof ItemBlock
+			if ((itemstack.getItem() instanceof ItemBlock)
 					&& RenderBlocks.renderItemIn3d(Block.getBlockFromItem(
 							itemstack.getItem()).getRenderType())) {
 				f1 = 0.5F;
@@ -123,20 +122,6 @@ public class RenderAutomoton extends RenderLiving {
 	@Override
 	protected void renderEquippedItems(EntityLivingBase par1EntityLivingBase,
 			float par2) {
-		this.renderEquippedItems((EntityAutomaton) par1EntityLivingBase, par2);
-	}
-
-	@Override
-	protected void rotateCorpse(EntityLivingBase par1EntityLivingBase,
-			float par2, float par3, float par4) {
-		GL11.glRotatef(180.0F - par3, 0.0F, 1.0F, 0.0F);
-
-		String s = EnumChatFormatting
-				.getTextWithoutFormattingCodes(par1EntityLivingBase
-						.getCommandSenderName());
-		if (s == "SR2610")
-			GL11.glTranslatef(0.0F, par1EntityLivingBase.height + 0.1F, 0.0F);
-
-		super.rotateCorpse(par1EntityLivingBase, par2, par3, par4);
+		this.renderEquippedItems((EntityAutomoton) par1EntityLivingBase, par2);
 	}
 }

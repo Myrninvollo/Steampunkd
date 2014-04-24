@@ -25,12 +25,12 @@ import org.lwjgl.opengl.GL12;
 
 public class BowRenderer implements IItemRenderer {
 	Minecraft mc = Minecraft.getMinecraft();
-	private RenderBlocks renderBlocksInstance = new RenderBlocks();
+	private final RenderBlocks renderBlocksInstance = new RenderBlocks();
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-		return type == ItemRenderType.EQUIPPED
-				|| type == ItemRenderType.EQUIPPED_FIRST_PERSON;
+		return (type == ItemRenderType.EQUIPPED)
+				|| (type == ItemRenderType.EQUIPPED_FIRST_PERSON);
 	}
 
 	@Override
@@ -41,9 +41,9 @@ public class BowRenderer implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		EntityLivingBase living = (EntityLivingBase) data[1];
-		for (int i = 0; i < item.getItem()
-				.getRenderPasses(item.getItemDamage()) + 1; i++)
+		final EntityLivingBase living = (EntityLivingBase) data[1];
+		for (int i = 0; i < (item.getItem().getRenderPasses(
+				item.getItemDamage()) + 1); i++)
 			renderItem(living, item, i, type);
 	}
 
@@ -53,7 +53,7 @@ public class BowRenderer implements IItemRenderer {
 
 		IIcon icon = null; // living.getItemIcon(stack, renderPass);
 		if (living instanceof EntityPlayer) {
-			EntityPlayer player = (EntityPlayer) living;
+			final EntityPlayer player = (EntityPlayer) living;
 			if (player.getItemInUse() != null)
 				icon = stack.getItem().getIcon(stack, renderPass, player,
 						player.getItemInUse(), player.getItemInUseCount());
@@ -66,7 +66,7 @@ public class BowRenderer implements IItemRenderer {
 			GL11.glPopMatrix();
 			return;
 		}
-		TextureManager texturemanager = mc.getTextureManager();
+		final TextureManager texturemanager = mc.getTextureManager();
 		texturemanager.bindTexture(texturemanager.getResourceLocation(stack
 				.getItemSpriteNumber()));
 
@@ -79,16 +79,16 @@ public class BowRenderer implements IItemRenderer {
 			GL11.glScalef(1.5F, 1.5F, 1.5F);
 		}
 
-		Tessellator tessellator = Tessellator.instance;
-		float f = icon.getMinU();
-		float f1 = icon.getMaxU();
-		float f2 = icon.getMinV();
-		float f3 = icon.getMaxV();
-		float f4 = 0.0F;
-		float f5 = 0.3F;
+		final Tessellator tessellator = Tessellator.instance;
+		final float f = icon.getMinU();
+		final float f1 = icon.getMaxU();
+		final float f2 = icon.getMinV();
+		final float f3 = icon.getMaxV();
+		final float f4 = 0.0F;
+		final float f5 = 0.3F;
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		GL11.glTranslatef(-f4, -f5, 0.0F);
-		float f6 = 1.5F;
+		final float f6 = 1.5F;
 		GL11.glScalef(f6, f6, f6);
 		GL11.glRotatef(50.0F, 0.0F, 1.0F, 0.0F);
 		GL11.glRotatef(335.0F, 0.0F, 0.0F, 1.0F);

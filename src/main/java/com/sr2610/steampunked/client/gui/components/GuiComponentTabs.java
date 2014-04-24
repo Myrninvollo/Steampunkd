@@ -32,7 +32,7 @@ public class GuiComponentTabs extends BaseComponent {
 			int mouseX, int mouseY) {
 		super.render(minecraft, offsetX, offsetY, mouseX, mouseY);
 		int oY = 0;
-		for (BaseComponent component : components)
+		for (final BaseComponent component : components)
 			if (component instanceof GuiComponentTab) {
 				component.setY(oY);
 				oY += ((GuiComponentTab) component).getHeight() - 1;
@@ -54,8 +54,8 @@ public class GuiComponentTabs extends BaseComponent {
 	@Override
 	public int getWidth() {
 		int maxWidth = 0;
-		for (BaseComponent component : components)
-			if (component.getX() + component.getWidth() > maxWidth)
+		for (final BaseComponent component : components)
+			if ((component.getX() + component.getWidth()) > maxWidth)
 				maxWidth = component.getX() + component.getWidth();
 		return maxWidth;
 	}
@@ -63,8 +63,8 @@ public class GuiComponentTabs extends BaseComponent {
 	@Override
 	public int getHeight() {
 		int maxHeight = 0;
-		for (BaseComponent component : components)
-			if (component.getY() + component.getHeight() > maxHeight)
+		for (final BaseComponent component : components)
+			if ((component.getY() + component.getHeight()) > maxHeight)
 				maxHeight = component.getY() + component.getHeight();
 		return maxHeight;
 	}

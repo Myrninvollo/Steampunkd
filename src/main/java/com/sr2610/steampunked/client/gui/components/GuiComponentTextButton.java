@@ -33,8 +33,8 @@ public class GuiComponentTextButton extends GuiComponentButton {
 	@Override
 	public void renderContents(Minecraft minecraft, int offsetX, int offsetY,
 			int mouseX, int mouseY, boolean pressed) {
-		int textWidth = minecraft.fontRenderer.getStringWidth(text);
-		int offX = (width - textWidth) / 2 + 1;
+		final int textWidth = minecraft.fontRenderer.getStringWidth(text);
+		int offX = ((width - textWidth) / 2) + 1;
 		int offY = 3;
 		if (buttonEnabled && pressed) {
 			offY++;

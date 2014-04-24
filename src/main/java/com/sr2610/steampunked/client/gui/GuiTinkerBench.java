@@ -24,7 +24,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import com.sr2610.steampunked.Steampunked;
-import com.sr2610.steampunked.common.entity.automatons.EntityAutomaton;
+import com.sr2610.steampunked.common.entitys.EntityAutomoton;
 import com.sr2610.steampunked.common.inventory.container.ContainerTinkerBench;
 import com.sr2610.steampunked.common.items.ModItems;
 import com.sr2610.steampunked.common.items.automotons.ItemChasis;
@@ -41,7 +41,7 @@ public class GuiTinkerBench extends GuiMachine {
 
 	private static int rotate = 0;
 
-	private TileEntityTinkerBench injectorInventory;
+	private final TileEntityTinkerBench injectorInventory;
 
 	private static final int TANK_HEIGHT = 60;
 	private static final int TANK_X = 193;
@@ -50,7 +50,7 @@ public class GuiTinkerBench extends GuiMachine {
 	private static final int TANK_OVERLAY_X = 216;
 	private static final int TANK_OVERLAY_Y = 35 - 16;
 
-	public EntityAutomaton ae;
+	public EntityAutomoton ae;
 
 	public GuiTinkerBench(TileEntityTinkerBench cs, IInventory player_inv) {
 		super(new ContainerTinkerBench(cs, player_inv));
@@ -64,30 +64,30 @@ public class GuiTinkerBench extends GuiMachine {
 		super.drawGuiContainerForegroundLayer(mouse_x, mouse_y);
 
 		fontRendererObj.drawString("Automaton Tinkering Bench", 5, 6, 0x404040);
-		fontRendererObj.drawString("Inventory", 25, ySize - 96 + 2, 0x404040);
+		fontRendererObj.drawString("Inventory", 25, (ySize - 96) + 2, 0x404040);
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.renderEngine.bindTexture(GUI_TEXTURE);
-		int window_x = (width - xSize) / 2;
-		int window_y = (height - ySize) / 2;
+		final int window_x = (width - xSize) / 2;
+		final int window_y = (height - ySize) / 2;
 		drawTexturedModalRect(window_x, window_y, 0, 0, xSize, ySize);
 
 		DisplayTank(window_x, window_y, TANK_X, TANK_Y, TANK_HEIGHT,
 				TANK_OVERLAY_X, TANK_OVERLAY_Y, injectorInventory.GetTank(0));
-		ae = new EntityAutomaton(mc.theWorld);
+		ae = new EntityAutomoton(mc.theWorld);
 		check();
 		drawEntity(guiLeft + 51 + 55, guiTop + 75, 30,
-				(float) (guiLeft + 51 + 60) - xSize, (float) (guiTop + 75 - 50)
-						- ySize, ae);
+				(float) (guiLeft + 51 + 60) - xSize,
+				(float) ((guiTop + 75) - 50) - ySize, ae);
 
 	}
 
 	private void check() {
-		if (injectorInventory.getStackInSlot(0) != null
-				&& injectorInventory.getStackInSlot(0).getItem() instanceof ItemChasis)
+		if ((injectorInventory.getStackInSlot(0) != null)
+				&& (injectorInventory.getStackInSlot(0).getItem() instanceof ItemChasis))
 			ae.setInvisible(false);
 		else
 			ae.setInvisible(true);
@@ -111,8 +111,8 @@ public class GuiTinkerBench extends GuiMachine {
 	public void initGui() {
 		super.initGui();
 		buttonList.clear();
-		buttonList.add(new GuiButton(1, width / 2 + 40, height / 2 - 35, 40,
-				20, "Craft"));
+		buttonList.add(new GuiButton(1, (width / 2) + 40, (height / 2) - 35,
+				40, 20, "Craft"));
 
 	}
 
@@ -126,20 +126,21 @@ public class GuiTinkerBench extends GuiMachine {
 	@Override
 	public void actionPerformed(GuiButton button) {
 		if (button.id == 1)
-			if (injectorInventory.getStackInSlot(0) != null
-					&& injectorInventory.getStackInSlot(0).getItem() instanceof ItemChasis
-					&& injectorInventory.getStackInSlot(1) != null
-					&& injectorInventory.getStackInSlot(1).getItem() instanceof ItemCore) {
-				ItemStack stack = new ItemStack(ModItems.spawner, 1, 0);
+			if ((injectorInventory.getStackInSlot(0) != null)
+					&& (injectorInventory.getStackInSlot(0).getItem() instanceof ItemChasis)
+					&& (injectorInventory.getStackInSlot(1) != null)
+					&& (injectorInventory.getStackInSlot(1).getItem() instanceof ItemCore)) {
+				final ItemStack stack = new ItemStack(ModItems.spawner, 1, 0);
 				for (int i = 2; i < 6; ++i)
-					if (injectorInventory.getStackInSlot(i) != null
-							&& injectorInventory.getStackInSlot(i).getItem() instanceof IUpgrade) {
+					if ((injectorInventory.getStackInSlot(i) != null)
+							&& (injectorInventory.getStackInSlot(i).getItem() instanceof IUpgrade)) {
 						if (!stack.hasTagCompound())
 							stack.setTagCompound(new NBTTagCompound());
 
-						NBTTagCompound nbttagcompound = stack.getTagCompound();
+						final NBTTagCompound nbttagcompound = stack
+								.getTagCompound();
 						if (injectorInventory.getStackInSlot(i).getItemDamage() == 0) {
-							NBTTagDouble nbttagdouble = (NBTTagDouble) nbttagcompound
+							final NBTTagDouble nbttagdouble = (NBTTagDouble) nbttagcompound
 									.getTag("Range");
 
 							if (nbttagdouble == null)
@@ -148,7 +149,7 @@ public class GuiTinkerBench extends GuiMachine {
 						}
 
 						if (injectorInventory.getStackInSlot(i).getItemDamage() == 2) {
-							NBTTagDouble nbttagdoubleHealth = (NBTTagDouble) nbttagcompound
+							final NBTTagDouble nbttagdoubleHealth = (NBTTagDouble) nbttagcompound
 									.getTag("MaxHealth");
 
 							if (nbttagdoubleHealth == null)
@@ -156,7 +157,7 @@ public class GuiTinkerBench extends GuiMachine {
 										40.0));
 						}
 						if (injectorInventory.getStackInSlot(i).getItemDamage() == 1) {
-							NBTTagDouble nbttagdoubleSpeed = (NBTTagDouble) nbttagcompound
+							final NBTTagDouble nbttagdoubleSpeed = (NBTTagDouble) nbttagcompound
 									.getTag("Speed");
 
 							if (nbttagdoubleSpeed == null)
@@ -183,11 +184,11 @@ public class GuiTinkerBench extends GuiMachine {
 		GL11.glTranslatef(par0, par1, 50.0F);
 		GL11.glScalef(-par2, par2, par2);
 		GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-		float f2 = par5EntityLivingBase.renderYawOffset;
-		float f3 = par5EntityLivingBase.rotationYaw;
-		float f4 = par5EntityLivingBase.rotationPitch;
-		float f5 = par5EntityLivingBase.prevRotationYawHead;
-		float f6 = par5EntityLivingBase.rotationYawHead;
+		final float f2 = par5EntityLivingBase.renderYawOffset;
+		final float f3 = par5EntityLivingBase.rotationYaw;
+		final float f4 = par5EntityLivingBase.rotationPitch;
+		final float f5 = par5EntityLivingBase.prevRotationYawHead;
+		final float f6 = par5EntityLivingBase.rotationYawHead;
 		GL11.glRotatef(135.0F, 0.0F, 1.0F, 0.0F);
 		RenderHelper.enableStandardItemLighting();
 		GL11.glRotatef(-135.0F, 0.0F, 1.0F, 0.0F);

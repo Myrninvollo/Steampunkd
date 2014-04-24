@@ -60,11 +60,12 @@ public class PacketPunchcardMaker extends AbstractPacket {
 
 	@Override
 	public void handleServerSide(EntityPlayer player) {
-		World world = player.worldObj;
-		TileEntity te = world.getTileEntity(x, y, z);
+		final World world = player.worldObj;
+		final TileEntity te = world.getTileEntity(x, y, z);
 
 		if (te instanceof TileEntityPunchardMaker) {
-			ItemStack is = ((TileEntityPunchardMaker) te).getStackInSlot(3);
+			final ItemStack is = ((TileEntityPunchardMaker) te)
+					.getStackInSlot(3);
 			is.stackSize--;
 			((TileEntityPunchardMaker) te)
 					.setInventorySlotContents(2, contents);

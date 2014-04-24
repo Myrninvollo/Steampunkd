@@ -46,20 +46,20 @@ public abstract class TileEntityMachine extends TileEntity implements
 		}
 
 		public void Update() {
-			ItemStack stack = getStackInSlot(slot);
-			if (stack == null
+			final ItemStack stack = getStackInSlot(slot);
+			if ((stack == null)
 					|| !(stack.getItem() instanceof IFluidContainerItem))
 				return;
 
-			IFluidContainerItem fluid_cont = (IFluidContainerItem) stack
+			final IFluidContainerItem fluid_cont = (IFluidContainerItem) stack
 					.getItem();
 
-			FluidTank tank = GetTank(tank_slot);
+			final FluidTank tank = GetTank(tank_slot);
 			if (fill) {
 				FluidStack drained = tank.drain(25, false);
-				if (drained == null || drained.amount == 0)
+				if ((drained == null) || (drained.amount == 0))
 					return;
-				int filled = fluid_cont.fill(stack, drained, false);
+				final int filled = fluid_cont.fill(stack, drained, false);
 				if (filled == 0)
 					return;
 				drained = tank.drain(filled, true);
@@ -68,10 +68,10 @@ public abstract class TileEntityMachine extends TileEntity implements
 				UpdateInventoryItem(slot);
 			} else {
 				FluidStack drained = fluid_cont.drain(stack, 25, false);
-				if (drained == null || drained.amount == 0)
+				if ((drained == null) || (drained.amount == 0))
 					return;
 
-				int filled = tank.fill(drained, false);
+				final int filled = tank.fill(drained, false);
 				if (filled == 0)
 					return;
 				drained = fluid_cont.drain(stack, filled, true);
@@ -82,7 +82,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 		}
 	}
 
-	private List<ContainerSlot> conatiner_slots;
+	private final List<ContainerSlot> conatiner_slots;
 	private NBTTagCompound packet;
 	private boolean initialized;
 
@@ -126,15 +126,15 @@ public abstract class TileEntityMachine extends TileEntity implements
 	}
 
 	protected final void WriteTankToNBT(NBTTagCompound compound, int slot) {
-		NBTTagCompound tag = new NBTTagCompound();
+		final NBTTagCompound tag = new NBTTagCompound();
 		GetTank(slot).writeToNBT(tag);
 		compound.setTag("Tank_" + String.valueOf(slot), tag);
 	}
 
 	protected final void WriteInventoryItemToNBT(NBTTagCompound compound,
 			int slot) {
-		ItemStack is = getStackInSlot(slot);
-		NBTTagCompound tag = new NBTTagCompound();
+		final ItemStack is = getStackInSlot(slot);
+		final NBTTagCompound tag = new NBTTagCompound();
 		if (is != null) {
 			tag.setBoolean("empty", false);
 			is.writeToNBT(tag);
@@ -150,17 +150,17 @@ public abstract class TileEntityMachine extends TileEntity implements
 
 		int i;
 		for (i = 0; i < GetTankCount(); i++) {
-			NBTTagCompound tag = (NBTTagCompound) compound.getTag("Tank_"
+			final NBTTagCompound tag = (NBTTagCompound) compound.getTag("Tank_"
 					+ String.valueOf(i));
 			if (tag != null) {
-				FluidTank tank = GetTank(i);
+				final FluidTank tank = GetTank(i);
 				tank.setFluid(null);
 				tank.readFromNBT(tag);
 			}
 		}
 
 		for (i = 0; i < getSizeInventory(); i++) {
-			NBTTagCompound tag = (NBTTagCompound) compound.getTag("Item_"
+			final NBTTagCompound tag = (NBTTagCompound) compound.getTag("Item_"
 					+ String.valueOf(i));
 			if (tag != null) {
 				ItemStack stack = null;
@@ -207,7 +207,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 			update();
 			packet = new NBTTagCompound();
 			super.writeToNBT(packet);
-			for (ContainerSlot cs : conatiner_slots)
+			for (final ContainerSlot cs : conatiner_slots)
 				cs.Update();
 			UpdateEntityServer();
 
@@ -230,20 +230,20 @@ public abstract class TileEntityMachine extends TileEntity implements
 
 	public TileEntity getTileInDirection(TileEntity tile,
 			ForgeDirection direction) {
-		int targetX = tile.xCoord + direction.offsetX;
-		int targetY = tile.yCoord + direction.offsetY;
-		int targetZ = tile.zCoord + direction.offsetZ;
+		final int targetX = tile.xCoord + direction.offsetX;
+		final int targetY = tile.yCoord + direction.offsetY;
+		final int targetZ = tile.zCoord + direction.offsetZ;
 		return worldObj.getTileEntity(targetX, targetY, targetZ);
 	}
 
 	public void refreshSurroundingTanks(TileEntity currentTile) {
-		HashSet<ForgeDirection> checkSides = new HashSet<ForgeDirection>();
+		final HashSet<ForgeDirection> checkSides = new HashSet<ForgeDirection>();
 
 		checkSides.addAll(Arrays.asList(ForgeDirection.VALID_DIRECTIONS));
 
 		surroundingTanks = new ArrayList<ForgeDirection>();
-		for (ForgeDirection side : checkSides) {
-			TileEntity tile = getTileInDirection(currentTile, side);
+		for (final ForgeDirection side : checkSides) {
+			final TileEntity tile = getTileInDirection(currentTile, side);
 			if (tile instanceof IFluidHandler)
 				surroundingTanks.add(side);
 		}

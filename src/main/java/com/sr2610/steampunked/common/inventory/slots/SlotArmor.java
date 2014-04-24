@@ -52,8 +52,9 @@ public class SlotArmor extends Slot {
 	 */
 	@Override
 	public boolean isItemValid(ItemStack par1ItemStack) {
-		Item item = par1ItemStack == null ? null : par1ItemStack.getItem();
-		return item != null
+		final Item item = par1ItemStack == null ? null : par1ItemStack
+				.getItem();
+		return (item != null)
 				&& item.isValidArmor(par1ItemStack, armorType,
 						Minecraft.getMinecraft().thePlayer);
 	}

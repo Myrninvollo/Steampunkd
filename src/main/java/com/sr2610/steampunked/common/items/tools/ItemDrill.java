@@ -118,7 +118,7 @@ public class ItemDrill extends ItemPickaxe implements ISteamUser {
 	@Override
 	public int fill(ItemStack target, int energyAvailable) {
 		if (energyAvailable > getDamage(target)) {
-			int remainder = energyAvailable - getDamage(target);
+			final int remainder = energyAvailable - getDamage(target);
 			setDamage(target, 0);
 			return remainder;
 		} else {

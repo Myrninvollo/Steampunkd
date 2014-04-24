@@ -19,12 +19,12 @@ import org.lwjgl.opengl.GL11;
 
 import com.sr2610.steampunked.Steampunked;
 import com.sr2610.steampunked.client.gui.components.BaseComponent;
+import com.sr2610.steampunked.client.gui.components.BaseComponent.TabColor;
 import com.sr2610.steampunked.client.gui.components.GuiComponentIconButton;
 import com.sr2610.steampunked.client.gui.components.GuiComponentLabel;
 import com.sr2610.steampunked.client.gui.components.GuiComponentTab;
 import com.sr2610.steampunked.client.gui.components.GuiComponentTabs;
 import com.sr2610.steampunked.client.gui.components.IComponentListener;
-import com.sr2610.steampunked.client.gui.components.BaseComponent.TabColor;
 import com.sr2610.steampunked.client.utils.FakeIcon;
 import com.sr2610.steampunked.common.inventory.container.ContainerInjector;
 import com.sr2610.steampunked.common.lib.Reference;
@@ -42,15 +42,15 @@ public class GuiInjector extends GuiMachine implements IComponentListener {
 	private static final int TANK_OVERLAY_X = 176;
 	private static final int TANK_OVERLAY_Y = 9;
 
-	private TileEntityInjector injectorInventory;
+	private final TileEntityInjector injectorInventory;
 
-	private GuiComponentTabs tabs;
+	private final GuiComponentTabs tabs;
 
-	private GuiComponentTab tabRedstone;
-	private GuiComponentLabel labelRedstoneControl;
-	private GuiComponentLabel labelInfo;
-	private GuiComponentLabel labelInfoLow;
-	private GuiComponentLabel labelInfoHigh;
+	private final GuiComponentTab tabRedstone;
+	private final GuiComponentLabel labelRedstoneControl;
+	private final GuiComponentLabel labelInfo;
+	private final GuiComponentLabel labelInfoLow;
+	private final GuiComponentLabel labelInfoHigh;
 
 	private GuiComponentIconButton buttonDisable;
 	private GuiComponentIconButton buttonLow;
@@ -100,7 +100,7 @@ public class GuiInjector extends GuiMachine implements IComponentListener {
 		super.drawGuiContainerForegroundLayer(mouse_x, mouse_y);
 
 		fontRendererObj.drawString("Steam Injector", 5, 6, 0x404040);
-		fontRendererObj.drawString("Inventory", 8, ySize - 96 + 2, 0x404040);
+		fontRendererObj.drawString("Inventory", 8, (ySize - 96) + 2, 0x404040);
 	}
 
 	@Override
@@ -108,8 +108,8 @@ public class GuiInjector extends GuiMachine implements IComponentListener {
 		super.drawGuiContainerBackgroundLayer(f, x, y);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.renderEngine.bindTexture(GUI_TEXTURE);
-		int window_x = (width - xSize) / 2;
-		int window_y = (height - ySize) / 2;
+		final int window_x = (width - xSize) / 2;
+		final int window_y = (height - ySize) / 2;
 		drawTexturedModalRect(window_x, window_y, 0, 0, xSize, ySize);
 
 		DisplayTank(window_x, window_y, TANK_X, TANK_Y, TANK_HEIGHT,

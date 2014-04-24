@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiComponentLabel extends BaseComponent {
 
-	private String text;
+	private final String text;
 	private float scale = 1f;
 	private String textDelta;
 	private String[] formattedText;
@@ -59,10 +59,10 @@ public class GuiComponentLabel extends BaseComponent {
 	public void render(Minecraft minecraft, int offsetX, int offsetY,
 			int mouseX, int mouseY) {
 		super.render(minecraft, offsetX, offsetY, mouseX, mouseY);
-		Minecraft mc = Minecraft.getMinecraft();
-		ScaledResolution sr = new ScaledResolution(mc.gameSettings,
+		final Minecraft mc = Minecraft.getMinecraft();
+		final ScaledResolution sr = new ScaledResolution(mc.gameSettings,
 				mc.displayWidth, mc.displayHeight);
-		additionalScale = sr.getScaleFactor() % 2 == 1 && scale < 1f ? 0.667f
+		additionalScale = ((sr.getScaleFactor() % 2) == 1) && (scale < 1f) ? 0.667f
 				: 1f;
 		if (getMaxHeight() < minecraft.fontRenderer.FONT_HEIGHT)
 			return;
@@ -75,7 +75,7 @@ public class GuiComponentLabel extends BaseComponent {
 		compileFormattedText(minecraft.fontRenderer);
 		int offset = 0;
 		int lineCount = 0;
-		for (String s : formattedText) {
+		for (final String s : formattedText) {
 			if (s == null)
 				break;
 			minecraft.fontRenderer.drawString(s, 0, offset, 0xffffffff);
@@ -87,11 +87,11 @@ public class GuiComponentLabel extends BaseComponent {
 	}
 
 	private int calculateHeight() {
-		FontRenderer fr = getFontRenderer();
+		final FontRenderer fr = getFontRenderer();
 		compileFormattedText(fr);
 		int offset = 0;
 		int lineCount = 0;
-		for (String s : formattedText) {
+		for (final String s : formattedText) {
 			if (s == null)
 				break;
 			offset += getFontHeight();
@@ -102,13 +102,13 @@ public class GuiComponentLabel extends BaseComponent {
 	}
 
 	private int calculateWidth() {
-		FontRenderer fr = getFontRenderer();
+		final FontRenderer fr = getFontRenderer();
 		compileFormattedText(fr);
 		float maxWidth = 0;
-		for (String s : formattedText) {
+		for (final String s : formattedText) {
 			if (s == null)
 				break;
-			float width = fr.getStringWidth(s);
+			final float width = fr.getStringWidth(s);
 			if (width > maxWidth)
 				maxWidth = width;
 		}
@@ -166,7 +166,7 @@ public class GuiComponentLabel extends BaseComponent {
 	}
 
 	public String getText() {
-		String pre = text;
+		final String pre = text;
 		return pre == null ? "" : pre;
 	}
 }

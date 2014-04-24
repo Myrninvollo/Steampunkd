@@ -39,12 +39,12 @@ public class GuiHandbookEntry extends GuiHandbook implements IGuiHandbookEntry {
 	public void initGui() {
 		super.initGui();
 
-		buttonList.add(new GuiButtonBackWithShift(0, left + guiWidth / 2 - 8,
-				top + guiHeight + 2));
-		buttonList.add(leftButton = new GuiButtonPage(1, left, top + guiHeight
-				- 10, false));
-		buttonList.add(rightButton = new GuiButtonPage(2, left + guiWidth - 18,
-				top + guiHeight - 10, true));
+		buttonList.add(new GuiButtonBackWithShift(0,
+				(left + (guiWidth / 2)) - 8, top + guiHeight + 2));
+		buttonList.add(leftButton = new GuiButtonPage(1, left,
+				(top + guiHeight) - 10, false));
+		buttonList.add(rightButton = new GuiButtonPage(2,
+				(left + guiWidth) - 18, (top + guiHeight) - 10, true));
 
 		updatePageButtons();
 	}
@@ -93,20 +93,20 @@ public class GuiHandbookEntry extends GuiHandbook implements IGuiHandbookEntry {
 
 	public void updatePageButtons() {
 		leftButton.enabled = page != 0;
-		rightButton.enabled = page + 1 < entry.pages.size();
+		rightButton.enabled = (page + 1) < entry.pages.size();
 	}
 
 	@Override
 	public void drawScreen(int par1, int par2, float par3) {
 		super.drawScreen(par1, par2, par3);
 
-		HandbookPage page = entry.pages.get(this.page);
+		final HandbookPage page = entry.pages.get(this.page);
 		page.renderScreen(this, par1, par2);
 	}
 
 	@Override
 	public void updateScreen() {
-		HandbookPage page = entry.pages.get(this.page);
+		final HandbookPage page = entry.pages.get(this.page);
 		page.updateScreen();
 	}
 

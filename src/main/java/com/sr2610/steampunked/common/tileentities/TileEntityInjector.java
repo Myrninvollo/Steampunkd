@@ -32,8 +32,8 @@ public class TileEntityInjector extends TileEntityMachine implements
 	static private final int NETDATAID_TANK_FLUID = 1;
 	static private final int NETDATAID_TANK_AMOUNT = 2;
 
-	private FluidTank tank;
-	private FluidTankInfo[] tank_info;
+	private final FluidTank tank;
+	private final FluidTankInfo[] tank_info;
 
 	public TileEntityInjector() {
 		super();
@@ -45,7 +45,7 @@ public class TileEntityInjector extends TileEntityMachine implements
 
 	}
 
-	private ItemStack[] injectorItemSlot = new ItemStack[1];
+	private final ItemStack[] injectorItemSlot = new ItemStack[1];
 
 	@Override
 	public boolean canInsertItem(int slot, ItemStack item, int side) {
@@ -107,7 +107,7 @@ public class TileEntityInjector extends TileEntityMachine implements
 	@Override
 	public ItemStack getStackInSlotOnClosing(int par1) {
 		if (injectorItemSlot[par1] != null) {
-			ItemStack itemstack = injectorItemSlot[par1];
+			final ItemStack itemstack = injectorItemSlot[par1];
 			injectorItemSlot[par1] = null;
 			return itemstack;
 		} else
@@ -122,8 +122,8 @@ public class TileEntityInjector extends TileEntityMachine implements
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
 		injectorItemSlot[par1] = par2ItemStack;
 
-		if (par2ItemStack != null
-				&& par2ItemStack.stackSize > getInventoryStackLimit())
+		if ((par2ItemStack != null)
+				&& (par2ItemStack.stackSize > getInventoryStackLimit()))
 			par2ItemStack.stackSize = getInventoryStackLimit();
 	}
 
@@ -220,18 +220,18 @@ public class TileEntityInjector extends TileEntityMachine implements
 
 	@Override
 	protected boolean isFluidFuel(FluidStack fuel) {
-		String name = getFluidName(fuel);
+		final String name = getFluidName(fuel);
 		if (name == null)
 			return false;
 		return name.equals("steam")
-				|| fuel.getFluid() == ModBlocks.steam
-				|| fuel.getFluid().getLocalizedName().trim().toLowerCase() == "steam";
+				|| (fuel.getFluid() == ModBlocks.steam)
+				|| (fuel.getFluid().getLocalizedName().trim().toLowerCase() == "steam");
 	}
 
 	protected String getFluidName(FluidStack fluid) {
-		if (fluid == null || fluid.getFluid() == null)
+		if ((fluid == null) || (fluid.getFluid() == null))
 			return null;
-		String name = fluid.getFluid().getName();
+		final String name = fluid.getFluid().getName();
 		if (name == null)
 			return null;
 		return name.trim().toLowerCase();
@@ -259,9 +259,9 @@ public class TileEntityInjector extends TileEntityMachine implements
 		if (getRedstoneMode() == 0)
 			return;
 
-		else if (getRedstoneMode() == 2 && !redstone_signal)
+		else if ((getRedstoneMode() == 2) && !redstone_signal)
 			return;
-		else if (canCharge() == true && tank.getFluidAmount() > 0) {
+		else if ((canCharge() == true) && (tank.getFluidAmount() > 0)) {
 			tank.drain(1, true);
 			injectorItemSlot[0].setItemDamage(injectorItemSlot[0]
 					.getItemDamage() - 1);
@@ -288,14 +288,14 @@ public class TileEntityInjector extends TileEntityMachine implements
 	public int getComparatorOutput() {
 		if (getItemMaxCharge() == 0)
 			return 0;
-		return getItemChargeLevel() * 15 / getItemMaxCharge();
+		return (getItemChargeLevel() * 15) / getItemMaxCharge();
 	}
 
 	public int getItemChargeLevel() {
 		if (injectorItemSlot[0] == null)
 			return 0;
 		if (injectorItemSlot[0].getItem() instanceof ISteamUser) {
-			ISteamUser r = (ISteamUser) injectorItemSlot[0].getItem();
+			final ISteamUser r = (ISteamUser) injectorItemSlot[0].getItem();
 			return r.getCurrentSteam(injectorItemSlot[0]);
 		} else
 			return 0;
@@ -307,7 +307,7 @@ public class TileEntityInjector extends TileEntityMachine implements
 			return 0;
 
 		if (injectorItemSlot[0].getItem() instanceof ISteamUser) {
-			ISteamUser r = (ISteamUser) injectorItemSlot[0].getItem();
+			final ISteamUser r = (ISteamUser) injectorItemSlot[0].getItem();
 			return r.getMaxSteam();
 		} else
 			return 0;
@@ -316,8 +316,8 @@ public class TileEntityInjector extends TileEntityMachine implements
 	boolean canCharge() {
 		if (injectorItemSlot[0] == null)
 			return false;
-		if (injectorItemSlot[0].getItem() instanceof ISteamUser
-				&& getItemChargeLevel() != getItemMaxCharge())
+		if ((injectorItemSlot[0].getItem() instanceof ISteamUser)
+				&& (getItemChargeLevel() != getItemMaxCharge()))
 			return true;
 		else
 			return false;

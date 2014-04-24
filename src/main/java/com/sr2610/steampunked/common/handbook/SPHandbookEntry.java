@@ -23,7 +23,7 @@ public class SPHandbookEntry extends HandbookEntry {
 
 	@Override
 	public HandbookEntry setHandbookPages(HandbookPage... pages) {
-		for (HandbookPage page : pages)
+		for (final HandbookPage page : pages)
 			page.unlocalizedName = "steampunked.page."
 					+ getLazyUnlocalizedName() + page.unlocalizedName;
 

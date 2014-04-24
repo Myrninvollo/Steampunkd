@@ -24,7 +24,7 @@ public class GuiComponentTab extends GuiComponentBox {
 	protected int expandedWidth;
 	protected int expandedHeight;
 	private boolean active = false;
-	private ItemStack iconStack;
+	private final ItemStack iconStack;
 	private double dWidth;
 	private double dHeight;
 
@@ -53,16 +53,16 @@ public class GuiComponentTab extends GuiComponentBox {
 	@Override
 	public void render(Minecraft minecraft, int offsetX, int offsetY,
 			int mouseX, int mouseY) {
-		double targetWidth = active ? expandedWidth : 24;
-		double targetHeight = active ? expandedHeight : 24;
+		final double targetWidth = active ? expandedWidth : 24;
+		final double targetHeight = active ? expandedHeight : 24;
 		if (width != targetWidth)
 			dWidth += (targetWidth - dWidth) / 4;
 		if (height != targetHeight)
 			dHeight += (targetHeight - dHeight) / 4;
 		width = (int) Math.round(dWidth);
 		height = (int) Math.round(dHeight);
-		renderChildren = active && width == targetWidth
-				&& height == targetHeight;
+		renderChildren = active && (width == targetWidth)
+				&& (height == targetHeight);
 		super.render(minecraft, offsetX, offsetY, mouseX, mouseY);
 
 		GL11.glColor4f(1, 1, 1, 1);
@@ -79,7 +79,7 @@ public class GuiComponentTab extends GuiComponentBox {
 	@Override
 	public void mouseClicked(int x, int y, int button) {
 		super.mouseClicked(x, y, button);
-		if (x > 24 || y > 24)
+		if ((x > 24) || (y > 24))
 			return;
 		container.onTabClicked(this);
 	}

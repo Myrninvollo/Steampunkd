@@ -64,7 +64,7 @@ public class PageCraftingRecipe extends PageRecipe {
 
 	@Override
 	public void onPageAdded(HandbookEntry entry, int index) {
-		for (IRecipe recipe : recipes)
+		for (final IRecipe recipe : recipes)
 			HandbookRecipeMappings.map(recipe.getRecipeOutput(), entry, index);
 	}
 
@@ -72,9 +72,9 @@ public class PageCraftingRecipe extends PageRecipe {
 	@SideOnly(Side.CLIENT)
 	public void renderRecipe(IGuiHandbookEntry gui, int mx, int my) {
 
-		FontRenderer fontRendererObj = ((GuiScreen) gui).mc.fontRenderer;
+		final FontRenderer fontRendererObj = ((GuiScreen) gui).mc.fontRenderer;
 
-		boolean unicode = fontRendererObj.getUnicodeFlag();
+		final boolean unicode = fontRendererObj.getUnicodeFlag();
 		fontRendererObj.setUnicodeFlag(true);
 		fontRendererObj.drawSplitString(
 				StatCollector.translateToLocal("steampunked.entry." + name
@@ -84,10 +84,10 @@ public class PageCraftingRecipe extends PageRecipe {
 
 		oreDictRecipe = shapelessRecipe = false;
 
-		IRecipe recipe = recipes.get(recipeAt);
+		final IRecipe recipe = recipes.get(recipeAt);
 		renderCraftingRecipe(gui, recipe);
 
-		TextureManager render = Minecraft.getMinecraft().renderEngine;
+		final TextureManager render = Minecraft.getMinecraft().renderEngine;
 		render.bindTexture(craftingOverlay);
 
 		GL11.glEnable(GL11.GL_BLEND);
@@ -97,7 +97,7 @@ public class PageCraftingRecipe extends PageRecipe {
 				0, gui.getWidth(), gui.getHeight());
 
 		int iconX = gui.getLeft() + 115;
-		int iconY = gui.getTop() + 12;
+		final int iconY = gui.getTop() + 12;
 
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -106,8 +106,8 @@ public class PageCraftingRecipe extends PageRecipe {
 			((GuiScreen) gui).drawTexturedModalRect(iconX, iconY, 240, 0, 16,
 					16);
 
-			if (mx >= iconX && my >= iconY && mx < iconX + 16
-					&& my < iconY + 16)
+			if ((mx >= iconX) && (my >= iconY) && (mx < (iconX + 16))
+					&& (my < (iconY + 16)))
 				RenderHelper
 						.renderTooltip(
 								mx,
@@ -125,8 +125,8 @@ public class PageCraftingRecipe extends PageRecipe {
 			((GuiScreen) gui).drawTexturedModalRect(iconX, iconY, 240, 16, 16,
 					16);
 
-			if (mx >= iconX && my >= iconY && mx < iconX + 16
-					&& my < iconY + 16)
+			if ((mx >= iconX) && (my >= iconY) && (mx < (iconX + 16))
+					&& (my < (iconY + 16)))
 				RenderHelper.renderTooltip(mx, my, Arrays.asList(StatCollector
 						.translateToLocal("steampunked.gui.handbook.oredict")));
 		}
@@ -136,7 +136,7 @@ public class PageCraftingRecipe extends PageRecipe {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void updateScreen() {
-		if (ticksElapsed % 20 == 0) {
+		if ((ticksElapsed % 20) == 0) {
 			recipeAt++;
 
 			if (recipeAt == recipes.size())
@@ -148,22 +148,23 @@ public class PageCraftingRecipe extends PageRecipe {
 	@SideOnly(Side.CLIENT)
 	public void renderCraftingRecipe(IGuiHandbookEntry gui, IRecipe recipe) {
 		if (recipe instanceof ShapedRecipes) {
-			ShapedRecipes shaped = (ShapedRecipes) recipe;
+			final ShapedRecipes shaped = (ShapedRecipes) recipe;
 
 			for (int y = 0; y < shaped.recipeHeight; y++)
 				for (int x = 0; x < shaped.recipeWidth; x++)
-					renderItemAtGridPos(gui, 1 + x, 1 + y, shaped.recipeItems[y
-							* shaped.recipeWidth + x], true);
+					renderItemAtGridPos(gui, 1 + x, 1 + y,
+							shaped.recipeItems[(y * shaped.recipeWidth) + x],
+							true);
 		} else if (recipe instanceof ShapedOreRecipe) {
-			ShapedOreRecipe shaped = (ShapedOreRecipe) recipe;
-			int width = (Integer) ReflectionHelper.getPrivateValue(
+			final ShapedOreRecipe shaped = (ShapedOreRecipe) recipe;
+			final int width = (Integer) ReflectionHelper.getPrivateValue(
 					ShapedOreRecipe.class, shaped, 4);
-			int height = (Integer) ReflectionHelper.getPrivateValue(
+			final int height = (Integer) ReflectionHelper.getPrivateValue(
 					ShapedOreRecipe.class, shaped, 5);
 
 			for (int y = 0; y < height; y++)
 				for (int x = 0; x < width; x++) {
-					Object input = shaped.getInput()[y * width + x];
+					final Object input = shaped.getInput()[(y * width) + x];
 					if (input != null)
 						renderItemAtGridPos(
 								gui,
@@ -176,12 +177,12 @@ public class PageCraftingRecipe extends PageRecipe {
 
 			oreDictRecipe = true;
 		} else if (recipe instanceof ShapelessRecipes) {
-			ShapelessRecipes shapeless = (ShapelessRecipes) recipe;
+			final ShapelessRecipes shapeless = (ShapelessRecipes) recipe;
 
 			drawGrid: {
 				for (int y = 0; y < 3; y++)
 					for (int x = 0; x < 3; x++) {
-						int index = y * 3 + x;
+						final int index = (y * 3) + x;
 
 						if (index >= shapeless.recipeItems.size())
 							break drawGrid;
@@ -194,17 +195,17 @@ public class PageCraftingRecipe extends PageRecipe {
 
 			shapelessRecipe = true;
 		} else if (recipe instanceof ShapelessOreRecipe) {
-			ShapelessOreRecipe shapeless = (ShapelessOreRecipe) recipe;
+			final ShapelessOreRecipe shapeless = (ShapelessOreRecipe) recipe;
 
 			drawGrid: {
 				for (int y = 0; y < 3; y++)
 					for (int x = 0; x < 3; x++) {
-						int index = y * 3 + x;
+						final int index = (y * 3) + x;
 
 						if (index >= shapeless.getRecipeSize())
 							break drawGrid;
 
-						Object input = shapeless.getInput().get(index);
+						final Object input = shapeless.getInput().get(index);
 						if (input != null)
 							renderItemAtGridPos(
 									gui,

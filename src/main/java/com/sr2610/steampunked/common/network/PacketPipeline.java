@@ -42,7 +42,7 @@ public class PacketPipeline extends
 		MessageToMessageCodec<FMLProxyPacket, AbstractPacket> {
 
 	private EnumMap<Side, FMLEmbeddedChannel> channels;
-	private LinkedList<Class<? extends AbstractPacket>> packets = new LinkedList<Class<? extends AbstractPacket>>();
+	private final LinkedList<Class<? extends AbstractPacket>> packets = new LinkedList<Class<? extends AbstractPacket>>();
 	private boolean isPostInitialised = false;
 
 	/**
@@ -77,17 +77,17 @@ public class PacketPipeline extends
 	@Override
 	protected void encode(ChannelHandlerContext ctx, AbstractPacket msg,
 			List<Object> out) throws Exception {
-		ByteBuf buffer = Unpooled.buffer();
-		Class<? extends AbstractPacket> clazz = msg.getClass();
+		final ByteBuf buffer = Unpooled.buffer();
+		final Class<? extends AbstractPacket> clazz = msg.getClass();
 		if (!packets.contains(msg.getClass()))
 			throw new NullPointerException("No Packet Registered for: "
 					+ msg.getClass().getCanonicalName());
 
-		byte discriminator = (byte) packets.indexOf(clazz);
+		final byte discriminator = (byte) packets.indexOf(clazz);
 		buffer.writeByte(discriminator);
 		msg.encodeInto(ctx, buffer);
-		FMLProxyPacket proxyPacket = new FMLProxyPacket(buffer.copy(), ctx
-				.channel().attr(NetworkRegistry.FML_CHANNEL).get());
+		final FMLProxyPacket proxyPacket = new FMLProxyPacket(buffer.copy(),
+				ctx.channel().attr(NetworkRegistry.FML_CHANNEL).get());
 		out.add(proxyPacket);
 	}
 
@@ -95,14 +95,15 @@ public class PacketPipeline extends
 	@Override
 	protected void decode(ChannelHandlerContext ctx, FMLProxyPacket msg,
 			List<Object> out) throws Exception {
-		ByteBuf payload = msg.payload();
-		byte discriminator = payload.readByte();
-		Class<? extends AbstractPacket> clazz = packets.get(discriminator);
+		final ByteBuf payload = msg.payload();
+		final byte discriminator = payload.readByte();
+		final Class<? extends AbstractPacket> clazz = packets
+				.get(discriminator);
 		if (clazz == null)
 			throw new NullPointerException(
 					"No packet registered for discriminator: " + discriminator);
 
-		AbstractPacket pkt = clazz.newInstance();
+		final AbstractPacket pkt = clazz.newInstance();
 		pkt.decodeInto(ctx, payload.slice());
 
 		EntityPlayer player;
@@ -113,7 +114,7 @@ public class PacketPipeline extends
 			break;
 
 		case SERVER:
-			INetHandler netHandler = ctx.channel()
+			final INetHandler netHandler = ctx.channel()
 					.attr(NetworkRegistry.NET_HANDLER).get();
 			player = ((NetHandlerPlayServer) netHandler).playerEntity;
 			pkt.handleServerSide(player);

@@ -49,7 +49,7 @@ public class ItemAutomatonUpgrade extends Item implements IUpgrade {
 
 	@Override
 	public IIcon getIconFromDamage(int par1) {
-		int j = MathHelper.clamp_int(par1, 0, 3);
+		final int j = MathHelper.clamp_int(par1, 0, 3);
 		return upgradeIcons[j];
 	}
 
@@ -65,14 +65,16 @@ public class ItemAutomatonUpgrade extends Item implements IUpgrade {
 
 	@Override
 	public String getUnlocalizedName(ItemStack par1ItemStack) {
-		int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 20);
+		final int i = MathHelper
+				.clamp_int(par1ItemStack.getItemDamage(), 0, 20);
 		return super.getUnlocalizedName() + "." + i;
 	}
 
 	@Override
 	public void addInformation(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
-		int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 20);
+		final int i = MathHelper
+				.clamp_int(par1ItemStack.getItemDamage(), 0, 20);
 		par3List.add(StatCollector.translateToLocal("steampunked.upgrade." + i
 				+ ".info"));
 	}

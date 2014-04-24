@@ -19,7 +19,7 @@ import com.sr2610.steampunked.common.tileentities.TileEntityPunchardMaker;
 
 public class ContainerPunchcardmaker extends Container {
 
-	private TileEntityPunchardMaker te_injector;
+	private final TileEntityPunchardMaker te_injector;
 	private static final int SLOT_INVENTORY_X = 8;
 	private static final int SLOT_INVENTORY_Y = 84;
 
@@ -39,11 +39,12 @@ public class ContainerPunchcardmaker extends Container {
 
 		for (i = 0; i < 3; ++i)
 			for (j = 0; j < 9; ++j)
-				addSlotToContainer(new Slot(player_inventory, j + i * 9 + 9,
-						SLOT_INVENTORY_X + j * 18, SLOT_INVENTORY_Y + i * 18));
+				addSlotToContainer(new Slot(player_inventory, j + (i * 9) + 9,
+						SLOT_INVENTORY_X + (j * 18), SLOT_INVENTORY_Y
+								+ (i * 18)));
 		for (i = 0; i < 9; ++i)
-			addSlotToContainer(new Slot(player_inventory, i, SLOT_HOTBAR_X + i
-					* 18, SLOT_HOTBAR_Y));
+			addSlotToContainer(new Slot(player_inventory, i, SLOT_HOTBAR_X
+					+ (i * 18), SLOT_HOTBAR_Y));
 	}
 
 	@Override

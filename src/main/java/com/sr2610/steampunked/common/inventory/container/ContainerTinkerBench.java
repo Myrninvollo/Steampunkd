@@ -27,7 +27,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ContainerTinkerBench extends Container {
 
-	private TileEntityTinkerBench tinkerTable;
+	private final TileEntityTinkerBench tinkerTable;
 	private int lastCraftProgress;
 
 	public ContainerTinkerBench(TileEntityTinkerBench cs, IInventory player_inv) {
@@ -50,11 +50,11 @@ public class ContainerTinkerBench extends Container {
 
 		for (i = 0; i < 3; ++i)
 			for (j = 0; j < 9; ++j)
-				addSlotToContainer(new Slot(player_inv, j + i * 9 + 9,
-						28 + j * 18, 135 + i * 18));
+				addSlotToContainer(new Slot(player_inv, j + (i * 9) + 9,
+						28 + (j * 18), 135 + (i * 18)));
 
 		for (i = 0; i < 9; ++i)
-			addSlotToContainer(new Slot(player_inv, i, 28 + i * 18, 193));
+			addSlotToContainer(new Slot(player_inv, i, 28 + (i * 18), 193));
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class ContainerTinkerBench extends Container {
 		super.detectAndSendChanges();
 
 		for (int i = 0; i < crafters.size(); ++i) {
-			ICrafting icrafting = (ICrafting) crafters.get(i);
+			final ICrafting icrafting = (ICrafting) crafters.get(i);
 
 			if (lastCraftProgress != tinkerTable.craftProgress)
 				icrafting.sendProgressBarUpdate(this, 0,
@@ -102,10 +102,10 @@ public class ContainerTinkerBench extends Container {
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
 		ItemStack itemstack = null;
-		Slot slot = (Slot) inventorySlots.get(par2);
+		final Slot slot = (Slot) inventorySlots.get(par2);
 
-		if (slot != null && slot.getHasStack()) {
-			ItemStack itemstack1 = slot.getStack();
+		if ((slot != null) && slot.getHasStack()) {
+			final ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
 			if (par2 < 8) {

@@ -60,8 +60,8 @@ public class PacketTinkerTable extends AbstractPacket {
 
 	@Override
 	public void handleServerSide(EntityPlayer player) {
-		World world = player.worldObj;
-		TileEntity te = world.getTileEntity(x, y, z);
+		final World world = player.worldObj;
+		final TileEntity te = world.getTileEntity(x, y, z);
 
 		if (te instanceof TileEntityTinkerBench) {
 			for (int i = 0; i < 8; ++i)

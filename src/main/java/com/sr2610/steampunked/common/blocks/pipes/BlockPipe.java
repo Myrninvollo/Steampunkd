@@ -60,10 +60,10 @@ public class BlockPipe extends BlockContainer {
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y,
 			int z) {
-		TileEntity tileEntity = world.getTileEntity(x, y, z);
+		final TileEntity tileEntity = world.getTileEntity(x, y, z);
 
 		if (tileEntity instanceof TileEntityPipe) {
-			TileEntityPipe tileG = (TileEntityPipe) tileEntity;
+			final TileEntityPipe tileG = (TileEntityPipe) tileEntity;
 
 			float minX = blockBounds.getXMin();
 			float minY = blockBounds.getYMin();
@@ -97,23 +97,23 @@ public class BlockPipe extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public void addCollisionBoxesToList(World world, int x, int y, int z,
 			AxisAlignedBB axisalignedbb, List arraylist, Entity par7Entity) {
-		TileEntity tileEntity = world.getTileEntity(x, y, z);
+		final TileEntity tileEntity = world.getTileEntity(x, y, z);
 
 		if (tileEntity instanceof TileEntityPipe) {
 
-			float minX = blockBounds.getXMin();
-			float minY = blockBounds.getYMin();
-			float minZ = blockBounds.getZMin();
-			float maxX = blockBounds.getXMax();
-			float maxY = blockBounds.getYMax();
-			float maxZ = blockBounds.getZMax();
+			final float minX = blockBounds.getXMin();
+			final float minY = blockBounds.getYMin();
+			final float minZ = blockBounds.getZMin();
+			final float maxX = blockBounds.getXMax();
+			final float maxY = blockBounds.getYMax();
+			final float maxZ = blockBounds.getZMax();
 
 			setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
 			super.addCollisionBoxesToList(world, x, y, z, axisalignedbb,
 					arraylist, par7Entity);
-			TileEntity tile1 = world.getTileEntity(x, y, z);
+			final TileEntity tile1 = world.getTileEntity(x, y, z);
 			if (tile1 instanceof TileEntityPipe) {
-				TileEntityPipe tileG = (TileEntityPipe) tile1;
+				final TileEntityPipe tileG = (TileEntityPipe) tile1;
 
 				if (tileG.isPipeConnected(ForgeDirection.EAST)) {
 					setBlockBounds(0.0F, minY, minZ, maxX, maxY, maxZ);

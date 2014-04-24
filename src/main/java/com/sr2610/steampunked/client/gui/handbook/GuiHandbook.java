@@ -38,14 +38,14 @@ public class GuiHandbook extends GuiScreen {
 		super.initGui();
 		currentOpenHandbook = this;
 
-		left = width / 2 - guiWidth / 2;
-		top = height / 2 - guiHeight / 2;
+		left = (width / 2) - (guiWidth / 2);
+		top = (height / 2) - (guiHeight / 2);
 
 		buttonList.clear();
 		if (isIndex()) {
-			int x = 18;
+			final int x = 18;
 			for (int i = 0; i < 12; i++) {
-				int y = 16 + i * 12;
+				final int y = 16 + (i * 12);
 				buttonList.add(new GuiButtonInvisible(i, left + x, top + y,
 						110, 10, ""));
 			}
@@ -65,7 +65,7 @@ public class GuiHandbook extends GuiScreen {
 	}
 
 	void drawHeader() {
-		boolean unicode = fontRendererObj.getUnicodeFlag();
+		final boolean unicode = fontRendererObj.getUnicodeFlag();
 		fontRendererObj.setUnicodeFlag(true);
 		fontRendererObj.drawSplitString(StatCollector
 				.translateToLocal("steampunked.gui.handbook.header"),
@@ -75,12 +75,13 @@ public class GuiHandbook extends GuiScreen {
 
 	@Override
 	protected void actionPerformed(GuiButton par1GuiButton) {
-		int i = par1GuiButton.id - 3;
+		final int i = par1GuiButton.id - 3;
 		if (i < 0)
 			return;
 
-		List<HandbookCatagory> categoryList = SteampunkedAPI.getAllCategories();
-		HandbookCatagory category = i >= categoryList.size() ? null
+		final List<HandbookCatagory> categoryList = SteampunkedAPI
+				.getAllCategories();
+		final HandbookCatagory category = i >= categoryList.size() ? null
 				: categoryList.get(i);
 
 		if (category != null)
@@ -97,11 +98,13 @@ public class GuiHandbook extends GuiScreen {
 	}
 
 	void populateIndex() {
-		List<HandbookCatagory> categoryList = SteampunkedAPI.getAllCategories();
+		final List<HandbookCatagory> categoryList = SteampunkedAPI
+				.getAllCategories();
 		for (int i = 3; i < 12; i++) {
-			int i_ = i - 3;
-			GuiButtonInvisible button = (GuiButtonInvisible) buttonList.get(i);
-			HandbookCatagory category = i_ >= categoryList.size() ? null
+			final int i_ = i - 3;
+			final GuiButtonInvisible button = (GuiButtonInvisible) buttonList
+					.get(i);
+			final HandbookCatagory category = i_ >= categoryList.size() ? null
 					: categoryList.get(i_);
 			if (category != null)
 				button.displayString = StatCollector.translateToLocal(category

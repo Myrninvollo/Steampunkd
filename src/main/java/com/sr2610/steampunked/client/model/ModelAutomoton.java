@@ -17,7 +17,7 @@ import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 
-import com.sr2610.steampunked.common.entity.automatons.EntityAutomaton;
+import com.sr2610.steampunked.common.entitys.EntityAutomoton;
 
 public class ModelAutomoton extends ModelBase {
 	ModelRenderer head;
@@ -32,17 +32,6 @@ public class ModelAutomoton extends ModelBase {
 	ModelRenderer ShaftRight;
 	ModelRenderer ShaftLeft;
 	ModelRenderer Neck;
-
-	ModelRenderer rightFlameBottom;
-	ModelRenderer rightFlameCan;
-	ModelRenderer rightFlameTop;
-	ModelRenderer rightFlameShaft;
-	ModelRenderer leftFlameTop;
-	ModelRenderer leftFlameCan;
-	ModelRenderer leftFlameShaft;
-	ModelRenderer leftFlameBottom;
-	ModelRenderer rightFlameEnd;
-	ModelRenderer leftFlameEnd;
 
 	public ModelAutomoton() {
 		textureWidth = 256;
@@ -106,47 +95,6 @@ public class ModelAutomoton extends ModelBase {
 		Neck.setTextureSize(64, 32);
 		Neck.mirror = true;
 
-		rightFlameBottom = new ModelRenderer(this, 120, 0);
-		rightFlameBottom.addBox(-5F, 6F, -1F, 4, 4, 4);
-		rightFlameBottom.setRotationPoint(-4F, 2F, 0F);
-		rightFlameBottom.setTextureSize(64, 32);
-		rightFlameBottom.mirror = true;
-		rightFlameCan = new ModelRenderer(this, 160, 0);
-		rightFlameCan.addBox(-4F, -2F, -4F, 2, 4, 2);
-		rightFlameCan.setRotationPoint(-4F, 2F, 0F);
-		rightFlameCan.setTextureSize(64, 32);
-		rightFlameCan.mirror = true;
-		rightFlameTop = new ModelRenderer(this, 70, 0);
-		rightFlameTop.addBox(-5F, -3F, -2F, 4, 6, 4);
-		rightFlameTop.setRotationPoint(-4F, 2F, 0F);
-		rightFlameTop.setTextureSize(64, 32);
-		rightFlameTop.mirror = true;
-		rightFlameShaft = new ModelRenderer(this, 100, 0);
-		rightFlameShaft.addBox(-4F, 3F, -1F, 2, 3, 2);
-		rightFlameShaft.setRotationPoint(-4F, 2F, 0F);
-		rightFlameShaft.setTextureSize(64, 32);
-		rightFlameShaft.mirror = true;
-		leftFlameTop = new ModelRenderer(this, 70, 0);
-		leftFlameTop.addBox(0F, -3F, -2F, 4, 6, 4);
-		leftFlameTop.setRotationPoint(5F, 2F, 0F);
-		leftFlameTop.setTextureSize(64, 32);
-		leftFlameTop.mirror = true;
-		leftFlameCan = new ModelRenderer(this, 160, 0);
-		leftFlameCan.addBox(2F, -2F, -4F, 2, 4, 2);
-		leftFlameCan.setRotationPoint(4F, 2F, 0F);
-		leftFlameCan.setTextureSize(64, 32);
-		leftFlameCan.mirror = true;
-		leftFlameShaft = new ModelRenderer(this, 100, 0);
-		leftFlameShaft.addBox(1F, 3F, -1F, 2, 3, 2);
-		leftFlameShaft.setRotationPoint(5F, 2F, 0F);
-		leftFlameShaft.setTextureSize(64, 32);
-		leftFlameShaft.mirror = true;
-		leftFlameBottom = new ModelRenderer(this, 120, 0);
-		leftFlameBottom.addBox(0F, 6F, -1F, 4, 4, 4);
-		leftFlameBottom.setRotationPoint(5F, 2F, 0F);
-		leftFlameBottom.setTextureSize(64, 32);
-		leftFlameBottom.mirror = true;
-
 	}
 
 	@Override
@@ -168,10 +116,6 @@ public class ModelAutomoton extends ModelBase {
 		ShaftRight.render(f5);
 		ShaftLeft.render(f5);
 		Neck.render(f5);
-
-		rightFlameBottom.render(f5);
-		rightFlameTop.render(f5);
-		rightFlameShaft.render(f5);
 		GL11.glPopMatrix();
 
 	}
@@ -193,15 +137,14 @@ public class ModelAutomoton extends ModelBase {
 	}
 
 	private float getAngle(float par1, float par2) {
-		return (Math.abs(par1 % par2 - par2 * 0.5F) - par2 * 0.25F)
+		return (Math.abs((par1 % par2) - (par2 * 0.5F)) - (par2 * 0.25F))
 				/ (par2 * 0.25F);
 	}
 
 	@Override
 	public void setLivingAnimations(EntityLivingBase par1EntityLivingBase,
 			float par2, float par3, float par4) {
-		EntityAutomaton entity = (EntityAutomaton) par1EntityLivingBase;
-		hideParts(entity);
+		final EntityAutomoton entity = (EntityAutomoton) par1EntityLivingBase;
 
 		if (entity.getHeldItem() != null) {
 			rightarm.rotateAngleX = -0.6F;
@@ -211,27 +154,13 @@ public class ModelAutomoton extends ModelBase {
 
 		} else {
 
-			rightarm.rotateAngleX = MathHelper.cos(par2 * 0.6662F
+			rightarm.rotateAngleX = MathHelper.cos((par2 * 0.6662F)
 					+ (float) Math.PI)
 					* 2.0F * par3 * 0.5F;
 			leftarm.rotateAngleX = MathHelper.cos(par2 * 0.6662F) * 2.0F * par3
 					* 0.5F;
 			rightarm.rotateAngleZ = 0.0F;
 			leftarm.rotateAngleZ = 0.0F;
-		}
-
-	}
-
-	public void hideParts(EntityAutomaton entity) {
-		if (entity.rFlame == true) {
-			rightFlameBottom.isHidden = false;
-			rightFlameTop.isHidden = false;
-			rightFlameShaft.isHidden = false;
-
-		} else {
-			rightFlameBottom.isHidden = true;
-			rightFlameTop.isHidden = true;
-			rightFlameShaft.isHidden = true;
 		}
 
 	}

@@ -54,7 +54,7 @@ public class TileEntityPunchardMaker extends TileEntity implements IInventory {
 	@Override
 	public ItemStack getStackInSlotOnClosing(int par1) {
 		if (benchItemStacks[par1] != null) {
-			ItemStack itemstack = benchItemStacks[par1];
+			final ItemStack itemstack = benchItemStacks[par1];
 			benchItemStacks[par1] = null;
 			return itemstack;
 		} else
@@ -65,8 +65,8 @@ public class TileEntityPunchardMaker extends TileEntity implements IInventory {
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
 		benchItemStacks[par1] = par2ItemStack;
 
-		if (par2ItemStack != null
-				&& par2ItemStack.stackSize > getInventoryStackLimit())
+		if ((par2ItemStack != null)
+				&& (par2ItemStack.stackSize > getInventoryStackLimit()))
 			par2ItemStack.stackSize = getInventoryStackLimit();
 	}
 
@@ -110,14 +110,16 @@ public class TileEntityPunchardMaker extends TileEntity implements IInventory {
 	@Override
 	public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
 		super.readFromNBT(par1NBTTagCompound);
-		NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items", 10);
+		final NBTTagList nbttaglist = par1NBTTagCompound
+				.getTagList("Items", 10);
 		benchItemStacks = new ItemStack[getSizeInventory()];
 
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-			byte b0 = nbttagcompound1.getByte("Slot");
+			final NBTTagCompound nbttagcompound1 = nbttaglist
+					.getCompoundTagAt(i);
+			final byte b0 = nbttagcompound1.getByte("Slot");
 
-			if (b0 >= 0 && b0 < benchItemStacks.length)
+			if ((b0 >= 0) && (b0 < benchItemStacks.length))
 				benchItemStacks[b0] = ItemStack
 						.loadItemStackFromNBT(nbttagcompound1);
 		}
@@ -127,10 +129,10 @@ public class TileEntityPunchardMaker extends TileEntity implements IInventory {
 	@Override
 	public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
 		super.writeToNBT(par1NBTTagCompound);
-		NBTTagList nbttaglist = new NBTTagList();
+		final NBTTagList nbttaglist = new NBTTagList();
 		for (int i = 0; i < benchItemStacks.length; ++i)
 			if (benchItemStacks[i] != null) {
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setByte("Slot", (byte) i);
 				benchItemStacks[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);

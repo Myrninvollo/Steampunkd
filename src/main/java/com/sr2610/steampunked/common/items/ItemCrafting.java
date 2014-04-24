@@ -40,14 +40,14 @@ public class ItemCrafting extends Item {
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs,
 			List par3List) {
-		for (int x = 0; x < itemNames.length - 1; x++)
+		for (int x = 0; x < (itemNames.length - 1); x++)
 			par3List.add(new ItemStack(this, 1, x));
 
 	}
 
 	@Override
 	public IIcon getIconFromDamage(int par1) {
-		int j = MathHelper.clamp_int(par1, 0, 3);
+		final int j = MathHelper.clamp_int(par1, 0, 3);
 		return icons[j];
 	}
 
@@ -62,7 +62,8 @@ public class ItemCrafting extends Item {
 
 	@Override
 	public String getUnlocalizedName(ItemStack par1ItemStack) {
-		int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 20);
+		final int i = MathHelper
+				.clamp_int(par1ItemStack.getItemDamage(), 0, 20);
 		return super.getUnlocalizedName() + "." + i;
 	}
 

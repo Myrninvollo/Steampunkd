@@ -57,8 +57,8 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 	static public final int TANK_OUTPUT = 1;
 	public int boilerBurnTime;
 
-	private FluidTank[] tanks;
-	private FluidTankInfo[] tank_info;
+	private final FluidTank[] tanks;
+	private final FluidTankInfo[] tank_info;
 
 	public TileEntitySteamBoiler() {
 		super();
@@ -75,14 +75,16 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 	@Override
 	public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
 		super.readFromNBT(par1NBTTagCompound);
-		NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items", 10);
+		final NBTTagList nbttaglist = par1NBTTagCompound
+				.getTagList("Items", 10);
 		boilerItemStacks = new ItemStack[getSizeInventory()];
 
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-			byte b0 = nbttagcompound1.getByte("Slot");
+			final NBTTagCompound nbttagcompound1 = nbttaglist
+					.getCompoundTagAt(i);
+			final byte b0 = nbttagcompound1.getByte("Slot");
 
-			if (b0 >= 0 && b0 < boilerItemStacks.length)
+			if ((b0 >= 0) && (b0 < boilerItemStacks.length))
 				boilerItemStacks[b0] = ItemStack
 						.loadItemStackFromNBT(nbttagcompound1);
 		}
@@ -99,11 +101,11 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 	public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
 		super.writeToNBT(par1NBTTagCompound);
 		par1NBTTagCompound.setShort("BurnTime", (short) boilerBurnTime);
-		NBTTagList nbttaglist = new NBTTagList();
+		final NBTTagList nbttaglist = new NBTTagList();
 
 		for (int i = 0; i < boilerItemStacks.length; ++i)
 			if (boilerItemStacks[i] != null) {
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setByte("Slot", (byte) i);
 				boilerItemStacks[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
@@ -150,7 +152,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 	@Override
 	public ItemStack getStackInSlotOnClosing(int par1) {
 		if (boilerItemStacks[par1] != null) {
-			ItemStack itemstack = boilerItemStacks[par1];
+			final ItemStack itemstack = boilerItemStacks[par1];
 			boilerItemStacks[par1] = null;
 			return itemstack;
 		} else
@@ -161,8 +163,8 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
 		boilerItemStacks[par1] = par2ItemStack;
 
-		if (par2ItemStack != null
-				&& par2ItemStack.stackSize > getInventoryStackLimit())
+		if ((par2ItemStack != null)
+				&& (par2ItemStack.stackSize > getInventoryStackLimit()))
 			par2ItemStack.stackSize = getInventoryStackLimit();
 	}
 
@@ -276,9 +278,9 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 	}
 
 	protected String getFluidName(FluidStack fluid) {
-		if (fluid == null || fluid.getFluid() == null)
+		if ((fluid == null) || (fluid.getFluid() == null))
 			return null;
-		String name = fluid.getFluid().getName();
+		final String name = fluid.getFluid().getName();
 		if (name == null)
 			return null;
 		return name.trim().toLowerCase();
@@ -348,11 +350,11 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 		if (itemstack == null)
 			return 0;
 		else {
-			Item item = itemstack.getItem();
+			final Item item = itemstack.getItem();
 
-			if (item instanceof ItemBlock
-					&& Block.getBlockFromItem(item) != Blocks.air) {
-				Block block = Block.getBlockFromItem(item);
+			if ((item instanceof ItemBlock)
+					&& (Block.getBlockFromItem(item) != Blocks.air)) {
+				final Block block = Block.getBlockFromItem(item);
 
 				if (block == Blocks.wooden_slab)
 					return 150;
@@ -364,13 +366,13 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 					return 16000;
 			}
 
-			if (item instanceof ItemTool
+			if ((item instanceof ItemTool)
 					&& ((ItemTool) item).getToolMaterialName().equals("WOOD"))
 				return 200;
-			if (item instanceof ItemSword
+			if ((item instanceof ItemSword)
 					&& ((ItemSword) item).getToolMaterialName().equals("WOOD"))
 				return 200;
-			if (item instanceof ItemHoe
+			if ((item instanceof ItemHoe)
 					&& ((ItemHoe) item).getToolMaterialName().equals("WOOD"))
 				return 200;
 			if (item == Items.stick)
@@ -399,7 +401,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 		if (getRedstoneMode() == 0)
 			return;
 
-		else if (getRedstoneMode() == 2 && !redstone_signal)
+		else if ((getRedstoneMode() == 2) && !redstone_signal)
 			return;
 		else {
 
@@ -413,8 +415,8 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 						tanks[0].fill(new FluidStack(FluidRegistry.WATER, 21),
 								true);
 
-				if (tanks[0].getFluidAmount() > 0
-						&& tanks[1].getFluidAmount() != LibOptions.boilerCapacity) {
+				if ((tanks[0].getFluidAmount() > 0)
+						&& (tanks[1].getFluidAmount() != LibOptions.boilerCapacity)) {
 					if (boilerBurnTime == 0) {
 						currentItemBurnTime = boilerBurnTime = getItemBurnTime(boilerItemStacks[0]) / 32;
 
@@ -429,7 +431,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 							}
 					}
 
-					if (boilerBurnTime > 0 && tanks[0].getFluidAmount() > 2) {
+					if ((boilerBurnTime > 0) && (tanks[0].getFluidAmount() > 2)) {
 						tanks[0].drain(20, true);
 						tanks[1].fill(new FluidStack(ModBlocks.steam, 20), true);
 					}
@@ -443,7 +445,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 		if (currentItemBurnTime == 0)
 			currentItemBurnTime = 200;
 
-		return boilerBurnTime * par1 / currentItemBurnTime;
+		return (boilerBurnTime * par1) / currentItemBurnTime;
 	}
 
 	static private final int[] INSERT_SLOTS = { 0 };
@@ -470,13 +472,13 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 			return;
 		refreshSurroundingTanks(currentTile);
 
-		if (tanks[1].getFluidAmount() > 0 && surroundingTanks.size() > 0) {
+		if ((tanks[1].getFluidAmount() > 0) && (surroundingTanks.size() > 0)) {
 			FluidStack drainedFluid = tanks[1].drain(
 					Math.min(tanks[1].getFluidAmount(), amountPerTick), true);
 			if (drainedFluid != null) {
 				Collections.shuffle(surroundingTanks);
-				for (ForgeDirection side : surroundingTanks) {
-					TileEntity otherTank = getTileInDirection(this, side);
+				for (final ForgeDirection side : surroundingTanks) {
+					final TileEntity otherTank = getTileInDirection(this, side);
 					if (drainedFluid.amount > 0) {
 						drainedFluid = drainedFluid.copy();
 						if (otherTank instanceof IFluidHandler)

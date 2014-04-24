@@ -35,8 +35,8 @@ public class TileEntityTinkerBench extends TileEntityMachine implements
 	static private final int NETDATAID_TANK_FLUID = 1;
 	static private final int NETDATAID_TANK_AMOUNT = 2;
 
-	private FluidTank tank;
-	private FluidTankInfo[] tank_info;
+	private final FluidTank tank;
+	private final FluidTankInfo[] tank_info;
 
 	public int craftProgress;
 
@@ -84,7 +84,7 @@ public class TileEntityTinkerBench extends TileEntityMachine implements
 	@Override
 	public ItemStack getStackInSlotOnClosing(int par1) {
 		if (benchItemStacks[par1] != null) {
-			ItemStack itemstack = benchItemStacks[par1];
+			final ItemStack itemstack = benchItemStacks[par1];
 			benchItemStacks[par1] = null;
 			return itemstack;
 		} else
@@ -95,8 +95,8 @@ public class TileEntityTinkerBench extends TileEntityMachine implements
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
 		benchItemStacks[par1] = par2ItemStack;
 
-		if (par2ItemStack != null
-				&& par2ItemStack.stackSize > getInventoryStackLimit())
+		if ((par2ItemStack != null)
+				&& (par2ItemStack.stackSize > getInventoryStackLimit()))
 			par2ItemStack.stackSize = getInventoryStackLimit();
 	}
 
@@ -159,18 +159,18 @@ public class TileEntityTinkerBench extends TileEntityMachine implements
 
 	@Override
 	protected boolean isFluidFuel(FluidStack fuel) {
-		String name = getFluidName(fuel);
+		final String name = getFluidName(fuel);
 		if (name == null)
 			return false;
 		return name.equals("steam")
-				|| fuel.getFluid() == ModBlocks.steam
-				|| fuel.getFluid().getLocalizedName().trim().toLowerCase() == "steam";
+				|| (fuel.getFluid() == ModBlocks.steam)
+				|| (fuel.getFluid().getLocalizedName().trim().toLowerCase() == "steam");
 	}
 
 	protected String getFluidName(FluidStack fluid) {
-		if (fluid == null || fluid.getFluid() == null)
+		if ((fluid == null) || (fluid.getFluid() == null))
 			return null;
-		String name = fluid.getFluid().getName();
+		final String name = fluid.getFluid().getName();
 		if (name == null)
 			return null;
 		return name.trim().toLowerCase();
@@ -240,14 +240,16 @@ public class TileEntityTinkerBench extends TileEntityMachine implements
 	@Override
 	public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
 		super.readFromNBT(par1NBTTagCompound);
-		NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items", 10);
+		final NBTTagList nbttaglist = par1NBTTagCompound
+				.getTagList("Items", 10);
 		benchItemStacks = new ItemStack[getSizeInventory()];
 
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-			byte b0 = nbttagcompound1.getByte("Slot");
+			final NBTTagCompound nbttagcompound1 = nbttaglist
+					.getCompoundTagAt(i);
+			final byte b0 = nbttagcompound1.getByte("Slot");
 
-			if (b0 >= 0 && b0 < benchItemStacks.length)
+			if ((b0 >= 0) && (b0 < benchItemStacks.length))
 				benchItemStacks[b0] = ItemStack
 						.loadItemStackFromNBT(nbttagcompound1);
 		}
@@ -260,11 +262,11 @@ public class TileEntityTinkerBench extends TileEntityMachine implements
 	public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
 		super.writeToNBT(par1NBTTagCompound);
 		par1NBTTagCompound.setShort("CraftProgress", (short) craftProgress);
-		NBTTagList nbttaglist = new NBTTagList();
+		final NBTTagList nbttaglist = new NBTTagList();
 
 		for (int i = 0; i < benchItemStacks.length; ++i)
 			if (benchItemStacks[i] != null) {
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setByte("Slot", (byte) i);
 				benchItemStacks[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);

@@ -26,8 +26,8 @@ public class PipeItemRenderer implements IItemRenderer {
 
 	private void renderPipeItem(RenderBlocks render, ItemStack item,
 			float translateX, float translateY, float translateZ) {
-		Tessellator tessellator = Tessellator.instance;
-		Block block = ModBlocks.pipe;
+		final Tessellator tessellator = Tessellator.instance;
+		final Block block = ModBlocks.pipe;
 		IIcon icon = item.getItem().getIconFromDamage(0);
 		if (icon == null)
 			icon = ((TextureMap) Minecraft.getMinecraft().getTextureManager()

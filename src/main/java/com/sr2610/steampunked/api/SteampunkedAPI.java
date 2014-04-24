@@ -50,7 +50,8 @@ public final class SteampunkedAPI {
 	 * Gets the last recipe to have been added to the recipe list.
 	 */
 	public static IRecipe getLatestAddedRecipe() {
-		List<IRecipe> list = CraftingManager.getInstance().getRecipeList();
+		final List<IRecipe> list = CraftingManager.getInstance()
+				.getRecipeList();
 		return list.get(list.size() - 1);
 	}
 
@@ -58,8 +59,9 @@ public final class SteampunkedAPI {
 	 * Gets the last x recipes added to the recipe list.
 	 */
 	public static List<IRecipe> getLatestAddedRecipes(int x) {
-		List<IRecipe> list = CraftingManager.getInstance().getRecipeList();
-		List<IRecipe> newList = new ArrayList();
+		final List<IRecipe> list = CraftingManager.getInstance()
+				.getRecipeList();
+		final List<IRecipe> newList = new ArrayList();
 		for (int i = x - 1; i >= 0; i--)
 			newList.add(list.get(list.size() - 1 - i));
 

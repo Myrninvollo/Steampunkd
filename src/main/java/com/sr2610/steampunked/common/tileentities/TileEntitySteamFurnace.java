@@ -36,8 +36,8 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 	static private final int NETDATAID_TANK_FLUID = 1;
 	static private final int NETDATAID_TANK_AMOUNT = 2;
 
-	private FluidTank tank;
-	private FluidTankInfo[] tank_info;
+	private final FluidTank tank;
+	private final FluidTankInfo[] tank_info;
 
 	public TileEntitySteamFurnace() {
 		super();
@@ -49,7 +49,7 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 
 	}
 
-	private ItemStack[] furnaceItemStacks = new ItemStack[6];
+	private final ItemStack[] furnaceItemStacks = new ItemStack[6];
 
 	public int furnaceCookTime;
 	private boolean isSmelting;
@@ -88,7 +88,7 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 	@Override
 	public ItemStack getStackInSlotOnClosing(int par1) {
 		if (furnaceItemStacks[par1] != null) {
-			ItemStack itemstack = furnaceItemStacks[par1];
+			final ItemStack itemstack = furnaceItemStacks[par1];
 			furnaceItemStacks[par1] = null;
 			return itemstack;
 		} else
@@ -99,38 +99,39 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
 		furnaceItemStacks[par1] = par2ItemStack;
 
-		if (par2ItemStack != null
-				&& par2ItemStack.stackSize > getInventoryStackLimit())
+		if ((par2ItemStack != null)
+				&& (par2ItemStack.stackSize > getInventoryStackLimit()))
 			par2ItemStack.stackSize = getInventoryStackLimit();
 	}
 
 	@SideOnly(Side.CLIENT)
 	public int getCookProgressScaled(int par1) {
-		return furnaceCookTime * par1 / (LibOptions.furnaceCookTime / 10);
+		return (furnaceCookTime * par1) / (LibOptions.furnaceCookTime / 10);
 	}
 
 	private boolean canSmelt() {
 		if (furnaceItemStacks[0] == null)
 			return false;
 		else {
-			ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(
-					furnaceItemStacks[0]);
+			final ItemStack itemstack = FurnaceRecipes.smelting()
+					.getSmeltingResult(furnaceItemStacks[0]);
 			if (itemstack == null)
 				return false;
 			if (furnaceItemStacks[1] == null)
 				return true;
 			if (!furnaceItemStacks[1].isItemEqual(itemstack))
 				return false;
-			int result = furnaceItemStacks[1].stackSize + itemstack.stackSize;
-			return result <= getInventoryStackLimit()
-					&& result <= itemstack.getMaxStackSize();
+			final int result = furnaceItemStacks[1].stackSize
+					+ itemstack.stackSize;
+			return (result <= getInventoryStackLimit())
+					&& (result <= itemstack.getMaxStackSize());
 		}
 	}
 
 	public void smeltItem() {
 		if (canSmelt()) {
-			ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(
-					furnaceItemStacks[0]);
+			final ItemStack itemstack = FurnaceRecipes.smelting()
+					.getSmeltingResult(furnaceItemStacks[0]);
 
 			if (furnaceItemStacks[1] == null)
 				furnaceItemStacks[1] = itemstack.copy();
@@ -162,18 +163,18 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 		if (getRedstoneMode() == 0)
 			return;
 
-		else if (getRedstoneMode() == 2 && !redstone_signal)
+		else if ((getRedstoneMode() == 2) && !redstone_signal)
 			return;
 		else {
-			boolean flag = true;
+			final boolean flag = true;
 			boolean flag1 = false;
 			if (!worldObj.isRemote) {
-				if (canSmelt() && tank.getFluidAmount() > 10) {
+				if (canSmelt() && (tank.getFluidAmount() > 10)) {
 					++furnaceCookTime;
 					isSmelting = true;
 					tank.drain(10, true);
 
-					if (furnaceCookTime == LibOptions.furnaceCookTime / 10) {
+					if (furnaceCookTime == (LibOptions.furnaceCookTime / 10)) {
 						furnaceCookTime = 0;
 						isSmelting = false;
 						smeltItem();
@@ -294,18 +295,18 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 
 	@Override
 	protected boolean isFluidFuel(FluidStack fuel) {
-		String name = getFluidName(fuel);
+		final String name = getFluidName(fuel);
 		if (name == null)
 			return false;
 		return name.equals("steam")
-				|| fuel.getFluid() == ModBlocks.steam
-				|| fuel.getFluid().getLocalizedName().trim().toLowerCase() == "steam";
+				|| (fuel.getFluid() == ModBlocks.steam)
+				|| (fuel.getFluid().getLocalizedName().trim().toLowerCase() == "steam");
 	}
 
 	protected String getFluidName(FluidStack fluid) {
-		if (fluid == null || fluid.getFluid() == null)
+		if ((fluid == null) || (fluid.getFluid() == null))
 			return null;
-		String name = fluid.getFluid().getName();
+		final String name = fluid.getFluid().getName();
 		if (name == null)
 			return null;
 		return name.trim().toLowerCase();

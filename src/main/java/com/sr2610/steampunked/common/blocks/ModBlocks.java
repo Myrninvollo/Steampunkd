@@ -112,8 +112,7 @@ public final class ModBlocks {
 		pipe = new BlockPipe(Material.piston).setHardness(5.0F)
 				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
 				.setBlockName("pipeFluid");
-		
-		
+
 		/*
 		 * pipeValve = new BlockValvePipe(Material.piston).setHardness(5.0F)
 		 * .setResistance(10.0F).setStepSound(Block.soundTypeMetal)
@@ -183,8 +182,7 @@ public final class ModBlocks {
 				ItemSlateBrickSlab.class, "slateBrickSlabFull");
 		GameRegistry.registerBlock(slateStair, "slateStair");
 		GameRegistry.registerBlock(slateBrickStair, "slateBrickStair");
-		
-		
+
 		oreRegistration();
 	}
 

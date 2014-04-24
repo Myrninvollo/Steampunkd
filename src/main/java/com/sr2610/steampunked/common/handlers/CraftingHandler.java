@@ -18,7 +18,6 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import com.sr2610.steampunked.api.SteampunkedAPI;
 import com.sr2610.steampunked.common.blocks.ModBlocks;
@@ -52,7 +51,7 @@ public final class CraftingHandler {
 		// "ingotTin", Items.book);
 
 		addOreDictRecipe(new ItemStack(ModBlocks.pipe), "ICI", "ICI", 'I',
-				"ingotIron",'C',new ItemStack(ModItems.craftingItems, 1, 0));
+				"ingotIron", 'C', new ItemStack(ModItems.craftingItems, 1, 0));
 		recipePipe = SteampunkedAPI.getLatestAddedRecipe();
 		addOreDictRecipe(new ItemStack(ModItems.spanner), "x x", " x ", " x ",
 				'x', "ingotIron");
@@ -132,9 +131,9 @@ public final class CraftingHandler {
 	public void craftingStuff(ItemCraftedEvent event) {
 		for (int i = 0; i < event.craftMatrix.getSizeInventory(); i++)
 			if (event.craftMatrix.getStackInSlot(i) != null) {
-				ItemStack j = event.craftMatrix.getStackInSlot(i);
-				if (j.getItem() != null && j.getItem() == ModItems.hammer) {
-					ItemStack k = new ItemStack(ModItems.hammer, 2,
+				final ItemStack j = event.craftMatrix.getStackInSlot(i);
+				if ((j.getItem() != null) && (j.getItem() == ModItems.hammer)) {
+					final ItemStack k = new ItemStack(ModItems.hammer, 2,
 							j.getItemDamage() + 1);
 					if (k.getItemDamage() >= k.getMaxDamage())
 						k.stackSize--;
@@ -146,12 +145,6 @@ public final class CraftingHandler {
 	private static void addOreDictRecipe(ItemStack output, Object... recipe) {
 		CraftingManager.getInstance().getRecipeList()
 				.add(new ShapedOreRecipe(output, recipe));
-	}
-
-	private static void addShapelessOreDictRecipe(ItemStack output,
-			Object... recipe) {
-		CraftingManager.getInstance().getRecipeList()
-				.add(new ShapelessOreRecipe(output, recipe));
 	}
 
 }

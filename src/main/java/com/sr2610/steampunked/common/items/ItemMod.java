@@ -19,7 +19,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemMod extends Item {
-	private String texturename;
+	private final String texturename;
 
 	public ItemMod(String name) {
 		super();

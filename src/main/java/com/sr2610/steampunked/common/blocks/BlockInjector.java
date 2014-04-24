@@ -22,16 +22,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidHandler;
 
 import com.sr2610.steampunked.Steampunked;
 import com.sr2610.steampunked.common.creativetabs.ModCreativeTab;
 import com.sr2610.steampunked.common.lib.Reference;
 import com.sr2610.steampunked.common.tileentities.TileEntityInjector;
-import com.sr2610.steampunked.common.utils.Utils;
 
 public class BlockInjector extends BlockContainer {
 
@@ -47,11 +42,12 @@ public class BlockInjector extends BlockContainer {
 
 	}
 
+	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
 			EntityPlayer player, int i, float f, float g, float t) {
-		TileEntity tile_entity = world.getTileEntity(x, y, z);
+		final TileEntity tile_entity = world.getTileEntity(x, y, z);
 
-		if (tile_entity == null || player.isSneaking())
+		if ((tile_entity == null) || player.isSneaking())
 			return false;
 		else
 			player.openGui(Steampunked.instance, 0, world, x, y, z);
@@ -68,35 +64,35 @@ public class BlockInjector extends BlockContainer {
 	}
 
 	private void dropItems(World world, int x, int y, int z) {
-		Random rand = new Random();
+		final Random rand = new Random();
 
-		TileEntity tile_entity = world.getTileEntity(x, y, z);
+		final TileEntity tile_entity = world.getTileEntity(x, y, z);
 
 		if (!(tile_entity instanceof IInventory))
 			return;
 
-		IInventory inventory = (IInventory) tile_entity;
+		final IInventory inventory = (IInventory) tile_entity;
 
 		for (int i = 0; i < inventory.getSizeInventory(); i++) {
-			ItemStack item = inventory.getStackInSlot(i);
+			final ItemStack item = inventory.getStackInSlot(i);
 
-			if (item != null && item.stackSize > 0) {
-				float rx = rand.nextFloat() * 0.6F + 0.1F;
-				float ry = rand.nextFloat() * 0.6F + 0.1F;
-				float rz = rand.nextFloat() * 0.6F + 0.1F;
+			if ((item != null) && (item.stackSize > 0)) {
+				final float rx = (rand.nextFloat() * 0.6F) + 0.1F;
+				final float ry = (rand.nextFloat() * 0.6F) + 0.1F;
+				final float rz = (rand.nextFloat() * 0.6F) + 0.1F;
 
-				EntityItem entity_item = new EntityItem(world, x + rx, y + ry,
-						z + rz, new ItemStack(item.getItem(), item.stackSize,
-								item.getItemDamage()));
+				final EntityItem entity_item = new EntityItem(world, x + rx, y
+						+ ry, z + rz, new ItemStack(item.getItem(),
+						item.stackSize, item.getItemDamage()));
 
 				if (item.hasTagCompound())
 					entity_item.writeToNBT((NBTTagCompound) item
 							.getTagCompound().copy());
 
-				float factor = 0.5F;
+				final float factor = 0.5F;
 
 				entity_item.motionX = rand.nextGaussian() * factor;
-				entity_item.motionY = rand.nextGaussian() * factor + 0.2F;
+				entity_item.motionY = (rand.nextGaussian() * factor) + 0.2F;
 				entity_item.motionZ = rand.nextGaussian() * factor;
 				world.spawnEntityInWorld(entity_item);
 				item.stackSize = 0;
@@ -115,5 +111,4 @@ public class BlockInjector extends BlockContainer {
 
 	}
 
-	
 }

@@ -32,7 +32,8 @@ public abstract class GuiComponentButton extends GuiComponentBox {
 	@Override
 	public void render(Minecraft minecraft, int offsetX, int offsetY,
 			int mouseX, int mouseY) {
-		boolean pressed = isMouseOver(mouseX, mouseY) && Mouse.isButtonDown(0);
+		final boolean pressed = isMouseOver(mouseX, mouseY)
+				&& Mouse.isButtonDown(0);
 		u = buttonEnabled ? pressed ? 20 : 0 : 40;
 		super.render(minecraft, offsetX, offsetY, mouseX, mouseY);
 		renderContents(minecraft, offsetX, offsetY, mouseX, mouseY, pressed);

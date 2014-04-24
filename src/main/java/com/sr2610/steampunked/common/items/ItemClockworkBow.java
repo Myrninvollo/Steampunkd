@@ -37,7 +37,7 @@ public class ItemClockworkBow extends ItemBow {
 	public static final String[] bowPullIconNameArray = new String[] {
 			"bow_pull_0", "bow_pull_1", "bow_pull_2" };
 	@SideOnly(Side.CLIENT)
-	private IIcon[] iconArray = new IIcon[4];
+	private final IIcon[] iconArray = new IIcon[4];
 
 	public ItemClockworkBow() {
 		super();
@@ -51,20 +51,20 @@ public class ItemClockworkBow extends ItemBow {
 			EntityPlayer par3EntityPlayer, int par4) {
 		int j = 72000 - par4;
 
-		ArrowLooseEvent event = new ArrowLooseEvent(par3EntityPlayer,
+		final ArrowLooseEvent event = new ArrowLooseEvent(par3EntityPlayer,
 				par1ItemStack, j);
 		MinecraftForge.EVENT_BUS.post(event);
 		if (event.isCanceled())
 			return;
 		j = event.charge;
 
-		boolean flag = par3EntityPlayer.capabilities.isCreativeMode
-				|| EnchantmentHelper.getEnchantmentLevel(
-						Enchantment.infinity.effectId, par1ItemStack) > 0;
+		final boolean flag = par3EntityPlayer.capabilities.isCreativeMode
+				|| (EnchantmentHelper.getEnchantmentLevel(
+						Enchantment.infinity.effectId, par1ItemStack) > 0);
 
 		if (flag || par3EntityPlayer.inventory.hasItem(Items.arrow)) {
 			float f = j / 20.0F;
-			f = (f * f + f * 2.0F) / 3.0F;
+			f = ((f * f) + (f * 2.0F)) / 3.0F;
 
 			if (f < 0.1D)
 				return;
@@ -72,21 +72,21 @@ public class ItemClockworkBow extends ItemBow {
 			if (f > 0.7F)
 				f = 1.1F;
 
-			EntityArrow entityarrow = new EntityArrow(par2World,
+			final EntityArrow entityarrow = new EntityArrow(par2World,
 					par3EntityPlayer, f * 2.0F);
 			entityarrow.setDamage(entityarrow.getDamage() + 1.0);
 
 			if (f == 1.1F)
 				entityarrow.setIsCritical(true);
 
-			int k = EnchantmentHelper.getEnchantmentLevel(
+			final int k = EnchantmentHelper.getEnchantmentLevel(
 					Enchantment.power.effectId, par1ItemStack);
 
 			if (k > 0)
-				entityarrow
-						.setDamage(entityarrow.getDamage() + k * 0.5D + 0.5D);
+				entityarrow.setDamage(entityarrow.getDamage() + (k * 0.5D)
+						+ 0.5D);
 
-			int l = EnchantmentHelper.getEnchantmentLevel(
+			final int l = EnchantmentHelper.getEnchantmentLevel(
 					Enchantment.punch.effectId, par1ItemStack);
 
 			if (l > 0)
@@ -98,13 +98,14 @@ public class ItemClockworkBow extends ItemBow {
 
 			par1ItemStack.damageItem(1, par3EntityPlayer);
 			par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F,
-					1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+					(1.0F / ((itemRand.nextFloat() * 0.4F) + 1.2F))
+							+ (f * 0.5F));
 
-			EntityArrow entityarrow1 = new EntityArrow(par2World,
+			final EntityArrow entityarrow1 = new EntityArrow(par2World,
 					par3EntityPlayer, f * 2.0F);
 			entityarrow1.setDamage(entityarrow1.getDamage() + 1.0);
 
-			EntityArrow entityarrow2 = new EntityArrow(par2World,
+			final EntityArrow entityarrow2 = new EntityArrow(par2World,
 					par3EntityPlayer, f * 2.0F);
 			entityarrow2.setDamage(entityarrow2.getDamage() + 1.0);
 
@@ -115,7 +116,7 @@ public class ItemClockworkBow extends ItemBow {
 			} else {
 				par3EntityPlayer.inventory.consumeInventoryItem(Items.arrow);
 				if (par1ItemStack.stackTagCompound != null) {
-					int mode = par1ItemStack.stackTagCompound
+					final int mode = par1ItemStack.stackTagCompound
 							.getInteger("Mode");
 					if (mode == 2) {
 						par3EntityPlayer.inventory
@@ -127,7 +128,8 @@ public class ItemClockworkBow extends ItemBow {
 			}
 
 			if (par1ItemStack.stackTagCompound != null) {
-				int Mode = par1ItemStack.stackTagCompound.getInteger("Mode");
+				final int Mode = par1ItemStack.stackTagCompound
+						.getInteger("Mode");
 				switch (Mode) {
 				case 1:
 					if (!par2World.isRemote)
@@ -176,7 +178,7 @@ public class ItemClockworkBow extends ItemBow {
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer) {
 
-		ArrowNockEvent event = new ArrowNockEvent(par3EntityPlayer,
+		final ArrowNockEvent event = new ArrowNockEvent(par3EntityPlayer,
 				par1ItemStack);
 		MinecraftForge.EVENT_BUS.post(event);
 		if (event.isCanceled())
@@ -211,7 +213,7 @@ public class ItemClockworkBow extends ItemBow {
 			ItemStack usingItem, int useRemaining) {
 		if (player.getItemInUse() == null)
 			return itemIcon;
-		int time = stack.getMaxItemUseDuration() - useRemaining;
+		final int time = stack.getMaxItemUseDuration() - useRemaining;
 		if (time >= 13)
 			return iconArray[3];
 		else if (time > 8)
@@ -231,7 +233,7 @@ public class ItemClockworkBow extends ItemBow {
 	public void addInformation(ItemStack itemStack, EntityPlayer player,
 			List list, boolean par4) {
 		if (itemStack.stackTagCompound != null) {
-			int Mode = itemStack.stackTagCompound.getInteger("Mode");
+			final int Mode = itemStack.stackTagCompound.getInteger("Mode");
 			switch (Mode) {
 			case 1:
 				list.add("Mode: Regular Firing");

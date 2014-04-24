@@ -33,10 +33,10 @@ public class FakeIcon implements IIcon {
 	}
 
 	public static IIcon createSheetIcon(int x, int y, int width, int height) {
-		float minU = x / 256.0f;
-		float minV = y / 256.0f;
-		float maxU = (x + width) / 256.0f;
-		float maxV = (y + height) / 256.0f;
+		final float minU = x / 256.0f;
+		final float minV = y / 256.0f;
+		final float maxU = (x + width) / 256.0f;
+		final float maxV = (y + height) / 256.0f;
 		return new FakeIcon(minU, maxU, minV, maxV, Math.abs(width),
 				Math.abs(height));
 	}
@@ -68,7 +68,7 @@ public class FakeIcon implements IIcon {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public float getInterpolatedU(double p) {
-		return minU + (maxU - minU) * (float) p / 16.0f;
+		return minU + (((maxU - minU) * (float) p) / 16.0f);
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class FakeIcon implements IIcon {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public float getInterpolatedV(double p) {
-		return minV + (maxV - minV) * (float) p / 16.0f;
+		return minV + (((maxV - minV) * (float) p) / 16.0f);
 	}
 
 	@Override

@@ -38,7 +38,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 
 	public FluidTank tank;
-	private FluidTankInfo[] tank_info;
+	private final FluidTankInfo[] tank_info;
 
 	public TileEntityPipe() {
 		super();
@@ -136,13 +136,13 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 			return;
 		refreshSurroundingTanks(currentTile);
 
-		if (tank.getFluidAmount() > 0 && surroundingTanks.size() > 0) {
+		if ((tank.getFluidAmount() > 0) && (surroundingTanks.size() > 0)) {
 			FluidStack drainedFluid = tank.drain(
 					Math.min(tank.getFluidAmount(), amountPerTick), true);
 			if (drainedFluid != null) {
 				Collections.shuffle(surroundingTanks);
-				for (ForgeDirection side : surroundingTanks) {
-					TileEntity otherTank = getTileInDirection(this, side);
+				for (final ForgeDirection side : surroundingTanks) {
+					final TileEntity otherTank = getTileInDirection(this, side);
 					if (drainedFluid.amount > 0) {
 						drainedFluid = drainedFluid.copy();
 						if (otherTank instanceof IFluidHandler)
@@ -189,9 +189,9 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 	}
 
 	protected String getFluidName(FluidStack fluid) {
-		if (fluid == null || fluid.getFluid() == null)
+		if ((fluid == null) || (fluid.getFluid() == null))
 			return null;
-		String name = fluid.getFluid().getName();
+		final String name = fluid.getFluid().getName();
 		if (name == null)
 			return null;
 		return name.trim().toLowerCase();
@@ -210,8 +210,8 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 	public boolean[] pipeConnectionsBuffer = new boolean[6];
 
 	public boolean isPipeConnected(ForgeDirection direct) {
-		TileEntity tile = getTileInDirection(this, direct);
-		if (tile != null && tile instanceof IFluidHandler)
+		final TileEntity tile = getTileInDirection(this, direct);
+		if ((tile != null) && (tile instanceof IFluidHandler))
 			return true;
 		return false;
 	}

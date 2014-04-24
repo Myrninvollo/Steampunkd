@@ -31,13 +31,13 @@ public class SteampunkedEventHandler {
 		if (!(event.entityLiving instanceof EntityPlayer))
 			return;
 		else {
-			EntityPlayer eventPlayer = (EntityPlayer) event.entityLiving;
+			final EntityPlayer eventPlayer = (EntityPlayer) event.entityLiving;
 			if (eventPlayer.inventory.armorInventory[0] != null) {
-				ItemStack boots = eventPlayer.inventory.armorInventory[0];
-				if ((boots.getItem() == ModItems.boots || boots.getItem() == ModItems.mechBoots)
-						&& boots.getMaxDamage() - boots.getItemDamage() >= 1) {
-					int d = (int) (event.distance / 2);
-					if (boots.getMaxDamage() - boots.getItemDamage() > d) {
+				final ItemStack boots = eventPlayer.inventory.armorInventory[0];
+				if (((boots.getItem() == ModItems.boots) || (boots.getItem() == ModItems.mechBoots))
+						&& ((boots.getMaxDamage() - boots.getItemDamage()) >= 1)) {
+					final int d = (int) (event.distance / 2);
+					if ((boots.getMaxDamage() - boots.getItemDamage()) > d) {
 
 						if (event.distance > 10F)
 							eventPlayer.worldObj
@@ -54,7 +54,7 @@ public class SteampunkedEventHandler {
 
 	@SubscribeEvent
 	public void entityColorRender(RenderLivingEvent.Pre event) {
-		String s = EnumChatFormatting
+		final String s = EnumChatFormatting
 				.getTextWithoutFormattingCodes(event.entity
 						.getCommandSenderName());
 		resetRender = true;

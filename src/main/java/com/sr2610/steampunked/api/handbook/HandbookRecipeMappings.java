@@ -23,8 +23,8 @@ public final class HandbookRecipeMappings {
 	 */
 	public static void map(ItemStack stack, HandbookEntry entry, int page,
 			boolean force) {
-		EntryData data = new EntryData(entry, page);
-		String str = stackToString(stack);
+		final EntryData data = new EntryData(entry, page);
+		final String str = stackToString(stack);
 
 		if (force || !mappings.containsKey(str))
 			mappings.put(str, data);
@@ -40,7 +40,7 @@ public final class HandbookRecipeMappings {
 
 	public static String stackToString(ItemStack stack) {
 		if (stack.hasTagCompound()
-				&& stack.getItem() instanceof IRecipeKeyProvider)
+				&& (stack.getItem() instanceof IRecipeKeyProvider))
 			return ((IRecipeKeyProvider) stack.getItem()).getKey(stack);
 
 		return stack.getUnlocalizedName() + "~" + stack.getItemDamage();

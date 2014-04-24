@@ -29,7 +29,7 @@ public class TileEntityValvePipe extends TileEntityMachine implements
 
 	public FluidTank tank;
 
-	private FluidTankInfo[] tank_info;
+	private final FluidTankInfo[] tank_info;
 
 	public TileEntityValvePipe() {
 		super();
@@ -152,9 +152,9 @@ public class TileEntityValvePipe extends TileEntityMachine implements
 	}
 
 	protected String getFluidName(FluidStack fluid) {
-		if (fluid == null || fluid.getFluid() == null)
+		if ((fluid == null) || (fluid.getFluid() == null))
 			return null;
-		String name = fluid.getFluid().getName();
+		final String name = fluid.getFluid().getName();
 		if (name == null)
 			return null;
 		return name.trim().toLowerCase();
@@ -173,8 +173,8 @@ public class TileEntityValvePipe extends TileEntityMachine implements
 	public boolean[] pipeConnectionsBuffer = new boolean[6];
 
 	public boolean isPipeConnected(ForgeDirection direct) {
-		TileEntity tile = getTileInDirection(this, direct);
-		if (tile != null && tile instanceof IFluidHandler
+		final TileEntity tile = getTileInDirection(this, direct);
+		if ((tile != null) && (tile instanceof IFluidHandler)
 				&& !(tile instanceof TileEntityValvePipe))
 			return true;
 		return false;
@@ -227,13 +227,13 @@ public class TileEntityValvePipe extends TileEntityMachine implements
 			return;
 		refreshSurroundingTanks(currentTile);
 
-		if (tank.getFluidAmount() > 0 && surroundingTanks.size() > 0) {
+		if ((tank.getFluidAmount() > 0) && (surroundingTanks.size() > 0)) {
 			FluidStack drainedFluid = tank.drain(
 					Math.min(tank.getFluidAmount(), amountPerTick), true);
 			if (drainedFluid != null) {
 				Collections.shuffle(surroundingTanks);
-				for (ForgeDirection side : surroundingTanks) {
-					TileEntity otherTank = getTileInDirection(this, side);
+				for (final ForgeDirection side : surroundingTanks) {
+					final TileEntity otherTank = getTileInDirection(this, side);
 					if (drainedFluid.amount > 0) {
 						drainedFluid = drainedFluid.copy();
 						if (otherTank instanceof TileEntityPipe)

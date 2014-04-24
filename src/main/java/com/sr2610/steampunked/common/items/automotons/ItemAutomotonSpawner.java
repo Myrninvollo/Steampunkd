@@ -17,13 +17,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagDouble;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
 
 import com.sr2610.steampunked.common.creativetabs.ModAutomatonTab;
-import com.sr2610.steampunked.common.entity.automatons.EntityAutomaton;
+import com.sr2610.steampunked.common.entitys.EntityAutomoton;
 import com.sr2610.steampunked.common.lib.Reference;
 
 import cpw.mods.fml.relauncher.Side;
@@ -49,35 +48,31 @@ public class ItemAutomotonSpawner extends Item {
 			switch (par1ItemStack.getItemDamage()) {
 			case 0: {
 
-				EntityAutomaton entity = new EntityAutomaton(par3World);
-				entity.homeX = par4;
-				entity.homeY = par5;
-				entity.homeZ = par6;
-				entity.side = par7;
-				entity.setLocationAndAngles(par4 + par8, par5 + par9 + 0.5,
-						par6 + par10, par9, par10);
+				final EntityAutomoton entity = new EntityAutomoton(par3World);
+				/*
+				 * entity.homeX = par4; entity.homeY = par5; entity.homeZ =
+				 * par6; entity.side = par7; entity.setLocationAndAngles(par4 +
+				 * par8, par5 + par9 + 0.5, par6 + par10, par9, par10);
+				 */
 				entity.setOwner(par2EntityPlayer.getDisplayName());
 
-				NBTTagCompound nbttagcompound = par1ItemStack.getTagCompound();
-				NBTTagDouble nbttagdouble = (NBTTagDouble) nbttagcompound
-						.getTag("Range");
-				if (nbttagdouble != null)
-					entity.range = nbttagdouble.func_150286_g();
-				else
-					entity.range = 5;
-				NBTTagDouble nbttagdoubleHealth = (NBTTagDouble) nbttagcompound
-						.getTag("MaxHealth");
-				if (nbttagdoubleHealth != null)
-					entity.maxHealth = nbttagdoubleHealth.func_150286_g();
-				else
-					entity.maxHealth = 20;
-
-				NBTTagDouble nbttagdoubleSpeed = (NBTTagDouble) nbttagcompound
-						.getTag("Speed");
-				if (nbttagdoubleSpeed != null)
-					entity.speed = nbttagdoubleSpeed.func_150286_g();
-				else
-					entity.speed = 0.25;
+				/*
+				 * NBTTagCompound nbttagcompound =
+				 * par1ItemStack.getTagCompound(); NBTTagDouble nbttagdouble =
+				 * (NBTTagDouble) nbttagcompound .getTag("Range"); if
+				 * (nbttagdouble != null) entity.range =
+				 * nbttagdouble.func_150286_g(); else entity.range = 5;
+				 * NBTTagDouble nbttagdoubleHealth = (NBTTagDouble)
+				 * nbttagcompound .getTag("MaxHealth"); if (nbttagdoubleHealth
+				 * != null) entity.maxHealth =
+				 * nbttagdoubleHealth.func_150286_g(); else entity.maxHealth =
+				 * 20;
+				 * 
+				 * NBTTagDouble nbttagdoubleSpeed = (NBTTagDouble)
+				 * nbttagcompound .getTag("Speed"); if (nbttagdoubleSpeed !=
+				 * null) entity.speed = nbttagdoubleSpeed.func_150286_g(); else
+				 * entity.speed = 0.25;
+				 */
 				par3World.spawnEntityInWorld(entity);
 				if (!par2EntityPlayer.capabilities.isCreativeMode) {
 					--par1ItemStack.stackSize;

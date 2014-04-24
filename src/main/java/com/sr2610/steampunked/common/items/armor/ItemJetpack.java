@@ -63,9 +63,10 @@ public class ItemJetpack extends ItemArmor implements ISteamUser, ISpecialArmor 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player,
 			ItemStack itemStack) {
-		Minecraft mc = FMLClientHandler.instance().getClient();
-		if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && player.posY <= 200
-				&& getCurrentSteam(itemStack) > 0 && mc.currentScreen == null) {
+		final Minecraft mc = FMLClientHandler.instance().getClient();
+		if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && (player.posY <= 200)
+				&& (getCurrentSteam(itemStack) > 0)
+				&& (mc.currentScreen == null)) {
 			player.fallDistance = 0F;
 			player.motionY += 0.10;
 			setDamage(itemStack, getDamage(itemStack) + 2);
@@ -87,7 +88,7 @@ public class ItemJetpack extends ItemArmor implements ISteamUser, ISpecialArmor 
 	@Override
 	public int fill(ItemStack target, int energyAvailable) {
 		if (energyAvailable > getDamage(target)) {
-			int remainder = energyAvailable - getDamage(target);
+			final int remainder = energyAvailable - getDamage(target);
 			setDamage(target, 0);
 			return remainder;
 		} else {
@@ -114,12 +115,12 @@ public class ItemJetpack extends ItemArmor implements ISteamUser, ISpecialArmor 
 	public ArmorProperties getProperties(EntityLivingBase player,
 			ItemStack armor, DamageSource source, double damage, int slot) {
 		double protection;
-		if (armor.getItemDamage() < armor.getMaxDamage() - 1)
+		if (armor.getItemDamage() < (armor.getMaxDamage() - 1))
 			protection = 0.2;
 		else
 			protection = 0;
 
-		ArmorProperties prop = new ArmorProperties(Integer.MAX_VALUE,
+		final ArmorProperties prop = new ArmorProperties(Integer.MAX_VALUE,
 				protection, Integer.MAX_VALUE);
 		return prop;
 
@@ -127,7 +128,7 @@ public class ItemJetpack extends ItemArmor implements ISteamUser, ISpecialArmor 
 
 	@Override
 	public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) {
-		if (armor.getItemDamage() < armor.getMaxDamage() - 1)
+		if (armor.getItemDamage() < (armor.getMaxDamage() - 1))
 			return 3;
 		else
 			return 0;
