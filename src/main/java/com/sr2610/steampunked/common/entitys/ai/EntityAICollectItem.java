@@ -11,15 +11,15 @@ package com.sr2610.steampunked.common.entitys.ai;
 
 import java.util.List;
 
-import com.sr2610.steampunked.common.entitys.EntityAutomoton;
-import com.sr2610.steampunked.common.utils.Utils;
-
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.AxisAlignedBB;
+
+import com.sr2610.steampunked.common.entitys.EntityAutomoton;
+import com.sr2610.steampunked.common.utils.InventoryUtils;
 
 public class EntityAICollectItem extends EntityAIBase {
 
@@ -77,7 +77,7 @@ public class EntityAICollectItem extends EntityAIBase {
 	@Override
 	public void startExecuting() {
 		if (targetItem != null) {
-			pathFinder.tryMoveToXYZ(targetItem.posX, targetItem.posY, targetItem.posZ, 0.4f);
+			pathFinder.tryMoveToXYZ(targetItem.posX, targetItem.posY, targetItem.posZ,auto.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue() );
 		}
 	}
 
@@ -89,7 +89,7 @@ public class EntityAICollectItem extends EntityAIBase {
 					&& auto.getDistanceToEntity(targetItem) < 1.0) {
 				ItemStack stack = targetItem.getEntityItem();
 				int preEatSize = stack.stackSize;
-				Utils.insertItemIntoInventory(auto, stack);
+				InventoryUtils.insertItemIntoInventory(auto, stack);
 				// Check that the size changed
 				if (preEatSize != stack.stackSize) {
 					if (stack.stackSize == 0) {

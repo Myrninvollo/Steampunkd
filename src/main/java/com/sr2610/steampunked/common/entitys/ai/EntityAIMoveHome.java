@@ -11,6 +11,7 @@ package com.sr2610.steampunked.common.entitys.ai;
 
 import com.sr2610.steampunked.common.entitys.EntityAutomoton;
 
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathNavigate;
 
@@ -49,7 +50,9 @@ public class EntityAIMoveHome extends EntityAIBase {
 	@Override
 	public void startExecuting() {
 		if (auto.posX != auto.homeX)
-			pathFinder.tryMoveToXYZ(auto.homeX, auto.homeY, auto.homeZ, 1.0D);
+			pathFinder.tryMoveToXYZ(auto.homeX, auto.homeY, auto.homeZ, auto
+					.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
+					.getAttributeValue());
 	}
 
 	@Override
