@@ -42,47 +42,40 @@ public class ItemAutomotonSpawner extends Item {
 
 	@Override
 	public boolean onItemUse(ItemStack par1ItemStack,
-			EntityPlayer par2EntityPlayer, World par3World, int par4, int par5,
-			int par6, int par7, float par8, float par9, float par10) {
-		if (!par3World.isRemote)
-			switch (par1ItemStack.getItemDamage()) {
-			case 0: {
+			EntityPlayer par2EntityPlayer, World par3World, int x, int y,
+			int z, int par7, float par8, float par9, float par10) {
+		if (!par3World.isRemote) {
+			// switch (par1ItemStack.getItemDamage()) {
+			// case 0: {
 
-				final EntityAutomoton entity = new EntityAutomoton(par3World);
-				/*
-				 * entity.homeX = par4; entity.homeY = par5; entity.homeZ =
-				 * par6; entity.side = par7; entity.setLocationAndAngles(par4 +
-				 * par8, par5 + par9 + 0.5, par6 + par10, par9, par10);
-				 */
-				entity.setOwner(par2EntityPlayer.getDisplayName());
+			final EntityAutomoton entity = new EntityAutomoton(par3World);
+			entity.homeX = x;
+			entity.homeY = y;
+			entity.homeZ = z;
+			/*
+			 * entity.homeX = par4; entity.homeY = par5; entity.homeZ =
+			 */
+			entity.setLocationAndAngles(x + par8, y + par9 + 0.5, z + par10,
+					par9, par10);
 
-				/*
-				 * NBTTagCompound nbttagcompound =
-				 * par1ItemStack.getTagCompound(); NBTTagDouble nbttagdouble =
-				 * (NBTTagDouble) nbttagcompound .getTag("Range"); if
-				 * (nbttagdouble != null) entity.range =
-				 * nbttagdouble.func_150286_g(); else entity.range = 5;
-				 * NBTTagDouble nbttagdoubleHealth = (NBTTagDouble)
-				 * nbttagcompound .getTag("MaxHealth"); if (nbttagdoubleHealth
-				 * != null) entity.maxHealth =
-				 * nbttagdoubleHealth.func_150286_g(); else entity.maxHealth =
-				 * 20;
-				 * 
-				 * NBTTagDouble nbttagdoubleSpeed = (NBTTagDouble)
-				 * nbttagcompound .getTag("Speed"); if (nbttagdoubleSpeed !=
-				 * null) entity.speed = nbttagdoubleSpeed.func_150286_g(); else
-				 * entity.speed = 0.25;
-				 */
-				par3World.spawnEntityInWorld(entity);
-				if (!par2EntityPlayer.capabilities.isCreativeMode) {
-					--par1ItemStack.stackSize;
+			entity.setOwner(par2EntityPlayer.getDisplayName());
 
-					return true;
-				} else if (!par3World.isRemote)
-					// par2EntityPlayer.addChatMessage(EnumChatFormatting.ITALIC+"You must place this on a block with a tank");
-					return false;
-			}
-			}
+			/*
+			 * NBTTagCompound nbttagcompound = par1ItemStack.getTagCompound();
+			 * NBTTagDouble nbttagdouble = (NBTTagDouble) nbttagcompound
+			 * .getTag("Range"); if (nbttagdouble != null) entity.range =
+			 * nbttagdouble.func_150286_g(); else entity.range = 5; NBTTagDouble
+			 * nbttagdoubleHealth = (NBTTagDouble) nbttagcompound
+			 * .getTag("MaxHealth"); if (nbttagdoubleHealth != null)
+			 * entity.maxHealth = nbttagdoubleHealth.func_150286_g(); else
+			 * entity.maxHealth = 20;
+			 * 
+			 * NBTTagDouble nbttagdoubleSpeed = (NBTTagDouble) nbttagcompound
+			 * .getTag("Speed"); if (nbttagdoubleSpeed != null) entity.speed =
+			 * nbttagdoubleSpeed.func_150286_g(); else entity.speed = 0.25;
+			 */
+			par3World.spawnEntityInWorld(entity);
+		}
 		return false;
 	}
 

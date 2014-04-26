@@ -11,28 +11,63 @@ package com.sr2610.steampunked.common.entitys;
 
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 
-public class EntityAutomoton extends EntityTameable {
+import com.sr2610.steampunked.common.entitys.ai.EntityAICollectItem;
+import com.sr2610.steampunked.common.entitys.ai.EntityAIMoveHome;
+import com.sr2610.steampunked.common.utils.Utils;
 
-	private boolean healthUpgrade;
-	private boolean speedUpgrade;
+public class EntityAutomoton extends EntityTameable implements IInventory {
+	
+	
+
+
+	private ItemStack[] containerItems = new ItemStack[1];
+
+	private boolean healthUpgrade=false;
+	private boolean speedUpgrade=false;
+	
+	public int homeX;
+	public int homeY;
+	public int homeZ;
 
 	public EntityAutomoton(World world) {
 		super(world);
 		setSize(0.6F, 0.8F);
-		getNavigator().setAvoidsWater(true);
-		tasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class,
-				8.0F));
+		func_110163_bv(); 
+	//	getNavigator().setAvoidsWater(true);
+	//	getNavigator().setCanSwim(true);
+		tasks.addTask(1, new EntityAISwimming(this));
+		tasks.addTask(2, new EntityAILookIdle(this));
+		
 
+		tasks.addTask(3, new EntityAICollectItem(this));
+
+		tasks.addTask(4, new EntityAIMoveHome(this));
+
+	}
+	
+	public boolean canConsumeStackPartially(ItemStack stack) {
+		return Utils.testInventoryInsertion(this, stack) > 0;
 	}
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable var1) {
 		return null;
+	}
+	
+	@Override
+	public boolean isAIEnabled() {
+		return true;
 	}
 
 	@Override
@@ -53,5 +88,195 @@ public class EntityAutomoton extends EntityTameable {
 			getEntityAttribute(SharedMonsterAttributes.movementSpeed)
 					.setBaseValue(0.5D);
 	}
+
+	@Override
+	public int getSizeInventory() {
+		return 1;
+	}
+
+
+
+	@Override
+	public String getInventoryName() {
+		return null;
+	}
+
+	@Override
+	public boolean hasCustomInventoryName() {
+		return false;
+	}
+
+	@Override
+	public int getInventoryStackLimit() {
+		return 64;
+	}
+
+	
+
+	@Override
+	public boolean isUseableByPlayer(EntityPlayer var1) {
+		return false;
+	}
+
+	@Override
+	public void openInventory() {
+	}
+
+	@Override
+	public void closeInventory() {
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int var1, ItemStack var2) {
+		return true;
+	}
+
+	public void setDead() {
+
+		for (int i = 0; i < this.getSizeInventory(); ++i) {
+			ItemStack itemstack = this.getStackInSlot(i);
+
+			if (itemstack != null) {
+				float f = this.rand.nextFloat() * 0.8F + 0.1F;
+				float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
+				float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
+
+				while (itemstack.stackSize > 0) {
+					int j = this.rand.nextInt(21) + 10;
+
+					if (j > itemstack.stackSize) {
+						j = itemstack.stackSize;
+					}
+
+					itemstack.stackSize -= j;
+					EntityItem entityitem = new EntityItem(this.worldObj,
+							this.posX + (double) f, this.posY + (double) f1,
+							this.posZ + (double) f2, new ItemStack(
+									itemstack.getItem(), j,
+									itemstack.getItemDamage()));
+
+					if (itemstack.hasTagCompound()) {
+						entityitem.getEntityItem().setTagCompound(
+								(NBTTagCompound) itemstack.getTagCompound()
+										.copy());
+					}
+
+					float f3 = 0.05F;
+					entityitem.motionX = (double) ((float) this.rand
+							.nextGaussian() * f3);
+					entityitem.motionY = (double) ((float) this.rand
+							.nextGaussian() * f3 + 0.2F);
+					entityitem.motionZ = (double) ((float) this.rand
+							.nextGaussian() * f3);
+					this.worldObj.spawnEntityInWorld(entityitem);
+				}
+			}
+		}
+
+		super.setDead();
+	}
+	
+	 public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+	    {
+	        super.writeEntityToNBT(par1NBTTagCompound);
+	        NBTTagList nbttaglist = new NBTTagList();
+
+	        for (int i = 0; i < this.containerItems.length; ++i)
+	        {
+	            if (this.containerItems[i] != null)
+	            {
+	                NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+	                nbttagcompound1.setByte("Slot", (byte)i);
+	                this.containerItems[i].writeToNBT(nbttagcompound1);
+	                nbttaglist.appendTag(nbttagcompound1);
+	            }
+	        }
+
+	        par1NBTTagCompound.setTag("Items", nbttaglist);
+	    }
+
+
+	    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+	    {
+	        super.readEntityFromNBT(par1NBTTagCompound);
+	        NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items", 10);
+	        this.containerItems = new ItemStack[this.getSizeInventory()];
+
+	        for (int i = 0; i < nbttaglist.tagCount(); ++i)
+	        {
+	            NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+	            int j = nbttagcompound1.getByte("Slot") & 255;
+
+	            if (j >= 0 && j < this.containerItems.length)
+	            {
+	                this.containerItems[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+	            }
+	        }
+	    }
+	    
+	    public ItemStack getStackInSlot(int par1)
+	    {
+	        return this.containerItems[par1];
+	    }
+
+	
+	    public ItemStack decrStackSize(int par1, int par2)
+	    {
+	        if (this.containerItems[par1] != null)
+	        {
+	            ItemStack itemstack;
+
+	            if (this.containerItems[par1].stackSize <= par2)
+	            {
+	                itemstack = this.containerItems[par1];
+	                this.containerItems[par1] = null;
+	                return itemstack;
+	            }
+	            else
+	            {
+	                itemstack = this.containerItems[par1].splitStack(par2);
+
+	                if (this.containerItems[par1].stackSize == 0)
+	                {
+	                    this.containerItems[par1] = null;
+	                }
+
+	                return itemstack;
+	            }
+	        }
+	        else
+	        {
+	            return null;
+	        }
+	    }
+
+	
+	    public ItemStack getStackInSlotOnClosing(int par1)
+	    {
+	        if (this.containerItems[par1] != null)
+	        {
+	            ItemStack itemstack = this.containerItems[par1];
+	            this.containerItems[par1] = null;
+	            return itemstack;
+	        }
+	        else
+	        {
+	            return null;
+	        }
+	    }
+
+	  
+	    public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
+	    {
+	        this.containerItems[par1] = par2ItemStack;
+
+	        if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit())
+	        {
+	            par2ItemStack.stackSize = this.getInventoryStackLimit();
+	        }
+	    }
+
+	
+	    public void markDirty() {}
 
 }
