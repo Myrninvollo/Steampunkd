@@ -17,9 +17,12 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 
 import com.sr2610.steampunked.common.creativetabs.ModAutomatonTab;
+import com.sr2610.steampunked.common.entitys.EntityAutomoton;
 import com.sr2610.steampunked.common.lib.Reference;
 
 import cpw.mods.fml.relauncher.Side;
@@ -55,25 +58,44 @@ public class ItemPunchcard extends Item {
 	public boolean itemInteractionForEntity(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase) {
 
-		/*
-		 * if (par3EntityLivingBase instanceof EntityAutomaton) {
-		 * EntityAutomaton entityAutomoton = (EntityAutomaton)
-		 * par3EntityLivingBase; if (entityAutomoton.getProgram() != true)
-		 * switch (par1ItemStack.getItemDamage()) { case 1: {
-		 * entityAutomoton.setProgram(par1ItemStack.getItemDamage());
-		 * --par1ItemStack.stackSize; return true; } case 2: {
-		 * entityAutomoton.setProgram(par1ItemStack.getItemDamage());
-		 * --par1ItemStack.stackSize; return true; } } else { if
-		 * (!par2EntityPlayer.worldObj.isRemote) par2EntityPlayer
-		 * .addChatComponentMessage(new ChatComponentTranslation( StatCollector
-		 * .translateToLocal("steampunked.oneProgram"))); return false; }
-		 * 
-		 * }
-		 * 
-		 * else { if (!par2EntityPlayer.worldObj.isRemote) par2EntityPlayer
-		 * .addChatComponentMessage(new ChatComponentTranslation( StatCollector
-		 * .translateToLocal("steampunked.onlyAutomaton"))); return false; }
-		 */
+		if (par3EntityLivingBase instanceof EntityAutomoton) {
+			EntityAutomoton entityAutomoton = (EntityAutomoton) par3EntityLivingBase;
+			if (entityAutomoton.getProgram() == 0) {
+				switch (par1ItemStack.getItemDamage()) {
+				case 1: {
+					entityAutomoton.setProgram(par1ItemStack.getItemDamage());
+					--par1ItemStack.stackSize;
+					return true;
+				}
+				case 2: {
+					entityAutomoton.setProgram(par1ItemStack.getItemDamage());
+					--par1ItemStack.stackSize;
+					return true;
+				}
+				}
+
+			}
+
+			else {
+				if (!par2EntityPlayer.worldObj.isRemote)
+					par2EntityPlayer
+							.addChatComponentMessage(new ChatComponentTranslation(
+									StatCollector
+											.translateToLocal("steampunked.oneProgram")));
+				return false;
+			}
+
+		}
+
+		else {
+			if (!par2EntityPlayer.worldObj.isRemote)
+				par2EntityPlayer
+						.addChatComponentMessage(new ChatComponentTranslation(
+								StatCollector
+										.translateToLocal("steampunked.onlyAutomaton")));
+			return false;
+		}
+
 		return false;
 	}
 

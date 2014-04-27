@@ -22,8 +22,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 
-import com.sr2610.steampunked.common.entitys.ai.EntityAICollectItem;
 import com.sr2610.steampunked.common.entitys.ai.EntityAIMoveHome;
+import com.sr2610.steampunked.common.entitys.ai.programs.EntityAICollectItem;
+import com.sr2610.steampunked.common.entitys.ai.programs.EntityAIInsertItem;
+import com.sr2610.steampunked.common.items.ModItems;
 import com.sr2610.steampunked.common.utils.InventoryUtils;
 
 public class EntityAutomoton extends EntityTameable implements IInventory {
@@ -32,12 +34,14 @@ public class EntityAutomoton extends EntityTameable implements IInventory {
 
 	private boolean healthUpgrade = false;
 	private boolean speedUpgrade = false;
+	public ItemStack carriedItem;
 
 	public int homeX;
 	public int homeY;
 	public int homeZ;
 	public int side;
 	private int healTimer;
+	private int programID;
 
 	public EntityAutomoton(World world) {
 		super(world);
@@ -45,16 +49,6 @@ public class EntityAutomoton extends EntityTameable implements IInventory {
 		func_110163_bv();
 		getNavigator().setAvoidsWater(true);
 		getNavigator().setCanSwim(true);
-		tasks.addTask(1, new EntityAISwimming(this));
-		tasks.addTask(2, new EntityAILookIdle(this));
-
-		tasks.addTask(3, new EntityAICollectItem(this));
-
-		tasks.addTask(4, new EntityAIMoveHome(this));
-		setCurrentItemOrArmor(0, getStackInSlot(0));
-
-	
-
 	}
 
 	public boolean canConsumeStackPartially(ItemStack stack) {
@@ -70,6 +64,11 @@ public class EntityAutomoton extends EntityTameable implements IInventory {
 	public boolean isAIEnabled() {
 		return true;
 	}
+	
+	 public void updateCarried()
+	  {
+		 carriedItem=this.getStackInSlot(0);
+	  }
 
 	@Override
 	protected void applyEntityAttributes() {
@@ -93,18 +92,13 @@ public class EntityAutomoton extends EntityTameable implements IInventory {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if(getStackInSlot(0)!=null)
-		System.out.println(		getStackInSlot(0).getItem().getUnlocalizedName());
 
 		healTimer--;
 		if (healTimer == 0) {
 			healTimer = 60;
 			heal(1.0F);
 		}
-
-		if (insertItemToInventory())
-			markDirty();
-
+		
 	}
 
 	@Override
@@ -147,13 +141,14 @@ public class EntityAutomoton extends EntityTameable implements IInventory {
 
 	public void setDead() {
 
+		float f = this.rand.nextFloat() * 0.8F + 0.1F;
+		float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
+		float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
+
 		for (int i = 0; i < this.getSizeInventory(); ++i) {
 			ItemStack itemstack = this.getStackInSlot(i);
 
 			if (itemstack != null) {
-				float f = this.rand.nextFloat() * 0.8F + 0.1F;
-				float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
-				float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
 
 				while (itemstack.stackSize > 0) {
 					int j = this.rand.nextInt(21) + 10;
@@ -183,8 +178,22 @@ public class EntityAutomoton extends EntityTameable implements IInventory {
 					entityitem.motionZ = (double) ((float) this.rand
 							.nextGaussian() * f3);
 					this.worldObj.spawnEntityInWorld(entityitem);
+
 				}
 			}
+
+		}
+		if (!this.worldObj.isRemote) {
+			ItemStack is = new ItemStack(ModItems.punchcard, 1, programID);
+			ItemStack is2 = new ItemStack(ModItems.spawner);
+			EntityItem itemEntity = new EntityItem(this.worldObj, this.posX
+					+ (double) f, this.posY + (double) f1, this.posZ
+					+ (double) f2, is);
+			if (programID != 0)
+				this.worldObj.spawnEntityInWorld(itemEntity);
+			itemEntity = new EntityItem(this.worldObj, this.posX + (double) f,
+					this.posY + (double) f1, this.posZ + (double) f2, is2);
+			this.worldObj.spawnEntityInWorld(itemEntity);
 		}
 
 		super.setDead();
@@ -198,6 +207,7 @@ public class EntityAutomoton extends EntityTameable implements IInventory {
 		par1NBTTagCompound.setInteger("Y", homeY);
 		par1NBTTagCompound.setInteger("Z", homeZ);
 		par1NBTTagCompound.setInteger("Side", side);
+		par1NBTTagCompound.setInteger("ProgramID", programID);
 
 		for (int i = 0; i < this.containerItems.length; ++i) {
 			if (this.containerItems[i] != null) {
@@ -217,6 +227,7 @@ public class EntityAutomoton extends EntityTameable implements IInventory {
 		homeY = par1NBTTagCompound.getInteger("Y");
 		homeZ = par1NBTTagCompound.getInteger("Z");
 		side = par1NBTTagCompound.getInteger("Side");
+		programID = par1NBTTagCompound.getInteger("ProgramID");
 
 		NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items", 10);
 		this.containerItems = new ItemStack[this.getSizeInventory()];
@@ -230,6 +241,8 @@ public class EntityAutomoton extends EntityTameable implements IInventory {
 						.loadItemStackFromNBT(nbttagcompound1);
 			}
 		}
+		startUp();
+
 	}
 
 	public ItemStack getStackInSlot(int par1) {
@@ -278,48 +291,31 @@ public class EntityAutomoton extends EntityTameable implements IInventory {
 	}
 
 	public void markDirty() {
+		updateCarried();
 	}
 
-	private boolean insertItemToInventory() {
-		IInventory iinventory = getOutputInventory();
-
-		if (iinventory == null)
-			return false;
-
-		if (!(getDistance(homeX, homeY, homeZ) < 2.5D))
-			return false;
-		else {
-			
-
-			for (int i = 0; i < getSizeInventory(); ++i)
-				if (getStackInSlot(i) != null) {
-					
-
-					ItemStack itemstack = getStackInSlot(i).copy();
-					ItemStack itemstack1 = InventoryUtils.insertStack(
-							iinventory, decrStackSize(i, 1), side);
-
-					if (itemstack1 == null || itemstack1.stackSize == 0) {
-						iinventory.markDirty();
-
-						return true;
-					}
-
-					setInventorySlotContents(i, itemstack);
-				}
-
-			return false;
-		}
-
-
-	}
-
-	private IInventory getOutputInventory() {
-		return InventoryUtils.getInventoryAtLocation(worldObj, homeX, homeY,
-				homeZ);
-	}
-	
 	@Override
-	protected void dropEquipment(boolean par1, int par2) {}
+	protected void dropEquipment(boolean par1, int par2) {
+	}
 
+	public void setProgram(int id) {
+		programID = id;
+		startUp();
+	}
+
+	public int getProgram() {
+		return programID;
+	}
+
+	public void startUp() {
+		switch (programID) {
+		case 0:
+			break;
+		case 1:
+			tasks.addTask(1, new EntityAICollectItem(this));
+			tasks.addTask(3, new EntityAIInsertItem(this));
+			tasks.addTask(2, new EntityAIMoveHome(this));
+
+		}
+	}
 }

@@ -17,6 +17,7 @@ import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.BlockSign;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -25,6 +26,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import com.sr2610.steampunked.common.blocks.BlockSteamFurnace;
 import com.sr2610.steampunked.common.creativetabs.ModCreativeTab;
+import com.sr2610.steampunked.common.entitys.EntityAutomoton;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -92,6 +94,20 @@ public class ItemSpanner extends Item {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister par1IconRegister) {
 		itemIcon = par1IconRegister.registerIcon("steampunked:spanner");
+	}
+
+	@Override
+	public boolean itemInteractionForEntity(ItemStack par1ItemStack,
+			EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase) {
+		if (par3EntityLivingBase instanceof EntityAutomoton) {
+			EntityAutomoton ea = (EntityAutomoton) par3EntityLivingBase;
+			if (!par2EntityPlayer.isSneaking())
+				ea.startUp();
+			else
+				par3EntityLivingBase.setDead();
+			return true;
+		}
+		return false;
 	}
 
 }

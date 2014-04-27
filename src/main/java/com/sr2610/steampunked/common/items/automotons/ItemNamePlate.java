@@ -10,9 +10,15 @@
 package com.sr2610.steampunked.common.items.automotons;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.StatCollector;
 
 import com.sr2610.steampunked.common.creativetabs.ModAutomatonTab;
+import com.sr2610.steampunked.common.entitys.EntityAutomoton;
 import com.sr2610.steampunked.common.lib.Reference;
 
 import cpw.mods.fml.relauncher.Side;
@@ -31,23 +37,37 @@ public class ItemNamePlate extends Item {
 		itemIcon = iconRegister.registerIcon(Reference.ModID + ":NamePlate");
 	}
 
-	/*
-	 * @Override public boolean itemInteractionForEntity(ItemStack
-	 * par1ItemStack, EntityPlayer par2EntityPlayer, EntityLivingBase
-	 * par3EntityLivingBase) { if (par3EntityLivingBase instanceof
-	 * EntityAutomaton) { if (!par1ItemStack.hasDisplayName()) { if
-	 * (!par2EntityPlayer.worldObj.isRemote) par2EntityPlayer
-	 * .addChatComponentMessage(new ChatComponentTranslation( StatCollector
-	 * .translateToLocal("steampunked.nameFirst"))); return false; } else if
-	 * (par3EntityLivingBase instanceof EntityAutomaton) { EntityAutomaton
-	 * entityAutomoton = (EntityAutomaton) par3EntityLivingBase; entityAutomoton
-	 * .setCustomNameTag(par1ItemStack.getDisplayName());
-	 * entityAutomoton.func_110163_bv(); --par1ItemStack.stackSize; return true;
-	 * } else return super.itemInteractionForEntity(par1ItemStack,
-	 * par2EntityPlayer, par3EntityLivingBase); }
-	 * 
-	 * else { if (!par2EntityPlayer.worldObj.isRemote) par2EntityPlayer
-	 * .addChatComponentMessage(new ChatComponentTranslation( StatCollector
-	 * .translateToLocal("steampunked.onlyAutomaton"))); return false; } }
-	 */
+	@Override
+	public boolean itemInteractionForEntity(ItemStack par1ItemStack,
+			EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase) {
+		if (par3EntityLivingBase instanceof EntityAutomoton) {
+			if (!par1ItemStack.hasDisplayName()) {
+				if (!par2EntityPlayer.worldObj.isRemote)
+					par2EntityPlayer
+							.addChatComponentMessage(new ChatComponentTranslation(
+									StatCollector
+											.translateToLocal("steampunked.nameFirst")));
+				return false;
+			} else if (par3EntityLivingBase instanceof EntityAutomoton) {
+				EntityAutomoton entityAutomoton = (EntityAutomoton) par3EntityLivingBase;
+				entityAutomoton
+						.setCustomNameTag(par1ItemStack.getDisplayName());
+				entityAutomoton.func_110163_bv();
+				--par1ItemStack.stackSize;
+				return true;
+			} else
+				return super.itemInteractionForEntity(par1ItemStack,
+						par2EntityPlayer, par3EntityLivingBase);
+		}
+
+		else {
+			if (!par2EntityPlayer.worldObj.isRemote)
+				par2EntityPlayer
+						.addChatComponentMessage(new ChatComponentTranslation(
+								StatCollector
+										.translateToLocal("steampunked.onlyAutomaton")));
+			return false;
+		}
+	}
+
 }

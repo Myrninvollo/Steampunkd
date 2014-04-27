@@ -292,5 +292,7 @@ public class InventoryUtils {
 						|| ((ISidedInventory) par0IInventory).canInsertItem(
 								par2, par1ItemStack, par3);
 	}
+	
+	
 
 }
