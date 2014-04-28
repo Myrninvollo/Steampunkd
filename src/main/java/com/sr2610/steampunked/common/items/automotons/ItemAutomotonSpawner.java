@@ -43,18 +43,14 @@ public class ItemAutomotonSpawner extends Item {
 	@Override
 	public boolean onItemUse(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, World par3World, int x, int y,
-			int z, int par7, float par8, float par9, float par10) {
+			int z, int side, float par8, float par9, float par10) {
 		if (!par3World.isRemote) {
-			// switch (par1ItemStack.getItemDamage()) {
-			// case 0: {
 
 			final EntityAutomoton entity = new EntityAutomoton(par3World);
 			entity.homeX = x;
 			entity.homeY = y;
 			entity.homeZ = z;
-			/*
-			 * entity.homeX = par4; entity.homeY = par5; entity.homeZ =
-			 */
+			entity.side=side;
 			entity.setLocationAndAngles(x + par8, y + par9 + 0.5, z + par10,
 					par9, par10);
 

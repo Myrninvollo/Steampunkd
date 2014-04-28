@@ -34,10 +34,10 @@ public class SteampunkedEventHandler {
 			final EntityPlayer eventPlayer = (EntityPlayer) event.entityLiving;
 			if (eventPlayer.inventory.armorInventory[0] != null) {
 				final ItemStack boots = eventPlayer.inventory.armorInventory[0];
-				if (((boots.getItem() == ModItems.boots) || (boots.getItem() == ModItems.mechBoots))
-						&& ((boots.getMaxDamage() - boots.getItemDamage()) >= 1)) {
+				if ((boots.getItem() == ModItems.boots || boots.getItem() == ModItems.mechBoots)
+						&& boots.getMaxDamage() - boots.getItemDamage() >= 1) {
 					final int d = (int) (event.distance / 2);
-					if ((boots.getMaxDamage() - boots.getItemDamage()) > d) {
+					if (boots.getMaxDamage() - boots.getItemDamage() > d) {
 
 						if (event.distance > 10F)
 							eventPlayer.worldObj

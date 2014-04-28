@@ -64,9 +64,8 @@ public class ItemJetpack extends ItemArmor implements ISteamUser, ISpecialArmor 
 	public void onArmorTick(World world, EntityPlayer player,
 			ItemStack itemStack) {
 		final Minecraft mc = FMLClientHandler.instance().getClient();
-		if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && (player.posY <= 200)
-				&& (getCurrentSteam(itemStack) > 0)
-				&& (mc.currentScreen == null)) {
+		if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && player.posY <= 200
+				&& getCurrentSteam(itemStack) > 0 && mc.currentScreen == null) {
 			player.fallDistance = 0F;
 			player.motionY += 0.10;
 			setDamage(itemStack, getDamage(itemStack) + 2);
@@ -115,7 +114,7 @@ public class ItemJetpack extends ItemArmor implements ISteamUser, ISpecialArmor 
 	public ArmorProperties getProperties(EntityLivingBase player,
 			ItemStack armor, DamageSource source, double damage, int slot) {
 		double protection;
-		if (armor.getItemDamage() < (armor.getMaxDamage() - 1))
+		if (armor.getItemDamage() < armor.getMaxDamage() - 1)
 			protection = 0.2;
 		else
 			protection = 0;
@@ -128,7 +127,7 @@ public class ItemJetpack extends ItemArmor implements ISteamUser, ISpecialArmor 
 
 	@Override
 	public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) {
-		if (armor.getItemDamage() < (armor.getMaxDamage() - 1))
+		if (armor.getItemDamage() < armor.getMaxDamage() - 1)
 			return 3;
 		else
 			return 0;

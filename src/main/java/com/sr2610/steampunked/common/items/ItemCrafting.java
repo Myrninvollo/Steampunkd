@@ -40,7 +40,7 @@ public class ItemCrafting extends Item {
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs,
 			List par3List) {
-		for (int x = 0; x < (itemNames.length - 1); x++)
+		for (int x = 0; x < itemNames.length - 1; x++)
 			par3List.add(new ItemStack(this, 1, x));
 
 	}

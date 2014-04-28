@@ -65,8 +65,8 @@ public class TileEntityPunchardMaker extends TileEntity implements IInventory {
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
 		benchItemStacks[par1] = par2ItemStack;
 
-		if ((par2ItemStack != null)
-				&& (par2ItemStack.stackSize > getInventoryStackLimit()))
+		if (par2ItemStack != null
+				&& par2ItemStack.stackSize > getInventoryStackLimit())
 			par2ItemStack.stackSize = getInventoryStackLimit();
 	}
 
@@ -119,7 +119,7 @@ public class TileEntityPunchardMaker extends TileEntity implements IInventory {
 					.getCompoundTagAt(i);
 			final byte b0 = nbttagcompound1.getByte("Slot");
 
-			if ((b0 >= 0) && (b0 < benchItemStacks.length))
+			if (b0 >= 0 && b0 < benchItemStacks.length)
 				benchItemStacks[b0] = ItemStack
 						.loadItemStackFromNBT(nbttagcompound1);
 		}

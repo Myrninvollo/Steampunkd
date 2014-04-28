@@ -63,7 +63,7 @@ public final class RenderHelper {
 			var7 = y - 12;
 			int var9 = 8;
 			if (tooltipData.size() > 1)
-				var9 += 2 + ((tooltipData.size() - 1) * 10);
+				var9 += 2 + (tooltipData.size() - 1) * 10;
 			final float z = 300F;
 			drawGradientRect(var6 - 3, var7 - 4, z, var6 + var5 + 3, var7 - 3,
 					color2, color2);
@@ -75,13 +75,13 @@ public final class RenderHelper {
 					color2, color2);
 			drawGradientRect(var6 + var5 + 3, var7 - 3, z, var6 + var5 + 4,
 					var7 + var9 + 3, color2, color2);
-			final int var12 = ((color & 0xFFFFFF) >> 1) | (color & -16777216);
-			drawGradientRect(var6 - 3, (var7 - 3) + 1, z, (var6 - 3) + 1, (var7
-					+ var9 + 3) - 1, color, var12);
-			drawGradientRect(var6 + var5 + 2, (var7 - 3) + 1, z, var6 + var5
-					+ 3, (var7 + var9 + 3) - 1, color, var12);
+			final int var12 = (color & 0xFFFFFF) >> 1 | color & -16777216;
+			drawGradientRect(var6 - 3, var7 - 3 + 1, z, var6 - 3 + 1, var7
+					+ var9 + 3 - 1, color, var12);
+			drawGradientRect(var6 + var5 + 2, var7 - 3 + 1, z, var6 + var5 + 3,
+					var7 + var9 + 3 - 1, color, var12);
 			drawGradientRect(var6 - 3, var7 - 3, z, var6 + var5 + 3,
-					(var7 - 3) + 1, color, color);
+					var7 - 3 + 1, color, color);
 			drawGradientRect(var6 - 3, var7 + var9 + 2, z, var6 + var5 + 3,
 					var7 + var9 + 3, var12, var12);
 
@@ -103,13 +103,13 @@ public final class RenderHelper {
 
 	public static void drawGradientRect(int par1, int par2, float z, int par3,
 			int par4, int par5, int par6) {
-		final float var7 = ((par5 >> 24) & 255) / 255F;
-		final float var8 = ((par5 >> 16) & 255) / 255F;
-		final float var9 = ((par5 >> 8) & 255) / 255F;
+		final float var7 = (par5 >> 24 & 255) / 255F;
+		final float var8 = (par5 >> 16 & 255) / 255F;
+		final float var9 = (par5 >> 8 & 255) / 255F;
 		final float var10 = (par5 & 255) / 255F;
-		final float var11 = ((par6 >> 24) & 255) / 255F;
-		final float var12 = ((par6 >> 16) & 255) / 255F;
-		final float var13 = ((par6 >> 8) & 255) / 255F;
+		final float var11 = (par6 >> 24 & 255) / 255F;
+		final float var12 = (par6 >> 16 & 255) / 255F;
+		final float var13 = (par6 >> 8 & 255) / 255F;
 		final float var14 = (par6 & 255) / 255F;
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_BLEND);
@@ -174,16 +174,16 @@ public final class RenderHelper {
 		GL11.glTranslatef(0F, -1F, -2F);
 		GL11.glScalef(xScale, yScale, zScale);
 
-		for (int i = 0; i < ((((f1 + (f1 * f1)) / 2F) * 90F) + 30F); i++) {
+		for (int i = 0; i < (f1 + f1 * f1) / 2F * 90F + 30F; i++) {
 			GL11.glRotatef(random.nextFloat() * 360F, 1F, 0F, 0F);
 			GL11.glRotatef(random.nextFloat() * 360F, 0F, 1F, 0F);
 			GL11.glRotatef(random.nextFloat() * 360F, 0F, 0F, 1F);
 			GL11.glRotatef(random.nextFloat() * 360F, 1F, 0F, 0F);
 			GL11.glRotatef(random.nextFloat() * 360F, 0F, 1F, 0F);
-			GL11.glRotatef((random.nextFloat() * 360F) + (f1 * 90F), 0F, 0F, 1F);
+			GL11.glRotatef(random.nextFloat() * 360F + f1 * 90F, 0F, 0F, 1F);
 			tessellator.startDrawing(GL11.GL_TRIANGLE_FAN);
-			final float f3 = (random.nextFloat() * 20F) + 5F + (f2 * 10F);
-			final float f4 = (random.nextFloat() * 2F) + 1F + (f2 * 2F);
+			final float f3 = random.nextFloat() * 20F + 5F + f2 * 10F;
+			final float f4 = random.nextFloat() * 2F + 1F + f2 * 2F;
 			tessellator.setColorRGBA_I(color, (int) (255F * (1F - f2)));
 			tessellator.addVertex(0, 0, 0);
 			tessellator.setColorRGBA_F(0F, 0F, 0F, 0);

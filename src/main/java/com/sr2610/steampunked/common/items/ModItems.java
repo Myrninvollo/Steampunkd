@@ -69,8 +69,6 @@ public final class ModItems {
 	public static Item copperIngot;
 	public static Item tinIngot;
 
-	
-
 	public static Item reprogrammer;
 	public static Item hammer;
 
@@ -124,7 +122,7 @@ public final class ModItems {
 
 		tinIngot = new ItemMod("ingotTin")
 				.setUnlocalizedName(LibNames.TININGOT);
-	
+
 		reprogrammer = new ItemReprogrammer().setUnlocalizedName(
 				LibNames.REPROGRAMMER).setMaxStackSize(1);
 

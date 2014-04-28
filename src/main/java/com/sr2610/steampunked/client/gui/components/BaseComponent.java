@@ -110,8 +110,8 @@ public abstract class BaseComponent extends Gui {
 	 * @return true if the X and Y are inside this components area
 	 */
 	protected boolean isMouseOver(int mouseX, int mouseY) {
-		return hasMouse = (mouseX >= x) && (mouseX < (x + getWidth()))
-				&& (mouseY >= y) && (mouseY < (y + getHeight()));
+		return hasMouse = mouseX >= x && mouseX < x + getWidth() && mouseY >= y
+				&& mouseY < y + getHeight();
 	}
 
 	private final List<IComponentListener> listeners = new ArrayList<IComponentListener>();
@@ -152,7 +152,7 @@ public abstract class BaseComponent extends Gui {
 			int mouseX, int mouseY) {
 		if (renderChildren)
 			for (final BaseComponent component : components)
-				if ((component != null) && component.isEnabled())
+				if (component != null && component.isEnabled())
 					component.render(minecraft, offsetX + x, offsetY + y,
 							mouseX - x, mouseY - y);
 	}
@@ -161,7 +161,7 @@ public abstract class BaseComponent extends Gui {
 			int mouseX, int mouseY) {
 		if (renderChildren)
 			for (final BaseComponent component : components)
-				if ((component != null) && component.isEnabled())
+				if (component != null && component.isEnabled())
 					component.renderOverlay(minecraft, offsetX + x,
 							offsetY + y, mouseX - x, mouseY - y);
 	}
@@ -170,7 +170,7 @@ public abstract class BaseComponent extends Gui {
 		invokeListenersKeyTyped(par1, par2);
 		if (renderChildren)
 			for (final BaseComponent component : components)
-				if ((component != null) && component.isEnabled())
+				if (component != null && component.isEnabled())
 					component.keyTyped(par1, par2);
 	}
 
@@ -178,7 +178,7 @@ public abstract class BaseComponent extends Gui {
 		invokeListenersMouseDown(mouseX, mouseY, button);
 		if (renderChildren)
 			for (final BaseComponent component : components)
-				if ((component != null) && component.isEnabled()
+				if (component != null && component.isEnabled()
 						&& component.isMouseOver(mouseX, mouseY))
 					component.mouseClicked(mouseX - component.x, mouseY
 							- component.y, button);
@@ -188,7 +188,7 @@ public abstract class BaseComponent extends Gui {
 		invokeListenersMouseDrag(mouseX, mouseY, button, time);
 		if (renderChildren)
 			for (final BaseComponent component : components)
-				if ((component != null) && component.isEnabled()
+				if (component != null && component.isEnabled()
 						&& component.isMouseOver(mouseX, mouseY))
 					component.mouseClickMove(mouseX - component.x, mouseY
 							- component.y, button, time);
@@ -201,7 +201,7 @@ public abstract class BaseComponent extends Gui {
 			invokeListenersMouseMove(mouseX, mouseY);
 		if (renderChildren)
 			for (final BaseComponent component : components)
-				if ((component != null) && component.isEnabled()
+				if (component != null && component.isEnabled()
 						&& component.isMouseOver(mouseX, mouseY))
 					component.mouseMovedOrUp(mouseX - component.x, mouseY
 							- component.y, button);

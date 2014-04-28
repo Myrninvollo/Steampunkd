@@ -49,11 +49,11 @@ public class ContainerTinkerBench extends Container {
 
 		for (i = 0; i < 3; ++i)
 			for (j = 0; j < 9; ++j)
-				addSlotToContainer(new Slot(player_inv, j + (i * 9) + 9,
-						28 + (j * 18), 135 + (i * 18)));
+				addSlotToContainer(new Slot(player_inv, j + i * 9 + 9,
+						28 + j * 18, 135 + i * 18));
 
 		for (i = 0; i < 9; ++i)
-			addSlotToContainer(new Slot(player_inv, i, 28 + (i * 18), 193));
+			addSlotToContainer(new Slot(player_inv, i, 28 + i * 18, 193));
 	}
 
 	@Override
@@ -103,7 +103,7 @@ public class ContainerTinkerBench extends Container {
 		ItemStack itemstack = null;
 		final Slot slot = (Slot) inventorySlots.get(par2);
 
-		if ((slot != null) && slot.getHasStack()) {
+		if (slot != null && slot.getHasStack()) {
 			final ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 

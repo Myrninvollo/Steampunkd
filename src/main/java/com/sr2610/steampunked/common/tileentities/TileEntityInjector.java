@@ -122,8 +122,8 @@ public class TileEntityInjector extends TileEntityMachine implements
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
 		injectorItemSlot[par1] = par2ItemStack;
 
-		if ((par2ItemStack != null)
-				&& (par2ItemStack.stackSize > getInventoryStackLimit()))
+		if (par2ItemStack != null
+				&& par2ItemStack.stackSize > getInventoryStackLimit())
 			par2ItemStack.stackSize = getInventoryStackLimit();
 	}
 
@@ -224,12 +224,12 @@ public class TileEntityInjector extends TileEntityMachine implements
 		if (name == null)
 			return false;
 		return name.equals("steam")
-				|| (fuel.getFluid() == ModBlocks.steam)
-				|| (fuel.getFluid().getLocalizedName().trim().toLowerCase() == "steam");
+				|| fuel.getFluid() == ModBlocks.steam
+				|| fuel.getFluid().getLocalizedName().trim().toLowerCase() == "steam";
 	}
 
 	protected String getFluidName(FluidStack fluid) {
-		if ((fluid == null) || (fluid.getFluid() == null))
+		if (fluid == null || fluid.getFluid() == null)
 			return null;
 		final String name = fluid.getFluid().getName();
 		if (name == null)
@@ -259,9 +259,9 @@ public class TileEntityInjector extends TileEntityMachine implements
 		if (getRedstoneMode() == 0)
 			return;
 
-		else if ((getRedstoneMode() == 2) && !redstone_signal)
+		else if (getRedstoneMode() == 2 && !redstone_signal)
 			return;
-		else if ((canCharge() == true) && (tank.getFluidAmount() > 0)) {
+		else if (canCharge() == true && tank.getFluidAmount() > 0) {
 			tank.drain(1, true);
 			injectorItemSlot[0].setItemDamage(injectorItemSlot[0]
 					.getItemDamage() - 1);
@@ -288,7 +288,7 @@ public class TileEntityInjector extends TileEntityMachine implements
 	public int getComparatorOutput() {
 		if (getItemMaxCharge() == 0)
 			return 0;
-		return (getItemChargeLevel() * 15) / getItemMaxCharge();
+		return getItemChargeLevel() * 15 / getItemMaxCharge();
 	}
 
 	public int getItemChargeLevel() {
@@ -316,8 +316,8 @@ public class TileEntityInjector extends TileEntityMachine implements
 	boolean canCharge() {
 		if (injectorItemSlot[0] == null)
 			return false;
-		if ((injectorItemSlot[0].getItem() instanceof ISteamUser)
-				&& (getItemChargeLevel() != getItemMaxCharge()))
+		if (injectorItemSlot[0].getItem() instanceof ISteamUser
+				&& getItemChargeLevel() != getItemMaxCharge())
 			return true;
 		else
 			return false;

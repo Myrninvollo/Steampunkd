@@ -61,8 +61,8 @@ public class GuiComponentTab extends GuiComponentBox {
 			dHeight += (targetHeight - dHeight) / 4;
 		width = (int) Math.round(dWidth);
 		height = (int) Math.round(dHeight);
-		renderChildren = active && (width == targetWidth)
-				&& (height == targetHeight);
+		renderChildren = active && width == targetWidth
+				&& height == targetHeight;
 		super.render(minecraft, offsetX, offsetY, mouseX, mouseY);
 
 		GL11.glColor4f(1, 1, 1, 1);
@@ -79,7 +79,7 @@ public class GuiComponentTab extends GuiComponentBox {
 	@Override
 	public void mouseClicked(int x, int y, int button) {
 		super.mouseClicked(x, y, button);
-		if ((x > 24) || (y > 24))
+		if (x > 24 || y > 24)
 			return;
 		container.onTabClicked(this);
 	}

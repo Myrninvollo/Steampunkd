@@ -86,7 +86,7 @@ public abstract class GuiMachine extends GuiContainer {
 	protected void DisplayTankTooltip(int x, int y, FluidTank tank) {
 		final List<String> list = new ArrayList<String>();
 		final FluidStack stack = tank.getFluid();
-		if ((stack != null) && (stack.amount > 0)) {
+		if (stack != null && stack.amount > 0) {
 
 			list.add(stack.getFluid().getLocalizedName());
 			list.add(String.valueOf(stack.amount) + " / "
@@ -127,11 +127,11 @@ public abstract class GuiMachine extends GuiContainer {
 
 		IIcon liquidIcon = null;
 		final Fluid fluid = liquid.getFluid();
-		if ((fluid != null) && (fluid.getBlock().getIcon(1, 1) != null))
+		if (fluid != null && fluid.getBlock().getIcon(1, 1) != null)
 			liquidIcon = fluid.getBlock().getIcon(1, 1);
 		mc.renderEngine.bindTexture(BLOCK_TEXTURE);
 
-		int h = (liquid.amount * tank_height) / tank.getCapacity();
+		int h = liquid.amount * tank_height / tank.getCapacity();
 
 		if (liquidIcon != null)
 			while (true) {
@@ -146,12 +146,12 @@ public abstract class GuiMachine extends GuiContainer {
 				}
 
 				if (i > 0)
-					drawTexturedModelRectFromIconPartial(window_x + x,
-							(window_y + y + tank_height) - i - start,
-							liquidIcon, 16, i, 0, 16 - i);
+					drawTexturedModelRectFromIconPartial(window_x + x, window_y
+							+ y + tank_height - i - start, liquidIcon, 16, i,
+							0, 16 - i);
 				start += 16;
 
-				if ((i == 0) || (h == 0))
+				if (i == 0 || h == 0)
 					break;
 			}
 

@@ -36,12 +36,11 @@ public class ContainerSteamFurnace extends Container {
 
 		for (i = 0; i < 3; ++i)
 			for (int j = 0; j < 9; ++j)
-				addSlotToContainer(new Slot(par1InventoryPlayer, j + (i * 9)
-						+ 9, 8 + (j * 18), 84 + (i * 18)));
+				addSlotToContainer(new Slot(par1InventoryPlayer, j + i * 9 + 9,
+						8 + j * 18, 84 + i * 18));
 
 		for (i = 0; i < 9; ++i)
-			addSlotToContainer(new Slot(par1InventoryPlayer, i, 8 + (i * 18),
-					142));
+			addSlotToContainer(new Slot(par1InventoryPlayer, i, 8 + i * 18, 142));
 
 	}
 
@@ -89,7 +88,7 @@ public class ContainerSteamFurnace extends Container {
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotId) {
 		final Slot slot = (Slot) inventorySlots.get(slotId);
-		if ((slot != null) && slot.getHasStack()) {
+		if (slot != null && slot.getHasStack()) {
 			final ItemStack itemToTransfer = slot.getStack();
 			final ItemStack copy = itemToTransfer.copy();
 			if (slotId < furnace.getSizeInventory()) {

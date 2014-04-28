@@ -38,14 +38,14 @@ public class GuiHandbook extends GuiScreen {
 		super.initGui();
 		currentOpenHandbook = this;
 
-		left = (width / 2) - (guiWidth / 2);
-		top = (height / 2) - (guiHeight / 2);
+		left = width / 2 - guiWidth / 2;
+		top = height / 2 - guiHeight / 2;
 
 		buttonList.clear();
 		if (isIndex()) {
 			final int x = 18;
 			for (int i = 0; i < 12; i++) {
-				final int y = 16 + (i * 12);
+				final int y = 16 + i * 12;
 				buttonList.add(new GuiButtonInvisible(i, left + x, top + y,
 						110, 10, ""));
 			}

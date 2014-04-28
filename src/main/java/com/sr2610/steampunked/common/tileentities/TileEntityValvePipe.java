@@ -152,7 +152,7 @@ public class TileEntityValvePipe extends TileEntityMachine implements
 	}
 
 	protected String getFluidName(FluidStack fluid) {
-		if ((fluid == null) || (fluid.getFluid() == null))
+		if (fluid == null || fluid.getFluid() == null)
 			return null;
 		final String name = fluid.getFluid().getName();
 		if (name == null)
@@ -174,7 +174,7 @@ public class TileEntityValvePipe extends TileEntityMachine implements
 
 	public boolean isPipeConnected(ForgeDirection direct) {
 		final TileEntity tile = getTileInDirection(this, direct);
-		if ((tile != null) && (tile instanceof IFluidHandler)
+		if (tile != null && tile instanceof IFluidHandler
 				&& !(tile instanceof TileEntityValvePipe))
 			return true;
 		return false;
@@ -227,7 +227,7 @@ public class TileEntityValvePipe extends TileEntityMachine implements
 			return;
 		refreshSurroundingTanks(currentTile);
 
-		if ((tank.getFluidAmount() > 0) && (surroundingTanks.size() > 0)) {
+		if (tank.getFluidAmount() > 0 && surroundingTanks.size() > 0) {
 			FluidStack drainedFluid = tank.drain(
 					Math.min(tank.getFluidAmount(), amountPerTick), true);
 			if (drainedFluid != null) {

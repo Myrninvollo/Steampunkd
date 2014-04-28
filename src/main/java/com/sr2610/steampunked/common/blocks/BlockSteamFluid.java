@@ -35,7 +35,7 @@ public class BlockSteamFluid extends BlockFluidFinite {
 
 	@Override
 	public IIcon getIcon(int side, int meta) {
-		return (side == 0) || (side == 1) ? stillIcon : flowingIcon;
+		return side == 0 || side == 1 ? stillIcon : flowingIcon;
 	}
 
 	@SideOnly(Side.CLIENT)

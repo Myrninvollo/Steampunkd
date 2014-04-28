@@ -9,16 +9,14 @@
  ******************************************************************************/
 package com.sr2610.steampunked.common.entitys.ai.programs;
 
-import com.sr2610.steampunked.common.entitys.EntityAutomoton;
-import com.sr2610.steampunked.common.utils.InventoryUtils;
-
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.world.World;
+
+import com.sr2610.steampunked.common.entitys.EntityAutomoton;
+import com.sr2610.steampunked.common.utils.InventoryUtils;
 
 public class EntityAIInsertItem extends EntityAIBase {
 
@@ -28,13 +26,13 @@ public class EntityAIInsertItem extends EntityAIBase {
 
 	public EntityAIInsertItem(EntityAutomoton auto) {
 		this.auto = auto;
-		this.pathFinder = auto.getNavigator();
+		pathFinder = auto.getNavigator();
 		setMutexBits(3);
 	}
 
 	@Override
 	public boolean shouldExecute() {
-		if ((auto.getDistance(auto.homeX, auto.homeY, auto.homeZ) < 2.5D))
+		if (auto.getDistance(auto.homeX, auto.homeY, auto.homeZ) < 2.5D)
 			return true;
 		else
 			return false;
@@ -58,10 +56,8 @@ public class EntityAIInsertItem extends EntityAIBase {
 	@Override
 	public void updateTask() {
 		super.updateTask();
-		if (!auto.worldObj.isRemote) {
+		if (!auto.worldObj.isRemote)
 			insertItemToInventory();
-
-		}
 	}
 
 	private boolean insertItemToInventory() {

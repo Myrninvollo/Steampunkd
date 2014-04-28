@@ -9,12 +9,6 @@
  ******************************************************************************/
 package com.sr2610.steampunked.common.utils;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -27,8 +21,6 @@ public class Utils {
 				+ FluidRegistry.getFluidName(stack));
 
 	}
-
-	
 
 	public static int getIntDirFromDirection(ForgeDirection dir) {
 		switch (dir) {
@@ -50,6 +42,5 @@ public class Utils {
 			return 0;
 		}
 	}
-	
-	
+
 }

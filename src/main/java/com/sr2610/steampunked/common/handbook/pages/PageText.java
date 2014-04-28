@@ -62,8 +62,8 @@ public class PageText extends HandbookPage {
 				boolean skipPending = false;
 				String format = FontHelper.getFormatFromString(s1);
 
-				if (!format.isEmpty() && (s1.length() > 0)
-						&& (s1.charAt(0) != '\u00a7')) {
+				if (!format.isEmpty() && s1.length() > 0
+						&& s1.charAt(0) != '\u00a7') {
 					skipPending = true;
 					pendingFormat = format;
 					format = "";
@@ -83,7 +83,7 @@ public class PageText extends HandbookPage {
 				}
 				workingOn = workingOn + format + " " + s1;
 
-				if (i == (tokens.length - 1))
+				if (i == tokens.length - 1)
 					wrappedLines.add(workingOn);
 
 				++i;

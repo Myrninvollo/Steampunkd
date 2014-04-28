@@ -99,14 +99,14 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
 		furnaceItemStacks[par1] = par2ItemStack;
 
-		if ((par2ItemStack != null)
-				&& (par2ItemStack.stackSize > getInventoryStackLimit()))
+		if (par2ItemStack != null
+				&& par2ItemStack.stackSize > getInventoryStackLimit())
 			par2ItemStack.stackSize = getInventoryStackLimit();
 	}
 
 	@SideOnly(Side.CLIENT)
 	public int getCookProgressScaled(int par1) {
-		return (furnaceCookTime * par1) / (LibOptions.furnaceCookTime / 10);
+		return furnaceCookTime * par1 / (LibOptions.furnaceCookTime / 10);
 	}
 
 	private boolean canSmelt() {
@@ -123,8 +123,8 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 				return false;
 			final int result = furnaceItemStacks[1].stackSize
 					+ itemstack.stackSize;
-			return (result <= getInventoryStackLimit())
-					&& (result <= itemstack.getMaxStackSize());
+			return result <= getInventoryStackLimit()
+					&& result <= itemstack.getMaxStackSize();
 		}
 	}
 
@@ -163,18 +163,17 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 		if (getRedstoneMode() == 0)
 			return;
 
-		else if ((getRedstoneMode() == 2) && !redstone_signal)
+		else if (getRedstoneMode() == 2 && !redstone_signal)
 			return;
 		else {
-			final boolean flag = true;
 			boolean flag1 = false;
 			if (!worldObj.isRemote) {
-				if (canSmelt() && (tank.getFluidAmount() > 10)) {
+				if (canSmelt() && tank.getFluidAmount() > 10) {
 					++furnaceCookTime;
 					isSmelting = true;
 					tank.drain(10, true);
 
-					if (furnaceCookTime == (LibOptions.furnaceCookTime / 10)) {
+					if (furnaceCookTime == LibOptions.furnaceCookTime / 10) {
 						furnaceCookTime = 0;
 						isSmelting = false;
 						smeltItem();
@@ -187,9 +186,7 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 
 				}
 
-				if (flag == isSmelting)
-					flag1 = true;
-
+			
 				if (flag1)
 					markDirty();
 				BlockSteamFurnace.updateFurnaceBlockState(isSmelting, worldObj,
@@ -299,12 +296,12 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 		if (name == null)
 			return false;
 		return name.equals("steam")
-				|| (fuel.getFluid() == ModBlocks.steam)
-				|| (fuel.getFluid().getLocalizedName().trim().toLowerCase() == "steam");
+				|| fuel.getFluid() == ModBlocks.steam
+				|| fuel.getFluid().getLocalizedName().trim().toLowerCase() == "steam";
 	}
 
 	protected String getFluidName(FluidStack fluid) {
-		if ((fluid == null) || (fluid.getFluid() == null))
+		if (fluid == null || fluid.getFluid() == null)
 			return null;
 		final String name = fluid.getFluid().getName();
 		if (name == null)

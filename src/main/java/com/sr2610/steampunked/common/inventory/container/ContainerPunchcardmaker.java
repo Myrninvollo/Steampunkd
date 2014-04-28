@@ -39,12 +39,11 @@ public class ContainerPunchcardmaker extends Container {
 
 		for (i = 0; i < 3; ++i)
 			for (j = 0; j < 9; ++j)
-				addSlotToContainer(new Slot(player_inventory, j + (i * 9) + 9,
-						SLOT_INVENTORY_X + (j * 18), SLOT_INVENTORY_Y
-								+ (i * 18)));
+				addSlotToContainer(new Slot(player_inventory, j + i * 9 + 9,
+						SLOT_INVENTORY_X + j * 18, SLOT_INVENTORY_Y + i * 18));
 		for (i = 0; i < 9; ++i)
-			addSlotToContainer(new Slot(player_inventory, i, SLOT_HOTBAR_X
-					+ (i * 18), SLOT_HOTBAR_Y));
+			addSlotToContainer(new Slot(player_inventory, i, SLOT_HOTBAR_X + i
+					* 18, SLOT_HOTBAR_Y));
 	}
 
 	@Override

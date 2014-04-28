@@ -101,7 +101,7 @@ public class GuiSteamBoiler extends GuiMachine implements IComponentListener {
 		super.drawGuiContainerForegroundLayer(mouse_x, mouse_y);
 
 		fontRendererObj.drawString("Steam Boiler", 5, 6, 0x404040);
-		fontRendererObj.drawString("Inventory", 8, (ySize - 96) + 2, 0x404040);
+		fontRendererObj.drawString("Inventory", 8, ySize - 96 + 2, 0x404040);
 	}
 
 	@Override
@@ -119,8 +119,8 @@ public class GuiSteamBoiler extends GuiMachine implements IComponentListener {
 				TANK_OVERLAY_X, TANK_OVERLAY_Y, BoilerInventory.GetTank(1));
 
 		final int i1 = BoilerInventory.getBurnTimeRemainingScaled(12);
-		drawTexturedModalRect(guiLeft + 82, (guiTop + 25 + 12) - i1, 176,
-				(75 + 14) - i1, 14, i1 + 2);
+		drawTexturedModalRect(guiLeft + 82, guiTop + 25 + 12 - i1, 176,
+				75 + 14 - i1, 14, i1 + 2);
 	}
 
 	@Override

@@ -72,26 +72,26 @@ public class GuiComponentBox extends BaseComponent {
 
 	// 3x3 pixels starting at 5,0
 	public void renderTopRightCorner(int offsetX, int offsetY) {
-		drawTexturedModalRect((offsetX + x + getWidth()) - 3, offsetY + y,
-				u + 5, v, 3, 3);
+		drawTexturedModalRect(offsetX + x + getWidth() - 3, offsetY + y, u + 5,
+				v, 3, 3);
 	}
 
 	// 3x3 pixels starting at 11,0
 	public void renderBottomLeftCorner(int offsetX, int offsetY) {
-		drawTexturedModalRect(offsetX + x, (offsetY + y + getHeight()) - 3,
+		drawTexturedModalRect(offsetX + x, offsetY + y + getHeight() - 3,
 				u + 11, v, 3, 3);
 	}
 
 	// 4x4 pixels starting at 15,0
 	public void renderBottomRightCorner(int offsetX, int offsetY) {
-		drawTexturedModalRect((offsetX + x + getWidth()) - 4,
-				(offsetY + y + getHeight()) - 4, u + 15, v, 4, 4);
+		drawTexturedModalRect(offsetX + x + getWidth() - 4, offsetY + y
+				+ getHeight() - 4, u + 15, v, 4, 4);
 	}
 
 	// 1x3 pixels starting at 14,0
 	public void renderBottomEdge(int offsetX, int offsetY) {
 		GL11.glPushMatrix();
-		GL11.glTranslated(offsetX + x + 3, (offsetY + y + getHeight()) - 3, 0);
+		GL11.glTranslated(offsetX + x + 3, offsetY + y + getHeight() - 3, 0);
 		GL11.glScaled(getWidth() - 6, 1, 0);
 		drawTexturedModalRect(0, 0, u + 14, v, 1, 3);
 		GL11.glPopMatrix();
@@ -118,7 +118,7 @@ public class GuiComponentBox extends BaseComponent {
 	// 3x1 pixels starting at 8,0
 	public void renderRightEdge(int offsetX, int offsetY) {
 		GL11.glPushMatrix();
-		GL11.glTranslated((offsetX + x + getWidth()) - 3, offsetY + y + 3, 0);
+		GL11.glTranslated(offsetX + x + getWidth() - 3, offsetY + y + 3, 0);
 		GL11.glScaled(1, getHeight() - 6, 0);
 		drawTexturedModalRect(0, 0, u + 8, v, 3, 1);
 		GL11.glPopMatrix();
@@ -154,8 +154,8 @@ public class GuiComponentBox extends BaseComponent {
 		RenderHelper.disableStandardItemLighting();
 		bindComponentsSheet();
 		final int c = getColor();
-		final float r = ((c >> 16) & 255) / 255.0F;
-		final float g = ((c >> 8) & 255) / 255.0F;
+		final float r = (c >> 16 & 255) / 255.0F;
+		final float g = (c >> 8 & 255) / 255.0F;
 		final float b = (c & 255) / 255.0F;
 		GL11.glColor4f(r, g, b, 1);
 

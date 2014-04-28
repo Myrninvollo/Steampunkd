@@ -68,7 +68,7 @@ public class FakeIcon implements IIcon {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public float getInterpolatedU(double p) {
-		return minU + (((maxU - minU) * (float) p) / 16.0f);
+		return minU + (maxU - minU) * (float) p / 16.0f;
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class FakeIcon implements IIcon {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public float getInterpolatedV(double p) {
-		return minV + (((maxV - minV) * (float) p) / 16.0f);
+		return minV + (maxV - minV) * (float) p / 16.0f;
 	}
 
 	@Override

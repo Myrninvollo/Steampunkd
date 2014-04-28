@@ -63,13 +63,11 @@ public class InventoryUtils {
 			 * If the slot is empty, dump the biggest stack we can, taking in to
 			 * consideration, the remaining amount of stack
 			 */
-			if (inventorySlot == null) {
+			if (inventorySlot == null)
 				itemSizeCounter -= Math.min(
 						Math.min(itemSizeCounter,
 								inventory.getInventoryStackLimit()),
 						item.getMaxStackSize());
-			}
-			/* If the slot is not empty, check that these items stack */
 			else if (areMergeCandidates(item, inventorySlot)) {
 				/* If they stack, decrement by the amount of space that remains */
 
@@ -126,37 +124,32 @@ public class InventoryUtils {
 				&& side != ForgeDirection.UNKNOWN) {
 			attemptSlots = ((ISidedInventory) inventory)
 					.getAccessibleSlotsFromSide(side.ordinal());
-			if (attemptSlots == null) {
+			if (attemptSlots == null)
 				attemptSlots = new int[0];
-			}
 		} else {
 			// if it's just a standard inventory, get all slots
 			attemptSlots = new int[inventory.getSizeInventory()];
-			for (int a = 0; a < inventory.getSizeInventory(); a++) {
+			for (int a = 0; a < inventory.getSizeInventory(); a++)
 				attemptSlots[a] = a;
-			}
 		}
 		// if we've defining a specific slot, we'll just use that
 		if (intoSlot > -1) {
 			Set<Integer> x = new HashSet<Integer>();
-			for (int attemptedSlot : attemptSlots) {
+			for (int attemptedSlot : attemptSlots)
 				x.add(attemptedSlot);
-			}
-			if (x.contains(intoSlot)) {
+			if (x.contains(intoSlot))
 				attemptSlots = new int[] { intoSlot };
-			} else {
+			else
 				attemptSlots = new int[0];
-			}
 		}
 		while (stack.stackSize > 0 && i < attemptSlots.length) {
 			if (side != ForgeDirection.UNKNOWN
-					&& inventory instanceof ISidedInventory) {
+					&& inventory instanceof ISidedInventory)
 				if (!((ISidedInventory) inventory).canInsertItem(intoSlot,
 						stack, side.ordinal())) {
 					i++;
 					continue;
 				}
-			}
 			tryInsertStack(targetInventory, attemptSlots[i], stack, canStack);
 			i++;
 		}
@@ -169,7 +162,7 @@ public class InventoryUtils {
 			if (targetStack == null) {
 				targetInventory.setInventorySlotContents(slot, stack.copy());
 				stack.stackSize = 0;
-			} else if (canMerge) {
+			} else if (canMerge)
 				if (targetInventory.isItemValidForSlot(slot, stack)
 						&& areMergeCandidates(stack, targetStack)) {
 					int space = targetStack.getMaxStackSize()
@@ -180,10 +173,9 @@ public class InventoryUtils {
 					targetInventory.setInventorySlotContents(slot, copy);
 					stack.stackSize -= mergeAmount;
 				}
-			}
 		}
 	}
-	
+
 	public static IInventory getInventoryAtLocation(World par0World,
 			double par1, double par3, double par5) {
 		IInventory iinventory = null;
@@ -218,7 +210,7 @@ public class InventoryUtils {
 
 		return iinventory;
 	}
-	
+
 	public static ItemStack insertStack(IInventory par0IInventory,
 			ItemStack par1ItemStack, int par2) {
 		if (par0IInventory instanceof ISidedInventory && par2 > -1) {
@@ -243,7 +235,7 @@ public class InventoryUtils {
 
 		return par1ItemStack;
 	}
-	
+
 	private static ItemStack transferItems(IInventory par0IInventory,
 			ItemStack par1ItemStack, int par2, int par3) {
 		ItemStack itemstack1 = par0IInventory.getStackInSlot(par2);
@@ -272,7 +264,7 @@ public class InventoryUtils {
 
 		return par1ItemStack;
 	}
-	
+
 	private static boolean areItemStacksEqualItem(ItemStack par0ItemStack,
 			ItemStack par1ItemStack) {
 		return par0ItemStack.getItem() != par1ItemStack.getItem() ? false
@@ -283,7 +275,6 @@ public class InventoryUtils {
 								.areItemStackTagsEqual(par0ItemStack,
 										par1ItemStack);
 	}
-	
 
 	private static boolean canInsertItemToInventory(IInventory par0IInventory,
 			ItemStack par1ItemStack, int par2, int par3) {
@@ -292,7 +283,5 @@ public class InventoryUtils {
 						|| ((ISidedInventory) par0IInventory).canInsertItem(
 								par2, par1ItemStack, par3);
 	}
-	
-	
 
 }

@@ -132,7 +132,7 @@ public final class CraftingHandler {
 		for (int i = 0; i < event.craftMatrix.getSizeInventory(); i++)
 			if (event.craftMatrix.getStackInSlot(i) != null) {
 				final ItemStack j = event.craftMatrix.getStackInSlot(i);
-				if ((j.getItem() != null) && (j.getItem() == ModItems.hammer)) {
+				if (j.getItem() != null && j.getItem() == ModItems.hammer) {
 					final ItemStack k = new ItemStack(ModItems.hammer, 2,
 							j.getItemDamage() + 1);
 					if (k.getItemDamage() >= k.getMaxDamage())

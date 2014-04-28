@@ -44,7 +44,7 @@ public class BlockTinkerBench extends BlockContainer {
 			EntityPlayer player, int i, float f, float g, float t) {
 		final TileEntity tile_entity = world.getTileEntity(x, y, z);
 
-		if ((tile_entity == null) || player.isSneaking())
+		if (tile_entity == null || player.isSneaking())
 			return false;
 		else
 			player.openGui(Steampunked.instance, 4, world, x, y, z);
@@ -73,10 +73,10 @@ public class BlockTinkerBench extends BlockContainer {
 		for (int i = 0; i < inventory.getSizeInventory(); i++) {
 			final ItemStack item = inventory.getStackInSlot(i);
 
-			if ((item != null) && (item.stackSize > 0)) {
-				final float rx = (rand.nextFloat() * 0.6F) + 0.1F;
-				final float ry = (rand.nextFloat() * 0.6F) + 0.1F;
-				final float rz = (rand.nextFloat() * 0.6F) + 0.1F;
+			if (item != null && item.stackSize > 0) {
+				final float rx = rand.nextFloat() * 0.6F + 0.1F;
+				final float ry = rand.nextFloat() * 0.6F + 0.1F;
+				final float rz = rand.nextFloat() * 0.6F + 0.1F;
 
 				final EntityItem entity_item = new EntityItem(world, x + rx, y
 						+ ry, z + rz, new ItemStack(item.getItem(),
@@ -89,7 +89,7 @@ public class BlockTinkerBench extends BlockContainer {
 				final float factor = 0.5F;
 
 				entity_item.motionX = rand.nextGaussian() * factor;
-				entity_item.motionY = (rand.nextGaussian() * factor) + 0.2F;
+				entity_item.motionY = rand.nextGaussian() * factor + 0.2F;
 				entity_item.motionZ = rand.nextGaussian() * factor;
 				world.spawnEntityInWorld(entity_item);
 				item.stackSize = 0;

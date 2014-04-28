@@ -55,10 +55,9 @@ public class ItemSaber extends ItemSword {
 	public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block) {
 
 		final Material material = par2Block.getMaterial();
-		return (material != Material.plants) && (material != Material.vine)
-				&& (material != Material.coral)
-				&& (material != Material.leaves) && (material != Material.cake) ? 1.0F
-				: 1.5F;
+		return material != Material.plants && material != Material.vine
+				&& material != Material.coral && material != Material.leaves
+				&& material != Material.cake ? 1.0F : 1.5F;
 	}
 
 	/**

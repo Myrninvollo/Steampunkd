@@ -84,7 +84,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 					.getCompoundTagAt(i);
 			final byte b0 = nbttagcompound1.getByte("Slot");
 
-			if ((b0 >= 0) && (b0 < boilerItemStacks.length))
+			if (b0 >= 0 && b0 < boilerItemStacks.length)
 				boilerItemStacks[b0] = ItemStack
 						.loadItemStackFromNBT(nbttagcompound1);
 		}
@@ -163,8 +163,8 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
 		boilerItemStacks[par1] = par2ItemStack;
 
-		if ((par2ItemStack != null)
-				&& (par2ItemStack.stackSize > getInventoryStackLimit()))
+		if (par2ItemStack != null
+				&& par2ItemStack.stackSize > getInventoryStackLimit())
 			par2ItemStack.stackSize = getInventoryStackLimit();
 	}
 
@@ -278,7 +278,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 	}
 
 	protected String getFluidName(FluidStack fluid) {
-		if ((fluid == null) || (fluid.getFluid() == null))
+		if (fluid == null || fluid.getFluid() == null)
 			return null;
 		final String name = fluid.getFluid().getName();
 		if (name == null)
@@ -352,8 +352,8 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 		else {
 			final Item item = itemstack.getItem();
 
-			if ((item instanceof ItemBlock)
-					&& (Block.getBlockFromItem(item) != Blocks.air)) {
+			if (item instanceof ItemBlock
+					&& Block.getBlockFromItem(item) != Blocks.air) {
 				final Block block = Block.getBlockFromItem(item);
 
 				if (block == Blocks.wooden_slab)
@@ -366,13 +366,13 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 					return 16000;
 			}
 
-			if ((item instanceof ItemTool)
+			if (item instanceof ItemTool
 					&& ((ItemTool) item).getToolMaterialName().equals("WOOD"))
 				return 200;
-			if ((item instanceof ItemSword)
+			if (item instanceof ItemSword
 					&& ((ItemSword) item).getToolMaterialName().equals("WOOD"))
 				return 200;
-			if ((item instanceof ItemHoe)
+			if (item instanceof ItemHoe
 					&& ((ItemHoe) item).getToolMaterialName().equals("WOOD"))
 				return 200;
 			if (item == Items.stick)
@@ -401,7 +401,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 		if (getRedstoneMode() == 0)
 			return;
 
-		else if ((getRedstoneMode() == 2) && !redstone_signal)
+		else if (getRedstoneMode() == 2 && !redstone_signal)
 			return;
 		else {
 
@@ -415,8 +415,8 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 						tanks[0].fill(new FluidStack(FluidRegistry.WATER, 21),
 								true);
 
-				if ((tanks[0].getFluidAmount() > 0)
-						&& (tanks[1].getFluidAmount() != LibOptions.boilerCapacity)) {
+				if (tanks[0].getFluidAmount() > 0
+						&& tanks[1].getFluidAmount() != LibOptions.boilerCapacity) {
 					if (boilerBurnTime == 0) {
 						currentItemBurnTime = boilerBurnTime = getItemBurnTime(boilerItemStacks[0]) / 32;
 
@@ -431,7 +431,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 							}
 					}
 
-					if ((boilerBurnTime > 0) && (tanks[0].getFluidAmount() > 2)) {
+					if (boilerBurnTime > 0 && tanks[0].getFluidAmount() > 2) {
 						tanks[0].drain(20, true);
 						tanks[1].fill(new FluidStack(ModBlocks.steam, 20), true);
 					}
@@ -445,7 +445,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 		if (currentItemBurnTime == 0)
 			currentItemBurnTime = 200;
 
-		return (boilerBurnTime * par1) / currentItemBurnTime;
+		return boilerBurnTime * par1 / currentItemBurnTime;
 	}
 
 	static private final int[] INSERT_SLOTS = { 0 };
@@ -472,7 +472,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 			return;
 		refreshSurroundingTanks(currentTile);
 
-		if ((tanks[1].getFluidAmount() > 0) && (surroundingTanks.size() > 0)) {
+		if (tanks[1].getFluidAmount() > 0 && surroundingTanks.size() > 0) {
 			FluidStack drainedFluid = tanks[1].drain(
 					Math.min(tanks[1].getFluidAmount(), amountPerTick), true);
 			if (drainedFluid != null) {

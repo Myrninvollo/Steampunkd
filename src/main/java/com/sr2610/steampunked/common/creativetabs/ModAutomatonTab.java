@@ -39,8 +39,6 @@ public class ModAutomatonTab extends CreativeTabs {
 		addItem(ModItems.AutomatonUpgrade);
 		addItem(ModItems.punchcard);
 
-	
-
 		addItem(ModItems.reprogrammer);
 
 	}

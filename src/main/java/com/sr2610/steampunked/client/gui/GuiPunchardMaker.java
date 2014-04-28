@@ -49,8 +49,8 @@ public class GuiPunchardMaker extends GuiMachine {
 	public void initGui() {
 		super.initGui();
 		buttonList.clear();
-		buttonList.add(new GuiButton(1, (width / 2) + 40, (height / 2) - 35,
-				40, 20, "Stamp"));
+		buttonList.add(new GuiButton(1, width / 2 + 40, height / 2 - 35, 40,
+				20, "Stamp"));
 
 	}
 
@@ -61,13 +61,13 @@ public class GuiPunchardMaker extends GuiMachine {
 			final ItemStack is2 = inventory.getStackInSlot(1);
 			final ItemStack is3 = inventory.getStackInSlot(2);
 			final ItemStack is4 = inventory.getStackInSlot(3);
-			if ((is4 != null) && (is4.getItem() == Items.dye)
-					&& (is4.getItemDamage() == 0))
-				if ((is != null) && (is.getItem() instanceof ItemPunchcard)
-						&& (is.getItemDamage() == 0) && (is3 == null)
-						&& (is2 != null)
-						&& (is2.getItem() instanceof ItemPunchcard)
-						&& (is2.getItemDamage() >= 11)) {
+			if (is4 != null && is4.getItem() == Items.dye
+					&& is4.getItemDamage() == 0)
+				if (is != null && is.getItem() instanceof ItemPunchcard
+						&& is.getItemDamage() == 0 && is3 == null
+						&& is2 != null
+						&& is2.getItem() instanceof ItemPunchcard
+						&& is2.getItemDamage() >= 11) {
 					final ItemStack stack = new ItemStack(ModItems.punchcard,
 							1, is2.getItemDamage() - 10);
 					inventory.setInventorySlotContents(2, stack);
@@ -88,7 +88,7 @@ public class GuiPunchardMaker extends GuiMachine {
 		super.drawGuiContainerForegroundLayer(mouse_x, mouse_y);
 
 		fontRendererObj.drawString("Punchcard Maker", 5, 6, 0x404040);
-		fontRendererObj.drawString("Inventory", 8, (ySize - 96) + 2, 0x404040);
+		fontRendererObj.drawString("Inventory", 8, ySize - 96 + 2, 0x404040);
 	}
 
 	@Override

@@ -59,12 +59,12 @@ public class ItemClockworkBow extends ItemBow {
 		j = event.charge;
 
 		final boolean flag = par3EntityPlayer.capabilities.isCreativeMode
-				|| (EnchantmentHelper.getEnchantmentLevel(
-						Enchantment.infinity.effectId, par1ItemStack) > 0);
+				|| EnchantmentHelper.getEnchantmentLevel(
+						Enchantment.infinity.effectId, par1ItemStack) > 0;
 
 		if (flag || par3EntityPlayer.inventory.hasItem(Items.arrow)) {
 			float f = j / 20.0F;
-			f = ((f * f) + (f * 2.0F)) / 3.0F;
+			f = (f * f + f * 2.0F) / 3.0F;
 
 			if (f < 0.1D)
 				return;
@@ -83,8 +83,8 @@ public class ItemClockworkBow extends ItemBow {
 					Enchantment.power.effectId, par1ItemStack);
 
 			if (k > 0)
-				entityarrow.setDamage(entityarrow.getDamage() + (k * 0.5D)
-						+ 0.5D);
+				entityarrow
+						.setDamage(entityarrow.getDamage() + k * 0.5D + 0.5D);
 
 			final int l = EnchantmentHelper.getEnchantmentLevel(
 					Enchantment.punch.effectId, par1ItemStack);
@@ -98,8 +98,7 @@ public class ItemClockworkBow extends ItemBow {
 
 			par1ItemStack.damageItem(1, par3EntityPlayer);
 			par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F,
-					(1.0F / ((itemRand.nextFloat() * 0.4F) + 1.2F))
-							+ (f * 0.5F));
+					1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
 			final EntityArrow entityarrow1 = new EntityArrow(par2World,
 					par3EntityPlayer, f * 2.0F);

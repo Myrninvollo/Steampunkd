@@ -9,11 +9,11 @@
  ******************************************************************************/
 package com.sr2610.steampunked.common.entitys.ai;
 
-import com.sr2610.steampunked.common.entitys.EntityAutomoton;
-
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathNavigate;
+
+import com.sr2610.steampunked.common.entitys.EntityAutomoton;
 
 public class EntityAIMoveHome extends EntityAIBase {
 

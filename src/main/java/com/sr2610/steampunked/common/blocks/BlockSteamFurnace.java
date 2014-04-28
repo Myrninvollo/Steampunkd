@@ -65,7 +65,7 @@ public class BlockSteamFurnace extends BlockContainer {
 	public boolean onBlockActivated(World world, int x, int y, int z,
 			EntityPlayer player, int i, float f, float g, float t) {
 		final TileEntity tile_entity = world.getTileEntity(x, y, z);
-		if ((tile_entity == null) || player.isSneaking())
+		if (tile_entity == null || player.isSneaking())
 			return false;
 		else
 			player.openGui(Steampunked.instance, 1, world, x, y, z);
@@ -85,9 +85,9 @@ public class BlockSteamFurnace extends BlockContainer {
 							.getStackInSlot(i1);
 
 					if (itemstack != null) {
-						final float f = (furnaceRand.nextFloat() * 0.8F) + 0.1F;
-						final float f1 = (furnaceRand.nextFloat() * 0.8F) + 0.1F;
-						final float f2 = (furnaceRand.nextFloat() * 0.8F) + 0.1F;
+						final float f = furnaceRand.nextFloat() * 0.8F + 0.1F;
+						final float f1 = furnaceRand.nextFloat() * 0.8F + 0.1F;
+						final float f2 = furnaceRand.nextFloat() * 0.8F + 0.1F;
 
 						while (itemstack.stackSize > 0) {
 							int j1 = furnaceRand.nextInt(21) + 10;
@@ -109,8 +109,8 @@ public class BlockSteamFurnace extends BlockContainer {
 							final float f3 = 0.05F;
 							entityitem.motionX = (float) furnaceRand
 									.nextGaussian() * f3;
-							entityitem.motionY = ((float) furnaceRand
-									.nextGaussian() * f3) + 0.2F;
+							entityitem.motionY = (float) furnaceRand
+									.nextGaussian() * f3 + 0.2F;
 							entityitem.motionZ = (float) furnaceRand
 									.nextGaussian() * f3;
 							world.spawnEntityInWorld(entityitem);
@@ -135,7 +135,7 @@ public class BlockSteamFurnace extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-		if ((meta == 0) && (side == 3))
+		if (meta == 0 && side == 3)
 			return furnaceIconFront;
 		else if (side == 1)
 			return furnaceIconTop;
@@ -190,7 +190,7 @@ public class BlockSteamFurnace extends BlockContainer {
 	public void onBlockPlacedBy(World world, int x, int y, int z,
 			EntityLivingBase entity, ItemStack itemstack) {
 		final int l = MathHelper
-				.floor_double(((entity.rotationYaw * 4.0F) / 360.0F) + 0.5D) & 3;
+				.floor_double(entity.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
 		if (l == 0)
 			world.setBlockMetadataWithNotify(x, y, z, 2, 2);

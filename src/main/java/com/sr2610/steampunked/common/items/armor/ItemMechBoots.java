@@ -120,7 +120,7 @@ public class ItemMechBoots extends ItemArmor implements ISteamUser,
 	public ArmorProperties getProperties(EntityLivingBase player,
 			ItemStack armor, DamageSource source, double damage, int slot) {
 		double protection;
-		if (armor.getItemDamage() < (armor.getMaxDamage() - 1))
+		if (armor.getItemDamage() < armor.getMaxDamage() - 1)
 			protection = 0.2;
 		else
 			protection = 0;
@@ -133,7 +133,7 @@ public class ItemMechBoots extends ItemArmor implements ISteamUser,
 
 	@Override
 	public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) {
-		if (armor.getItemDamage() < (armor.getMaxDamage() - 1))
+		if (armor.getItemDamage() < armor.getMaxDamage() - 1)
 			return 3;
 		else
 			return 0;
@@ -150,7 +150,7 @@ public class ItemMechBoots extends ItemArmor implements ISteamUser,
 			final EntityPlayer player = (EntityPlayer) event.entityLiving;
 
 			final ItemStack armor = player.getCurrentArmor(3 - armorType);
-			if ((armor != null) && (armor.getItem() == this))
+			if (armor != null && armor.getItem() == this)
 				tickPlayer(player);
 		}
 	}
@@ -161,7 +161,7 @@ public class ItemMechBoots extends ItemArmor implements ISteamUser,
 			if (player.worldObj.isRemote)
 				player.stepHeight = player.isSneaking() ? 0.5F : 1F;
 			if ((player.onGround || player.capabilities.isFlying)
-					&& (player.moveForward > 0F))
+					&& player.moveForward > 0F)
 				player.moveFlying(0F, 1F, player.capabilities.isFlying ? 0.04F
 						: 0.08F);
 			player.jumpMovementFactor = player.isSprinting() ? 0.05F : 0.04F;
@@ -172,32 +172,32 @@ public class ItemMechBoots extends ItemArmor implements ISteamUser,
 	public void onPlayerJump(LivingJumpEvent event) {
 		if (event.entityLiving instanceof EntityPlayer) {
 			final EntityPlayer player = (EntityPlayer) event.entityLiving;
-			final boolean hasArmor = (player.getCurrentArmor(0) != null)
-					&& (player.getCurrentArmor(0).getItem() == this);
+			final boolean hasArmor = player.getCurrentArmor(0) != null
+					&& player.getCurrentArmor(0).getItem() == this;
 
 			if (hasArmor
-					&& (((ISteamUser) player.getCurrentArmor(0).getItem())
-							.getCurrentSteam(player.getCurrentArmor(0)) > 0))
+					&& ((ISteamUser) player.getCurrentArmor(0).getItem())
+							.getCurrentSteam(player.getCurrentArmor(0)) > 0)
 				player.motionY += 0.3;
 		}
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public void onLivingUpdate(LivingUpdateEvent event) {
-		if ((event.entityLiving instanceof EntityPlayer)
+		if (event.entityLiving instanceof EntityPlayer
 				&& event.entityLiving.worldObj.isRemote) {
 			final EntityPlayer player = (EntityPlayer) event.entityLiving;
 
 			final boolean highStepListed = playersWith1Step.contains(player
 					.getCommandSenderName());
-			final boolean hasHighStep = (player.getCurrentArmor(0) != null)
-					&& (player.getCurrentArmor(0).getItem() == this);
+			final boolean hasHighStep = player.getCurrentArmor(0) != null
+					&& player.getCurrentArmor(0).getItem() == this;
 
 			if (!highStepListed
 					&& hasHighStep
-					&& (((ISteamUser) player.getCurrentArmor(0).getItem())
-							.getCurrentSteam(player.getCurrentArmor(0)) > 0)
-					&& (player.getCurrentArmor(0) != null))
+					&& ((ISteamUser) player.getCurrentArmor(0).getItem())
+							.getCurrentSteam(player.getCurrentArmor(0)) > 0
+					&& player.getCurrentArmor(0) != null)
 				playersWith1Step.add(player.getCommandSenderName());
 
 			if (!hasHighStep && highStepListed) {
@@ -226,14 +226,14 @@ public class ItemMechBoots extends ItemArmor implements ISteamUser,
 			if (armorModel != null) {
 				armorModel.bipedHead.showModel = armorSlot == 0;
 				armorModel.bipedHeadwear.showModel = armorSlot == 0;
-				armorModel.bipedBody.showModel = (armorSlot == 1)
-						|| (armorSlot == 2);
+				armorModel.bipedBody.showModel = armorSlot == 1
+						|| armorSlot == 2;
 				armorModel.bipedRightArm.showModel = armorSlot == 1;
 				armorModel.bipedLeftArm.showModel = armorSlot == 1;
-				armorModel.bipedRightLeg.showModel = (armorSlot == 2)
-						|| (armorSlot == 3);
-				armorModel.bipedLeftLeg.showModel = (armorSlot == 2)
-						|| (armorSlot == 3);
+				armorModel.bipedRightLeg.showModel = armorSlot == 2
+						|| armorSlot == 3;
+				armorModel.bipedLeftLeg.showModel = armorSlot == 2
+						|| armorSlot == 3;
 
 				armorModel.isSneak = entityLiving.isSneaking();
 				armorModel.isRiding = entityLiving.isRiding();

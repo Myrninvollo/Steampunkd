@@ -50,12 +50,12 @@ public class GuiHandbookIndex extends GuiHandbook {
 	@Override
 	public void initGui() {
 		super.initGui();
-		buttonList.add(new GuiButtonBack(12, (left + (guiWidth / 2)) - 8, top
+		buttonList.add(new GuiButtonBack(12, left + guiWidth / 2 - 8, top
 				+ guiHeight + 2));
-		buttonList.add(leftButton = new GuiButtonPage(13, left,
-				(top + guiHeight) - 10, false));
+		buttonList.add(leftButton = new GuiButtonPage(13, left, top + guiHeight
+				- 10, false));
 		buttonList.add(rightButton = new GuiButtonPage(14,
-				(left + guiWidth) - 18, (top + guiHeight) - 10, true));
+				left + guiWidth - 18, top + guiHeight - 10, true));
 
 		entriesToDisplay.clear();
 		entriesToDisplay.addAll(category.entries);
@@ -67,9 +67,9 @@ public class GuiHandbookIndex extends GuiHandbook {
 
 	@Override
 	void populateIndex() {
-		for (int i = page * 12; i < ((page + 1) * 12); i++) {
+		for (int i = page * 12; i < (page + 1) * 12; i++) {
 			final GuiButtonInvisible button = (GuiButtonInvisible) buttonList
-					.get(i - (page * 12));
+					.get(i - page * 12);
 			final HandbookEntry entry = i >= entriesToDisplay.size() ? null
 					: entriesToDisplay.get(i);
 			if (entry != null)
@@ -101,7 +101,7 @@ public class GuiHandbookIndex extends GuiHandbook {
 
 			break;
 		default:
-			final int index = par1GuiButton.id + (page * 12);
+			final int index = par1GuiButton.id + page * 12;
 			if (index >= entriesToDisplay.size())
 				return;
 
@@ -112,6 +112,6 @@ public class GuiHandbookIndex extends GuiHandbook {
 
 	public void updatePageButtons() {
 		leftButton.enabled = page != 0;
-		rightButton.enabled = page < ((entriesToDisplay.size() - 1) / 12);
+		rightButton.enabled = page < (entriesToDisplay.size() - 1) / 12;
 	}
 }

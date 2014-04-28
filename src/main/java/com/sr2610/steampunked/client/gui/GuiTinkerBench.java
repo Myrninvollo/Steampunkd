@@ -63,7 +63,7 @@ public class GuiTinkerBench extends GuiMachine {
 		super.drawGuiContainerForegroundLayer(mouse_x, mouse_y);
 
 		fontRendererObj.drawString("Automaton Tinkering Bench", 5, 6, 0x404040);
-		fontRendererObj.drawString("Inventory", 25, (ySize - 96) + 2, 0x404040);
+		fontRendererObj.drawString("Inventory", 25, ySize - 96 + 2, 0x404040);
 	}
 
 	@Override
@@ -79,14 +79,14 @@ public class GuiTinkerBench extends GuiMachine {
 		ae = new EntityAutomoton(mc.theWorld);
 		check();
 		drawEntity(guiLeft + 51 + 55, guiTop + 75, 30,
-				(float) (guiLeft + 51 + 60) - xSize,
-				(float) ((guiTop + 75) - 50) - ySize, ae);
+				(float) (guiLeft + 51 + 60) - xSize, (float) (guiTop + 75 - 50)
+						- ySize, ae);
 
 	}
 
 	private void check() {
-		if ((injectorInventory.getStackInSlot(0) != null)
-				&& (injectorInventory.getStackInSlot(0).getItem() instanceof ItemChasis))
+		if (injectorInventory.getStackInSlot(0) != null
+				&& injectorInventory.getStackInSlot(0).getItem() instanceof ItemChasis)
 			ae.setInvisible(false);
 		else
 			ae.setInvisible(true);
@@ -110,8 +110,8 @@ public class GuiTinkerBench extends GuiMachine {
 	public void initGui() {
 		super.initGui();
 		buttonList.clear();
-		buttonList.add(new GuiButton(1, (width / 2) + 40, (height / 2) - 35,
-				40, 20, "Craft"));
+		buttonList.add(new GuiButton(1, width / 2 + 40, height / 2 - 35, 40,
+				20, "Craft"));
 
 	}
 
@@ -125,13 +125,13 @@ public class GuiTinkerBench extends GuiMachine {
 	@Override
 	public void actionPerformed(GuiButton button) {
 		if (button.id == 1)
-			if ((injectorInventory.getStackInSlot(0) != null)
-					&& (injectorInventory.getStackInSlot(0).getItem() instanceof ItemChasis)
-					&& (injectorInventory.getStackInSlot(1) != null)) {
+			if (injectorInventory.getStackInSlot(0) != null
+					&& injectorInventory.getStackInSlot(0).getItem() instanceof ItemChasis
+					&& injectorInventory.getStackInSlot(1) != null) {
 				final ItemStack stack = new ItemStack(ModItems.spawner, 1, 0);
 				for (int i = 2; i < 6; ++i)
-					if ((injectorInventory.getStackInSlot(i) != null)
-							&& (injectorInventory.getStackInSlot(i).getItem() instanceof IUpgrade)) {
+					if (injectorInventory.getStackInSlot(i) != null
+							&& injectorInventory.getStackInSlot(i).getItem() instanceof IUpgrade) {
 						if (!stack.hasTagCompound())
 							stack.setTagCompound(new NBTTagCompound());
 

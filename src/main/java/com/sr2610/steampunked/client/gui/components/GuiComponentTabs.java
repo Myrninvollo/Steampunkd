@@ -55,7 +55,7 @@ public class GuiComponentTabs extends BaseComponent {
 	public int getWidth() {
 		int maxWidth = 0;
 		for (final BaseComponent component : components)
-			if ((component.getX() + component.getWidth()) > maxWidth)
+			if (component.getX() + component.getWidth() > maxWidth)
 				maxWidth = component.getX() + component.getWidth();
 		return maxWidth;
 	}
@@ -64,7 +64,7 @@ public class GuiComponentTabs extends BaseComponent {
 	public int getHeight() {
 		int maxHeight = 0;
 		for (final BaseComponent component : components)
-			if ((component.getY() + component.getHeight()) > maxHeight)
+			if (component.getY() + component.getHeight() > maxHeight)
 				maxHeight = component.getY() + component.getHeight();
 		return maxHeight;
 	}

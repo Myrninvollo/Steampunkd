@@ -11,8 +11,6 @@ package com.sr2610.steampunked.common.entitys;
 
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -64,11 +62,10 @@ public class EntityAutomoton extends EntityTameable implements IInventory {
 	public boolean isAIEnabled() {
 		return true;
 	}
-	
-	 public void updateCarried()
-	  {
-		 carriedItem=this.getStackInSlot(0);
-	  }
+
+	public void updateCarried() {
+		carriedItem = getStackInSlot(0);
+	}
 
 	@Override
 	protected void applyEntityAttributes() {
@@ -98,7 +95,7 @@ public class EntityAutomoton extends EntityTameable implements IInventory {
 			healTimer = 60;
 			heal(1.0F);
 		}
-		
+
 	}
 
 	@Override
@@ -139,66 +136,60 @@ public class EntityAutomoton extends EntityTameable implements IInventory {
 		return true;
 	}
 
+	@Override
 	public void setDead() {
 
-		float f = this.rand.nextFloat() * 0.8F + 0.1F;
-		float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
-		float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
+		float f = rand.nextFloat() * 0.8F + 0.1F;
+		float f1 = rand.nextFloat() * 0.8F + 0.1F;
+		float f2 = rand.nextFloat() * 0.8F + 0.1F;
 
-		for (int i = 0; i < this.getSizeInventory(); ++i) {
-			ItemStack itemstack = this.getStackInSlot(i);
+		for (int i = 0; i < getSizeInventory(); ++i) {
+			ItemStack itemstack = getStackInSlot(i);
 
-			if (itemstack != null) {
-
+			if (itemstack != null)
 				while (itemstack.stackSize > 0) {
-					int j = this.rand.nextInt(21) + 10;
+					int j = rand.nextInt(21) + 10;
 
-					if (j > itemstack.stackSize) {
+					if (j > itemstack.stackSize)
 						j = itemstack.stackSize;
-					}
 
 					itemstack.stackSize -= j;
-					EntityItem entityitem = new EntityItem(this.worldObj,
-							this.posX + (double) f, this.posY + (double) f1,
-							this.posZ + (double) f2, new ItemStack(
+					EntityItem entityitem = new EntityItem(worldObj, posX + f,
+							posY + f1, posZ + f2, new ItemStack(
 									itemstack.getItem(), j,
 									itemstack.getItemDamage()));
 
-					if (itemstack.hasTagCompound()) {
+					if (itemstack.hasTagCompound())
 						entityitem.getEntityItem().setTagCompound(
 								(NBTTagCompound) itemstack.getTagCompound()
 										.copy());
-					}
 
 					float f3 = 0.05F;
-					entityitem.motionX = (double) ((float) this.rand
-							.nextGaussian() * f3);
-					entityitem.motionY = (double) ((float) this.rand
-							.nextGaussian() * f3 + 0.2F);
-					entityitem.motionZ = (double) ((float) this.rand
-							.nextGaussian() * f3);
-					this.worldObj.spawnEntityInWorld(entityitem);
+					entityitem.motionX = (float) rand.nextGaussian() * f3;
+					entityitem.motionY = (float) rand.nextGaussian() * f3
+							+ 0.2F;
+					entityitem.motionZ = (float) rand.nextGaussian() * f3;
+					worldObj.spawnEntityInWorld(entityitem);
 
 				}
-			}
 
 		}
-		if (!this.worldObj.isRemote) {
+		if (!worldObj.isRemote) {
 			ItemStack is = new ItemStack(ModItems.punchcard, 1, programID);
 			ItemStack is2 = new ItemStack(ModItems.spawner);
-			EntityItem itemEntity = new EntityItem(this.worldObj, this.posX
-					+ (double) f, this.posY + (double) f1, this.posZ
-					+ (double) f2, is);
+			EntityItem itemEntity = new EntityItem(worldObj, posX + f, posY
+					+ f1, posZ + f2, is);
 			if (programID != 0)
-				this.worldObj.spawnEntityInWorld(itemEntity);
-			itemEntity = new EntityItem(this.worldObj, this.posX + (double) f,
-					this.posY + (double) f1, this.posZ + (double) f2, is2);
-			this.worldObj.spawnEntityInWorld(itemEntity);
+				worldObj.spawnEntityInWorld(itemEntity);
+			itemEntity = new EntityItem(worldObj, posX + f, posY + f1, posZ
+					+ f2, is2);
+			worldObj.spawnEntityInWorld(itemEntity);
 		}
 
 		super.setDead();
 	}
 
+	@Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
 		super.writeEntityToNBT(par1NBTTagCompound);
 		NBTTagList nbttaglist = new NBTTagList();
@@ -209,18 +200,18 @@ public class EntityAutomoton extends EntityTameable implements IInventory {
 		par1NBTTagCompound.setInteger("Side", side);
 		par1NBTTagCompound.setInteger("ProgramID", programID);
 
-		for (int i = 0; i < this.containerItems.length; ++i) {
-			if (this.containerItems[i] != null) {
+		for (int i = 0; i < containerItems.length; ++i)
+			if (containerItems[i] != null) {
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setByte("Slot", (byte) i);
-				this.containerItems[i].writeToNBT(nbttagcompound1);
+				containerItems[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
-		}
 
 		par1NBTTagCompound.setTag("Items", nbttaglist);
 	}
 
+	@Override
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
 		super.readEntityFromNBT(par1NBTTagCompound);
 		homeX = par1NBTTagCompound.getInteger("X");
@@ -230,66 +221,66 @@ public class EntityAutomoton extends EntityTameable implements IInventory {
 		programID = par1NBTTagCompound.getInteger("ProgramID");
 
 		NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items", 10);
-		this.containerItems = new ItemStack[this.getSizeInventory()];
+		containerItems = new ItemStack[getSizeInventory()];
 
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
 			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			int j = nbttagcompound1.getByte("Slot") & 255;
 
-			if (j >= 0 && j < this.containerItems.length) {
-				this.containerItems[j] = ItemStack
+			if (j >= 0 && j < containerItems.length)
+				containerItems[j] = ItemStack
 						.loadItemStackFromNBT(nbttagcompound1);
-			}
 		}
 		startUp();
 
 	}
 
+	@Override
 	public ItemStack getStackInSlot(int par1) {
-		return this.containerItems[par1];
+		return containerItems[par1];
 	}
 
+	@Override
 	public ItemStack decrStackSize(int par1, int par2) {
-		if (this.containerItems[par1] != null) {
+		if (containerItems[par1] != null) {
 			ItemStack itemstack;
 
-			if (this.containerItems[par1].stackSize <= par2) {
-				itemstack = this.containerItems[par1];
-				this.containerItems[par1] = null;
+			if (containerItems[par1].stackSize <= par2) {
+				itemstack = containerItems[par1];
+				containerItems[par1] = null;
 				return itemstack;
 			} else {
-				itemstack = this.containerItems[par1].splitStack(par2);
+				itemstack = containerItems[par1].splitStack(par2);
 
-				if (this.containerItems[par1].stackSize == 0) {
-					this.containerItems[par1] = null;
-				}
+				if (containerItems[par1].stackSize == 0)
+					containerItems[par1] = null;
 
 				return itemstack;
 			}
-		} else {
+		} else
 			return null;
-		}
 	}
 
+	@Override
 	public ItemStack getStackInSlotOnClosing(int par1) {
-		if (this.containerItems[par1] != null) {
-			ItemStack itemstack = this.containerItems[par1];
-			this.containerItems[par1] = null;
+		if (containerItems[par1] != null) {
+			ItemStack itemstack = containerItems[par1];
+			containerItems[par1] = null;
 			return itemstack;
-		} else {
+		} else
 			return null;
-		}
 	}
 
+	@Override
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
-		this.containerItems[par1] = par2ItemStack;
+		containerItems[par1] = par2ItemStack;
 
 		if (par2ItemStack != null
-				&& par2ItemStack.stackSize > this.getInventoryStackLimit()) {
-			par2ItemStack.stackSize = this.getInventoryStackLimit();
-		}
+				&& par2ItemStack.stackSize > getInventoryStackLimit())
+			par2ItemStack.stackSize = getInventoryStackLimit();
 	}
 
+	@Override
 	public void markDirty() {
 		updateCarried();
 	}

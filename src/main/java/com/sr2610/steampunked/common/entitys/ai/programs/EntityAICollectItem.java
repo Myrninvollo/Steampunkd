@@ -31,29 +31,36 @@ public class EntityAICollectItem extends EntityAIBase {
 
 	public EntityAICollectItem(EntityAutomoton auto) {
 		this.auto = auto;
-		this.pathFinder = auto.getNavigator();
+		pathFinder = auto.getNavigator();
 		setMutexBits(3);
 	}
 
 	@Override
 	public boolean shouldExecute() {
-		if (!pathFinder.noPath()) { return false; }
+		if (!pathFinder.noPath())
+			return false;
 		if (auto.worldObj != null) {
 			@SuppressWarnings("unchecked")
-			List<EntityItem> items = auto.worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getAABBPool().getAABB(auto.posX - 1, auto.posY - 1, auto.posZ - 1, auto.posX + 1, auto.posY + 1, auto.posZ + 1).expand(10.0, 10.0, 10.0));
+			List<EntityItem> items = auto.worldObj.getEntitiesWithinAABB(
+					EntityItem.class,
+					AxisAlignedBB
+							.getAABBPool()
+							.getAABB(auto.posX - 1, auto.posY - 1,
+									auto.posZ - 1, auto.posX + 1,
+									auto.posY + 1, auto.posZ + 1)
+							.expand(10.0, 10.0, 10.0));
 			EntityItem closest = null;
 			double closestDistance = Double.MAX_VALUE;
-			for (EntityItem item : items) {
+			for (EntityItem item : items)
 				if (!item.isDead && item.onGround) {
 					double dist = item.getDistanceToEntity(auto);
 					if (dist < closestDistance
-							&& auto.canConsumeStackPartially(item.getEntityItem())
-							&& !item.isInWater()) {
+							&& auto.canConsumeStackPartially(item
+									.getEntityItem()) && !item.isInWater()) {
 						closest = item;
 						closestDistance = dist;
 					}
 				}
-			}
 			if (closest != null) {
 				targetItem = closest;
 				return true;
@@ -76,27 +83,29 @@ public class EntityAICollectItem extends EntityAIBase {
 
 	@Override
 	public void startExecuting() {
-		if (targetItem != null) {
-			pathFinder.tryMoveToXYZ(targetItem.posX, targetItem.posY, targetItem.posZ,auto.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue() );
-		}
+		if (targetItem != null)
+			pathFinder.tryMoveToXYZ(
+					targetItem.posX,
+					targetItem.posY,
+					targetItem.posZ,
+					auto.getEntityAttribute(
+							SharedMonsterAttributes.movementSpeed)
+							.getAttributeValue());
 	}
 
 	@Override
 	public void updateTask() {
 		super.updateTask();
-		if (!auto.worldObj.isRemote) {
+		if (!auto.worldObj.isRemote)
 			if (targetItem != null
 					&& auto.getDistanceToEntity(targetItem) < 1.0) {
 				ItemStack stack = targetItem.getEntityItem();
 				int preEatSize = stack.stackSize;
 				InventoryUtils.insertItemIntoInventory(auto, stack);
 				// Check that the size changed
-				if (preEatSize != stack.stackSize) {
-					if (stack.stackSize == 0) {
+				if (preEatSize != stack.stackSize)
+					if (stack.stackSize == 0)
 						targetItem.setDead();
-					}
-				}
 			}
-		}
 	}
 }

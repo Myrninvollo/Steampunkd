@@ -40,7 +40,7 @@ public final class HandbookRecipeMappings {
 
 	public static String stackToString(ItemStack stack) {
 		if (stack.hasTagCompound()
-				&& (stack.getItem() instanceof IRecipeKeyProvider))
+				&& stack.getItem() instanceof IRecipeKeyProvider)
 			return ((IRecipeKeyProvider) stack.getItem()).getKey(stack);
 
 		return stack.getUnlocalizedName() + "~" + stack.getItemDamage();

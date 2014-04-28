@@ -60,7 +60,7 @@ public class ItemPunchcard extends Item {
 
 		if (par3EntityLivingBase instanceof EntityAutomoton) {
 			EntityAutomoton entityAutomoton = (EntityAutomoton) par3EntityLivingBase;
-			if (entityAutomoton.getProgram() == 0) {
+			if (entityAutomoton.getProgram() == 0)
 				switch (par1ItemStack.getItemDamage()) {
 				case 1: {
 					entityAutomoton.setProgram(par1ItemStack.getItemDamage());
@@ -73,9 +73,6 @@ public class ItemPunchcard extends Item {
 					return true;
 				}
 				}
-
-			}
-
 			else {
 				if (!par2EntityPlayer.worldObj.isRemote)
 					par2EntityPlayer

@@ -47,7 +47,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 
 		public void Update() {
 			final ItemStack stack = getStackInSlot(slot);
-			if ((stack == null)
+			if (stack == null
 					|| !(stack.getItem() instanceof IFluidContainerItem))
 				return;
 
@@ -57,7 +57,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 			final FluidTank tank = GetTank(tank_slot);
 			if (fill) {
 				FluidStack drained = tank.drain(25, false);
-				if ((drained == null) || (drained.amount == 0))
+				if (drained == null || drained.amount == 0)
 					return;
 				final int filled = fluid_cont.fill(stack, drained, false);
 				if (filled == 0)
@@ -68,7 +68,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 				UpdateInventoryItem(slot);
 			} else {
 				FluidStack drained = fluid_cont.drain(stack, 25, false);
-				if ((drained == null) || (drained.amount == 0))
+				if (drained == null || drained.amount == 0)
 					return;
 
 				final int filled = tank.fill(drained, false);

@@ -29,8 +29,8 @@ public class BowRenderer implements IItemRenderer {
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-		return (type == ItemRenderType.EQUIPPED)
-				|| (type == ItemRenderType.EQUIPPED_FIRST_PERSON);
+		return type == ItemRenderType.EQUIPPED
+				|| type == ItemRenderType.EQUIPPED_FIRST_PERSON;
 	}
 
 	@Override
@@ -42,8 +42,8 @@ public class BowRenderer implements IItemRenderer {
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		final EntityLivingBase living = (EntityLivingBase) data[1];
-		for (int i = 0; i < (item.getItem().getRenderPasses(
-				item.getItemDamage()) + 1); i++)
+		for (int i = 0; i < item.getItem()
+				.getRenderPasses(item.getItemDamage()) + 1; i++)
 			renderItem(living, item, i, type);
 	}
 

@@ -111,27 +111,35 @@ public class ModelAutomoton extends ModelBase {
 		setRotation(punchcard, 0F, 0F, 0F);
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-  {
-	   f5= f5/2;
-    super.render(entity, f, f1, f2, f3, f4, f5);
-    setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-    GL11.glPushMatrix();
-	GL11.glTranslated(0, 0.8, 0);
-    head.render(f5);
-    neck.render(f5);
-    body.render(f5);
-    lShoulder.render(f5);
-    rShoulder.render(f5);
-    rArm.render(f5);
-    lArm.render(f5);
-    lThigh.render(f5);
-    rLeg.render(f5);
-    rThigh.render(f5);
-    lLeg.render(f5);
-    punchcard.render(f5);
-	GL11.glPopMatrix();
-  }
+	@Override
+	public void render(Entity entity, float f, float f1, float f2, float f3,
+			float f4, float f5) {
+		f5 = f5 / 2;
+		super.render(entity, f, f1, f2, f3, f4, f5);
+		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+
+		final EntityAutomoton entityA = (EntityAutomoton) entity;
+
+		if (entityA.getProgram() != 0)
+			punchcard.isHidden = false;
+		else
+			punchcard.isHidden = true;
+		GL11.glPushMatrix();
+		GL11.glTranslated(0, 0.8, 0);
+		head.render(f5);
+		neck.render(f5);
+		body.render(f5);
+		lShoulder.render(f5);
+		rShoulder.render(f5);
+		rArm.render(f5);
+		lArm.render(f5);
+		lThigh.render(f5);
+		rLeg.render(f5);
+		rThigh.render(f5);
+		lLeg.render(f5);
+		punchcard.render(f5);
+		GL11.glPopMatrix();
+	}
 
 	@Override
 	public void setRotationAngles(float f, float f1, float f2, float f3,
@@ -150,7 +158,7 @@ public class ModelAutomoton extends ModelBase {
 	}
 
 	private float getAngle(float par1, float par2) {
-		return (Math.abs((par1 % par2) - (par2 * 0.5F)) - (par2 * 0.25F))
+		return (Math.abs(par1 % par2 - par2 * 0.5F) - par2 * 0.25F)
 				/ (par2 * 0.25F);
 	}
 
@@ -159,11 +167,6 @@ public class ModelAutomoton extends ModelBase {
 			float par2, float par3, float par4) {
 		final EntityAutomoton entity = (EntityAutomoton) par1EntityLivingBase;
 		entity.updateCarried();
-		
-		if(entity.getProgram()!=0)
-			punchcard.isHidden=false;
-		else
-			punchcard.isHidden=true;
 
 		if (entity.carriedItem != null) {
 			rArm.rotateAngleX = -0.6F;
@@ -173,9 +176,8 @@ public class ModelAutomoton extends ModelBase {
 
 		} else {
 
-			rArm.rotateAngleX = MathHelper.cos((par2 * 0.6662F)
-					+ (float) Math.PI)
-					* 2.0F * par3 * 0.5F;
+			rArm.rotateAngleX = MathHelper
+					.cos(par2 * 0.6662F + (float) Math.PI) * 2.0F * par3 * 0.5F;
 			lArm.rotateAngleX = MathHelper.cos(par2 * 0.6662F) * 2.0F * par3
 					* 0.5F;
 			rArm.rotateAngleZ = 0.0F;

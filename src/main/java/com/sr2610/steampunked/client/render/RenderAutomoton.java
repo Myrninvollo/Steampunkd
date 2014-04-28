@@ -54,18 +54,17 @@ public class RenderAutomoton extends RenderLiving {
 		return getAutomotonTextures((EntityAutomoton) entity);
 	}
 
-	protected void renderEquippedItems(EntityAutomoton entity,
-			float par2) {
+	protected void renderEquippedItems(EntityAutomoton entity, float par2) {
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
 		super.renderEquippedItems(entity, par2);
-		 ItemStack itemstack = entity.getHeldItem();
+		ItemStack itemstack = entity.getHeldItem();
 
 		if (itemstack != null) {
 			GL11.glPushMatrix();
 			float f1;
 
 			GL11.glTranslatef(-0.0625F, 0.53125F, 0.21875F);
-			if ((itemstack.getItem() instanceof ItemBlock)
+			if (itemstack.getItem() instanceof ItemBlock
 					&& RenderBlocks.renderItemIn3d(Block.getBlockFromItem(
 							itemstack.getItem()).getRenderType())) {
 				f1 = 0.5F;
@@ -104,12 +103,10 @@ public class RenderAutomoton extends RenderLiving {
 
 			GL11.glRotatef(-15.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glRotatef(40.0F, 0.0F, 0.0F, 1.0F);
-			renderManager.itemRenderer
-					.renderItem(entity, itemstack, 0);
+			renderManager.itemRenderer.renderItem(entity, itemstack, 0);
 
 			if (itemstack.getItem().requiresMultipleRenderPasses())
-				renderManager.itemRenderer.renderItem(entity,
-						itemstack, 1);
+				renderManager.itemRenderer.renderItem(entity, itemstack, 1);
 
 			GL11.glPopMatrix();
 		}

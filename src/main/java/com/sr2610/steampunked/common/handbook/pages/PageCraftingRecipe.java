@@ -106,8 +106,8 @@ public class PageCraftingRecipe extends PageRecipe {
 			((GuiScreen) gui).drawTexturedModalRect(iconX, iconY, 240, 0, 16,
 					16);
 
-			if ((mx >= iconX) && (my >= iconY) && (mx < (iconX + 16))
-					&& (my < (iconY + 16)))
+			if (mx >= iconX && my >= iconY && mx < iconX + 16
+					&& my < iconY + 16)
 				RenderHelper
 						.renderTooltip(
 								mx,
@@ -125,8 +125,8 @@ public class PageCraftingRecipe extends PageRecipe {
 			((GuiScreen) gui).drawTexturedModalRect(iconX, iconY, 240, 16, 16,
 					16);
 
-			if ((mx >= iconX) && (my >= iconY) && (mx < (iconX + 16))
-					&& (my < (iconY + 16)))
+			if (mx >= iconX && my >= iconY && mx < iconX + 16
+					&& my < iconY + 16)
 				RenderHelper.renderTooltip(mx, my, Arrays.asList(StatCollector
 						.translateToLocal("steampunked.gui.handbook.oredict")));
 		}
@@ -136,7 +136,7 @@ public class PageCraftingRecipe extends PageRecipe {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void updateScreen() {
-		if ((ticksElapsed % 20) == 0) {
+		if (ticksElapsed % 20 == 0) {
 			recipeAt++;
 
 			if (recipeAt == recipes.size())
@@ -152,9 +152,8 @@ public class PageCraftingRecipe extends PageRecipe {
 
 			for (int y = 0; y < shaped.recipeHeight; y++)
 				for (int x = 0; x < shaped.recipeWidth; x++)
-					renderItemAtGridPos(gui, 1 + x, 1 + y,
-							shaped.recipeItems[(y * shaped.recipeWidth) + x],
-							true);
+					renderItemAtGridPos(gui, 1 + x, 1 + y, shaped.recipeItems[y
+							* shaped.recipeWidth + x], true);
 		} else if (recipe instanceof ShapedOreRecipe) {
 			final ShapedOreRecipe shaped = (ShapedOreRecipe) recipe;
 			final int width = (Integer) ReflectionHelper.getPrivateValue(
@@ -164,7 +163,7 @@ public class PageCraftingRecipe extends PageRecipe {
 
 			for (int y = 0; y < height; y++)
 				for (int x = 0; x < width; x++) {
-					final Object input = shaped.getInput()[(y * width) + x];
+					final Object input = shaped.getInput()[y * width + x];
 					if (input != null)
 						renderItemAtGridPos(
 								gui,
@@ -182,7 +181,7 @@ public class PageCraftingRecipe extends PageRecipe {
 			drawGrid: {
 				for (int y = 0; y < 3; y++)
 					for (int x = 0; x < 3; x++) {
-						final int index = (y * 3) + x;
+						final int index = y * 3 + x;
 
 						if (index >= shapeless.recipeItems.size())
 							break drawGrid;
@@ -200,7 +199,7 @@ public class PageCraftingRecipe extends PageRecipe {
 			drawGrid: {
 				for (int y = 0; y < 3; y++)
 					for (int x = 0; x < 3; x++) {
-						final int index = (y * 3) + x;
+						final int index = y * 3 + x;
 
 						if (index >= shapeless.getRecipeSize())
 							break drawGrid;
