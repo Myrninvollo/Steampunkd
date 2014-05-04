@@ -1,72 +1,72 @@
 **Items**
-item.automaton.name=Steam Automaton
-item.jetpack.name=Steam Powered Jetpack
-item.drill.name=Mining Drill
-item.drill_diamond.name=Mining Drill
-item.bucketSteam.name=Bucket of Steam
-item.spanner.name=Spanner
-item.nameplate.name=Automaton Nameplate
-item.flightGoggles.name=Flight Goggles
-item.bootsPiston.name=Piston Boots
-item.mechBoots.name=Mechanised Boots
-item.chasis.name=Automaton Chassis
-item.ingotCopper.name=Copper Ingot
-item.ingotTin.name=Tin Ingot
-item.hammer.name=Iron Hammer
+item.steampunked.automaton.name=Steam Automaton
+item.steampunked.jetpack.name=Steam Powered Jetpack
+item.steampunked.drill.name=Mining Drill
+item.steampunked.drill_diamond.name=Mining Drill
+item.steampunked.bucketSteam.name=Bucket of Steam
+item.steampunked.spanner.name=Spanner
+item.steampunked.nameplate.name=Automaton Nameplate
+item.steampunked.flightGoggles.name=Flight Goggles
+item.steampunked.bootsPiston.name=Piston Boots
+item.steampunked.mechBoots.name=Mechanised Boots
+item.steampunked.chasis.name=Automaton Chassis
+item.steampunked.ingotCopper.name=Copper Ingot
+item.steampunked.ingotTin.name=Tin Ingot
+item.steampunked.hammer.name=Iron Hammer
 
-item.craftingItem.0.name=Canister
+item.steampunked.craftingItem.0.name=Canister
 
 **Sabers**
-item.saberWooden.name=Wooden Sabre
-item.saberIron.name=Iron Sabre
-item.saberStone.name=Stone Sabre
-item.saberGold.name=Gold Sabre
-item.saberDiamond.name=Diamond Sabre
-item.bowClockwork.name=Clockwork Bow
+item.steampunked.saberWooden.name=Wooden Sabre
+item.steampunked.saberIron.name=Iron Sabre
+item.steampunked.saberStone.name=Stone Sabre
+item.steampunked.saberGold.name=Gold Sabre
+item.steampunked.saberDiamond.name=Diamond Sabre
+item.steampunked.bowClockwork.name=Clockwork Bow
 
 **Cores**
-item.coreBasic.name=Basic Automaton Core
-item.coreMedium.name=Simple Automaton Core
-item.coreAdvanced.name=Advanced Automaton Core
+item.steampunked.coreBasic.name=Basic Automaton Core
+item.steampunked.coreMedium.name=Simple Automaton Core
+item.steampunked.coreAdvanced.name=Advanced Automaton Core
 
 **Punchcards**
-item.punchcard.0.name=Blank Punchcard
-item.punchcard.1.name=Punchcard - Gather
-item.punchcard.2.name=Punchcard - Attack
-item.punchcard.11.name=Punchcard - Gather Template
-item.punchcard.12.name=Punchcard - Attack Template
+item.steampunked.punchcard.0.name=Blank Punchcard
+item.steampunked.punchcard.1.name=Punchcard - Gather
+item.steampunked.punchcard.2.name=Punchcard - Attack
+item.steampunked.punchcard.11.name=Punchcard - Gather Template
+item.steampunked.punchcard.12.name=Punchcard - Attack Template
 
-item.reprogrammer.name=Automaton Reprogrammer
+item.steampunked.reprogrammer.name=Automaton Reprogrammer
 
-item.upgrade.0.name=Cybernetic Eye
-item.upgrade.1.name=Gearbox
-item.upgrade.2.name=Reinforced Armor
+item.steampunked.upgrade.0.name=Cybernetic Eye
+item.steampunked.upgrade.1.name=Gearbox
+item.steampunked.upgrade.2.name=Reinforced Armor
 steampunked.upgrade.0.info=Automaton Upgrade - Range
 steampunked.upgrade.1.info=Automaton Upgrade - Speed
 steampunked.upgrade.2.info=Automaton Upgrade - Health
 
 
 
-fluid.steam=Steam
-tile.injector.name=Steam Injector
-tile.boiler.name=Steam Boiler
-tile.furnaceSteam.name=Steam Heated Furnace
-tile.furnaceSteamburning.name=Steam Heated Furnace
-tile.bench.name=Automaton Tinkering Bench
-tile.punchcardmaker.name=Punchcard Maker
-tile.oreCopper.name=Copper Ore
-tile.oreTin.name=Tin Ore
+fluid.steampunked.steam=Steam
+tile.steampunked.injector.name=Steam Injector
+tile.steampunked.boiler.name=Steam Boiler
+tile.steampunked.furnaceSteam.name=Steam Heated Furnace
+tile.steampunked.furnaceSteamburning.name=Steam Heated Furnace
+tile.steampunked.bench.name=Automaton Tinkering Bench
+tile.steampunked.punchcardmaker.name=Punchcard Maker
+tile.steampunked.oreCopper.name=Copper Ore
+tile.steampunked.oreTin.name=Tin Ore
 
 **Slate**
-tile.slate.name=Slate
-tile.slateBrick.name=Slate Bricks
-tile.slateSlab.name=Slate Slab
-tile.slateBrickSlab.name=Slate Brick Slab
-tile.slate.stairs.name=Slate Stairs
-tile.slate.brickStairs.name=Slate Brick Stairs
+tile.steampunked.slate.name=Slate
+tile.steampunked.slateBrick.name=Slate Bricks
+tile.steampunked.slateSlab.name=Slate Slab
+tile.steampunked.slateBrickSlab.name=Slate Brick Slab
+tile.steampunked.slate.stairs.name=Slate Stairs
+tile.steampunked.slate.brickStairs.name=Slate Brick Stairs
 
-tile.pipeFluid.name=Fluid Pipe
-entity.steampunked.Automaton.name=Steam Automaton
+tile.steampunked.pipeFluid.name=Fluid Pipe
+entity.steampunked.Automoton.name=Steam Automoton
 
 
 itemGroup.automatons=Steampunk'd Automatons
@@ -83,10 +83,10 @@ steampunked.gui.lowRedstone=Machine Enabled
 steampunked.gui.highRedstone=Requires Redstone Signal to Operate
 
 **Handbook**
-item.handbook.name=Engineer's Handbook
+item.steampunked.handbook.name=Engineer's Handbook
 steampunked.gui.handbook.header=Engineer's Handbook
 steampunked.gui.handbook.clickToRecipe=Click to see Recipe
-steampunked.gui.handbook.craftingContainer=This item is returned after crafting
+steampunked.gui.handbook.craftingContainer=This item.steampunked is returned after crafting
 steampunked.gui.handbook.oredict=Ore Dictionary Recipe
 steampunked.gui.handbook.shapeless=Shapeless Recipe
 

@@ -21,10 +21,10 @@ public class ContainerPunchcardmaker extends Container {
 
 	private final TileEntityPunchardMaker te_injector;
 	private static final int SLOT_INVENTORY_X = 8;
-	private static final int SLOT_INVENTORY_Y = 84;
+	private static final int SLOT_INVENTORY_Y = 84+30;
 
 	private static final int SLOT_HOTBAR_X = 8;
-	private static final int SLOT_HOTBAR_Y = 142;
+	private static final int SLOT_HOTBAR_Y = 142+30;
 
 	public ContainerPunchcardmaker(TileEntityPunchardMaker injector,
 			IInventory player_inventory) {

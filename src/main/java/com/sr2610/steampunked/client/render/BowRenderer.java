@@ -50,7 +50,8 @@ public class BowRenderer implements IItemRenderer {
 	public void renderItem(EntityLivingBase living, ItemStack stack,
 			int renderPass, ItemRenderType type) {
 		GL11.glPushMatrix();
-
+		
+		
 		IIcon icon = null; // living.getItemIcon(stack, renderPass);
 		if (living instanceof EntityPlayer) {
 			final EntityPlayer player = (EntityPlayer) living;

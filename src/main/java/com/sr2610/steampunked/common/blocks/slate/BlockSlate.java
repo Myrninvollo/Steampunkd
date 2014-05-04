@@ -31,7 +31,6 @@ public class BlockSlate extends Block {
 		setHardness(3.0F);
 		setResistance(5.0F);
 		setStepSound(Block.soundTypeStone);
-		setBlockName(name);
 
 	}
 

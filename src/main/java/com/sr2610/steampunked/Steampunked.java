@@ -14,7 +14,6 @@ import org.apache.logging.log4j.Logger;
 
 import com.sr2610.steampunked.client.gui.GuiHandler;
 import com.sr2610.steampunked.common.CommonProxy;
-import com.sr2610.steampunked.common.entitys.EntityAutomoton;
 import com.sr2610.steampunked.common.handlers.ConfigHandler;
 import com.sr2610.steampunked.common.network.PacketPipeline;
 
@@ -26,7 +25,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.EntityRegistry;
 
 @Mod(modid = Steampunked.name, name = "Steampunkd", version = Steampunked.version)
 public class Steampunked {
@@ -34,6 +32,8 @@ public class Steampunked {
 	public static final String version = "0.0.1";
 	public static final String name = "Steampunked";
 	public static final Logger logger = LogManager.getLogger("Steampunked");
+	private final GuiHandler guiHandler = new GuiHandler();
+
 
 	@SidedProxy(serverSide = "com.sr2610.steampunked.common.CommonProxy", clientSide = "com.sr2610.steampunked.client.ClientProxy")
 	public static CommonProxy proxy;
@@ -44,16 +44,13 @@ public class Steampunked {
 	public static final String STEAMPUNKED = "STEAMPUNKED";
 
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
-	private final GuiHandler guiHandler = new GuiHandler();
 
 	@EventHandler
 	public void preLoad(FMLPreInitializationEvent event) {
 		ConfigHandler.loadConfig(event.getSuggestedConfigurationFile());
-		EntityRegistry.registerModEntity(EntityAutomoton.class, "Automoton", 1,
-				this, 80, 3, true);
-
 		proxy.init();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, guiHandler);
+
 
 	}
 

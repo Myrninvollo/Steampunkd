@@ -9,26 +9,50 @@
  ******************************************************************************/
 package com.sr2610.steampunked.common.entitys;
 
+import net.minecraft.command.IEntitySelector;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIDefendVillage;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookAtVillager;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
+import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntityGolem;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityTameable;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 import com.sr2610.steampunked.common.entitys.ai.EntityAIMoveHome;
 import com.sr2610.steampunked.common.entitys.ai.programs.EntityAICollectItem;
 import com.sr2610.steampunked.common.entitys.ai.programs.EntityAIInsertItem;
+import com.sr2610.steampunked.common.entitys.ai.programs.combat.AttackFilter;
 import com.sr2610.steampunked.common.items.ModItems;
 import com.sr2610.steampunked.common.utils.InventoryUtils;
 
-public class EntityAutomoton extends EntityTameable implements IInventory {
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+public class EntityAutomoton extends EntityGolem implements IInventory {
 
 	private ItemStack[] containerItems = new ItemStack[1];
+	private static final IEntitySelector attackEntitySelector = new AttackFilter();
 
 	private boolean healthUpgrade = false;
 	private boolean speedUpgrade = false;
@@ -38,24 +62,23 @@ public class EntityAutomoton extends EntityTameable implements IInventory {
 	public int homeY;
 	public int homeZ;
 	public int side;
-	private int healTimer;
+	public int healTimer;
 	private int programID;
+
+	private float range = 4.0F;
+	public String owner;
+	private int attackTimer;
 
 	public EntityAutomoton(World world) {
 		super(world);
 		setSize(0.6F, 1F);
 		func_110163_bv();
-		getNavigator().setAvoidsWater(true);
-		getNavigator().setCanSwim(true);
+		this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
+
 	}
 
 	public boolean canConsumeStackPartially(ItemStack stack) {
 		return InventoryUtils.testInventoryInsertion(this, stack) > 0;
-	}
-
-	@Override
-	public EntityAgeable createChild(EntityAgeable var1) {
-		return null;
 	}
 
 	@Override
@@ -79,21 +102,32 @@ public class EntityAutomoton extends EntityTameable implements IInventory {
 					15.0D);
 
 		if (speedUpgrade)
+
 			getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-					.setBaseValue(0.3D);
+					.setBaseValue(0.7D);
 		else
 			getEntityAttribute(SharedMonsterAttributes.movementSpeed)
 					.setBaseValue(0.5D);
+
+		this.getAttributeMap().registerAttribute(
+				SharedMonsterAttributes.attackDamage);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(
+				1.0D);
 	}
 
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
 
-		healTimer--;
+		if (this.attackTimer > 0) {
+			--this.attackTimer;
+		}
+		if (this.getHealth() != this.getMaxHealth() && this.healTimer > 0) {
+			--this.healTimer;
+		}
 		if (healTimer == 0) {
-			healTimer = 60;
-			heal(1.0F);
+			this.heal(1.0F);
+			this.healTimer = 60;
 		}
 
 	}
@@ -199,6 +233,7 @@ public class EntityAutomoton extends EntityTameable implements IInventory {
 		par1NBTTagCompound.setInteger("Z", homeZ);
 		par1NBTTagCompound.setInteger("Side", side);
 		par1NBTTagCompound.setInteger("ProgramID", programID);
+		par1NBTTagCompound.setString("Owner", owner);
 
 		for (int i = 0; i < containerItems.length; ++i)
 			if (containerItems[i] != null) {
@@ -219,6 +254,7 @@ public class EntityAutomoton extends EntityTameable implements IInventory {
 		homeZ = par1NBTTagCompound.getInteger("Z");
 		side = par1NBTTagCompound.getInteger("Side");
 		programID = par1NBTTagCompound.getInteger("ProgramID");
+		owner = par1NBTTagCompound.getString("Owner");
 
 		NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items", 10);
 		containerItems = new ItemStack[getSizeInventory()];
@@ -306,7 +342,60 @@ public class EntityAutomoton extends EntityTameable implements IInventory {
 			tasks.addTask(1, new EntityAICollectItem(this));
 			tasks.addTask(3, new EntityAIInsertItem(this));
 			tasks.addTask(2, new EntityAIMoveHome(this));
+			break;
+
+		case 2:
+			this.tasks.addTask(1, new EntityAIAttackOnCollide(this,
+					getEntityAttribute(SharedMonsterAttributes.movementSpeed)
+							.getBaseValue(), true));
+			this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this,
+					getEntityAttribute(SharedMonsterAttributes.movementSpeed)
+							.getBaseValue(), 32.0F));
+			this.tasks.addTask(4, new EntityAIMoveHome(this));
+			this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
+			this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(
+					this, EntityLiving.class, 0, false, true,
+					attackEntitySelector));
 
 		}
 	}
+
+	public void setOwner(String displayName) {
+		owner = displayName;
+	}
+
+	protected void collideWithEntity(Entity par1Entity) {
+		if (par1Entity instanceof IMob && this.getRNG().nextInt(20) == 0) {
+			this.setAttackTarget((EntityLivingBase) par1Entity);
+		}
+
+		super.collideWithEntity(par1Entity);
+	}
+
+	public boolean attackEntityAsMob(Entity par1Entity) {
+		float i = (float) this.getEntityAttribute(
+				SharedMonsterAttributes.attackDamage).getBaseValue();
+		if(attackTimer==0){
+		this.worldObj.setEntityState(this, (byte) 4);
+		return par1Entity
+				.attackEntityFrom(DamageSource.causeMobDamage(this), i);}
+		else
+			return false;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public int getAttackTimer() {
+		return this.attackTimer;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void handleHealthUpdate(byte par1) {
+		if (par1 == 4) {
+			this.attackTimer = 10;
+
+		} else {
+			super.handleHealthUpdate(par1);
+		}
+	}
+
 }

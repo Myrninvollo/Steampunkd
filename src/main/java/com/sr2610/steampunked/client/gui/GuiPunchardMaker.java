@@ -34,7 +34,7 @@ public class GuiPunchardMaker extends GuiMachine {
 
 	public GuiPunchardMaker(TileEntityPunchardMaker cs, IInventory player_inv) {
 		super(new ContainerPunchcardmaker(cs, player_inv));
-		ySize = 166;
+		ySize = 166+30;
 		xSize = 176;
 		inventory = cs;
 
@@ -49,8 +49,8 @@ public class GuiPunchardMaker extends GuiMachine {
 	public void initGui() {
 		super.initGui();
 		buttonList.clear();
-		buttonList.add(new GuiButton(1, width / 2 + 40, height / 2 - 35, 40,
-				20, "Stamp"));
+		buttonList.add(new GuiButton(1, width / 2 + 28, height / 2 -4 , 40,
+				18, "Stamp"));
 
 	}
 
@@ -87,7 +87,7 @@ public class GuiPunchardMaker extends GuiMachine {
 	protected void drawGuiContainerForegroundLayer(int mouse_x, int mouse_y) {
 		super.drawGuiContainerForegroundLayer(mouse_x, mouse_y);
 
-		fontRendererObj.drawString("Punchcard Maker", 5, 6, 0x404040);
+		fontRendererObj.drawString("Punchcard Maker", 64, 6, 0x404040);
 		fontRendererObj.drawString("Inventory", 8, ySize - 96 + 2, 0x404040);
 	}
 

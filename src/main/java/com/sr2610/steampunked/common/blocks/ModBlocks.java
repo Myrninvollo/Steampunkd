@@ -111,7 +111,7 @@ public final class ModBlocks {
 
 		pipe = new BlockPipe(Material.piston).setHardness(5.0F)
 				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
-				.setBlockName("pipeFluid");
+				.setBlockName("steampunked.pipeFluid");
 
 		/*
 		 * pipeValve = new BlockValvePipe(Material.piston).setHardness(5.0F)
@@ -125,9 +125,9 @@ public final class ModBlocks {
 	}
 
 	private static void initSlate() {
-		slate = new BlockSlate("slate");
+		slate = new BlockSlate("slate").setBlockName("steampunked.slate");
 
-		slateBrick = new BlockSlate("slateBrick");
+		slateBrick = new BlockSlate("slateBrick").setBlockName("steampunked.slateBrick");
 
 		slateSlab = new BlockSlateSlab(false);
 		slateSlabDouble = new BlockSlateSlab(true);
@@ -162,7 +162,7 @@ public final class ModBlocks {
 		GameRegistry.registerTileEntity(TileEntityPunchardMaker.class,
 				"tileEntityPunchcardMaker");
 
-		GameRegistry.registerBlock(pipe, "pipe");
+		GameRegistry.registerBlock(pipe, "steampunked.pipe");
 		GameRegistry.registerTileEntity(TileEntityPipe.class, "tileEntityPipe");
 
 		/*
@@ -171,17 +171,17 @@ public final class ModBlocks {
 		 * "tileEntityValvePipe");
 		 */
 
-		GameRegistry.registerBlock(slate, "slate");
-		GameRegistry.registerBlock(slateBrick, "slateBrick");
-		GameRegistry.registerBlock(slateSlab, ItemSlateSlab.class, "slateSlab");
+		GameRegistry.registerBlock(slate, "steampunked.slate");
+		GameRegistry.registerBlock(slateBrick, "steampunked.slateBrick");
+		GameRegistry.registerBlock(slateSlab, ItemSlateSlab.class, "steampunked.slateSlab");
 		GameRegistry.registerBlock(slateSlabDouble, ItemSlateSlab.class,
-				"slateSlabFull");
+				"steampunked.slateSlabFull");
 		GameRegistry.registerBlock(slateBrickSlab, ItemSlateBrickSlab.class,
-				"slateBrickSlab");
+				"steampunked.slateBrickSlab");
 		GameRegistry.registerBlock(slateBrickSlabDouble,
-				ItemSlateBrickSlab.class, "slateBrickSlabFull");
-		GameRegistry.registerBlock(slateStair, "slateStair");
-		GameRegistry.registerBlock(slateBrickStair, "slateBrickStair");
+				ItemSlateBrickSlab.class, "steampunked.slateBrickSlabFull");
+		GameRegistry.registerBlock(slateStair, "steampunked.slateStair");
+		GameRegistry.registerBlock(slateBrickStair, "steampunked.slateBrickStair");
 
 		oreRegistration();
 	}
