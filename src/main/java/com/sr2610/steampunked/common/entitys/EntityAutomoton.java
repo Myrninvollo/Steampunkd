@@ -69,12 +69,16 @@ public class EntityAutomoton extends EntityGolem implements IInventory {
 	private float range = 4.0F;
 	public String owner;
 	private int attackTimer;
+	private boolean hasProgram;
+	private int programClient;
 
 	public EntityAutomoton(World world) {
 		super(world);
 		setSize(0.6F, 1F);
 		func_110163_bv();
-		this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
+
+		this.dataWatcher.addObject(30,
+				Byte.valueOf((byte) (int) getMaxHealth()));
 
 	}
 
@@ -89,6 +93,13 @@ public class EntityAutomoton extends EntityGolem implements IInventory {
 
 	public void updateCarried() {
 		carriedItem = getStackInSlot(0);
+		if (carriedItem != null) {
+			getDataWatcher().updateObject(16, this.carriedItem.copy());
+			getDataWatcher().setObjectWatched(16);
+		} else {
+			getDataWatcher().addObjectByDataType(16, 5);
+			getDataWatcher().setObjectWatched(16);
+		}
 	}
 
 	@Override
@@ -119,6 +130,9 @@ public class EntityAutomoton extends EntityGolem implements IInventory {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
+		
+		if (programID != 0)
+			this.worldObj.setEntityState(this, (byte) 17);
 
 		if (this.attackTimer > 0) {
 			--this.attackTimer;
@@ -335,6 +349,14 @@ public class EntityAutomoton extends EntityGolem implements IInventory {
 		return programID;
 	}
 
+	@Override
+	protected void entityInit() {
+		super.entityInit();
+
+		getDataWatcher().addObjectByDataType(16, 5);
+		
+	}
+
 	public void startUp() {
 		switch (programID) {
 		case 0:
@@ -359,6 +381,8 @@ public class EntityAutomoton extends EntityGolem implements IInventory {
 					attackEntitySelector));
 
 		}
+		
+		markDirty();
 	}
 
 	public void setOwner(String displayName) {
@@ -390,9 +414,19 @@ public class EntityAutomoton extends EntityGolem implements IInventory {
 	}
 
 	@SideOnly(Side.CLIENT)
+	public int getProgramID() {
+		return this.programClient;
+	}
+
+	@SideOnly(Side.CLIENT)
 	public void handleHealthUpdate(byte par1) {
 		if (par1 == 4) {
 			this.attackTimer = 10;
+
+		}
+
+		else if (par1 == 17) {
+			this.programClient = 1;
 
 		} else {
 			super.handleHealthUpdate(par1);
@@ -407,9 +441,15 @@ public class EntityAutomoton extends EntityGolem implements IInventory {
 		return "mob.irongolem.death";
 	}
 
-	protected void func_145780_a(int x, int y,
-			int z, Block block) {
+	protected void func_145780_a(int x, int y, int z, Block block) {
 		this.playSound("mob.irongolem.walk", 0.5F, 0.5F);
+	}
+
+	public ItemStack getCarriedForDisplay() {
+		if (this.dataWatcher.getWatchableObjectItemStack(16) != null) {
+			return this.dataWatcher.getWatchableObjectItemStack(16);
+		}
+		return null;
 	}
 
 }

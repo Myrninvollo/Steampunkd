@@ -57,7 +57,7 @@ public class RenderAutomoton extends RenderLiving {
 	protected void renderEquippedItems(EntityAutomoton entity, float par2) {
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
 		super.renderEquippedItems(entity, par2);
-		ItemStack itemstack = entity.carriedItem;
+		ItemStack itemstack = entity.getCarriedForDisplay();
 
 		if (itemstack != null) {
 			GL11.glPushMatrix();

@@ -102,6 +102,7 @@ public class EntityAICollectItem extends EntityAIBase {
 				ItemStack stack = targetItem.getEntityItem();
 				int preEatSize = stack.stackSize;
 				InventoryUtils.insertItemIntoInventory(auto, stack);
+				auto.markDirty();
 				// Check that the size changed
 				if (preEatSize != stack.stackSize)
 					if (stack.stackSize == 0)
