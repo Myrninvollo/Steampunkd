@@ -193,13 +193,7 @@ public class ModelAutomoton extends ModelBase {
 	                this.lArm.rotateAngleX = (-0.2F - 1.5F * this.func_78172_a(par2, 13.0F)) * par3;
 	            }
 	        }
-	        
-	        if ((this.pass == 0) && ((automoton).healTimer > 0))
-		      {
-		        float h1 = (automoton).healTimer / 10.0F;
-		        float h2 = (automoton).healTimer / 5.0F;
-		        GL11.glColor3f(0.5F + h1, 0.9F + h2, 0.5F + h1);
-		      }
+	      
 	    }
 
 	    private float func_78172_a(float par1, float par2)
