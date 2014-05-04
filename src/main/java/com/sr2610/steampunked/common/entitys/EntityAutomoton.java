@@ -9,6 +9,7 @@
  ******************************************************************************/
 package com.sr2610.steampunked.common.entitys;
 
+import net.minecraft.block.Block;
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -375,11 +376,11 @@ public class EntityAutomoton extends EntityGolem implements IInventory {
 	public boolean attackEntityAsMob(Entity par1Entity) {
 		float i = (float) this.getEntityAttribute(
 				SharedMonsterAttributes.attackDamage).getBaseValue();
-		if(attackTimer==0){
-		this.worldObj.setEntityState(this, (byte) 4);
-		return par1Entity
-				.attackEntityFrom(DamageSource.causeMobDamage(this), i);}
-		else
+		if (attackTimer == 0) {
+			this.worldObj.setEntityState(this, (byte) 4);
+			return par1Entity.attackEntityFrom(
+					DamageSource.causeMobDamage(this), i);
+		} else
 			return false;
 	}
 
@@ -396,6 +397,19 @@ public class EntityAutomoton extends EntityGolem implements IInventory {
 		} else {
 			super.handleHealthUpdate(par1);
 		}
+	}
+
+	protected String getHurtSound() {
+		return "mob.irongolem.hit";
+	}
+
+	protected String getDeathSound() {
+		return "mob.irongolem.death";
+	}
+
+	protected void func_145780_a(int x, int y,
+			int z, Block block) {
+		this.playSound("mob.irongolem.walk", 0.5F, 0.5F);
 	}
 
 }
