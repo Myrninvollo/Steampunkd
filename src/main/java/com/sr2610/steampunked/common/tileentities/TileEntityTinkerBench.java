@@ -186,10 +186,7 @@ public class TileEntityTinkerBench extends TileEntityMachine implements
 		return tank_info;
 	}
 
-	@Override
-	protected void UpdateEntityClient() {
 
-	}
 
 	public World getWorld() {
 		return worldObj;
@@ -207,10 +204,8 @@ public class TileEntityTinkerBench extends TileEntityMachine implements
 		return 1;
 	}
 
-	@Override
-	protected void UpdateEntityServer() {
 
-	}
+
 
 	public void GetGUINetworkData(int id, int value) {
 		switch (id) {

@@ -30,6 +30,7 @@ import com.sr2610.steampunked.common.lib.LibNames;
 import com.sr2610.steampunked.common.tileentities.TileEntityInjector;
 import com.sr2610.steampunked.common.tileentities.TileEntityPipe;
 import com.sr2610.steampunked.common.tileentities.TileEntityPunchardMaker;
+import com.sr2610.steampunked.common.tileentities.TileEntitySteamBlaster;
 import com.sr2610.steampunked.common.tileentities.TileEntitySteamBoiler;
 import com.sr2610.steampunked.common.tileentities.TileEntitySteamFurnace;
 import com.sr2610.steampunked.common.tileentities.TileEntityTinkerBench;
@@ -48,6 +49,8 @@ public final class ModBlocks {
 	public static Block punchcardMaker;
 	public static Block pipe;
 	public static Block pipeValve;
+	
+	public static Block steamBlaster;
 
 	public static Block oreCopper;
 	public static Block oreTin;
@@ -112,6 +115,10 @@ public final class ModBlocks {
 		pipe = new BlockPipe(Material.piston).setHardness(5.0F)
 				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
 				.setBlockName("steampunked.pipeFluid");
+		
+		steamBlaster= new BlockSteamBlaster(Material.iron).setHardness(5.0F)
+				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
+				.setBlockName("steampunked.steamBlaster");
 
 		/*
 		 * pipeValve = new BlockValvePipe(Material.piston).setHardness(5.0F)
@@ -165,6 +172,11 @@ public final class ModBlocks {
 
 		GameRegistry.registerBlock(pipe, "steampunked.pipe");
 		GameRegistry.registerTileEntity(TileEntityPipe.class, "tileEntityPipe");
+		
+		
+		GameRegistry.registerBlock(steamBlaster, LibNames.BLASTER);
+		GameRegistry.registerTileEntity(TileEntitySteamBlaster.class,
+				"tileEntitySteamBlaster");
 
 		/*
 		 * GameRegistry.registerBlock(pipeValve, "pipeValve");

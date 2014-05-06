@@ -327,16 +327,6 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 	}
 
 	@Override
-	protected void UpdateEntityClient() {
-
-	}
-
-	@Override
-	protected void UpdateEntityServer() {
-
-	}
-
-	@Override
 	public FluidTank GetTank(int slot) {
 		return tanks[slot];
 	}

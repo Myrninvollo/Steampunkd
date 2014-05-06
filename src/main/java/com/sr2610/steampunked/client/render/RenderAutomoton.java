@@ -9,13 +9,9 @@
  ******************************************************************************/
 package com.sr2610.steampunked.client.render;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -71,7 +67,7 @@ public class RenderAutomoton extends RenderLiving {
 
 				if (itemstack.getItem() instanceof ItemBlock) {
 					GL11.glTranslatef(0.06F, 0.4F, -0.4F);
-					f2 *= 0.75F;
+				
 					GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
 					GL11.glScalef(f2 / 2, -f2 / 2, f2 / 2);
 				}
@@ -86,21 +82,14 @@ public class RenderAutomoton extends RenderLiving {
 					GL11.glRotatef(110.0F, 0.0F, 0.0F, 1.0F);
 				}
 
-				this.renderManager.itemRenderer
-						.renderItem(entity, itemstack, 0);
+				renderManager.itemRenderer.renderItem(entity, itemstack, 0);
 
-				if (itemstack.getItem().requiresMultipleRenderPasses()) {
-					this.renderManager.itemRenderer.renderItem(entity,
-							itemstack, 1);
-				}
+				if (itemstack.getItem().requiresMultipleRenderPasses())
+					renderManager.itemRenderer.renderItem(entity, itemstack, 1);
 
 				GL11.glPopMatrix();
 			}
 		}
-	}
-
-	protected void func_82410_b() {
-		GL11.glTranslatef(0.0F, 0.1875F, 0.0F);
 	}
 
 	@Override

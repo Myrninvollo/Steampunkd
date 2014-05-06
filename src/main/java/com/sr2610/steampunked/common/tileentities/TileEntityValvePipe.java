@@ -96,13 +96,6 @@ public class TileEntityValvePipe extends TileEntityMachine implements
 		return false;
 	}
 
-	@Override
-	protected void UpdateEntityClient() {
-	}
-
-	@Override
-	protected void UpdateEntityServer() {
-	}
 
 	@Override
 	public FluidTank GetTank(int slot) {

@@ -247,10 +247,7 @@ public class TileEntityInjector extends TileEntityMachine implements
 		return tank_info;
 	}
 
-	@Override
-	protected void UpdateEntityClient() {
 
-	}
 
 	@Override
 	public void update() {
@@ -324,10 +321,7 @@ public class TileEntityInjector extends TileEntityMachine implements
 
 	}
 
-	@Override
-	protected void UpdateEntityServer() {
 
-	}
 
 	@Override
 	public String getInventoryName() {

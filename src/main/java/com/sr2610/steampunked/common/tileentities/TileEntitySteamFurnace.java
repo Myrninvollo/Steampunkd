@@ -318,10 +318,7 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 		return tank_info;
 	}
 
-	@Override
-	protected void UpdateEntityClient() {
 
-	}
 
 	public World getWorld() {
 		return worldObj;
@@ -339,10 +336,7 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 		return 1;
 	}
 
-	@Override
-	protected void UpdateEntityServer() {
 
-	}
 
 	@Override
 	public String getInventoryName() {

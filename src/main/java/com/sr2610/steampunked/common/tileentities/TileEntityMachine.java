@@ -93,9 +93,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 		conatiner_slots.add(cs);
 	}
 
-	protected abstract void UpdateEntityClient();
-
-	protected abstract void UpdateEntityServer();
+	
 
 	public abstract FluidTank GetTank(int slot);
 
@@ -209,11 +207,8 @@ public abstract class TileEntityMachine extends TileEntity implements
 			super.writeToNBT(packet);
 			for (final ContainerSlot cs : conatiner_slots)
 				cs.Update();
-			UpdateEntityServer();
-
 			packet = null;
-		} else
-			UpdateEntityClient();
+		}
 		last_redstone_signal = redstone_signal;
 	}
 

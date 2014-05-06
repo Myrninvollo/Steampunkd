@@ -105,13 +105,7 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 		return false;
 	}
 
-	@Override
-	protected void UpdateEntityClient() {
-	}
 
-	@Override
-	protected void UpdateEntityServer() {
-	}
 
 	@Override
 	public FluidTank GetTank(int slot) {
