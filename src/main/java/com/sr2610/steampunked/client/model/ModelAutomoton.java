@@ -110,13 +110,12 @@ public class ModelAutomoton extends ModelBase {
 				/ (par2 * 0.25F);
 	}
 
+	@Override
 	public void render(Entity par1Entity, float par2, float par3, float par4,
 			float par5, float par6, float par7) {
 
 		par7 = par7 / 2;
-		this.setRotationAngles(par2, par3, par4, par5, par6, par7, par1Entity);
-
-		EntityAutomoton entityA = (EntityAutomoton) par1Entity;
+		setRotationAngles(par2, par3, par4, par5, par6, par7, par1Entity);
 
 		GL11.glPushMatrix();
 		GL11.glTranslated(0, 0.8, 0);
@@ -141,6 +140,7 @@ public class ModelAutomoton extends ModelBase {
 	 * the time(so that arms and legs swing back and forth) and par2 represents
 	 * how "far" arms and legs can swing at most.
 	 */
+	@Override
 	public void setRotationAngles(float par1, float par2, float par3,
 			float par4, float par5, float par6, Entity par7Entity) {
 
@@ -159,6 +159,7 @@ public class ModelAutomoton extends ModelBase {
 	 * float params here are the same second and third as in the
 	 * setRotationAngles method.
 	 */
+	@Override
 	public void setLivingAnimations(EntityLivingBase par1EntityLivingBase,
 			float par2, float par3, float par4) {
 		EntityAutomoton automoton = (EntityAutomoton) par1EntityLivingBase;
@@ -166,26 +167,24 @@ public class ModelAutomoton extends ModelBase {
 		int p = automoton.getProgramID();
 
 		if (p > 0)
-			punchcard.isHidden=false;
+			punchcard.isHidden = false;
 		else
-			punchcard.isHidden=true;
+			punchcard.isHidden = true;
 
 		if (i > 0) {
-			this.rArm.rotateAngleX = -2.0F + 1.5F
-					* this.func_78172_a((float) i - par4, 10.0F);
-			this.lArm.rotateAngleX = -2.0F + 1.5F
-					* this.func_78172_a((float) i - par4, 10.0F);
+			rArm.rotateAngleX = -2.0F + 1.5F * func_78172_a(i - par4, 10.0F);
+			lArm.rotateAngleX = -2.0F + 1.5F * func_78172_a(i - par4, 10.0F);
 		} else {
 			ItemStack itemstack = automoton.getCarriedForDisplay();
 
 			if (itemstack != null) {
-				this.rArm.rotateAngleX = -1.0F;
-				this.lArm.rotateAngleX = -1.0F;
+				rArm.rotateAngleX = -1.0F;
+				lArm.rotateAngleX = -1.0F;
 			} else {
-				this.rArm.rotateAngleX = (-0.2F + 1.5F * this.func_78172_a(
-						par2, 13.0F)) * par3;
-				this.lArm.rotateAngleX = (-0.2F - 1.5F * this.func_78172_a(
-						par2, 13.0F)) * par3;
+				rArm.rotateAngleX = (-0.2F + 1.5F * func_78172_a(par2, 13.0F))
+						* par3;
+				lArm.rotateAngleX = (-0.2F - 1.5F * func_78172_a(par2, 13.0F))
+						* par3;
 			}
 		}
 

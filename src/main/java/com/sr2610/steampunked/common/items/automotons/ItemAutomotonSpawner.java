@@ -50,7 +50,7 @@ public class ItemAutomotonSpawner extends Item {
 			entity.homeX = x;
 			entity.homeY = y;
 			entity.homeZ = z;
-			entity.side=side;
+			entity.side = side;
 			entity.setLocationAndAngles(x + par8, y + par9 + 0.5, z + par10,
 					par9, par10);
 

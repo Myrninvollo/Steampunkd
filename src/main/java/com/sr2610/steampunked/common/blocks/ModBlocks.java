@@ -127,7 +127,8 @@ public final class ModBlocks {
 	private static void initSlate() {
 		slate = new BlockSlate("slate").setBlockName("steampunked.slate");
 
-		slateBrick = new BlockSlate("slateBrick").setBlockName("steampunked.slateBrick");
+		slateBrick = new BlockSlate("slateBrick")
+				.setBlockName("steampunked.slateBrick");
 
 		slateSlab = new BlockSlateSlab(false);
 		slateSlabDouble = new BlockSlateSlab(true);
@@ -173,7 +174,8 @@ public final class ModBlocks {
 
 		GameRegistry.registerBlock(slate, "steampunked.slate");
 		GameRegistry.registerBlock(slateBrick, "steampunked.slateBrick");
-		GameRegistry.registerBlock(slateSlab, ItemSlateSlab.class, "steampunked.slateSlab");
+		GameRegistry.registerBlock(slateSlab, ItemSlateSlab.class,
+				"steampunked.slateSlab");
 		GameRegistry.registerBlock(slateSlabDouble, ItemSlateSlab.class,
 				"steampunked.slateSlabFull");
 		GameRegistry.registerBlock(slateBrickSlab, ItemSlateBrickSlab.class,
@@ -181,7 +183,8 @@ public final class ModBlocks {
 		GameRegistry.registerBlock(slateBrickSlabDouble,
 				ItemSlateBrickSlab.class, "steampunked.slateBrickSlabFull");
 		GameRegistry.registerBlock(slateStair, "steampunked.slateStair");
-		GameRegistry.registerBlock(slateBrickStair, "steampunked.slateBrickStair");
+		GameRegistry.registerBlock(slateBrickStair,
+				"steampunked.slateBrickStair");
 
 		oreRegistration();
 	}

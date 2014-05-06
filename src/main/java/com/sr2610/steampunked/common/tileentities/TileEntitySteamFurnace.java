@@ -186,7 +186,6 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 
 				}
 
-			
 				if (flag1)
 					markDirty();
 				BlockSteamFurnace.updateFurnaceBlockState(isSmelting, worldObj,

@@ -34,7 +34,6 @@ public class Steampunked {
 	public static final Logger logger = LogManager.getLogger("Steampunked");
 	private final GuiHandler guiHandler = new GuiHandler();
 
-
 	@SidedProxy(serverSide = "com.sr2610.steampunked.common.CommonProxy", clientSide = "com.sr2610.steampunked.client.ClientProxy")
 	public static CommonProxy proxy;
 
@@ -50,7 +49,6 @@ public class Steampunked {
 		ConfigHandler.loadConfig(event.getSuggestedConfigurationFile());
 		proxy.init();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, guiHandler);
-
 
 	}
 

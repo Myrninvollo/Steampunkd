@@ -12,26 +12,16 @@ package com.sr2610.steampunked.common.entitys;
 import net.minecraft.block.Block;
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIDefendVillage;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookAtVillager;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityGolem;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.EntityTameable;
-import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -66,10 +56,8 @@ public class EntityAutomoton extends EntityGolem implements IInventory {
 	public int healTimer;
 	private int programID;
 
-	private float range = 4.0F;
 	public String owner;
 	private int attackTimer;
-	private boolean hasProgram;
 	private int programClient;
 
 	public EntityAutomoton(World world) {
@@ -77,8 +65,7 @@ public class EntityAutomoton extends EntityGolem implements IInventory {
 		setSize(0.6F, 1F);
 		func_110163_bv();
 
-		this.dataWatcher.addObject(30,
-				Byte.valueOf((byte) (int) getMaxHealth()));
+		dataWatcher.addObject(30, Byte.valueOf((byte) (int) getMaxHealth()));
 
 	}
 
@@ -94,7 +81,7 @@ public class EntityAutomoton extends EntityGolem implements IInventory {
 	public void updateCarried() {
 		carriedItem = getStackInSlot(0);
 		if (carriedItem != null) {
-			getDataWatcher().updateObject(16, this.carriedItem.copy());
+			getDataWatcher().updateObject(16, carriedItem.copy());
 			getDataWatcher().setObjectWatched(16);
 		} else {
 			getDataWatcher().addObjectByDataType(16, 5);
@@ -121,7 +108,7 @@ public class EntityAutomoton extends EntityGolem implements IInventory {
 			getEntityAttribute(SharedMonsterAttributes.movementSpeed)
 					.setBaseValue(0.5D);
 
-		this.getAttributeMap().registerAttribute(
+		getAttributeMap().registerAttribute(
 				SharedMonsterAttributes.attackDamage);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(
 				1.0D);
@@ -130,19 +117,17 @@ public class EntityAutomoton extends EntityGolem implements IInventory {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		
-		if (programID != 0)
-			this.worldObj.setEntityState(this, (byte) 17);
 
-		if (this.attackTimer > 0) {
-			--this.attackTimer;
-		}
-		if (this.getHealth() != this.getMaxHealth() && this.healTimer > 0) {
-			--this.healTimer;
-		}
+		if (programID != 0)
+			worldObj.setEntityState(this, (byte) 17);
+
+		if (attackTimer > 0)
+			--attackTimer;
+		if (getHealth() != getMaxHealth() && healTimer > 0)
+			--healTimer;
 		if (healTimer == 0) {
-			this.heal(1.0F);
-			this.healTimer = 60;
+			heal(1.0F);
+			healTimer = 60;
 		}
 
 	}
@@ -354,7 +339,7 @@ public class EntityAutomoton extends EntityGolem implements IInventory {
 		super.entityInit();
 
 		getDataWatcher().addObjectByDataType(16, 5);
-		
+
 	}
 
 	public void startUp() {
@@ -368,20 +353,19 @@ public class EntityAutomoton extends EntityGolem implements IInventory {
 			break;
 
 		case 2:
-			this.tasks.addTask(1, new EntityAIAttackOnCollide(this,
+			tasks.addTask(1, new EntityAIAttackOnCollide(this,
 					getEntityAttribute(SharedMonsterAttributes.movementSpeed)
 							.getBaseValue(), true));
-			this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this,
+			tasks.addTask(2, new EntityAIMoveTowardsTarget(this,
 					getEntityAttribute(SharedMonsterAttributes.movementSpeed)
 							.getBaseValue(), 32.0F));
-			this.tasks.addTask(4, new EntityAIMoveHome(this));
-			this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
-			this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(
-					this, EntityLiving.class, 0, false, true,
-					attackEntitySelector));
+			tasks.addTask(4, new EntityAIMoveHome(this));
+			targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
+			targetTasks.addTask(3, new EntityAINearestAttackableTarget(this,
+					EntityLiving.class, 0, false, true, attackEntitySelector));
 
 		}
-		
+
 		markDirty();
 	}
 
@@ -389,19 +373,20 @@ public class EntityAutomoton extends EntityGolem implements IInventory {
 		owner = displayName;
 	}
 
+	@Override
 	protected void collideWithEntity(Entity par1Entity) {
-		if (par1Entity instanceof IMob && this.getRNG().nextInt(20) == 0) {
-			this.setAttackTarget((EntityLivingBase) par1Entity);
-		}
+		if (par1Entity instanceof IMob && getRNG().nextInt(20) == 0)
+			setAttackTarget((EntityLivingBase) par1Entity);
 
 		super.collideWithEntity(par1Entity);
 	}
 
+	@Override
 	public boolean attackEntityAsMob(Entity par1Entity) {
-		float i = (float) this.getEntityAttribute(
+		float i = (float) getEntityAttribute(
 				SharedMonsterAttributes.attackDamage).getBaseValue();
 		if (attackTimer == 0) {
-			this.worldObj.setEntityState(this, (byte) 4);
+			worldObj.setEntityState(this, (byte) 4);
 			return par1Entity.attackEntityFrom(
 					DamageSource.causeMobDamage(this), i);
 		} else
@@ -410,45 +395,43 @@ public class EntityAutomoton extends EntityGolem implements IInventory {
 
 	@SideOnly(Side.CLIENT)
 	public int getAttackTimer() {
-		return this.attackTimer;
+		return attackTimer;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public int getProgramID() {
-		return this.programClient;
+		return programClient;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void handleHealthUpdate(byte par1) {
-		if (par1 == 4) {
-			this.attackTimer = 10;
-
-		}
-
-		else if (par1 == 17) {
-			this.programClient = 1;
-
-		} else {
+		if (par1 == 4)
+			attackTimer = 10;
+		else if (par1 == 17)
+			programClient = 1;
+		else
 			super.handleHealthUpdate(par1);
-		}
 	}
 
+	@Override
 	protected String getHurtSound() {
 		return "mob.irongolem.hit";
 	}
 
+	@Override
 	protected String getDeathSound() {
 		return "mob.irongolem.death";
 	}
 
+	@Override
 	protected void func_145780_a(int x, int y, int z, Block block) {
-		this.playSound("mob.irongolem.walk", 0.5F, 0.5F);
+		playSound("mob.irongolem.walk", 0.5F, 0.5F);
 	}
 
 	public ItemStack getCarriedForDisplay() {
-		if (this.dataWatcher.getWatchableObjectItemStack(16) != null) {
-			return this.dataWatcher.getWatchableObjectItemStack(16);
-		}
+		if (dataWatcher.getWatchableObjectItemStack(16) != null)
+			return dataWatcher.getWatchableObjectItemStack(16);
 		return null;
 	}
 
