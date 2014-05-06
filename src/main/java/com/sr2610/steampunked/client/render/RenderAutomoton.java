@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -55,60 +56,46 @@ public class RenderAutomoton extends RenderLiving {
 	}
 
 	protected void renderEquippedItems(EntityAutomoton entity, float par2) {
-		GL11.glColor3f(1.0F, 1.0F, 1.0F);
-		super.renderEquippedItems(entity, par2);
-		ItemStack itemstack = entity.getCarriedForDisplay();
+		{
+			float f1 = 1.0F;
+			GL11.glColor3f(f1, f1, f1);
+			super.renderEquippedItems(entity, par2);
+			ItemStack itemstack = entity.getCarriedForDisplay();
 
-		if (itemstack != null) {
-			GL11.glPushMatrix();
-			float f1;
+			if (itemstack != null) {
+				GL11.glPushMatrix();
+				float f2;
+				f2 = 0.5F;
 
-			GL11.glTranslatef(-0.0625F, 0.53125F, 0.21875F);
-			if (itemstack.getItem() instanceof ItemBlock
-					&& RenderBlocks.renderItemIn3d(Block.getBlockFromItem(
-							itemstack.getItem()).getRenderType())) {
-				f1 = 0.5F;
-				GL11.glTranslatef(0.12F, 0.4F, -0.4F);
-				f1 *= 0.75F;
-				GL11.glRotatef(20.0F, 1.0F, 0.0F, 0.0F);
-				GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glScalef(f1 / 2, -f1 / 2, f1 / 2);
-			} else if (itemstack.getItem() == Items.bow) {
-				f1 = 0.625F;
-				GL11.glTranslatef(0.12F, 0.4F, -0.4F);
-				GL11.glRotatef(-20.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glScalef(f1 / 2, -f1 / 2, f1 / 2);
-				GL11.glRotatef(-100.0F, 1.0F, 0.0F, 0.0F);
-				GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
-			} else if (itemstack.getItem().isFull3D()) {
-				f1 = 0.625F;
+				GL11.glTranslatef(-0.0625F, 0.53125F, 0.21875F);
 
-				if (itemstack.getItem().shouldRotateAroundWhenRendering()) {
-					GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-					GL11.glTranslatef(0.12F, 0.4F, -0.4F);
+				if (itemstack.getItem() instanceof ItemBlock) {
+					GL11.glTranslatef(0.06F, 0.4F, -0.4F);
+					f2 *= 0.75F;
+					GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
+					GL11.glScalef(f2 / 2, -f2 / 2, f2 / 2);
 				}
 
-				func_82410_b();
-				GL11.glScalef(f1 / 2, -f1 / 2, f1 / 2);
-				GL11.glRotatef(-100.0F, 1.0F, 0.0F, 0.0F);
-				GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
-			} else {
-				f1 = 0.375F;
-				GL11.glTranslatef(0.12F, 0.4F, -0.4F);
-				GL11.glScalef(f1 / 2, f1 / 2, f1 / 2);
-				GL11.glRotatef(60.0F, 0.0F, 0.0F, 1.0F);
-				GL11.glRotatef(-90.0F, 1.0F, 0.0F, 0.0F);
-				GL11.glRotatef(20.0F, 0.0F, 0.0F, 1.0F);
+				else {
+					f2 = 0.375F;
+					GL11.glTranslatef(0.15F, 0.4F, -0.4F);
+					GL11.glScalef(f2 / 2, f2 / 2, f2 / 2);
+					GL11.glRotatef(90.0F, 0.0F, 0.0F, 1.0F);
+					GL11.glRotatef(-140.0F, 1.0F, 0.0F, 0.0F);
+					GL11.glRotatef(10F, 0.0F, 1.0F, 0.0F);
+					GL11.glRotatef(110.0F, 0.0F, 0.0F, 1.0F);
+				}
+
+				this.renderManager.itemRenderer
+						.renderItem(entity, itemstack, 0);
+
+				if (itemstack.getItem().requiresMultipleRenderPasses()) {
+					this.renderManager.itemRenderer.renderItem(entity,
+							itemstack, 1);
+				}
+
+				GL11.glPopMatrix();
 			}
-
-			GL11.glRotatef(-15.0F, 1.0F, 0.0F, 0.0F);
-			GL11.glRotatef(40.0F, 0.0F, 0.0F, 1.0F);
-			renderManager.itemRenderer.renderItem(entity, itemstack, 0);
-
-			if (itemstack.getItem().requiresMultipleRenderPasses())
-				renderManager.itemRenderer.renderItem(entity, itemstack, 1);
-
-			GL11.glPopMatrix();
 		}
 	}
 
