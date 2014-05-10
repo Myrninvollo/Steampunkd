@@ -21,6 +21,8 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import com.sr2610.steampunked.client.FX.ParticleFX;
+
 public class TileEntitySteamBlaster extends TileEntity{
 	public double direction;
 public boolean mode;
@@ -301,8 +303,9 @@ public void spawnParticle(World world, int par2, int par3, int par4)
         var17 = 0.0D;
         var15 = 0.0D;
     }
+    for (int i = 0; i < 5; i++) 
+    world.spawnParticle("cloud", var7, var9, var11, var13, var15, var17);
 
-    world.spawnParticle("smoke", var7, var9, var11, var13, var15, var17);
 }
 
 /**
