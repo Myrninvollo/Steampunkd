@@ -116,7 +116,7 @@ public final class ModBlocks {
 				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
 				.setBlockName("steampunked.pipeFluid");
 		
-		steamBlaster= new BlockSteamBlaster(Material.iron).setHardness(5.0F)
+		steamBlaster= new BlockSteamBlaster().setHardness(5.0F)
 				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
 				.setBlockName("steampunked.steamBlaster");
 
