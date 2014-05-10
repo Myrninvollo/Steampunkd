@@ -23,6 +23,9 @@ import net.minecraft.world.World;
 import com.sr2610.steampunked.common.lib.Reference;
 import com.sr2610.steampunked.common.tileentities.TileEntitySteamBlaster;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class BlockSteamBlaster extends BlockContainer {
 
 	public IIcon iconSide;
@@ -44,17 +47,22 @@ public class BlockSteamBlaster extends BlockContainer {
 		return par1 & 7;
 	}
 
+	
+	
 	@Override
-	public IIcon getIcon(int par1, int par2) {
-		int var1 = getOrientation(par2);
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta) {
+		int var1 = getOrientation(meta);
 
-		if (var1 > 5)
+		if (var1>5)
 			return blockIcon;
-
-		if (par1 == var1)
+		if (side == var1)
+			return blockIcon;
+		else if (side == meta)
 			return blockIcon;
 		else
-			return blockIcon;
+			return iconSide;
+
 	}
 
 	/**
@@ -80,9 +88,9 @@ public class BlockSteamBlaster extends BlockContainer {
 	@Override
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		blockIcon = par1IconRegister.registerIcon(Reference.ModID
-				+ "blasterTop");
+				+ ":blaster");
 		iconSide = par1IconRegister.registerIcon(Reference.ModID
-				+ "blasterSide");
+				+ ":machine");
 	}
 
 }

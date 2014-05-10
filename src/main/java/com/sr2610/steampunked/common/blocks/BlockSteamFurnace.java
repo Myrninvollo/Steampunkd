@@ -159,7 +159,7 @@ public class BlockSteamFurnace extends BlockContainer {
 		furnaceIconTop = par1IconRegister.registerIcon(Reference.ModID
 				+ ":furnace_top");
 		furnaceIconBottom = par1IconRegister.registerIcon(Reference.ModID
-				+ ":furnace_bottom");
+				+ ":machine");
 	}
 
 	private void func_149930_e(World world, int x, int y, int z) {
