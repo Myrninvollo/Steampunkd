@@ -12,7 +12,6 @@ package com.sr2610.steampunked.client.gui.handbook.buttons;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.util.StatCollector;
 
 public class GuiButtonInvisible extends GuiButton {
 
@@ -31,12 +30,12 @@ public class GuiButtonInvisible extends GuiButton {
 		final boolean unicode = renderer.getUnicodeFlag();
 		renderer.setUnicodeFlag(true);
 		String stringDisplay;
-		if(k==2)
-		 stringDisplay=("\u00a71"+displayString+"\u00a70");
+		if (k == 2)
+			stringDisplay = "\u00a71" + displayString + "\u00a70";
 		else
-			stringDisplay=displayString;
-		renderer.drawString(stringDisplay, xPosition
-				, yPosition + (height - 8) / 2, 0);
+			stringDisplay = displayString;
+		renderer.drawString(stringDisplay, xPosition, yPosition + (height - 8)
+				/ 2, 0);
 		par1Minecraft.fontRenderer.setUnicodeFlag(unicode);
 	}
 

@@ -247,8 +247,6 @@ public class TileEntityInjector extends TileEntityMachine implements
 		return tank_info;
 	}
 
-
-
 	@Override
 	public void update() {
 		UpdateRedstone();
@@ -320,8 +318,6 @@ public class TileEntityInjector extends TileEntityMachine implements
 			return false;
 
 	}
-
-
 
 	@Override
 	public String getInventoryName() {

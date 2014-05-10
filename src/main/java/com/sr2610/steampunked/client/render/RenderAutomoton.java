@@ -67,7 +67,7 @@ public class RenderAutomoton extends RenderLiving {
 
 				if (itemstack.getItem() instanceof ItemBlock) {
 					GL11.glTranslatef(0.06F, 0.4F, -0.4F);
-				
+
 					GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
 					GL11.glScalef(f2 / 2, -f2 / 2, f2 / 2);
 				}

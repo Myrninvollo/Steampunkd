@@ -144,7 +144,7 @@ public class GuiComponentBox extends BaseComponent {
 	@Override
 	public void renderOverlay(Minecraft minecraft, int offsetX, int offsetY,
 			int mouseX, int mouseY) {
-	
+
 		super.renderOverlay(minecraft, offsetX, offsetY, mouseX, mouseY);
 	}
 
@@ -158,7 +158,7 @@ public class GuiComponentBox extends BaseComponent {
 		final float b = (c & 255) / 255.0F;
 		GL11.glColor4f(r, g, b, 1);
 
-	renderBackground(offsetX, offsetY);
+		renderBackground(offsetX, offsetY);
 		renderTopEdge(offsetX, offsetY);
 		renderBottomEdge(offsetX, offsetY);
 		renderLeftEdge(offsetX, offsetY);

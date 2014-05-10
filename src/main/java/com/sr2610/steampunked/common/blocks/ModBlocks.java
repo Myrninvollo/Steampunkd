@@ -49,7 +49,7 @@ public final class ModBlocks {
 	public static Block punchcardMaker;
 	public static Block pipe;
 	public static Block pipeValve;
-	
+
 	public static Block steamBlaster;
 
 	public static Block oreCopper;
@@ -115,8 +115,8 @@ public final class ModBlocks {
 		pipe = new BlockPipe(Material.piston).setHardness(5.0F)
 				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
 				.setBlockName("steampunked.pipeFluid");
-		
-		steamBlaster= new BlockSteamBlaster().setHardness(5.0F)
+
+		steamBlaster = new BlockSteamBlaster().setHardness(5.0F)
 				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
 				.setBlockName("steampunked.steamBlaster");
 
@@ -172,8 +172,7 @@ public final class ModBlocks {
 
 		GameRegistry.registerBlock(pipe, "steampunked.pipe");
 		GameRegistry.registerTileEntity(TileEntityPipe.class, "tileEntityPipe");
-		
-		
+
 		GameRegistry.registerBlock(steamBlaster, LibNames.BLASTER);
 		GameRegistry.registerTileEntity(TileEntitySteamBlaster.class,
 				"tileEntitySteamBlaster");

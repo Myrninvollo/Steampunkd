@@ -27,71 +27,62 @@ public class BlockSteamBlaster extends BlockContainer {
 
 	public IIcon iconSide;
 
-    public BlockSteamBlaster() {
-        super(Material.rock);
-        this.setCreativeTab(CreativeTabs.tabRedstone);
-    }
-    
-    /**
-     * Returns the TileEntity used by this block.
-     */
-    @Override
-    public TileEntity createNewTileEntity(World var1, int meta) {
-        return new TileEntitySteamBlaster();
-    }
+	public BlockSteamBlaster() {
+		super(Material.rock);
+		setCreativeTab(CreativeTabs.tabRedstone);
+	}
 
-    public static int getOrientation(int par1) {
-        return par1 & 7;
-    }
-    
-  
-    @Override
-    public IIcon getIcon(int par1, int par2)
-    {
-        int var1 = getOrientation(par2);
+	/**
+	 * Returns the TileEntity used by this block.
+	 */
+	@Override
+	public TileEntity createNewTileEntity(World var1, int meta) {
+		return new TileEntitySteamBlaster();
+	}
 
-        if (var1 > 5)
-        {
-            return this.blockIcon;
-        }
+	public static int getOrientation(int par1) {
+		return par1 & 7;
+	}
 
-        if (par1 == var1)
-        {
-            return this.blockIcon;
-        }
-        else
-        {
-        	return blockIcon;
-        }
-    }
-    
-    /**
-     * Called when the block is placed in the world.
-     */
-    @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack) {
-        int rotation = 0;
-        
-        if (Math.abs(player.rotationPitch) > 90D / 2D){
-            if (player.rotationPitch > 0){
-                rotation = 1;
-            }else if (player.rotationPitch < 0){
-                rotation = 0;
-            }
-        }else{
-            rotation = Direction.directionToFacing[Direction.rotateOpposite[Math.round(player.rotationYaw / 90) & 3]];
-        }
-        
-        world.setBlockMetadataWithNotify(x, y, z, rotation, 2);
-    }
-   
+	@Override
+	public IIcon getIcon(int par1, int par2) {
+		int var1 = getOrientation(par2);
 
-    
-    @Override
-    public void registerBlockIcons(IIconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon(Reference.ModID + "blasterTop");
-        this.iconSide = par1IconRegister.registerIcon(Reference.ModID + "blasterSide");
-    }
-    
-   
+		if (var1 > 5)
+			return blockIcon;
+
+		if (par1 == var1)
+			return blockIcon;
+		else
+			return blockIcon;
+	}
+
+	/**
+	 * Called when the block is placed in the world.
+	 */
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z,
+			EntityLivingBase player, ItemStack stack) {
+		int rotation = 0;
+
+		if (Math.abs(player.rotationPitch) > 90D / 2D) {
+			if (player.rotationPitch > 0)
+				rotation = 1;
+			else if (player.rotationPitch < 0)
+				rotation = 0;
+		} else
+			rotation = Direction.directionToFacing[Direction.rotateOpposite[Math
+					.round(player.rotationYaw / 90) & 3]];
+
+		world.setBlockMetadataWithNotify(x, y, z, rotation, 2);
+	}
+
+	@Override
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
+		blockIcon = par1IconRegister.registerIcon(Reference.ModID
+				+ "blasterTop");
+		iconSide = par1IconRegister.registerIcon(Reference.ModID
+				+ "blasterSide");
+	}
+
 }

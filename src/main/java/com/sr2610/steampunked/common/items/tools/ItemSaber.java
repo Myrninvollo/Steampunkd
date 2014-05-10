@@ -24,7 +24,6 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Multimap;
-import com.sr2610.steampunked.common.creativetabs.ModCreativeTab;
 import com.sr2610.steampunked.common.lib.Reference;
 
 import cpw.mods.fml.relauncher.Side;

@@ -318,8 +318,6 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 		return tank_info;
 	}
 
-
-
 	public World getWorld() {
 		return worldObj;
 	}
@@ -335,8 +333,6 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 	public int GetTankCount() {
 		return 1;
 	}
-
-
 
 	@Override
 	public String getInventoryName() {

@@ -186,8 +186,6 @@ public class TileEntityTinkerBench extends TileEntityMachine implements
 		return tank_info;
 	}
 
-
-
 	public World getWorld() {
 		return worldObj;
 	}
@@ -203,9 +201,6 @@ public class TileEntityTinkerBench extends TileEntityMachine implements
 	public int GetTankCount() {
 		return 1;
 	}
-
-
-
 
 	public void GetGUINetworkData(int id, int value) {
 		switch (id) {

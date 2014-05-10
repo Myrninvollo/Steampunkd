@@ -93,8 +93,6 @@ public abstract class TileEntityMachine extends TileEntity implements
 		conatiner_slots.add(cs);
 	}
 
-	
-
 	public abstract FluidTank GetTank(int slot);
 
 	public abstract int GetTankCount();

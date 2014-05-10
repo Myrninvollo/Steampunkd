@@ -105,8 +105,6 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 		return false;
 	}
 
-
-
 	@Override
 	public FluidTank GetTank(int slot) {
 		if (slot != 0)
