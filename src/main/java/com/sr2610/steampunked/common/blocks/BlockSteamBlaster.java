@@ -11,31 +11,31 @@ package com.sr2610.steampunked.common.blocks;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockPistonBase;
-import net.minecraft.block.BlockSourceImpl;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.dispenser.IBehaviorDispenseItem;
 import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.dispenser.PositionImpl;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityDispenser;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
+import com.sr2610.steampunked.common.tileentities.TileEntitySteamBlaster;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSteamBlaster extends BlockContainer {
 
@@ -45,7 +45,7 @@ public class BlockSteamBlaster extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
-		return null;
+		return new TileEntitySteamBlaster();
 	}
 	
 	   protected Random rand = new Random();
@@ -145,7 +145,7 @@ public class BlockSteamBlaster extends BlockContainer {
 
 	   
 
-	    public static IPosition func_149939_a(IBlockSource block)
+	    public static IPosition getDirection(IBlockSource block)
 	    {
 	        EnumFacing enumfacing = getFront(block.getBlockMetadata());
 	        double d0 = block.getX() + 0.7D * (double)enumfacing.getFrontOffsetX();
@@ -176,6 +176,54 @@ public class BlockSteamBlaster extends BlockContainer {
 	    {
 	        return Container.calcRedstoneFromInventory((IInventory)p_149736_1_.getTileEntity(p_149736_2_, p_149736_3_, p_149736_4_));
 	    }
+	    
+	    public static void doDispense(World par0World, ItemStack par1ItemStack, int par2, EnumFacing par3EnumFacing, IPosition par4IPosition)
+	    {
+	        double d0 = par4IPosition.getX();
+	        double d1 = par4IPosition.getY();
+	        double d2 = par4IPosition.getZ();
+	        EntityItem entityitem = new EntityItem(par0World, d0, d1 - 0.3D, d2, par1ItemStack);
+	        double d3 = par0World.rand.nextDouble() * 0.1D + 0.2D;
+	        entityitem.motionX = (double)par3EnumFacing.getFrontOffsetX() * d3;
+	        entityitem.motionY = 0.20000000298023224D;
+	        entityitem.motionZ = (double)par3EnumFacing.getFrontOffsetZ() * d3;
+	        entityitem.motionX += par0World.rand.nextGaussian() * 0.007499999832361937D * (double)par2;
+	        entityitem.motionY += par0World.rand.nextGaussian() * 0.007499999832361937D * (double)par2;
+	        entityitem.motionZ += par0World.rand.nextGaussian() * 0.007499999832361937D * (double)par2;
+	        par0World.spawnEntityInWorld(entityitem);
+	    }
+	    
+	  /* public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
+	    {
+			//par5Entity.motionY=0.5;
+
+			if (par1World.getBlockMetadata(par2, par3, par4) == 0) {
+				par5Entity.motionY=-1;
+			} else if (par1World.getBlockMetadata(par2, par3, par4) == 1) {
+				par5Entity.motionY=+1;
+			} else if (par1World.getBlockMetadata(par2, par3, par4) == 2) {
+				par5Entity.motionZ=-1;
+			} else if (par1World.getBlockMetadata(par2, par3, par4) == 3) {
+				par5Entity.motionZ=+1;
+			}else if (par1World.getBlockMetadata(par2, par3, par4) == 4) {
+				par5Entity.motionX=-1;
+			}else if (par1World.getBlockMetadata(par2, par3, par4) == 5) {
+				par5Entity.motionX=+1;
+			}
+
+
+
+	    }
+	    
+	 //   public boolean isOpaqueCube()
+	    {
+	        return false;
+	    }
+
+		public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+	    {
+	        return null;
+	    }*/
 	
 
 }

@@ -10,7 +10,9 @@
 package com.sr2610.steampunked.client.gui.handbook.buttons;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.util.StatCollector;
 
 public class GuiButtonInvisible extends GuiButton {
 
@@ -25,10 +27,16 @@ public class GuiButtonInvisible extends GuiButton {
 				&& par2 < xPosition + width && par3 < yPosition + height;
 		final int k = getHoverState(field_146123_n);
 
-		final boolean unicode = par1Minecraft.fontRenderer.getUnicodeFlag();
-		par1Minecraft.fontRenderer.setUnicodeFlag(true);
-		par1Minecraft.fontRenderer.drawString(displayString, xPosition
-				+ (k == 2 ? 5 : 0), yPosition + (height - 8) / 2, 0);
+		final FontRenderer renderer = Minecraft.getMinecraft().fontRenderer;
+		final boolean unicode = renderer.getUnicodeFlag();
+		renderer.setUnicodeFlag(true);
+		String stringDisplay;
+		if(k==2)
+		 stringDisplay=("\u00a71"+displayString+"\u00a70");
+		else
+			stringDisplay=displayString;
+		renderer.drawString(stringDisplay, xPosition
+				, yPosition + (height - 8) / 2, 0);
 		par1Minecraft.fontRenderer.setUnicodeFlag(unicode);
 	}
 

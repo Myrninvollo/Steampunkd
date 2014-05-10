@@ -9,85 +9,109 @@
  ******************************************************************************/
 package com.sr2610.steampunked.common.tileentities;
 
+import java.util.Iterator;
+import java.util.List;
+
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
+import net.minecraft.potion.Potion;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 
-public class TileEntitySteamBlaster extends TileEntityMachine {
+public class TileEntitySteamBlaster extends TileEntity {
 
-	@Override
-	public int getSizeInventory() {
-		return 0;
+	public void updateEntity() {
+		if (!worldObj.isBlockIndirectlyGettingPowered(this.xCoord, this.yCoord,
+				this.zCoord)) {
+			addEntityYSpeed();
+		}
 	}
 
-	@Override
-	public ItemStack getStackInSlot(int var1) {
-		return null;
+	public void addEntityYSpeed() {
+		AxisAlignedBB area;
+		int range=1;
+		switch (this.blockMetadata) {
+		case 0:
+			area = AxisAlignedBB
+					.getAABBPool()
+					.getAABB((double) this.xCoord, (double) this.yCoord-1,
+							(double) this.zCoord, (double) (this.xCoord),
+							(double) (this.yCoord-1), (double) (this.zCoord))
+					.expand(range, range, range);
+		case 1:
+			area = AxisAlignedBB
+					.getAABBPool()
+					.getAABB((double) this.xCoord, (double) this.yCoord+1,
+							(double) this.zCoord, (double) (this.xCoord),
+							(double) (this.yCoord+1),
+							(double) (this.zCoord))
+					.expand(range, range, range);
+
+		case 2:
+			area = AxisAlignedBB
+					.getAABBPool()
+					.getAABB((double) this.xCoord, (double) this.yCoord,
+							(double) this.zCoord-1, (double) (this.xCoord),
+							(double) (this.yCoord),
+							(double) (this.zCoord-1))
+					.expand(range, range, range);
+
+		case 3:
+			area = AxisAlignedBB
+					.getAABBPool()
+					.getAABB((double) this.xCoord, (double) this.yCoord,
+							(double) this.zCoord+1, (double) (this.xCoord),
+							(double) (this.yCoord),
+							(double) (this.zCoord+1))
+					.expand(range, range, range);
+		case 4:
+			area = AxisAlignedBB
+					.getAABBPool()
+					.getAABB((double) this.xCoord-1, (double) this.yCoord,
+							(double) this.zCoord, (double) (this.xCoord-1),
+							(double) (this.yCoord),
+							(double) (this.zCoord))
+					.expand(range, range, range);
+		case 5:
+			area = AxisAlignedBB
+					.getAABBPool()
+					.getAABB((double) this.xCoord+1, (double) this.yCoord,
+							(double) this.zCoord, (double) (this.xCoord+1),
+							(double) (this.yCoord),
+							(double) (this.zCoord))
+					.expand(range+4, range, range);
+		default:
+			area =  AxisAlignedBB
+					.getAABBPool()
+					.getAABB((double) this.xCoord, (double) this.yCoord,
+							(double) this.zCoord, (double) (this.xCoord),
+							(double) (this.yCoord),
+							(double) (this.zCoord))
+					.expand(range, range, range);
+
+		}
+		List inarea = this.worldObj.getEntitiesWithinAABB(Entity.class, area);
+		Iterator iterator = inarea.iterator();
+		Entity entity;
+
+		
+
+		while (iterator.hasNext()) {
+			entity = (Entity) iterator.next();
+			if (this.getBlockMetadata() == 0) {
+				entity.motionY=-1;
+			} else if (this.getBlockMetadata() == 1) {
+				entity.motionY=+1;
+			} else if (this.getBlockMetadata() == 2) {
+				entity.motionZ=-1;
+			} else if (this.getBlockMetadata() == 3) {
+				entity.motionZ=+1;
+			}else if (this.getBlockMetadata() == 4) {
+				entity.motionX=-1;
+			}else if (this.getBlockMetadata() == 5) {
+				entity.motionX=+1;
+			}
+
+		}
 	}
-
-	@Override
-	public ItemStack decrStackSize(int var1, int var2) {
-		return null;
-	}
-
-	@Override
-	public ItemStack getStackInSlotOnClosing(int var1) {
-		return null;
-	}
-
-	@Override
-	public void setInventorySlotContents(int var1, ItemStack var2) {
-	}
-
-	@Override
-	public String getInventoryName() {
-		return null;
-	}
-
-	@Override
-	public boolean hasCustomInventoryName() {
-		return false;
-	}
-
-	@Override
-	public int getInventoryStackLimit() {
-		return 0;
-	}
-
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer var1) {
-		return false;
-	}
-
-	@Override
-	public void openInventory() {
-	}
-
-	@Override
-	public void closeInventory() {
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int var1, ItemStack var2) {
-		return false;
-	}
-
-	@Override
-	protected boolean isFluidFuel(FluidStack fuel) {
-		return false;
-	}
-
-
-
-	@Override
-	public FluidTank GetTank(int slot) {
-		return null;
-	}
-
-	@Override
-	public int GetTankCount() {
-		return 1;
-	}
-
 }

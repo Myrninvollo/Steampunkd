@@ -12,6 +12,7 @@ package com.sr2610.steampunked.common.items.tools;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -40,7 +41,7 @@ public class ItemSaber extends ItemSword {
 		maxStackSize = 1;
 		setMaxDamage(par2EnumToolMaterial.getMaxUses());
 		weaponDamage = 6.0F + par2EnumToolMaterial.getDamageVsEntity();
-		setCreativeTab(ModCreativeTab.INSTANCE);
+		setCreativeTab(CreativeTabs.tabCombat);
 
 	}
 
