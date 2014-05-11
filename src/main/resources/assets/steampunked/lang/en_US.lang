@@ -165,3 +165,5 @@ steampunked.entry.injector=Steam Injector
 steampunked.entry.injector.title=Crafting the Steam Injector
 steampunked.page.injector0=The Steam Injector is used for all your steam refueling needs.  It fills up anything that runs off of it.
 steampunked.page.injector1=
+
+tile.steampunked.machineCase.name=Machine Case
