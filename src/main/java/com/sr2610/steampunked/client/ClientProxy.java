@@ -31,7 +31,9 @@ public class ClientProxy extends CommonProxy {
 
 	public static int pipeRenderID = -1;
 
+
 	public final static PipeItemRenderer pipeItemRenderer = new PipeItemRenderer();
+
 	public final static BootsItemRenderer bootsItemRenderer = new BootsItemRenderer();
 
 	@Override
@@ -43,6 +45,7 @@ public class ClientProxy extends CommonProxy {
 		final PipeRendererTESR rp = new PipeRendererTESR();
 		MinecraftForgeClient.registerItemRenderer(
 				Item.getItemFromBlock(ModBlocks.pipe), pipeItemRenderer);
+		
 
 		MinecraftForgeClient.registerItemRenderer(ModItems.mechBoots,
 				bootsItemRenderer);

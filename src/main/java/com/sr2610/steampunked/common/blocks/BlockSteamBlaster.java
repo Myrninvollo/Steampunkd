@@ -10,10 +10,12 @@
 package com.sr2610.steampunked.common.blocks;
 
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
@@ -28,6 +30,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSteamBlaster extends BlockContainer {
 
+	
+	public static final int[] faceToSide = new int[] {1, 0, 3, 2, 5, 4};
+
 	public IIcon iconSide;
 
 	public BlockSteamBlaster() {
@@ -35,62 +40,51 @@ public class BlockSteamBlaster extends BlockContainer {
 		setCreativeTab(CreativeTabs.tabRedstone);
 	}
 
-	/**
-	 * Returns the TileEntity used by this block.
-	 */
 	@Override
 	public TileEntity createNewTileEntity(World var1, int meta) {
 		return new TileEntitySteamBlaster();
 	}
 
-	public static int getOrientation(int par1) {
-		return par1 & 7;
+	public static int getOrientation(int meta) {
+		return meta & 7;
 	}
 
-	
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		int var1 = getOrientation(meta);
+	  public IIcon getIcon(int par1, int par2)
+	    {
+	        int var1 = getOrientation(par2);
 
-		if (var1>5)
-			return blockIcon;
-		if (side == var1)
-			return blockIcon;
-		else if (side == meta)
-			return blockIcon;
-		else
-			return iconSide;
+	        if (var1 > 5)
+	        {
+	            return this.blockIcon;
+	        }
 
-	}
-
-	/**
-	 * Called when the block is placed in the world.
-	 */
+	        if (par1 == var1)
+	        {
+	            return this.blockIcon;
+	        }
+	        else
+	        {
+	        	return par1 == faceToSide[var1] ? iconSide : iconSide;
+	        }
+	    }
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z,
 			EntityLivingBase player, ItemStack stack) {
-		int rotation = 0;
-
-		if (Math.abs(player.rotationPitch) > 90D / 2D) {
-			if (player.rotationPitch > 0)
-				rotation = 1;
-			else if (player.rotationPitch < 0)
-				rotation = 0;
-		} else
-			rotation = Direction.directionToFacing[Direction.rotateOpposite[Math
-					.round(player.rotationYaw / 90) & 3]];
+		int rotation = BlockPistonBase.determineOrientation(world, x, y, z,
+				player);
 
 		world.setBlockMetadataWithNotify(x, y, z, rotation, 2);
 	}
 
 	@Override
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		blockIcon = par1IconRegister.registerIcon(Reference.ModID
-				+ ":blaster");
-		iconSide = par1IconRegister.registerIcon(Reference.ModID
-				+ ":machine");
+		blockIcon = par1IconRegister.registerIcon(Reference.ModID + ":blaster");
+		iconSide = par1IconRegister.registerIcon(Reference.ModID + ":machine");
 	}
+	
+    @Override
+    public int getRenderType() {
+        return 16;
+    }
 
 }

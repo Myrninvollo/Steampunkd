@@ -44,6 +44,7 @@ public final class CraftingHandler {
 	public static IRecipe slateBrickStairs;
 	public static IRecipe recipeGoggles;
 	public static IRecipe recipePipe;
+	public static IRecipe recipeBlaster;
 
 	public static void init() {
 		initSmelting();
@@ -117,6 +118,19 @@ public final class CraftingHandler {
 				'G', "ingotGold", 'L', new ItemStack(Items.leather), 'P',
 				new ItemStack(Blocks.glass_pane), 'C', "ingotCopper");
 		recipeGoggles = SteampunkedAPI.getLatestAddedRecipe();
+		
+		
+		addOreDictRecipe(new ItemStack(ModBlocks.Injector), "cxc", "xpx","xxx", 'x', "ingotIron",
+				'p', new ItemStack(Items.iron_chestplate), 'c', new ItemStack(
+						ModItems.craftingItems, 1, 0));
+		recipeInjector = SteampunkedAPI.getLatestAddedRecipe();
+		
+		/*
+		
+		addOreDictRecipe(new ItemStack(ModBlocks.steamBlaster), "cxc", "xpx", 'x', "ingotIron",
+				'p', new ItemStack(Items.iron_chestplate), 'c', new ItemStack(
+						ModItems.craftingItems, 1, 0));
+		recipeBlaster = SteampunkedAPI.getLatestAddedRecipe();*/
 	}
 
 	public static void initSmelting() {

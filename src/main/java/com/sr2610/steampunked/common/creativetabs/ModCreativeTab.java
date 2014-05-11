@@ -34,11 +34,13 @@ public class ModCreativeTab extends CreativeTabs {
 		this.list = list;
 		addItem(ModItems.handBook);
 		addItem(ModItems.bucket);
+		addBlock(ModBlocks.machineCase);
 		addBlock(ModBlocks.steamBoiler);
 		addBlock(ModBlocks.Injector);
 		addBlock(ModBlocks.steamFurnace);
 		addBlock(ModBlocks.tinkerBench);
 		addBlock(ModBlocks.punchcardMaker);
+		addBlock(ModBlocks.steamBlaster);
 		addBlock(ModBlocks.pipe);
 		addItem(ModItems.goggles);
 		addItem(ModItems.jetpack);

@@ -35,6 +35,7 @@ public final class HandbookData {
 	public static HandbookEntry goggles;
 	public static HandbookEntry sabers;
 	public static HandbookEntry pipes;
+	public static HandbookEntry blaster;
 
 	public static HandbookEntry injector;
 
@@ -98,10 +99,10 @@ public final class HandbookData {
 		pipes.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",
 				CraftingHandler.recipePipe, "pipes"));
 
-		// injector = new SPHandbookEntry("injector", categoryMachines);
-		// injector.setHandbookPages(new PageText("0"), new
-		// PageCraftingRecipe("1",
-		// CraftingHandler.recipeInjector, "injector"));
+		 injector = new SPHandbookEntry("injector", categoryMachines);
+		injector.setHandbookPages(new PageText("0"), new
+		 PageCraftingRecipe("1",
+		 CraftingHandler.recipeInjector, "injector"));
 
 	}
 

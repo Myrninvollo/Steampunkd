@@ -20,7 +20,7 @@ public class Steam extends Fluid {
 		setViscosity(500);
 		setGaseous(true);
 		setTemperature(390);
-		setUnlocalizedName("steam");
+		setUnlocalizedName("steampunked.steam");
 		setBlock(ModBlocks.BlockFluidSteam);
 		FluidRegistry.registerFluid(this);
 

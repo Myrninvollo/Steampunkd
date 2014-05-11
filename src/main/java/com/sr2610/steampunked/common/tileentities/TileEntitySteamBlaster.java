@@ -15,6 +15,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityMinecart;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -25,7 +26,6 @@ public class TileEntitySteamBlaster extends TileEntity {
 	public double direction;
 	public boolean mode;
 	public float speed = 1.0F;
-	public double extraRange = 0.0D;
 
 	public TileEntitySteamBlaster() {
 		if (direction != 1.0D && direction != -1D)
@@ -69,6 +69,7 @@ public class TileEntitySteamBlaster extends TileEntity {
 
 				if (entity instanceof EntityFallingBlock && j == 1)
 					d = 0.0D;
+				
 
 				if (!isPathClear(entity, j))
 					continue;
@@ -156,7 +157,7 @@ public class TileEntitySteamBlaster extends TileEntity {
 	public AxisAlignedBB getDirection() {
 		int i = getBlockMetadata();
 		worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-		double d = 5D + extraRange;
+		double d = 5D;
 
 		if (i == 0)
 			return AxisAlignedBB.getBoundingBox(xCoord, yCoord - d, zCoord,
@@ -234,7 +235,7 @@ public class TileEntitySteamBlaster extends TileEntity {
 			var17 = 0.0D;
 			var15 = 0.0D;
 		}
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 2; i++)
 			world.spawnParticle("cloud", var7, var9, var11, var13, var15, var17);
 
 	}
@@ -246,7 +247,6 @@ public class TileEntitySteamBlaster extends TileEntity {
 	public void readFromNBT(NBTTagCompound nbttagcompound) {
 		super.readFromNBT(nbttagcompound);
 		speed = nbttagcompound.getFloat("speed");
-		extraRange = nbttagcompound.getDouble("extraRange");
 		direction = nbttagcompound.getDouble("direction");
 	}
 
@@ -257,7 +257,6 @@ public class TileEntitySteamBlaster extends TileEntity {
 	public void writeToNBT(NBTTagCompound nbttagcompound) {
 		super.writeToNBT(nbttagcompound);
 		nbttagcompound.setFloat("speed", speed);
-		nbttagcompound.setDouble("extraRange", extraRange);
 
 		nbttagcompound.setDouble("direction", direction);
 	}
