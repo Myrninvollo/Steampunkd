@@ -152,3 +152,9 @@ steampunked.page.pipes1=
 **Steam**
 steampunked.entry.steam=Steam
 steampunked.page.steam0=Steam is a gas formed by heating water to temperatures of over 100C.  This can be achieved by using a Steam Boiler, which requires a heat source and water to produce it.
+
+**Steam Blaster**
+tile.steampunked.steamBlaster.name=Steam Blaster
+steampunked.entry.steamBlaster=Steam Blaster
+steampunked.page.steamBlaster0=The Steam Blaster is a machine that moves entities around, it uses water vapor from the air and requires a redstone signal to operate
+steampunked.page.steamBlaster1=&o*Steam Blasting Noises*&1

@@ -75,6 +75,7 @@ public final class ModItems {
 	public static Item craftingItems;
 
 	public static Item handBook;
+	
 
 	public static void initItems() {
 		Steampunked.logger.info("Initialising  Items");
@@ -134,6 +135,7 @@ public final class ModItems {
 
 		craftingItems = new ItemCrafting()
 				.setUnlocalizedName(LibNames.CRAFTING);
+		
 
 		registerItems();
 	}

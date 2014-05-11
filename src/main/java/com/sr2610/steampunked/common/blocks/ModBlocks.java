@@ -66,6 +66,7 @@ public final class ModBlocks {
 	public static Block slateBrickSlabDouble;
 	public static Block slateStair;
 	public static Block slateBrickStair;
+	public static Block machineCase;
 
 	public static void initBlocks() {
 		Steampunked.logger.info("Initialising  Blocks");
@@ -119,6 +120,10 @@ public final class ModBlocks {
 		steamBlaster = new BlockSteamBlaster().setHardness(5.0F)
 				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
 				.setBlockName("steampunked.steamBlaster");
+		
+		machineCase = new BlockMod(Material.iron, "machine", 2, "pickaxe").setHardness(5.0F)
+				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
+				.setBlockName(LibNames.MACHINE);
 
 		/*
 		 * pipeValve = new BlockValvePipe(Material.piston).setHardness(5.0F)
@@ -176,6 +181,9 @@ public final class ModBlocks {
 		GameRegistry.registerBlock(steamBlaster, LibNames.BLASTER);
 		GameRegistry.registerTileEntity(TileEntitySteamBlaster.class,
 				"tileEntitySteamBlaster");
+		
+		GameRegistry.registerBlock(machineCase, LibNames.MACHINE);
+
 
 		/*
 		 * GameRegistry.registerBlock(pipeValve, "pipeValve");

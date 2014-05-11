@@ -53,5 +53,6 @@ public final class LibNames {
 	public static final String HANDBOOK = "steampunked.handbook";
 	public static final String CRAFTING = "steampunked.craftingItem";
 	public static final String BLASTER = "steampunked.steamBlaster";
+	public static final String MACHINE = "steampunked.machineCase";
 
 }
