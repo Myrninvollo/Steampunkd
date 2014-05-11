@@ -11,6 +11,7 @@ package com.sr2610.steampunked.client.gui.handbook;
 
 import java.util.List;
 
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
@@ -67,11 +68,19 @@ public class GuiHandbook extends GuiScreen {
 	void drawHeader() {
 		final boolean unicode = fontRendererObj.getUnicodeFlag();
 		fontRendererObj.setUnicodeFlag(true);
-		fontRendererObj.drawSplitString(StatCollector
-				.translateToLocal("steampunked.gui.handbook.header"),
-				left + 15, top + 20, 110, 0);
+		
+		String title = (StatCollector
+				.translateToLocal("steampunked.gui.handbook.header"));
+		drawCenteredStringNoShadow(fontRendererObj, title, (left+fontRendererObj.getStringWidth(title)), top +10, 0);
+		
+
 		fontRendererObj.setUnicodeFlag(unicode);
 	}
+	
+	   public void drawCenteredStringNoShadow(FontRenderer par1FontRenderer, String par2Str, int par3, int par4, int par5)
+	    {
+	        par1FontRenderer.drawString(par2Str, par3 - par1FontRenderer.getStringWidth(par2Str) / 2, par4, par5);
+	    }
 
 	@Override
 	protected void actionPerformed(GuiButton par1GuiButton) {

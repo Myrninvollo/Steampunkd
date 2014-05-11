@@ -9,6 +9,7 @@
  ******************************************************************************/
 package com.sr2610.steampunked.api.handbook;
 
+import net.minecraft.client.gui.FontRenderer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -40,10 +41,6 @@ public abstract class HandbookPage {
 		// NO-OP
 	}
 
-	/**
-	 * Called when {@link LexiconEntry#setLexiconPages(LexiconPage...)} is
-	 * called.
-	 */
 	public void onPageAdded(HandbookEntry entry, int index) {
 		// NO-OP
 	}
@@ -51,4 +48,9 @@ public abstract class HandbookPage {
 	public String getUnlocalizedName() {
 		return unlocalizedName;
 	}
+	
+	  public void drawCenteredString(FontRenderer par1FontRenderer, String par2Str, int par3, int par4, int par5)
+	    {
+	        par1FontRenderer.drawString(par2Str, par3 - par1FontRenderer.getStringWidth(par2Str) / 2, par4, par5);
+	    }
 }
