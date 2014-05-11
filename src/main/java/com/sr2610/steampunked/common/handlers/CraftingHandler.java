@@ -120,8 +120,8 @@ public final class CraftingHandler {
 		recipeGoggles = SteampunkedAPI.getLatestAddedRecipe();
 		
 		
-		addOreDictRecipe(new ItemStack(ModBlocks.Injector), "cxc", "xpx","xxx", 'x', "ingotIron",
-				'p', new ItemStack(Items.iron_chestplate), 'c', new ItemStack(
+		addOreDictRecipe(new ItemStack(ModBlocks.Injector), "c c", "xbx","xxx", 'x', "ingotIron",
+				'b', new ItemStack(ModBlocks.machineCase), 'c', new ItemStack(
 						ModItems.craftingItems, 1, 0));
 		recipeInjector = SteampunkedAPI.getLatestAddedRecipe();
 		
