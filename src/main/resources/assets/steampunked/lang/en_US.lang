@@ -156,13 +156,13 @@ steampunked.page.steam0=Steam is a gas formed by heating water to temperatures o
 **Steam Blaster**
 tile.steampunked.steamBlaster.name=Steam Blaster
 steampunked.entry.steamBlaster=Steam Blaster
-steampunked.entry.steamBlaster.title=Crafting the Steam Blaster
+steampunked.entry.steamBlaster.title=Crafting
 steampunked.page.steamBlaster0=The Steam Blaster is a machine that moves entities around, it uses water vapor from the air and requires a redstone signal to operate
 steampunked.page.steamBlaster1=&o*Steam Blasting Noises*&1
 
 **Steam Injector**
 steampunked.entry.injector=Steam Injector
-steampunked.entry.injector.title=Crafting the Steam Injector
+steampunked.entry.injector.title=Crafting
 steampunked.page.injector0=The Steam Injector is used for all your steam refueling needs.  It fills up anything that runs off of it.
 steampunked.page.injector1=
 

@@ -102,6 +102,10 @@ public final class HandbookData {
 		injector = new SPHandbookEntry("injector", categoryMachines);
 		injector.setHandbookPages(new PageText("0"), new PageCraftingRecipe(
 				"1", CraftingHandler.recipeInjector, "injector"));
+		
+		blaster = new SPHandbookEntry("steamBlaster", categoryMachines);
+		blaster.setHandbookPages(new PageText("0"), new PageCraftingRecipe(
+				"1", CraftingHandler.recipeBlaster, "steamBlaster"));
 
 	}
 

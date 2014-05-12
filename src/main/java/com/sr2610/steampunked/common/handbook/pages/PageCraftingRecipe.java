@@ -9,6 +9,7 @@
  ******************************************************************************/
 package com.sr2610.steampunked.common.handbook.pages;
 
+import java.awt.FontMetrics;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -78,8 +79,7 @@ public class PageCraftingRecipe extends PageRecipe {
 		fontRendererObj.setUnicodeFlag(true);
 		String title = StatCollector.translateToLocal("steampunked.entry."
 				+ name + ".title");
-		drawCenteredString(fontRendererObj, title, gui.getLeft()
-				+ fontRendererObj.getStringWidth(title), gui.getTop() + 10, 0);
+		drawHeader(((GuiScreen) gui).mc.fontRenderer,((GuiScreen) gui));
 
 		fontRendererObj.setUnicodeFlag(unicode);
 
@@ -222,5 +222,25 @@ public class PageCraftingRecipe extends PageRecipe {
 		}
 
 		renderItemAtGridPos(gui, 2, 0, recipe.getRecipeOutput(), false);
+	}
+
+	void drawHeader(FontRenderer font,GuiScreen gui) {
+		final boolean unicode = font.getUnicodeFlag();
+		font.setUnicodeFlag(true);
+
+		String title = StatCollector.translateToLocal("steampunked.entry."
+				+ name + ".title");
+		drawCenteredStringNoShadow(font, title,
+				((IGuiHandbookEntry) gui).getLeft() + (font.getStringWidth(title)), ((IGuiHandbookEntry) gui).getTop() + 10, 0);
+
+		font.setUnicodeFlag(unicode);
+	}
+
+	public void drawCenteredStringNoShadow(FontRenderer par1FontRenderer,
+			String par2Str, int par3, int par4, int par5) {
+		par1FontRenderer
+				.drawString(par2Str,
+						par3 - par1FontRenderer.getStringWidth(par2Str) / 2,
+						par4, par5);
 	}
 }

@@ -125,13 +125,11 @@ public final class CraftingHandler {
 						ModItems.craftingItems, 1, 0));
 		recipeInjector = SteampunkedAPI.getLatestAddedRecipe();
 
-		/*
-		 * 
-		 * addOreDictRecipe(new ItemStack(ModBlocks.steamBlaster), "cxc", "xpx",
-		 * 'x', "ingotIron", 'p', new ItemStack(Items.iron_chestplate), 'c', new
-		 * ItemStack( ModItems.craftingItems, 1, 0)); recipeBlaster =
-		 * SteampunkedAPI.getLatestAddedRecipe();
-		 */
+		addOreDictRecipe(new ItemStack(ModBlocks.steamBlaster), "cxc", "xpx",
+				'x', "ingotIron", 'p', new ItemStack(Items.iron_chestplate),
+				'c', new ItemStack(ModItems.craftingItems, 1, 0));
+		recipeBlaster = SteampunkedAPI.getLatestAddedRecipe();
+
 	}
 
 	public static void initSmelting() {

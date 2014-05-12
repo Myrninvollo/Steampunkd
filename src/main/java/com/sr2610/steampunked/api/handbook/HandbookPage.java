@@ -49,11 +49,4 @@ public abstract class HandbookPage {
 		return unlocalizedName;
 	}
 
-	public void drawCenteredString(FontRenderer par1FontRenderer,
-			String par2Str, int par3, int par4, int par5) {
-		par1FontRenderer
-				.drawString(par2Str,
-						par3 - par1FontRenderer.getStringWidth(par2Str) / 2,
-						par4, par5);
-	}
 }
