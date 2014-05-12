@@ -18,6 +18,12 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.sr2610.steampunked.Steampunked;
+import com.sr2610.steampunked.common.blocks.machines.BlockInjector;
+import com.sr2610.steampunked.common.blocks.machines.BlockPunchcardMaker;
+import com.sr2610.steampunked.common.blocks.machines.BlockSteamBlaster;
+import com.sr2610.steampunked.common.blocks.machines.BlockSteamBoiler;
+import com.sr2610.steampunked.common.blocks.machines.BlockSteamFurnace;
+import com.sr2610.steampunked.common.blocks.machines.BlockTinkerBench;
 import com.sr2610.steampunked.common.blocks.pipes.BlockPipe;
 import com.sr2610.steampunked.common.blocks.slate.BlockSlate;
 import com.sr2610.steampunked.common.blocks.slate.BlockSlateBrickSlab;
@@ -38,26 +44,27 @@ import com.sr2610.steampunked.common.tileentities.TileEntityTinkerBench;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public final class ModBlocks {
-
-	public static Block Injector;
+	/* FLUIDS */
 	public static Fluid steam;
-	public static Block BlockFluidSteam;
+	public static Block blockSteam;
+	public static Material materialSteam;
+
+	/* MACHINES */
+	public static Block machineCase;
+	public static Block steamBoiler;
+	public static Block injector;
 	public static Block steamFurnace;
 	public static Block steamFurnaceActive;
-	public static Block steamBoiler;
 	public static Block tinkerBench;
 	public static Block punchcardMaker;
 	public static Block pipe;
-	public static Block pipeValve;
-
 	public static Block steamBlaster;
 
+	/* ORES */
 	public static Block oreCopper;
 	public static Block oreTin;
-	public static Material materialSteam;
 
 	/* Slate */
-
 	public static Block slate;
 	public static Block slateBrick;
 	public static Block slateSlab;
@@ -66,42 +73,37 @@ public final class ModBlocks {
 	public static Block slateBrickSlabDouble;
 	public static Block slateStair;
 	public static Block slateBrickStair;
-	public static Block machineCase;
 
 	public static void initBlocks() {
 		Steampunked.logger.info("Initialising  Blocks");
+		/* FLUIDS */
 		materialSteam = new MaterialLiquid(MapColor.ironColor);
-
 		steam = new Steam();
-		Injector = new BlockInjector(Material.iron).setHardness(5.0F)
-				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
-				.setBlockName(LibNames.INJECTOR);
+		blockSteam = new BlockSteamFluid(steam, materialSteam);
 
-		BlockFluidSteam = new BlockSteamFluid(steam, materialSteam)
-				.setBlockName(LibNames.STEAM);
-
-		steamFurnace = new BlockSteamFurnace(false, Material.iron)
+		/* MACHINES */
+		machineCase = new BlockMod(Material.iron, "machine", 2, "pickaxe")
 				.setHardness(5.0F).setResistance(10.0F)
 				.setStepSound(Block.soundTypeMetal)
+				.setBlockName(LibNames.MACHINE);
+
+		steamBoiler = new BlockSteamBoiler(Material.iron);
+
+		injector = new BlockInjector(Material.iron);
+
+		steamFurnace = new BlockSteamFurnace(false, Material.iron)
 				.setBlockName(LibNames.FURNACE);
 
 		steamFurnaceActive = new BlockSteamFurnace(true, Material.iron)
-				.setHardness(5.0F).setResistance(10.0F)
-				.setStepSound(Block.soundTypeMetal)
 				.setBlockName(LibNames.FURNACE + "burning");
 
-		steamBoiler = new BlockSteamBoiler(Material.iron).setHardness(5.0F)
-				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
-				.setBlockName(LibNames.BOILER);
+		tinkerBench = new BlockTinkerBench(Material.iron);
 
-		tinkerBench = new BlockTinkerBench(Material.iron).setHardness(5.0F)
-				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
-				.setBlockName(LibNames.BENCH);
+		punchcardMaker = new BlockPunchcardMaker(Material.iron);
 
-		punchcardMaker = new BlockPunchcardMaker(Material.iron)
-				.setHardness(5.0F).setResistance(10.0F)
-				.setStepSound(Block.soundTypeMetal)
-				.setBlockName(LibNames.MAKER);
+		pipe = new BlockPipe(Material.piston);
+
+		steamBlaster = new BlockSteamBlaster();
 
 		oreCopper = new BlockMod(Material.rock, "oreCopper", 1, "pickaxe")
 				.setHardness(3.0F).setResistance(5.0F)
@@ -113,34 +115,17 @@ public final class ModBlocks {
 				.setStepSound(Block.soundTypeStone)
 				.setBlockName(LibNames.ORETIN);
 
-		pipe = new BlockPipe(Material.piston).setHardness(5.0F)
-				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
-				.setBlockName("steampunked.pipeFluid");
-
-		steamBlaster = new BlockSteamBlaster().setHardness(5.0F)
-				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
-				.setBlockName("steampunked.steamBlaster");
-		
-		machineCase = new BlockMod(Material.iron, "machine", 2, "pickaxe").setHardness(5.0F)
-				.setResistance(10.0F).setStepSound(Block.soundTypeMetal)
-				.setBlockName(LibNames.MACHINE);
-
-		/*
-		 * pipeValve = new BlockValvePipe(Material.piston).setHardness(5.0F)
-		 * .setResistance(10.0F).setStepSound(Block.soundTypeMetal)
-		 * .setBlockName("pipeValveFluid");
-		 */
-
 		initSlate();
-
 		registerBlocks();
+		bindTileEntitys();
+		oreRegistration();
 	}
 
 	private static void initSlate() {
-		slate = new BlockSlate("slate").setBlockName("steampunked.slate");
+		slate = new BlockSlate("slate").setBlockName(LibNames.SLATE);
 
 		slateBrick = new BlockSlate("slateBrick")
-				.setBlockName("steampunked.slateBrick");
+				.setBlockName(LibNames.SLATEBRICK);
 
 		slateSlab = new BlockSlateSlab(false);
 		slateSlabDouble = new BlockSlateSlab(true);
@@ -152,46 +137,26 @@ public final class ModBlocks {
 	}
 
 	private static void registerBlocks() {
-		GameRegistry.registerBlock(Injector, LibNames.INJECTOR);
+		GameRegistry.registerBlock(blockSteam, LibNames.STEAM);
+		GameRegistry.registerBlock(steamBoiler, LibNames.BOILER);
 
-		GameRegistry.registerBlock(BlockFluidSteam,
-				"Steampunked.BlockFluidSteam");
+		GameRegistry.registerBlock(injector, LibNames.INJECTOR);
+
 		GameRegistry.registerBlock(steamFurnace, LibNames.FURNACE);
 		GameRegistry.registerBlock(steamFurnaceActive, LibNames.FURNACE
 				+ "burning");
-		GameRegistry.registerBlock(steamBoiler, LibNames.BOILER);
 		GameRegistry.registerBlock(tinkerBench, LibNames.BENCH);
 		GameRegistry.registerBlock(oreCopper, LibNames.ORECOPPER);
 		GameRegistry.registerBlock(oreTin, LibNames.ORETIN);
 		GameRegistry.registerBlock(punchcardMaker, LibNames.MAKER);
-		GameRegistry.registerTileEntity(TileEntityInjector.class,
-				"tileEntityInjector");
-		GameRegistry.registerTileEntity(TileEntitySteamFurnace.class,
-				"tileEntitySteamFurnace");
-		GameRegistry.registerTileEntity(TileEntitySteamBoiler.class,
-				"tileEntitySteamBoiler");
-		GameRegistry.registerTileEntity(TileEntityTinkerBench.class,
-				"tileEntityTinkerBench");
-		GameRegistry.registerTileEntity(TileEntityPunchardMaker.class,
-				"tileEntityPunchcardMaker");
 
-		GameRegistry.registerBlock(pipe, "steampunked.pipe");
-		GameRegistry.registerTileEntity(TileEntityPipe.class, "tileEntityPipe");
+		GameRegistry.registerBlock(pipe, LibNames.PIPE);
 
 		GameRegistry.registerBlock(steamBlaster, LibNames.BLASTER);
-		GameRegistry.registerTileEntity(TileEntitySteamBlaster.class,
-				"tileEntitySteamBlaster");
-		
+
 		GameRegistry.registerBlock(machineCase, LibNames.MACHINE);
 
-
-		/*
-		 * GameRegistry.registerBlock(pipeValve, "pipeValve");
-		 * GameRegistry.registerTileEntity(TileEntityValvePipe.class,
-		 * "tileEntityValvePipe");
-		 */
-
-		GameRegistry.registerBlock(slate, "steampunked.slate");
+		GameRegistry.registerBlock(slate, LibNames.SLATE);
 		GameRegistry.registerBlock(slateBrick, "steampunked.slateBrick");
 		GameRegistry.registerBlock(slateSlab, ItemSlateSlab.class,
 				"steampunked.slateSlab");
@@ -205,7 +170,23 @@ public final class ModBlocks {
 		GameRegistry.registerBlock(slateBrickStair,
 				"steampunked.slateBrickStair");
 
-		oreRegistration();
+	}
+
+	private static void bindTileEntitys() {
+
+		GameRegistry.registerTileEntity(TileEntityInjector.class,
+				"tileEntityInjector");
+		GameRegistry.registerTileEntity(TileEntitySteamFurnace.class,
+				"tileEntitySteamFurnace");
+		GameRegistry.registerTileEntity(TileEntitySteamBoiler.class,
+				"tileEntitySteamBoiler");
+		GameRegistry.registerTileEntity(TileEntityTinkerBench.class,
+				"tileEntityTinkerBench");
+		GameRegistry.registerTileEntity(TileEntityPunchardMaker.class,
+				"tileEntityPunchcardMaker");
+		GameRegistry.registerTileEntity(TileEntityPipe.class, "tileEntityPipe");
+		GameRegistry.registerTileEntity(TileEntitySteamBlaster.class,
+				"tileEntitySteamBlaster");
 	}
 
 	public static void oreRegistration() {

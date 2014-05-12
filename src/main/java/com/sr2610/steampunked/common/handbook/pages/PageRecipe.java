@@ -57,7 +57,7 @@ public class PageRecipe extends HandbookPage {
 		final int height = gui.getHeight();
 		final int x = gui.getLeft() + 16;
 		final int y = gui.getTop() + height - 80;
-		PageText.renderText(x, y+10, width, height, getUnlocalizedName());
+		PageText.renderText(x, y + 10, width, height, getUnlocalizedName());
 
 		if (tooltipStack != null) {
 			final List<String> tooltipData = tooltipStack.getTooltip(
@@ -141,7 +141,7 @@ public class PageRecipe extends HandbookPage {
 	@SideOnly(Side.CLIENT)
 	public void renderItem(IGuiHandbookEntry gui, int xPos, int yPos,
 			ItemStack stack, boolean accountForContainer) {
-		yPos+=10;
+		yPos += 10;
 		final RenderItem render = new RenderItem();
 		final TextureManager renderEngine = Minecraft.getMinecraft().renderEngine;
 		final FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;

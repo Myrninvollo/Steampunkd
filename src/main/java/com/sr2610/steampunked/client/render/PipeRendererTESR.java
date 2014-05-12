@@ -19,7 +19,6 @@ import org.lwjgl.opengl.GL11;
 import com.sr2610.steampunked.client.model.ModelPipe;
 import com.sr2610.steampunked.common.lib.Reference;
 import com.sr2610.steampunked.common.tileentities.TileEntityPipe;
-import com.sr2610.steampunked.common.tileentities.TileEntityValvePipe;
 
 public class PipeRendererTESR extends TileEntitySpecialRenderer {
 
@@ -75,32 +74,6 @@ public class PipeRendererTESR extends TileEntitySpecialRenderer {
 
 		}
 
-		else if (tileEntity instanceof TileEntityValvePipe) {
-			((TileEntityValvePipe) tileEntity).checkPipeConnections();
-			final boolean[] adjecentConnections = ((TileEntityValvePipe) tileEntity).pipeConnectionsBuffer;
-			final float f = 0.05F;
-
-			if (adjecentConnections[0] == true)
-				model.renderPart("Top", f);
-
-			if (adjecentConnections[1] == true)
-				model.renderPart("Bottom", f);
-
-			if (adjecentConnections[2] == true)
-				model.renderPart("Front", f);
-
-			if (adjecentConnections[3] == true)
-				model.renderPart("Back", f);
-
-			if (adjecentConnections[4] == true)
-				model.renderPart("Right", f);
-
-			if (adjecentConnections[5] == true)
-				model.renderPart("Left", f);
-
-			model.renderPart("Middle", f);
-
-		}
 	}
 
 }

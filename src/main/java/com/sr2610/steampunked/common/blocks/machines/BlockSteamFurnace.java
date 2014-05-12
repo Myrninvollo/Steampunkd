@@ -7,7 +7,7 @@
  * Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
  ******************************************************************************/
-package com.sr2610.steampunked.common.blocks;
+package com.sr2610.steampunked.common.blocks.machines;
 
 import java.util.Random;
 
@@ -27,6 +27,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.sr2610.steampunked.Steampunked;
+import com.sr2610.steampunked.common.blocks.ModBlocks;
 import com.sr2610.steampunked.common.creativetabs.ModCreativeTab;
 import com.sr2610.steampunked.common.lib.Reference;
 import com.sr2610.steampunked.common.tileentities.TileEntitySteamFurnace;
@@ -47,8 +48,13 @@ public class BlockSteamFurnace extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	private IIcon furnaceIconBottom;
 
-	protected BlockSteamFurnace(Boolean isOn, Material par2Material) {
-		super(par2Material);
+	public BlockSteamFurnace(Boolean isOn, Material material) {
+		super(material);
+		
+		setHardness(5.0F);
+		setResistance(10.0F);
+		setStepSound(Block.soundTypeMetal);
+		
 		isActive = isOn;
 
 		if (!isOn)

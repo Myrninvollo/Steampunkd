@@ -7,7 +7,7 @@
  * Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
  ******************************************************************************/
-package com.sr2610.steampunked.common.blocks;
+package com.sr2610.steampunked.common.blocks.machines;
 
 import java.util.Random;
 
@@ -24,13 +24,18 @@ import net.minecraft.world.World;
 
 import com.sr2610.steampunked.Steampunked;
 import com.sr2610.steampunked.common.creativetabs.ModCreativeTab;
+import com.sr2610.steampunked.common.lib.LibNames;
 import com.sr2610.steampunked.common.tileentities.TileEntityTinkerBench;
 
 public class BlockTinkerBench extends BlockContainer {
 
-	protected BlockTinkerBench(Material par2Material) {
+	public BlockTinkerBench(Material par2Material) {
 		super(par2Material);
 		setCreativeTab(ModCreativeTab.INSTANCE);
+		setHardness(5.0F);
+		setResistance(10.0F);
+		setStepSound(Block.soundTypeMetal);
+		setBlockName(LibNames.BENCH);
 
 	}
 

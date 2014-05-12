@@ -11,6 +11,7 @@ package com.sr2610.steampunked.common.blocks.pipes;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -22,6 +23,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.sr2610.steampunked.common.lib.LibNames;
 import com.sr2610.steampunked.common.lib.Reference;
 import com.sr2610.steampunked.common.tileentities.TileEntityPipe;
 import com.sr2610.steampunked.common.utils.Vector3fMax;
@@ -37,6 +39,10 @@ public class BlockPipe extends BlockContainer {
 	public BlockPipe(Material mat) {
 		super(mat);
 		setCreativeTab(CreativeTabs.tabRedstone);
+		setHardness(5.0F);
+		setResistance(10.0F);
+		setStepSound(Block.soundTypeMetal);
+		setBlockName(LibNames.PIPE);
 
 	}
 

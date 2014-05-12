@@ -68,19 +68,22 @@ public class GuiHandbook extends GuiScreen {
 	void drawHeader() {
 		final boolean unicode = fontRendererObj.getUnicodeFlag();
 		fontRendererObj.setUnicodeFlag(true);
-		
-		String title = (StatCollector
-				.translateToLocal("steampunked.gui.handbook.header"));
-		drawCenteredStringNoShadow(fontRendererObj, title, (left+fontRendererObj.getStringWidth(title)), top +10, 0);
-		
+
+		String title = StatCollector
+				.translateToLocal("steampunked.gui.handbook.header");
+		drawCenteredStringNoShadow(fontRendererObj, title, left
+				+ fontRendererObj.getStringWidth(title), top + 10, 0);
 
 		fontRendererObj.setUnicodeFlag(unicode);
 	}
-	
-	   public void drawCenteredStringNoShadow(FontRenderer par1FontRenderer, String par2Str, int par3, int par4, int par5)
-	    {
-	        par1FontRenderer.drawString(par2Str, par3 - par1FontRenderer.getStringWidth(par2Str) / 2, par4, par5);
-	    }
+
+	public void drawCenteredStringNoShadow(FontRenderer par1FontRenderer,
+			String par2Str, int par3, int par4, int par5) {
+		par1FontRenderer
+				.drawString(par2Str,
+						par3 - par1FontRenderer.getStringWidth(par2Str) / 2,
+						par4, par5);
+	}
 
 	@Override
 	protected void actionPerformed(GuiButton par1GuiButton) {

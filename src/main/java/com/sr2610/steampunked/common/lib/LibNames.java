@@ -49,10 +49,17 @@ public final class LibNames {
 	public static final String REPROGRAMMER = "steampunked.reprogrammer";
 	public static final String MECHBOOTS = "steampunked.mechBoots";
 	public static final String HAMMER = "steampunked.hammer";
-	public static final String SLATE = "steampunked.slate";
 	public static final String HANDBOOK = "steampunked.handbook";
 	public static final String CRAFTING = "steampunked.craftingItem";
 	public static final String BLASTER = "steampunked.steamBlaster";
 	public static final String MACHINE = "steampunked.machineCase";
+	
+	public static final String PIPE = "steampunked.pipe";
+
+	
+	
+	
+	public static final String SLATE = "steampunked.slate";
+	public static final String SLATEBRICK = "steampunked.slateBrick";
 
 }

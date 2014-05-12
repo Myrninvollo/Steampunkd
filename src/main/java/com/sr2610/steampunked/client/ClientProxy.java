@@ -22,7 +22,6 @@ import com.sr2610.steampunked.common.blocks.ModBlocks;
 import com.sr2610.steampunked.common.entitys.EntityAutomoton;
 import com.sr2610.steampunked.common.items.ModItems;
 import com.sr2610.steampunked.common.tileentities.TileEntityPipe;
-import com.sr2610.steampunked.common.tileentities.TileEntityValvePipe;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -30,7 +29,6 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 public class ClientProxy extends CommonProxy {
 
 	public static int pipeRenderID = -1;
-
 
 	public final static PipeItemRenderer pipeItemRenderer = new PipeItemRenderer();
 
@@ -45,14 +43,11 @@ public class ClientProxy extends CommonProxy {
 		final PipeRendererTESR rp = new PipeRendererTESR();
 		MinecraftForgeClient.registerItemRenderer(
 				Item.getItemFromBlock(ModBlocks.pipe), pipeItemRenderer);
-		
 
 		MinecraftForgeClient.registerItemRenderer(ModItems.mechBoots,
 				bootsItemRenderer);
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPipe.class, rp);
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityValvePipe.class,
-				rp);
 
 	}
 }

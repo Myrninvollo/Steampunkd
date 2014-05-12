@@ -24,7 +24,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.sr2610.steampunked.common.blocks.BlockSteamFurnace;
+import com.sr2610.steampunked.common.blocks.machines.BlockSteamFurnace;
 import com.sr2610.steampunked.common.creativetabs.ModCreativeTab;
 import com.sr2610.steampunked.common.entitys.EntityAutomoton;
 

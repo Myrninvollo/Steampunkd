@@ -7,37 +7,38 @@
  * Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
  ******************************************************************************/
-package com.sr2610.steampunked.common.blocks;
+package com.sr2610.steampunked.common.blocks.machines;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import com.sr2610.steampunked.common.lib.LibNames;
 import com.sr2610.steampunked.common.lib.Reference;
 import com.sr2610.steampunked.common.tileentities.TileEntitySteamBlaster;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class BlockSteamBlaster extends BlockContainer {
 
-	
-	public static final int[] faceToSide = new int[] {1, 0, 3, 2, 5, 4};
+	public static final int[] faceToSide = new int[] { 1, 0, 3, 2, 5, 4 };
 
 	public IIcon iconSide;
 
 	public BlockSteamBlaster() {
 		super(Material.rock);
 		setCreativeTab(CreativeTabs.tabRedstone);
+		setHardness(5.0F);
+		setResistance(10.0F);
+		setStepSound(Block.soundTypeMetal);
+		setBlockName(LibNames.BLASTER);
+
 	}
 
 	@Override
@@ -49,24 +50,19 @@ public class BlockSteamBlaster extends BlockContainer {
 		return meta & 7;
 	}
 
-	  public IIcon getIcon(int par1, int par2)
-	    {
-	        int var1 = getOrientation(par2);
+	@Override
+	public IIcon getIcon(int par1, int par2) {
+		int var1 = getOrientation(par2);
 
-	        if (var1 > 5)
-	        {
-	            return this.blockIcon;
-	        }
+		if (var1 > 5)
+			return blockIcon;
 
-	        if (par1 == var1)
-	        {
-	            return this.blockIcon;
-	        }
-	        else
-	        {
-	        	return par1 == faceToSide[var1] ? iconSide : iconSide;
-	        }
-	    }
+		if (par1 == var1)
+			return blockIcon;
+		else
+			return par1 == faceToSide[var1] ? iconSide : iconSide;
+	}
+
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z,
 			EntityLivingBase player, ItemStack stack) {
@@ -81,10 +77,10 @@ public class BlockSteamBlaster extends BlockContainer {
 		blockIcon = par1IconRegister.registerIcon(Reference.ModID + ":blaster");
 		iconSide = par1IconRegister.registerIcon(Reference.ModID + ":machine");
 	}
-	
-    @Override
-    public int getRenderType() {
-        return 16;
-    }
+
+	@Override
+	public int getRenderType() {
+		return 16;
+	}
 
 }

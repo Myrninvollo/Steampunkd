@@ -75,7 +75,6 @@ public final class ModItems {
 	public static Item craftingItems;
 
 	public static Item handBook;
-	
 
 	public static void initItems() {
 		Steampunked.logger.info("Initialising  Items");
@@ -84,7 +83,7 @@ public final class ModItems {
 		drill = new ItemDrill().setUnlocalizedName(LibNames.DRILL);
 		drillDiamond = new ItemDiamondDrill().setUnlocalizedName(LibNames.DRILL
 				+ "_diamond");
-		bucket = new ItemBucket(ModBlocks.BlockFluidSteam)
+		bucket = new ItemBucket(ModBlocks.blockSteam)
 				.setUnlocalizedName(LibNames.BUCKET)
 				.setContainerItem(Items.bucket)
 				.setTextureName(Reference.ModID + ":steam_bucket");
@@ -135,7 +134,6 @@ public final class ModItems {
 
 		craftingItems = new ItemCrafting()
 				.setUnlocalizedName(LibNames.CRAFTING);
-		
 
 		registerItems();
 	}
@@ -192,7 +190,7 @@ public final class ModItems {
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry
 				.getFluidStack("steam", FluidContainerRegistry.BUCKET_VOLUME),
 				new ItemStack(bucket), new ItemStack(Items.bucket));
-		BucketHandler.INSTANCE.buckets.put(ModBlocks.BlockFluidSteam, bucket);
+		BucketHandler.INSTANCE.buckets.put(ModBlocks.blockSteam, bucket);
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
 
 		oreRegistration();

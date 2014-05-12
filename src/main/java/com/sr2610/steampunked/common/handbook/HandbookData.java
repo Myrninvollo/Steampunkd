@@ -99,10 +99,9 @@ public final class HandbookData {
 		pipes.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",
 				CraftingHandler.recipePipe, "pipes"));
 
-		 injector = new SPHandbookEntry("injector", categoryMachines);
-		injector.setHandbookPages(new PageText("0"), new
-		 PageCraftingRecipe("1",
-		 CraftingHandler.recipeInjector, "injector"));
+		injector = new SPHandbookEntry("injector", categoryMachines);
+		injector.setHandbookPages(new PageText("0"), new PageCraftingRecipe(
+				"1", CraftingHandler.recipeInjector, "injector"));
 
 	}
 

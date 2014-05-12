@@ -25,15 +25,12 @@ import java.util.Collections;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 
@@ -119,7 +116,7 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 
 	@Override
 	public void update() {
-		autoOutputToSides(40, this);
+		autoOutputToSides(100, this);
 	}
 
 	public void autoOutputToSides(int amountPerTick, TileEntity currentTile) {
@@ -206,12 +203,6 @@ public class TileEntityPipe extends TileEntityMachine implements IFluidHandler {
 		if (tile != null && tile instanceof IFluidHandler)
 			return true;
 		return false;
-	}
-
-	@SideOnly(Side.CLIENT)
-	public IIcon getPipeIcons() {
-
-		return null;
 	}
 
 	public void checkPipeConnections() {

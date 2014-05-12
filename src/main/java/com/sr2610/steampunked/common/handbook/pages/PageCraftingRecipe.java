@@ -67,23 +67,19 @@ public class PageCraftingRecipe extends PageRecipe {
 		for (final IRecipe recipe : recipes)
 			HandbookRecipeMappings.map(recipe.getRecipeOutput(), entry, index);
 	}
-	
-	
-
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void renderRecipe(IGuiHandbookEntry gui, int mx, int my) {
-		
 
 		final FontRenderer fontRendererObj = ((GuiScreen) gui).mc.fontRenderer;
 
 		final boolean unicode = fontRendererObj.getUnicodeFlag();
 		fontRendererObj.setUnicodeFlag(true);
-		String title = StatCollector.translateToLocal("steampunked.entry." + name
-				+ ".title");
-		drawCenteredString(fontRendererObj, title, (gui.getLeft()+fontRendererObj.getStringWidth(title)),  gui.getTop() +10, 0);
-		
+		String title = StatCollector.translateToLocal("steampunked.entry."
+				+ name + ".title");
+		drawCenteredString(fontRendererObj, title, gui.getLeft()
+				+ fontRendererObj.getStringWidth(title), gui.getTop() + 10, 0);
 
 		fontRendererObj.setUnicodeFlag(unicode);
 
@@ -98,11 +94,11 @@ public class PageCraftingRecipe extends PageRecipe {
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glColor4f(1F, 1F, 1F, 1F);
-		((GuiScreen) gui).drawTexturedModalRect(gui.getLeft(), gui.getTop()+10, 0,
-				0, gui.getWidth(), gui.getHeight());
+		((GuiScreen) gui).drawTexturedModalRect(gui.getLeft(),
+				gui.getTop() + 10, 0, 0, gui.getWidth(), gui.getHeight());
 
 		int iconX = gui.getLeft() + 115;
-		final int iconY = gui.getTop() + 12+10;
+		final int iconY = gui.getTop() + 12 + 10;
 
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);

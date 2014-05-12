@@ -15,6 +15,7 @@ import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.BlockFluidFinite;
 import net.minecraftforge.fluids.Fluid;
 
+import com.sr2610.steampunked.common.lib.LibNames;
 import com.sr2610.steampunked.common.lib.Reference;
 
 import cpw.mods.fml.relauncher.Side;
@@ -31,6 +32,7 @@ public class BlockSteamFluid extends BlockFluidFinite {
 		super(fluid, material);
 		quantaPerBlock = 6;
 		setTickRate(5);
+		setBlockName(LibNames.STEAM);
 	}
 
 	@Override

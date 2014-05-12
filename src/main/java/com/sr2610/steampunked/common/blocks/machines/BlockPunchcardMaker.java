@@ -7,7 +7,7 @@
  * Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
  ******************************************************************************/
-package com.sr2610.steampunked.common.blocks;
+package com.sr2610.steampunked.common.blocks.machines;
 
 import java.util.Random;
 
@@ -24,14 +24,17 @@ import net.minecraft.world.World;
 
 import com.sr2610.steampunked.Steampunked;
 import com.sr2610.steampunked.common.creativetabs.ModAutomatonTab;
+import com.sr2610.steampunked.common.lib.LibNames;
 import com.sr2610.steampunked.common.tileentities.TileEntityPunchardMaker;
 
 public class BlockPunchcardMaker extends BlockContainer {
 
-	protected BlockPunchcardMaker(Material material) {
+	public BlockPunchcardMaker(Material material) {
 		super(material);
 		setCreativeTab(ModAutomatonTab.INSTANCE);
-
+		setHardness(5.0F).setResistance(10.0F);
+		setStepSound(Block.soundTypeMetal);
+		setBlockName(LibNames.MAKER);
 	}
 
 	@Override

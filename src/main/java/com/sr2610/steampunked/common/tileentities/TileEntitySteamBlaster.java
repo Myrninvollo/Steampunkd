@@ -15,7 +15,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityMinecart;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -69,7 +68,6 @@ public class TileEntitySteamBlaster extends TileEntity {
 
 				if (entity instanceof EntityFallingBlock && j == 1)
 					d = 0.0D;
-				
 
 				if (!isPathClear(entity, j))
 					continue;

@@ -7,13 +7,14 @@
  * Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
  ******************************************************************************/
-package com.sr2610.steampunked.common.blocks;
+package com.sr2610.steampunked.common.blocks.machines;
 
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -24,13 +25,25 @@ import net.minecraft.world.World;
 
 import com.sr2610.steampunked.Steampunked;
 import com.sr2610.steampunked.common.creativetabs.ModCreativeTab;
-import com.sr2610.steampunked.common.tileentities.TileEntitySteamBoiler;
+import com.sr2610.steampunked.common.lib.LibNames;
+import com.sr2610.steampunked.common.lib.Reference;
+import com.sr2610.steampunked.common.tileentities.TileEntityInjector;
 
-public class BlockSteamBoiler extends BlockContainer {
+public class BlockInjector extends BlockContainer {
 
-	protected BlockSteamBoiler(Material par2Material) {
-		super(par2Material);
+	public BlockInjector(Material par2) {
+		super(par2);
 		setCreativeTab(ModCreativeTab.INSTANCE);
+		setHardness(5.0F);
+		setResistance(10.0F);
+		setStepSound(Block.soundTypeMetal);
+		setBlockName(LibNames.INJECTOR);
+
+	}
+
+	public void registerIcons(IIconRegister par1IconRegister) {
+		blockIcon = par1IconRegister.registerIcon(Reference.ModID
+				+ ":compressor");
 
 	}
 
@@ -42,7 +55,7 @@ public class BlockSteamBoiler extends BlockContainer {
 		if (tile_entity == null || player.isSneaking())
 			return false;
 		else
-			player.openGui(Steampunked.instance, 2, world, x, y, z);
+			player.openGui(Steampunked.instance, 0, world, x, y, z);
 		return true;
 
 	}
@@ -99,7 +112,8 @@ public class BlockSteamBoiler extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
-		return new TileEntitySteamBoiler();
+		return new TileEntityInjector();
+
 	}
 
 }

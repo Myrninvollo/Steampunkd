@@ -386,7 +386,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 	@Override
 	public void update() {
 		UpdateRedstone();
-		autoOutputToSides(80, this);
+		autoOutputToSides(120, this);
 
 		if (getRedstoneMode() == 0)
 			return;

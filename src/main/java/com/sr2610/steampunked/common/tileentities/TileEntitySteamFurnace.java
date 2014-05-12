@@ -22,8 +22,8 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
-import com.sr2610.steampunked.common.blocks.BlockSteamFurnace;
 import com.sr2610.steampunked.common.blocks.ModBlocks;
+import com.sr2610.steampunked.common.blocks.machines.BlockSteamFurnace;
 import com.sr2610.steampunked.common.inventory.container.ContainerSteamFurnace;
 import com.sr2610.steampunked.common.lib.LibOptions;
 
