@@ -65,9 +65,8 @@ public final class ModItems {
 	public static Item saberGold;
 	public static Item saberDiamond;
 	public static Item clockworkBow;
-
-	public static Item copperIngot;
-	public static Item tinIngot;
+	
+	public static Item ingots;
 
 	public static Item reprogrammer;
 	public static Item hammer;
@@ -117,11 +116,7 @@ public final class ModItems {
 
 		clockworkBow = new ItemClockworkBow().setUnlocalizedName(LibNames.BOW);
 
-		copperIngot = new ItemMod("ingotCopper")
-				.setUnlocalizedName(LibNames.COPPERINGOT);
-
-		tinIngot = new ItemMod("ingotTin")
-				.setUnlocalizedName(LibNames.TININGOT);
+	
 
 		reprogrammer = new ItemReprogrammer().setUnlocalizedName(
 				LibNames.REPROGRAMMER).setMaxStackSize(1);
@@ -134,6 +129,8 @@ public final class ModItems {
 
 		craftingItems = new ItemCrafting()
 				.setUnlocalizedName(LibNames.CRAFTING);
+		
+		ingots = new ItemIngot();
 
 		registerItems();
 	}
@@ -170,9 +167,8 @@ public final class ModItems {
 
 		GameRegistry.registerItem(clockworkBow, LibNames.BOW, Reference.ModID);
 
-		GameRegistry.registerItem(copperIngot, LibNames.COPPERINGOT,
-				Reference.ModID);
-		GameRegistry.registerItem(tinIngot, LibNames.TININGOT, Reference.ModID);
+		
+		GameRegistry.registerItem(ingots, LibNames.INGOTS, Reference.ModID);
 
 		GameRegistry.registerItem(reprogrammer, LibNames.REPROGRAMMER,
 				Reference.ModID);

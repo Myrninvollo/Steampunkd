@@ -10,8 +10,8 @@ item.steampunked.flightGoggles.name=Flight Goggles
 item.steampunked.bootsPiston.name=Piston Boots
 item.steampunked.mechBoots.name=Mechanised Boots
 item.steampunked.chasis.name=Automaton Chassis
-item.steampunked.ingotCopper.name=Copper Ingot
-item.steampunked.ingotTin.name=Tin Ingot
+item.steampunked.ingotcopper.name=Copper Ingot
+item.steampunked.ingottin.name=Tin Ingot
 item.steampunked.hammer.name=Iron Hammer
 
 item.steampunked.craftingItem.0.name=Canister
@@ -54,8 +54,10 @@ tile.steampunked.furnaceSteam.name=Steam Heated Furnace
 tile.steampunked.furnaceSteamburning.name=Steam Heated Furnace
 tile.steampunked.bench.name=Automaton Tinkering Bench
 tile.steampunked.punchcardmaker.name=Punchcard Maker
-tile.steampunked.oreCopper.name=Copper Ore
-tile.steampunked.oreTin.name=Tin Ore
+tile.steampunked.blockGeneric.oreCopper.name=Copper Ore
+tile.steampunked.blockGeneric.oreTin.name=Tin Ore
+tile.steampunked.blockGeneric.storageCopper.name=Block of Copper
+tile.steampunked.blockGeneric.storageTin.name=Block of Tin
 
 **Slate**
 tile.steampunked.slate.name=Slate
@@ -65,7 +67,7 @@ tile.steampunked.slateBrickSlab.name=Slate Brick Slab
 tile.steampunked.slate.stairs.name=Slate Stairs
 tile.steampunked.slate.brickStairs.name=Slate Brick Stairs
 
-tile.steampunked.pipeFluid.name=Fluid Pipe
+tile.steampunked.pipe.name=Fluid Pipe
 entity.steampunked.Automoton.name=Steam Automoton
 
 

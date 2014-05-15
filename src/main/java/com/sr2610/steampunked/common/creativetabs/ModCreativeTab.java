@@ -64,8 +64,7 @@ public class ModCreativeTab extends CreativeTabs {
 		addBlock(ModBlocks.slateBrick);
 		addBlock(ModBlocks.slateBrickStair);
 		addBlock(ModBlocks.genericBlock);
-		addItem(ModItems.copperIngot);
-		addItem(ModItems.tinIngot);
+		addItem(ModItems.ingots);
 		addItem(ModItems.craftingItems);
 
 	}
