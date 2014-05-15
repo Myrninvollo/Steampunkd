@@ -14,20 +14,40 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.sr2610.steampunked.Steampunked;
 import com.sr2610.steampunked.common.creativetabs.ModCreativeTab;
 import com.sr2610.steampunked.common.lib.LibNames;
+import com.sr2610.steampunked.common.lib.Reference;
 import com.sr2610.steampunked.common.tileentities.TileEntitySteamBoiler;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class BlockSteamBoiler extends BlockContainer {
+	
+	
+	@SideOnly(Side.CLIENT)
+	private IIcon topIcon;
+	@SideOnly(Side.CLIENT)
+	private IIcon frontIcon;
+	@SideOnly(Side.CLIENT)
+	private IIcon bottomIcon;
+	
+	private final boolean isActive=false;
+	private final boolean hasWater=false;
+
 
 	public BlockSteamBoiler(Material par2Material) {
 		super(par2Material);
@@ -97,14 +117,99 @@ public class BlockSteamBoiler extends BlockContainer {
 		}
 	}
 
-	@Override
-	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
-		super.onBlockAdded(par1World, par2, par3, par4);
-	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
 		return new TileEntitySteamBoiler();
+	}
+	
+	
+	@Override
+	public void onBlockAdded(World world, int x, int y, int z) {
+		super.onBlockAdded(world, x, y, z);
+		setMeta(world, x, y, z);
+
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta) {
+		if (meta == 0 && side == 3)
+			return frontIcon;
+		else if (side == 1)
+			return topIcon;
+		else if (side == 0)
+			return bottomIcon;
+		else if (side == meta)
+			return frontIcon;
+		else
+			return blockIcon;
+
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
+		blockIcon = par1IconRegister.registerIcon(Reference.ModID + ":machine");
+	if(hasWater)
+		if(isActive)
+			frontIcon = par1IconRegister.registerIcon(Reference.ModID + ":boiler_front_on_full");
+		else
+			frontIcon = par1IconRegister.registerIcon(Reference.ModID + ":boiler_front_off_full");
+	else
+		frontIcon = par1IconRegister.registerIcon(Reference.ModID + ":boiler_front_off_empty");
+
+
+
+
+		topIcon = par1IconRegister.registerIcon(Reference.ModID
+				+ ":machineTop");
+		bottomIcon = par1IconRegister.registerIcon(Reference.ModID
+				+ ":machineBottom");
+	}
+
+	private void setMeta(World world, int x, int y, int z) {
+		if (!world.isRemote) {
+			final Block block = world.getBlock(x, y, z - 1);
+			final Block block1 = world.getBlock(x, y, z + 1);
+			final Block block2 = world.getBlock(x - 1, y, z);
+			final Block block3 = world.getBlock(x + 1, y, z);
+			byte b0 = 3;
+
+			if (block.func_149730_j() && !block1.func_149730_j())
+				b0 = 3;
+
+			if (block1.func_149730_j() && !block.func_149730_j())
+				b0 = 2;
+
+			if (block2.func_149730_j() && !block3.func_149730_j())
+				b0 = 5;
+
+			if (block3.func_149730_j() && !block2.func_149730_j())
+				b0 = 4;
+
+			world.setBlockMetadataWithNotify(x, y, z, b0, 2);
+		}
+	}
+
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z,
+			EntityLivingBase entity, ItemStack itemstack) {
+		final int l = MathHelper
+				.floor_double(entity.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+
+		if (l == 0)
+			world.setBlockMetadataWithNotify(x, y, z, 2, 2);
+
+		if (l == 1)
+			world.setBlockMetadataWithNotify(x, y, z, 5, 2);
+
+		if (l == 2)
+			world.setBlockMetadataWithNotify(x, y, z, 3, 2);
+
+		if (l == 3)
+			world.setBlockMetadataWithNotify(x, y, z, 4, 2);
+
 	}
 
 }

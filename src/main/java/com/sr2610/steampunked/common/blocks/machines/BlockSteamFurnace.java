@@ -134,7 +134,7 @@ public class BlockSteamFurnace extends BlockContainer {
 	@Override
 	public void onBlockAdded(World world, int x, int y, int z) {
 		super.onBlockAdded(world, x, y, z);
-		func_149930_e(world, x, y, z);
+		setMeta(world, x, y, z);
 
 	}
 
@@ -168,7 +168,7 @@ public class BlockSteamFurnace extends BlockContainer {
 				+ ":machine");
 	}
 
-	private void func_149930_e(World world, int x, int y, int z) {
+	private void setMeta(World world, int x, int y, int z) {
 		if (!world.isRemote) {
 			final Block block = world.getBlock(x, y, z - 1);
 			final Block block1 = world.getBlock(x, y, z + 1);

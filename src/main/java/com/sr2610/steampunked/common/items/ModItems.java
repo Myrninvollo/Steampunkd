@@ -202,8 +202,8 @@ public final class ModItems {
 	}
 
 	public static void oreRegistration() {
-		OreDictionary.registerOre("ingotCopper", new ItemStack(copperIngot));
-		OreDictionary.registerOre("ingotTin", new ItemStack(tinIngot));
+		OreDictionary.registerOre("ingotCopper", new ItemStack(ingots,1,0));
+		OreDictionary.registerOre("ingotTin", new ItemStack(ingots,1,1));
 
 		// :( Vanilla Should do this
 		OreDictionary.registerOre("ingotIron", Items.iron_ingot);
