@@ -30,6 +30,7 @@ import com.sr2610.steampunked.common.blocks.slate.BlockSlateBrickSlab;
 import com.sr2610.steampunked.common.blocks.slate.BlockSlateBrickStairs;
 import com.sr2610.steampunked.common.blocks.slate.BlockSlateSlab;
 import com.sr2610.steampunked.common.blocks.slate.BlockSlateStairs;
+import com.sr2610.steampunked.common.items.ItemGenericBlock;
 import com.sr2610.steampunked.common.items.ItemSlateBrickSlab;
 import com.sr2610.steampunked.common.items.ItemSlateSlab;
 import com.sr2610.steampunked.common.lib.LibNames;
@@ -61,8 +62,6 @@ public final class ModBlocks {
 	public static Block steamBlaster;
 
 	/* ORES */
-	public static Block oreCopper;
-	public static Block oreTin;
 
 	/* Slate */
 	public static Block slate;
@@ -73,6 +72,8 @@ public final class ModBlocks {
 	public static Block slateBrickSlabDouble;
 	public static Block slateStair;
 	public static Block slateBrickStair;
+
+	public static Block genericBlock;
 
 	public static void initBlocks() {
 		Steampunked.logger.info("Initialising  Blocks");
@@ -105,15 +106,7 @@ public final class ModBlocks {
 
 		steamBlaster = new BlockSteamBlaster();
 
-		oreCopper = new BlockMod(Material.rock, "oreCopper", 1, "pickaxe")
-				.setHardness(3.0F).setResistance(5.0F)
-				.setStepSound(Block.soundTypeStone)
-				.setBlockName(LibNames.ORECOPPER);
-
-		oreTin = new BlockMod(Material.rock, "oreTin", 1, "pickaxe")
-				.setHardness(3.0F).setResistance(5.0F)
-				.setStepSound(Block.soundTypeStone)
-				.setBlockName(LibNames.ORETIN);
+		genericBlock = new BlockGeneric();
 
 		initSlate();
 		registerBlocks();
@@ -146,8 +139,6 @@ public final class ModBlocks {
 		GameRegistry.registerBlock(steamFurnaceActive, LibNames.FURNACE
 				+ "burning");
 		GameRegistry.registerBlock(tinkerBench, LibNames.BENCH);
-		GameRegistry.registerBlock(oreCopper, LibNames.ORECOPPER);
-		GameRegistry.registerBlock(oreTin, LibNames.ORETIN);
 		GameRegistry.registerBlock(punchcardMaker, LibNames.MAKER);
 
 		GameRegistry.registerBlock(pipe, LibNames.PIPE);
@@ -170,6 +161,9 @@ public final class ModBlocks {
 		GameRegistry.registerBlock(slateBrickStair,
 				"steampunked.slateBrickStair");
 
+		GameRegistry.registerBlock(genericBlock, ItemGenericBlock.class,
+				LibNames.GENERICBLOCK);
+
 	}
 
 	private static void bindTileEntitys() {
@@ -190,8 +184,9 @@ public final class ModBlocks {
 	}
 
 	public static void oreRegistration() {
-		OreDictionary.registerOre("oreCopper", new ItemStack(oreCopper));
-		OreDictionary.registerOre("oreTin", new ItemStack(oreTin));
+		OreDictionary.registerOre("oreCopper",
+				new ItemStack(genericBlock, 1, 0));
+		OreDictionary.registerOre("oreTin", new ItemStack(genericBlock, 1, 1));
 
 	}
 

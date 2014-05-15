@@ -19,7 +19,7 @@ import net.minecraft.util.StatCollector;
 
 import com.sr2610.steampunked.api.handbook.HandbookPage;
 import com.sr2610.steampunked.api.handbook.IGuiHandbookEntry;
-import com.sr2610.steampunked.client.utils.FontHelper;
+import com.sr2610.steampunked.api.utils.FontHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

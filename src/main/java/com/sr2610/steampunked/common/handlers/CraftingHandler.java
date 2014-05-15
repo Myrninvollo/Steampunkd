@@ -134,9 +134,11 @@ public final class CraftingHandler {
 
 	public static void initSmelting() {
 
-		GameRegistry.addSmelting(ModBlocks.oreCopper, new ItemStack(
+		GameRegistry.addSmelting(new ItemStack(
+				ModBlocks.genericBlock,1,0), new ItemStack(
 				ModItems.copperIngot), 0.7F);
-		GameRegistry.addSmelting(ModBlocks.oreTin, new ItemStack(
+		GameRegistry.addSmelting(new ItemStack(
+				ModBlocks.genericBlock,1,1), new ItemStack(
 				ModItems.tinIngot), 0.7F);
 	}
 

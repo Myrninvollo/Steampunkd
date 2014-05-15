@@ -11,6 +11,7 @@ package com.sr2610.steampunked.common.world;
 
 import java.util.Random;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -45,7 +46,7 @@ public class OreGeneration implements IWorldGenerator {
 			final int blockXCoord = i + random.nextInt(16);
 			final int blockYCoord = random.nextInt(64);
 			final int blockZCoord = j + random.nextInt(16);
-			new WorldGenMinable(ModBlocks.oreCopper, 8).generate(world, random,
+			new WorldGenMinable(ModBlocks.genericBlock,0,8,Blocks.stone).generate(world, random,
 					blockXCoord, blockYCoord, blockZCoord);
 
 		}
@@ -54,8 +55,9 @@ public class OreGeneration implements IWorldGenerator {
 			final int blockXCoord = i + random.nextInt(16);
 			final int blockYCoord = random.nextInt(64);
 			final int blockZCoord = j + random.nextInt(16);
-			new WorldGenMinable(ModBlocks.oreTin, 6).generate(world, random,
+			new WorldGenMinable(ModBlocks.genericBlock,1,6,Blocks.stone).generate(world, random,
 					blockXCoord, blockYCoord, blockZCoord);
+
 
 		}
 

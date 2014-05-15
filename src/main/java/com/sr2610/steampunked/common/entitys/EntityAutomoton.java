@@ -30,12 +30,12 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
+import com.sr2610.steampunked.api.utils.InventoryUtils;
 import com.sr2610.steampunked.common.entitys.ai.EntityAIMoveHome;
 import com.sr2610.steampunked.common.entitys.ai.programs.EntityAICollectItem;
 import com.sr2610.steampunked.common.entitys.ai.programs.EntityAIInsertItem;
 import com.sr2610.steampunked.common.entitys.ai.programs.combat.AttackFilter;
 import com.sr2610.steampunked.common.items.ModItems;
-import com.sr2610.steampunked.common.utils.InventoryUtils;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

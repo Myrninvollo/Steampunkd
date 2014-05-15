@@ -18,6 +18,7 @@ import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
 import com.sr2610.steampunked.Steampunked;
+import com.sr2610.steampunked.api.utils.FakeIcon;
 import com.sr2610.steampunked.client.gui.components.BaseComponent;
 import com.sr2610.steampunked.client.gui.components.BaseComponent.TabColor;
 import com.sr2610.steampunked.client.gui.components.GuiComponentIconButton;
@@ -25,7 +26,6 @@ import com.sr2610.steampunked.client.gui.components.GuiComponentLabel;
 import com.sr2610.steampunked.client.gui.components.GuiComponentTab;
 import com.sr2610.steampunked.client.gui.components.GuiComponentTabs;
 import com.sr2610.steampunked.client.gui.components.IComponentListener;
-import com.sr2610.steampunked.client.utils.FakeIcon;
 import com.sr2610.steampunked.common.inventory.container.ContainerInjector;
 import com.sr2610.steampunked.common.lib.Reference;
 import com.sr2610.steampunked.common.network.PacketMachineRedstone;

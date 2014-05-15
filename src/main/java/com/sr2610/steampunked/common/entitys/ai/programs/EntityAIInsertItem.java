@@ -15,8 +15,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.world.World;
 
+import com.sr2610.steampunked.api.utils.InventoryUtils;
 import com.sr2610.steampunked.common.entitys.EntityAutomoton;
-import com.sr2610.steampunked.common.utils.InventoryUtils;
 
 public class EntityAIInsertItem extends EntityAIBase {
 

@@ -23,10 +23,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.sr2610.steampunked.api.utils.Vector3fMax;
 import com.sr2610.steampunked.common.lib.LibNames;
 import com.sr2610.steampunked.common.lib.Reference;
 import com.sr2610.steampunked.common.tileentities.TileEntityPipe;
-import com.sr2610.steampunked.common.utils.Vector3fMax;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

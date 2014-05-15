@@ -61,5 +61,6 @@ public final class LibNames {
 	
 	public static final String SLATE = "steampunked.slate";
 	public static final String SLATEBRICK = "steampunked.slateBrick";
+	public static final String GENERICBLOCK = "steampunked.blockGeneric";
 
 }

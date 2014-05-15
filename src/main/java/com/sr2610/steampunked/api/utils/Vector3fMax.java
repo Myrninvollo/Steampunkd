@@ -7,7 +7,7 @@
  * Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
  ******************************************************************************/
-package com.sr2610.steampunked.common.utils;
+package com.sr2610.steampunked.api.utils;
 
 public class Vector3fMax {
 	private float xMin;

@@ -7,8 +7,11 @@
  * Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
  ******************************************************************************/
-package com.sr2610.steampunked.common.utils;
+package com.sr2610.steampunked.api.utils;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -20,6 +23,14 @@ public class Utils {
 		return StatCollector.translateToLocal("fluid."
 				+ FluidRegistry.getFluidName(stack));
 
+	}
+	
+	public static void sendPlayerChatMessage(EntityPlayer player, String message){
+		player.addChatMessage(new ChatComponentTranslation(message));
+	}
+	
+	public static void sendPlayerLocalisedChatMessage(EntityPlayer player, String message){
+		player.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal(message)));
 	}
 
 	public static int getIntDirFromDirection(ForgeDirection dir) {

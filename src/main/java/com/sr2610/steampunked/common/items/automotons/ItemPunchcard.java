@@ -21,6 +21,7 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 
+import com.sr2610.steampunked.api.utils.Utils;
 import com.sr2610.steampunked.common.creativetabs.ModAutomatonTab;
 import com.sr2610.steampunked.common.entitys.EntityAutomoton;
 import com.sr2610.steampunked.common.lib.Reference;
@@ -75,10 +76,8 @@ public class ItemPunchcard extends Item {
 				}
 			else {
 				if (!par2EntityPlayer.worldObj.isRemote)
-					par2EntityPlayer
-							.addChatComponentMessage(new ChatComponentTranslation(
-									StatCollector
-											.translateToLocal("steampunked.oneProgram")));
+					Utils.sendPlayerLocalisedChatMessage(par2EntityPlayer,
+							"steampunked.oneProgram");
 				return false;
 			}
 

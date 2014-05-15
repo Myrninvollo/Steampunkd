@@ -29,8 +29,8 @@ import com.sr2610.steampunked.api.handbook.HandbookPage;
 import com.sr2610.steampunked.api.handbook.HandbookRecipeMappings;
 import com.sr2610.steampunked.api.handbook.HandbookRecipeMappings.EntryData;
 import com.sr2610.steampunked.api.handbook.IGuiHandbookEntry;
+import com.sr2610.steampunked.api.utils.RenderHelper;
 import com.sr2610.steampunked.client.gui.handbook.GuiHandbookEntry;
-import com.sr2610.steampunked.client.utils.RenderHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

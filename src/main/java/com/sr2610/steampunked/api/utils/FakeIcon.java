@@ -7,7 +7,7 @@
  * Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
  ******************************************************************************/
-package com.sr2610.steampunked.client.utils;
+package com.sr2610.steampunked.api.utils;
 
 import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;

@@ -32,7 +32,7 @@ import org.lwjgl.opengl.GL11;
 import com.sr2610.steampunked.api.handbook.HandbookEntry;
 import com.sr2610.steampunked.api.handbook.HandbookRecipeMappings;
 import com.sr2610.steampunked.api.handbook.IGuiHandbookEntry;
-import com.sr2610.steampunked.client.utils.RenderHelper;
+import com.sr2610.steampunked.api.utils.RenderHelper;
 import com.sr2610.steampunked.common.lib.Reference;
 
 import cpw.mods.fml.relauncher.ReflectionHelper;
