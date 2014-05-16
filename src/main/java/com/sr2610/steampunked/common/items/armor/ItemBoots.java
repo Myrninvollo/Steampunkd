@@ -45,7 +45,7 @@ public class ItemBoots extends ItemArmor implements ISteamUser, ISpecialArmor {
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
 			String type) {
 
-		return Reference.ModID + ":textures/models/springbootsmodel.png";
+		return Reference.ModID + ":textures/models/armor/pistonBoots.png";
 	}
 
 	@Override

@@ -34,7 +34,7 @@ public class ItemGoggles extends ItemArmor {
 	@Override
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
 			String type) {
-		return Reference.ModID + ":textures/models/goggles.png";
+		return Reference.ModID + ":textures/models/armor/goggles.png";
 	}
 
 	@Override

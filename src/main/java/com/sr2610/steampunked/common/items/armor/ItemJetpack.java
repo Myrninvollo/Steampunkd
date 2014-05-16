@@ -58,7 +58,7 @@ public class ItemJetpack extends ItemArmor implements ISteamUser, ISpecialArmor 
 	@Override
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
 			String type) {
-		return Reference.ModID + ":textures/models/jetpack.png";
+		return Reference.ModID + ":textures/models/armor/jetpackBasic.png";
 	}
 
 	@Override
