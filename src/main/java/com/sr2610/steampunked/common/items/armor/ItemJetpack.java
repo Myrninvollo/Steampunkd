@@ -26,6 +26,7 @@ import org.lwjgl.input.Keyboard;
 
 import com.sr2610.steampunked.api.items.ISteamUser;
 import com.sr2610.steampunked.common.creativetabs.ModCreativeTab;
+import com.sr2610.steampunked.common.items.ModItems;
 import com.sr2610.steampunked.common.lib.LibOptions;
 import com.sr2610.steampunked.common.lib.Reference;
 
@@ -63,8 +64,17 @@ public class ItemJetpack extends ItemArmor implements ISteamUser, ISpecialArmor 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player,
 			ItemStack itemStack) {
+		final ItemStack armor = player.getCurrentArmor(3 - 0);
 		final Minecraft mc = FMLClientHandler.instance().getClient();
 		if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && player.posY <= 200
+				&& getCurrentSteam(itemStack) > 0 && mc.currentScreen == null) {
+			player.fallDistance = 0F;
+			player.motionY += 0.10;
+			setDamage(itemStack, getDamage(itemStack) + 2);
+
+		}
+		
+		else if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && (armor != null && armor.getItem() == ModItems.goggles)
 				&& getCurrentSteam(itemStack) > 0 && mc.currentScreen == null) {
 			player.fallDistance = 0F;
 			player.motionY += 0.10;
