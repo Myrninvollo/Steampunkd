@@ -77,9 +77,11 @@ public class PageCraftingRecipe extends PageRecipe {
 
 		final boolean unicode = fontRendererObj.getUnicodeFlag();
 		fontRendererObj.setUnicodeFlag(true);
-		String title = StatCollector.translateToLocal("steampunked.entry."
-				+ name + ".title");
-		drawHeader(((GuiScreen) gui).mc.fontRenderer,((GuiScreen) gui));
+
+		String title = StatCollector
+				.translateToLocal("steampunked.gui.handbook.crafting");
+		drawCenteredStringNoShadow(fontRendererObj, title, ((IGuiHandbookEntry) gui).getLeft()
+				+ fontRendererObj.getStringWidth(title), ((IGuiHandbookEntry) gui).getTop() + 10, 0);
 
 		fontRendererObj.setUnicodeFlag(unicode);
 
@@ -228,13 +230,14 @@ public class PageCraftingRecipe extends PageRecipe {
 		final boolean unicode = font.getUnicodeFlag();
 		font.setUnicodeFlag(true);
 
-		String title = StatCollector.translateToLocal("steampunked.entry."
-				+ name + ".title");
-		drawCenteredStringNoShadow(font, title,
-				((IGuiHandbookEntry) gui).getLeft() + (font.getStringWidth(title)), ((IGuiHandbookEntry) gui).getTop() + 10, 0);
+		drawCenteredStringNoShadow(font, "Crafting", ((IGuiHandbookEntry) gui).getLeft()
+				+ font.getStringWidth("Crafting"), ((IGuiHandbookEntry) gui).getTop() + 10, 0);
 
 		font.setUnicodeFlag(unicode);
 	}
+	
+	
+
 
 	public void drawCenteredStringNoShadow(FontRenderer par1FontRenderer,
 			String par2Str, int par3, int par4, int par5) {

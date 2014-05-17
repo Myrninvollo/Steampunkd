@@ -87,6 +87,7 @@ steampunked.gui.highRedstone=Requires Redstone Signal to Operate
 **Handbook**
 item.steampunked.handbook.name=Engineer's Handbook
 steampunked.gui.handbook.header=Engineer's Handbook
+steampunked.gui.handbook.crafting=     Crafting     
 steampunked.gui.handbook.clickToRecipe=Click to see Recipe
 steampunked.gui.handbook.craftingContainer=This item.steampunked is returned after crafting
 steampunked.gui.handbook.oredict=Ore Dictionary Recipe
