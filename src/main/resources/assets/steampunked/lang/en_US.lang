@@ -4,7 +4,7 @@ item.steampunked.jetpack.name=Steam Powered Jetpack
 item.steampunked.drill.name=Mining Drill
 item.steampunked.drill_diamond.name=Mining Drill
 item.steampunked.bucketSteam.name=Bucket of Steam
-item.steampunked.spanner.name=Spanner
+item.steampunked.wrench.name=Monkey Wrench
 item.steampunked.nameplate.name=Automaton Nameplate
 item.steampunked.flightGoggles.name=Flight Goggles
 item.steampunked.bootsPiston.name=Piston Boots
@@ -92,11 +92,11 @@ steampunked.gui.handbook.craftingContainer=This item.steampunked is returned aft
 steampunked.gui.handbook.oredict=Ore Dictionary Recipe
 steampunked.gui.handbook.shapeless=Shapeless Recipe
 
-**Spanner**
-steampunked.entry.spanner=Spanner
-steampunked.entry.spanner.title=Crafting the Spanner
-steampunked.page.spanner0=The Spanner.  The tool used to rotate blocks and do nifty things with machines and Automotons.
-steampunked.page.spanner1=Never put a spanner in the works.  Never.
+**wrench**
+steampunked.entry.wrench=Monkey Wrench
+steampunked.entry.wrench.title=Crafting the Mokey Wrench
+steampunked.page.wrench0=The Monkey Wrench.  The tool used to rotate blocks and do nifty things with machines and Automotons.
+steampunked.page.wrench1="Don't wanna be your..." 
 
 **Hammer**
 steampunked.entry.hammer=Hammer

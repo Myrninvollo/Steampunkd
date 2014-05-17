@@ -31,11 +31,11 @@ import com.sr2610.steampunked.common.entitys.EntityAutomoton;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemSpanner extends Item {
+public class ItemWrench extends Item {
 
 	private final Set<Class<? extends Block>> shiftRotations = new HashSet<Class<? extends Block>>();
 
-	public ItemSpanner() {
+	public ItemWrench() {
 		super();
 		setFull3D();
 		setMaxStackSize(1);
@@ -93,7 +93,7 @@ public class ItemSpanner extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister par1IconRegister) {
-		itemIcon = par1IconRegister.registerIcon("steampunked:spanner");
+		itemIcon = par1IconRegister.registerIcon("steampunked:wrench");
 	}
 
 	@Override

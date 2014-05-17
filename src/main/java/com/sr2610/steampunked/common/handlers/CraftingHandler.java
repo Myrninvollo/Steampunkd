@@ -29,7 +29,7 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public final class CraftingHandler {
-	public static IRecipe recipeSpanner;
+	public static IRecipe recipeWrench;
 	public static IRecipe recipeHammer;
 	public static List<IRecipe> recipeSabers;
 	public static IRecipe recipePistonBoots;
@@ -54,9 +54,9 @@ public final class CraftingHandler {
 		addOreDictRecipe(new ItemStack(ModBlocks.pipe), "ICI", "ICI", 'I',
 				"ingotIron", 'C', new ItemStack(ModItems.craftingItems, 1, 0));
 		recipePipe = SteampunkedAPI.getLatestAddedRecipe();
-		addOreDictRecipe(new ItemStack(ModItems.spanner), "x x", " x ", " x ",
+		addOreDictRecipe(new ItemStack(ModItems.wrench), "x x", " x ", " x ",
 				'x', "ingotIron");
-		recipeSpanner = SteampunkedAPI.getLatestAddedRecipe();
+		recipeWrench = SteampunkedAPI.getLatestAddedRecipe();
 
 		addOreDictRecipe(new ItemStack(ModItems.hammer), "xxx", "xxx", " s ",
 				's', "stickWood", 'x', "ingotIron");

@@ -37,7 +37,7 @@ import com.sr2610.steampunked.common.items.tools.ItemDiamondDrill;
 import com.sr2610.steampunked.common.items.tools.ItemDrill;
 import com.sr2610.steampunked.common.items.tools.ItemHammer;
 import com.sr2610.steampunked.common.items.tools.ItemSaber;
-import com.sr2610.steampunked.common.items.tools.ItemSpanner;
+import com.sr2610.steampunked.common.items.tools.ItemWrench;
 import com.sr2610.steampunked.common.lib.LibNames;
 import com.sr2610.steampunked.common.lib.Reference;
 
@@ -48,7 +48,7 @@ public final class ModItems {
 	public static Item drill;
 	public static Item drillDiamond;
 	public static Item bucket;
-	public static Item spanner;
+	public static Item wrench;
 	public static Item goggles;
 	public static Item boots;
 	public static Item mechBoots;
@@ -87,7 +87,7 @@ public final class ModItems {
 				.setContainerItem(Items.bucket)
 				.setTextureName(Reference.ModID + ":steam_bucket");
 
-		spanner = new ItemSpanner().setUnlocalizedName(LibNames.SPANNER);
+		wrench = new ItemWrench().setUnlocalizedName(LibNames.WRENCH);
 
 		goggles = new ItemGoggles().setUnlocalizedName(LibNames.GOGGLES);
 
@@ -142,7 +142,7 @@ public final class ModItems {
 		GameRegistry.registerItem(drillDiamond, LibNames.DRILL + "_diamond",
 				Reference.ModID);
 		GameRegistry.registerItem(bucket, LibNames.BUCKET, Reference.ModID);
-		GameRegistry.registerItem(spanner, LibNames.SPANNER, Reference.ModID);
+		GameRegistry.registerItem(wrench, LibNames.WRENCH, Reference.ModID);
 		GameRegistry.registerItem(goggles, LibNames.GOGGLES, Reference.ModID);
 		GameRegistry.registerItem(spawner, LibNames.SPAWNER, Reference.ModID);
 		GameRegistry.registerItem(namePlate, LibNames.NAMEPLATE,

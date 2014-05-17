@@ -26,7 +26,7 @@ public final class HandbookData {
 	public static HandbookCatagory categoryArmor;
 
 	public static HandbookEntry steam;
-	public static HandbookEntry spanner;
+	public static HandbookEntry wrench;
 	public static HandbookEntry hammer;
 	public static HandbookEntry pistonBoots;
 	public static HandbookEntry mechBoots;
@@ -56,9 +56,9 @@ public final class HandbookData {
 		steam = new SPHandbookEntry("steam", categoryBasics);
 		steam.setPriority().setHandbookPages(new PageText("0"));
 
-		spanner = new SPHandbookEntry("spanner", categoryBasics);
-		spanner.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",
-				CraftingHandler.recipeSpanner, "spanner"));
+		wrench = new SPHandbookEntry("wrench", categoryBasics);
+		wrench.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",
+				CraftingHandler.recipeWrench, "wrench"));
 
 		hammer = new SPHandbookEntry("hammer", categoryBasics);
 		hammer.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",

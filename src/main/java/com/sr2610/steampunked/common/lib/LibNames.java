@@ -14,7 +14,7 @@ public final class LibNames {
 	public static final String JETPACK = "steampunked.jetpack";
 	public static final String DRILL = "steampunked.drill";
 	public static final String BUCKET = "steampunked.bucketSteam";
-	public static final String SPANNER = "steampunked.spanner";
+	public static final String WRENCH = "steampunked.wrench";
 	public static final String GOGGLES = "steampunked.flightGoggles";
 	public static final String BOOTS = "steampunked.bootsPiston";
 

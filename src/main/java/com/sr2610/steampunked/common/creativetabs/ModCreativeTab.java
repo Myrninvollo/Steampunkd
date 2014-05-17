@@ -46,7 +46,7 @@ public class ModCreativeTab extends CreativeTabs {
 		addItem(ModItems.jetpack);
 		addItem(ModItems.boots);
 		addItem(ModItems.mechBoots);
-		addItem(ModItems.spanner);
+		addItem(ModItems.wrench);
 		addItem(ModItems.hammer);
 		addItem(ModItems.drill);
 		addItem(ModItems.drillDiamond);
@@ -80,7 +80,7 @@ public class ModCreativeTab extends CreativeTabs {
 	@Override
 	public Item getTabIconItem() {
 		if (displayItem == null)
-			return new ItemStack(ModItems.spanner).getItem();
+			return new ItemStack(ModItems.handBook).getItem();
 
 		return displayItem.getItem();
 	}
