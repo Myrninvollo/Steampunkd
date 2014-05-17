@@ -95,32 +95,27 @@ steampunked.gui.handbook.shapeless=Shapeless Recipe
 
 **wrench**
 steampunked.entry.wrench=Monkey Wrench
-steampunked.entry.wrench.title=Crafting the Mokey Wrench
 steampunked.page.wrench0=The Monkey Wrench.  The tool used to rotate blocks and do nifty things with machines and Automotons.
 steampunked.page.wrench1="Don't wanna be your..." 
 
 **Hammer**
 steampunked.entry.hammer=Hammer
-steampunked.entry.hammer.title=Crafting the Hammer
 steampunked.page.hammer0=The Hammer.  A useful tool for crafting items, but it can also double up as a weapon and a pickaxe, some say that it was even used by a Norse God.
 steampunked.page.hammer1=It was so cruel to put the hammer within your reach knowing that you could never lift it.
 
 **Piston Boots**
 steampunked.entry.pistonBoots=Piston Boots
-steampunked.entry.pistonBoots.title=Crafting Piston Boots
 steampunked.page.pistonBoots0=These babies are something special.They use a patented design to break your fall, and can be refilled with steam.
 steampunked.page.pistonBoots1=Useful for High Altitude Falling
 
 **Mech Boots**
 steampunked.entry.mechBoots=Mechanised Boots
-steampunked.entry.mechBoots.title=Crafting Mechanised Boots
 steampunked.page.mechBoots0=The piston boot's older brother.  They allow you to move faster, step up full blocks and jump with greater potency.
 steampunked.page.mechBoots1="Harder, Better, Faster, Stronger"
 
 
 **Slate**
 steampunked.entry.slate=Slate
-steampunked.entry.slate.title=Crafting with Slate
 steampunked.page.slate0=Slate is a metamorphic rock, found exclusively underground in mountainous regions.  It can be converted into Slabs, Stairs, Bricks and more, being useful as a decorative block.
 steampunked.page.slate1=Crafting Slate Slabs
 steampunked.page.slate2=Crafting Slate Stairs
@@ -130,25 +125,21 @@ steampunked.page.slate5=Crafting Slate Brick Stairs
 
 **Jetpack**
 steampunked.entry.jetpack=Jetpack
-steampunked.entry.jetpack.title=Crafting the Jetpack
 steampunked.page.jetpack0=The Jetpack is a steam powered self propulsion device. When you wear this you are capable of flying upwards when jumping, however it only know up, and not how to hover.  Sadly due to weather conditions, you are not able to operate the jetpack at heights greater than 200M in the air, if only there was something to improve your vision... 
 steampunked.page.jetpack1=Up, Up, and Away
 
 **Goggles**
 steampunked.entry.goggles=Flight Goggles
-steampunked.entry.goggles.title=Crafting the Flight Goggles
 steampunked.page.goggles0=It sucks that due to poor visibility, aviation regulations only allow you to fly your Jetpack to altitudes of 200M.That's where these babies come in.These approved goggles allow you to fly however high you wish to go.
 steampunked.page.goggles1=Useful for high altitude flying
 
 **Sabers**
 steampunked.entry.sabers=Sabers
-steampunked.entry.sabers.title=Crafting Sabers
 steampunked.page.sabers0=These are like swords except they pack a slightly larger punch.  
 steampunked.page.sabers1=
 
 **Pipes**
 steampunked.entry.pipes=Fluid Pipes
-steampunked.entry.pipes.title=Crafting Pipes
 steampunked.page.pipes0=These nifty blocks are capable of transferring fluids across distances. WIP-Currently not fully implemented
 steampunked.page.pipes1=
 
@@ -159,13 +150,11 @@ steampunked.page.steam0=Steam is a gas formed by heating water to temperatures o
 **Steam Blaster**
 tile.steampunked.steamBlaster.name=Steam Blaster
 steampunked.entry.steamBlaster=Steam Blaster
-steampunked.entry.steamBlaster.title=Crafting
 steampunked.page.steamBlaster0=The Steam Blaster is a machine that moves entities around, it uses water vapor from the air and requires a redstone signal to operate
 steampunked.page.steamBlaster1=&o*Steam Blasting Noises*&1
 
 **Steam Injector**
 steampunked.entry.injector=Steam Injector
-steampunked.entry.injector.title=Crafting
 steampunked.page.injector0=The Steam Injector is used for all your steam refueling needs.  It fills up anything that runs off of it.
 steampunked.page.injector1=
 

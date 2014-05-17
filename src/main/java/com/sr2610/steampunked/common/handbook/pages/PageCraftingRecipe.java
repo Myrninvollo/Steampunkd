@@ -51,16 +51,13 @@ public class PageCraftingRecipe extends PageRecipe {
 
 	boolean oreDictRecipe, shapelessRecipe;
 
-	public PageCraftingRecipe(String unlocalizedName, List<IRecipe> recipes,
-			String pageTitle) {
+	public PageCraftingRecipe(String unlocalizedName, List<IRecipe> recipes) {
 		super(unlocalizedName);
 		this.recipes = recipes;
-		name = pageTitle;
 	}
 
-	public PageCraftingRecipe(String unlocalizedName, IRecipe recipe,
-			String pageTitle) {
-		this(unlocalizedName, Arrays.asList(recipe), pageTitle);
+	public PageCraftingRecipe(String unlocalizedName, IRecipe recipe) {
+		this(unlocalizedName, Arrays.asList(recipe));
 	}
 
 	@Override

@@ -58,54 +58,51 @@ public final class HandbookData {
 
 		wrench = new SPHandbookEntry("wrench", categoryBasics);
 		wrench.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",
-				CraftingHandler.recipeWrench, "wrench"));
+				CraftingHandler.recipeWrench));
 
 		hammer = new SPHandbookEntry("hammer", categoryBasics);
 		hammer.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",
-				CraftingHandler.recipeHammer, "hammer"));
+				CraftingHandler.recipeHammer));
 
 		pistonBoots = new SPHandbookEntry("pistonBoots", categoryArmor);
 		pistonBoots.setHandbookPages(new PageText("0"), new PageCraftingRecipe(
-				"1", CraftingHandler.recipePistonBoots, "pistonBoots"));
+				"1", CraftingHandler.recipePistonBoots));
 
 		mechBoots = new SPHandbookEntry("mechBoots", categoryArmor);
 		mechBoots.setHandbookPages(new PageText("0"), new PageCraftingRecipe(
-				"1", CraftingHandler.recipeMechBoots, "mechBoots"));
+				"1", CraftingHandler.recipeMechBoots));
 		jetpack = new SPHandbookEntry("jetpack", categoryArmor);
 		jetpack.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",
-				CraftingHandler.recipeJetpack, "jepack"));
+				CraftingHandler.recipeJetpack));
 		goggles = new SPHandbookEntry("goggles", categoryArmor);
 		goggles.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",
-				CraftingHandler.recipeGoggles, "goggles"));
+				CraftingHandler.recipeGoggles));
 
 		sabers = new SPHandbookEntry("sabers", categoryItems);
 		sabers.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",
-				CraftingHandler.recipeSabers, "sabers"));
+				CraftingHandler.recipeSabers));
 
 		slate = new SPHandbookEntry("slate", categoryBlocks);
-		slate.setHandbookPages(
-				new PageText("0"),
-				new PageCraftingRecipe("1", CraftingHandler.slateSlab, "slate"),
-				new PageCraftingRecipe("2", CraftingHandler.slateStairs,
-						"slate"),
-				new PageCraftingRecipe("3", CraftingHandler.slateBrick, "slate"),
-				new PageCraftingRecipe("4", CraftingHandler.slateBrickSlab,
-						"slate"), new PageCraftingRecipe("4",
-						CraftingHandler.slateBrickStairs, "slate"));
+		slate.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",
+				CraftingHandler.slateSlab), new PageCraftingRecipe("2",
+				CraftingHandler.slateStairs), new PageCraftingRecipe("3",
+				CraftingHandler.slateBrick), new PageCraftingRecipe("4",
+				CraftingHandler.slateBrickSlab), new PageCraftingRecipe("4",
+				CraftingHandler.slateBrickStairs));
 
 		// MACHINES//
 
 		pipes = new SPHandbookEntry("pipes", categoryMachines);
 		pipes.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",
-				CraftingHandler.recipePipe, "pipes"));
+				CraftingHandler.recipePipe));
 
 		injector = new SPHandbookEntry("injector", categoryMachines);
 		injector.setHandbookPages(new PageText("0"), new PageCraftingRecipe(
-				"1", CraftingHandler.recipeInjector, "injector"));
-		
+				"1", CraftingHandler.recipeInjector));
+
 		blaster = new SPHandbookEntry("steamBlaster", categoryMachines);
-		blaster.setHandbookPages(new PageText("0"), new PageCraftingRecipe(
-				"1", CraftingHandler.recipeBlaster, "steamBlaster"));
+		blaster.setHandbookPages(new PageText("0"), new PageCraftingRecipe("1",
+				CraftingHandler.recipeBlaster));
 
 	}
 
