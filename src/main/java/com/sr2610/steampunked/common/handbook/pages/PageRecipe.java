@@ -14,22 +14,21 @@ import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
-import net.minecraftforge.client.ForgeHooksClient;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
 import com.sr2610.steampunked.api.handbook.HandbookPage;
 import com.sr2610.steampunked.api.handbook.HandbookRecipeMappings;
 import com.sr2610.steampunked.api.handbook.HandbookRecipeMappings.EntryData;
 import com.sr2610.steampunked.api.handbook.IGuiHandbookEntry;
-import com.sr2610.steampunked.api.utils.RenderHelper;
 import com.sr2610.steampunked.client.gui.handbook.GuiHandbookEntry;
 
 import cpw.mods.fml.relauncher.Side;
@@ -62,7 +61,7 @@ public class PageRecipe extends HandbookPage {
 		if (tooltipStack != null) {
 			final List<String> tooltipData = tooltipStack.getTooltip(
 					Minecraft.getMinecraft().thePlayer, false);
-			RenderHelper.renderTooltip(mx, my, tooltipData);
+			com.sr2610.steampunked.api.utils.RenderHelper.renderTooltip(mx, my, tooltipData);
 
 			if (tooltipEntry)
 				tooltipData
@@ -76,7 +75,7 @@ public class PageRecipe extends HandbookPage {
 								+ StatCollector
 										.translateToLocal("steampunked.gui.handbook.craftingContainer"));
 
-			RenderHelper.renderTooltip(mx, my, tooltipData);
+			com.sr2610.steampunked.api.utils.RenderHelper.renderTooltip(mx, my, tooltipData);
 
 		}
 
@@ -146,15 +145,17 @@ public class PageRecipe extends HandbookPage {
 		final TextureManager renderEngine = Minecraft.getMinecraft().renderEngine;
 		final FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
 
-		GL11.glTranslatef(0F, 0F, 200F);
-		if (!ForgeHooksClient.renderInventoryItem(new RenderBlocks(),
-				renderEngine, stack, render.renderWithColor, gui.getZLevel(),
-				xPos, yPos))
-			render.renderItemIntoGUI(fontRenderer, renderEngine, stack, xPos,
-					yPos);
-		render.renderItemOverlayIntoGUI(fontRenderer, renderEngine, stack,
-				xPos, yPos);
-		GL11.glTranslatef(0F, 0F, -200F);
+		GL11.glPushMatrix();
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		RenderHelper.enableGUIStandardItemLighting();
+		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+		GL11.glEnable(GL11.GL_DEPTH_TEST);
+		render.renderItemAndEffectIntoGUI(
+				Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft()
+						.getTextureManager(), stack, xPos, yPos);
+		RenderHelper.disableStandardItemLighting();
+		GL11.glPopMatrix();
 
 		if (relativeMouseX >= xPos && relativeMouseY >= yPos
 				&& relativeMouseX <= xPos + 16 && relativeMouseY <= yPos + 16) {
