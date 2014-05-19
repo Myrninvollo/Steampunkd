@@ -19,5 +19,7 @@ public abstract class LibOptions {
 	public static int advBootsCapacity = 1500;
 	public static int boilerCapacity = 16000;
 	public static int furnaceCookTime = 500;
+	
+
 
 }

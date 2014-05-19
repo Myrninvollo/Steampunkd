@@ -12,44 +12,54 @@ package com.sr2610.steampunked.common.handlers;
 import java.io.File;
 
 import net.minecraftforge.common.config.Configuration;
-
-import com.sr2610.steampunked.common.lib.LibOptions;
+import net.minecraftforge.common.config.Property;
 
 public final class ConfigHandler {
 
 	private static Configuration config;
 
+	public static boolean giveHandbook = true;
+	public static int injectorCapacity = 16000;
+	public static int furnaceCapacity = 16000;
+	public static int jetpackCapacity = 10000;
+	public static int drillCapacity = 120;
+	public static int bootsCapacity = 250;
+	public static int advBootsCapacity = 1500;
+	public static int boilerCapacity = 16000;
+	public static int furnaceCookTime = 500;
+	
+
+
 	public static void loadConfig(File configFile) {
 		config = new Configuration(configFile);
 
 		config.load();
+		String desc;
 
-		config.get(
-				Configuration.CATEGORY_GENERAL,
-				"Capacity for the Steam injector in mB (1000mB = 1 Buckets Worth)",
-				LibOptions.injectorCapacity).getInt();
-		config.get(
-				Configuration.CATEGORY_GENERAL,
-				"Capacity for the Mining Drill in mB (1000mB = 1 Buckets Worth)",
-				LibOptions.drillCapacity).getInt();
-		config.get(Configuration.CATEGORY_GENERAL,
-				"Capacity for the Jetpack in mB (1000mB = 1 Buckets Worth)",
-				LibOptions.jetpackCapacity).getInt();
-		config.get(
-				Configuration.CATEGORY_GENERAL,
-				"Capacity for the Steam Furnace in mB (1000mB = 1 Buckets Worth)",
-				LibOptions.furnaceCapacity).getInt();
-		config.get(
-				Configuration.CATEGORY_GENERAL,
-				"Volume of Steam Taken for the Steam Furnace to Smelt 1 Item in mB (1000mb = 1 Buckets Worth)  !Warning, Anything Below 500 will mean that it can become an infinite steam generator!",
-				LibOptions.furnaceCookTime).getInt();
-
-		config.get(Configuration.CATEGORY_GENERAL, "Mech Boots Capacity",
-				LibOptions.advBootsCapacity).getInt();
-		config.get(Configuration.CATEGORY_GENERAL, "Piston Boots Capacity",
-				LibOptions.bootsCapacity).getInt();
+		desc = "Set to false to disable giving the player a handbook on startup";
+		giveHandbook = loadPropBool("handbook.shouldGive", desc, giveHandbook);
+		
 
 		config.save();
+	}
+
+	public static int loadPropInt(String propName, String desc, int defaultValue) {
+		Property prop = config.get(Configuration.CATEGORY_GENERAL, propName, defaultValue);
+		prop.comment = desc;
+		return prop.getInt(defaultValue);
+	}
+
+	public static double loadPropDouble(String propName, String desc, double defaultValue) {
+		Property prop = config.get(Configuration.CATEGORY_GENERAL, propName, defaultValue);
+		prop.comment = desc;
+		return prop.getDouble(defaultValue);
+	}
+
+	public static boolean loadPropBool(String propName, String desc, boolean defaultValue) {
+		Property prop = config.get(Configuration.CATEGORY_GENERAL, propName, defaultValue);
+		prop.comment = desc;
+		return prop.getBoolean(defaultValue);
+
 	}
 
 }

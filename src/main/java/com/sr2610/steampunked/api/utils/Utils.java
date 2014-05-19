@@ -9,10 +9,13 @@
  ******************************************************************************/
 package com.sr2610.steampunked.api.utils;
 
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -52,6 +55,44 @@ public class Utils {
 		default:
 			return 0;
 		}
+	}
+	
+	
+	public static NBTTagCompound getModPlayerPersistTag(EntityPlayer player, String modName) {
+
+		NBTTagCompound tag = player.getEntityData();
+
+		NBTTagCompound persistTag = null;
+		if (tag.hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
+			persistTag = tag.getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
+		} else {
+			persistTag = new NBTTagCompound();
+			tag.setTag(EntityPlayer.PERSISTED_NBT_TAG, persistTag);
+		}
+
+		NBTTagCompound modTag = null;
+		if (persistTag.hasKey(modName)) {
+			modTag = persistTag.getCompoundTag(modName);
+		} else {
+			modTag = new NBTTagCompound();
+			persistTag.setTag(modName, modTag);
+		}
+
+		return modTag;
+	}
+	
+	public static EntityItem dropItemStackInWorld(World worldObj, double x, double y, double z, ItemStack stack) {
+		float f = 0.7F;
+		float d0 = worldObj.rand.nextFloat() * f + (1.0F - f) * 0.5F;
+		float d1 = worldObj.rand.nextFloat() * f + (1.0F - f) * 0.5F;
+		float d2 = worldObj.rand.nextFloat() * f + (1.0F - f) * 0.5F;
+		EntityItem entityitem = new EntityItem(worldObj, x + d0, y + d1, z + d2, stack);
+		entityitem.delayBeforeCanPickup = 10;
+		if (stack.hasTagCompound()) {
+			entityitem.getEntityItem().setTagCompound((NBTTagCompound)stack.getTagCompound().copy());
+		}
+		worldObj.spawnEntityInWorld(entityitem);
+		return entityitem;
 	}
 
 }

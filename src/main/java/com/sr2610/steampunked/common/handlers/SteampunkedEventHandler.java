@@ -9,15 +9,22 @@
  ******************************************************************************/
 package com.sr2610.steampunked.common.handlers;
 
+import java.util.Set;
+
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.client.event.RenderLivingEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 
 import org.lwjgl.opengl.GL11;
 
+import com.sr2610.steampunked.api.utils.Utils;
 import com.sr2610.steampunked.common.items.ModItems;
+import com.sr2610.steampunked.common.lib.LibOptions;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -25,6 +32,8 @@ public class SteampunkedEventHandler {
 
 	public boolean resetRender = false;
 	boolean avoidRecursion = false;
+	public static final String GIVEN_HANDBOOK_TAG = "givenHandbook";
+
 
 	@SubscribeEvent
 	public void livingFall(LivingFallEvent event) {
@@ -89,6 +98,25 @@ public class SteampunkedEventHandler {
 		if (!avoidRecursion && resetRender) {
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glDisable(3042);
+		}
+	}
+	
+	@SubscribeEvent
+	public void onEntityJoinWorld(EntityJoinWorldEvent event) {
+		Entity entity = event.entity;
+		if (!event.world.isRemote && entity instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer)entity;
+			NBTTagCompound persistTag = Utils.getModPlayerPersistTag(player, "Steampunked");
+
+			boolean shouldGiveHandbook = !persistTag.getBoolean(GIVEN_HANDBOOK_TAG) && ConfigHandler.giveHandbook==true;
+			if (shouldGiveHandbook) {
+				ItemStack manual = new ItemStack(ModItems.handBook);
+				if (!player.inventory.addItemStackToInventory(manual)) {
+					Utils.dropItemStackInWorld(player.worldObj, player.posX, player.posY, player.posZ, manual);
+				}
+				persistTag.setBoolean(GIVEN_HANDBOOK_TAG, true);
+			}
+			
 		}
 	}
 
