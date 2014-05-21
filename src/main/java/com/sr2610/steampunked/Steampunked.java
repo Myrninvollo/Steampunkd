@@ -21,6 +21,7 @@ import org.apache.logging.log4j.Logger;
 import com.sr2610.steampunked.client.gui.GuiHandler;
 import com.sr2610.steampunked.common.CommonProxy;
 import com.sr2610.steampunked.common.handlers.ConfigHandler;
+import com.sr2610.steampunked.common.lib.Reference;
 import com.sr2610.steampunked.common.network.PacketPipeline;
 
 import cpw.mods.fml.common.Mod;
@@ -40,7 +41,7 @@ public class Steampunked {
 	public static final Logger logger = LogManager.getLogger("Steampunked");
 	private final GuiHandler guiHandler = new GuiHandler();
 
-	@SidedProxy(serverSide = "com.sr2610.steampunked.common.CommonProxy", clientSide = "com.sr2610.steampunked.client.ClientProxy")
+	@SidedProxy(serverSide = Reference.commonProxy, clientSide = Reference.clientProxy)
 	public static CommonProxy proxy;
 
 	@Instance
