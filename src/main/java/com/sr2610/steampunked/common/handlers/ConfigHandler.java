@@ -27,6 +27,8 @@ public final class ConfigHandler {
 	public static int advBootsCapacity = 1500;
 	public static int boilerCapacity = 16000;
 	public static int furnaceCookTime = 500;
+
+	public static boolean enableVersionCheck = false;
 	
 
 
@@ -38,6 +40,9 @@ public final class ConfigHandler {
 
 		desc = "Set to false to disable giving the player a handbook on startup";
 		giveHandbook = loadPropBool("handbook.shouldGive", desc, giveHandbook);
+		
+		desc = "Set to false to disable version checking";
+		enableVersionCheck = loadPropBool("version.shouldCheck", desc, enableVersionCheck);
 		
 
 		config.save();

@@ -128,25 +128,26 @@ public class SteampunkedEventHandler {
 
 	@SubscribeEvent
 	public void checkVersion(EntityJoinWorldEvent event) {
+		if (ConfigHandler.enableVersionCheck) {
+			try {
+				if (Utils.isUpdateAvailable()) {
+					if (event.entity instanceof EntityPlayer)
+						if (!event.entity.worldObj.isRemote) {
+							Steampunked.logger.info("Update Avalible");
 
-		try {
-			if (Utils.isUpdateAvailable()) {
-				if (event.entity instanceof EntityPlayer)
-					if (!event.entity.worldObj.isRemote) {
-						Steampunked.logger.info("Update Avalible");
-
-						Utils.sendPlayerChatMessage(
-								(EntityPlayer) event.entity,
-								EnumChatFormatting.RED
-										+ "[Steampunk'd] "
-										+ EnumChatFormatting.RESET
-										+ "A new version is available to download");
-					}
+							Utils.sendPlayerChatMessage(
+									(EntityPlayer) event.entity,
+									EnumChatFormatting.RED
+											+ "[Steampunk'd] "
+											+ EnumChatFormatting.RESET
+											+ "A new version is available to download");
+						}
+				}
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 
