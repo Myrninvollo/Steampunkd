@@ -61,13 +61,13 @@ public class ItemJetpack extends ItemArmor implements ISteamUser, ISpecialArmor 
 		return Reference.ModID + ":textures/models/armor/jetpackBasic.png";
 	}
 
-	@Override
+/*	@Override
 	public void onArmorTick(World world, EntityPlayer player,
 			ItemStack itemStack) {
 		final ItemStack armor = player.getCurrentArmor(3 - 0);
-		final Minecraft mc = FMLClientHandler.instance().getClient();
+	//	final Minecraft mc = FMLClientHandler.instance().getClient();
 		if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && player.posY <= 200
-				&& getCurrentSteam(itemStack) > 0 && mc.currentScreen == null) {
+				&& getCurrentSteam(itemStack) > 0 ) {
 			player.fallDistance = 0F;
 			player.motionY += 0.10;
 			setDamage(itemStack, getDamage(itemStack) + 2);
@@ -75,14 +75,14 @@ public class ItemJetpack extends ItemArmor implements ISteamUser, ISpecialArmor 
 		}
 		
 		else if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && (armor != null && armor.getItem() == ModItems.goggles)
-				&& getCurrentSteam(itemStack) > 0 && mc.currentScreen == null) {
+				&& getCurrentSteam(itemStack) > 0 ) {
 			player.fallDistance = 0F;
 			player.motionY += 0.10;
 			setDamage(itemStack, getDamage(itemStack) + 2);
 
 		}
 
-	}
+	}*/
 
 	@Override
 	public int getCurrentSteam(ItemStack itemStack) {
