@@ -11,7 +11,6 @@ package com.sr2610.steampunked.common.handlers;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.Set;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,12 +23,12 @@ import net.minecraftforge.event.entity.living.LivingFallEvent;
 
 import org.lwjgl.opengl.GL11;
 
-import com.sr2610.steampunked.Steampunked;
 import com.sr2610.steampunked.api.utils.Utils;
 import com.sr2610.steampunked.common.items.ModItems;
-import com.sr2610.steampunked.common.lib.LibOptions;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class SteampunkedEventHandler {
 
@@ -64,6 +63,7 @@ public class SteampunkedEventHandler {
 	}
 
 	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
 	public void entityColorRender(RenderLivingEvent.Pre event) {
 		final String s = EnumChatFormatting
 				.getTextWithoutFormattingCodes(event.entity
@@ -96,6 +96,7 @@ public class SteampunkedEventHandler {
 	}
 
 	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
 	public void entityColorRender(RenderLivingEvent.Post event) {
 		if (!avoidRecursion && resetRender) {
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
