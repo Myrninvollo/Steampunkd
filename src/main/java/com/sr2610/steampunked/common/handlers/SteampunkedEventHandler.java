@@ -133,8 +133,6 @@ public class SteampunkedEventHandler {
 				if (Utils.isUpdateAvailable()) {
 					if (event.entity instanceof EntityPlayer)
 						if (!event.entity.worldObj.isRemote) {
-							Steampunked.logger.info("Update Avalible");
-
 							Utils.sendPlayerChatMessage(
 									(EntityPlayer) event.entity,
 									EnumChatFormatting.RED
