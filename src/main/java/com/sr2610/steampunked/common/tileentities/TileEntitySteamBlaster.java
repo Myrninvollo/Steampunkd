@@ -76,7 +76,7 @@ public class TileEntitySteamBlaster extends TileEntity {
 					entity.motionY += -d;
 
 				if (j == 1 && entity.motionY < d1 * 0.5D)
-					entity.motionY += d;
+					entity.motionY += d+0.05;
 
 				if (j == 2 && entity.motionZ > -d1)
 					entity.motionZ += -d;
