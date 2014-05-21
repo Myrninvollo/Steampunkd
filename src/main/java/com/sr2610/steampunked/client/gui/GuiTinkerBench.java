@@ -175,7 +175,7 @@ public class GuiTinkerBench extends GuiMachine {
 
 	}
 
-	public static void drawEntity(int par0, int par1, int par2, float par3,
+	public void drawEntity(int par0, int par1, int par2, float par3,
 			float par4, EntityLivingBase par5EntityLivingBase) {
 		GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 		GL11.glPushMatrix();

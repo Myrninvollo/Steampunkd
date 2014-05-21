@@ -15,9 +15,6 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import com.sr2610.steampunked.Steampunked;
-import com.sr2610.steampunked.common.lib.Reference;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -28,6 +25,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+
+import com.sr2610.steampunked.Steampunked;
 
 public class Utils {
 
@@ -74,17 +73,17 @@ public class Utils {
 		NBTTagCompound tag = player.getEntityData();
 
 		NBTTagCompound persistTag = null;
-		if (tag.hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
+		if (tag.hasKey(EntityPlayer.PERSISTED_NBT_TAG))
 			persistTag = tag.getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
-		} else {
+		else {
 			persistTag = new NBTTagCompound();
 			tag.setTag(EntityPlayer.PERSISTED_NBT_TAG, persistTag);
 		}
 
 		NBTTagCompound modTag = null;
-		if (persistTag.hasKey(modName)) {
+		if (persistTag.hasKey(modName))
 			modTag = persistTag.getCompoundTag(modName);
-		} else {
+		else {
 			modTag = new NBTTagCompound();
 			persistTag.setTag(modName, modTag);
 		}
@@ -101,10 +100,9 @@ public class Utils {
 		EntityItem entityitem = new EntityItem(worldObj, x + d0, y + d1,
 				z + d2, stack);
 		entityitem.delayBeforeCanPickup = 10;
-		if (stack.hasTagCompound()) {
+		if (stack.hasTagCompound())
 			entityitem.getEntityItem().setTagCompound(
 					(NBTTagCompound) stack.getTagCompound().copy());
-		}
 		worldObj.spawnEntityInWorld(entityitem);
 		return entityitem;
 	}
@@ -118,7 +116,7 @@ public class Utils {
 		if (!curVersion.contains(Steampunked.version)) {
 			Steampunked.logger.info("Update Avalible - Version " + curVersion);
 			return true;
-		} 
+		}
 
 		versionFile.close();
 

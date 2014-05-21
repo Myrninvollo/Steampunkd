@@ -9,12 +9,6 @@
  ******************************************************************************/
 package com.sr2610.steampunked;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -71,5 +65,4 @@ public class Steampunked {
 		logger.info("Initialised Sucsessfully");
 	}
 
-	
 }

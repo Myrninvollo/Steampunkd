@@ -12,11 +12,9 @@ package com.sr2610.steampunked.common.handbook.pages;
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
@@ -61,7 +59,8 @@ public class PageRecipe extends HandbookPage {
 		if (tooltipStack != null) {
 			final List<String> tooltipData = tooltipStack.getTooltip(
 					Minecraft.getMinecraft().thePlayer, false);
-			com.sr2610.steampunked.api.utils.RenderHelper.renderTooltip(mx, my, tooltipData);
+			com.sr2610.steampunked.api.utils.RenderHelper.renderTooltip(mx, my,
+					tooltipData);
 
 			if (tooltipEntry)
 				tooltipData
@@ -75,7 +74,8 @@ public class PageRecipe extends HandbookPage {
 								+ StatCollector
 										.translateToLocal("steampunked.gui.handbook.craftingContainer"));
 
-			com.sr2610.steampunked.api.utils.RenderHelper.renderTooltip(mx, my, tooltipData);
+			com.sr2610.steampunked.api.utils.RenderHelper.renderTooltip(mx, my,
+					tooltipData);
 
 		}
 
@@ -142,9 +142,6 @@ public class PageRecipe extends HandbookPage {
 			ItemStack stack, boolean accountForContainer) {
 		yPos += 10;
 		final RenderItem render = new RenderItem();
-		final TextureManager renderEngine = Minecraft.getMinecraft().renderEngine;
-		final FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
-
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);

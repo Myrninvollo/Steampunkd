@@ -11,18 +11,18 @@ package com.sr2610.steampunked.common.blocks;
 
 import java.util.List;
 
-import com.sr2610.steampunked.common.lib.LibNames;
-import com.sr2610.steampunked.common.lib.Reference;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+
+import com.sr2610.steampunked.common.lib.LibNames;
+import com.sr2610.steampunked.common.lib.Reference;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -35,11 +35,9 @@ public class BlockGeneric extends Block {
 		super(Material.rock);
 		setBlockName(LibNames.GENERICBLOCK);
 		setCreativeTab(CreativeTabs.tabBlock);
-		blockHardness=3.0F ;
+		blockHardness = 3.0F;
 
 	}
-
-	
 
 	@Override
 	public int damageDropped(int par1) {
@@ -52,30 +50,29 @@ public class BlockGeneric extends Block {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		icons = new IIcon[names.length+1];
+		icons = new IIcon[names.length + 1];
 
-		for (int i = 0; i < names.length; i++) {
+		for (int i = 0; i < names.length; i++)
 			icons[i] = par1IconRegister.registerIcon(Reference.ModID + ":"
 					+ names[i]);
-		}
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(int side, int meta) {
 		return icons[meta];
-		}
+	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs,
 			List par3List) {
-		for (int i = 0; i < names.length; i++) {
+		for (int i = 0; i < names.length; i++)
 			par3List.add(new ItemStack(par1, 1, i));
-		}
 	}
 
+	@Override
 	public boolean isBeaconBase(IBlockAccess worldObj, int x, int y, int z,
 			int beaconX, int beaconY, int beaconZ) {
 		int meta = worldObj.getBlockMetadata(x, y, z);
@@ -84,15 +81,14 @@ public class BlockGeneric extends Block {
 		else
 			return false;
 	}
-	
-	 public String getHarvestTool(int metadata)
-	    {
-	        return "pickaxe";
-	    }
 
-	   
-	    public int getHarvestLevel(int metadata)
-	    {
-	        return 1;
-	    }
+	@Override
+	public String getHarvestTool(int metadata) {
+		return "pickaxe";
+	}
+
+	@Override
+	public int getHarvestLevel(int metadata) {
+		return 1;
+	}
 }

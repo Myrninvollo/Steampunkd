@@ -117,10 +117,9 @@ public class SteampunkedEventHandler {
 					&& ConfigHandler.giveHandbook == true;
 			if (shouldGiveHandbook) {
 				ItemStack manual = new ItemStack(ModItems.handBook);
-				if (!player.inventory.addItemStackToInventory(manual)) {
+				if (!player.inventory.addItemStackToInventory(manual))
 					Utils.dropItemStackInWorld(player.worldObj, player.posX,
 							player.posY, player.posZ, manual);
-				}
 				persistTag.setBoolean(GIVEN_HANDBOOK_TAG, true);
 			}
 
@@ -129,25 +128,22 @@ public class SteampunkedEventHandler {
 
 	@SubscribeEvent
 	public void checkVersion(EntityJoinWorldEvent event) {
-		if (ConfigHandler.enableVersionCheck) {
+		if (ConfigHandler.enableVersionCheck)
 			try {
-				if (Utils.isUpdateAvailable()) {
+				if (Utils.isUpdateAvailable())
 					if (event.entity instanceof EntityPlayer)
-						if (!event.entity.worldObj.isRemote) {
+						if (!event.entity.worldObj.isRemote)
 							Utils.sendPlayerChatMessage(
 									(EntityPlayer) event.entity,
 									EnumChatFormatting.RED
 											+ "[Steampunk'd] "
 											+ EnumChatFormatting.RESET
 											+ "A new version is available to download");
-						}
-				}
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
 	}
 
 }

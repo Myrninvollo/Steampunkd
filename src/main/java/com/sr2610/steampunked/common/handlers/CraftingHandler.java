@@ -134,12 +134,10 @@ public final class CraftingHandler {
 
 	public static void initSmelting() {
 
-		GameRegistry.addSmelting(new ItemStack(
-				ModBlocks.genericBlock,1,0), new ItemStack(
-				ModItems.ingots,1,0), 0.7F);
-		GameRegistry.addSmelting(new ItemStack(
-				ModBlocks.genericBlock,1,1), new ItemStack(
-				ModItems.ingots,1,1), 0.7F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.genericBlock, 1, 0),
+				new ItemStack(ModItems.ingots, 1, 0), 0.7F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.genericBlock, 1, 1),
+				new ItemStack(ModItems.ingots, 1, 1), 0.7F);
 	}
 
 	@SubscribeEvent

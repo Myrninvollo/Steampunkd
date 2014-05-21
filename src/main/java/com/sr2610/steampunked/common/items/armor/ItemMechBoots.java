@@ -40,7 +40,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemMechBoots extends ItemArmor implements ISteamUser,
 		ISpecialArmor {
-	
 
 	public static List<String> playersWith1Step = new ArrayList();
 	static final int ARMOR_BOOTS = 3;
@@ -208,13 +207,11 @@ public class ItemMechBoots extends ItemArmor implements ISteamUser,
 		}
 	}
 
-
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public ModelBiped getArmorModel(EntityLivingBase entityLiving,
 			ItemStack itemStack, int armorSlot) {
-	ModelBiped armorModel = new ModelBiped();
+		ModelBiped armorModel = new ModelBiped();
 
 		if (itemStack != null) {
 			if (itemStack.getItem() instanceof ItemMechBoots) {

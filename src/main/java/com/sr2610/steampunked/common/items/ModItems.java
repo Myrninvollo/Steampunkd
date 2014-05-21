@@ -65,7 +65,7 @@ public final class ModItems {
 	public static Item saberGold;
 	public static Item saberDiamond;
 	public static Item clockworkBow;
-	
+
 	public static Item ingots;
 
 	public static Item reprogrammer;
@@ -116,8 +116,6 @@ public final class ModItems {
 
 		clockworkBow = new ItemClockworkBow().setUnlocalizedName(LibNames.BOW);
 
-	
-
 		reprogrammer = new ItemReprogrammer().setUnlocalizedName(
 				LibNames.REPROGRAMMER).setMaxStackSize(1);
 
@@ -129,7 +127,7 @@ public final class ModItems {
 
 		craftingItems = new ItemCrafting()
 				.setUnlocalizedName(LibNames.CRAFTING);
-		
+
 		ingots = new ItemIngot();
 
 		registerItems();
@@ -167,7 +165,6 @@ public final class ModItems {
 
 		GameRegistry.registerItem(clockworkBow, LibNames.BOW, Reference.ModID);
 
-		
 		GameRegistry.registerItem(ingots, LibNames.INGOTS, Reference.ModID);
 
 		GameRegistry.registerItem(reprogrammer, LibNames.REPROGRAMMER,
@@ -202,8 +199,8 @@ public final class ModItems {
 	}
 
 	public static void oreRegistration() {
-		OreDictionary.registerOre("ingotCopper", new ItemStack(ingots,1,0));
-		OreDictionary.registerOre("ingotTin", new ItemStack(ingots,1,1));
+		OreDictionary.registerOre("ingotCopper", new ItemStack(ingots, 1, 0));
+		OreDictionary.registerOre("ingotTin", new ItemStack(ingots, 1, 1));
 
 		// :( Vanilla Should do this
 		OreDictionary.registerOre("ingotIron", Items.iron_ingot);

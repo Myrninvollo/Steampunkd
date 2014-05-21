@@ -11,7 +11,6 @@ package com.sr2610.steampunked.common.items.armor;
 
 import java.util.List;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,18 +18,13 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
-
-import org.lwjgl.input.Keyboard;
 
 import com.sr2610.steampunked.api.items.ISteamUser;
 import com.sr2610.steampunked.common.creativetabs.ModCreativeTab;
-import com.sr2610.steampunked.common.items.ModItems;
 import com.sr2610.steampunked.common.lib.LibOptions;
 import com.sr2610.steampunked.common.lib.Reference;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -61,28 +55,25 @@ public class ItemJetpack extends ItemArmor implements ISteamUser, ISpecialArmor 
 		return Reference.ModID + ":textures/models/armor/jetpackBasic.png";
 	}
 
-/*	@Override
-	public void onArmorTick(World world, EntityPlayer player,
-			ItemStack itemStack) {
-		final ItemStack armor = player.getCurrentArmor(3 - 0);
-	//	final Minecraft mc = FMLClientHandler.instance().getClient();
-		if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && player.posY <= 200
-				&& getCurrentSteam(itemStack) > 0 ) {
-			player.fallDistance = 0F;
-			player.motionY += 0.10;
-			setDamage(itemStack, getDamage(itemStack) + 2);
-
-		}
-		
-		else if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && (armor != null && armor.getItem() == ModItems.goggles)
-				&& getCurrentSteam(itemStack) > 0 ) {
-			player.fallDistance = 0F;
-			player.motionY += 0.10;
-			setDamage(itemStack, getDamage(itemStack) + 2);
-
-		}
-
-	}*/
+	/*
+	 * @Override public void onArmorTick(World world, EntityPlayer player,
+	 * ItemStack itemStack) { final ItemStack armor = player.getCurrentArmor(3 -
+	 * 0); // final Minecraft mc = FMLClientHandler.instance().getClient(); if
+	 * (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && player.posY <= 200 &&
+	 * getCurrentSteam(itemStack) > 0 ) { player.fallDistance = 0F;
+	 * player.motionY += 0.10; setDamage(itemStack, getDamage(itemStack) + 2);
+	 * 
+	 * }
+	 * 
+	 * else if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && (armor != null &&
+	 * armor.getItem() == ModItems.goggles) && getCurrentSteam(itemStack) > 0 )
+	 * { player.fallDistance = 0F; player.motionY += 0.10; setDamage(itemStack,
+	 * getDamage(itemStack) + 2);
+	 * 
+	 * }
+	 * 
+	 * }
+	 */
 
 	@Override
 	public int getCurrentSteam(ItemStack itemStack) {

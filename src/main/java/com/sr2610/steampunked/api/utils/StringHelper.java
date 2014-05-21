@@ -27,20 +27,24 @@ public final class StringHelper {
 
 	public static boolean isAltKeyDown() {
 
-		return Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU);
+		return Keyboard.isKeyDown(Keyboard.KEY_LMENU)
+				|| Keyboard.isKeyDown(Keyboard.KEY_RMENU);
 	}
 
 	public static boolean isControlKeyDown() {
 
-		return Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL);
+		return Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)
+				|| Keyboard.isKeyDown(Keyboard.KEY_RCONTROL);
 	}
 
 	public static boolean isShiftKeyDown() {
 
-		return Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
+		return Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)
+				|| Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
 	}
 
-	public static int getSplitStringHeight(FontRenderer fontRenderer, String input, int width) {
+	public static int getSplitStringHeight(FontRenderer fontRenderer,
+			String input, int width) {
 
 		List stringRows = fontRenderer.listFormattedStringToWidth(input, width);
 		return stringRows.size() * fontRenderer.FONT_HEIGHT;
@@ -69,13 +73,12 @@ public final class StringHelper {
 	public static String getFluidName(Fluid fluid) {
 
 		String fluidName = "";
-		if (fluid.getRarity() == EnumRarity.uncommon) {
+		if (fluid.getRarity() == EnumRarity.uncommon)
 			fluidName += YELLOW;
-		} else if (fluid.getRarity() == EnumRarity.rare) {
+		else if (fluid.getRarity() == EnumRarity.rare)
 			fluidName += BRIGHT_BLUE;
-		} else if (fluid.getRarity() == EnumRarity.epic) {
+		else if (fluid.getRarity() == EnumRarity.epic)
 			fluidName += PINK;
-		}
 		fluidName += fluid.getLocalizedName() + END;
 
 		return fluidName;
@@ -92,17 +95,14 @@ public final class StringHelper {
 
 		int numMod = 10 * minDigits;
 
-		if (number > 100000 * numMod) {
+		if (number > 100000 * numMod)
 			numString += number / 1000000 + "M";
-		} else if (number > 100 * numMod) {
+		else if (number > 100 * numMod)
 			numString += number / 1000 + "k";
-		} else {
+		else
 			numString += number;
-		}
 		return numString;
 	}
-
-
 
 	public static String getActivationText(String key) {
 
@@ -151,6 +151,5 @@ public final class StringHelper {
 
 	public static boolean displayShiftForDetail = true;
 	public static boolean displayStackCount = false;
-
 
 }

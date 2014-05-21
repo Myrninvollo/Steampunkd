@@ -44,7 +44,7 @@ public class CommonProxy {
 		ModItems.initItems();
 		registerRenderInformation();
 
-	MinecraftForge.EVENT_BUS.register(new SteampunkedEventHandler());
+		MinecraftForge.EVENT_BUS.register(new SteampunkedEventHandler());
 		FMLCommonHandler.instance().bus().register(new CraftingHandler());
 		GameRegistry.registerWorldGenerator(new OreGeneration(), 1);
 		CraftingHandler.init();

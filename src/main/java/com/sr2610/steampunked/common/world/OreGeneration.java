@@ -46,8 +46,9 @@ public class OreGeneration implements IWorldGenerator {
 			final int blockXCoord = i + random.nextInt(16);
 			final int blockYCoord = random.nextInt(64);
 			final int blockZCoord = j + random.nextInt(16);
-			new WorldGenMinable(ModBlocks.genericBlock,0,8,Blocks.stone).generate(world, random,
-					blockXCoord, blockYCoord, blockZCoord);
+			new WorldGenMinable(ModBlocks.genericBlock, 0, 8, Blocks.stone)
+					.generate(world, random, blockXCoord, blockYCoord,
+							blockZCoord);
 
 		}
 
@@ -55,9 +56,9 @@ public class OreGeneration implements IWorldGenerator {
 			final int blockXCoord = i + random.nextInt(16);
 			final int blockYCoord = random.nextInt(64);
 			final int blockZCoord = j + random.nextInt(16);
-			new WorldGenMinable(ModBlocks.genericBlock,1,6,Blocks.stone).generate(world, random,
-					blockXCoord, blockYCoord, blockZCoord);
-
+			new WorldGenMinable(ModBlocks.genericBlock, 1, 6, Blocks.stone)
+					.generate(world, random, blockXCoord, blockYCoord,
+							blockZCoord);
 
 		}
 

@@ -50,11 +50,11 @@ public class BlockSteamFurnace extends BlockContainer {
 
 	public BlockSteamFurnace(Boolean isOn, Material material) {
 		super(material);
-		
+
 		setHardness(5.0F);
 		setResistance(10.0F);
 		setStepSound(Block.soundTypeMetal);
-		
+
 		isActive = isOn;
 
 		if (!isOn)

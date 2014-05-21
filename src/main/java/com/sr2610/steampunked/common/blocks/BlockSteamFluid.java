@@ -43,8 +43,8 @@ public class BlockSteamFluid extends BlockFluidFinite {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
-		stillIcon = register
-				.registerIcon(Reference.ModID + ":fluids/steam" + "_still");
+		stillIcon = register.registerIcon(Reference.ModID + ":fluids/steam"
+				+ "_still");
 		flowingIcon = register.registerIcon(Reference.ModID + ":fluids/steam"
 				+ "_flow");
 	}

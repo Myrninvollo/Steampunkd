@@ -53,12 +53,9 @@ public final class LibNames {
 	public static final String CRAFTING = "steampunked.craftingItem";
 	public static final String BLASTER = "steampunked.steamBlaster";
 	public static final String MACHINE = "steampunked.machineCase";
-	
+
 	public static final String PIPE = "steampunked.pipe";
 
-	
-	
-	
 	public static final String SLATE = "steampunked.slate";
 	public static final String SLATEBRICK = "steampunked.slateBrick";
 	public static final String GENERICBLOCK = "steampunked.blockGeneric";

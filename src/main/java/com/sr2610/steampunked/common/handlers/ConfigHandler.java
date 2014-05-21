@@ -29,8 +29,6 @@ public final class ConfigHandler {
 	public static int furnaceCookTime = 500;
 
 	public static boolean enableVersionCheck = false;
-	
-
 
 	public static void loadConfig(File configFile) {
 		config = new Configuration(configFile);
@@ -40,28 +38,33 @@ public final class ConfigHandler {
 
 		desc = "Set to false to disable giving the player a handbook on startup";
 		giveHandbook = loadPropBool("handbook.shouldGive", desc, giveHandbook);
-		
+
 		desc = "Set to false to disable version checking";
-		enableVersionCheck = loadPropBool("version.shouldCheck", desc, enableVersionCheck);
-		
+		enableVersionCheck = loadPropBool("version.shouldCheck", desc,
+				enableVersionCheck);
 
 		config.save();
 	}
 
 	public static int loadPropInt(String propName, String desc, int defaultValue) {
-		Property prop = config.get(Configuration.CATEGORY_GENERAL, propName, defaultValue);
+		Property prop = config.get(Configuration.CATEGORY_GENERAL, propName,
+				defaultValue);
 		prop.comment = desc;
 		return prop.getInt(defaultValue);
 	}
 
-	public static double loadPropDouble(String propName, String desc, double defaultValue) {
-		Property prop = config.get(Configuration.CATEGORY_GENERAL, propName, defaultValue);
+	public static double loadPropDouble(String propName, String desc,
+			double defaultValue) {
+		Property prop = config.get(Configuration.CATEGORY_GENERAL, propName,
+				defaultValue);
 		prop.comment = desc;
 		return prop.getDouble(defaultValue);
 	}
 
-	public static boolean loadPropBool(String propName, String desc, boolean defaultValue) {
-		Property prop = config.get(Configuration.CATEGORY_GENERAL, propName, defaultValue);
+	public static boolean loadPropBool(String propName, String desc,
+			boolean defaultValue) {
+		Property prop = config.get(Configuration.CATEGORY_GENERAL, propName,
+				defaultValue);
 		prop.comment = desc;
 		return prop.getBoolean(defaultValue);
 

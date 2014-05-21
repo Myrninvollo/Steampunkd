@@ -9,7 +9,6 @@
  ******************************************************************************/
 package com.sr2610.steampunked.api.handbook;
 
-import net.minecraft.client.gui.FontRenderer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

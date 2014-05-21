@@ -36,18 +36,16 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSteamBoiler extends BlockContainer {
-	
-	
+
 	@SideOnly(Side.CLIENT)
 	private IIcon topIcon;
 	@SideOnly(Side.CLIENT)
 	private IIcon frontIcon;
 	@SideOnly(Side.CLIENT)
 	private IIcon bottomIcon;
-	
-	private final boolean isActive=false;
-	private final boolean hasWater=false;
 
+	private final boolean isActive = false;
+	private final boolean hasWater = false;
 
 	public BlockSteamBoiler(Material par2Material) {
 		super(par2Material);
@@ -55,7 +53,8 @@ public class BlockSteamBoiler extends BlockContainer {
 		setHardness(5.0F);
 		setResistance(10.0F);
 		setStepSound(Block.soundTypeMetal);
-		setBlockName(LibNames.BOILER);;
+		setBlockName(LibNames.BOILER);
+		;
 
 	}
 
@@ -117,13 +116,11 @@ public class BlockSteamBoiler extends BlockContainer {
 		}
 	}
 
-
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
 		return new TileEntitySteamBoiler();
 	}
-	
-	
+
 	@Override
 	public void onBlockAdded(World world, int x, int y, int z) {
 		super.onBlockAdded(world, x, y, z);
@@ -151,19 +148,19 @@ public class BlockSteamBoiler extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		blockIcon = par1IconRegister.registerIcon(Reference.ModID + ":machine");
-	if(hasWater)
-		if(isActive)
-			frontIcon = par1IconRegister.registerIcon(Reference.ModID + ":boiler_front_on_full");
+		if (hasWater)
+			if (isActive)
+				frontIcon = par1IconRegister.registerIcon(Reference.ModID
+						+ ":boiler_front_on_full");
+			else
+				frontIcon = par1IconRegister.registerIcon(Reference.ModID
+						+ ":boiler_front_off_full");
 		else
-			frontIcon = par1IconRegister.registerIcon(Reference.ModID + ":boiler_front_off_full");
-	else
-		frontIcon = par1IconRegister.registerIcon(Reference.ModID + ":boiler_front_off_empty");
+			frontIcon = par1IconRegister.registerIcon(Reference.ModID
+					+ ":boiler_front_off_empty");
 
-
-
-
-		topIcon = par1IconRegister.registerIcon(Reference.ModID
-				+ ":machineTop");
+		topIcon = par1IconRegister
+				.registerIcon(Reference.ModID + ":machineTop");
 		bottomIcon = par1IconRegister.registerIcon(Reference.ModID
 				+ ":machineBottom");
 	}
