@@ -1,12 +1,3 @@
-/*******************************************************************************
- * This class was created by <SR2610>. It's distributed as part of the
- * Steampunk'd Mod. Get the Source Code in Github:
- * https://github.com/SR2610/Steampunkd
- * 
- * Steampunk'd is Open Source and distributed under a Creative Commons
- * Attribution-NonCommercial-ShareAlike 3.0 License
- * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- ******************************************************************************/
 package com.sr2610.steampunked.common.tileentities;
 
 import java.util.Collections;
@@ -36,6 +27,8 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
+import com.sr2610.steampunked.api.utils.IRedstoneControl;
+import com.sr2610.steampunked.api.utils.IRedstoneControl.ControlMode;
 import com.sr2610.steampunked.common.blocks.ModBlocks;
 import com.sr2610.steampunked.common.inventory.container.ContainerSteamBoiler;
 import com.sr2610.steampunked.common.lib.LibOptions;
@@ -45,7 +38,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntitySteamBoiler extends TileEntityMachine implements
-		IFluidHandler, ISidedInventory {
+		IFluidHandler, ISidedInventory, IRedstoneControl {
 
 	static private final int NETDATAID_INPUT_TANK_FLUID = 1;
 	static private final int NETDATAID_INPUT_TANK_AMOUNT = 2;
@@ -69,6 +62,8 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 			tanks[i] = new FluidTank(LibOptions.boilerCapacity);
 			tank_info[i] = new FluidTankInfo(tanks[i]);
 		}
+		if(mode==null)
+			mode = ControlMode.LOW;
 
 	}
 
@@ -220,6 +215,11 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 		case 7:
 			setRedstoneMode(value);
 			break;
+		
+		
+	case 8:
+		setControl(getModeFromInt(value));
+		break;
 		}
 	}
 
@@ -248,6 +248,9 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 				NETDATAID_OUTPUT_TANK_AMOUNT,
 				tanks[TANK_OUTPUT].getFluid() != null ? tanks[TANK_OUTPUT]
 						.getFluid().amount : 0);
+		
+		crafting.sendProgressBarUpdate(container, 8, getIntFromMode(mode));
+
 	}
 
 	@Override
@@ -388,12 +391,12 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 		UpdateRedstone();
 		autoOutputToSides(120, this);
 
-		if (getRedstoneMode() == 0)
-			return;
+	//	if (getRedstoneMode() == 0)
+		//	return;
 
-		else if (getRedstoneMode() == 2 && !redstone_signal)
-			return;
-		else {
+	//	else if (getRedstoneMode() == 2 && !redstone_signal)
+		//	return;
+	//	else {
 
 			if (boilerBurnTime > 0)
 				--boilerBurnTime;
@@ -427,7 +430,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 					}
 				}
 			}
-		}
+		//}
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -484,4 +487,31 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 
 	}
 
+	@Override
+	public void setPowered(boolean isPowered) {
+		this.isPowered = isPowered;
+	}
+
+	@Override
+	public boolean isPowered() {
+		return isPowered;
+	}
+
+	@Override
+	public void setControl(ControlMode control) {
+
+		mode = control;
+	}
+
+	@Override
+	public ControlMode getControl() {
+		return mode;
+	}
+
+	public boolean isPowered;
+	protected boolean rsDisable;
+	protected boolean rsSetting;
+	protected boolean wasPowered;
+
+	
 }

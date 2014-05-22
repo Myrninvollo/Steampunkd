@@ -1,18 +1,11 @@
-/*******************************************************************************
- * This class was created by <SR2610>. It's distributed as part of the
- * Steampunk'd Mod. Get the Source Code in Github:
- * https://github.com/SR2610/Steampunkd
- * 
- * Steampunk'd is Open Source and distributed under a Creative Commons
- * Attribution-NonCommercial-ShareAlike 3.0 License
- * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- ******************************************************************************/
 package com.sr2610.steampunked.common.tileentities;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+
+import com.sr2610.steampunked.api.utils.IRedstoneControl.ControlMode;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -27,6 +20,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 public abstract class TileEntityMachine extends TileEntity implements
 		IInventory {
 	protected abstract boolean isFluidFuel(FluidStack fuel);
+	protected ControlMode mode;
 
 	private int redstoneMode;
 
@@ -165,6 +159,8 @@ public abstract class TileEntityMachine extends TileEntity implements
 				setInventorySlotContents(i, stack);
 			}
 		}
+		mode=getModeFromInt(compound.getInteger("rsMode"));
+
 	}
 
 	@Override
@@ -178,6 +174,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 			WriteInventoryItemToNBT(compound, i);
 
 		compound.setInteger("redstoneMode", getRedstoneMode());
+		compound.setInteger("rsMode", getIntFromMode(mode));
 
 	}
 
@@ -248,6 +245,34 @@ public abstract class TileEntityMachine extends TileEntity implements
 
 	public void setRedstoneMode(int redstoneMode) {
 		this.redstoneMode = redstoneMode;
+	}
+	
+	protected ControlMode getModeFromInt(int mode) {
+		switch (mode) {
+		case 0:
+			return ControlMode.DISABLED;
+		case 1:
+			return ControlMode.LOW;
+		case 2:
+			return ControlMode.HIGH;
+
+		}
+		return ControlMode.DISABLED;
+	}
+
+	protected int getIntFromMode(ControlMode control) {
+		if (control == ControlMode.DISABLED)
+			return 0;
+		if (control == ControlMode.LOW)
+			return 1;
+		if (control== ControlMode.HIGH)
+			return 2;
+		else
+			return 0;
+	}
+	
+	public int getMode(){
+		return getIntFromMode(mode);
 	}
 
 }

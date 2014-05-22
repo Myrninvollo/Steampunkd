@@ -1,12 +1,3 @@
-/*******************************************************************************
- * This class was created by <SR2610>. It's distributed as part of the
- * Steampunk'd Mod. Get the Source Code in Github:
- * https://github.com/SR2610/Steampunkd
- * 
- * Steampunk'd is Open Source and distributed under a Creative Commons
- * Attribution-NonCommercial-ShareAlike 3.0 License
- * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- ******************************************************************************/
 package com.sr2610.steampunked.common.tileentities;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,6 +13,8 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
+import com.sr2610.steampunked.api.utils.IRedstoneControl;
+import com.sr2610.steampunked.api.utils.IRedstoneControl.ControlMode;
 import com.sr2610.steampunked.common.blocks.ModBlocks;
 import com.sr2610.steampunked.common.blocks.machines.BlockSteamFurnace;
 import com.sr2610.steampunked.common.inventory.container.ContainerSteamFurnace;
@@ -31,7 +24,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntitySteamFurnace extends TileEntityMachine implements
-		ISidedInventory, IFluidHandler {
+		ISidedInventory, IFluidHandler, IRedstoneControl {
 
 	static private final int NETDATAID_TANK_FLUID = 1;
 	static private final int NETDATAID_TANK_AMOUNT = 2;
@@ -52,7 +45,7 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 	private final ItemStack[] furnaceItemStacks = new ItemStack[6];
 
 	public int furnaceCookTime;
-	private boolean isSmelting;
+	public boolean isSmelting;
 
 	@Override
 	public int getSizeInventory() {
@@ -222,6 +215,10 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 		case 3:
 			setRedstoneMode(value);
 			break;
+			
+		case 4:
+			setControl(getModeFromInt(value));
+			break;
 		}
 	}
 
@@ -232,6 +229,8 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 		crafting.sendProgressBarUpdate(container, NETDATAID_TANK_AMOUNT,
 				tank.getFluid() != null ? tank.getFluid().amount : 0);
 		crafting.sendProgressBarUpdate(container, 3, getRedstoneMode());
+		crafting.sendProgressBarUpdate(container, 4, getIntFromMode(mode));
+
 	}
 
 	@Override
@@ -336,12 +335,38 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 
 	@Override
 	public String getInventoryName() {
-		return "SteamFurnace";
+		return "Steam Furnace";
 	}
 
 	@Override
 	public boolean hasCustomInventoryName() {
 		return false;
 	}
+	
+	@Override
+	public void setPowered(boolean isPowered) {
+		this.isPowered = isPowered;
+	}
+
+	@Override
+	public boolean isPowered() {
+		return isPowered;
+	}
+
+	@Override
+	public void setControl(ControlMode control) {
+
+		mode = control;
+	}
+
+	@Override
+	public ControlMode getControl() {
+		return mode;
+	}
+
+	public boolean isPowered;
+	protected boolean rsDisable;
+	protected boolean rsSetting;
+	protected boolean wasPowered;
 
 }

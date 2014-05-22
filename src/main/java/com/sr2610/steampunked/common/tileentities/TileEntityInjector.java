@@ -1,18 +1,10 @@
-/*******************************************************************************
- * This class was created by <SR2610>. It's distributed as part of the
- * Steampunk'd Mod. Get the Source Code in Github:
- * https://github.com/SR2610/Steampunkd
- * 
- * Steampunk'd is Open Source and distributed under a Creative Commons
- * Attribution-NonCommercial-ShareAlike 3.0 License
- * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- ******************************************************************************/
 package com.sr2610.steampunked.common.tileentities;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -22,12 +14,15 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
 import com.sr2610.steampunked.api.items.ISteamUser;
+import com.sr2610.steampunked.api.utils.IRedstoneControl;
+import com.sr2610.steampunked.api.utils.IRedstoneControl.ControlMode;
 import com.sr2610.steampunked.common.blocks.ModBlocks;
 import com.sr2610.steampunked.common.inventory.container.ContainerInjector;
 import com.sr2610.steampunked.common.lib.LibOptions;
 
 public class TileEntityInjector extends TileEntityMachine implements
-		ISidedInventory, IFluidHandler {
+		ISidedInventory, IFluidHandler, IRedstoneControl {
+
 
 	static private final int NETDATAID_TANK_FLUID = 1;
 	static private final int NETDATAID_TANK_AMOUNT = 2;
@@ -37,7 +32,7 @@ public class TileEntityInjector extends TileEntityMachine implements
 
 	public TileEntityInjector() {
 		super();
-
+	
 		tank = new FluidTank(LibOptions.injectorCapacity);
 
 		tank_info = new FluidTankInfo[1];
@@ -145,6 +140,10 @@ public class TileEntityInjector extends TileEntityMachine implements
 		case 3:
 			setRedstoneMode(value);
 			break;
+			
+		case 4:
+			setControl(getModeFromInt(value));
+			break;
 		}
 	}
 
@@ -155,6 +154,8 @@ public class TileEntityInjector extends TileEntityMachine implements
 		crafting.sendProgressBarUpdate(container, NETDATAID_TANK_AMOUNT,
 				tank.getFluid() != null ? tank.getFluid().amount : 0);
 		crafting.sendProgressBarUpdate(container, 3, getRedstoneMode());
+		crafting.sendProgressBarUpdate(container, 4, getIntFromMode(mode));
+
 
 	}
 
@@ -329,4 +330,36 @@ public class TileEntityInjector extends TileEntityMachine implements
 		return false;
 	}
 
+	@Override
+	public void setPowered(boolean isPowered) {
+		this.isPowered = isPowered;
+	}
+
+	@Override
+	public boolean isPowered() {
+		return isPowered;
+	}
+
+	@Override
+	public void setControl(ControlMode control) {
+
+		mode = control;
+	}
+
+	@Override
+	public ControlMode getControl() {
+		return mode;
+	}
+
+	public boolean isPowered;
+	protected boolean rsDisable;
+	protected boolean rsSetting;
+	protected boolean wasPowered;
+
+	
+	
+
+
+	
+	
 }

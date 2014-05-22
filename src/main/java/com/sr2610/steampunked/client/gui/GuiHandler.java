@@ -1,12 +1,3 @@
-/*******************************************************************************
- * This class was created by <SR2610>. It's distributed as part of the
- * Steampunk'd Mod. Get the Source Code in Github:
- * https://github.com/SR2610/Steampunkd
- * 
- * Steampunk'd is Open Source and distributed under a Creative Commons
- * Attribution-NonCommercial-ShareAlike 3.0 License
- * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- ******************************************************************************/
 package com.sr2610.steampunked.client.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,8 +25,8 @@ public class GuiHandler implements IGuiHandler {
 		final TileEntity tile_entity = world.getTileEntity(x, y, z);
 		switch (id) {
 		case 0:
-			return new ContainerInjector((TileEntityInjector) tile_entity,
-					player.inventory);
+			return new ContainerInjector(player.inventory,
+					(TileEntityInjector) tile_entity);
 
 		case 1:
 			return new ContainerSteamFurnace(player.inventory,
@@ -50,8 +41,8 @@ public class GuiHandler implements IGuiHandler {
 					(TileEntityTinkerBench) tile_entity, player.inventory);
 
 		case 5:
-			return new ContainerPunchcardmaker(
-					(TileEntityPunchardMaker) tile_entity, player.inventory);
+			return new ContainerPunchcardmaker(player.inventory,
+					(TileEntityPunchardMaker) tile_entity);
 		}
 		return null;
 	}
@@ -62,8 +53,7 @@ public class GuiHandler implements IGuiHandler {
 		final TileEntity tile_entity = world.getTileEntity(x, y, z);
 		switch (id) {
 		case 0:
-			return new GuiInjector((TileEntityInjector) tile_entity,
-					player.inventory);
+			return new GuiInjector(player.inventory, tile_entity);
 
 		case 1:
 			return new GuiSteamFurnace((TileEntitySteamFurnace) tile_entity,
@@ -77,8 +67,7 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiTinkerBench((TileEntityTinkerBench) tile_entity,
 					player.inventory);
 		case 5:
-			return new GuiPunchardMaker((TileEntityPunchardMaker) tile_entity,
-					player.inventory);
+			return new GuiPunchardMaker(player.inventory, tile_entity);
 
 		case 6:
 			return GuiHandbook.currentOpenHandbook;
