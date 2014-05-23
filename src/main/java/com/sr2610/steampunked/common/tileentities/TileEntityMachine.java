@@ -29,9 +29,8 @@ import net.minecraftforge.fluids.IFluidHandler;
 public abstract class TileEntityMachine extends TileEntity implements
 		IInventory {
 	protected abstract boolean isFluidFuel(FluidStack fuel);
-	protected ControlMode mode;
 
-	private int redstoneMode;
+	protected ControlMode mode;
 
 	/**
 	 * Links an item slot to a tank for filling/draining containers.
@@ -145,7 +144,6 @@ public abstract class TileEntityMachine extends TileEntity implements
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
-		setRedstoneMode(compound.getInteger("redstoneMode"));
 
 		int i;
 		for (i = 0; i < GetTankCount(); i++) {
@@ -168,7 +166,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 				setInventorySlotContents(i, stack);
 			}
 		}
-		mode=getModeFromInt(compound.getInteger("rsMode"));
+		mode = getModeFromInt(compound.getInteger("rsMode"));
 
 	}
 
@@ -182,7 +180,6 @@ public abstract class TileEntityMachine extends TileEntity implements
 		for (i = 0; i < getSizeInventory(); i++)
 			WriteInventoryItemToNBT(compound, i);
 
-		compound.setInteger("redstoneMode", getRedstoneMode());
 		compound.setInteger("rsMode", getIntFromMode(mode));
 
 	}
@@ -248,14 +245,6 @@ public abstract class TileEntityMachine extends TileEntity implements
 		}
 	}
 
-	public int getRedstoneMode() {
-		return redstoneMode;
-	}
-
-	public void setRedstoneMode(int redstoneMode) {
-		this.redstoneMode = redstoneMode;
-	}
-	
 	protected ControlMode getModeFromInt(int mode) {
 		switch (mode) {
 		case 0:
@@ -274,14 +263,25 @@ public abstract class TileEntityMachine extends TileEntity implements
 			return 0;
 		if (control == ControlMode.LOW)
 			return 1;
-		if (control== ControlMode.HIGH)
+		if (control == ControlMode.HIGH)
 			return 2;
 		else
 			return 0;
 	}
-	
-	public int getMode(){
+
+	public int getMode() {
 		return getIntFromMode(mode);
+	}
+
+	public boolean shouldRun() {
+		if (mode.isDisabled())
+			return true;
+		else if (mode.isLow() && this.redstone_signal == false)
+			return true;
+		else if (mode.isHigh() && this.redstone_signal == true)
+			return true;
+		else
+			return false;
 	}
 
 }

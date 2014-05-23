@@ -71,7 +71,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 			tanks[i] = new FluidTank(LibOptions.boilerCapacity);
 			tank_info[i] = new FluidTankInfo(tanks[i]);
 		}
-		if(mode==null)
+		if (mode == null)
 			mode = ControlMode.LOW;
 
 	}
@@ -221,14 +221,9 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 			SetTankAmount(tanks[TANK_OUTPUT], value);
 			break;
 
-		case 7:
-			setRedstoneMode(value);
+		case 8:
+			setControl(getModeFromInt(value));
 			break;
-		
-		
-	case 8:
-		setControl(getModeFromInt(value));
-		break;
 		}
 	}
 
@@ -236,7 +231,6 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 			ICrafting crafting) {
 		crafting.sendProgressBarUpdate(container, 5, boilerBurnTime);
 		crafting.sendProgressBarUpdate(container, 6, currentItemBurnTime);
-		crafting.sendProgressBarUpdate(container, 7, getRedstoneMode());
 		crafting.sendProgressBarUpdate(
 				container,
 				NETDATAID_INPUT_TANK_FLUID,
@@ -257,7 +251,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 				NETDATAID_OUTPUT_TANK_AMOUNT,
 				tanks[TANK_OUTPUT].getFluid() != null ? tanks[TANK_OUTPUT]
 						.getFluid().amount : 0);
-		
+
 		crafting.sendProgressBarUpdate(container, 8, getIntFromMode(mode));
 
 	}
@@ -400,46 +394,41 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 		UpdateRedstone();
 		autoOutputToSides(120, this);
 
-	//	if (getRedstoneMode() == 0)
-		//	return;
+		if (!shouldRun())
+			return;
 
-	//	else if (getRedstoneMode() == 2 && !redstone_signal)
-		//	return;
-	//	else {
+		if (boilerBurnTime > 0)
+			--boilerBurnTime;
 
-			if (boilerBurnTime > 0)
-				--boilerBurnTime;
+		if (!worldObj.isRemote) {
+			if (tanks[0].getFluidAmount() != LibOptions.boilerCapacity)
+				if (worldObj.getBlock(xCoord, yCoord - 1, zCoord) == FluidRegistry.WATER
+						.getBlock())
+					tanks[0].fill(new FluidStack(FluidRegistry.WATER, 21), true);
 
-			if (!worldObj.isRemote) {
-				if (tanks[0].getFluidAmount() != LibOptions.boilerCapacity)
-					if (worldObj.getBlock(xCoord, yCoord - 1, zCoord) == FluidRegistry.WATER
-							.getBlock())
-						tanks[0].fill(new FluidStack(FluidRegistry.WATER, 21),
-								true);
+			if (tanks[0].getFluidAmount() > 0
+					&& tanks[1].getFluidAmount() != LibOptions.boilerCapacity) {
+				if (boilerBurnTime == 0) {
+					currentItemBurnTime = boilerBurnTime = getItemBurnTime(boilerItemStacks[0]) / 32;
 
-				if (tanks[0].getFluidAmount() > 0
-						&& tanks[1].getFluidAmount() != LibOptions.boilerCapacity) {
-					if (boilerBurnTime == 0) {
-						currentItemBurnTime = boilerBurnTime = getItemBurnTime(boilerItemStacks[0]) / 32;
+					if (boilerBurnTime > 0)
+						if (boilerItemStacks[0] != null) {
+							--boilerItemStacks[0].stackSize;
 
-						if (boilerBurnTime > 0)
-							if (boilerItemStacks[0] != null) {
-								--boilerItemStacks[0].stackSize;
+							if (boilerItemStacks[0].stackSize == 0)
+								boilerItemStacks[0] = boilerItemStacks[0]
+										.getItem().getContainerItem(
+												boilerItemStacks[0]);
+						}
+				}
 
-								if (boilerItemStacks[0].stackSize == 0)
-									boilerItemStacks[0] = boilerItemStacks[0]
-											.getItem().getContainerItem(
-													boilerItemStacks[0]);
-							}
-					}
-
-					if (boilerBurnTime > 0 && tanks[0].getFluidAmount() > 2) {
-						tanks[0].drain(20, true);
-						tanks[1].fill(new FluidStack(ModBlocks.steam, 20), true);
-					}
+				if (boilerBurnTime > 0 && tanks[0].getFluidAmount() > 2) {
+					tanks[0].drain(20, true);
+					tanks[1].fill(new FluidStack(ModBlocks.steam, 20), true);
 				}
 			}
-		//}
+		}
+		// }
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -522,5 +511,4 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 	protected boolean rsSetting;
 	protected boolean wasPowered;
 
-	
 }

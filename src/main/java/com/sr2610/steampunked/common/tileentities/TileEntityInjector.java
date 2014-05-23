@@ -32,7 +32,6 @@ import com.sr2610.steampunked.common.lib.LibOptions;
 public class TileEntityInjector extends TileEntityMachine implements
 		ISidedInventory, IFluidHandler, IRedstoneControl {
 
-
 	static private final int NETDATAID_TANK_FLUID = 1;
 	static private final int NETDATAID_TANK_AMOUNT = 2;
 
@@ -41,7 +40,7 @@ public class TileEntityInjector extends TileEntityMachine implements
 
 	public TileEntityInjector() {
 		super();
-	
+
 		tank = new FluidTank(LibOptions.injectorCapacity);
 
 		tank_info = new FluidTankInfo[1];
@@ -147,10 +146,6 @@ public class TileEntityInjector extends TileEntityMachine implements
 			break;
 
 		case 3:
-			setRedstoneMode(value);
-			break;
-			
-		case 4:
 			setControl(getModeFromInt(value));
 			break;
 		}
@@ -162,9 +157,7 @@ public class TileEntityInjector extends TileEntityMachine implements
 				tank.getFluid() != null ? tank.getFluid().fluidID : 0);
 		crafting.sendProgressBarUpdate(container, NETDATAID_TANK_AMOUNT,
 				tank.getFluid() != null ? tank.getFluid().amount : 0);
-		crafting.sendProgressBarUpdate(container, 3, getRedstoneMode());
-		crafting.sendProgressBarUpdate(container, 4, getIntFromMode(mode));
-
+		crafting.sendProgressBarUpdate(container, 3, getIntFromMode(mode));
 
 	}
 
@@ -261,16 +254,13 @@ public class TileEntityInjector extends TileEntityMachine implements
 	public void update() {
 		UpdateRedstone();
 
-		if (getRedstoneMode() == 0)
-			return;
-
-		else if (getRedstoneMode() == 2 && !redstone_signal)
-			return;
-		else if (canCharge() == true && tank.getFluidAmount() > 0) {
+	if(shouldRun()){
+		 if (canCharge() == true && tank.getFluidAmount() > 0) {
 			tank.drain(1, true);
 			injectorItemSlot[0].setItemDamage(injectorItemSlot[0]
 					.getItemDamage() - 1);
 		}
+	}
 
 	}
 
@@ -365,10 +355,4 @@ public class TileEntityInjector extends TileEntityMachine implements
 	protected boolean rsSetting;
 	protected boolean wasPowered;
 
-	
-	
-
-
-	
-	
 }

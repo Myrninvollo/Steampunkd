@@ -110,6 +110,11 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 	public int getCookProgressScaled(int par1) {
 		return furnaceCookTime * par1 / (LibOptions.furnaceCookTime / 10);
 	}
+	
+	@SideOnly(Side.CLIENT)
+	public boolean getActive() {
+		return furnaceCookTime * 24 / (LibOptions.furnaceCookTime / 10)>0 && shouldRun();
+	}
 
 	private boolean canSmelt() {
 		if (furnaceItemStacks[0] == null)
@@ -162,11 +167,11 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 
 		UpdateRedstone();
 
-		if (getRedstoneMode() == 0)
+		if (!shouldRun()){
+			furnaceCookTime=0;
+		
 			return;
-
-		else if (getRedstoneMode() == 2 && !redstone_signal)
-			return;
+		}
 		else {
 			boolean flag1 = false;
 			if (!worldObj.isRemote) {
@@ -221,9 +226,6 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 				tank.getFluid().amount = value;
 			break;
 
-		case 3:
-			setRedstoneMode(value);
-			break;
 			
 		case 4:
 			setControl(getModeFromInt(value));
@@ -237,7 +239,6 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 				tank.getFluid() != null ? tank.getFluid().fluidID : 0);
 		crafting.sendProgressBarUpdate(container, NETDATAID_TANK_AMOUNT,
 				tank.getFluid() != null ? tank.getFluid().amount : 0);
-		crafting.sendProgressBarUpdate(container, 3, getRedstoneMode());
 		crafting.sendProgressBarUpdate(container, 4, getIntFromMode(mode));
 
 	}

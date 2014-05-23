@@ -59,7 +59,7 @@ public class GuiSteamFurnace extends GuiBaseAdv {
 
 	@Override
 	protected void updateElements() {
-		if (furnace.getCookProgressScaled(24) > 0)
+		if (furnace.getActive())
 			duration.setQuantity(16);
 		else
 			duration.setQuantity(0);
