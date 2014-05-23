@@ -61,19 +61,20 @@ public class PacketRedstoneMode extends AbstractPacket {
 
 		if (te instanceof IRedstoneControl)
 			((IRedstoneControl) te).setControl(getModeFromInt());
-		
-		System.out.println(mode);
+
 	}
 
 	private ControlMode getModeFromInt() {
-		switch (mode){
-		case 0: return ControlMode.DISABLED;
-		case 1: return ControlMode.LOW;
-		case 2: return ControlMode.HIGH;
+		switch (mode) {
+		case 0:
+			return ControlMode.DISABLED;
+		case 1:
+			return ControlMode.LOW;
+		case 2:
+			return ControlMode.HIGH;
 
 		}
 		return ControlMode.DISABLED;
 	}
-	
 
 }
