@@ -80,9 +80,12 @@ steampunked.nameFirst=You must name this in an anvil first
 steampunked.boundDone=Successfully Reprogrammed
 
 steampunked.gui.redstoneControl=Redstone Control
-steampunked.gui.ignoreRedstone=Machine Disabled
-steampunked.gui.lowRedstone=Machine Enabled
+steampunked.gui.redstoneControlOff=Disabled
+steampunked.gui.redstoneControlOn=Enabled
 steampunked.gui.highRedstone=Requires Redstone Signal to Operate
+steampunked.gui.signalRequired=Signal Required
+steampunked.gui.controlStatus=Control Status
+
 
 **Handbook**
 item.steampunked.handbook.name=Engineer's Handbook

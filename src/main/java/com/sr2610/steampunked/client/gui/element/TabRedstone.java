@@ -30,7 +30,6 @@ public class TabRedstone extends TabBase {
 			StringHelper.localize("steampunked.gui.redstoneStateHigh") };
 
 	IRedstoneControl myTile;
-	int headerColor = 0xe1c92f;
 	int subheaderColor = 0xaaafb8;
 	int textColor = 0x000000;
 
@@ -53,7 +52,7 @@ public class TabRedstone extends TabBase {
 			return;
 		GuiBase.guiFontRenderer.drawStringWithShadow(
 				StringHelper.localize("steampunked.gui.redstoneControl"),
-				posX + 20, posY + 6, headerColor);
+				posX + 20, posY + 6, subheaderColor);
 		GuiBase.guiFontRenderer.drawStringWithShadow(
 				StringHelper.localize("steampunked.gui.controlStatus") + ":",
 				posX + 8, posY + 42, subheaderColor);

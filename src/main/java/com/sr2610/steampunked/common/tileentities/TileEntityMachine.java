@@ -198,6 +198,9 @@ public abstract class TileEntityMachine extends TileEntity implements
 
 	@Override
 	public void updateEntity() {
+		
+		if (mode == null)
+			mode = ControlMode.LOW;
 
 		if (!(initialized || isInvalid()))
 			UpdateRedstone();
