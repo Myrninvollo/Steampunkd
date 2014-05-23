@@ -82,9 +82,11 @@ steampunked.boundDone=Successfully Reprogrammed
 steampunked.gui.redstoneControl=Redstone Control
 steampunked.gui.redstoneControlOff=Disabled
 steampunked.gui.redstoneControlOn=Enabled
-steampunked.gui.highRedstone=Requires Redstone Signal to Operate
 steampunked.gui.signalRequired=Signal Required
 steampunked.gui.controlStatus=Control Status
+steampunked.gui.redstoneStateHigh=High
+steampunked.gui.redstoneStateLow=Low
+steampunked.gui.redstoneStateIgnored-Ignored
 
 
 **Handbook**
