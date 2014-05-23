@@ -27,8 +27,8 @@ public class ContainerInjector extends Container {
 	private static final int SLOT_HOTBAR_X = 8;
 	private static final int SLOT_HOTBAR_Y = 142;
 
-	public ContainerInjector(
-			IInventory player_inventory,TileEntityInjector injector) {
+	public ContainerInjector(IInventory player_inventory,
+			TileEntityInjector injector) {
 		te_injector = injector;
 		te_injector.openInventory();
 		int i, j;

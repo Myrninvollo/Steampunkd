@@ -23,7 +23,6 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
 import com.sr2610.steampunked.api.utils.IRedstoneControl;
-import com.sr2610.steampunked.api.utils.IRedstoneControl.ControlMode;
 import com.sr2610.steampunked.common.blocks.ModBlocks;
 import com.sr2610.steampunked.common.blocks.machines.BlockSteamFurnace;
 import com.sr2610.steampunked.common.inventory.container.ContainerSteamFurnace;
@@ -110,10 +109,11 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 	public int getCookProgressScaled(int par1) {
 		return furnaceCookTime * par1 / (LibOptions.furnaceCookTime / 10);
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	public boolean getActive() {
-		return furnaceCookTime * 24 / (LibOptions.furnaceCookTime / 10)>0 && shouldRun();
+		return furnaceCookTime * 24 / (LibOptions.furnaceCookTime / 10) > 0
+				&& shouldRun();
 	}
 
 	private boolean canSmelt() {
@@ -167,12 +167,11 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 
 		UpdateRedstone();
 
-		if (!shouldRun()){
-			furnaceCookTime=0;
-		
+		if (!shouldRun()) {
+			furnaceCookTime = 0;
+
 			return;
-		}
-		else {
+		} else {
 			boolean flag1 = false;
 			if (!worldObj.isRemote) {
 				if (canSmelt() && tank.getFluidAmount() > 10) {
@@ -226,7 +225,6 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 				tank.getFluid().amount = value;
 			break;
 
-			
 		case 4:
 			setControl(getModeFromInt(value));
 			break;
@@ -352,7 +350,7 @@ public class TileEntitySteamFurnace extends TileEntityMachine implements
 	public boolean hasCustomInventoryName() {
 		return false;
 	}
-	
+
 	@Override
 	public void setPowered(boolean isPowered) {
 		this.isPowered = isPowered;

@@ -139,7 +139,6 @@ public class PacketPipeline extends
 		registerPacket(PacketPunchcardMaker.class);
 		registerPacket(PacketRedstoneMode.class);
 
-
 	}
 
 	// Method to call from FMLPostInitializationEvent

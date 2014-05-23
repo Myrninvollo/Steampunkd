@@ -37,7 +37,6 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
 import com.sr2610.steampunked.api.utils.IRedstoneControl;
-import com.sr2610.steampunked.api.utils.IRedstoneControl.ControlMode;
 import com.sr2610.steampunked.common.blocks.ModBlocks;
 import com.sr2610.steampunked.common.inventory.container.ContainerSteamBoiler;
 import com.sr2610.steampunked.common.lib.LibOptions;

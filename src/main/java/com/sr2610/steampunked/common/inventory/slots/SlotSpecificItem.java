@@ -13,13 +13,13 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-
 public class SlotSpecificItem extends Slot {
 
 	final ItemStack stack;
 	int slotStackLimit = -1;
 
-	public SlotSpecificItem(IInventory inventory, int slotIndex, int x, int y, ItemStack stack) {
+	public SlotSpecificItem(IInventory inventory, int slotIndex, int x, int y,
+			ItemStack stack) {
 
 		super(inventory, slotIndex, x, y);
 

@@ -13,7 +13,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -24,7 +23,6 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 import com.sr2610.steampunked.api.items.ISteamUser;
 import com.sr2610.steampunked.api.utils.IRedstoneControl;
-import com.sr2610.steampunked.api.utils.IRedstoneControl.ControlMode;
 import com.sr2610.steampunked.common.blocks.ModBlocks;
 import com.sr2610.steampunked.common.inventory.container.ContainerInjector;
 import com.sr2610.steampunked.common.lib.LibOptions;
@@ -254,13 +252,12 @@ public class TileEntityInjector extends TileEntityMachine implements
 	public void update() {
 		UpdateRedstone();
 
-	if(shouldRun()){
-		 if (canCharge() == true && tank.getFluidAmount() > 0) {
-			tank.drain(1, true);
-			injectorItemSlot[0].setItemDamage(injectorItemSlot[0]
-					.getItemDamage() - 1);
-		}
-	}
+		if (shouldRun())
+			if (canCharge() == true && tank.getFluidAmount() > 0) {
+				tank.drain(1, true);
+				injectorItemSlot[0].setItemDamage(injectorItemSlot[0]
+						.getItemDamage() - 1);
+			}
 
 	}
 

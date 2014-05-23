@@ -26,8 +26,8 @@ public class ContainerPunchcardmaker extends Container {
 	private static final int SLOT_HOTBAR_X = 8;
 	private static final int SLOT_HOTBAR_Y = 142 + 30;
 
-	public ContainerPunchcardmaker(IInventory player_inventory,TileEntityPunchardMaker injector
-			) {
+	public ContainerPunchcardmaker(IInventory player_inventory,
+			TileEntityPunchardMaker injector) {
 		te_injector = injector;
 		te_injector.openInventory();
 		int i, j;

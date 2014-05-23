@@ -14,8 +14,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-import com.sr2610.steampunked.api.utils.IRedstoneControl.ControlMode;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -25,6 +23,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.IFluidContainerItem;
 import net.minecraftforge.fluids.IFluidHandler;
+
+import com.sr2610.steampunked.api.utils.IRedstoneControl.ControlMode;
 
 public abstract class TileEntityMachine extends TileEntity implements
 		IInventory {
@@ -198,7 +198,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 
 	@Override
 	public void updateEntity() {
-		
+
 		if (mode == null)
 			mode = ControlMode.LOW;
 
@@ -279,9 +279,9 @@ public abstract class TileEntityMachine extends TileEntity implements
 	public boolean shouldRun() {
 		if (mode.isDisabled())
 			return true;
-		else if (mode.isLow() && this.redstone_signal == false)
+		else if (mode.isLow() && redstone_signal == false)
 			return true;
-		else if (mode.isHigh() && this.redstone_signal == true)
+		else if (mode.isHigh() && redstone_signal == true)
 			return true;
 		else
 			return false;

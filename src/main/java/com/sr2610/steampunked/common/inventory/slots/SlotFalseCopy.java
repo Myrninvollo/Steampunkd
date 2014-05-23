@@ -14,7 +14,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-
 public class SlotFalseCopy extends Slot {
 
 	public int slotIndex = 0;
