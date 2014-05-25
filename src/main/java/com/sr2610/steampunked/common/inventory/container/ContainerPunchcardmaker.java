@@ -15,27 +15,28 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+import com.sr2610.steampunked.common.inventory.slots.SlotSpecificItem;
+import com.sr2610.steampunked.common.items.ModItems;
 import com.sr2610.steampunked.common.tileentities.TileEntityPunchardMaker;
 
 public class ContainerPunchcardmaker extends Container {
 
-	private final TileEntityPunchardMaker te_injector;
-	private static final int SLOT_INVENTORY_X = 8;
+	private final TileEntityPunchardMaker maker;
+	private static final int SLOT_INVENTORY_X = 40;
 	private static final int SLOT_INVENTORY_Y = 84 + 30;
 
-	private static final int SLOT_HOTBAR_X = 8;
+	private static final int SLOT_HOTBAR_X = 40;
 	private static final int SLOT_HOTBAR_Y = 142 + 30;
 
 	public ContainerPunchcardmaker(IInventory player_inventory,
 			TileEntityPunchardMaker injector) {
-		te_injector = injector;
-		te_injector.openInventory();
+		maker = injector;
+		maker.openInventory();
 		int i, j;
 
-		addSlotToContainer(new Slot(injector, 0, 80, 16));
-		addSlotToContainer(new Slot(injector, 1, 80, 35));
-		addSlotToContainer(new Slot(injector, 2, 80, 54));
-		addSlotToContainer(new Slot(injector, 3, 33, 29));
+		addSlotToContainer(new SlotSpecificItem(injector, 0, 7, 7, new ItemStack(ModItems.handBook)));
+		addSlotToContainer(new Slot(injector, 1, 155, 29));
+		addSlotToContainer(new Slot(injector, 2, 155, 75));
 
 		for (i = 0; i < 3; ++i)
 			for (j = 0; j < 9; ++j)
@@ -47,8 +48,8 @@ public class ContainerPunchcardmaker extends Container {
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
-		return te_injector.isUseableByPlayer(par1EntityPlayer);
+	public boolean canInteractWith(EntityPlayer player) {
+		return maker.isUseableByPlayer(player);
 	}
 
 	@Override

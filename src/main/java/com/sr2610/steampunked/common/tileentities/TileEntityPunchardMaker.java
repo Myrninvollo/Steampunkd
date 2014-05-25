@@ -18,7 +18,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityPunchardMaker extends TileEntity implements IInventory {
 
-	private ItemStack[] benchItemStacks = new ItemStack[4];
+	private ItemStack[] benchItemStacks = new ItemStack[3];
 
 	@Override
 	public int getSizeInventory() {
@@ -72,7 +72,7 @@ public class TileEntityPunchardMaker extends TileEntity implements IInventory {
 
 	@Override
 	public String getInventoryName() {
-		return "Tinkerbench";
+		return "Punchcard Maker";
 	}
 
 	@Override
