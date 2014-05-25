@@ -14,6 +14,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.sr2610.steampunked.client.gui.handbook.GuiHandbook;
+import com.sr2610.steampunked.client.gui.machines.GuiInjector;
+import com.sr2610.steampunked.client.gui.machines.GuiPunchardMaker;
+import com.sr2610.steampunked.client.gui.machines.GuiSteamBoiler;
+import com.sr2610.steampunked.client.gui.machines.GuiSteamFurnace;
+import com.sr2610.steampunked.client.gui.machines.GuiTinkerBench;
 import com.sr2610.steampunked.common.inventory.container.ContainerInjector;
 import com.sr2610.steampunked.common.inventory.container.ContainerPunchcardmaker;
 import com.sr2610.steampunked.common.inventory.container.ContainerSteamBoiler;
