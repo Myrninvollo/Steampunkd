@@ -21,19 +21,7 @@ public abstract class GuiBaseAdv extends GuiBase {
 			+ "Progress_Arrow_Left.png";
 	public static final String TEX_ARROW_RIGHT = GuiProps.PATH_ELEMENTS
 			+ "Progress_Arrow_Right.png";
-	public static final String TEX_DROP_LEFT = GuiProps.PATH_ELEMENTS
-			+ "Progress_Fluid_Left.png";
-	public static final String TEX_DROP_RIGHT = GuiProps.PATH_ELEMENTS
-			+ "Progress_Fluid_Right.png";
 
-	public static final String TEX_ALCHEMY = GuiProps.PATH_ELEMENTS
-			+ "Scale_Alchemy.png";
-	public static final String TEX_BUBBLE = GuiProps.PATH_ELEMENTS
-			+ "Scale_Bubble.png";
-	public static final String TEX_CRUSH = GuiProps.PATH_ELEMENTS
-			+ "Scale_Crush.png";
-	public static final String TEX_SAW = GuiProps.PATH_ELEMENTS
-			+ "Scale_Saw.png";
 	public static final String TEX_FLAME = GuiProps.PATH_ELEMENTS
 			+ "Scale_Flame.png";
 	public static final String TEX_SNOWFLAKE = GuiProps.PATH_ELEMENTS

@@ -15,6 +15,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+import com.sr2610.steampunked.common.inventory.slots.SlotLocked;
 import com.sr2610.steampunked.common.inventory.slots.SlotSpecificItem;
 import com.sr2610.steampunked.common.items.ModItems;
 import com.sr2610.steampunked.common.tileentities.TileEntityPunchardMaker;
@@ -35,8 +36,10 @@ public class ContainerPunchcardmaker extends Container {
 		int i, j;
 
 		addSlotToContainer(new SlotSpecificItem(injector, 0, 7, 7, new ItemStack(ModItems.handBook)));
-		addSlotToContainer(new Slot(injector, 1, 155, 29));
-		addSlotToContainer(new Slot(injector, 2, 155, 75));
+		addSlotToContainer(new Slot(injector, 1, 187, 29));
+		addSlotToContainer(new Slot(injector, 2, 187, 75));
+		addSlotToContainer(new SlotLocked(injector, 3, 21, 45));
+
 
 		for (i = 0; i < 3; ++i)
 			for (j = 0; j < 9; ++j)

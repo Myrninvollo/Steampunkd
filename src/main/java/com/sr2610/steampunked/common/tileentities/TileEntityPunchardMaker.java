@@ -18,7 +18,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityPunchardMaker extends TileEntity implements IInventory {
 
-	private ItemStack[] benchItemStacks = new ItemStack[3];
+	private ItemStack[] benchItemStacks = new ItemStack[4];
 
 	@Override
 	public int getSizeInventory() {

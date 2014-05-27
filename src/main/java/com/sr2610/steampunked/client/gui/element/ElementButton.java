@@ -9,6 +9,7 @@
  ******************************************************************************/
 package com.sr2610.steampunked.client.gui.element;
 
+import java.awt.Color;
 import java.util.List;
 
 import com.sr2610.steampunked.api.utils.StringHelper;
@@ -26,10 +27,11 @@ public class ElementButton extends ElementBase {
 	boolean disabled = false;
 	boolean tooltipLocalized = false;
 	String tooltip;
+	private String text;
 
 	public ElementButton(GuiBase gui, int posX, int posY, String name,
 			int sheetX, int sheetY, int hoverX, int hoverY, int sizeX,
-			int sizeY, String texture) {
+			int sizeY, String texture,String text) {
 
 		super(gui, posX, posY);
 		setName(name);
@@ -39,11 +41,12 @@ public class ElementButton extends ElementBase {
 		this.sheetY = sheetY;
 		this.hoverX = hoverX;
 		this.hoverY = hoverY;
+		this.text=text;
 	}
 
 	public ElementButton(GuiBase gui, int posX, int posY, String name,
 			int sheetX, int sheetY, int hoverX, int hoverY, int disabledX,
-			int disabledY, int sizeX, int sizeY, String texture) {
+			int disabledY, int sizeX, int sizeY, String texture,String text) {
 
 		super(gui, posX, posY);
 		setName(name);
@@ -55,6 +58,8 @@ public class ElementButton extends ElementBase {
 		this.hoverY = hoverY;
 		this.disabledX = disabledX;
 		this.disabledY = disabledY;
+		this.text=text;
+
 	}
 
 	public ElementButton clearToolTip() {
@@ -87,6 +92,9 @@ public class ElementButton extends ElementBase {
 		} else
 			drawTexturedModalRect(posX, posY, disabledX, disabledY, sizeX,
 					sizeY);
+		
+		gui.drawCenteredString(gui.guiFontRenderer, text, (posX+ gui.guiFontRenderer.getStringWidth(text)-10), posY+4, Color.WHITE.hashCode());
+		
 	}
 
 	@Override
