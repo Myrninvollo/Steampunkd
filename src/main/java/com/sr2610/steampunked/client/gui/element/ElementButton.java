@@ -31,7 +31,7 @@ public class ElementButton extends ElementBase {
 
 	public ElementButton(GuiBase gui, int posX, int posY, String name,
 			int sheetX, int sheetY, int hoverX, int hoverY, int sizeX,
-			int sizeY, String texture,String text) {
+			int sizeY, String texture, String text) {
 
 		super(gui, posX, posY);
 		setName(name);
@@ -41,12 +41,12 @@ public class ElementButton extends ElementBase {
 		this.sheetY = sheetY;
 		this.hoverX = hoverX;
 		this.hoverY = hoverY;
-		this.text=text;
+		this.text = text;
 	}
 
 	public ElementButton(GuiBase gui, int posX, int posY, String name,
 			int sheetX, int sheetY, int hoverX, int hoverY, int disabledX,
-			int disabledY, int sizeX, int sizeY, String texture,String text) {
+			int disabledY, int sizeX, int sizeY, String texture, String text) {
 
 		super(gui, posX, posY);
 		setName(name);
@@ -58,7 +58,7 @@ public class ElementButton extends ElementBase {
 		this.hoverY = hoverY;
 		this.disabledX = disabledX;
 		this.disabledY = disabledY;
-		this.text=text;
+		this.text = text;
 
 	}
 
@@ -92,9 +92,11 @@ public class ElementButton extends ElementBase {
 		} else
 			drawTexturedModalRect(posX, posY, disabledX, disabledY, sizeX,
 					sizeY);
-		
-		gui.drawCenteredString(gui.guiFontRenderer, text, (posX+ gui.guiFontRenderer.getStringWidth(text)-10), posY+4, Color.WHITE.hashCode());
-		
+
+		gui.drawCenteredString(GuiBase.guiFontRenderer, text, posX
+				+ GuiBase.guiFontRenderer.getStringWidth(text) - 10, posY + 4,
+				Color.WHITE.hashCode());
+
 	}
 
 	@Override

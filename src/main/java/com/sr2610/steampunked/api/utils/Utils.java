@@ -114,7 +114,8 @@ public class Utils {
 		String curVersion = versionFile.readLine();
 
 		if (!curVersion.contains(Steampunked.version)) {
-			Steampunked.logger.info("Update Avalible : Version " + curVersion + "Get it here: http://goo.gl/2f2k09");
+			Steampunked.logger.info("Update Avalible : Version " + curVersion
+					+ "Get it here: http://goo.gl/2f2k09");
 			return true;
 		}
 

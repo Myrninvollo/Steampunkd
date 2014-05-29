@@ -42,29 +42,29 @@ public class GuiPunchardMaker extends GuiBaseAdv {
 	@Override
 	public void initGui() {
 		super.initGui();
-		this.previousButton = new ElementButton(this, 5, 46, "left", 216, 3,
-				216, 17, 14, 14, (Reference.ModID + ":textures/gui/maker.png"),
-				null).setToolTip("Previous Punchcard");
+		previousButton = new ElementButton(this, 5, 46, "left", 216, 3, 216,
+				17, 14, 14, Reference.ModID + ":textures/gui/maker.png", null)
+				.setToolTip("Previous Punchcard");
 
-		this.nextButton = new ElementButton(this, 39, 46, "right", 230, 3, 230,
-				17, 14, 14, (Reference.ModID + ":textures/gui/maker.png"), null)
+		nextButton = new ElementButton(this, 39, 46, "right", 230, 3, 230, 17,
+				14, 14, Reference.ModID + ":textures/gui/maker.png", null)
 				.setToolTip("Next Punchcard");
 
-		this.craftButton = new ElementButton(this, 11, 70, "craft", 216, 31,
-				216, 47, 36, 16, (Reference.ModID + ":textures/gui/maker.png"),
+		craftButton = new ElementButton(this, 11, 70, "craft", 216, 31, 216,
+				47, 36, 16, Reference.ModID + ":textures/gui/maker.png",
 				"Craft");
 
-		addElement(this.previousButton);
-		addElement(this.nextButton);
-		addElement(this.craftButton);
+		addElement(previousButton);
+		addElement(nextButton);
+		addElement(craftButton);
 
 	}
 
 	private static final ResourceLocation TEXTURE = new ResourceLocation(
 			Reference.ModID, "textures/gui/maker.png");
 
-	private static final ResourceLocation PUNCHCARD = new ResourceLocation(Reference.ModID,
-			"textures/items/punchcards/punchcard_0.png");
+	private static final ResourceLocation PUNCHCARD = new ResourceLocation(
+			Reference.ModID, "textures/items/punchcards/punchcard_0.png");
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
@@ -79,24 +79,23 @@ public class GuiPunchardMaker extends GuiBaseAdv {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
 		super.drawGuiContainerBackgroundLayer(f, x, y);
-		
+
 	}
 
+	@Override
 	public void handleElementButtonClick(String buttonName, int mouseButton) {
 		if (buttonName == "right")
 			tile.setInventorySlotContents(3, new ItemStack(ModItems.punchcard));
 
 	}
-	
-	  public void updateScreen()
-	    {
-	        super.updateScreen();
-	        
-	    	mc.renderEngine.bindTexture(PUNCHCARD);
-	    	if(tile.getStackInSlot(3)!=null)
-	    		this.drawTexturedModalRect(this.guiLeft + 57, this.guiTop + 29, 0, 0,
-	    				127, 61);
 
-	      
-	    }
+	@Override
+	public void updateScreen() {
+		super.updateScreen();
+
+		mc.renderEngine.bindTexture(PUNCHCARD);
+		if (tile.getStackInSlot(3) != null)
+			drawTexturedModalRect(guiLeft + 57, guiTop + 29, 0, 0, 127, 61);
+
+	}
 }

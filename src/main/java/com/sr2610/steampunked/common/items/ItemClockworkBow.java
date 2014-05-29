@@ -35,7 +35,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemClockworkBow extends ItemBow {
 
-
 	public static final String[] bowPullIconNameArray = new String[] {
 			"bow_pull_0", "bow_pull_1", "bow_pull_2" };
 	private final IIcon[] iconArray = new IIcon[4];
@@ -45,7 +44,7 @@ public class ItemClockworkBow extends ItemBow {
 		maxStackSize = 1;
 		setMaxDamage(384);
 		setCreativeTab(CreativeTabs.tabCombat);
-		
+
 	}
 
 	@Override

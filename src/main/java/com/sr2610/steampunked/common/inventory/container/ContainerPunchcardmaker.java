@@ -35,11 +35,11 @@ public class ContainerPunchcardmaker extends Container {
 		maker.openInventory();
 		int i, j;
 
-		addSlotToContainer(new SlotSpecificItem(injector, 0, 7, 7, new ItemStack(ModItems.handBook)));
+		addSlotToContainer(new SlotSpecificItem(injector, 0, 7, 7,
+				new ItemStack(ModItems.handBook)));
 		addSlotToContainer(new Slot(injector, 1, 187, 29));
 		addSlotToContainer(new Slot(injector, 2, 187, 75));
 		addSlotToContainer(new SlotLocked(injector, 3, 21, 45));
-
 
 		for (i = 0; i < 3; ++i)
 			for (j = 0; j < 9; ++j)
