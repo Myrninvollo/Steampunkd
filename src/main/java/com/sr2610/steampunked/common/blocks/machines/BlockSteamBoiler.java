@@ -24,6 +24,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.sr2610.steampunked.Steampunked;
@@ -44,8 +45,10 @@ public class BlockSteamBoiler extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	private IIcon bottomIcon;
 
-	private final boolean isActive = false;
-	private final boolean hasWater = false;
+	private IIcon frontIconOnFull;
+	private IIcon frontIconOnEmpty;
+	private IIcon frontIconOffFull;
+	private IIcon frontIconOffEmpty;
 
 	public BlockSteamBoiler(Material par2Material) {
 		super(par2Material);
@@ -54,7 +57,6 @@ public class BlockSteamBoiler extends BlockContainer {
 		setResistance(10.0F);
 		setStepSound(Block.soundTypeMetal);
 		setBlockName(LibNames.BOILER);
-		;
 
 	}
 
@@ -146,18 +148,49 @@ public class BlockSteamBoiler extends BlockContainer {
 
 	@Override
 	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(IBlockAccess block, int x, int y, int z, int side) {
+		if (block.getBlockMetadata(x, y, z) == 0 && side == 3)
+			return getFrontIcon(block, x, y, z);
+		else if (side == 1)
+			return topIcon;
+		else if (side == 0)
+			return bottomIcon;
+		else if (side == block.getBlockMetadata(x, y, z))
+			return getFrontIcon(block, x, y, z);
+		else
+			return blockIcon;
+	}
+
+	private IIcon getFrontIcon(IBlockAccess block, int x, int y, int z) {
+		TileEntitySteamBoiler tile = (TileEntitySteamBoiler) block
+				.getTileEntity(x, y, z);
+		if (tile != null && tile.boilerBurnTime > 0)
+			if (tile.GetTank(1).getFluidAmount() > 0)
+				return frontIconOnFull;
+
+			else
+				return frontIconOnEmpty;
+		else if (tile.GetTank(1).getFluidAmount() > 0)
+			return frontIconOffFull;
+		else
+			return frontIconOffEmpty;
+
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		blockIcon = par1IconRegister.registerIcon(Reference.ModID + ":machine");
-		if (hasWater)
-			if (isActive)
-				frontIcon = par1IconRegister.registerIcon(Reference.ModID
-						+ ":boiler_front_on_full");
-			else
-				frontIcon = par1IconRegister.registerIcon(Reference.ModID
-						+ ":boiler_front_off_full");
-		else
-			frontIcon = par1IconRegister.registerIcon(Reference.ModID
-					+ ":boiler_front_off_empty");
+
+		frontIconOnFull = par1IconRegister.registerIcon(Reference.ModID
+				+ ":machines/boiler/boiler_front_on_full");
+		frontIconOnEmpty = par1IconRegister.registerIcon(Reference.ModID
+				+ ":machines/boiler/boiler_front_on_empty");
+		frontIconOffFull = par1IconRegister.registerIcon(Reference.ModID
+				+ ":machines/boiler/boiler_front_off_full");
+
+		frontIconOffEmpty = par1IconRegister.registerIcon(Reference.ModID
+				+ ":machines/boiler/boiler_front_off_empty");
 
 		topIcon = par1IconRegister
 				.registerIcon(Reference.ModID + ":machineTop");

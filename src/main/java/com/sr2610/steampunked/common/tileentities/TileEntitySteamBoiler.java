@@ -258,6 +258,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 	@Override
 	public void markDirty() {
 		super.markDirty();
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override
@@ -390,6 +391,7 @@ public class TileEntitySteamBoiler extends TileEntityMachine implements
 
 	@Override
 	public void update() {
+		markDirty();
 		UpdateRedstone();
 		autoOutputToSides(120, this);
 
